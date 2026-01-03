@@ -1,12 +1,12 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    input,
+    signal,
 } from '@angular/core';
-import { Avatar } from './avatar.component';
-import { AvatarImage } from './avatar-image.component';
 import { AvatarFallback } from './avatar-fallback.component';
+import { AvatarImage } from './avatar-image.component';
+import { Avatar } from './avatar.component';
 
 /**
  * Avatar component that handles image loading and fallback display.

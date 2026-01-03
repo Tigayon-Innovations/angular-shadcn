@@ -1,5 +1,3 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-angular';
 import {
     Accordion,
     AccordionContent,
@@ -23,6 +21,8 @@ import { Label } from '@/ui/label';
 import { Separator } from '@/ui/separator';
 import { Skeleton } from '@/ui/skeleton';
 import { Textarea } from '@/ui/textarea';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-angular';
 
 @Component({
   selector: 'app-root',

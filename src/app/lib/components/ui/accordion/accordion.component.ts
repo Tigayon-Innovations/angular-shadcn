@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -8,7 +9,6 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@/lib/utils';
 import {
   ACCORDION_CONTEXT,
   AccordionContext,

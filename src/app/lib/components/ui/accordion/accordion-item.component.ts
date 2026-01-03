@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +7,6 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@/lib/utils';
 import {
   ACCORDION_CONTEXT,
   ACCORDION_ITEM_CONTEXT,

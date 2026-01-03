@@ -2,15 +2,13 @@
 
 // Accordion
 export {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  ACCORDION_CONTEXT,
-  ACCORDION_ITEM_CONTEXT,
-  type AccordionContext,
-  type AccordionItemContext,
-  type AccordionType,
+    ACCORDION_CONTEXT,
+    ACCORDION_ITEM_CONTEXT, Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger, type AccordionContext,
+    type AccordionItemContext,
+    type AccordionType
 } from './accordion';
 
 // Alert
@@ -27,13 +25,13 @@ export { Button, buttonVariants, type ButtonVariants } from './button';
 
 // Card
 export {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardAction,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle
 } from './card';
 
 // Input

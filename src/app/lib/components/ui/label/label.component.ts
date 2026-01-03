@@ -1,10 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
 import { cn } from '@/lib/utils';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
+} from '@angular/core';
 
 /**
  * Label component that applies shadcn label styles.
