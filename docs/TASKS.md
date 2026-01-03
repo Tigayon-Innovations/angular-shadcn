@@ -10,6 +10,11 @@
 | Phase 4 | ✅ Complete | Layout Components |
 | Phase 5 | ✅ Complete | Overlay Components |
 | Phase 6 | ✅ Complete | Complex Components |
+| Phase 7 | 🔲 Pending | Extended Components |
+| Phase 8 | 🔲 Pending | Advanced Components |
+| Phase 9 | 🔲 Pending | Documentation Site |
+| Phase 10 | 🔲 Pending | Dark Mode System |
+| Phase 11 | 🔲 Pending | Routing & Navigation |
 
 
 ---
@@ -126,6 +131,299 @@ src/
 | 43 | **InputOTP** | ✅ Done | None | `input-otp/*.ts` (5 files) |
 | 44 | **Carousel** | ✅ Done | Button | `carousel/*.ts` (6 files) |
 | 45 | **Toast/Sonner** | ✅ Done | None | `toast/*.ts` (7 files) |
+
+---
+
+## Phase 7: Extended Components 🔲
+
+**Difficulty: Medium ⭐⭐**
+
+These components extend beyond base shadcn/ui to match ZardUI feature parity.
+
+| # | Component | Status | Dependencies | Description |
+|---|-----------|--------|--------------|-------------|
+| 46 | **Combobox** | 🔲 Pending | Popover, Command | Autocomplete/searchable dropdown (composition pattern) |
+| 47 | **ButtonGroup** | 🔲 Pending | Button | Grouped buttons with shared styling |
+| 48 | **Spinner** | 🔲 Pending | None | Loading indicator animations |
+| 49 | **Kbd** | 🔲 Pending | None | Keyboard key indicator component |
+| 50 | **Empty** | 🔲 Pending | None | Empty state placeholder component |
+| 51 | **InputGroup** | 🔲 Pending | Input, Button | Input with prefix/suffix addons |
+| 52 | **NativeSelect** | 🔲 Pending | None | HTML native select with styling |
+| 53 | **Typography** | 🔲 Pending | None | Text styling components (H1-H6, P, Lead, Muted, etc.) |
+| 54 | **Segmented** | 🔲 Pending | None | iOS-style segmented control buttons |
+
+---
+
+## Phase 8: Advanced Components 🔲
+
+**Difficulty: Hard ⭐⭐⭐**
+
+| # | Component | Status | Dependencies | Description |
+|---|-----------|--------|--------------|-------------|
+| 55 | **Sidebar** | 🔲 Pending | Collapsible, Sheet | Full sidebar system with collapsible states |
+| 56 | **DataTable** | 🔲 Pending | Table, Checkbox, Pagination | Sortable, filterable, selectable data tables |
+| 57 | **Chart** | 🔲 Pending | External lib (ng2-charts/ngx-charts) | Chart components (Line, Bar, Pie, Area, etc.) |
+
+### Sidebar Sub-components
+- SidebarProvider
+- Sidebar
+- SidebarHeader
+- SidebarContent
+- SidebarFooter
+- SidebarGroup
+- SidebarGroupLabel
+- SidebarGroupContent
+- SidebarGroupAction
+- SidebarMenu
+- SidebarMenuItem
+- SidebarMenuButton
+- SidebarMenuAction
+- SidebarMenuSub
+- SidebarMenuSubItem
+- SidebarMenuSubButton
+- SidebarMenuBadge
+- SidebarMenuSkeleton
+- SidebarSeparator
+- SidebarTrigger
+- SidebarRail
+- SidebarInset
+
+---
+
+## Phase 9: Documentation Site 🔲
+
+**Difficulty: Hard ⭐⭐⭐**
+
+Build a documentation site inspired by ZardUI (https://zardui.com).
+
+### Step 9.1: Site Structure & Layout
+- [ ] Create site header component with logo, navigation, theme toggle
+- [ ] Create site footer component with links
+- [ ] Create docs layout with sidebar navigation
+- [ ] Set up routing for all documentation pages
+
+### Step 9.2: Home Page (ZardUI Style)
+- [ ] Hero section with title, badges, CTA buttons
+- [ ] Beautiful Components showcase section with interactive demos
+- [ ] Features section (Lightning Fast, Beautiful Design, DX, Modular, Type Safe, Community)
+- [ ] Stats section (45+ Components, 99% TypeScript, 100% Tree Shakable)
+- [ ] Featured/testimonials section
+
+### Step 9.3: Documentation Pages
+- [ ] Introduction page
+- [ ] Installation page (CLI and manual setup)
+- [ ] Theming documentation
+- [ ] Dark mode guide
+
+### Step 9.4: Components Pages
+- [ ] Components index page with grid layout
+- [ ] Component search/filter functionality
+- [ ] Category filtering (Layout, Form, Feedback, Navigation, Data)
+- [ ] Component detail page template
+- [ ] Live preview component with preview/code tabs
+- [ ] Code block component with syntax highlighting and copy button
+- [ ] API reference table component
+
+### Step 9.5: Component Documentation
+Generate documentation pages for all 57 components with:
+- [ ] Component description
+- [ ] Live interactive preview
+- [ ] Code examples (Basic, Variants, etc.)
+- [ ] Installation instructions
+- [ ] API reference (Props, Events, Methods)
+- [ ] Previous/Next navigation
+
+---
+
+## Phase 10: Dark Mode System 🔲
+
+**Difficulty: Medium ⭐⭐**
+
+Implement complete dark mode system matching shadcn/ui.
+
+### Step 10.1: Theme Service
+- [ ] Create `theme.service.ts` with signal-based state
+- [ ] Support themes: 'light' | 'dark' | 'system'
+- [ ] Store preference in localStorage
+- [ ] Listen to system preference changes (prefers-color-scheme media query)
+- [ ] Add/remove 'dark' class on document root
+
+### Step 10.2: Theme Toggle Component
+- [ ] Create `ThemeToggle` component
+- [ ] Dropdown with Sun (light), Moon (dark), Monitor (system) icons
+- [ ] Use DropdownMenu component
+- [ ] Smooth icon transitions/animations
+
+### Step 10.3: Integration
+- [ ] Add theme toggle to site header
+- [ ] Ensure all components respect dark mode
+- [ ] Test transitions between modes
+- [ ] Test system preference detection
+
+---
+
+## Phase 11: Routing & Navigation 🔲
+
+**Difficulty: Medium ⭐⭐**
+
+### Step 11.1: App Routes Configuration
+```typescript
+const routes = [
+  { path: '', component: HomePageComponent },
+  { path: 'docs', component: DocsLayoutComponent, children: [
+    { path: '', redirectTo: 'introduction', pathMatch: 'full' },
+    { path: 'introduction', component: IntroductionComponent },
+    { path: 'installation', component: InstallationComponent },
+    { path: 'theming', component: ThemingComponent },
+    { path: 'dark-mode', component: DarkModeComponent },
+    { path: 'components', component: ComponentsListComponent },
+    { path: 'components/:name', component: ComponentDetailComponent },
+  ]},
+];
+```
+
+### Step 11.2: Documentation Sidebar Navigation
+- [ ] Create collapsible sidebar with all doc sections
+- [ ] Getting Started section
+- [ ] Components section with all 57 components listed
+- [ ] Active state highlighting
+- [ ] Mobile responsive drawer
+
+### Step 11.3: Component Registry
+- [ ] Create component metadata registry service
+- [ ] Store component info: name, description, category, examples, API
+- [ ] Dynamic component loading for previews
+
+---
+
+## Pre-Phase 7: Tailwind Setup (Step 0) 🔲
+
+Before starting Phase 7, ensure Tailwind CSS is properly set up:
+
+### Step 0.1: Clean Install
+- [ ] Uninstall existing Tailwind packages
+  ```bash
+  npm uninstall tailwindcss @tailwindcss/postcss postcss
+  ```
+- [ ] Install via Angular CLI
+  ```bash
+  ng add tailwindcss
+  ```
+
+### Step 0.2: Verify Setup
+- [ ] Confirm `styles.scss` uses `@use "tailwindcss"`
+- [ ] Run `npm start` and verify Tailwind classes work
+- [ ] Test dark mode toggle functionality
+- [ ] Verify all existing components render correctly
+
+---
+
+## Project Structure (Extended)
+
+```
+src/app/
+├── lib/
+│   └── components/ui/          # All shadcn components (57 total)
+│       ├── [existing 45 components]
+│       ├── combobox/           # Phase 7
+│       ├── button-group/       # Phase 7
+│       ├── spinner/            # Phase 7
+│       ├── kbd/                # Phase 7
+│       ├── empty/              # Phase 7
+│       ├── input-group/        # Phase 7
+│       ├── native-select/      # Phase 7
+│       ├── typography/         # Phase 7
+│       ├── segmented/          # Phase 7
+│       ├── sidebar/            # Phase 8
+│       ├── data-table/         # Phase 8
+│       └── chart/              # Phase 8
+├── pages/
+│   ├── home/                   # Phase 9
+│   └── docs/
+│       ├── layout/             # Phase 9
+│       ├── introduction/       # Phase 9
+│       ├── installation/       # Phase 9
+│       ├── theming/            # Phase 9
+│       ├── dark-mode/          # Phase 9
+│       ├── components-list/    # Phase 9
+│       └── component-detail/   # Phase 9
+├── components/
+│   ├── site-header/            # Phase 9
+│   ├── site-footer/            # Phase 9
+│   ├── docs-sidebar/           # Phase 9
+│   ├── component-preview/      # Phase 9
+│   ├── code-block/             # Phase 9
+│   └── theme-toggle/           # Phase 10
+├── services/
+│   ├── theme.service.ts        # Phase 10
+│   └── component-registry.ts   # Phase 11
+└── data/
+    └── components.ts           # Phase 9
+```
+
+---
+
+## Component Gap Analysis
+
+| Component | shadcn-angular | ZardUI | shadcn/ui | Status |
+|-----------|----------------|--------|-----------|--------|
+| Accordion | ✅ | ✅ | ✅ | Done |
+| Alert | ✅ | ✅ | ✅ | Done |
+| AlertDialog | ✅ | ✅ | ✅ | Done |
+| AspectRatio | ✅ | ✅ | ✅ | Done |
+| Avatar | ✅ | ✅ | ✅ | Done |
+| Badge | ✅ | ✅ | ✅ | Done |
+| Breadcrumb | ✅ | ✅ | ✅ | Done |
+| Button | ✅ | ✅ | ✅ | Done |
+| **ButtonGroup** | ❌ | ✅ | ❌ | Phase 7 |
+| Calendar | ✅ | ✅ | ✅ | Done |
+| Card | ✅ | ✅ | ✅ | Done |
+| Carousel | ✅ | ✅ | ✅ | Done |
+| **Chart** | ❌ | 🔜 | ✅ | Phase 8 |
+| Checkbox | ✅ | ✅ | ✅ | Done |
+| Collapsible | ✅ | ✅ | ✅ | Done |
+| **Combobox** | ❌ | ✅ | ✅ | Phase 7 |
+| Command | ✅ | ✅ | ✅ | Done |
+| ContextMenu | ✅ | ✅ | ✅ | Done |
+| **DataTable** | ❌ | ✅ | ✅ | Phase 8 |
+| DatePicker | ✅ | ✅ | ✅ | Done |
+| Dialog | ✅ | ✅ | ✅ | Done |
+| Drawer | ✅ | ✅ | ✅ | Done |
+| DropdownMenu | ✅ | ✅ | ✅ | Done |
+| **Empty** | ❌ | ✅ | ❌ | Phase 7 |
+| Form | ✅ | ✅ | ✅ | Done |
+| HoverCard | ✅ | ✅ | ✅ | Done |
+| Input | ✅ | ✅ | ✅ | Done |
+| **InputGroup** | ❌ | ✅ | ❌ | Phase 7 |
+| InputOTP | ✅ | ✅ | ✅ | Done |
+| **Kbd** | ❌ | ✅ | ❌ | Phase 7 |
+| Label | ✅ | ✅ | ✅ | Done |
+| Menubar | ✅ | ✅ | ✅ | Done |
+| **NativeSelect** | ❌ | ✅ | ❌ | Phase 7 |
+| NavigationMenu | ✅ | ✅ | ✅ | Done |
+| Pagination | ✅ | ✅ | ✅ | Done |
+| Popover | ✅ | ✅ | ✅ | Done |
+| Progress | ✅ | ✅ | ✅ | Done |
+| RadioGroup | ✅ | ✅ | ✅ | Done |
+| Resizable | ✅ | ✅ | ✅ | Done |
+| ScrollArea | ✅ | ✅ | ✅ | Done |
+| **Segmented** | ❌ | ✅ | ❌ | Phase 7 |
+| Select | ✅ | ✅ | ✅ | Done |
+| Separator | ✅ | ✅ | ✅ | Done |
+| Sheet | ✅ | ✅ | ✅ | Done |
+| **Sidebar** | ❌ | ✅ | ✅ | Phase 8 |
+| Skeleton | ✅ | ✅ | ✅ | Done |
+| Slider | ✅ | ✅ | ✅ | Done |
+| **Spinner** | ❌ | ✅ | ✅ | Phase 7 |
+| Switch | ✅ | ✅ | ✅ | Done |
+| Table | ✅ | ✅ | ✅ | Done |
+| Tabs | ✅ | ✅ | ✅ | Done |
+| Textarea | ✅ | ✅ | ✅ | Done |
+| Toast | ✅ | ✅ | ✅ | Done |
+| Toggle | ✅ | ✅ | ✅ | Done |
+| ToggleGroup | ✅ | ✅ | ✅ | Done |
+| Tooltip | ✅ | ✅ | ✅ | Done |
+| **Typography** | ❌ | ✅ | ❌ | Phase 7 |
 
 
 ---
@@ -275,4 +573,6 @@ npx tsc --noEmit
 | 2026-01-03 | **Phase 5 Complete**: Added Tooltip, Popover, HoverCard, Dialog, AlertDialog, Sheet, Drawer components |
 | 2026-01-03 | Installed @angular/cdk for overlay and dialog support |
 | 2026-01-03 | **Phase 6 Complete**: Added DropdownMenu (15 files), ContextMenu (14 files), Menubar (16 files), NavigationMenu (11 files), Command (10 files), Calendar (2 files), DatePicker (2 files), InputOTP (5 files), Carousel (6 files), Toast/Sonner (7 files) - 88 new files total |
-| 2026-01-03 | **ALL PHASES COMPLETE**: shadcn-angular component library fully implemented with 45 components |
+| 2026-01-03 | **ALL PHASES 1-6 COMPLETE**: shadcn-angular component library core implemented with 45 components |
+| 2026-01-03 | Added Phase 7-11 planning: Extended Components, Advanced Components, Documentation Site, Dark Mode System, Routing & Navigation |
+| 2026-01-03 | Added Component Gap Analysis comparing shadcn-angular, ZardUI, and shadcn/ui |

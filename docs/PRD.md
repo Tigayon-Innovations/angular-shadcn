@@ -231,3 +231,196 @@ This repository includes `mcp.json` for tooling (no human docs). The manifest mu
 - `.prettierrc` — present in repo root for Angular formatting standards.
 - `ng add` schematic and per-component packages (design & acceptance criteria defined here).
 - Release plan & CI pipelines for publishing individual packages.
+
+---
+
+## Phase 7+ Requirements: Extended Components & Documentation Site
+
+### Additional Components (ZardUI/shadcn Parity)
+
+The following components extend beyond the base shadcn/ui set to provide full feature parity with ZardUI:
+
+| Package | Components | Description |
+|---------|-----------|-------------|
+| `@shadcn-angular/combobox` | Combobox | Autocomplete/searchable dropdown (composition of Popover + Command) |
+| `@shadcn-angular/button-group` | ButtonGroup | Grouped buttons with shared styling |
+| `@shadcn-angular/spinner` | Spinner | Loading indicator animations |
+| `@shadcn-angular/kbd` | Kbd | Keyboard key indicator component |
+| `@shadcn-angular/empty` | Empty | Empty state placeholder component |
+| `@shadcn-angular/input-group` | InputGroup | Input with prefix/suffix addons |
+| `@shadcn-angular/native-select` | NativeSelect | HTML native select with styling |
+| `@shadcn-angular/typography` | Typography (H1-H6, P, Lead, etc.) | Text styling components |
+| `@shadcn-angular/segmented` | Segmented | iOS-style segmented control buttons |
+| `@shadcn-angular/sidebar` | Sidebar, SidebarProvider, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarRail | Full sidebar system with collapsible states |
+| `@shadcn-angular/data-table` | DataTable | Sortable, filterable, selectable data tables |
+| `@shadcn-angular/chart` | Chart (Line, Bar, Pie, Area, etc.) | Chart components using external charting library |
+
+### Documentation Site Requirements
+
+**Goal:** Build a documentation site inspired by ZardUI (https://zardui.com) that showcases all components with live demos, code examples, and API documentation.
+
+#### FR8 — Documentation Site Structure
+
+```
+/                       → Home page (hero, features, component showcase)
+/docs                   → Documentation landing
+/docs/introduction      → Getting started guide
+/docs/installation      → Setup instructions
+/docs/theming           → Theming documentation
+/docs/dark-mode         → Dark mode implementation guide
+/docs/components        → Components index (grid of all components)
+/docs/components/[name] → Individual component page (preview, code, API)
+```
+
+#### FR9 — Home Page (ZardUI Style)
+
+The home page must include:
+
+1. **Hero Section**
+   - Title: "Finally, a real @shadcn/ui alternative for Angular."
+   - Subtitle with Angular, TypeScript, Tailwind CSS badges
+   - "Get Started" and "View Components" CTA buttons
+
+2. **Beautiful Components Section**
+   - Interactive component cards (Button, Badge, Input, Checkbox, Switch, Progress, Avatar, Tooltip)
+   - Each card shows live component demo with description
+   - "View All" link to components page
+   - Stats: "45+ Components", "99% TypeScript", "100% Tree Shakable"
+
+3. **Features Section**
+   - Lightning Fast (performance optimization)
+   - Beautiful Design (modern design principles)
+   - Developer Experience (TypeScript-first, IDE support)
+   - Modular Architecture (tree-shakable)
+   - Type Safe (strict typing)
+   - Community Driven (open source)
+
+4. **Footer**
+   - Links to GitHub, NPM, social media
+
+#### FR10 — Components Index Page
+
+- Grid layout of component cards (3-column responsive)
+- Categories: Layout, Form, Feedback, Navigation, Data
+- Search/filter functionality
+- Previous/Next navigation between components
+
+#### FR11 — Component Detail Page
+
+Each component page must include:
+
+1. **Header** - Component name and description
+2. **Live Preview** - Interactive demo with preview/code tabs
+3. **Installation** - CLI and manual installation instructions
+4. **Examples** - Multiple usage examples (Basic, Variants, etc.)
+5. **API Reference** - Props table with types, defaults, and descriptions
+
+### Dark Mode System Requirements
+
+**Goal:** Implement a complete dark mode system matching shadcn/ui's implementation.
+
+#### FR12 — Theme Provider Service
+
+```typescript
+// theme.service.ts
+- Store theme preference in localStorage
+- Support themes: 'light' | 'dark' | 'system'
+- Listen to system preference changes (prefers-color-scheme)
+- Add/remove 'dark' class on document root element
+- Provide reactive theme state via signals
+```
+
+#### FR13 — Theme Toggle Component
+
+```typescript
+// theme-toggle.component.ts
+- Dropdown menu with Sun/Moon/System icons
+- Uses DropdownMenu component
+- Persists selection to localStorage
+- Smooth icon transitions
+```
+
+#### FR14 — CSS Variables
+
+CSS variables are already defined in `styles.scss` with:
+- Light mode colors (`:root`)
+- Dark mode colors (`.dark`)
+- Sidebar-specific theming
+- Chart colors for both modes
+
+### Project Structure for Documentation Site
+
+```
+src/app/
+├── lib/
+│   └── components/ui/          # Existing UI components
+│       ├── combobox/           # NEW
+│       ├── button-group/       # NEW
+│       ├── spinner/            # NEW
+│       ├── kbd/                # NEW
+│       ├── empty/              # NEW
+│       ├── input-group/        # NEW
+│       ├── native-select/      # NEW
+│       ├── typography/         # NEW
+│       ├── segmented/          # NEW
+│       ├── sidebar/            # NEW
+│       ├── data-table/         # NEW
+│       └── chart/              # NEW
+├── pages/
+│   ├── home/                   # Home page component
+│   └── docs/
+│       ├── layout/             # Docs sidebar layout
+│       ├── introduction/       # Introduction page
+│       ├── installation/       # Installation guide
+│       ├── theming/            # Theming documentation
+│       ├── dark-mode/          # Dark mode guide
+│       ├── components-list/    # Components grid page
+│       └── component-detail/   # Dynamic component detail page
+├── components/
+│   ├── site-header/            # Site navigation header
+│   ├── site-footer/            # Site footer
+│   ├── docs-sidebar/           # Documentation sidebar nav
+│   ├── component-preview/      # Live component preview wrapper
+│   ├── code-block/             # Syntax highlighted code block
+│   └── theme-toggle/           # Dark mode toggle button
+├── services/
+│   ├── theme.service.ts        # Theme management service
+│   └── component-registry.ts   # Component metadata registry
+└── data/
+    └── components.ts           # Component metadata and examples
+```
+
+### Routing Configuration
+
+```typescript
+// app.routes.ts
+const routes = [
+  { path: '', component: HomePageComponent },
+  { path: 'docs', component: DocsLayoutComponent, children: [
+    { path: '', redirectTo: 'introduction', pathMatch: 'full' },
+    { path: 'introduction', component: IntroductionComponent },
+    { path: 'installation', component: InstallationComponent },
+    { path: 'theming', component: ThemingComponent },
+    { path: 'dark-mode', component: DarkModeComponent },
+    { path: 'components', component: ComponentsListComponent },
+    { path: 'components/:name', component: ComponentDetailComponent },
+  ]},
+];
+```
+
+### Design Guidelines
+
+1. **Color Scheme:** Dark background (`oklch(0.145 0 0)`) with white text as default
+2. **Component Cards:** Rounded corners (`--radius: 0.625rem`), subtle borders, dark card backgrounds
+3. **Interactive Demos:** Live components inside preview boxes with code toggle
+4. **Code Blocks:** Syntax highlighted with copy button
+5. **Typography:** Clean, modern, good spacing using Tailwind typography utilities
+6. **Responsive:** Mobile-first design, collapsible sidebar on mobile
+
+### Acceptance Criteria (Extended)
+
+- **AC6:** All 12 additional components (Combobox through Chart) are implemented with element selectors
+- **AC7:** Documentation site home page matches ZardUI design with hero, features, and component showcase
+- **AC8:** Each component has a dedicated documentation page with preview, code, and API reference
+- **AC9:** Dark mode toggle persists preference and responds to system changes
+- **AC10:** Documentation site is fully responsive and accessible
