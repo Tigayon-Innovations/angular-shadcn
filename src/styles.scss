@@ -240,4 +240,37 @@
       height: 0;
     }
   }
+
+  /* Search dialog animations */
+  .animate-in {
+    animation: animate-in 0.2s ease-out;
+  }
+
+  .fade-in-0 {
+    --tw-enter-opacity: 0;
+  }
+
+  .zoom-in-95 {
+    --tw-enter-scale: 0.95;
+  }
+
+  .slide-in-from-left-1\/2 {
+    --tw-enter-translate-x: -50%;
+  }
+
+  .slide-in-from-top-\[48\%\] {
+    --tw-enter-translate-y: -48%;
+  }
+
+  @keyframes animate-in {
+    from {
+      opacity: var(--tw-enter-opacity, 1);
+      transform: translate(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0))
+        scale(var(--tw-enter-scale, 1));
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
 }

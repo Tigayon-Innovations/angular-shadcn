@@ -1,16 +1,24 @@
+import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/ui/button';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Kbd } from '@/ui/kbd';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Github, LucideAngularModule, Menu } from 'lucide-angular';
+import { Github, LucideAngularModule, Menu, Search, Star } from 'lucide-angular';
 
 /**
- * Site header component with logo, navigation, and theme toggle.
+ * Site header component with logo, navigation, search, and theme toggle.
  */
 @Component({
   selector: 'SiteHeader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule],
+  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd],
   template: `
     <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto flex h-14 max-w-screen-2xl items-center px-4">
@@ -47,6 +55,36 @@ import { Github, LucideAngularModule, Menu } from 'lucide-angular';
 
         <!-- Right side actions -->
         <div class="flex items-center gap-2">
+          <!-- Search Button -->
+          <Button
+            variant="outline"
+            class="relative h-9 w-full justify-start rounded-md bg-muted/50 text-sm text-muted-foreground sm:w-64 md:w-80"
+            (click)="openSearch()"
+          >
+            <lucide-icon [img]="icons.Search" class="mr-2 h-4 w-4" />
+            <span class="hidden lg:inline-flex">Search documentation...</span>
+            <span class="inline-flex lg:hidden">Search...</span>
+            <span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1">
+              <Kbd size="sm">⌘</Kbd>
+              <Kbd size="sm">K</Kbd>
+            </span>
+          </Button>
+
+          <!-- GitHub Stars -->
+          <a
+            href="https://github.com/example/shadcn-angular"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden sm:flex"
+          >
+            <Button variant="outline" size="sm" class="h-9 gap-2 px-3">
+              <lucide-icon [img]="icons.Star" class="h-4 w-4 fill-yellow-500 text-yellow-500" />
+              <span class="font-medium">{{ starCount() }}</span>
+              <span class="text-muted-foreground hidden md:inline">Stars</span>
+            </Button>
+          </a>
+
+          <!-- GitHub Icon -->
           <a
             href="https://github.com/example/shadcn-angular"
             target="_blank"
@@ -57,12 +95,40 @@ import { Github, LucideAngularModule, Menu } from 'lucide-angular';
               <span class="sr-only">GitHub</span>
             </Button>
           </a>
+
+          <!-- Theme Toggle -->
           <ThemeToggle />
         </div>
       </div>
     </header>
+
+    <!-- Search Dialog -->
+    <SearchDialog
+      [open]="searchOpen()"
+      (openChange)="searchOpen.set($event)"
+    />
   `,
 })
-export class SiteHeader {
-  protected readonly icons = { Github, Menu };
+export class SiteHeader implements OnInit {
+  protected readonly icons = { Github, Menu, Search, Star };
+  protected readonly searchOpen = signal(false);
+  protected readonly starCount = signal('1.2k');
+
+  ngOnInit(): void {
+    // In a real app, you would fetch the actual star count from GitHub API
+    // this.fetchGitHubStars();
+  }
+
+  protected openSearch(): void {
+    this.searchOpen.set(true);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  protected onKeydown(event: KeyboardEvent): void {
+    // Open search on Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+      event.preventDefault();
+      this.searchOpen.set(true);
+    }
+  }
 }
