@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
 } from '@angular/core';
 import { buttonVariants, type ButtonVariants } from './button-variants';
 
@@ -12,22 +12,22 @@ import { buttonVariants, type ButtonVariants } from './button-variants';
  *
  * @example
  * <!-- Default button -->
- * <button Button>Click me</button>
+ * <Button>Click me</Button>
  *
  * <!-- With variant -->
- * <button Button variant="destructive">Delete</button>
+ * <Button variant="destructive">Delete</Button>
  *
  * <!-- With size -->
- * <button Button size="lg">Large Button</button>
+ * <Button size="lg">Large Button</Button>
  *
  * <!-- Combined -->
- * <button Button variant="outline" size="sm">Small Outline</button>
+ * <Button variant="outline" size="sm">Small Outline</Button>
  *
  * <!-- As link -->
- * <a Button variant="link" href="/path">Link Button</a>
+ * <Button variant="link">Link Button</Button>
  */
 @Component({
-  selector: '[Button]',
+  selector: 'Button',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

@@ -34,6 +34,15 @@ export {
     CardTitle
 } from './card';
 
+// Collapsible
+export {
+    COLLAPSIBLE_CONTEXT,
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+    type CollapsibleContext
+} from './collapsible';
+
 // Input
 export { Input } from './input';
 
@@ -45,6 +54,16 @@ export { Separator } from './separator';
 
 // Skeleton
 export { Skeleton } from './skeleton';
+
+// Tabs
+export {
+    TABS_CONTEXT,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+    type TabsContext
+} from './tabs';
 
 // Textarea
 export { Textarea } from './textarea';

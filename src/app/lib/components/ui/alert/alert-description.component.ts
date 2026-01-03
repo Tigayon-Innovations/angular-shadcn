@@ -10,10 +10,10 @@ import {
  * Alert description component.
  *
  * @example
- * <p AlertDescription>You can add components to your app using the CLI.</p>
+ * <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
  */
 @Component({
-  selector: '[AlertDescription]',
+  selector: 'AlertDescription',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

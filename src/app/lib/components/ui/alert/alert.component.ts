@@ -11,21 +11,21 @@ import { alertVariants, type AlertVariants } from './alert-variants';
  * Alert container component.
  *
  * @example
- * <div Alert>
+ * <Alert>
  *   <lucide-icon name="terminal" />
- *   <h5 AlertTitle>Heads up!</h5>
- *   <p AlertDescription>You can add components to your app using the CLI.</p>
- * </div>
+ *   <AlertTitle>Heads up!</AlertTitle>
+ *   <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
+ * </Alert>
  *
  * <!-- Destructive variant -->
- * <div Alert variant="destructive">
+ * <Alert variant="destructive">
  *   <lucide-icon name="alert-circle" />
- *   <h5 AlertTitle>Error</h5>
- *   <p AlertDescription>Your session has expired.</p>
- * </div>
+ *   <AlertTitle>Error</AlertTitle>
+ *   <AlertDescription>Your session has expired.</AlertDescription>
+ * </Alert>
  */
 @Component({
-  selector: '[Alert]',
+  selector: 'Alert',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

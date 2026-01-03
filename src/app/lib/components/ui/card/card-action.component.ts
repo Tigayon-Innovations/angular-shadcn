@@ -11,13 +11,15 @@ import {
  * Optional action button/link in the header area.
  *
  * @example
- * <div CardHeader>
- *   <h3 CardTitle>Title</h3>
- *   <button CardAction Button variant="ghost">Edit</button>
- * </div>
+ * <CardHeader>
+ *   <CardTitle>Title</CardTitle>
+ *   <CardAction>
+ *     <button Button variant="ghost">Edit</button>
+ *   </CardAction>
+ * </CardHeader>
  */
 @Component({
-  selector: '[CardAction]',
+  selector: 'CardAction',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

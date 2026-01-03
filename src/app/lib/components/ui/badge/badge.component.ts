@@ -12,19 +12,19 @@ import { badgeVariants, type BadgeVariants } from './badge-variants';
  *
  * @example
  * <!-- Default badge -->
- * <span Badge>New</span>
+ * <Badge>New</Badge>
  *
  * <!-- With variant -->
- * <span Badge variant="secondary">Beta</span>
+ * <Badge variant="secondary">Beta</Badge>
  *
  * <!-- Destructive -->
- * <span Badge variant="destructive">Error</span>
+ * <Badge variant="destructive">Error</Badge>
  *
  * <!-- Outline -->
- * <span Badge variant="outline">Tag</span>
+ * <Badge variant="outline">Tag</Badge>
  */
 @Component({
-  selector: '[Badge]',
+  selector: 'Badge',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

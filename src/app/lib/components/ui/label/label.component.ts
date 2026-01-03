@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
 } from '@angular/core';
 
 /**
@@ -12,16 +12,16 @@ import {
  *
  * @example
  * <!-- Basic label -->
- * <label Label for="email">Email</label>
- * <input Input id="email" type="email" />
+ * <Label for="email">Email</Label>
+ * <Input id="email" type="email" />
  *
  * <!-- Required field -->
- * <label Label for="name">
+ * <Label for="name">
  *   Name <span class="text-destructive">*</span>
- * </label>
+ * </Label>
  */
 @Component({
-  selector: '[Label]',
+  selector: 'Label',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

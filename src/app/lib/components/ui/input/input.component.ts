@@ -11,17 +11,17 @@ import {
  *
  * @example
  * <!-- Basic input -->
- * <input Input type="text" placeholder="Enter your name" />
+ * <Input type="text" placeholder="Enter your name" />
  *
  * <!-- With file type -->
- * <input Input type="file" />
+ * <Input type="file" />
  *
  * <!-- Disabled -->
- * <input Input type="email" disabled placeholder="Disabled input" />
+ * <Input type="email" disabled placeholder="Disabled input" />
  */
 @Component({
-  selector: '[Input]',
-  template: ``,
+  selector: 'Input',
+  template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
     'data-slot': 'input',

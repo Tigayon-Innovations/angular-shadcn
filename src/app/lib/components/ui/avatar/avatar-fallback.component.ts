@@ -11,10 +11,10 @@ import {
  * Shown when the image fails to load or is not provided.
  *
  * @example
- * <span AvatarFallback>JD</span>
+ * <AvatarFallback>JD</AvatarFallback>
  */
 @Component({
-  selector: '[AvatarFallback]',
+  selector: 'AvatarFallback',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

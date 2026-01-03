@@ -11,16 +11,16 @@ import {
  *
  * @example
  * <!-- Horizontal separator (default) -->
- * <div Separator></div>
+ * <Separator />
  *
  * <!-- Vertical separator -->
- * <div Separator orientation="vertical"></div>
+ * <Separator orientation="vertical" />
  *
  * <!-- With decorative role -->
- * <div Separator [decorative]="true"></div>
+ * <Separator [decorative]="true" />
  */
 @Component({
-  selector: '[Separator]',
+  selector: 'Separator',
   template: ``,
   host: {
     '[class]': 'computedClass()',

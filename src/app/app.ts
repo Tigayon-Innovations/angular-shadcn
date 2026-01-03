@@ -16,13 +16,19 @@ import {
     CardHeader,
     CardTitle,
 } from '@/ui/card';
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from '@/ui/collapsible';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
 import { Separator } from '@/ui/separator';
 import { Skeleton } from '@/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { Textarea } from '@/ui/textarea';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-angular';
+import { AlertCircle, ChevronsUpDown, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-angular';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +45,9 @@ import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-an
     CardDescription,
     CardContent,
     CardFooter,
+    Collapsible,
+    CollapsibleTrigger,
+    CollapsibleContent,
     Input,
     Label,
     Badge,
@@ -50,6 +59,10 @@ import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-an
     Avatar,
     AvatarImage,
     AvatarFallback,
+    Tabs,
+    TabsList,
+    TabsTrigger,
+    TabsContent,
     Textarea,
     LucideAngularModule,
   ],
@@ -59,8 +72,9 @@ import { AlertCircle, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-an
 export class App {
   protected readonly title = signal('shadcn-angular');
   protected readonly isDark = signal(false);
+  protected readonly collapsibleOpen = signal(false);
 
-  protected readonly icons = { Terminal, AlertCircle, Sun, Moon };
+  protected readonly icons = { Terminal, AlertCircle, Sun, Moon, ChevronsUpDown };
 
   toggleDarkMode() {
     this.isDark.update((v) => !v);

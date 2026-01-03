@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
 } from '@angular/core';
 
 /**
@@ -11,10 +11,10 @@ import {
  * The main heading of the card.
  *
  * @example
- * <h3 CardTitle>My Card Title</h3>
+ * <CardTitle>My Card Title</CardTitle>
  */
 @Component({
-  selector: '[CardTitle]',
+  selector: 'CardTitle',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

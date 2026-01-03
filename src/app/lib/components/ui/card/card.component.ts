@@ -11,17 +11,17 @@ import {
  * Provides the main card wrapper with shadow and rounded corners.
  *
  * @example
- * <section Card>
- *   <div CardHeader>
- *     <h3 CardTitle>Title</h3>
- *     <p CardDescription>Description</p>
- *   </div>
- *   <div CardContent>Content here</div>
- *   <div CardFooter>Footer actions</div>
- * </section>
+ * <Card>
+ *   <CardHeader>
+ *     <CardTitle>Title</CardTitle>
+ *     <CardDescription>Description</CardDescription>
+ *   </CardHeader>
+ *   <CardContent>Content here</CardContent>
+ *   <CardFooter>Footer actions</CardFooter>
+ * </Card>
  */
 @Component({
-  selector: '[Card]',
+  selector: 'Card',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

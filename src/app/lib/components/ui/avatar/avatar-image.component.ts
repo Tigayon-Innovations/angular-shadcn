@@ -11,11 +11,11 @@ import {
  * The image to display for the avatar.
  *
  * @example
- * <img AvatarImage src="/avatar.png" alt="User avatar" />
+ * <AvatarImage src="/avatar.png" alt="User avatar" />
  */
 @Component({
-  selector: '[AvatarImage]',
-  template: ``,
+  selector: 'AvatarImage',
+  template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
     'data-slot': 'avatar-image',

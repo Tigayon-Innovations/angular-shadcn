@@ -11,13 +11,13 @@ import {
  * Contains action buttons or additional information.
  *
  * @example
- * <div CardFooter>
+ * <CardFooter>
  *   <button Button>Save</button>
  *   <button Button variant="outline">Cancel</button>
- * </div>
+ * </CardFooter>
  */
 @Component({
-  selector: '[CardFooter]',
+  selector: 'CardFooter',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

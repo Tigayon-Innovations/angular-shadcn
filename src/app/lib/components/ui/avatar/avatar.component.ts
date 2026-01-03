@@ -11,13 +11,13 @@ import {
  * Wraps the avatar image and fallback.
  *
  * @example
- * <span Avatar>
+ * <Avatar>
  *   <img AvatarImage src="/avatar.png" alt="User" />
- *   <span AvatarFallback>JD</span>
- * </span>
+ *   <AvatarFallback>JD</AvatarFallback>
+ * </Avatar>
  */
 @Component({
-  selector: '[Avatar]',
+  selector: 'Avatar',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

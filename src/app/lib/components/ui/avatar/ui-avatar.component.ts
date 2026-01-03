@@ -24,7 +24,7 @@ import { Avatar } from './avatar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Avatar, AvatarImage, AvatarFallback],
   template: `
-    <span Avatar [class]="class()">
+    <Avatar [class]="class()">
       @if (src() && !imageError()) {
         <img
           AvatarImage
@@ -34,9 +34,9 @@ import { Avatar } from './avatar.component';
         />
       }
       @if (!src() || imageError()) {
-        <span AvatarFallback>{{ fallback() }}</span>
+        <AvatarFallback>{{ fallback() }}</AvatarFallback>
       }
-    </span>
+    </Avatar>
   `,
 })
 export class UiAvatar {

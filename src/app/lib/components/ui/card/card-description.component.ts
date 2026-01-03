@@ -11,10 +11,10 @@ import {
  * Secondary text providing additional context.
  *
  * @example
- * <p CardDescription>This is a description of the card content.</p>
+ * <CardDescription>This is a description of the card content.</CardDescription>
  */
 @Component({
-  selector: '[CardDescription]',
+  selector: 'CardDescription',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

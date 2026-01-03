@@ -4,15 +4,15 @@
     <div class="container mx-auto flex items-center justify-between px-4 py-4">
       <div class="flex items-center gap-2">
         <h1 class="text-xl font-bold">shadcn-angular</h1>
-        <span Badge variant="secondary">v0.1.0</span>
+        <Badge variant="secondary">v0.1.0</Badge>
       </div>
-      <button Button variant="ghost" size="icon" (click)="toggleDarkMode()">
+      <Button variant="ghost" size="icon" (click)="toggleDarkMode()">
         @if (isDark()) {
           <lucide-icon [img]="icons.Sun" class="size-5" />
         } @else {
           <lucide-icon [img]="icons.Moon" class="size-5" />
         }
-      </button>
+      </Button>
     </div>
   </header>
 
@@ -20,18 +20,113 @@
     <div class="mb-8">
       <h2 class="text-3xl font-bold tracking-tight">Component Showcase</h2>
       <p class="text-muted-foreground mt-2">
-        A complete clone of shadcn/ui for Angular — using the exact same naming conventions.
+        A complete clone of shadcn/ui for Angular — using element selectors only.
       </p>
     </div>
 
     <div class="grid gap-8 lg:grid-cols-2">
+      <!-- Tabs Example -->
+      <Card class="lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Tabs</CardTitle>
+          <CardDescription>A set of layered sections of content—known as tab panels.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="account" class="w-full">
+            <TabsList>
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account" class="space-y-4">
+              <div class="space-y-2">
+                <h4 class="font-medium">Account Settings</h4>
+                <p class="text-sm text-muted-foreground">
+                  Make changes to your account here. Click save when you're done.
+                </p>
+              </div>
+              <div class="grid gap-2">
+                <Label for="tab-name">Name</Label>
+                <Input id="tab-name" placeholder="Your name" />
+              </div>
+              <div class="grid gap-2">
+                <Label for="tab-username">Username</Label>
+                <Input id="tab-username" placeholder="@username" />
+              </div>
+            </TabsContent>
+            <TabsContent value="password" class="space-y-4">
+              <div class="space-y-2">
+                <h4 class="font-medium">Password</h4>
+                <p class="text-sm text-muted-foreground">
+                  Change your password here. After saving, you'll be logged out.
+                </p>
+              </div>
+              <div class="grid gap-2">
+                <Label for="tab-current">Current password</Label>
+                <Input id="tab-current" type="password" />
+              </div>
+              <div class="grid gap-2">
+                <Label for="tab-new">New password</Label>
+                <Input id="tab-new" type="password" />
+              </div>
+            </TabsContent>
+            <TabsContent value="settings" class="space-y-4">
+              <div class="space-y-2">
+                <h4 class="font-medium">General Settings</h4>
+                <p class="text-sm text-muted-foreground">
+                  Configure your application preferences and notifications.
+                </p>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+        <CardFooter class="text-sm text-muted-foreground">
+          <code class="bg-muted px-1 rounded">&lt;Tabs defaultValue="account"&gt;...&lt;/Tabs&gt;</code>
+        </CardFooter>
+      </Card>
+
+      <!-- Collapsible Example -->
+      <Card>
+        <CardHeader>
+          <CardTitle>Collapsible</CardTitle>
+          <CardDescription>An interactive component which expands/collapses a panel.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Collapsible [(open)]="collapsibleOpen" class="w-full space-y-2">
+            <div class="flex items-center justify-between space-x-4 px-4">
+              <h4 class="text-sm font-semibold">
+                &#64;peduarte starred 3 repositories
+              </h4>
+              <CollapsibleTrigger class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9">
+                <lucide-icon [img]="icons.ChevronsUpDown" class="size-4" />
+                <span class="sr-only">Toggle</span>
+              </CollapsibleTrigger>
+            </div>
+            <div class="rounded-md border px-4 py-2 font-mono text-sm shadow-xs">
+              &#64;radix-ui/primitives
+            </div>
+            <CollapsibleContent class="space-y-2">
+              <div class="rounded-md border px-4 py-2 font-mono text-sm shadow-xs">
+                &#64;radix-ui/colors
+              </div>
+              <div class="rounded-md border px-4 py-2 font-mono text-sm shadow-xs">
+                &#64;stitches/react
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </CardContent>
+        <CardFooter class="text-sm text-muted-foreground">
+          <code class="bg-muted px-1 rounded">&lt;Collapsible&gt;...&lt;/Collapsible&gt;</code>
+        </CardFooter>
+      </Card>
+
       <!-- Accordion Example -->
-      <section Card class="lg:col-span-2">
-        <div CardHeader>
-          <h3 CardTitle>Accordion</h3>
-          <p CardDescription>A vertically stacked set of interactive headings.</p>
-        </div>
-        <div CardContent>
+      <Card>
+        <CardHeader>
+          <CardTitle>Accordion</CardTitle>
+          <CardDescription>A vertically stacked set of interactive headings.</CardDescription>
+        </CardHeader>
+        <CardContent>
           <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
             <AccordionItem value="item-1">
               <AccordionTrigger>Product Information</AccordionTrigger>
@@ -41,10 +136,6 @@
                   design. Built with premium materials, it offers unparalleled
                   performance and reliability.
                 </p>
-                <p>
-                  Key features include advanced processing capabilities, and an
-                  intuitive user interface designed for both beginners and experts.
-                </p>
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
@@ -52,12 +143,7 @@
               <AccordionContent className="flex flex-col gap-4 text-balance">
                 <p>
                   We offer worldwide shipping through trusted courier partners.
-                  Standard delivery takes 3-5 business days, while express shipping
-                  ensures delivery within 1-2 business days.
-                </p>
-                <p>
-                  All orders are carefully packaged and fully insured. Track your
-                  shipment in real-time through our dedicated tracking portal.
+                  Standard delivery takes 3-5 business days.
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -66,227 +152,225 @@
               <AccordionContent className="flex flex-col gap-4 text-balance">
                 <p>
                   We stand behind our products with a comprehensive 30-day return
-                  policy. If you're not completely satisfied, simply return the
-                  item in its original condition.
-                </p>
-                <p>
-                  Our hassle-free return process includes free return shipping and
-                  full refunds processed within 48 hours of receiving the returned
-                  item.
+                  policy.
                 </p>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </div>
-        <div CardFooter class="text-sm text-muted-foreground">
+        </CardContent>
+        <CardFooter class="text-sm text-muted-foreground">
           <code class="bg-muted px-1 rounded">&lt;Accordion type="single" collapsible&gt;...&lt;/Accordion&gt;</code>
-        </div>
-      </section>
+        </CardFooter>
+      </Card>
 
       <!-- Button Examples -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Button</h3>
-          <p CardDescription>Displays a button or a component that looks like a button.</p>
-        </div>
-        <div CardContent class="flex flex-wrap gap-3">
-          <button Button>Default</button>
-          <button Button variant="secondary">Secondary</button>
-          <button Button variant="destructive">Destructive</button>
-          <button Button variant="outline">Outline</button>
-          <button Button variant="ghost">Ghost</button>
-          <button Button variant="link">Link</button>
-        </div>
-        <div CardFooter class="text-sm text-muted-foreground">
-          <code class="bg-muted px-1 rounded">&lt;button Button variant="default"&gt;Click&lt;/button&gt;</code>
-        </div>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Button</CardTitle>
+          <CardDescription>Displays a button or a component that looks like a button.</CardDescription>
+        </CardHeader>
+        <CardContent class="flex flex-wrap gap-3">
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="link">Link</Button>
+        </CardContent>
+        <CardFooter class="text-sm text-muted-foreground">
+          <code class="bg-muted px-1 rounded">&lt;Button variant="default"&gt;Click&lt;/Button&gt;</code>
+        </CardFooter>
+      </Card>
 
       <!-- Button Sizes -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Button Sizes</h3>
-          <p CardDescription>Different button size options.</p>
-        </div>
-        <div CardContent class="flex flex-wrap items-center gap-3">
-          <button Button size="sm">Small</button>
-          <button Button size="default">Default</button>
-          <button Button size="lg">Large</button>
-          <button Button size="icon">
+      <Card>
+        <CardHeader>
+          <CardTitle>Button Sizes</CardTitle>
+          <CardDescription>Different button size options.</CardDescription>
+        </CardHeader>
+        <CardContent class="flex flex-wrap items-center gap-3">
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button size="icon">
             <lucide-icon [img]="icons.Sun" class="size-4" />
-          </button>
-        </div>
-      </section>
+          </Button>
+        </CardContent>
+      </Card>
 
       <!-- Badge Examples -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Badge</h3>
-          <p CardDescription>Displays a badge or a component that looks like a badge.</p>
-        </div>
-        <div CardContent class="flex flex-wrap gap-3">
-          <span Badge>Default</span>
-          <span Badge variant="secondary">Secondary</span>
-          <span Badge variant="destructive">Destructive</span>
-          <span Badge variant="outline">Outline</span>
-        </div>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Badge</CardTitle>
+          <CardDescription>Displays a badge or a component that looks like a badge.</CardDescription>
+        </CardHeader>
+        <CardContent class="flex flex-wrap gap-3">
+          <Badge>Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </CardContent>
+      </Card>
 
       <!-- Input & Label -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Input & Label</h3>
-          <p CardDescription>Form input with associated label.</p>
-        </div>
-        <div CardContent class="grid gap-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Input & Label</CardTitle>
+          <CardDescription>Form input with associated label.</CardDescription>
+        </CardHeader>
+        <CardContent class="grid gap-4">
           <div class="grid gap-2">
-            <label Label for="email">Email</label>
-            <input Input type="email" id="email" placeholder="m@example.com" />
+            <Label for="email">Email</Label>
+            <Input type="email" id="email" placeholder="m@example.com" />
           </div>
           <div class="grid gap-2">
-            <label Label for="password">Password</label>
-            <input Input type="password" id="password" placeholder="Enter password" />
+            <Label for="password">Password</Label>
+            <Input type="password" id="password" placeholder="Enter password" />
           </div>
-        </div>
-      </section>
+        </CardContent>
+      </Card>
 
       <!-- Textarea -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Textarea</h3>
-          <p CardDescription>Multi-line text input field.</p>
-        </div>
-        <div CardContent class="grid gap-2">
-          <label Label for="message">Your message</label>
-          <textarea Textarea id="message" placeholder="Type your message here..."></textarea>
-        </div>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Textarea</CardTitle>
+          <CardDescription>Multi-line text input field.</CardDescription>
+        </CardHeader>
+        <CardContent class="grid gap-2">
+          <Label for="message">Your message</Label>
+          <Textarea id="message" placeholder="Type your message here..."></Textarea>
+        </CardContent>
+      </Card>
 
       <!-- Alert -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Alert</h3>
-          <p CardDescription>Displays a callout for user attention.</p>
-        </div>
-        <div CardContent class="grid gap-4">
-          <div Alert>
+      <Card>
+        <CardHeader>
+          <CardTitle>Alert</CardTitle>
+          <CardDescription>Displays a callout for user attention.</CardDescription>
+        </CardHeader>
+        <CardContent class="grid gap-4">
+          <Alert>
             <lucide-icon [img]="icons.Terminal" class="size-4" />
-            <h5 AlertTitle>Heads up!</h5>
-            <p AlertDescription>You can add components to your app using the CLI.</p>
-          </div>
-          <div Alert variant="destructive">
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
+          </Alert>
+          <Alert variant="destructive">
             <lucide-icon [img]="icons.AlertCircle" class="size-4" />
-            <h5 AlertTitle>Error</h5>
-            <p AlertDescription>Your session has expired. Please log in again.</p>
-          </div>
-        </div>
-      </section>
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
+          </Alert>
+        </CardContent>
+      </Card>
 
       <!-- Avatar -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Avatar</h3>
-          <p CardDescription>An image element with a fallback for representing the user.</p>
-        </div>
-        <div CardContent class="flex gap-4">
-          <span Avatar>
-            <img AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-            <span AvatarFallback>CN</span>
-          </span>
-          <span Avatar class="size-12">
-            <span AvatarFallback class="text-lg">JD</span>
-          </span>
-          <span Avatar class="size-16">
-            <span AvatarFallback class="text-xl">AB</span>
-          </span>
-        </div>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Avatar</CardTitle>
+          <CardDescription>An image element with a fallback for representing the user.</CardDescription>
+        </CardHeader>
+        <CardContent class="flex gap-4">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <Avatar class="size-12">
+            <AvatarFallback class="text-lg">JD</AvatarFallback>
+          </Avatar>
+          <Avatar class="size-16">
+            <AvatarFallback class="text-xl">AB</AvatarFallback>
+          </Avatar>
+        </CardContent>
+      </Card>
 
       <!-- Separator -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Separator</h3>
-          <p CardDescription>Visually separates content.</p>
-        </div>
-        <div CardContent>
+      <Card>
+        <CardHeader>
+          <CardTitle>Separator</CardTitle>
+          <CardDescription>Visually separates content.</CardDescription>
+        </CardHeader>
+        <CardContent>
           <div class="space-y-1">
             <h4 class="text-sm font-medium">shadcn-angular</h4>
             <p class="text-sm text-muted-foreground">Angular port of shadcn/ui components.</p>
           </div>
-          <div Separator class="my-4"></div>
+          <Separator class="my-4" />
           <div class="flex h-5 items-center gap-4 text-sm">
             <span>Docs</span>
-            <div Separator orientation="vertical"></div>
+            <Separator orientation="vertical" />
             <span>Source</span>
-            <div Separator orientation="vertical"></div>
+            <Separator orientation="vertical" />
             <span>Help</span>
           </div>
-        </div>
-      </section>
+        </CardContent>
+      </Card>
 
       <!-- Skeleton -->
-      <section Card>
-        <div CardHeader>
-          <h3 CardTitle>Skeleton</h3>
-          <p CardDescription>Loading placeholder animation.</p>
-        </div>
-        <div CardContent>
+      <Card>
+        <CardHeader>
+          <CardTitle>Skeleton</CardTitle>
+          <CardDescription>Loading placeholder animation.</CardDescription>
+        </CardHeader>
+        <CardContent>
           <div class="flex items-center gap-4">
-            <div Skeleton class="size-12 rounded-full"></div>
+            <Skeleton class="size-12 rounded-full" />
             <div class="space-y-2">
-              <div Skeleton class="h-4 w-[250px]"></div>
-              <div Skeleton class="h-4 w-[200px]"></div>
+              <Skeleton class="h-4 w-[250px]" />
+              <Skeleton class="h-4 w-[200px]" />
             </div>
           </div>
-        </div>
-      </section>
+        </CardContent>
+      </Card>
 
       <!-- Card Demo -->
-      <section Card class="lg:col-span-2">
-        <div CardHeader>
-          <h3 CardTitle>Login to your account</h3>
-          <p CardDescription>Enter your email below to login to your account.</p>
-        </div>
-        <div CardContent>
+      <Card class="lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>Enter your email below to login to your account.</CardDescription>
+        </CardHeader>
+        <CardContent>
           <form class="grid gap-4">
             <div class="grid gap-2">
-              <label Label for="login-email">Email</label>
-              <input Input type="email" id="login-email" placeholder="m@example.com" />
+              <Label for="login-email">Email</Label>
+              <Input type="email" id="login-email" placeholder="m@example.com" />
             </div>
             <div class="grid gap-2">
               <div class="flex items-center justify-between">
-                <label Label for="login-password">Password</label>
-                <a Button variant="link" class="h-auto p-0 text-sm">Forgot your password?</a>
+                <Label for="login-password">Password</Label>
+                <Button variant="link" class="h-auto p-0 text-sm">Forgot your password?</Button>
               </div>
-              <input Input type="password" id="login-password" />
+              <Input type="password" id="login-password" />
             </div>
           </form>
-        </div>
-        <div CardFooter class="flex-col gap-2">
-          <button Button class="w-full">Login</button>
-          <button Button variant="outline" class="w-full">Login with Google</button>
-        </div>
-      </section>
+        </CardContent>
+        <CardFooter class="flex-col gap-2">
+          <Button class="w-full">Login</Button>
+          <Button variant="outline" class="w-full">Login with Google</Button>
+        </CardFooter>
+      </Card>
     </div>
 
     <!-- Usage Section -->
     <section class="mt-12">
       <h2 class="text-2xl font-bold mb-4">Usage</h2>
-      <div Card>
-        <div CardContent class="pt-6">
+      <Card>
+        <CardContent class="pt-6">
           <pre class="bg-muted p-4 rounded-lg overflow-x-auto text-sm"><code>// Import components
-import {{ '{' }} Button, Card, CardHeader, CardTitle {{ '}' }} from './lib';
+import {{ '{' }} Button, Card, CardHeader, CardTitle, Input, Label {{ '}' }} from './lib';
 
-// Use in template - exact same as React shadcn/ui!
-&lt;button Button variant="default"&gt;Click me&lt;/button&gt;
+// ALL components use element selectors
+&lt;Button variant="default"&gt;Click me&lt;/Button&gt;
 
-&lt;div Card&gt;
-  &lt;div CardHeader&gt;
-    &lt;h3 CardTitle&gt;Title&lt;/h3&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </div>
+&lt;Card&gt;
+  &lt;CardHeader&gt;
+    &lt;CardTitle&gt;Title&lt;/CardTitle&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;
+    &lt;Label for="email"&gt;Email&lt;/Label&gt;
+    &lt;Input type="email" id="email" /&gt;
+  &lt;/CardContent&gt;
+&lt;/Card&gt;</code></pre>
+        </CardContent>
+      </Card>
     </section>
   </div>
 </main>

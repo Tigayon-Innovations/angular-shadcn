@@ -10,10 +10,10 @@ import {
  * Alert title component.
  *
  * @example
- * <h5 AlertTitle>Heads up!</h5>
+ * <AlertTitle>Heads up!</AlertTitle>
  */
 @Component({
-  selector: '[AlertTitle]',
+  selector: 'AlertTitle',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

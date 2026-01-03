@@ -12,22 +12,22 @@ import {
  *
  * @example
  * <!-- Basic skeleton -->
- * <div Skeleton class="h-4 w-[250px]"></div>
+ * <Skeleton class="h-4 w-[250px]" />
  *
  * <!-- Circle skeleton (avatar) -->
- * <div Skeleton class="h-12 w-12 rounded-full"></div>
+ * <Skeleton class="h-12 w-12 rounded-full" />
  *
  * <!-- Card skeleton -->
  * <div class="flex flex-col space-y-3">
- *   <div Skeleton class="h-[125px] w-[250px] rounded-xl"></div>
+ *   <Skeleton class="h-[125px] w-[250px] rounded-xl" />
  *   <div class="space-y-2">
- *     <div Skeleton class="h-4 w-[250px]"></div>
- *     <div Skeleton class="h-4 w-[200px]"></div>
+ *     <Skeleton class="h-4 w-[250px]" />
+ *     <Skeleton class="h-4 w-[200px]" />
  *   </div>
  * </div>
  */
 @Component({
-  selector: '[Skeleton]',
+  selector: 'Skeleton',
   template: ``,
   host: {
     '[class]': 'computedClass()',

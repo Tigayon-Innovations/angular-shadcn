@@ -11,17 +11,17 @@ import {
  *
  * @example
  * <!-- Basic textarea -->
- * <textarea Textarea placeholder="Enter your message"></textarea>
+ * <Textarea placeholder="Enter your message"></Textarea>
  *
  * <!-- With rows -->
- * <textarea Textarea rows="5" placeholder="Description"></textarea>
+ * <Textarea rows="5" placeholder="Description"></Textarea>
  *
  * <!-- Disabled -->
- * <textarea Textarea disabled placeholder="Disabled"></textarea>
+ * <Textarea disabled placeholder="Disabled"></Textarea>
  */
 @Component({
-  selector: '[Textarea]',
-  template: ``,
+  selector: 'Textarea',
+  template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
     'data-slot': 'textarea',

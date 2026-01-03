@@ -11,12 +11,12 @@ import {
  * The main content area of the card.
  *
  * @example
- * <div CardContent>
+ * <CardContent>
  *   <p>Your content goes here.</p>
- * </div>
+ * </CardContent>
  */
 @Component({
-  selector: '[CardContent]',
+  selector: 'CardContent',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',

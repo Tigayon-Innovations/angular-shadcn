@@ -11,13 +11,13 @@ import {
  * Contains the title, description, and optional action.
  *
  * @example
- * <div CardHeader>
- *   <h3 CardTitle>Card Title</h3>
- *   <p CardDescription>Card description text</p>
- * </div>
+ * <CardHeader>
+ *   <CardTitle>Card Title</CardTitle>
+ *   <CardDescription>Card description text</CardDescription>
+ * </CardHeader>
  */
 @Component({
-  selector: '[CardHeader]',
+  selector: 'CardHeader',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
