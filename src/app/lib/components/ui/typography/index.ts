@@ -1,15 +1,13 @@
-export {
-    TypographyBlockquote,
-    TypographyH1,
-    TypographyH2,
-    TypographyH3,
-    TypographyH4,
-    TypographyInlineCode,
-    TypographyLarge,
-    TypographyLead,
-    TypographyList,
-    TypographyMuted,
-    TypographyP,
-    TypographySmall
-} from './typography.component';
+export { TypographyBlockquote } from './typography-blockquote.component';
+export { TypographyH1 } from './typography-h1.component';
+export { TypographyH2 } from './typography-h2.component';
+export { TypographyH3 } from './typography-h3.component';
+export { TypographyH4 } from './typography-h4.component';
+export { TypographyInlineCode } from './typography-inline-code.component';
+export { TypographyLarge } from './typography-large.component';
+export { TypographyLead } from './typography-lead.component';
+export { TypographyList } from './typography-list.component';
+export { TypographyMuted } from './typography-muted.component';
+export { TypographyP } from './typography-p.component';
+export { TypographySmall } from './typography-small.component';
 

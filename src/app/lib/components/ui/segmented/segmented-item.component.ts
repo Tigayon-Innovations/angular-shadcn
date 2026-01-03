@@ -1,0 +1,72 @@
+import { cn } from '@/lib/utils';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
+} from '@angular/core';
+import { SEGMENTED_CONTEXT } from './segmented-context';
+import { segmentedItemVariants } from './segmented-variants';
+
+/**
+ * SegmentedItem component - individual item in a segmented control.
+ *
+ * @example
+ * <SegmentedItem value="option1">Option 1</SegmentedItem>
+ */
+@Component({
+  selector: 'SegmentedItem',
+  template: `<ng-content />`,
+  host: {
+    '[class]': 'computedClass()',
+    role: 'tab',
+    '[attr.aria-selected]': 'isSelected()',
+    '[attr.data-state]': 'isSelected() ? "active" : "inactive"',
+    '[attr.disabled]': 'isDisabled() || null',
+    '[tabindex]': 'isDisabled() ? -1 : 0',
+    '(click)': 'onClick()',
+    '(keydown.enter)': 'onClick()',
+    '(keydown.space)': 'onClick(); $event.preventDefault()',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SegmentedItem {
+  private readonly context = inject(SEGMENTED_CONTEXT, { optional: true });
+
+  /** The value of this item */
+  readonly value = input.required<string>();
+
+  /** Whether this item is disabled */
+  readonly disabled = input<boolean>(false);
+
+  /** Additional CSS classes to apply */
+  readonly class = input<string>('');
+
+  /** Whether this item is selected */
+  protected readonly isSelected = computed(
+    () => this.context?.value() === this.value()
+  );
+
+  /** Whether this item is disabled */
+  protected readonly isDisabled = computed(
+    () => this.disabled() || this.context?.disabled()
+  );
+
+  /** Handle click */
+  protected onClick(): void {
+    if (!this.isDisabled()) {
+      this.context?.onValueChange(this.value());
+    }
+  }
+
+  /** Computed class combining variants and custom classes */
+  protected readonly computedClass = computed(() =>
+    cn(
+      segmentedItemVariants({
+        size: 'default',
+      }),
+      this.class()
+    )
+  );
+}

@@ -1,3 +1,4 @@
+export { SidebarContent } from './sidebar-content.component';
 export {
     SIDEBAR_CONTEXT,
     SIDEBAR_COOKIE_MAX_AGE,
@@ -13,29 +14,26 @@ export {
     type SidebarState,
     type SidebarVariant
 } from './sidebar-context';
-export {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupAction,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarInput,
-    SidebarInset,
-    SidebarMenu,
-    SidebarMenuAction,
-    SidebarMenuBadge,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarMenuSkeleton,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
-    SidebarProvider,
-    SidebarRail,
-    SidebarSeparator,
-    SidebarTrigger
-} from './sidebar.component';
+export { SidebarFooter } from './sidebar-footer.component';
+export { SidebarGroupAction } from './sidebar-group-action.component';
+export { SidebarGroupContent } from './sidebar-group-content.component';
+export { SidebarGroupLabel } from './sidebar-group-label.component';
+export { SidebarGroup } from './sidebar-group.component';
+export { SidebarHeader } from './sidebar-header.component';
+export { SidebarInput } from './sidebar-input.component';
+export { SidebarInset } from './sidebar-inset.component';
+export { SidebarMenuAction } from './sidebar-menu-action.component';
+export { SidebarMenuBadge } from './sidebar-menu-badge.component';
+export { SidebarMenuButton } from './sidebar-menu-button.component';
+export { SidebarMenuItem } from './sidebar-menu-item.component';
+export { SidebarMenuSkeleton } from './sidebar-menu-skeleton.component';
+export { SidebarMenuSubButton } from './sidebar-menu-sub-button.component';
+export { SidebarMenuSubItem } from './sidebar-menu-sub-item.component';
+export { SidebarMenuSub } from './sidebar-menu-sub.component';
+export { SidebarMenu } from './sidebar-menu.component';
+export { SidebarProvider } from './sidebar-provider.component';
+export { SidebarRail } from './sidebar-rail.component';
+export { SidebarSeparator } from './sidebar-separator.component';
+export { SidebarTrigger } from './sidebar-trigger.component';
+export { Sidebar } from './sidebar.component';
 
