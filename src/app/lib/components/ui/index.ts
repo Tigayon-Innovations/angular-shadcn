@@ -16,6 +16,32 @@ export {
 // Alert
 export { Alert, AlertDescription, AlertTitle, alertVariants, type AlertVariants } from './alert';
 
+// AlertDialog
+export {
+    ALERT_DIALOG_CONTEXT,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+    type AlertDialogContextValue
+} from './alert-dialog';
+
+// Breadcrumb
+export {
+    Breadcrumb,
+    BreadcrumbEllipsis,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from './breadcrumb';
+
 // AspectRatio
 export { AspectRatio } from './aspect-ratio';
 
@@ -51,6 +77,34 @@ export {
     type CollapsibleContext
 } from './collapsible';
 
+// Dialog
+export {
+    DIALOG_CONTEXT,
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    type DialogContextValue
+} from './dialog';
+
+// Drawer
+export {
+    DRAWER_CONTEXT,
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+    type DrawerContextValue
+} from './drawer';
+
 // Form
 export {
     FORM_CONTEXT,
@@ -66,11 +120,41 @@ export {
     type FormFieldContext
 } from './form';
 
+// HoverCard
+export {
+    HOVER_CARD_CONTEXT,
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+    type HoverCardContextValue
+} from './hover-card';
+
 // Input
 export { Input } from './input';
 
 // Label
 export { Label } from './label';
+
+// Pagination
+export {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious
+} from './pagination';
+
+// Popover
+export {
+    POPOVER_CONTEXT,
+    Popover,
+    PopoverAnchor,
+    PopoverContent,
+    PopoverTrigger,
+    type PopoverContextValue
+} from './popover';
 
 // Progress
 export { Progress } from './progress';
@@ -82,6 +166,18 @@ export {
     RadioGroupItem,
     type RadioGroupContext
 } from './radio-group';
+
+// Resizable
+export {
+    RESIZABLE_CONTEXT,
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+    type ResizableContextValue
+} from './resizable';
+
+// ScrollArea
+export { ScrollArea, ScrollBar } from './scroll-area';
 
 // Select
 export {
@@ -102,6 +198,22 @@ export {
 // Separator
 export { Separator } from './separator';
 
+// Sheet
+export {
+    SHEET_CONTEXT,
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+    sheetVariants,
+    type SheetContextValue,
+    type SheetVariants
+} from './sheet';
+
 // Skeleton
 export { Skeleton } from './skeleton';
 
@@ -110,6 +222,18 @@ export { Slider } from './slider';
 
 // Switch
 export { Switch } from './switch';
+
+// Table
+export {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow
+} from './table';
 
 // Tabs
 export {
@@ -134,3 +258,13 @@ export {
     ToggleGroupItem,
     type ToggleGroupContext
 } from './toggle-group';
+
+// Tooltip
+export {
+    TOOLTIP_CONTEXT,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+    type TooltipContextValue
+} from './tooltip';

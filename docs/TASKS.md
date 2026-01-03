@@ -7,8 +7,8 @@
 | Phase 1 | ✅ Complete | Foundation Setup |
 | Phase 2 | ✅ Complete | Basic Components |
 | Phase 3 | ✅ Complete | Form Components |
-| Phase 4 | 🔄 In Progress | Layout Components |
-| Phase 5 | ⏳ Pending | Overlay Components |
+| Phase 4 | ✅ Complete | Layout Components |
+| Phase 5 | ✅ Complete | Overlay Components |
 | Phase 6 | ⏳ Pending | Complex Components |
 
 ---
@@ -76,36 +76,36 @@ src/
 
 ---
 
-## Phase 4: Layout Components 🔄
+## Phase 4: Layout Components ✅
 
 **Difficulty: Medium ⭐⭐**
 
-| # | Component | Status | Dependencies | Notes |
+| # | Component | Status | Dependencies | Files |
 |---|-----------|--------|--------------|-------|
-| 21 | **ScrollArea** | ⏳ Pending | @angular/cdk | Custom scrollbar container |
+| 21 | **ScrollArea** | ✅ Done | @angular/cdk | `scroll-area/*.ts` (3 files) |
 | 22 | **Tabs** | ✅ Done | None | `tabs/*.ts` (5 files) |
 | 23 | **Accordion** | ✅ Done | None | `accordion/*.ts` (5 files) |
 | 24 | **Collapsible** | ✅ Done | None | `collapsible/*.ts` (4 files) |
-| 25 | **Resizable** | ⏳ Pending | None | Resizable panel layout |
-| 26 | **Table** | ⏳ Pending | None | Data table structure |
-| 27 | **Breadcrumb** | ⏳ Pending | Router | Navigation breadcrumb |
-| 28 | **Pagination** | ⏳ Pending | None | Page navigation |
+| 25 | **Resizable** | ✅ Done | None | `resizable/*.ts` (5 files) |
+| 26 | **Table** | ✅ Done | None | `table/*.ts` (9 files) |
+| 27 | **Breadcrumb** | ✅ Done | Router | `breadcrumb/*.ts` (8 files) |
+| 28 | **Pagination** | ✅ Done | None | `pagination/*.ts` (8 files) |
 
 ---
 
-## Phase 5: Overlay Components ⏳
+## Phase 5: Overlay Components ✅
 
 **Difficulty: Hard ⭐⭐⭐**
 
-| # | Component | Status | Dependencies | Notes |
+| # | Component | Status | Dependencies | Files |
 |---|-----------|--------|--------------|-------|
-| 29 | **Tooltip** | ⏳ Pending | @angular/cdk/overlay | Hover information popup |
-| 30 | **Popover** | ⏳ Pending | @angular/cdk/overlay | Click-triggered popup |
-| 31 | **HoverCard** | ⏳ Pending | @angular/cdk/overlay | Hover-triggered card popup |
-| 32 | **Dialog** | ⏳ Pending | @angular/cdk/dialog | Modal dialog window |
-| 33 | **AlertDialog** | ⏳ Pending | Dialog | Confirmation dialog |
-| 34 | **Sheet** | ⏳ Pending | @angular/cdk/dialog | Slide-out panel |
-| 35 | **Drawer** | ⏳ Pending | @angular/cdk/dialog | Bottom/side drawer |
+| 29 | **Tooltip** | ✅ Done | @angular/cdk/overlay | `tooltip/*.ts` (6 files) |
+| 30 | **Popover** | ✅ Done | @angular/cdk/overlay | `popover/*.ts` (6 files) |
+| 31 | **HoverCard** | ✅ Done | @angular/cdk/overlay | `hover-card/*.ts` (5 files) |
+| 32 | **Dialog** | ✅ Done | @angular/cdk/dialog | `dialog/*.ts` (10 files) |
+| 33 | **AlertDialog** | ✅ Done | Dialog | `alert-dialog/*.ts` (11 files) |
+| 34 | **Sheet** | ✅ Done | @angular/cdk/dialog | `sheet/*.ts` (11 files) |
+| 35 | **Drawer** | ✅ Done | @angular/cdk/dialog | `drawer/*.ts` (10 files) |
 
 ---
 
@@ -269,3 +269,6 @@ npx tsc --noEmit
 | 2026-01-03 | Updated Button, Input, Label, Textarea, AvatarImage to use element selectors |
 | 2026-01-03 | **Phase 2 Complete**: Added AspectRatio, Progress components |
 | 2026-01-03 | **Phase 3 Complete**: Added Checkbox, Switch, RadioGroup, Slider, Toggle, ToggleGroup, Select, Form components |
+| 2026-01-03 | **Phase 4 Complete**: Added ScrollArea, Resizable, Table, Breadcrumb, Pagination components |
+| 2026-01-03 | **Phase 5 Complete**: Added Tooltip, Popover, HoverCard, Dialog, AlertDialog, Sheet, Drawer components |
+| 2026-01-03 | Installed @angular/cdk for overlay and dialog support |
