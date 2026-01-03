@@ -1,11 +1,23 @@
 import { ApiReference } from '@/components/api-reference';
 import { CodeBlock } from '@/components/code-block';
+import { ComponentPreview } from '@/components/component-preview';
+import { ComponentDemos } from '@/services/component-demos.service';
 import { ComponentRegistry } from '@/services/component-registry.service';
 import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  Type,
+  viewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-angular';
 
@@ -26,6 +38,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
     TabsTrigger,
     CodeBlock,
     ApiReference,
+    ComponentPreview,
     LucideAngularModule,
   ],
   template: `
@@ -47,11 +60,22 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
         <!-- Preview -->
         <section class="space-y-4">
           <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="rounded-lg border bg-background p-8 flex items-center justify-center min-h-[200px]">
-            <p class="text-muted-foreground text-sm">
-              Interactive preview coming soon...
-            </p>
-          </div>
+          <ComponentPreview
+            [code]="previewCode()"
+            language="html"
+            [interactive]="hasDemo()"
+            [showViewportControls]="true"
+          >
+            @if (hasDemo()) {
+              <div class="w-full flex items-center justify-center">
+                <ng-container #demoContainer></ng-container>
+              </div>
+            } @else {
+              <p class="text-muted-foreground text-sm">
+                Preview not available yet for this component.
+              </p>
+            }
+          </ComponentPreview>
         </section>
 
         <!-- Installation -->
@@ -84,8 +108,12 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
         <section class="space-y-4">
           <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">Usage</h2>
           <CodeBlock
-            [code]="importCode()"
+            [code]="usageCode()"
             language="typescript"
+          />
+          <CodeBlock
+            [code]="templateUsageCode()"
+            language="html"
           />
         </section>
 
@@ -143,14 +171,21 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
 })
 export class ComponentDetailPage {
   private readonly registry = inject(ComponentRegistry);
+  private readonly demos = inject(ComponentDemos);
   private readonly router = inject(Router);
 
   readonly slug = input.required<string>();
+
+  protected readonly demoContainer = viewChild('demoContainer', { read: ViewContainerRef });
 
   protected readonly icons = { ArrowRight, ArrowLeft, Copy, Check };
 
   protected readonly component = computed(() => {
     return this.registry.getBySlug(this.slug());
+  });
+
+  protected readonly hasDemo = computed(() => {
+    return this.demos.hasDemo(this.slug());
   });
 
   protected readonly categoryLabel = computed(() => {
@@ -170,7 +205,31 @@ export class ComponentDetailPage {
   protected readonly importCode = computed(() => {
     const comp = this.component();
     if (!comp) return '';
-    return `import { ${comp.imports.join(', ')} } from '@shadcn-angular/${comp.slug}';`;
+    return `import { ${comp.imports.join(', ')} } from '@/ui/${comp.slug}';`;
+  });
+
+  protected readonly usageCode = computed(() => {
+    const comp = this.component();
+    if (!comp) return '';
+    return `import { ${comp.imports.join(', ')} } from '@/ui/${comp.slug}';
+
+@Component({
+  // ...
+  imports: [${comp.imports.join(', ')}],
+})
+export class MyComponent { }`;
+  });
+
+  protected readonly templateUsageCode = computed(() => {
+    const comp = this.component();
+    if (!comp || comp.examples.length === 0) return '';
+    return comp.examples[0].code;
+  });
+
+  protected readonly previewCode = computed(() => {
+    const comp = this.component();
+    if (!comp || comp.examples.length === 0) return '';
+    return comp.examples[0].code;
   });
 
   protected readonly prevComponent = computed(() => {
@@ -190,4 +249,24 @@ export class ComponentDetailPage {
     }
     return null;
   });
+
+  constructor() {
+    // Load demo component when slug changes
+    effect(() => {
+      const slug = this.slug();
+      const container = this.demoContainer();
+
+      if (container) {
+        container.clear();
+
+        if (this.demos.hasDemo(slug)) {
+          this.demos.getDemo(slug).then((demo) => {
+            if (demo) {
+              container.createComponent(demo.component as Type<unknown>);
+            }
+          });
+        }
+      }
+    });
+  }
 }

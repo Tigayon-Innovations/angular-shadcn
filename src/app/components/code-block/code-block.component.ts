@@ -86,6 +86,12 @@ interface Token {
     :host-context(.dark) .line-number {
       color: oklch(0.45 0 0);
     }
+
+    /* Code overflow handling */
+    pre {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
   `,
   template: `
     <div [class]="computedClass()">
@@ -119,8 +125,8 @@ interface Token {
       </div>
 
       <!-- Code content -->
-      <div class="overflow-x-auto">
-        <pre class="p-4 text-[13px] leading-6"><code [innerHTML]="highlightedCode()"></code></pre>
+      <div class="overflow-x-auto max-w-full">
+        <pre class="p-4 text-[13px] leading-6 whitespace-pre-wrap break-all"><code [innerHTML]="highlightedCode()"></code></pre>
       </div>
     </div>
   `,

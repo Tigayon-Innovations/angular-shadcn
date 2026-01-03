@@ -10,17 +10,17 @@ import { Switch } from '@/ui/switch';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-    ArrowRight,
-    Boxes,
-    ChevronRight,
-    Code2,
-    Github,
-    LucideAngularModule,
-    Palette,
-    Shield,
-    Star,
-    Users,
-    Zap,
+  ArrowRight,
+  Boxes,
+  ChevronRight,
+  Code2,
+  Github,
+  LucideAngularModule,
+  Palette,
+  Shield,
+  Star,
+  Users,
+  Zap,
 } from 'lucide-angular';
 
 /**
@@ -67,9 +67,9 @@ import {
             <!-- Title -->
             <div class="max-w-4xl">
               <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                Finally, a real
+                A modern
                 <span class="text-primary">&#64;shadcn/ui</span>
-                alternative for
+                experience for
                 <span class="bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
                   Angular
                 </span>
@@ -78,18 +78,18 @@ import {
 
             <!-- Description -->
             <p class="max-w-2xl text-lg text-muted-foreground md:text-xl">
-              Beautifully designed components built with Angular and Tailwind CSS.
-              Open source. Accessible. Customizable. Just copy and paste.
+              Beautiful components for Angular, built with Tailwind CSS.
+              Open source. Accessible. Ready when you are.
             </p>
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4">
               <Button routerLink="/docs" size="lg" class="gap-2">
-                Get Started
+                Start building
                 <lucide-icon [img]="icons.ArrowRight" class="h-4 w-4" />
               </Button>
               <Button routerLink="/docs/components" variant="outline" size="lg">
-                View Components
+                Explore components
               </Button>
             </div>
 
@@ -107,7 +107,7 @@ import {
               <Separator orientation="vertical" class="h-12" />
               <div>
                 <div class="text-3xl font-bold">100%</div>
-                <div class="text-sm text-muted-foreground">Tree Shakable</div>
+                <div class="text-sm text-muted-foreground">Tree-shakable</div>
               </div>
             </div>
           </div>
@@ -119,11 +119,11 @@ import {
         <div class="container mx-auto px-4">
           <div class="text-center mb-12">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              Beautiful Components
+              Components that feel right
             </h2>
             <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A collection of beautifully designed, accessible, and customizable components
-              that you can copy and paste into your apps.
+              A growing set of polished, accessible building blocks.
+              Copy, paste, ship.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Button</CardTitle>
-                <CardDescription class="text-xs">Click me interactions</CardDescription>
+                <CardDescription class="text-xs">Clear, responsive actions</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-wrap gap-2">
                 <Button size="sm">Primary</Button>
@@ -146,7 +146,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Badge</CardTitle>
-                <CardDescription class="text-xs">Status indicators</CardDescription>
+                <CardDescription class="text-xs">Small details. Big clarity.</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-wrap gap-2">
                 <Badge>Default</Badge>
@@ -160,7 +160,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Input</CardTitle>
-                <CardDescription class="text-xs">Text input fields</CardDescription>
+                <CardDescription class="text-xs">Simple, focused form fields</CardDescription>
               </CardHeader>
               <CardContent>
                 <Input type="email" placeholder="Email address" class="w-full" />
@@ -171,7 +171,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Checkbox</CardTitle>
-                <CardDescription class="text-xs">Selection controls</CardDescription>
+                <CardDescription class="text-xs">Selection, made effortless</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-col gap-3">
                 <label class="flex items-center gap-2 text-sm">
@@ -189,7 +189,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Switch</CardTitle>
-                <CardDescription class="text-xs">Toggle controls</CardDescription>
+                <CardDescription class="text-xs">Toggles that just work</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-col gap-3">
                 <label class="flex items-center justify-between text-sm">
@@ -207,7 +207,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Progress</CardTitle>
-                <CardDescription class="text-xs">Loading indicators</CardDescription>
+                <CardDescription class="text-xs">A better sense of progress</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-col gap-3">
                 <Progress [value]="66"></Progress>
@@ -219,7 +219,7 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Avatar</CardTitle>
-                <CardDescription class="text-xs">User representations</CardDescription>
+                <CardDescription class="text-xs">Identity, at a glance</CardDescription>
               </CardHeader>
               <CardContent class="flex gap-2">
                 <Avatar>
@@ -239,11 +239,11 @@ import {
             <Card class="group hover:shadow-lg transition-shadow">
               <CardHeader class="pb-3">
                 <CardTitle class="text-sm font-medium">Card</CardTitle>
-                <CardDescription class="text-xs">Content containers</CardDescription>
+                <CardDescription class="text-xs">Thoughtful, flexible layouts</CardDescription>
               </CardHeader>
               <CardContent>
                 <div class="rounded-md border p-3 bg-background">
-                  <p class="text-xs text-muted-foreground">Nested card content</p>
+                  <p class="text-xs text-muted-foreground">Content, beautifully grouped</p>
                 </div>
               </CardContent>
             </Card>
@@ -252,7 +252,7 @@ import {
           <!-- View All Link -->
           <div class="text-center mt-12">
             <Button routerLink="/docs/components" variant="outline" class="gap-2">
-              View All 57+ Components
+              See all 57+ components
               <lucide-icon [img]="icons.ChevronRight" class="h-4 w-4" />
             </Button>
           </div>
@@ -264,10 +264,10 @@ import {
         <div class="container mx-auto px-4">
           <div class="text-center mb-12">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              Why shadcn-angular?
+              Designed for Angular.
             </h2>
             <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Built with the same philosophy as shadcn/ui, but designed specifically for Angular.
+              The shadcn approach, rebuilt for Angular — fast, typed, and easy to adopt.
             </p>
           </div>
 
@@ -279,7 +279,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Lightning Fast</h3>
               <p class="text-muted-foreground text-sm">
-                Optimized for performance with OnPush change detection and signals.
+                Built for speed with OnPush change detection and signals.
               </p>
             </div>
 
@@ -290,7 +290,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Beautiful Design</h3>
               <p class="text-muted-foreground text-sm">
-                Crafted with attention to detail. Looks great out of the box.
+                Crafted with care. Looks great from day one.
               </p>
             </div>
 
@@ -301,7 +301,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Developer Experience</h3>
               <p class="text-muted-foreground text-sm">
-                TypeScript-first with full IDE support and type safety.
+                TypeScript-first. Great DX. Strong defaults.
               </p>
             </div>
 
@@ -312,7 +312,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Modular Architecture</h3>
               <p class="text-muted-foreground text-sm">
-                Standalone components. Import only what you need. Tree-shakable.
+                Standalone by default. Import what you need. Nothing more.
               </p>
             </div>
 
@@ -323,7 +323,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Type Safe</h3>
               <p class="text-muted-foreground text-sm">
-                Strict TypeScript throughout. No any types in the public API.
+                Strict types throughout. No guesswork.
               </p>
             </div>
 
@@ -334,7 +334,7 @@ import {
               </div>
               <h3 class="font-semibold text-lg mb-2">Community Driven</h3>
               <p class="text-muted-foreground text-sm">
-                Open source and built with the community. Contributions welcome.
+                Open source, built in the open. Contributions welcome.
               </p>
             </div>
           </div>
@@ -346,14 +346,14 @@ import {
         <div class="container mx-auto px-4">
           <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              Ready to get started?
+              Build something great.
             </h2>
             <p class="text-lg text-muted-foreground mb-8">
-              Start building beautiful Angular applications with shadcn-angular today.
+              Bring a new level of polish to your next Angular app.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <Button routerLink="/docs" size="lg" class="gap-2">
-                Read the Docs
+                Read the docs
                 <lucide-icon [img]="icons.ArrowRight" class="h-4 w-4" />
               </Button>
               <Button

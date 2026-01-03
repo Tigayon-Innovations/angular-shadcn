@@ -1,3 +1,4 @@
+export { ComponentDemos, type ComponentDemo } from './component-demos.service';
 export {
     ComponentRegistry, type ComponentCategory, type ComponentExample, type ComponentInfo
 } from './component-registry.service';
