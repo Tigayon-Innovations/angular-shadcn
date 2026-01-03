@@ -2,10 +2,10 @@ import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/ui/button';
 import { Kbd } from '@/ui/kbd';
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
   OnInit,
   signal,
 } from '@angular/core';
@@ -18,14 +18,24 @@ import { Github, LucideAngularModule, Menu, Search, Star } from 'lucide-angular'
 @Component({
   selector: 'SiteHeader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd],
+  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd, NgOptimizedImage],
+  host: {
+    '(document:keydown)': 'onKeydown($event)',
+  },
   template: `
     <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto flex h-14 max-w-screen-2xl items-center px-4">
         <!-- Logo -->
         <div class="mr-4 flex">
           <a routerLink="/" class="mr-6 flex items-center space-x-2">
-            <span class="font-bold text-xl">shadcn-angular</span>
+            <img
+              ngSrc="/angular-shad-cn.png"
+              width="24"
+              height="24"
+              alt="shadcn-angular"
+              class="h-6 w-6 scale-200"
+              priority
+            />
           </a>
         </div>
 
@@ -122,8 +132,6 @@ export class SiteHeader implements OnInit {
   protected openSearch(): void {
     this.searchOpen.set(true);
   }
-
-  @HostListener('document:keydown', ['$event'])
   protected onKeydown(event: KeyboardEvent): void {
     // Open search on Cmd+K (Mac) or Ctrl+K (Windows/Linux)
     if ((event.metaKey || event.ctrlKey) && event.key === 'k') {

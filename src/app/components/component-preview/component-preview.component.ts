@@ -3,22 +3,22 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-    signal
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal
 } from '@angular/core';
 import {
-    Code2,
-    Copy,
-    Eye,
-    Fullscreen,
-    LucideAngularModule,
-    Maximize2,
-    Monitor,
-    Smartphone,
-    Tablet
+  Code2,
+  Copy,
+  Eye,
+  Fullscreen,
+  LucideAngularModule,
+  Maximize2,
+  Monitor,
+  Smartphone,
+  Tablet
 } from 'lucide-angular';
 
 type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
@@ -34,21 +34,9 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
   template: `
     <div [class]="computedClass()">
       <Tabs defaultValue="preview" class="relative w-full">
-        <!-- Header with improved visual hierarchy -->
-        <div class="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-2">
-          <!-- Left: Title and Description -->
-          <div class="flex items-center gap-4">
-            @if (title()) {
-              <div class="flex flex-col">
-                <h3 class="text-sm font-semibold text-foreground">{{ title() }}</h3>
-                @if (description()) {
-                  <p class="text-xs text-muted-foreground">{{ description() }}</p>
-                }
-              </div>
-            }
-          </div>
-
-          <!-- Center: Tabs -->
+        <!-- Header with centered tabs -->
+        <div class="relative flex items-center justify-center border-b border-border bg-muted/30 px-4 py-2">
+          <!-- Center: Tabs (absolutely positioned to stay centered) -->
           <TabsList class="h-9 rounded-lg bg-muted p-1">
             <TabsTrigger value="preview" class="gap-2 text-xs px-3">
               <lucide-icon [img]="icons.Eye" class="h-3.5 w-3.5" />
@@ -60,8 +48,8 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
             </TabsTrigger>
           </TabsList>
 
-          <!-- Right: Viewport Controls -->
-          <div class="flex items-center gap-1">
+          <!-- Right: Viewport Controls (absolutely positioned) -->
+          <div class="absolute right-4 flex items-center gap-1">
             @if (showViewportControls()) {
               <div class="hidden sm:flex items-center gap-1 mr-2 border-r border-border pr-2">
                 <Button
@@ -115,8 +103,8 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
           <div [class]="previewContainerClass()">
             <!-- Viewport wrapper for responsive preview -->
             <div [class]="viewportWrapperClass()">
-              <!-- Grid background pattern -->
-              <div class="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_40%,transparent_100%)] opacity-50"></div>
+              <!-- Subtle dot pattern background -->
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:16px_16px] opacity-30"></div>
 
               <!-- Component content -->
               <div [class]="previewContentClass()">

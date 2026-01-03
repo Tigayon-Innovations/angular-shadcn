@@ -1,6 +1,5 @@
 import { ComponentRegistry, type ComponentCategory } from '@/services/component-registry.service';
 import { Badge } from '@/ui/badge';
-import { Button } from '@/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { Input } from '@/ui/input';
 import { Separator } from '@/ui/separator';
@@ -17,7 +16,6 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
-    Button,
     Input,
     Badge,
     Card,

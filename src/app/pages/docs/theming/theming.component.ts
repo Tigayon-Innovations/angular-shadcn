@@ -18,7 +18,7 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
       <div>
         <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">Theming</h1>
         <p class="text-lg text-muted-foreground mt-2">
-          Using CSS variables for theming and customization.
+          Theme with CSS variables. Change a few values, and everything follows.
         </p>
       </div>
 
@@ -31,8 +31,8 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
             CSS Variables
           </h2>
           <p class="leading-7">
-            shadcn-angular uses CSS variables for theming. This makes it easy to customize
-            the look and feel of the components by simply changing the variable values.
+            Themes are just CSS variables. Update them once, and components stay in sync
+            across your app.
           </p>
         </section>
 
@@ -41,7 +41,7 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
             Default Theme
           </h2>
           <p class="leading-7">
-            Here are the default CSS variables used for theming:
+            Start here. These are the defaults:
           </p>
           <CodeBlock
             [code]="defaultThemeCode"
@@ -56,8 +56,9 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
           <p class="leading-7">
             We use a simple <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code>
             and <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code> convention
-            for colors. The background variable is used for the background color of the
-            component and the foreground variable is used for the text color.
+            for colors. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code>
+            sets the surface. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code>
+            sets the text.
           </p>
           <div class="grid gap-4 md:grid-cols-2 my-6">
             <div class="rounded-lg border p-4 space-y-2">
@@ -65,42 +66,42 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
                 <div class="h-4 w-4 rounded bg-background border"></div>
                 <code class="text-sm">--background</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for the page background.</p>
+              <p class="text-sm text-muted-foreground">Used for page surfaces.</p>
             </div>
             <div class="rounded-lg border p-4 space-y-2">
               <div class="flex items-center gap-2">
                 <div class="h-4 w-4 rounded bg-foreground"></div>
                 <code class="text-sm">--foreground</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for the main text color.</p>
+              <p class="text-sm text-muted-foreground">Used for primary text.</p>
             </div>
             <div class="rounded-lg border p-4 space-y-2">
               <div class="flex items-center gap-2">
                 <div class="h-4 w-4 rounded bg-primary"></div>
                 <code class="text-sm">--primary</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for primary buttons and links.</p>
+              <p class="text-sm text-muted-foreground">Used for key actions.</p>
             </div>
             <div class="rounded-lg border p-4 space-y-2">
               <div class="flex items-center gap-2">
                 <div class="h-4 w-4 rounded bg-secondary"></div>
                 <code class="text-sm">--secondary</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for secondary elements.</p>
+              <p class="text-sm text-muted-foreground">Used for supporting UI.</p>
             </div>
             <div class="rounded-lg border p-4 space-y-2">
               <div class="flex items-center gap-2">
                 <div class="h-4 w-4 rounded bg-muted"></div>
                 <code class="text-sm">--muted</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for muted backgrounds.</p>
+              <p class="text-sm text-muted-foreground">Used for subtle surfaces.</p>
             </div>
             <div class="rounded-lg border p-4 space-y-2">
               <div class="flex items-center gap-2">
                 <div class="h-4 w-4 rounded bg-accent"></div>
                 <code class="text-sm">--accent</code>
               </div>
-              <p class="text-sm text-muted-foreground">Used for accent highlights.</p>
+              <p class="text-sm text-muted-foreground">Used for emphasis.</p>
             </div>
           </div>
         </section>
@@ -110,7 +111,7 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
             Adding New Colors
           </h2>
           <p class="leading-7">
-            To add new colors, you need to add them to your CSS file and the Tailwind theme:
+            Add a variable in CSS, then map it into Tailwind:
           </p>
           <CodeBlock
             [code]="addColorCode"
@@ -123,9 +124,8 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
             Other Color Formats
           </h2>
           <p class="leading-7">
-            shadcn-angular uses OKLCH color format by default for better color manipulation
-            and perceptual uniformity. You can also use other formats like HSL or RGB if
-            preferred:
+            OKLCH is the default for consistent, modern color. Prefer HSL or RGB? That's
+            fine too:
           </p>
           <CodeBlock
             [code]="otherFormatsCode"

@@ -1,4 +1,3 @@
-import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -11,14 +10,14 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
 @Component({
   selector: 'IntroductionPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, Badge, Separator, LucideAngularModule],
+  imports: [RouterLink, Button, Separator, LucideAngularModule],
   template: `
     <div class="space-y-6">
       <!-- Header -->
       <div>
         <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>
         <p class="text-lg text-muted-foreground mt-2">
-          Re-usable components built with Angular, Tailwind CSS, and shadcn/ui design principles.
+          Reusable components for Angular — built with Tailwind and shadcn/ui principles.
         </p>
       </div>
 
@@ -31,17 +30,16 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
             What is shadcn-angular?
           </h2>
           <p class="leading-7">
-            shadcn-angular is a collection of re-usable components built using Angular and
-            Tailwind CSS. It's NOT a component library. It's a collection of components that
-            you can copy and paste into your apps.
+            shadcn-angular is a set of components built with Angular and Tailwind CSS.
+            It's not a packaged component library — you copy what you need into your app.
           </p>
           <p class="leading-7">
             This project is an Angular port of
             <a href="https://ui.shadcn.com" target="_blank" class="font-medium underline underline-offset-4 hover:text-primary">
               shadcn/ui
             </a>
-            , maintaining the same design principles, naming conventions, and API patterns
-            wherever possible.
+            , with the same design principles, naming conventions, and API patterns where it
+            makes sense.
           </p>
         </section>
 
@@ -50,24 +48,23 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
             Philosophy
           </h2>
           <p class="leading-7">
-            The idea behind shadcn-angular is simple:
+            The idea is simple:
           </p>
           <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
             <li>
-              <strong>Ownership</strong> — You own the code. Copy and paste the components
-              you need into your project.
+              <strong>Ownership</strong> — Copy the components you need. You own the code.
             </li>
             <li>
-              <strong>Customization</strong> — Every component is fully customizable.
-              Modify the styles, behavior, or structure to fit your needs.
+              <strong>Customization</strong> — Adjust styles, structure, and behavior to fit
+              your product.
             </li>
             <li>
-              <strong>No Dependencies</strong> — No runtime dependencies on third-party
-              component libraries. Just pure Angular and Tailwind CSS.
+              <strong>No Dependencies</strong> — No runtime component library. Just Angular
+              and Tailwind CSS.
             </li>
             <li>
-              <strong>Accessibility</strong> — Components are built with accessibility in
-              mind, following WAI-ARIA guidelines.
+              <strong>Accessibility</strong> — Built with accessibility in mind, following
+              WAI-ARIA patterns.
             </li>
           </ul>
         </section>
@@ -80,27 +77,28 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
             <div class="rounded-lg border p-4">
               <h3 class="font-semibold">Angular 21+</h3>
               <p class="text-sm text-muted-foreground mt-1">
-                Built for the latest Angular with signals, standalone components, and
-                zoneless change detection.
+                Built for modern Angular: signals, standalone components, and zoneless
+                change detection.
               </p>
             </div>
             <div class="rounded-lg border p-4">
               <h3 class="font-semibold">Tailwind CSS 4</h3>
               <p class="text-sm text-muted-foreground mt-1">
-                Uses Tailwind CSS v4 with CSS variables for theming and dark mode support.
+                Tailwind v4, powered by CSS variables for theming and dark mode.
               </p>
             </div>
             <div class="rounded-lg border p-4">
               <h3 class="font-semibold">TypeScript First</h3>
               <p class="text-sm text-muted-foreground mt-1">
-                100% TypeScript with strict type checking. No any types in the public API.
+                Strict TypeScript. No <code class="bg-muted px-1.5 py-0.5 rounded text-sm">any</code>
+                in the public API.
               </p>
             </div>
             <div class="rounded-lg border p-4">
               <h3 class="font-semibold">57+ Components</h3>
               <p class="text-sm text-muted-foreground mt-1">
-                A comprehensive collection covering forms, navigation, feedback, data
-                display, and more.
+                A broad set of components for forms, navigation, feedback, data display,
+                and more.
               </p>
             </div>
           </div>
@@ -111,7 +109,7 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
             Credits
           </h2>
           <p class="leading-7">
-            This project is inspired by and based on:
+            Inspired by:
           </p>
           <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
             <li>

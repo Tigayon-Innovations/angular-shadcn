@@ -1,4 +1,3 @@
-import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
 
@@ -8,7 +7,7 @@ import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
 @Component({
   selector: 'SiteFooter',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Separator, LucideAngularModule],
+  imports: [LucideAngularModule],
   template: `
     <footer class="border-t border-border/40 py-6 md:py-0">
       <div class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:h-16 md:flex-row">

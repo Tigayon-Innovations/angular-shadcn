@@ -31,8 +31,8 @@ interface NavItem {
     LucideAngularModule,
   ],
   template: `
-    <aside class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
-      <ScrollArea class="h-full py-6 pr-6 lg:py-8">
+    <aside class="h-full border-r border-border/40 overflow-y-auto">
+      <div class="py-6 pr-6 pl-4 lg:py-8">
         <nav class="flex flex-col gap-4">
           @for (section of navigation; track section.title) {
             <div class="flex flex-col gap-1">
@@ -77,7 +77,7 @@ interface NavItem {
             </div>
           }
         </nav>
-      </ScrollArea>
+      </div>
     </aside>
   `,
 })

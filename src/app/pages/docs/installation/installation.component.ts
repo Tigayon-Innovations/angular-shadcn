@@ -1,7 +1,6 @@
 import { CodeBlock } from '@/components/code-block';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-angular';
@@ -12,14 +11,14 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
 @Component({
   selector: 'InstallationPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, Separator, Tabs, TabsContent, TabsList, TabsTrigger, CodeBlock, LucideAngularModule],
+  imports: [RouterLink, Button, Separator, CodeBlock, LucideAngularModule],
   template: `
     <div class="space-y-6">
       <!-- Header -->
       <div>
         <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">Installation</h1>
         <p class="text-lg text-muted-foreground mt-2">
-          How to install dependencies and structure your app.
+          Get set up fast. Install what you need, then start building.
         </p>
       </div>
 
@@ -32,7 +31,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Prerequisites
           </h2>
           <p class="leading-7">
-            Before you begin, make sure you have the following installed:
+            Before you start, make sure you have:
           </p>
           <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
             <li>Node.js 18.19 or later</li>
@@ -46,7 +45,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Create a New Project
           </h2>
           <p class="leading-7">
-            Start by creating a new Angular project if you don't have one:
+            Create a new Angular app (or use an existing one):
           </p>
           <CodeBlock
             [code]="createProjectCode"
@@ -59,7 +58,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Add Tailwind CSS
           </h2>
           <p class="leading-7">
-            Install Tailwind CSS using the Angular CLI:
+            Add Tailwind with the Angular CLI:
           </p>
           <CodeBlock
             [code]="addTailwindCode"
@@ -72,7 +71,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Configure CSS Variables
           </h2>
           <p class="leading-7">
-            Add the shadcn CSS variables to your <code class="bg-muted px-1.5 py-0.5 rounded text-sm">styles.scss</code> file:
+            Paste the shadcn CSS variables into <code class="bg-muted px-1.5 py-0.5 rounded text-sm">styles.scss</code>:
           </p>
           <CodeBlock
             [code]="cssVariablesCode"
@@ -85,14 +84,14 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Add the cn Utility
           </h2>
           <p class="leading-7">
-            Install the required dependencies:
+            Install a few small utilities:
           </p>
           <CodeBlock
             [code]="installDepsCode"
             language="bash"
           />
           <p class="leading-7">
-            Create the <code class="bg-muted px-1.5 py-0.5 rounded text-sm">cn</code> utility function:
+            Then add the <code class="bg-muted px-1.5 py-0.5 rounded text-sm">cn</code> helper:
           </p>
           <CodeBlock
             [code]="cnUtilityCode"
@@ -105,7 +104,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Add Path Aliases
           </h2>
           <p class="leading-7">
-            Configure path aliases in your <code class="bg-muted px-1.5 py-0.5 rounded text-sm">tsconfig.json</code>:
+            Set up path aliases in <code class="bg-muted px-1.5 py-0.5 rounded text-sm">tsconfig.json</code>:
           </p>
           <CodeBlock
             [code]="pathAliasesCode"
@@ -118,8 +117,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             That's it!
           </h2>
           <p class="leading-7">
-            You're now ready to start adding components to your project. Head over to the
-            components section to start copying components.
+            You're ready. Next, copy the components you need.
           </p>
         </section>
       </div>
