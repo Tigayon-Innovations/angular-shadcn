@@ -45,3 +45,42 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+
+## MCP Tools- Use MCP tools for managing component packages and metadata
+- Use Context 7 mcp tool always
+
+## Tailwind 4
+
+- Always use Tailwind CSS v4 - do not use the deprecated utilities.
+- `corePlugins` is not supported in Tailwind v4.
+- In Tailwind v4, you import Tailwind using a regular CSS `@import` statement, not using the `@tailwind` directives used in v3:
+
+<code-snippet name="Tailwind v4 Import Tailwind Diff" lang="diff"
+
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
+* @import "tailwindcss";
+  </code-snippet>
+
+### Replaced Utilities
+
+- Tailwind v4 removed deprecated utilities. Do not use the deprecated option - use the replacement.
+- Opacity values are still numeric.
+
+| Deprecated | Replacement |
+|------------+--------------|
+| bg-opacity-_ | bg-black/_ |
+| text-opacity-_ | text-black/_ |
+| border-opacity-_ | border-black/_ |
+| divide-opacity-_ | divide-black/_ |
+| ring-opacity-_ | ring-black/_ |
+| placeholder-opacity-_ | placeholder-black/_ |
+| flex-shrink-_ | shrink-_ |
+| flex-grow-_ | grow-_ |
+| overflow-ellipsis | text-ellipsis |
+| decoration-slice | box-decoration-slice |
+| decoration-clone | box-decoration-clone |
+

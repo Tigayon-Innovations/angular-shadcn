@@ -1,0 +1,53 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from '@angular/core';
+import { Avatar } from './avatar.component';
+import { AvatarImage } from './avatar-image.component';
+import { AvatarFallback } from './avatar-fallback.component';
+
+/**
+ * Avatar component that handles image loading and fallback display.
+ * This is a convenience component that combines Avatar, AvatarImage, and AvatarFallback.
+ *
+ * @example
+ * <ui-avatar
+ *   src="/avatar.png"
+ *   alt="John Doe"
+ *   fallback="JD"
+ * />
+ */
+@Component({
+  selector: 'ui-avatar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [Avatar, AvatarImage, AvatarFallback],
+  template: `
+    <span Avatar [class]="class()">
+      @if (src() && !imageError()) {
+        <img
+          AvatarImage
+          [src]="src()"
+          [alt]="alt()"
+          (error)="onImageError()"
+        />
+      }
+      @if (!src() || imageError()) {
+        <span AvatarFallback>{{ fallback() }}</span>
+      }
+    </span>
+  `,
+})
+export class UiAvatar {
+  readonly src = input<string>('');
+  readonly alt = input<string>('');
+  readonly fallback = input<string>('');
+  readonly class = input<string>('');
+
+  protected readonly imageError = signal(false);
+
+  protected onImageError() {
+    this.imageError.set(true);
+  }
+}

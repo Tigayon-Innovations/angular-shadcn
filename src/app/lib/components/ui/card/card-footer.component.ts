@@ -1,0 +1,34 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { cn } from '@/lib/utils';
+
+/**
+ * Card footer section.
+ * Contains action buttons or additional information.
+ *
+ * @example
+ * <div CardFooter>
+ *   <button Button>Save</button>
+ *   <button Button variant="outline">Cancel</button>
+ * </div>
+ */
+@Component({
+  selector: '[CardFooter]',
+  template: `<ng-content />`,
+  host: {
+    '[class]': 'computedClass()',
+    'data-slot': 'card-footer',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CardFooter {
+  readonly class = input<string>('');
+
+  protected readonly computedClass = computed(() =>
+    cn('flex items-center px-6 [.border-t]:pt-6', this.class())
+  );
+}
