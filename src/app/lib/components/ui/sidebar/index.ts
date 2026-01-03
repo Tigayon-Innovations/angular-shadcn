@@ -1,0 +1,41 @@
+export {
+    SIDEBAR_CONTEXT,
+    SIDEBAR_COOKIE_MAX_AGE,
+    SIDEBAR_COOKIE_NAME,
+    SIDEBAR_KEYBOARD_SHORTCUT,
+    SIDEBAR_MENU_CONTEXT,
+    SIDEBAR_WIDTH,
+    SIDEBAR_WIDTH_ICON,
+    SIDEBAR_WIDTH_MOBILE,
+    type SidebarCollapsible,
+    type SidebarContext,
+    type SidebarSide,
+    type SidebarState,
+    type SidebarVariant
+} from './sidebar-context';
+export {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupAction,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarInput,
+    SidebarInset,
+    SidebarMenu,
+    SidebarMenuAction,
+    SidebarMenuBadge,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSkeleton,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
+    SidebarProvider,
+    SidebarRail,
+    SidebarSeparator,
+    SidebarTrigger
+} from './sidebar.component';
+
