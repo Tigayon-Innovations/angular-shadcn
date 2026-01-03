@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
+    signal,
 } from '@angular/core';
 import {
-  CAROUSEL_CONTEXT,
-  type CarouselContextValue,
-  type CarouselOrientation,
+    CAROUSEL_CONTEXT,
+    type CarouselContextValue,
+    type CarouselOrientation,
 } from './carousel-context';
 
 /**
@@ -68,8 +68,8 @@ import {
     '[class]': 'computedClass()',
     'role': 'region',
     'aria-roledescription': 'carousel',
-    '(keydown.ArrowLeft)': 'onKeyDown($event, "left")',
-    '(keydown.ArrowRight)': 'onKeyDown($event, "right")',
+    '(keydown.arrowleft)': 'onKeyDown($event, "left")',
+    '(keydown.arrowright)': 'onKeyDown($event, "right")',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -84,7 +84,7 @@ export class Carousel {
     cn('relative', this.class())
   );
 
-  protected onKeyDown(event: KeyboardEvent, direction: 'left' | 'right'): void {
+  protected onKeyDown(_event: Event, _direction: 'left' | 'right'): void {
     // Keyboard navigation is handled by the carousel API
   }
 }

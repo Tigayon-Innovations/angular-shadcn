@@ -152,7 +152,7 @@ export * from './component-name';
 - ✅ Use `computed()` for derived state
 - ✅ Use `cn()` utility for class merging
 - ✅ Use `host` object for host bindings
-- ✅ Accept `class` input: `readonly class = input<string>('');`
+- ✅ Accept `class` input: `readonly class = input<string>('');` (NOT `className`)
 
 ### DON'T:
 - ❌ Use attribute selectors like `[Button]` or `[Input]`
@@ -161,6 +161,7 @@ export * from './component-name';
 - ❌ Use `@Input()` decorator (use `input()` function instead)
 - ❌ Use `ngClass` or `ngStyle` (use class/style bindings)
 - ❌ Set `standalone: true` explicitly (it's the default in Angular 21+)
+- ❌ Use `className` - use `class` instead (Angular convention)
 
 ### Example Usage in Templates:
 

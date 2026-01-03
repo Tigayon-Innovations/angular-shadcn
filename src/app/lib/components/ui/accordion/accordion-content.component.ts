@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
 } from '@angular/core';
 import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
@@ -36,7 +36,7 @@ export class AccordionContent {
   protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
 
   /** Additional CSS classes */
-  readonly className = input<string>('');
+  readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -45,5 +45,5 @@ export class AccordionContent {
     )
   );
 
-  protected readonly innerClass = computed(() => cn('pb-4 pt-0', this.className()));
+  protected readonly innerClass = computed(() => cn('pb-4 pt-0', this.class()));
 }

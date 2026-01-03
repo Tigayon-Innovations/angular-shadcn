@@ -1,18 +1,18 @@
 import { cn } from '@/lib/utils';
 import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  input,
-  signal,
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    forwardRef,
+    input,
+    signal,
 } from '@angular/core';
 import {
-  ACCORDION_CONTEXT,
-  AccordionContext,
-  AccordionType,
+    ACCORDION_CONTEXT,
+    AccordionContext,
+    AccordionType,
 } from './accordion-context';
 
 /**
@@ -56,7 +56,7 @@ export class Accordion implements AccordionContext {
   readonly controlledValue = input<string | string[] | undefined>(undefined, { alias: 'value' });
 
   /** Additional CSS classes */
-  readonly className = input<string>('');
+  readonly class = input<string>('');
 
   /** Internal state for open items */
   private readonly openItems = signal<Set<string>>(new Set());
@@ -136,5 +136,5 @@ export class Accordion implements AccordionContext {
     return this.openItems().has(itemValue);
   }
 
-  protected readonly computedClass = computed(() => cn('w-full', this.className()));
+  protected readonly computedClass = computed(() => cn('w-full', this.class()));
 }

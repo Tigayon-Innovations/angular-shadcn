@@ -1,15 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  input,
-  model,
-  output,
-  signal,
-  viewChild,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    input,
+    model,
+    output,
+    signal,
+    viewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-context';
 
 /**
@@ -18,6 +19,7 @@ import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-contex
  */
 @Component({
   selector: 'InputOTP',
+  imports: [FormsModule],
   template: `
     <div [class]="computedClass()">
       <input
@@ -26,7 +28,7 @@ import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-contex
         inputmode="numeric"
         pattern="[0-9]*"
         autocomplete="one-time-code"
-        [maxlength]="maxLength()"
+        [attr.maxlength]="maxLength()"
         [value]="value()"
         (input)="onInput($event)"
         (keydown)="onKeyDown($event)"

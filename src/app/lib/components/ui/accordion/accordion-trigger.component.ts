@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
 } from '@angular/core';
 import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
@@ -50,12 +50,12 @@ export class AccordionTrigger {
   protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
 
   /** Additional CSS classes */
-  readonly className = input<string>('');
+  readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
     cn(
       'flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 cursor-pointer w-full',
-      this.className()
+      this.class()
     )
   );
 

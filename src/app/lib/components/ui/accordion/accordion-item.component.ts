@@ -1,16 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    forwardRef,
+    inject,
+    input,
 } from '@angular/core';
 import {
-  ACCORDION_CONTEXT,
-  ACCORDION_ITEM_CONTEXT,
-  AccordionItemContext,
+    ACCORDION_CONTEXT,
+    ACCORDION_ITEM_CONTEXT,
+    AccordionItemContext,
 } from './accordion-context';
 
 /**
@@ -44,7 +44,7 @@ export class AccordionItem implements AccordionItemContext {
   readonly value = input.required<string>();
 
   /** Additional CSS classes */
-  readonly className = input<string>('');
+  readonly class = input<string>('');
 
   /** Whether this item is currently open */
   readonly isOpen = computed(() => this.accordion.isItemOpen(this.value()));
@@ -54,5 +54,5 @@ export class AccordionItem implements AccordionItemContext {
     this.accordion.onValueChange(this.value());
   }
 
-  protected readonly computedClass = computed(() => cn('border-b', this.className()));
+  protected readonly computedClass = computed(() => cn('border-b', this.class()));
 }

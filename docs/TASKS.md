@@ -539,6 +539,7 @@ When implementing components:
 5. **Update this TASKS.md** after completing components
 6. **Run tests** to verify implementations
 7. **ALL selectors are element selectors** - no attribute selectors
+8. **Use `class` NOT `className`** - Angular convention differs from React; use `readonly class = input<string>('')`
 
 ### Quick Reference Commands
 
@@ -561,8 +562,7 @@ npx tsc --noEmit
 ## Changelog
 
 | Date | Changes |
-|------|---------|
-| 2026-01-03 | Initial task document created, Phase 1-2 marked complete |
+|------|---------|| 2026-01-03 | **CONVENTION**: Input property for CSS classes must be `class` not `className` (Angular convention) || 2026-01-03 | Initial task document created, Phase 1-2 marked complete |
 | 2026-01-03 | Added Accordion to Phase 4 as complete |
 | 2026-01-03 | Setup Vitest testing framework |
 | 2026-01-03 | **MAJOR**: Changed ALL selectors to element selectors only (no attribute selectors) |

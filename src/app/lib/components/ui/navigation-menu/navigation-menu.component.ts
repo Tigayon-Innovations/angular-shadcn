@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { NAVIGATION_MENU_CONTEXT, type NavigationMenuContextValue } from './navigation-menu-context';
+import { NavigationMenuViewport } from './navigation-menu-viewport.component';
 
 /**
  * NavigationMenu component - navigation menu with links.
@@ -8,6 +9,7 @@ import { NAVIGATION_MENU_CONTEXT, type NavigationMenuContextValue } from './navi
  */
 @Component({
   selector: 'NavigationMenu',
+  imports: [NavigationMenuViewport],
   template: `
     <div [class]="computedClass()">
       <ng-content />

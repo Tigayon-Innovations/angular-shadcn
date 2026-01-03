@@ -63,6 +63,7 @@ Component selectors and exported names must match shadcn/ui React naming **exact
 - **No attribute selectors** - all components use element selectors
 - **No custom prefixes** (no `shad-`, no `ui-`, no `ng-`)
 - Export names match React: `Button`, `Card`, `DialogTrigger`, etc.
+- **Use `class` NOT `className`** for the CSS classes input property (Angular convention)
 
 **Example usage (mirrors React shadcn):**
 ```html
