@@ -1,84 +1,27 @@
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/ui/accordion';
-import { Alert, AlertDescription, AlertTitle } from '@/ui/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
-import { Badge } from '@/ui/badge';
-import { Button } from '@/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/ui/card';
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from '@/ui/collapsible';
-import { Input } from '@/ui/input';
-import { Label } from '@/ui/label';
-import { Separator } from '@/ui/separator';
-import { Skeleton } from '@/ui/skeleton';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
-import { Textarea } from '@/ui/textarea';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { AlertCircle, ChevronsUpDown, LucideAngularModule, Moon, Sun, Terminal } from 'lucide-angular';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    Accordion,
-    AccordionItem,
-    AccordionTrigger,
-    AccordionContent,
-    Button,
-    Card,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-    CardContent,
-    CardFooter,
-    Collapsible,
-    CollapsibleTrigger,
-    CollapsibleContent,
-    Input,
-    Label,
-    Badge,
-    Separator,
-    Skeleton,
-    Alert,
-    AlertTitle,
-    AlertDescription,
-    Avatar,
-    AvatarImage,
-    AvatarFallback,
-    Tabs,
-    TabsList,
-    TabsTrigger,
-    TabsContent,
-    Textarea,
-    LucideAngularModule,
-  ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  imports: [RouterOutlet, SiteHeader, SiteFooter],
+  template: `
+    <div class="relative flex min-h-screen flex-col bg-background">
+      <SiteHeader />
+      <main class="flex-1">
+        <router-outlet />
+      </main>
+      <SiteFooter />
+    </div>
+  `,
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
 })
-export class App {
-  protected readonly title = signal('shadcn-angular');
-  protected readonly isDark = signal(false);
-  protected readonly collapsibleOpen = signal(false);
+export class App {}
 
-  protected readonly icons = { Terminal, AlertCircle, Sun, Moon, ChevronsUpDown };
-
-  toggleDarkMode() {
-    this.isDark.update((v) => !v);
-    document.documentElement.classList.toggle('dark', this.isDark());
-  }
-}
 
