@@ -75,10 +75,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Add node_modules/.bin to PATH
-                        export PATH="$PWD/node_modules/.bin:$PATH"
-
-                        npx ng lint || true
+                        # Use direct path to ng binary (handles spaces in path)
+                        ./node_modules/.bin/ng lint || true
                     '''
                 }
             }
@@ -93,15 +91,9 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Add node_modules/.bin to PATH for ng command
-                        export PATH="$PWD/node_modules/.bin:$PATH"
-
-                        # Verify ng is available
-                        echo "Checking Angular CLI..."
-                        which ng || echo "ng not in PATH, using npx"
-
-                        # Build using npx to ensure ng is found
-                        npx ng build
+                        # Use direct path to ng binary (handles spaces in path)
+                        echo "Building Angular application..."
+                        ./node_modules/.bin/ng build
 
                         # Verify build output
                         echo "Build output:"
@@ -139,10 +131,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Add node_modules/.bin to PATH
-                        export PATH="$PWD/node_modules/.bin:$PATH"
-
-                        npx vitest run || true
+                        # Use direct path to vitest binary (handles spaces in path)
+                        ./node_modules/.bin/vitest run || true
                     '''
                 }
             }
