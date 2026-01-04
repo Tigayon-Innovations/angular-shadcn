@@ -54,10 +54,8 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
             steps {
                 script {
                     sh '''#!/bin/bash -l
@@ -65,30 +63,28 @@ pipeline {
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Create deployment directory
+                        # Create deploy directory
                         sudo mkdir -p ${DEPLOY_DIR}
+                        sudo chown jenkins:jenkins ${DEPLOY_DIR}
 
-                        # Copy built files
-                        sudo cp -r dist/shadcn-angular/* ${DEPLOY_DIR}/
-                        sudo cp package.json ecosystem.config.js ${DEPLOY_DIR}/
+                        # Clear old deployment
+                        rm -rf ${DEPLOY_DIR}/*
 
-                        # Copy MCP server source (not dist - it's already in dist/mcp-server)
-                        sudo mkdir -p ${DEPLOY_DIR}/mcp-server
-                        sudo cp -r dist/mcp-server/* ${DEPLOY_DIR}/mcp-server/
+                        # Copy dist folder (Angular SSR)
+                        cp -r dist ${DEPLOY_DIR}/
 
-                        # Install only production dependencies
+                        # Copy MCP server build
+                        cp -r mcp-server ${DEPLOY_DIR}/
+
+                        # Copy necessary config files
+                        cp package.json ${DEPLOY_DIR}/
+                        cp ecosystem.config.js ${DEPLOY_DIR}/
+
+                        # Install production dependencies only
                         cd ${DEPLOY_DIR}
-                        sudo npm install --omit=dev
+                        npm install --production
 
-                        # Set permissions
-                        sudo chown -R www-data:www-data ${DEPLOY_DIR}
-
-                        # Restart services
-                        pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
-                        pm2 save
-
-                        # Reload nginx
-                        sudo nginx -t && sudo systemctl reload nginx
+                        echo "✅ Deployed to ${DEPLOY_DIR}"
                     '''
                 }
             }
