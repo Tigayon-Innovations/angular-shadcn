@@ -8,7 +8,7 @@ interface NgAddOptions {
 
 export function ngAdd(options: NgAddOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    context.logger.info('✨ Adding shadcn-angular to your project...');
+    context.logger.info('✨ Adding @ascn components to your project...');
 
     // Add dependencies to package.json
     const packageJsonPath = '/package.json';
@@ -48,12 +48,12 @@ export function ngAdd(options: NgAddOptions): Rule {
     }
 
     context.logger.info('');
-    context.logger.info('✅ shadcn-angular setup complete!');
+    context.logger.info('✅ @ascn setup complete!');
     context.logger.info('');
     context.logger.info('📚 Next steps:');
     context.logger.info('  1. Ensure Tailwind CSS is configured in your project');
     context.logger.info('  2. Add CSS variables to your styles.scss (see docs)');
-    context.logger.info('  3. Install components: ng generate shadcn-angular:component button');
+    context.logger.info('  3. Install components: ng add @ascn/button');
     context.logger.info('');
 
     return tree;

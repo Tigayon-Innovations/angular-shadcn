@@ -107,7 +107,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
                 </p>
               </div>
               <CodeBlock
-                [code]="'ng add @shadcn-angular/' + slug()"
+                [code]="'ng add @ascn/' + slug()"
                 language="bash"
               />
             </div>
@@ -290,7 +290,7 @@ export class ComponentDetailPage {
   protected readonly usageCode = computed(() => {
     const comp = this.component();
     if (!comp) return '';
-    return `import { ${comp.imports.join(', ')} } from '@/ui/${comp.slug}';
+    return `import { ${comp.imports.join(', ')} } from '@ascn/${comp.slug}';
 
 @Component({
   // ...

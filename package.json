@@ -1,6 +1,6 @@
 {
-  "name": "ngx-shadcn-angular",
-  "version": "1.0.02",
+  "name": "@ascn/core",
+  "version": "1.0.3",
   "description": "Beautifully designed Angular components built with Tailwind CSS v4",
   "keywords": [
     "angular",

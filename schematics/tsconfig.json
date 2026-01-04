@@ -5,7 +5,7 @@
     "module": "commonjs",
     "target": "es2020",
     "declaration": true,
-    "outDir": "../dist/schematics",
+    "outDir": ".",
     "rootDir": ".",
     "strict": true,
     "skipLibCheck": true,
@@ -16,5 +16,5 @@
     "resolveJsonModule": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.d.ts"]
 }

@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "ShadcnAngularNgAddSchema",
-  "title": "shadcn-angular ng-add schematic",
+  "$id": "AscnNgAddSchema",
+  "title": "@ascn ng-add schematic",
   "type": "object",
   "properties": {
     "project": {
       "type": "string",
-      "description": "The name of the project to add shadcn-angular to.",
+      "description": "The name of the project to add @ascn to.",
       "$default": {
         "$source": "projectName"
       }

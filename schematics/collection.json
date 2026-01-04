@@ -2,12 +2,12 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add shadcn-angular components to your project",
+      "description": "Add @ascn components to your project",
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
     },
     "component": {
-      "description": "Install a specific shadcn-angular component",
+      "description": "Install a specific @ascn component",
       "factory": "./component/index#component",
       "schema": "./component/schema.json",
       "aliases": ["c"]
