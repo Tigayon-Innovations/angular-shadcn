@@ -112,11 +112,53 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
                 </TabsList>
                 <TabsContent value="cli" class="mt-6 space-y-4">
                   <div class="rounded-lg border bg-muted/50 p-4">
-                    <p class="text-sm font-medium mb-3">Run the following command in your terminal:</p>
-                    <CodeBlock
-                      [code]="'npx shadcn-angular add ' + slug()"
-                      language="bash"
-                    />
+                    <p class="text-sm font-medium mb-3">Choose your package manager:</p>
+                    <Tabs defaultValue="npx" class="w-full">
+                      <TabsList class="grid w-full grid-cols-5">
+                        <TabsTrigger value="npx">npx</TabsTrigger>
+                        <TabsTrigger value="npm">npm</TabsTrigger>
+                        <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+                        <TabsTrigger value="yarn">yarn</TabsTrigger>
+                        <TabsTrigger value="bun">bun</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="npx" class="mt-3">
+                        <CodeBlock
+                          [code]="'npx shadcn-angular add ' + slug()"
+                          language="bash"
+                        />
+                      </TabsContent>
+                      <TabsContent value="npm" class="mt-3">
+                        <CodeBlock
+                          [code]="'npm install @shadcn-angular/' + slug()"
+                          language="bash"
+                        />
+                      </TabsContent>
+                      <TabsContent value="pnpm" class="mt-3">
+                        <CodeBlock
+                          [code]="'pnpm add @shadcn-angular/' + slug()"
+                          language="bash"
+                        />
+                      </TabsContent>
+                      <TabsContent value="yarn" class="mt-3">
+                        <CodeBlock
+                          [code]="'yarn add @shadcn-angular/' + slug()"
+                          language="bash"
+                        />
+                      </TabsContent>
+                      <TabsContent value="bun" class="mt-3">
+                        <CodeBlock
+                          [code]="'bun add @shadcn-angular/' + slug()"
+                          language="bash"
+                        />
+                      </TabsContent>
+                    </Tabs>
+                    <div class="mt-4 pt-4 border-t">
+                      <p class="text-sm font-medium mb-2">Angular CLI (ng add):</p>
+                      <CodeBlock
+                        [code]="'ng add @shadcn-angular/' + slug()"
+                        language="bash"
+                      />
+                    </div>
                   </div>
                 </TabsContent>
                 <TabsContent value="manual" class="mt-6 space-y-4">

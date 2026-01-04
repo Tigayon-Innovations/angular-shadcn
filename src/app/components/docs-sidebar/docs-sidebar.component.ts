@@ -1,7 +1,7 @@
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
 } from '@/ui/collapsible';
 import { ScrollArea } from '@/ui/scroll-area';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -92,6 +92,7 @@ export class DocsSidebar {
         { title: 'Installation', href: '/docs/installation' },
         { title: 'Theming', href: '/docs/theming' },
         { title: 'Dark Mode', href: '/docs/dark-mode' },
+        { title: 'MCP Setup', href: '/docs/mcp-setup' },
       ],
     },
     {

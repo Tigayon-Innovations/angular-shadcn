@@ -6,11 +6,23 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { getMcpInfo, handleMcpMessage, handleMcpSse } from '../mcp-server/ssr-handler.js';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+// Enable JSON parsing for MCP endpoints
+app.use(express.json());
+
+/**
+ * MCP (Model Context Protocol) API endpoints
+ * These endpoints allow AI assistants to query shadcn-angular components
+ */
+app.get('/api/mcp', getMcpInfo);
+app.get('/api/mcp/sse', handleMcpSse);
+app.post('/api/mcp/message', handleMcpMessage);
 
 /**
  * Example Express Rest API endpoints can be defined here.

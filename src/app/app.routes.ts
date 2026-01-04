@@ -35,6 +35,11 @@ export const routes: Routes = [
           import('@/pages/docs/dark-mode').then((m) => m.DarkModePage),
       },
       {
+        path: 'mcp-setup',
+        loadComponent: () =>
+          import('@/pages/docs/mcp-setup').then((m) => m.McpSetupPage),
+      },
+      {
         path: 'components',
         loadComponent: () =>
           import('@/pages/docs/components-list').then((m) => m.ComponentsListPage),

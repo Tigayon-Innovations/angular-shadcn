@@ -1,0 +1,12 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/config.json",
+  "mcpServers": {
+    "shadcn-angular": {
+      "command": "node",
+      "args": [
+        "/REPLACE/WITH/ABSOLUTE/PATH/TO/shadcn-angular/dist/mcp-server/index.js"
+      ],
+      "env": {}
+    }
+  }
+}

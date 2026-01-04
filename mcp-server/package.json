@@ -1,0 +1,23 @@
+{
+  "name": "@shadcn-angular/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for shadcn-angular component documentation and installation",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "shadcn-angular-mcp": "./index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "shadcn",
+    "angular",
+    "components",
+    "ui"
+  ],
+  "author": "shadcn-angular team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  }
+}
