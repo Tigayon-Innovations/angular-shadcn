@@ -8,8 +8,8 @@ pipeline {
         DOMAIN = 'shadcn-angular.tigayon.com'
         MCP_PORT = '3001'
         APP_PORT = '4200'
-        DEPLOY_DIR = '/var/www/shadcn-angular'
-        DEPLOY_PATH = '/var/www/frontend/shad-cn-angular/dist'
+        DEPLOY_DIR = '/var/www/frontend/tigayon/frontend/production/shadcn-angular'
+        DEPLOY_PATH = '/var/www/frontend/tigayon/frontend/production/shadcn-angular/dist'
         BUILD_PATH_APP = 'dist/shadcn-angular'
         BUILD_PATH_MCP = 'dist/mcp-server'
         NVM_DIR = '/var/lib/jenkins/.nvm'
@@ -29,11 +29,11 @@ pipeline {
                     sh '''
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        
+
                         # Install and use the specified Node version
                         nvm install ${NODE_VERSION} || true
                         nvm use ${NODE_VERSION}
-                        
+
                         # Verify Node.js and npm versions
                         echo "Node version: $(node --version)"
                         echo "NPM version: $(npm --version)"
@@ -59,7 +59,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         npm ci
                     '''
                 }
@@ -74,10 +74,10 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         # Add node_modules/.bin to PATH
                         export PATH="$PWD/node_modules/.bin:$PATH"
-                        
+
                         npx ng lint || true
                     '''
                 }
@@ -92,17 +92,17 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         # Add node_modules/.bin to PATH for ng command
                         export PATH="$PWD/node_modules/.bin:$PATH"
-                        
+
                         # Verify ng is available
                         echo "Checking Angular CLI..."
                         which ng || echo "ng not in PATH, using npx"
-                        
+
                         # Build using npx to ensure ng is found
                         npx ng build
-                        
+
                         # Verify build output
                         echo "Build output:"
                         ls -la ${BUILD_PATH_APP} || echo "App build path not found"
@@ -119,11 +119,11 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         cd mcp-server
                         npm ci
                         npm run build || true
-                        
+
                         echo "MCP Server build complete"
                     '''
                 }
@@ -138,10 +138,10 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         # Add node_modules/.bin to PATH
                         export PATH="$PWD/node_modules/.bin:$PATH"
-                        
+
                         npx vitest run || true
                     '''
                 }
@@ -159,7 +159,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         # Create deployment directory if not exists
                         sudo mkdir -p ${DEPLOY_DIR}
                         sudo mkdir -p ${DEPLOY_PATH}
@@ -193,7 +193,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         MCP_DIR="${DEPLOY_DIR}/mcp-server"
 
                         # Create MCP directory
@@ -224,7 +224,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         pm2 stop ${APP_NAME} mcp-server || true
                         sleep 2
                     '''
@@ -243,7 +243,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         cd ${DEPLOY_DIR}
                         pm2 start ecosystem.config.js || true
                         pm2 save
@@ -264,7 +264,7 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
+
                         # Give services time to start
                         sleep 5
 
