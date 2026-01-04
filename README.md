@@ -36,21 +36,30 @@
 
 Choose your package manager:
 
+
+
+
+```bash
+# Angular CLI (recommended)
+ng add ngx-shadcn-angular
+```
+
 ```bash
 # npm
 npm install ngx-shadcn-angular
-
+```
+```bash
 # pnpm
 pnpm add ngx-shadcn-angular
-
+```
+```bash
 # yarn
 yarn add ngx-shadcn-angular
-
+```
+```bash
 # bun
 bun add ngx-shadcn-angular
 
-# Angular CLI (recommended)
-ng add ngx-shadcn-angular
 ```
 
 ### Basic Usage
