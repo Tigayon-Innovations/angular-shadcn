@@ -1,17 +1,18 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
 } from '@angular/core';
+import { ArrowDown, ArrowUp, ArrowUpDown, LucideAngularModule } from 'lucide-angular';
 import {
-  DATA_TABLE_CONTEXT,
-  DataTableContext,
-  SortDirection,
-  SortingState,
-  type ColumnDef,
+    DATA_TABLE_CONTEXT,
+    DataTableContext,
+    SortDirection,
+    SortingState,
+    type ColumnDef,
 } from './data-table-context';
 
 /**
@@ -19,6 +20,7 @@ import {
  */
 @Component({
   selector: 'DataTableContent',
+  imports: [LucideAngularModule],
   template: `
     <div class="rounded-md border">
       <table class="w-full caption-bottom text-sm">
@@ -36,11 +38,11 @@ import {
                   >
                     {{ column.header }}
                     @if (getSortDirection(column.id) === 'asc') {
-                      <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                      <lucide-icon [img]="icons.ArrowUp" class="size-4" />
                     } @else if (getSortDirection(column.id) === 'desc') {
-                      <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                      <lucide-icon [img]="icons.ArrowDown" class="size-4" />
                     } @else {
-                      <svg class="size-4 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+                      <lucide-icon [img]="icons.ArrowUpDown" class="size-4 opacity-50" />
                     }
                   </button>
                 } @else {
@@ -83,6 +85,7 @@ import {
 })
 export class DataTableContent<T = unknown> {
   protected readonly context = inject(DATA_TABLE_CONTEXT) as DataTableContext<T>;
+  protected readonly icons = { ArrowUp, ArrowDown, ArrowUpDown };
 
   /** Additional CSS classes */
   readonly class = input<string>('');

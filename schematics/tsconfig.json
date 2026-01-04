@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["es2020"],
+    "module": "commonjs",
+    "target": "es2020",
+    "declaration": true,
+    "outDir": "../dist/schematics",
+    "rootDir": ".",
+    "strict": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "types": ["node"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

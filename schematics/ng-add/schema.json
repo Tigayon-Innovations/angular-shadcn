@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ShadcnAngularNgAddSchema",
+  "title": "shadcn-angular ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project to add shadcn-angular to.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip installing dependency packages."
+    }
+  }
+}

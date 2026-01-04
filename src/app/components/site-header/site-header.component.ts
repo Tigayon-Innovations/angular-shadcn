@@ -29,12 +29,12 @@ import { Github, LucideAngularModule, Menu, Search, Star } from 'lucide-angular'
         <div class="mr-4 flex">
           <a routerLink="/" class="mr-6 flex items-center space-x-2">
             <img
-              ngSrc="/angular-shad-cn.png"
-              width="24"
-              height="24"
+              src="https://angular.dev/assets/images/press-kit/angular_wordmark_gradient.png"
+
+
               alt="shadcn-angular"
-              class="h-6 w-6 scale-200"
-              priority
+              class="h-6  scale-150"
+
             />
           </a>
         </div>

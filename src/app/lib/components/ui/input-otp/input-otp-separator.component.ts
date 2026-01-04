@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { LucideAngularModule, Minus } from 'lucide-angular';
 
 /**
  * InputOTPSeparator component - separator between OTP groups.
@@ -7,11 +8,10 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
  */
 @Component({
   selector: 'InputOTPSeparator',
+  imports: [LucideAngularModule],
   template: `
     <div role="separator">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus">
-        <path d="M5 12h14"/>
-      </svg>
+      <lucide-icon [img]="icons.Minus" />
     </div>
   `,
   host: {
@@ -20,6 +20,8 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOTPSeparator {
+  protected readonly icons = { Minus };
+
   /** Additional CSS classes */
   readonly class = input<string>('');
 

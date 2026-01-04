@@ -48,6 +48,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 
 ## MCP Tools- Use MCP tools for managing component packages and metadata
+- Always Invoke angular mcp tool for the latest updates and best practices
 - Use Context 7 mcp tool always 
 - When creating new components, check first shad cn for existing components to match naming conventions and structure.
 

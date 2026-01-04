@@ -30,24 +30,28 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
     LucideAngularModule,
   ],
   template: `
-    <div class="space-y-6">
+    <article class="relative">
       <!-- Header -->
-      <div>
-        <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">Components</h1>
-        <p class="text-lg text-muted-foreground mt-2">
-          Beautifully designed components built with Angular and Tailwind CSS.
-        </p>
+      <div class="space-y-4 pb-8 pt-6 md:pb-10">
+        <div class="space-y-2">
+          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
+            Components
+          </h1>
+          <p class="text-xl text-muted-foreground leading-7">
+            Beautifully designed components built with Angular and Tailwind CSS.
+          </p>
+        </div>
       </div>
 
-      <Separator />
+      <Separator class="mb-10" />
 
       <!-- Search -->
-      <div class="relative">
-        <lucide-icon [img]="icons.Search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <div class="relative max-w-2xl mb-10">
+        <lucide-icon [img]="icons.Search" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
           type="search"
           placeholder="Search components..."
-          class="pl-10"
+          class="pl-12 h-12 text-base"
           [value]="searchQuery()"
           (input)="onSearch($event)"
         />
@@ -55,68 +59,94 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
 
       <!-- Category Tabs -->
       <Tabs defaultValue="all" class="w-full">
-        <TabsList class="flex flex-wrap h-auto gap-1">
-          <TabsTrigger value="all" (click)="setCategory(null)">
-            All
-            <Badge variant="secondary" class="ml-1.5">{{ allComponents().length }}</Badge>
-          </TabsTrigger>
-          @for (category of categories(); track category.category) {
-            <TabsTrigger [value]="category.category" (click)="setCategory(category.category)">
-              {{ category.label }}
-              <Badge variant="secondary" class="ml-1.5">{{ category.components.length }}</Badge>
+        <div class="mb-8">
+          <TabsList class="inline-flex flex-wrap h-auto gap-2">
+            <TabsTrigger value="all" (click)="setCategory(null)" class="gap-2">
+              All
+              <Badge variant="secondary" class="ml-1">{{ allComponents().length }}</Badge>
             </TabsTrigger>
-          }
-        </TabsList>
+            @for (category of categories(); track category.category) {
+              <TabsTrigger [value]="category.category" (click)="setCategory(category.category)" class="gap-2">
+                {{ category.label }}
+                <Badge variant="secondary" class="ml-1">{{ category.components.length }}</Badge>
+              </TabsTrigger>
+            }
+          </TabsList>
+        </div>
 
-        <TabsContent value="all" class="mt-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <TabsContent value="all" class="mt-0">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @for (component of filteredComponents(); track component.slug) {
               <a [routerLink]="['/docs/components', component.slug]" class="block group">
-                <Card class="h-full transition-colors hover:bg-muted/50">
-                  <CardHeader>
-                    <CardTitle class="flex items-center justify-between">
-                      {{ component.name }}
+                <Card class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50">
+                  <CardHeader class="space-y-3">
+                    <CardTitle class="flex items-center justify-between text-xl">
+                      <span>{{ component.name }}</span>
                       <lucide-icon
                         [img]="icons.ArrowRight"
-                        class="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                        class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
                       />
                     </CardTitle>
-                    <CardDescription>{{ component.description }}</CardDescription>
+                    <CardDescription class="leading-relaxed">{{ component.description }}</CardDescription>
                   </CardHeader>
                 </Card>
               </a>
             } @empty {
-              <div class="col-span-full text-center py-12">
-                <p class="text-muted-foreground">No components found matching "{{ searchQuery() }}"</p>
+              <div class="col-span-full">
+                <div class="rounded-lg border bg-muted/50 p-12 text-center">
+                  <div class="flex justify-center mb-4">
+                    <div class="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                      <lucide-icon [img]="icons.Search" class="h-6 w-6 text-muted-foreground" />
+                    </div>
+                  </div>
+                  <h3 class="text-lg font-semibold mb-2">No components found</h3>
+                  <p class="text-muted-foreground">
+                    No components match "{{ searchQuery() }}". Try a different search term.
+                  </p>
+                </div>
               </div>
             }
           </div>
         </TabsContent>
 
         @for (category of categories(); track category.category) {
-          <TabsContent [value]="category.category" class="mt-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <TabsContent [value]="category.category" class="mt-0">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               @for (component of getCategoryComponents(category.category); track component.slug) {
                 <a [routerLink]="['/docs/components', component.slug]" class="block group">
-                  <Card class="h-full transition-colors hover:bg-muted/50">
-                    <CardHeader>
-                      <CardTitle class="flex items-center justify-between">
-                        {{ component.name }}
+                  <Card class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50">
+                    <CardHeader class="space-y-3">
+                      <CardTitle class="flex items-center justify-between text-xl">
+                        <span>{{ component.name }}</span>
                         <lucide-icon
                           [img]="icons.ArrowRight"
-                          class="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                          class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
                         />
                       </CardTitle>
-                      <CardDescription>{{ component.description }}</CardDescription>
+                      <CardDescription class="leading-relaxed">{{ component.description }}</CardDescription>
                     </CardHeader>
                   </Card>
                 </a>
+              } @empty {
+                <div class="col-span-full">
+                  <div class="rounded-lg border bg-muted/50 p-12 text-center">
+                    <div class="flex justify-center mb-4">
+                      <div class="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                        <lucide-icon [img]="icons.Search" class="h-6 w-6 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">No components found</h3>
+                    <p class="text-muted-foreground">
+                      No components match "{{ searchQuery() }}". Try a different search term.
+                    </p>
+                  </div>
+                </div>
               }
             </div>
           </TabsContent>
         }
       </Tabs>
-    </div>
+    </article>
   `,
 })
 export class ComponentsListPage {

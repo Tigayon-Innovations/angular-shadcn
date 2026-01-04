@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ShadcnAngularComponentSchema",
+  "title": "shadcn-angular component schematic",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the component to install.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which component would you like to install?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to install the component.",
+      "default": "src/app/lib/components/ui"
+    }
+  },
+  "required": ["name"]
+}

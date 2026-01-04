@@ -6,6 +6,7 @@ import {
     inject,
     input,
 } from '@angular/core';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-angular';
 import { DATA_TABLE_CONTEXT } from './data-table-context';
 
 /**
@@ -13,6 +14,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
  */
 @Component({
   selector: 'DataTablePagination',
+  imports: [LucideAngularModule],
   template: `
     <div class="flex items-center justify-between px-2">
       <div class="flex-1 text-sm text-muted-foreground">
@@ -41,7 +43,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
             (click)="firstPage()"
             aria-label="Go to first page"
           >
-            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
+            <lucide-icon [img]="icons.ChevronsLeft" class="size-4" />
           </button>
           <button
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-transparent text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
@@ -49,7 +51,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
             (click)="previousPage()"
             aria-label="Go to previous page"
           >
-            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <lucide-icon [img]="icons.ChevronLeft" class="size-4" />
           </button>
           <button
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-transparent text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
@@ -57,7 +59,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
             (click)="nextPage()"
             aria-label="Go to next page"
           >
-            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <lucide-icon [img]="icons.ChevronRight" class="size-4" />
           </button>
           <button
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-transparent text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
@@ -65,7 +67,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
             (click)="lastPage()"
             aria-label="Go to last page"
           >
-            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
+            <lucide-icon [img]="icons.ChevronsRight" class="size-4" />
           </button>
         </div>
       </div>
@@ -78,6 +80,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
 })
 export class DataTablePagination {
   protected readonly context = inject(DATA_TABLE_CONTEXT);
+  protected readonly icons = { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight };
 
   /** Page size options */
   readonly pageSizeOptions = input<number[]>([10, 20, 30, 40, 50]);

@@ -7,6 +7,7 @@ import {
     input,
     signal,
 } from '@angular/core';
+import { Check, LucideAngularModule, Settings2 } from 'lucide-angular';
 import { DATA_TABLE_CONTEXT } from './data-table-context';
 
 /**
@@ -14,13 +15,14 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
  */
 @Component({
   selector: 'DataTableViewOptions',
+  imports: [LucideAngularModule],
   template: `
     <div class="relative">
       <button
         class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-transparent px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         (click)="toggleDropdown()"
       >
-        <svg class="mr-2 size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <lucide-icon [img]="icons.Settings2" class="mr-2 size-4" />
         View
       </button>
       @if (isOpen()) {
@@ -34,7 +36,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
             >
               <span class="mr-2 flex h-4 w-4 items-center justify-center">
                 @if (isColumnVisible(column.id)) {
-                  <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                  <lucide-icon [img]="icons.Check" class="size-4" />
                 }
               </span>
               {{ column.header }}
@@ -52,6 +54,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
 })
 export class DataTableViewOptions {
   protected readonly context = inject(DATA_TABLE_CONTEXT);
+  protected readonly icons = { Settings2, Check };
 
   /** Additional CSS classes */
   readonly class = input<string>('');
