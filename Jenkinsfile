@@ -40,14 +40,14 @@ pipeline {
                         nvm use ${NODE_VERSION}
 
                         # Clean install root dependencies
-                        npm ci
+                        npm install --force
 
                         # Build Angular SSR app
                         npm run build
 
                         # Build MCP server
                         cd mcp-server
-                        npm ci
+                        npm install --force
                         npm run build
                     '''
                 }
@@ -89,7 +89,7 @@ pipeline {
 
                         # Install production dependencies
                         cd ${DEPLOY_DIR}
-                        sudo npm ci --omit=dev
+                        sudo npm install --force --omit=dev
 
                         # Set permissions
                         sudo chown -R www-data:www-data ${DEPLOY_DIR}
