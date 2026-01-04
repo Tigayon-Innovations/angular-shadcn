@@ -1,4 +1,4 @@
-import { join, normalize } from '@angular-devkit/core';
+import { join, normalize, Path } from '@angular-devkit/core';
 import { Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 
 interface ComponentOptions {
@@ -75,7 +75,7 @@ export function component(options: ComponentOptions): Rule {
 
     const componentInfo = COMPONENT_REGISTRY[componentName];
     const basePath = options.path || 'src/app/lib/components/ui';
-    const componentPath = normalize(join(basePath, componentName));
+    const componentPath = normalize(join(normalize(basePath), normalize(componentName)) as Path);
 
     context.logger.info(`📦 Installing ${componentName} component...`);
 
@@ -92,8 +92,8 @@ export function component(options: ComponentOptions): Rule {
     const sourceBasePath = `src/app/lib/components/ui/${componentName}`;
 
     for (const file of componentInfo.files) {
-      const sourcePath = join(sourceBasePath, file);
-      const targetPath = join(componentPath, file);
+      const sourcePath = join(normalize(sourceBasePath), normalize(file)) as Path;
+      const targetPath = join(componentPath, normalize(file)) as Path;
 
       if (tree.exists(sourcePath)) {
         const content = tree.read(sourcePath);

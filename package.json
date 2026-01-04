@@ -1,6 +1,26 @@
 {
-  "name": "shadcn-angular",
-  "version": "0.0.0",
+  "name": "ngx-shadcn-angular",
+  "version": "1.0.0",
+  "description": "Beautifully designed Angular components built with Tailwind CSS v4",
+  "keywords": [
+    "angular",
+    "components",
+    "tailwind",
+    "shadcn",
+    "ui",
+    "design-system",
+    "angular-components"
+  ],
+  "author": "Jamel Eid Yassin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://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@github.com/Tigayon-Innovations/angular-shadcn.git"
+  },
+  "homepage": "https://shadcn-angular.tigayon.com/",
+  "bugs": {
+    "url": "https://github.com/Tigayon-Innovations/angular-shadcn/issues"
+  },
   "schematics": "./schematics/collection.json",
   "ng-add": {
     "save": "dependencies"
@@ -12,7 +32,6 @@
     "build:schematics": "tsc -p schematics/tsconfig.json",
     "build:mcp": "tsc -p mcp-server/tsconfig.json",
     "mcp:setup": "tsx mcp-server/setup-mcp.ts",
-    "mcp:dev": "node dist/mcp-server/http-server.js",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "test": "vitest",
@@ -32,7 +51,6 @@
       }
     ]
   },
-  "private": true,
   "dependencies": {
     "@angular/cdk": "^21.0.5",
     "@angular/common": "^21.0.6",

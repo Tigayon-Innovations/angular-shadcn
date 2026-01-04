@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'shadcn-angular',
-      script: './dist/server/main.js',
+      script: './dist/shadcn-angular/server/server.mjs',
       instances: 2,
       exec_mode: 'cluster',
       env: {
@@ -30,14 +30,13 @@ module.exports = {
     },
     {
       name: 'mcp-server',
-      script: './mcp-server/http-server.ts',
+      script: './dist/mcp-server/http-server.js',
       interpreter: 'node',
-      interpreter_args: '--loader ts-node/esm',
       instances: 1,
       exec_mode: 'fork',
       env: {
         NODE_ENV: 'production',
-        PORT: 3001,
+        PORT: 3100,
         HOST: 'localhost',
         MCP_URL: 'https://shadcn-angular.tigayon.com/mcp'
       },

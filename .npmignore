@@ -1,0 +1,50 @@
+# Source files
+src/
+docs/
+scripts/
+nginx/
+mcp-server/
+
+# Build artifacts
+.angular/
+node_modules/
+dist/shadcn-angular/
+
+# Development files
+*.spec.ts
+*.test.ts
+test-setup.ts
+vitest.config.ts
+karma.conf.js
+
+# CI/CD
+.github/
+Jenkinsfile*
+ecosystem.config.js
+
+# Documentation (except README)
+*.md
+!README.md
+!LICENSE
+BLOCKS-README.md
+CI-CD-SETUP.md
+DEPLOYMENT-READY.md
+MASTER-INDEX.md
+MCP-*.md
+PRD.md
+SETUP-SUMMARY.md
+PUBLISHING.md
+
+# Environment files
+.env*
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Git
+.git
+.gitignore
