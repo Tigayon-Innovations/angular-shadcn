@@ -70,13 +70,15 @@ pipeline {
             steps {
                 script {
                     echo '========== Running linter =========='
-                    sh '''
+                    sh '''#!/bin/bash
                         export NVM_DIR="${NVM_DIR}"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-
-                        # Use node directly to call Angular CLI (bypasses all PATH issues)
-                        node node_modules/@angular/cli/bin/ng.js lint || true
+                        
+                        # Export PATH so npm subshell inherits it
+                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        
+                        npm run lint || true
                     '''
                 }
             }
@@ -86,14 +88,19 @@ pipeline {
             steps {
                 script {
                     echo '========== Building Angular SSR =========='
-                    sh '''
+                    sh '''#!/bin/bash
                         export NVM_DIR="${NVM_DIR}"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-
-                        # Use node directly to call Angular CLI (bypasses all PATH issues)
+                        
+                        # Export PATH so npm subshell inherits it
+                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        
                         echo "Building Angular application..."
-                        node node_modules/@angular/cli/bin/ng.js build
+                        echo "Node: $(which node)"
+                        echo "NPM: $(which npm)"
+                        
+                        npm run build
 
                         # Verify build output
                         echo "Build output:"
@@ -107,10 +114,13 @@ pipeline {
             steps {
                 script {
                     echo '========== Building MCP Server =========='
-                    sh '''
+                    sh '''#!/bin/bash
                         export NVM_DIR="${NVM_DIR}"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
+                        
+                        # Export PATH so npm subshell inherits it
+                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
 
                         cd mcp-server
                         npm ci
@@ -126,13 +136,15 @@ pipeline {
             steps {
                 script {
                     echo '========== Running tests =========='
-                    sh '''
+                    sh '''#!/bin/bash
                         export NVM_DIR="${NVM_DIR}"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-
-                        # Use node directly to call vitest (bypasses all PATH issues)
-                        node node_modules/vitest/vitest.mjs run || true
+                        
+                        # Export PATH so npm subshell inherits it
+                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        
+                        npm run test -- --run || true
                     '''
                 }
             }
