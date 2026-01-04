@@ -75,8 +75,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use npm run which correctly handles PATH for local binaries
-                        npm run lint || true
+                        # Use node directly to call Angular CLI (bypasses all PATH issues)
+                        node node_modules/@angular/cli/bin/ng.js lint || true
                     '''
                 }
             }
@@ -91,9 +91,9 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use npm run which correctly handles PATH for local binaries
+                        # Use node directly to call Angular CLI (bypasses all PATH issues)
                         echo "Building Angular application..."
-                        npm run build
+                        node node_modules/@angular/cli/bin/ng.js build
 
                         # Verify build output
                         echo "Build output:"
@@ -131,8 +131,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use npm run which correctly handles PATH for local binaries
-                        npm run test -- --run || true
+                        # Use node directly to call vitest (bypasses all PATH issues)
+                        node node_modules/vitest/vitest.mjs run || true
                     '''
                 }
             }
