@@ -75,7 +75,10 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         
-                        npm run lint || true
+                        # Add node_modules/.bin to PATH
+                        export PATH="$PWD/node_modules/.bin:$PATH"
+                        
+                        npx ng lint || true
                     '''
                 }
             }
@@ -90,7 +93,15 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         
-                        npm run build
+                        # Add node_modules/.bin to PATH for ng command
+                        export PATH="$PWD/node_modules/.bin:$PATH"
+                        
+                        # Verify ng is available
+                        echo "Checking Angular CLI..."
+                        which ng || echo "ng not in PATH, using npx"
+                        
+                        # Build using npx to ensure ng is found
+                        npx ng build
                         
                         # Verify build output
                         echo "Build output:"
@@ -128,7 +139,10 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
                         
-                        npm run test -- --run || true
+                        # Add node_modules/.bin to PATH
+                        export PATH="$PWD/node_modules/.bin:$PATH"
+                        
+                        npx vitest run || true
                     '''
                 }
             }
