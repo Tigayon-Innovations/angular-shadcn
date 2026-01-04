@@ -7,4 +7,5 @@ export { IntroductionPage } from './docs/introduction';
 export { DocsLayout } from './docs/layout';
 export { ThemingPage } from './docs/theming';
 export { HomePage } from './home';
+export { PlaygroundPage } from './playground';
 

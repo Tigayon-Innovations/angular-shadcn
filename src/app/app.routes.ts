@@ -57,6 +57,11 @@ export const routes: Routes = [
       import('@/pages/theme-editor').then((m) => m.ThemeEditorPage),
   },
   {
+    path: 'playground',
+    loadComponent: () =>
+      import('@/pages/playground').then((m) => m.PlaygroundPage),
+  },
+  {
     path: 'blocks',
     loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksLayout),
     children: [

@@ -1,3 +1,4 @@
+import { Playground } from '@/components/playground';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/lib/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { isPlatformBrowser } from '@angular/common';
@@ -52,6 +53,7 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
     AIGenerate,
     ThemeCodeModal,
     LucideAngularModule,
+    Playground,
   ],
   template: `
     <div class="w-full">
@@ -191,6 +193,7 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                   <TabsTrigger value="pricing">Pricing</TabsTrigger>
                   <TabsTrigger value="settings">Settings</TabsTrigger>
                   <TabsTrigger value="sidebar">Sidebar</TabsTrigger>
+                  <TabsTrigger value="playground">Playground</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="cards">
@@ -238,6 +241,16 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                     </div>
                   </div>
                 </TabsContent>
+
+                <TabsContent value="playground">
+                  <div class="overflow-hidden rounded-xl shadow-sm">
+                    <Playground
+                      title="Test Your Components"
+                      [initialCode]="playgroundCode()"
+                      (codeChange)="onPlaygroundCodeChange($event)"
+                    />
+                  </div>
+                </TabsContent>
               </Tabs>
             </section>
           </div>
@@ -272,6 +285,26 @@ export class ThemeEditorPage {
   protected readonly showCodeModal = signal(false);
 
   protected readonly presets = ['#000000', '#fee2e2', '#fecaca', '#fca5a5', '#f87171'];
+
+  // Playground code for custom testing
+  protected readonly playgroundCode = signal(`<div class="flex flex-wrap items-center gap-4">
+  <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+    Primary
+  </button>
+  <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
+    Secondary
+  </button>
+  <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-accent text-accent-foreground hover:bg-accent/80 h-10 px-4 py-2">
+    Accent
+  </button>
+</div>
+
+<div class="mt-6 rounded-lg border bg-card text-card-foreground shadow-sm p-6 max-w-md">
+  <h3 class="text-lg font-semibold">Card Title</h3>
+  <p class="text-sm text-muted-foreground mt-2">
+    This card demonstrates your custom theme colors.
+  </p>
+</div>`);
 
   protected readonly expandedSections = signal<Record<string, boolean>>({
     'Primary Colors': true,
@@ -409,6 +442,10 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
 
   protected onBlockChange(value: string): void {
     this.selectedBlock.set(value);
+  }
+
+  protected onPlaygroundCodeChange(code: string): void {
+    this.playgroundCode.set(code);
   }
 
   protected openCodeModal(): void {

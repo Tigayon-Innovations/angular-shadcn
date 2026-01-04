@@ -3,6 +3,7 @@ export { BlocksSidebar } from './blocks-sidebar';
 export { CodeBlock } from './code-block';
 export { ComponentPreview } from './component-preview';
 export { DocsSidebar } from './docs-sidebar';
+export { Playground } from './playground';
 export { SearchDialog } from './search-dialog';
 export { SiteFooter } from './site-footer';
 export { SiteHeader } from './site-header';

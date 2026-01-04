@@ -8,18 +8,19 @@ import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    inject,
-    input,
-    Type,
-    viewChild,
-    ViewContainerRef
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  Type,
+  viewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } from 'lucide-angular';
 
 /**
  * Component detail page showing documentation for a specific component.
@@ -43,7 +44,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
   ],
   template: `
     @if (component(); as comp) {
-      <article class="relative">
+      <article class="relative max-w-4xl">
         <!-- Header -->
         <div class="space-y-4 pb-8 pt-6 md:pb-10">
           <div class="flex items-center gap-2">
@@ -102,84 +103,17 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
                   Installation
                 </h2>
                 <p class="text-muted-foreground">
-                  Install the {{ comp.name }} component using the CLI or copy and paste the code.
+                  Add the {{ comp.name }} component to your project.
                 </p>
               </div>
-              <Tabs defaultValue="cli">
-                <TabsList class="grid w-full max-w-md grid-cols-2">
-                  <TabsTrigger value="cli">CLI</TabsTrigger>
-                  <TabsTrigger value="manual">Manual</TabsTrigger>
-                </TabsList>
-                <TabsContent value="cli" class="mt-6 space-y-4">
-                  <div class="rounded-lg border bg-muted/50 p-4">
-                    <p class="text-sm font-medium mb-3">Choose your package manager:</p>
-                    <Tabs defaultValue="npx" class="w-full">
-                      <TabsList class="grid w-full grid-cols-5">
-                        <TabsTrigger value="npx">npx</TabsTrigger>
-                        <TabsTrigger value="npm">npm</TabsTrigger>
-                        <TabsTrigger value="pnpm">pnpm</TabsTrigger>
-                        <TabsTrigger value="yarn">yarn</TabsTrigger>
-                        <TabsTrigger value="bun">bun</TabsTrigger>
-                      </TabsList>
-                      <TabsContent value="npx" class="mt-3">
-                        <CodeBlock
-                          [code]="'npx shadcn-angular add ' + slug()"
-                          language="bash"
-                        />
-                      </TabsContent>
-                      <TabsContent value="npm" class="mt-3">
-                        <CodeBlock
-                          [code]="'npm install @shadcn-angular/' + slug()"
-                          language="bash"
-                        />
-                      </TabsContent>
-                      <TabsContent value="pnpm" class="mt-3">
-                        <CodeBlock
-                          [code]="'pnpm add @shadcn-angular/' + slug()"
-                          language="bash"
-                        />
-                      </TabsContent>
-                      <TabsContent value="yarn" class="mt-3">
-                        <CodeBlock
-                          [code]="'yarn add @shadcn-angular/' + slug()"
-                          language="bash"
-                        />
-                      </TabsContent>
-                      <TabsContent value="bun" class="mt-3">
-                        <CodeBlock
-                          [code]="'bun add @shadcn-angular/' + slug()"
-                          language="bash"
-                        />
-                      </TabsContent>
-                    </Tabs>
-                    <div class="mt-4 pt-4 border-t">
-                      <p class="text-sm font-medium mb-2">Angular CLI (ng add):</p>
-                      <CodeBlock
-                        [code]="'ng add @shadcn-angular/' + slug()"
-                        language="bash"
-                      />
-                    </div>
-                  </div>
-                </TabsContent>
-                <TabsContent value="manual" class="mt-6 space-y-4">
-                  <div class="rounded-lg border bg-muted/50 p-4 space-y-3">
-                    <p class="text-sm font-medium">
-                      Copy and paste the following code into your project.
-                    </p>
-                    <p class="text-sm text-muted-foreground">
-                      Create a new file in your components directory and import the component.
-                    </p>
-                  </div>
-                  <CodeBlock
-                    [code]="importCode()"
-                    language="typescript"
-                  />
-                </TabsContent>
-              </Tabs>
+              <CodeBlock
+                [code]="'ng add @shadcn-angular/' + slug()"
+                language="bash"
+              />
             </div>
           </section>
 
-          <!-- Usage Section -->
+          <!-- Usage Section with Segmented Tabs -->
           <section class="scroll-mt-20" id="usage">
             <div class="space-y-6">
               <div class="space-y-2">
@@ -190,26 +124,40 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
                   Import and use the {{ comp.name }} component in your Angular application.
                 </p>
               </div>
-              <div class="space-y-6">
-                <div class="space-y-3">
-                  <h3 class="text-xl font-semibold">Import the component</h3>
+
+              <!-- Segmented Tabs for TypeScript/Template -->
+              <Tabs [value]="usageTab()" (valueChange)="usageTab.set($event)" class="w-full">
+                <TabsList class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-auto">
+                  <TabsTrigger value="template">
+                    Template
+                  </TabsTrigger>
+
+                  <TabsTrigger value="typescript">
+                    TypeScript
+                  </TabsTrigger>
+
+                </TabsList>
+
+                <TabsContent value="typescript" class="mt-4">
                   <CodeBlock
                     [code]="usageCode()"
                     language="typescript"
+                    filename="component.ts"
                   />
-                </div>
-                <div class="space-y-3">
-                  <h3 class="text-xl font-semibold">Use in your template</h3>
+                </TabsContent>
+
+                <TabsContent value="template" class="mt-4">
                   <CodeBlock
                     [code]="templateUsageCode()"
                     language="html"
+                    filename="template.html"
                   />
-                </div>
-              </div>
+                </TabsContent>
+              </Tabs>
             </div>
           </section>
 
-          <!-- Examples Section -->
+          <!-- Examples Section with Preview/Code Toggle -->
           <section class="scroll-mt-20" id="examples">
             <div class="space-y-6">
               <div class="space-y-2">
@@ -221,7 +169,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
                 </p>
               </div>
               <div class="space-y-10">
-                @for (example of comp.examples; track example.title) {
+                @for (example of comp.examples; track example.title; let i = $index) {
                   <div class="space-y-4">
                     <div class="space-y-2">
                       <h3 class="text-xl font-semibold">{{ example.title }}</h3>
@@ -231,7 +179,25 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
                         </p>
                       }
                     </div>
-                    <CodeBlock [code]="example.code" language="html" />
+
+                    <!-- Example Preview with ComponentPreview -->
+                    <ComponentPreview
+                      [code]="example.code"
+                      language="html"
+                      [interactive]="hasDemo()"
+                    >
+                      @if (hasDemo()) {
+                        <div class="w-full flex items-center justify-center p-10">
+                          <ng-container #exampleContainer></ng-container>
+                        </div>
+                      } @else {
+                        <div class="flex items-center justify-center p-10 min-h-[200px]">
+                          <p class="text-muted-foreground text-sm">
+                            Interactive preview available when demo component is registered.
+                          </p>
+                        </div>
+                      }
+                    </ComponentPreview>
                   </div>
                 }
               </div>
@@ -288,7 +254,10 @@ export class ComponentDetailPage {
 
   protected readonly demoContainer = viewChild('demoContainer', { read: ViewContainerRef });
 
-  protected readonly icons = { ArrowRight, ArrowLeft, Copy, Check };
+  protected readonly icons = { ArrowRight, ArrowLeft, Copy, Check, Eye, Code2 };
+
+  // Signal for usage tab state
+  protected readonly usageTab = signal<string>('template');
 
   protected readonly component = computed(() => {
     return this.registry.getBySlug(this.slug());

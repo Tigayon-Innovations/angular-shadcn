@@ -94,6 +94,13 @@ export class DocsSidebar {
       ],
     },
     {
+      title: 'Tools',
+      items: [
+        { title: 'Playground', href: '/playground' },
+        { title: 'Theme Editor', href: '/theme-editor' },
+      ],
+    },
+    {
       title: 'Components',
       items: [
         { title: 'All Components', href: '/docs/components' },
