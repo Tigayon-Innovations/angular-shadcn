@@ -4,7 +4,7 @@ exports.ngAdd = ngAdd;
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 function ngAdd(options) {
     return (tree, context) => {
-        context.logger.info('✨ Adding @ascn components to your project...');
+        context.logger.info('✨ Adding @jamelyassin/shadcn-angular to your project...');
         // Add dependencies to package.json
         const packageJsonPath = '/package.json';
         if (tree.exists(packageJsonPath)) {
@@ -39,12 +39,12 @@ function ngAdd(options) {
             }
         }
         context.logger.info('');
-        context.logger.info('✅ @ascn setup complete!');
+        context.logger.info('✅ @jamelyassin/shadcn-angular setup complete!');
         context.logger.info('');
         context.logger.info('📚 Next steps:');
         context.logger.info('  1. Ensure Tailwind CSS is configured in your project');
         context.logger.info('  2. Add CSS variables to your styles.scss (see docs)');
-        context.logger.info('  3. Install components: ng add @ascn/button');
+        context.logger.info('  3. Install components: ng add @jamelyassin/button');
         context.logger.info('');
         return tree;
     };

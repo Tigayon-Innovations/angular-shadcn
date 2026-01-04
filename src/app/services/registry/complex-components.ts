@@ -9,7 +9,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'avatar',
     description: 'An image element with a fallback for representing the user.',
     category: 'complex',
-    package: '@shadcn-angular/avatar',
+    package: '@jamelyassin/avatar',
     imports: ['Avatar', 'AvatarImage', 'AvatarFallback'],
     examples: [
       {
@@ -47,7 +47,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'badge',
     description: 'Displays a badge or a component that looks like a badge.',
     category: 'complex',
-    package: '@shadcn-angular/badge',
+    package: '@jamelyassin/badge',
     imports: ['Badge', 'badgeVariants'],
     examples: [
       {
@@ -70,7 +70,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'calendar',
     description: 'A date field component that allows users to enter and edit date.',
     category: 'complex',
-    package: '@shadcn-angular/calendar',
+    package: '@jamelyassin/calendar',
     imports: ['Calendar'],
     examples: [
       {
@@ -94,7 +94,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'carousel',
     description: 'A carousel with motion and swipe built using Embla.',
     category: 'complex',
-    package: '@shadcn-angular/carousel',
+    package: '@jamelyassin/carousel',
     imports: ['Carousel', 'CarouselContent', 'CarouselItem', 'CarouselPrevious', 'CarouselNext'],
     examples: [
       {
@@ -128,7 +128,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'chart',
     description: 'Beautiful charts built with SVG.',
     category: 'complex',
-    package: '@shadcn-angular/chart',
+    package: '@jamelyassin/chart',
     imports: ['Chart', 'ChartConfig'],
     examples: [
       {
@@ -147,7 +147,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'command',
     description: 'Fast, composable, unstyled command menu.',
     category: 'complex',
-    package: '@shadcn-angular/command',
+    package: '@jamelyassin/command',
     imports: ['Command', 'CommandInput', 'CommandList', 'CommandEmpty', 'CommandGroup', 'CommandItem', 'CommandSeparator', 'CommandShortcut'],
     examples: [
       {
@@ -196,7 +196,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'progress',
     description: 'Displays an indicator showing the completion progress.',
     category: 'complex',
-    package: '@shadcn-angular/progress',
+    package: '@jamelyassin/progress',
     imports: ['Progress'],
     examples: [
       {
@@ -214,7 +214,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'skeleton',
     description: 'Used to show a placeholder while content is loading.',
     category: 'complex',
-    package: '@shadcn-angular/skeleton',
+    package: '@jamelyassin/skeleton',
     imports: ['Skeleton'],
     examples: [
       {
@@ -247,7 +247,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'spinner',
     description: 'A loading spinner indicator.',
     category: 'complex',
-    package: '@shadcn-angular/spinner',
+    package: '@jamelyassin/spinner',
     imports: ['Spinner'],
     examples: [
       {
@@ -273,7 +273,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'table',
     description: 'A responsive table component.',
     category: 'complex',
-    package: '@shadcn-angular/table',
+    package: '@jamelyassin/table',
     imports: ['Table', 'TableHeader', 'TableBody', 'TableFooter', 'TableHead', 'TableRow', 'TableCell', 'TableCaption'],
     examples: [
       {

@@ -9,7 +9,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'button',
     description: 'Displays a button or a component that looks like a button.',
     category: 'form',
-    package: '@shadcn-angular/button',
+    package: '@jamelyassin/button',
     imports: ['Button', 'buttonVariants'],
     examples: [
       {
@@ -54,7 +54,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'checkbox',
     description: 'A control that allows the user to toggle between checked and not checked.',
     category: 'form',
-    package: '@shadcn-angular/checkbox',
+    package: '@jamelyassin/checkbox',
     imports: ['Checkbox'],
     examples: [
       {
@@ -83,7 +83,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'combobox',
     description: 'Autocomplete input and command palette with a list of suggestions.',
     category: 'form',
-    package: '@shadcn-angular/combobox',
+    package: '@jamelyassin/combobox',
     imports: ['Combobox', 'ComboboxTrigger', 'ComboboxContent', 'ComboboxItem'],
     examples: [
       {
@@ -111,7 +111,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'date-picker',
     description: 'A date picker component with calendar popup.',
     category: 'form',
-    package: '@shadcn-angular/date-picker',
+    package: '@jamelyassin/date-picker',
     imports: ['DatePicker', 'Calendar'],
     examples: [
       {
@@ -130,7 +130,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'form',
     description: 'Building forms with Angular Reactive Forms.',
     category: 'form',
-    package: '@shadcn-angular/form',
+    package: '@jamelyassin/form',
     imports: ['FormField', 'FormLabel', 'FormControl', 'FormDescription', 'FormMessage'],
     examples: [
       {
@@ -157,7 +157,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'input',
     description: 'Displays a form input field.',
     category: 'form',
-    package: '@shadcn-angular/input',
+    package: '@jamelyassin/input',
     imports: ['Input'],
     examples: [
       {
@@ -188,7 +188,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'input-otp',
     description: 'Accessible one-time password component with copy paste functionality.',
     category: 'form',
-    package: '@shadcn-angular/input-otp',
+    package: '@jamelyassin/input-otp',
     imports: ['InputOTP', 'InputOTPGroup', 'InputOTPSlot', 'InputOTPSeparator'],
     examples: [
       {
@@ -218,7 +218,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'label',
     description: 'Renders an accessible label associated with controls.',
     category: 'form',
-    package: '@shadcn-angular/label',
+    package: '@jamelyassin/label',
     imports: ['Label'],
     examples: [
       {
@@ -239,7 +239,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'radio-group',
     description: 'A set of checkable buttons where only one can be checked at a time.',
     category: 'form',
-    package: '@shadcn-angular/radio-group',
+    package: '@jamelyassin/radio-group',
     imports: ['RadioGroup', 'RadioGroupItem'],
     examples: [
       {
@@ -271,7 +271,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'select',
     description: 'Displays a list of options for the user to pick from.',
     category: 'form',
-    package: '@shadcn-angular/select',
+    package: '@jamelyassin/select',
     imports: ['Select', 'SelectTrigger', 'SelectValue', 'SelectContent', 'SelectItem', 'SelectGroup', 'SelectLabel'],
     examples: [
       {
@@ -317,7 +317,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'slider',
     description: 'An input where the user selects a value from within a given range.',
     category: 'form',
-    package: '@shadcn-angular/slider',
+    package: '@jamelyassin/slider',
     imports: ['Slider'],
     examples: [
       {
@@ -341,7 +341,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'switch',
     description: 'A control that allows the user to toggle between checked and not checked.',
     category: 'form',
-    package: '@shadcn-angular/switch',
+    package: '@jamelyassin/switch',
     imports: ['Switch'],
     examples: [
       {
@@ -363,7 +363,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'textarea',
     description: 'Displays a form textarea.',
     category: 'form',
-    package: '@shadcn-angular/textarea',
+    package: '@jamelyassin/textarea',
     imports: ['Textarea'],
     examples: [
       {
@@ -389,7 +389,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'toggle',
     description: 'A two-state button that can be either on or off.',
     category: 'form',
-    package: '@shadcn-angular/toggle',
+    package: '@jamelyassin/toggle',
     imports: ['Toggle'],
     examples: [
       {
@@ -423,7 +423,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'toggle-group',
     description: 'A set of two-state buttons that can be toggled on or off.',
     category: 'form',
-    package: '@shadcn-angular/toggle-group',
+    package: '@jamelyassin/toggle-group',
     imports: ['ToggleGroup', 'ToggleGroupItem'],
     examples: [
       {

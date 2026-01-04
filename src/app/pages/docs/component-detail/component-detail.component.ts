@@ -8,16 +8,16 @@ import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-  Type,
-  viewChild,
-  ViewContainerRef
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    inject,
+    input,
+    signal,
+    Type,
+    viewChild,
+    ViewContainerRef
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } from 'lucide-angular';
@@ -107,7 +107,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
                 </p>
               </div>
               <CodeBlock
-                [code]="'ng add @ascn/' + slug()"
+                [code]="'ng add @jamelyassin/' + slug()"
                 language="bash"
               />
             </div>
@@ -290,7 +290,7 @@ export class ComponentDetailPage {
   protected readonly usageCode = computed(() => {
     const comp = this.component();
     if (!comp) return '';
-    return `import { ${comp.imports.join(', ')} } from '@ascn/${comp.slug}';
+    return `import { ${comp.imports.join(', ')} } from '@jamelyassin/${comp.slug}';
 
 @Component({
   // ...

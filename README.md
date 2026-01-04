@@ -2,7 +2,7 @@
 
 > **Beautifully designed Angular components** built with Tailwind CSS v4, Angular 21+, and modern TypeScript. A comprehensive port of the popular [shadcn/ui](https://ui.shadcn.com/) library.
 
-[![npm version](https://img.shields.io/npm/v/ngx-shadcn-angular.svg)](https://www.npmjs.com/package/ngx-shadcn-angular)
+[![npm version](https://img.shields.io/npm/v/@jamelyassin/shadcn-angular.svg)](https://www.npmjs.com/package/@jamelyassin/shadcn-angular)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Angular](https://img.shields.io/badge/Angular-21%2B-red.svg)](https://angular.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
@@ -41,32 +41,31 @@ Choose your package manager:
 
 ```bash
 # Angular CLI (recommended)
-ng add ngx-shadcn-angular
+ng add @jamelyassin/shadcn-angular
 ```
 
 ```bash
 # npm
-npm install ngx-shadcn-angular
+npm install @jamelyassin/shadcn-angular
 ```
 ```bash
 # pnpm
-pnpm add ngx-shadcn-angular
+pnpm add @jamelyassin/shadcn-angular
 ```
 ```bash
 # yarn
-yarn add ngx-shadcn-angular
+yarn add @jamelyassin/shadcn-angular
 ```
 ```bash
 # bun
-bun add ngx-shadcn-angular
-
+bun add @jamelyassin/shadcn-angular
 ```
 
 ### Basic Usage
 
 ```typescript
 import { Component } from '@angular/core';
-import { Button } from '@/lib/components/ui/button';
+import { Button } from '@jamelyassin/button';
 
 @Component({
   selector: 'app-example',
