@@ -75,8 +75,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use direct path to ng binary (handles spaces in path)
-                        ./node_modules/.bin/ng lint || true
+                        # Use npm run which correctly handles PATH for local binaries
+                        npm run lint || true
                     '''
                 }
             }
@@ -91,13 +91,13 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use direct path to ng binary (handles spaces in path)
+                        # Use npm run which correctly handles PATH for local binaries
                         echo "Building Angular application..."
-                        ./node_modules/.bin/ng build
+                        npm run build
 
                         # Verify build output
                         echo "Build output:"
-                        ls -la ${BUILD_PATH_APP} || echo "App build path not found"
+                        ls -la dist/ || echo "dist folder not found"
                     '''
                 }
             }
@@ -131,8 +131,8 @@ pipeline {
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Use direct path to vitest binary (handles spaces in path)
-                        ./node_modules/.bin/vitest run || true
+                        # Use npm run which correctly handles PATH for local binaries
+                        npm run test -- --run || true
                     '''
                 }
             }
