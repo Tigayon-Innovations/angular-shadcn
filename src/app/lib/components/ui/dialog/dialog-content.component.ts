@@ -15,17 +15,17 @@ import { DIALOG_CONTEXT } from './dialog-context';
 @Component({
   selector: 'DialogContent',
   template: `
-    @if (context.open()) {
+    @if (context.isOpen()) {
       <!-- Overlay -->
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-        [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
       ></div>
       <!-- Content -->
       <div
         [class]="computedClass()"
-        [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         role="dialog"
         aria-modal="true"
         (keydown.escape)="onEscapeKey()"
@@ -63,7 +63,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContent {
-  protected readonly context = inject(DIALOG_CONTEXT);
+  readonly context = inject(DIALOG_CONTEXT);
 
   /** Additional CSS classes */
   readonly class = input<string>('');

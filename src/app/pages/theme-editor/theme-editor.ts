@@ -1,12 +1,12 @@
-import { CodeBlock } from '@/components/code-block';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/lib/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID, signal } from '@angular/core';
-import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
-import { Dashboard01Component, Login01Component, Pricing01Component, Settings01Component } from 'src/app/blocks';
+import { Code, Download, LucideAngularModule, Moon, Redo, RotateCcw, Sun, Undo, Upload } from 'lucide-angular';
+import { Cards01Component, Dashboard01Component, Login01Component, Pricing01Component, Settings01Component, Sidebar01Component } from 'src/app/blocks';
 import { ThemeService } from 'src/app/services';
-import { AIGenerate, ColorSection, ThemeTabs } from './components';
+import { AIGenerate, ColorSection, ThemeCodeModal, ThemeTabs } from './components';
+import { TAILWIND_COLORS } from './data';
 
 interface ColorValue {
   light: string;
@@ -31,11 +31,6 @@ interface ThemeColors extends Record<string, ColorValue> {
   'accent-foreground': ColorValue;
 }
 
-interface TailwindColor {
-  name: string;
-  shades: { label: string; value: string; hex: string }[];
-}
-
 type TabType = 'colors' | 'typography' | 'other' | 'generate';
 
 @Component({
@@ -46,37 +41,87 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
     TabsContent,
     TabsList,
     TabsTrigger,
+    Cards01Component,
     Dashboard01Component,
     Login01Component,
     Pricing01Component,
     Settings01Component,
-    CodeBlock,
+    Sidebar01Component,
     ThemeTabs,
     ColorSection,
     AIGenerate,
+    ThemeCodeModal,
     LucideAngularModule,
   ],
   template: `
     <div class="w-full">
-
-
-      <!-- Preset Selector -->
-      <div class="border-b bg-muted/30 px-6 py-4">
-        <label class="text-xs font-medium text-muted-foreground mb-2 block">Color Presets</label>
+      <!-- Top Toolbar -->
+      <div class="border-b bg-muted/30 px-6 py-3 flex items-center justify-between gap-4">
+        <!-- Left: Color Presets -->
         <div class="flex items-center gap-3">
-          @for (preset of presets; track preset) {
-            <button
-              type="button"
-              [class]="cn(
-                'h-6 w-6 rounded-full border-2 transition-all',
-                selectedPreset() === preset
-                  ? 'border-foreground ring-2 ring-offset-2 ring-offset-background ring-foreground/20'
-                  : 'border-border hover:border-foreground/50'
-              )"
-              [style.background-color]="preset"
-              (click)="selectedPreset.set(preset)"
-            ></button>
-          }
+          <span class="text-xs font-medium text-muted-foreground">Color Presets</span>
+          <div class="flex items-center gap-2">
+            @for (preset of presets; track preset) {
+              <button
+                type="button"
+                [class]="cn(
+                  'h-6 w-6 rounded-full border-2 transition-all',
+                  selectedPreset() === preset
+                    ? 'border-foreground ring-2 ring-offset-2 ring-offset-background ring-foreground/20'
+                    : 'border-border hover:border-foreground/50'
+                )"
+                [style.background-color]="preset"
+                (click)="selectedPreset.set(preset)"
+              ></button>
+            }
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="undo()"
+            [disabled]="!canUndo()"
+            class="inline-flex items-center justify-center size-9 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+            title="Undo"
+          >
+            <lucide-icon [img]="icons.Undo" class="size-4" />
+          </button>
+          <button
+            type="button"
+            (click)="redo()"
+            [disabled]="!canRedo()"
+            class="inline-flex items-center justify-center size-9 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+            title="Redo"
+          >
+            <lucide-icon [img]="icons.Redo" class="size-4" />
+          </button>
+          <div class="w-px h-6 bg-border mx-1"></div>
+          <button
+            type="button"
+            (click)="resetColors()"
+            class="inline-flex items-center justify-center gap-2 h-9 px-3 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm font-medium"
+          >
+            <lucide-icon [img]="icons.RotateCcw" class="size-4" />
+            Reset
+          </button>
+          <button
+            type="button"
+            (click)="importTheme()"
+            class="inline-flex items-center justify-center gap-2 h-9 px-3 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm font-medium"
+          >
+            <lucide-icon [img]="icons.Upload" class="size-4" />
+            Import
+          </button>
+          <button
+            type="button"
+            (click)="openCodeModal()"
+            class="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium"
+          >
+            <lucide-icon [img]="icons.Code" class="size-4" />
+            Code
+          </button>
         </div>
       </div>
 
@@ -96,6 +141,7 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                     [colorKeys]="section.colors"
                     [initialExpanded]="expandedSections()[section.title]"
                     [colors]="colors()"
+                    [isDark]="themeService.isDark()"
                     [tailwindColors]="tailwindColors"
                     (colorChange)="onColorChange($event)"
                     (colorSelected)="onColorSelected($event)"
@@ -127,24 +173,36 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
           <div class="p-8 space-y-8">
             <!-- Live Preview Section -->
             <section class="space-y-4">
-              <div class="space-y-1.5">
-                <h2 class="text-xl font-semibold tracking-tight">Live Preview</h2>
-                <p class="text-sm text-muted-foreground">
-                  See your theme changes across different blocks in real-time
-                </p>
+              <div class="flex items-center justify-between">
+                <div class="space-y-1.5">
+                  <h2 class="text-xl font-semibold tracking-tight">Live Preview</h2>
+                  <p class="text-sm text-muted-foreground">
+                    See your theme changes across different blocks in real-time
+                  </p>
+                </div>
               </div>
 
               <!-- Block Tabs -->
               <Tabs [value]="selectedBlock()" (valueChange)="onBlockChange($event)">
                 <TabsList class="mb-6 bg-muted">
+                  <TabsTrigger value="cards">Cards</TabsTrigger>
                   <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
                   <TabsTrigger value="login">Login</TabsTrigger>
                   <TabsTrigger value="pricing">Pricing</TabsTrigger>
                   <TabsTrigger value="settings">Settings</TabsTrigger>
+                  <TabsTrigger value="sidebar">Sidebar</TabsTrigger>
                 </TabsList>
 
+                <TabsContent value="cards">
+                  <div class="overflow-hidden rounded-xl border bg-background shadow-sm">
+                    <div class="h-[600px] overflow-auto p-6">
+                      <app-cards-01 />
+                    </div>
+                  </div>
+                </TabsContent>
+
                 <TabsContent value="dashboard">
-                  <div class="overflow-hidden rounded-lg border bg-background">
+                  <div class="overflow-hidden rounded-xl border bg-background shadow-sm">
                     <div class="h-[600px] overflow-auto">
                       <app-dashboard-01 />
                     </div>
@@ -152,15 +210,13 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                 </TabsContent>
 
                 <TabsContent value="login">
-                  <div class="flex items-center justify-center rounded-lg border bg-muted/30 p-8 min-h-[600px]">
-                    <div class="w-full max-w-md">
-                      <app-login-01 />
-                    </div>
+                  <div class="flex items-center justify-center rounded-xl border bg-muted/30 shadow-sm min-h-[600px] p-8">
+                    <app-login-01 />
                   </div>
                 </TabsContent>
 
                 <TabsContent value="pricing">
-                  <div class="overflow-hidden rounded-lg border bg-background">
+                  <div class="overflow-hidden rounded-xl border bg-background shadow-sm">
                     <div class="h-[600px] overflow-auto">
                       <app-pricing-01 />
                     </div>
@@ -168,33 +224,28 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                 </TabsContent>
 
                 <TabsContent value="settings">
-                  <div class="overflow-hidden rounded-lg border bg-background">
-                    <div class="h-[600px] overflow-auto">
+                  <div class="overflow-hidden rounded-xl border bg-background shadow-sm">
+                    <div class="h-[600px] overflow-auto p-6">
                       <app-settings-01 />
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="sidebar">
+                  <div class="overflow-hidden rounded-xl border bg-background shadow-sm">
+                    <div class="h-[600px] overflow-auto">
+                      <app-sidebar-01 />
                     </div>
                   </div>
                 </TabsContent>
               </Tabs>
             </section>
-
-            <!-- Export CSS Section -->
-            <section class="space-y-4 pt-6 border-t">
-              <div class="space-y-1.5">
-                <h2 class="text-xl font-semibold tracking-tight">Export CSS</h2>
-                <p class="text-sm text-muted-foreground">
-                  Copy this CSS to your global styles file to apply your custom theme
-                </p>
-              </div>
-              <CodeBlock
-                [code]="generatedCSS()"
-                [language]="'css'"
-                [filename]="'styles.css'"
-                [showLineNumbers]="false"
-              />
-            </section>
           </div>
         </main>
       </div>
+
+      <!-- Theme Code Modal -->
+      <ThemeCodeModal [colors]="colors()" [open]="showCodeModal()" (openChange)="showCodeModal.set($event)" />
     </div>
   `,
 })
@@ -203,11 +254,22 @@ export class ThemeEditorPage {
   protected readonly themeService = inject(ThemeService);
 
   protected readonly cn = cn;
-  protected readonly icons = { Moon, Sun };
+  protected readonly icons = { Moon, Sun, Undo, Redo, RotateCcw, Upload, Code, Download };
 
   protected readonly activeTab = signal<TabType>('colors');
-  protected readonly selectedBlock = signal('dashboard');
+  protected readonly selectedBlock = signal('cards');
   protected readonly selectedPreset = signal('#000000');
+
+  // Undo/Redo history
+  private readonly history = signal<ThemeColors[]>([]);
+  private readonly historyIndex = signal(-1);
+  private readonly maxHistory = 50;
+
+  protected readonly canUndo = computed(() => this.historyIndex() > 0);
+  protected readonly canRedo = computed(() => this.historyIndex() < this.history().length - 1);
+
+  // Code modal state
+  protected readonly showCodeModal = signal(false);
 
   protected readonly presets = ['#000000', '#fee2e2', '#fecaca', '#fca5a5', '#f87171'];
 
@@ -231,86 +293,11 @@ export class ThemeEditorPage {
     { title: 'Border & Input', colors: ['border', 'input', 'ring'] },
   ];
 
-  protected readonly tailwindColors: TailwindColor[] = [
-    {
-      name: 'Red',
-      shades: [
-        { label: 'red-50', value: '50', hex: '#fef2f2' },
-        { label: 'red-100', value: '100', hex: '#fee2e2' },
-        { label: 'red-200', value: '200', hex: '#fecaca' },
-        { label: 'red-300', value: '300', hex: '#fca5a5' },
-        { label: 'red-400', value: '400', hex: '#f87171' },
-        { label: 'red-500', value: '500', hex: '#ef4444' },
-        { label: 'red-600', value: '600', hex: '#dc2626' },
-        { label: 'red-700', value: '700', hex: '#b91c1c' },
-        { label: 'red-800', value: '800', hex: '#991b1b' },
-        { label: 'red-900', value: '900', hex: '#7f1d1d' },
-      ],
-    },
-    {
-      name: 'Blue',
-      shades: [
-        { label: 'blue-50', value: '50', hex: '#eff6ff' },
-        { label: 'blue-100', value: '100', hex: '#dbeafe' },
-        { label: 'blue-200', value: '200', hex: '#bfdbfe' },
-        { label: 'blue-300', value: '300', hex: '#93c5fd' },
-        { label: 'blue-400', value: '400', hex: '#60a5fa' },
-        { label: 'blue-500', value: '500', hex: '#3b82f6' },
-        { label: 'blue-600', value: '600', hex: '#2563eb' },
-        { label: 'blue-700', value: '700', hex: '#1d4ed8' },
-        { label: 'blue-800', value: '800', hex: '#1e40af' },
-        { label: 'blue-900', value: '900', hex: '#1e3a8a' },
-      ],
-    },
-    {
-      name: 'Green',
-      shades: [
-        { label: 'green-50', value: '50', hex: '#f0fdf4' },
-        { label: 'green-100', value: '100', hex: '#dcfce7' },
-        { label: 'green-200', value: '200', hex: '#bbf7d0' },
-        { label: 'green-300', value: '300', hex: '#86efac' },
-        { label: 'green-400', value: '400', hex: '#4ade80' },
-        { label: 'green-500', value: '500', hex: '#22c55e' },
-        { label: 'green-600', value: '600', hex: '#16a34a' },
-        { label: 'green-700', value: '700', hex: '#15803d' },
-        { label: 'green-800', value: '800', hex: '#166534' },
-        { label: 'green-900', value: '900', hex: '#14532d' },
-      ],
-    },
-    {
-      name: 'Purple',
-      shades: [
-        { label: 'purple-50', value: '50', hex: '#faf5ff' },
-        { label: 'purple-100', value: '100', hex: '#f3e8ff' },
-        { label: 'purple-200', value: '200', hex: '#e9d5ff' },
-        { label: 'purple-300', value: '300', hex: '#d8b4fe' },
-        { label: 'purple-400', value: '400', hex: '#c084fc' },
-        { label: 'purple-500', value: '500', hex: '#a855f7' },
-        { label: 'purple-600', value: '600', hex: '#9333ea' },
-        { label: 'purple-700', value: '700', hex: '#7e22ce' },
-        { label: 'purple-800', value: '800', hex: '#6b21a8' },
-        { label: 'purple-900', value: '900', hex: '#581c87' },
-      ],
-    },
-    {
-      name: 'Zinc',
-      shades: [
-        { label: 'zinc-50', value: '50', hex: '#fafafa' },
-        { label: 'zinc-100', value: '100', hex: '#f4f4f5' },
-        { label: 'zinc-200', value: '200', hex: '#e4e4e7' },
-        { label: 'zinc-300', value: '300', hex: '#d4d4d8' },
-        { label: 'zinc-400', value: '400', hex: '#a1a1aa' },
-        { label: 'zinc-500', value: '500', hex: '#71717a' },
-        { label: 'zinc-600', value: '600', hex: '#52525b' },
-        { label: 'zinc-700', value: '700', hex: '#3f3f46' },
-        { label: 'zinc-800', value: '800', hex: '#27272a' },
-        { label: 'zinc-900', value: '900', hex: '#18181b' },
-      ],
-    },
-  ];
+  // Use complete Tailwind v4 colors from data file
+  protected readonly tailwindColors = TAILWIND_COLORS;
 
   protected readonly colors = signal<ThemeColors>({
-    primary: { light: 'oklch(0.985 0 0)', dark: 'oklch(0.985 0 0)' },
+    primary: { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
     secondary: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.269 0 0)' },
     accent: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.371 0 0)' },
     background: { light: 'oklch(1 0 0)', dark: 'oklch(0.145 0 0)' },
@@ -319,13 +306,31 @@ export class ThemeEditorPage {
     'card-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
     border: { light: 'oklch(0.92 0 0)', dark: 'oklch(0.27 0 0)' },
     input: { light: 'oklch(0.92 0 0)', dark: 'oklch(0.27 0 0)' },
-    ring: { light: 'oklch(0.985 0 0)', dark: 'oklch(0.985 0 0)' },
+    ring: { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
     muted: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.205 0 0)' },
     'muted-foreground': { light: 'oklch(0.55 0 0)', dark: 'oklch(0.65 0 0)' },
-    'primary-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    'primary-foreground': { light: 'oklch(0.985 0 0)', dark: 'oklch(0.145 0 0)' },
     'secondary-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
     'accent-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
   });
+
+  private readonly defaultColors: ThemeColors = {
+    primary: { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    secondary: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.269 0 0)' },
+    accent: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.371 0 0)' },
+    background: { light: 'oklch(1 0 0)', dark: 'oklch(0.145 0 0)' },
+    foreground: { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    card: { light: 'oklch(1 0 0)', dark: 'oklch(0.205 0 0)' },
+    'card-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    border: { light: 'oklch(0.92 0 0)', dark: 'oklch(0.27 0 0)' },
+    input: { light: 'oklch(0.92 0 0)', dark: 'oklch(0.27 0 0)' },
+    ring: { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    muted: { light: 'oklch(0.97 0 0)', dark: 'oklch(0.205 0 0)' },
+    'muted-foreground': { light: 'oklch(0.55 0 0)', dark: 'oklch(0.65 0 0)' },
+    'primary-foreground': { light: 'oklch(0.985 0 0)', dark: 'oklch(0.145 0 0)' },
+    'secondary-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+    'accent-foreground': { light: 'oklch(0.145 0 0)', dark: 'oklch(0.985 0 0)' },
+  };
 
   protected readonly generatedCSS = computed(() => {
     const colors = this.colors();
@@ -343,8 +348,11 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
   });
 
   constructor() {
+    // Watch colors and theme changes
     effect(() => {
       if (isPlatformBrowser(this.platformId)) {
+        this.colors(); // Track colors changes
+        this.themeService.isDark(); // Track theme changes
         this.applyTheme();
       }
     });
@@ -358,11 +366,18 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
       value = this.hexToOklch(value);
     }
 
+    const currentColor = this.colors()[event.key as keyof ThemeColors];
+    const isDark = this.themeService.isDark();
+
+    // Save current state before making changes
+    this.saveToHistory();
+
+    // Update both light and dark values based on current mode
     const updatedColors = {
       ...this.colors(),
       [event.key]: {
-        ...this.colors()[event.key as keyof ThemeColors],
-        light: value,
+        light: isDark ? (currentColor?.light || value) : value,
+        dark: isDark ? value : (currentColor?.dark || value),
       },
     };
     this.colors.set(updatedColors as ThemeColors);
@@ -370,23 +385,34 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
 
   protected onColorSelected(event: { key: string; hex: string }): void {
     const oklchValue = this.hexToOklch(event.hex);
+    const currentColor = this.colors()[event.key as keyof ThemeColors];
+    const isDark = this.themeService.isDark();
+
+    // Save current state before making changes
+    this.saveToHistory();
+
+    // Update both light and dark values based on current mode
     const updatedColors = {
       ...this.colors(),
       [event.key]: {
-        ...this.colors()[event.key as keyof ThemeColors],
-        light: oklchValue,
+        light: isDark ? (currentColor?.light || oklchValue) : oklchValue,
+        dark: isDark ? oklchValue : (currentColor?.dark || oklchValue),
       },
     };
     this.colors.set(updatedColors as ThemeColors);
   }
 
   protected onThemeGenerated(generatedColors: Record<string, { light: string; dark: string }>): void {
+    this.saveToHistory();
     this.colors.set(generatedColors as unknown as ThemeColors);
   }
 
-  protected onBlockChange(value: string | Event): void {
-    const blockValue = typeof value === 'string' ? value : (value as any).detail || 'dashboard';
-    this.selectedBlock.set(blockValue);
+  protected onBlockChange(value: string): void {
+    this.selectedBlock.set(value);
+  }
+
+  protected openCodeModal(): void {
+    this.showCodeModal.set(true);
   }
 
   private applyTheme(): void {
@@ -399,11 +425,155 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
     });
   }
 
+  /**
+   * Convert hex color to OKLCH format with proper chroma and hue preservation
+   */
   private hexToOklch(hex: string): string {
+    // Parse hex to RGB
     const r = parseInt(hex.slice(1, 3), 16) / 255;
     const g = parseInt(hex.slice(3, 5), 16) / 255;
     const b = parseInt(hex.slice(5, 7), 16) / 255;
-    const l = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    return `oklch(${l.toFixed(3)} 0 0)`;
+
+    // Convert RGB to linear RGB
+    const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    const lr = toLinear(r);
+    const lg = toLinear(g);
+    const lb = toLinear(b);
+
+    // Convert linear RGB to XYZ (D65)
+    const x = 0.4124564 * lr + 0.3575761 * lg + 0.1804375 * lb;
+    const y = 0.2126729 * lr + 0.7151522 * lg + 0.0721750 * lb;
+    const z = 0.0193339 * lr + 0.1191920 * lg + 0.9503041 * lb;
+
+    // Convert XYZ to LMS
+    const l = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
+    const m = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
+    const s = 0.0482003018 * x + 0.2643662691 * y + 0.6338517070 * z;
+
+    // Apply cube root
+    const lp = Math.cbrt(l);
+    const mp = Math.cbrt(m);
+    const sp = Math.cbrt(s);
+
+    // Convert to OKLab
+    const L = 0.2104542553 * lp + 0.7936177850 * mp - 0.0040720468 * sp;
+    const a = 1.9779984951 * lp - 2.4285922050 * mp + 0.4505937099 * sp;
+    const bLab = 0.0259040371 * lp + 0.7827717662 * mp - 0.8086757660 * sp;
+
+    // Convert OKLab to OKLCH
+    const C = Math.sqrt(a * a + bLab * bLab);
+    let H = Math.atan2(bLab, a) * (180 / Math.PI);
+    if (H < 0) H += 360;
+
+    // Format with proper precision
+    const lightness = Math.max(0, Math.min(1, L)).toFixed(3);
+    const chroma = Math.max(0, Math.min(0.4, C)).toFixed(3);
+    const hue = C < 0.001 ? '0' : H.toFixed(1); // Use 0 hue for near-gray colors
+
+    return `oklch(${lightness} ${chroma} ${hue})`;
+  }
+
+  // Save current state to history
+  private saveToHistory(): void {
+    const currentColors = this.colors();
+    const currentIndex = this.historyIndex();
+    const currentHistory = this.history();
+
+    // Remove any future states if we're not at the end
+    const newHistory = currentHistory.slice(0, currentIndex + 1);
+
+    // Add current state
+    newHistory.push(JSON.parse(JSON.stringify(currentColors)));
+
+    // Limit history size
+    if (newHistory.length > this.maxHistory) {
+      newHistory.shift();
+    }
+
+    this.history.set(newHistory);
+    this.historyIndex.set(newHistory.length - 1);
+  }
+
+  protected undo(): void {
+    const currentIndex = this.historyIndex();
+    if (currentIndex > 0) {
+      const newIndex = currentIndex - 1;
+      this.historyIndex.set(newIndex);
+      this.colors.set(JSON.parse(JSON.stringify(this.history()[newIndex])));
+    }
+  }
+
+  protected redo(): void {
+    const currentIndex = this.historyIndex();
+    const historyLength = this.history().length;
+    if (currentIndex < historyLength - 1) {
+      const newIndex = currentIndex + 1;
+      this.historyIndex.set(newIndex);
+      this.colors.set(JSON.parse(JSON.stringify(this.history()[newIndex])));
+    }
+  }
+
+  protected resetColors(): void {
+    this.saveToHistory();
+    this.colors.set(JSON.parse(JSON.stringify(this.defaultColors)));
+    this.saveToHistory();
+  }
+
+  protected importTheme(): void {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json,.css';
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const content = event.target?.result as string;
+            if (file.name.endsWith('.json')) {
+              const parsed = JSON.parse(content);
+              this.saveToHistory();
+              this.colors.set(parsed as ThemeColors);
+              this.saveToHistory();
+            } else if (file.name.endsWith('.css')) {
+              // Parse CSS variables
+              this.parseCSSAndApply(content);
+            }
+          } catch (error) {
+            console.error('Failed to parse theme file:', error);
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  }
+
+  private parseCSSAndApply(css: string): void {
+    const colorRegex = /--([a-z-]+):\s*([^;]+);/gi;
+    const newColors: Partial<ThemeColors> = {};
+    let match;
+
+    while ((match = colorRegex.exec(css)) !== null) {
+      const [, key, value] = match;
+      if (key in this.colors()) {
+        // Assume it's for light mode if not in .dark block
+        if (!newColors[key as keyof ThemeColors]) {
+          newColors[key as keyof ThemeColors] = {
+            light: value.trim(),
+            dark: value.trim(),
+          };
+        }
+      }
+    }
+
+    if (Object.keys(newColors).length > 0) {
+      this.saveToHistory();
+      this.colors.set({
+        ...this.colors(),
+        ...newColors,
+      } as ThemeColors);
+      this.saveToHistory();
+    }
   }
 }

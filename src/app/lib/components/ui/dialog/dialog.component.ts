@@ -1,10 +1,11 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-  output,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    forwardRef,
+    input,
+    output,
+    signal,
 } from '@angular/core';
 import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
 
@@ -67,7 +68,7 @@ export class Dialog implements DialogContextValue {
     this.openChange.emit(open);
   }
 
-  isOpen(): boolean {
-    return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
-  }
+  readonly isOpen = computed(() =>
+    this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open()
+  );
 }

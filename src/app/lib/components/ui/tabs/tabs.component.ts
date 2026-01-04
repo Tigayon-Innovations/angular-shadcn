@@ -6,6 +6,7 @@ import {
     effect,
     forwardRef,
     input,
+    output,
     signal,
 } from '@angular/core';
 import { TABS_CONTEXT, TabsContext } from './tabs-context';
@@ -49,6 +50,9 @@ export class Tabs implements TabsContext {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Emits when the active tab changes */
+  readonly valueChange = output<string>();
+
   /** Internal state for the active tab value */
   private readonly _value = signal<string>('');
 
@@ -75,6 +79,7 @@ export class Tabs implements TabsContext {
     if (this.controlledValue() === undefined) {
       this._value.set(newValue);
     }
+    this.valueChange.emit(newValue);
   };
 
   protected readonly computedClass = computed(() =>

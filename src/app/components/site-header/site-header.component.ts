@@ -2,7 +2,6 @@ import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/ui/button';
 import { Kbd } from '@/ui/kbd';
-import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,13 +17,13 @@ import { Github, LucideAngularModule, Menu, Search, Star } from 'lucide-angular'
 @Component({
   selector: 'SiteHeader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd, NgOptimizedImage],
+  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd],
   host: {
     '(document:keydown)': 'onKeydown($event)',
   },
   template: `
     <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div class="container mx-auto flex h-14 max-w-screen-2xl items-center px-4">
+      <div class="md:px-6 flex h-14   items-center px-4">
         <!-- Logo -->
         <div class="mr-4 flex">
           <a routerLink="/" class="mr-6 flex items-center flex gap-2 space-x-2">

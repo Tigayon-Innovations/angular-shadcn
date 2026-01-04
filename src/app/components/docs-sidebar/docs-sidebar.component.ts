@@ -3,7 +3,6 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/ui/collapsible';
-import { ScrollArea } from '@/ui/scroll-area';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ChevronRight, LucideAngularModule } from 'lucide-angular';
@@ -24,7 +23,6 @@ interface NavItem {
   imports: [
     RouterLink,
     RouterLinkActive,
-    ScrollArea,
     Collapsible,
     CollapsibleTrigger,
     CollapsibleContent,

@@ -1,3 +1,4 @@
+export { Cards01Component } from './cards-01';
 export { Dashboard01Component } from './dashboard-01';
 export { Login01Component } from './login-01';
 export { Otp01Component } from './otp-01';

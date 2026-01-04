@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TailwindColor } from '../data';
 import { ColorPicker } from './color-picker.component';
-
-interface TailwindColor {
-  name: string;
-  shades: { label: string; value: string; hex: string }[];
-}
 
 /**
  * Color input with hex preview and color picker
@@ -19,10 +15,18 @@ interface TailwindColor {
         {{ label() }}
       </label>
       <div class="flex items-center gap-2">
-        <div
-          class="h-9 w-12 flex-shrink-0 cursor-pointer rounded border border-input"
+        <!-- Color preview that opens native color picker -->
+        <label
+          class="relative h-9 w-12 flex-shrink-0 cursor-pointer rounded border border-input overflow-hidden"
           [style.background-color]="hexColor()"
-        ></div>
+        >
+          <input
+            type="color"
+            [value]="hexColor()"
+            (input)="onNativeColorChange($any($event.target).value)"
+            class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+          />
+        </label>
         <input
           type="text"
           [value]="value()"
@@ -45,6 +49,10 @@ export class ColorInput {
   readonly colorSelected = output<string>();
 
   protected onColorSelected(hex: string): void {
+    this.colorSelected.emit(hex);
+  }
+
+  protected onNativeColorChange(hex: string): void {
     this.colorSelected.emit(hex);
   }
 }

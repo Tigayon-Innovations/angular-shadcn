@@ -2,11 +2,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { Grid, List, LucideAngularModule, Palette } from 'lucide-angular';
-
-interface TailwindColor {
-  name: string;
-  shades: { label: string; value: string; hex: string }[];
-}
+import { TailwindColor } from '../data';
 
 /**
  * Color picker component with Tailwind color palette

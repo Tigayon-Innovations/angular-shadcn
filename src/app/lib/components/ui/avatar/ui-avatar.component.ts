@@ -5,7 +5,6 @@ import {
     signal,
 } from '@angular/core';
 import { AvatarFallback } from './avatar-fallback.component';
-import { AvatarImage } from './avatar-image.component';
 import { Avatar } from './avatar.component';
 
 /**
@@ -22,7 +21,7 @@ import { Avatar } from './avatar.component';
 @Component({
   selector: 'ui-avatar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Avatar, AvatarImage, AvatarFallback],
+  imports: [Avatar, AvatarFallback],
   template: `
     <Avatar [class]="class()">
       @if (src() && !imageError()) {

@@ -51,6 +51,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Always Invoke angular mcp tool for the latest updates and best practices
 - Use Context 7 mcp tool always 
 - When creating new components, check first shad cn for existing components to match naming conventions and structure.
+- Always use shad-cn angular mcp tool if applicable
 
 ## Tailwind 4
 
@@ -86,3 +87,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 | decoration-slice | box-decoration-slice |
 | decoration-clone | box-decoration-clone |
 
+
+
+## Testing
+- Use ng build to verify build correctness

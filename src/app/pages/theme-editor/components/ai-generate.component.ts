@@ -1,6 +1,8 @@
 import { Button } from '@/lib/components/ui/button';
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { Label } from '@/lib/components/ui/label';
+import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core';
 import { LucideAngularModule, Sparkles } from 'lucide-angular';
+import { GoogleAiService } from 'src/app/services';
 
 /**
  * AI theme generation component
@@ -8,7 +10,7 @@ import { LucideAngularModule, Sparkles } from 'lucide-angular';
 @Component({
   selector: 'AIGenerate',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, LucideAngularModule],
+  imports: [Button, Label, LucideAngularModule],
   template: `
     <div class="space-y-4">
       <div>
@@ -19,12 +21,15 @@ import { LucideAngularModule, Sparkles } from 'lucide-angular';
       </div>
 
       <div class="space-y-3">
-        <textarea
-          [value]="prompt()"
-          (input)="prompt.set($any($event.target).value)"
-          placeholder="E.g., 'A modern, professional theme with blue accents and high contrast' or 'A warm, earthy theme for a coffee shop website'"
-          class="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
-        ></textarea>
+        <div class="space-y-2">
+          <Label class="text-xs">Theme Description</Label>
+          <textarea
+            [value]="prompt()"
+            (input)="prompt.set($any($event.target).value)"
+            placeholder="E.g., 'A modern, professional theme with blue accents and high contrast' or 'A warm, earthy theme for a coffee shop website'"
+            class="flex field-sizing-content min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] resize-none"
+          ></textarea>
+        </div>
 
         <Button
           [disabled]="isGenerating() || !prompt().trim()"
@@ -40,7 +45,7 @@ import { LucideAngularModule, Sparkles } from 'lucide-angular';
         </Button>
 
         @if (error()) {
-          <div class="text-xs text-destructive">
+          <div class="text-xs text-destructive bg-destructive/10 p-3 rounded-md">
             {{ error() }}
           </div>
         }
@@ -52,7 +57,7 @@ import { LucideAngularModule, Sparkles } from 'lucide-angular';
           @for (example of examples; track example) {
             <button
               type="button"
-              class="w-full text-left text-xs text-muted-foreground hover:text-foreground p-2 rounded border hover:border-foreground/20 transition-colors"
+              class="w-full text-left text-xs text-muted-foreground hover:text-foreground p-2.5 rounded-md border bg-muted/30 hover:bg-muted hover:border-foreground/20 transition-colors"
               (click)="prompt.set(example)"
             >
               {{ example }}
@@ -64,6 +69,8 @@ import { LucideAngularModule, Sparkles } from 'lucide-angular';
   `,
 })
 export class AIGenerate {
+  private readonly googleAi = inject(GoogleAiService);
+
   readonly themeGenerated = output<Record<string, { light: string; dark: string }>>();
 
   protected readonly icons = { Sparkles };
@@ -85,60 +92,7 @@ export class AIGenerate {
     this.error.set('');
 
     try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDb_dqTMFOquZTVEprMYsjerYtFu-uywo4`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: `Generate a CSS color theme based on this description: "${this.prompt()}".
-
-Return ONLY a valid JSON object with this exact structure (no markdown, no explanation):
-{
-  "primary": { "light": "oklch(0.5 0.2 220)", "dark": "oklch(0.6 0.2 220)" },
-  "secondary": { "light": "oklch(0.9 0.05 220)", "dark": "oklch(0.3 0.05 220)" },
-  "accent": { "light": "oklch(0.7 0.15 320)", "dark": "oklch(0.6 0.15 320)" },
-  "background": { "light": "oklch(1 0 0)", "dark": "oklch(0.15 0 0)" },
-  "foreground": { "light": "oklch(0.15 0 0)", "dark": "oklch(0.98 0 0)" },
-  "card": { "light": "oklch(1 0 0)", "dark": "oklch(0.2 0 0)" },
-  "card-foreground": { "light": "oklch(0.15 0 0)", "dark": "oklch(0.98 0 0)" },
-  "border": { "light": "oklch(0.92 0 0)", "dark": "oklch(0.27 0 0)" },
-  "input": { "light": "oklch(0.92 0 0)", "dark": "oklch(0.27 0 0)" },
-  "ring": { "light": "oklch(0.5 0.2 220)", "dark": "oklch(0.6 0.2 220)" },
-  "muted": { "light": "oklch(0.97 0 0)", "dark": "oklch(0.2 0 0)" },
-  "muted-foreground": { "light": "oklch(0.55 0 0)", "dark": "oklch(0.65 0 0)" },
-  "primary-foreground": { "light": "oklch(0.98 0 0)", "dark": "oklch(0.15 0 0)" },
-  "secondary-foreground": { "light": "oklch(0.15 0 0)", "dark": "oklch(0.98 0 0)" },
-  "accent-foreground": { "light": "oklch(0.15 0 0)", "dark": "oklch(0.98 0 0)" }
-}
-
-Use OKLCH color format. Ensure good contrast and accessibility.`
-              }]
-            }]
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to generate theme');
-      }
-
-      const data = await response.json();
-      const generatedText = data.candidates[0]?.content?.parts[0]?.text;
-
-      if (!generatedText) {
-        throw new Error('No response from AI');
-      }
-
-      // Extract JSON from response (handle markdown code blocks)
-      const jsonMatch = generatedText.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) {
-        throw new Error('Invalid response format');
-      }
-
-      const colors = JSON.parse(jsonMatch[0]);
+      const colors = await this.googleAi.generateTheme(this.prompt());
       this.themeGenerated.emit(colors);
       this.prompt.set('');
     } catch (err) {

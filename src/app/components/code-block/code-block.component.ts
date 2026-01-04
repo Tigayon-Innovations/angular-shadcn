@@ -1,3 +1,9 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/lib/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import {
   ChangeDetectionStrategy,
@@ -8,17 +14,17 @@ import {
   signal,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Check, Clipboard, LucideAngularModule } from 'lucide-angular';
+import { Check, Clipboard, FileCode, LucideAngularModule, MoreVertical } from 'lucide-angular';
 import { codeToHtml } from 'shiki';
 
 /**
  * Code block component with VS Code-like syntax highlighting powered by Shiki.
- * Styled like Vercel/Next.js documentation.
+ * Styled like Vercel/Next.js documentation with title bar.
  */
 @Component({
   selector: 'CodeBlock',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger],
   styles: `
     :host {
       display: block;
@@ -32,7 +38,7 @@ import { codeToHtml } from 'shiki';
         overflow-x: auto;
         font-family: 'Fira Code', 'Geist Mono', 'JetBrains Mono', Consolas, Monaco, monospace;
         font-size: 13px;
-        line-height: 1;
+        line-height: .5;
         tab-size: 2;
         background: transparent !important;
         font-feature-settings: 'calt' 1, 'liga' 1;
@@ -42,19 +48,19 @@ import { codeToHtml } from 'shiki';
         font-family: inherit;
         background: transparent;
         display: block;
-        padding: 0.5rem 0;
+        padding: 1rem 0;
       }
 
       .line {
         display: block;
-        padding: 0 1rem 0 0;
-        min-height: 1.2em;
+        padding: 0 1rem;
+        min-height: 1.5em;
       }
 
       /* Line numbers styling */
       .line-number {
         display: inline-block;
-        width: 3rem;
+        width: 2.5rem;
         padding-right: 1rem;
         text-align: right;
         color: #4b5563;
@@ -68,51 +74,104 @@ import { codeToHtml } from 'shiki';
       span {
         font-style: normal !important;
       }
+
+      /* Transparency for special characters like brackets, punctuation */
+      .punctuation,
+      [style*="color:#9ECBFF"] + span[style*="color:#E1E4E8"],
+      span[style*="color:#E1E4E8"]:has(+ span) {
+        opacity: 0.6;
+      }
+    }
+
+    /* Wrap long lines when enabled */
+    :host.wrap-lines ::ng-deep {
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
     }
   `,
   template: `
-    <div [class]="computedClass()" class="py-6">
-      <!-- Code content with copy button -->
-      <div class="relative group">
-        <!-- Copy button - absolute positioned -->
-        <button
-          type="button"
-          (click)="copyCode()"
-          [class]="copyButtonClass()"
-          [attr.aria-label]="copied() ? 'Copied!' : 'Copy code'"
-        >
-          @if (copied()) {
-            <lucide-icon [img]="icons.Check" class="size-4" />
-          } @else {
-            <lucide-icon [img]="icons.Clipboard" class="size-4" />
-          }
-        </button>
-
-        <!-- Code block -->
-        <div class="overflow-x-auto">
-          @if (isLoading()) {
-            <div class="p-4 text-sm text-zinc-500 font-mono">
-              <pre><code>{{ code() }}</code></pre>
-            </div>
-          } @else {
-            <div [innerHTML]="highlightedHtml()"></div>
-          }
+    <div [class]="computedClass()">
+      <!-- Header bar with title and actions -->
+      <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50">
+        <div class="flex items-center gap-2 text-zinc-400">
+          <lucide-icon [img]="icons.FileCode" class="size-4" />
+          <span class="text-sm font-medium">{{ displayTitle() }}</span>
         </div>
+        <div class="flex items-center gap-1">
+          <!-- Copy button -->
+          <button
+            type="button"
+            (click)="copyCode()"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+          >
+            @if (copied()) {
+              <lucide-icon [img]="icons.Check" class="size-3.5 text-green-400" />
+              <span>Copied!</span>
+            } @else {
+              <lucide-icon [img]="icons.Clipboard" class="size-3.5" />
+              <span>Copy</span>
+            }
+          </button>
+          <!-- Options dropdown -->
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <button
+                type="button"
+                class="flex items-center justify-center size-8 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+              >
+                <lucide-icon [img]="icons.MoreVertical" class="size-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent [align]="'end'" class="w-48">
+              <DropdownMenuItem (click)="toggleDarkTheme()">
+                <div class="flex items-center justify-between w-full">
+                  <span>Use dark theme</span>
+                  <input type="checkbox" [checked]="useDarkTheme()" class="h-4 w-4 rounded border-input" />
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem (click)="toggleWrapLines()">
+                <div class="flex items-center justify-between w-full">
+                  <span>Wrap long lines</span>
+                  <input type="checkbox" [checked]="wrapLines()" class="h-4 w-4 rounded border-input" />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+
+      <!-- Code content -->
+      <div class="overflow-x-auto">
+        @if (isLoading()) {
+          <div class="p-4 text-sm text-zinc-500 font-mono">
+            <pre><code>{{ code() }}</code></pre>
+          </div>
+        } @else {
+          <div [innerHTML]="highlightedHtml()"></div>
+        }
       </div>
     </div>
   `,
+  host: {
+    '[class.wrap-lines]': 'wrapLines()',
+  },
 })
 export class CodeBlock {
   readonly code = input<string>('');
   readonly language = input<string>('typescript');
   readonly filename = input<string>('');
+  readonly title = input<string>('');
   readonly showLineNumbers = input<boolean>(true);
   readonly class = input<string>('');
 
   protected readonly copied = signal(false);
   protected readonly isLoading = signal(true);
   protected readonly highlightedHtml = signal<SafeHtml>('');
-  protected readonly icons = { Clipboard, Check };
+  protected readonly useDarkTheme = signal(true);
+  protected readonly wrapLines = signal(false);
+  protected readonly icons = { Clipboard, Check, MoreVertical, FileCode };
 
   constructor(private sanitizer: DomSanitizer) {
     // Effect to highlight code when inputs change
@@ -129,6 +188,14 @@ export class CodeBlock {
     });
   }
 
+  protected readonly displayTitle = computed(() => {
+    if (this.title()) return this.title();
+    if (this.filename()) return this.filename();
+    // Capitalize language name
+    const lang = this.language();
+    return lang.charAt(0).toUpperCase() + lang.slice(1);
+  });
+
   protected readonly computedClass = computed(() =>
     cn(
       'relative rounded-lg border border-zinc-800 bg-zinc-950 overflow-hidden font-mono',
@@ -136,20 +203,13 @@ export class CodeBlock {
     )
   );
 
-  protected readonly copyButtonClass = computed(() =>
-    cn(
-      'absolute right-3 top-3 z-10',
-      'flex items-center justify-center',
-      'size-8 rounded-md',
-      'bg-zinc-800/80 hover:bg-zinc-700',
-      'text-zinc-400 hover:text-zinc-100',
-      'border border-zinc-700/50',
-      'opacity-0 group-hover:opacity-100',
-      'transition-all duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-950',
-      this.copied() && 'text-green-400 hover:text-green-400'
-    )
-  );
+  protected toggleDarkTheme(): void {
+    this.useDarkTheme.update((v) => !v);
+  }
+
+  protected toggleWrapLines(): void {
+    this.wrapLines.update((v) => !v);
+  }
 
   private async highlightCode(code: string, lang: string, showLineNumbers: boolean): Promise<void> {
     this.isLoading.set(true);

@@ -1,270 +1,244 @@
+import { Button } from '@/lib/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/lib/components/ui/card';
+import { Checkbox } from '@/lib/components/ui/checkbox';
+import { Input } from '@/lib/components/ui/input';
+import { Label } from '@/lib/components/ui/label';
+import { NativeSelect } from '@/lib/components/ui/native-select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/lib/components/ui/tabs';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-settings-01',
-  imports: [],
+  imports: [
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    Checkbox,
+    Input,
+    Label,
+    NativeSelect,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+  ],
   template: `
     <div class="container max-w-4xl py-12">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="mb-2 text-3xl font-bold">Settings</h1>
+        <h1 class="mb-2 text-3xl font-bold tracking-tight">Settings</h1>
         <p class="text-muted-foreground">
           Manage your account settings and preferences
         </p>
       </div>
 
       <!-- Tabs -->
-      <div class="mb-6 flex gap-4 border-b">
-        <button
-          (click)="activeTab.set('general')"
-          [class.border-b-2]="activeTab() === 'general'"
-          [class.border-primary]="activeTab() === 'general'"
-          [class.text-foreground]="activeTab() === 'general'"
-          [class.text-muted-foreground]="activeTab() !== 'general'"
-          class="px-4 py-2 text-sm font-medium"
-        >
-          General
-        </button>
-        <button
-          (click)="activeTab.set('security')"
-          [class.border-b-2]="activeTab() === 'security'"
-          [class.border-primary]="activeTab() === 'security'"
-          [class.text-foreground]="activeTab() === 'security'"
-          [class.text-muted-foreground]="activeTab() !== 'security'"
-          class="px-4 py-2 text-sm font-medium"
-        >
-          Security
-        </button>
-        <button
-          (click)="activeTab.set('notifications')"
-          [class.border-b-2]="activeTab() === 'notifications'"
-          [class.border-primary]="activeTab() === 'notifications'"
-          [class.text-foreground]="activeTab() === 'notifications'"
-          [class.text-muted-foreground]="activeTab() !== 'notifications'"
-          class="px-4 py-2 text-sm font-medium"
-        >
-          Notifications
-        </button>
-      </div>
+      <Tabs [value]="activeTab()" (valueChange)="activeTab.set($any($event))">
+        <TabsList class="mb-6">
+          <TabsTrigger value="general">General</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
+        </TabsList>
 
-      <!-- General Tab -->
-      @if (activeTab() === 'general') {
-        <div class="space-y-6">
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">Profile Information</h3>
-            <div class="space-y-4">
-              <div>
-                <label class="mb-2 block text-sm font-medium">Name</label>
-                <input
-                  type="text"
-                  value="John Doe"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-              </div>
-              <div>
-                <label class="mb-2 block text-sm font-medium">Email</label>
-                <input
-                  type="email"
-                  value="john@example.com"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-              </div>
-              <div>
-                <label class="mb-2 block text-sm font-medium">Bio</label>
-                <textarea
-                  rows="3"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                  placeholder="Tell us about yourself"
-                ></textarea>
-              </div>
+        <!-- General Tab -->
+        <TabsContent value="general">
+          <div class="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Profile Information</CardTitle>
+                <CardDescription>Update your personal details</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div class="space-y-2">
+                  <Label for="name">Name</Label>
+                  <Input id="name" type="text" value="John Doe" />
+                </div>
+                <div class="space-y-2">
+                  <Label for="email">Email</Label>
+                  <input
+                    id="email"
+                    type="email"
+                    value="john@example.com"
+                    class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <Label for="bio">Bio</Label>
+                  <textarea
+                    id="bio"
+                    placeholder="Tell us about yourself"
+                    rows="3"
+                    class="flex field-sizing-content min-h-16 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  ></textarea>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Preferences</CardTitle>
+                <CardDescription>Customize your experience</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <Label>Language</Label>
+                    <p class="text-sm text-muted-foreground">
+                      Select your preferred language
+                    </p>
+                  </div>
+                  <NativeSelect class="w-40">
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                  </NativeSelect>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <Label>Timezone</Label>
+                    <p class="text-sm text-muted-foreground">
+                      Your current timezone
+                    </p>
+                  </div>
+                  <NativeSelect class="w-40">
+                    <option>UTC-8 (Pacific)</option>
+                    <option>UTC-5 (Eastern)</option>
+                    <option>UTC+0 (London)</option>
+                  </NativeSelect>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div class="flex justify-end gap-3">
+              <Button variant="outline">Cancel</Button>
+              <Button>Save Changes</Button>
             </div>
           </div>
+        </TabsContent>
 
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">Preferences</h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Language</p>
-                  <p class="text-sm text-muted-foreground">
-                    Select your preferred language
-                  </p>
+        <!-- Security Tab -->
+        <TabsContent value="security">
+          <div class="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Change Password</CardTitle>
+                <CardDescription>Update your password to keep your account secure</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div class="space-y-2">
+                  <Label for="current-password">Current Password</Label>
+                  <Input id="current-password" type="password" />
                 </div>
-                <select
-                  class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                >
-                  <option>English</option>
-                  <option>Spanish</option>
-                  <option>French</option>
-                </select>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Timezone</p>
-                  <p class="text-sm text-muted-foreground">
-                    Your current timezone
-                  </p>
+                <div class="space-y-2">
+                  <Label for="new-password">New Password</Label>
+                  <Input id="new-password" type="password" />
                 </div>
-                <select
-                  class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                >
-                  <option>UTC-8 (Pacific)</option>
-                  <option>UTC-5 (Eastern)</option>
-                  <option>UTC+0 (London)</option>
-                </select>
-              </div>
+                <div class="space-y-2">
+                  <Label for="confirm-password">Confirm Password</Label>
+                  <Input id="confirm-password" type="password" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Two-Factor Authentication</CardTitle>
+                <CardDescription>Add an extra layer of security to your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">Enable 2FA</p>
+                    <p class="text-sm text-muted-foreground">
+                      Protect your account with 2FA
+                    </p>
+                  </div>
+                  <Button variant="outline">Enable</Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div class="flex justify-end">
+              <Button>Update Password</Button>
             </div>
           </div>
+        </TabsContent>
 
-          <div class="flex justify-end gap-3">
-            <button
-              class="rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent"
-            >
-              Cancel
-            </button>
-            <button
-              class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Save Changes
-            </button>
-          </div>
-        </div>
-      }
+        <!-- Notifications Tab -->
+        <TabsContent value="notifications">
+          <div class="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Email Notifications</CardTitle>
+                <CardDescription>Manage your email notification preferences</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">Marketing emails</p>
+                    <p class="text-sm text-muted-foreground">
+                      Receive updates about new features
+                    </p>
+                  </div>
+                  <Checkbox></Checkbox>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">Security alerts</p>
+                    <p class="text-sm text-muted-foreground">
+                      Important security updates
+                    </p>
+                  </div>
+                  <Checkbox [checked]="true"></Checkbox>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">Product updates</p>
+                    <p class="text-sm text-muted-foreground">
+                      News about product changes
+                    </p>
+                  </div>
+                  <Checkbox></Checkbox>
+                </div>
+              </CardContent>
+            </Card>
 
-      <!-- Security Tab -->
-      @if (activeTab() === 'security') {
-        <div class="space-y-6">
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">Change Password</h3>
-            <div class="space-y-4">
-              <div>
-                <label class="mb-2 block text-sm font-medium"
-                  >Current Password</label
-                >
-                <input
-                  type="password"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-              </div>
-              <div>
-                <label class="mb-2 block text-sm font-medium"
-                  >New Password</label
-                >
-                <input
-                  type="password"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-              </div>
-              <div>
-                <label class="mb-2 block text-sm font-medium"
-                  >Confirm Password</label
-                >
-                <input
-                  type="password"
-                  class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-              </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Push Notifications</CardTitle>
+                <CardDescription>Manage your push notification preferences</CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">New messages</p>
+                    <p class="text-sm text-muted-foreground">
+                      Get notified about new messages
+                    </p>
+                  </div>
+                  <Checkbox [checked]="true"></Checkbox>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">Project updates</p>
+                    <p class="text-sm text-muted-foreground">
+                      Updates on your projects
+                    </p>
+                  </div>
+                  <Checkbox [checked]="true"></Checkbox>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div class="flex justify-end">
+              <Button>Save Preferences</Button>
             </div>
           </div>
-
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">
-              Two-Factor Authentication
-            </h3>
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="font-medium">Enable 2FA</p>
-                <p class="text-sm text-muted-foreground">
-                  Add an extra layer of security
-                </p>
-              </div>
-              <button
-                class="rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent"
-              >
-                Enable
-              </button>
-            </div>
-          </div>
-
-          <div class="flex justify-end">
-            <button
-              class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Update Password
-            </button>
-          </div>
-        </div>
-      }
-
-      <!-- Notifications Tab -->
-      @if (activeTab() === 'notifications') {
-        <div class="space-y-6">
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">Email Notifications</h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Marketing emails</p>
-                  <p class="text-sm text-muted-foreground">
-                    Receive updates about new features
-                  </p>
-                </div>
-                <input type="checkbox" class="h-4 w-4" />
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Security alerts</p>
-                  <p class="text-sm text-muted-foreground">
-                    Important security updates
-                  </p>
-                </div>
-                <input type="checkbox" checked class="h-4 w-4" />
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Product updates</p>
-                  <p class="text-sm text-muted-foreground">
-                    News about product changes
-                  </p>
-                </div>
-                <input type="checkbox" class="h-4 w-4" />
-              </div>
-            </div>
-          </div>
-
-          <div class="rounded-lg border bg-card p-6">
-            <h3 class="mb-4 text-lg font-semibold">Push Notifications</h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">New messages</p>
-                  <p class="text-sm text-muted-foreground">
-                    Get notified about new messages
-                  </p>
-                </div>
-                <input type="checkbox" checked class="h-4 w-4" />
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="font-medium">Project updates</p>
-                  <p class="text-sm text-muted-foreground">
-                    Updates on your projects
-                  </p>
-                </div>
-                <input type="checkbox" checked class="h-4 w-4" />
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-end">
-            <button
-              class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Save Preferences
-            </button>
-          </div>
-        </div>
-      }
+        </TabsContent>
+      </Tabs>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
