@@ -90,25 +90,7 @@ pipeline {
                 script {
                     echo '========== Building Angular SSR =========='
                     sh '''#!/bin/bash
-                        export NVM_DIR="${NVM_DIR}"
-                        source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION}
-
-                        # Add node_modules/.bin to PATH and configure npm to use bash
-                        export PATH="$(pwd)/node_modules/.bin:$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
-                        npm config set script-shell /bin/bash
-
-                        echo "Building Angular application..."
-                        echo "Node: $(which node)"
-                        echo "NPM: $(which npm)"
-                        echo "ng: $(which ng || echo 'checking node_modules')"
-                        ls -la node_modules/.bin/ng || echo "ng binary not found"
-
-                        npm run build
-
-                        # Verify build output
-                        echo "Build output:"
-                        ls -la dist/ || echo "dist folder not found"
+                        bash scripts/build.sh
                     '''
                 }
             }
