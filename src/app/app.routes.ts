@@ -52,6 +52,32 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'theme-editor',
+    loadComponent: () =>
+      import('@/pages/theme-editor').then((m) => m.ThemeEditorPage),
+  },
+  {
+    path: 'blocks',
+    loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksLayout),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('@/pages/blocks').then((m) => m.BlocksListPage),
+      },
+      {
+        path: ':category',
+        loadComponent: () =>
+          import('@/pages/blocks').then((m) => m.BlocksCategoryPage),
+      },
+      {
+        path: ':category/:slug',
+        loadComponent: () =>
+          import('@/pages/blocks').then((m) => m.BlockDetailPage),
+      },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

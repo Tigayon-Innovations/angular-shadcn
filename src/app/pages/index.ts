@@ -1,3 +1,4 @@
+export { BlockDetailPage, BlocksCategoryPage, BlocksLayout, BlocksListPage } from './blocks';
 export { ComponentDetailPage } from './docs/component-detail';
 export { ComponentsListPage } from './docs/components-list';
 export { DarkModePage } from './docs/dark-mode';

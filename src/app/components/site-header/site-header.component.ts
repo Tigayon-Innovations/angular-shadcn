@@ -60,6 +60,18 @@ import { Github, LucideAngularModule, Menu, Search, Star } from 'lucide-angular'
             Components
           </a>
           <a
+            routerLink="/blocks"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Blocks
+          </a>
+          <a
+            routerLink="/theme-editor"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Theme Editor
+          </a>
+          <a
             routerLink="/docs/mcp-setup"
             class="text-foreground/60 transition-colors hover:text-foreground/80"
           >

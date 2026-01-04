@@ -1,3 +1,4 @@
+export { BlocksService, type Block, type BlockCategory } from './blocks.service';
 export { ComponentDemos, type ComponentDemo } from './component-demos.service';
 export {
     ComponentRegistry, type ComponentCategory, type ComponentExample, type ComponentInfo
