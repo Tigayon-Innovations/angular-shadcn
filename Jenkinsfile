@@ -74,10 +74,11 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
-                        # Export PATH so npm subshell inherits it
-                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
-                        
+
+                        # Add node_modules/.bin to PATH and configure npm to use bash
+                        export PATH="$(pwd)/node_modules/.bin:$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        npm config set script-shell /bin/bash
+
                         npm run lint || true
                     '''
                 }
@@ -92,14 +93,17 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
-                        # Export PATH so npm subshell inherits it
-                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
-                        
+
+                        # Add node_modules/.bin to PATH and configure npm to use bash
+                        export PATH="$(pwd)/node_modules/.bin:$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        npm config set script-shell /bin/bash
+
                         echo "Building Angular application..."
                         echo "Node: $(which node)"
                         echo "NPM: $(which npm)"
-                        
+                        echo "ng: $(which ng || echo 'checking node_modules')"
+                        ls -la node_modules/.bin/ng || echo "ng binary not found"
+
                         npm run build
 
                         # Verify build output
@@ -118,12 +122,14 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
-                        # Export PATH so npm subshell inherits it
+
+                        # Add node_modules/.bin to PATH and configure npm to use bash
                         export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        npm config set script-shell /bin/bash
 
                         cd mcp-server
                         npm ci
+                        export PATH="$(pwd)/node_modules/.bin:$PATH"
                         npm run build || true
 
                         echo "MCP Server build complete"
@@ -140,10 +146,11 @@ pipeline {
                         export NVM_DIR="${NVM_DIR}"
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
-                        
-                        # Export PATH so npm subshell inherits it
-                        export PATH="$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
-                        
+
+                        # Add node_modules/.bin to PATH and configure npm to use bash
+                        export PATH="$(pwd)/node_modules/.bin:$NVM_DIR/versions/node/v24.12.0/bin:$PATH"
+                        npm config set script-shell /bin/bash
+
                         npm run test -- --run || true
                     '''
                 }
@@ -152,7 +159,11 @@ pipeline {
 
         stage('Deploy Application') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -186,7 +197,11 @@ pipeline {
 
         stage('Deploy MCP Server') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -217,7 +232,11 @@ pipeline {
 
         stage('Stop PM2 Services') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -236,7 +255,11 @@ pipeline {
 
         stage('Start PM2 Services') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -257,7 +280,11 @@ pipeline {
 
         stage('Verify Health Check') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -282,7 +309,11 @@ pipeline {
 
         stage('Reload Nginx') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
@@ -297,7 +328,11 @@ pipeline {
 
         stage('Create Restart Script') {
             when {
-                branch 'main'
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                    expression { env.GIT_BRANCH == 'main' || env.GIT_BRANCH == 'origin/main' || env.BRANCH_NAME == 'main' }
+                }
             }
             steps {
                 script {
