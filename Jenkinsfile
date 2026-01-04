@@ -39,16 +39,17 @@ pipeline {
                         source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        # Clean install root dependencies
-                        npm install --force
+                        # Clean start
+                        rm -rf node_modules package-lock.json
 
-                        # Build Angular SSR app
+                        # Install all dependencies (including devDependencies for build)
+                        npm install
+
+                        # Build Angular SSR app (includes MCP build)
                         npm run build
 
-                        # Build MCP server
-                        cd mcp-server
-                        npm install --force
-                        npm run build
+                        # Build MCP server separately
+                        npm run build:mcp
                     '''
                 }
             }
@@ -84,12 +85,15 @@ pipeline {
 
                         # Copy built files
                         sudo cp -r dist/shadcn-angular/* ${DEPLOY_DIR}/
-                        sudo cp package*.json ecosystem.config.js ${DEPLOY_DIR}/
-                        sudo cp -r mcp-server ${DEPLOY_DIR}/
+                        sudo cp package.json ecosystem.config.js ${DEPLOY_DIR}/
 
-                        # Install production dependencies
+                        # Copy MCP server source (not dist - it's already in dist/mcp-server)
+                        sudo mkdir -p ${DEPLOY_DIR}/mcp-server
+                        sudo cp -r dist/mcp-server/* ${DEPLOY_DIR}/mcp-server/
+
+                        # Install only production dependencies
                         cd ${DEPLOY_DIR}
-                        sudo npm install --force --omit=dev
+                        sudo npm install --omit=dev
 
                         # Set permissions
                         sudo chown -R www-data:www-data ${DEPLOY_DIR}
