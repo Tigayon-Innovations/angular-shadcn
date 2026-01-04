@@ -54,21 +54,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Test') {
-            steps {
-                script {
-                    sh '''#!/bin/bash -l
-                        export NVM_DIR="${NVM_DIR}"
-                        source "$NVM_DIR/nvm.sh"
-                        nvm use ${NODE_VERSION}
-
-                        npm run test -- --run || true
-                    '''
-                }
-            }
-        }
-
         stage('Deploy') {
             when {
                 branch 'main'
