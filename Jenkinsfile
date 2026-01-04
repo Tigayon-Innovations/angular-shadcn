@@ -55,12 +55,26 @@ pipeline {
             steps {
                 script {
                     echo '========== Installing dependencies =========='
-                    sh '''
+                    sh '''#!/bin/bash
                         export NVM_DIR="${NVM_DIR}"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        source "$NVM_DIR/nvm.sh"
                         nvm use ${NODE_VERSION}
 
-                        npm ci
+                        echo "Installing dependencies with npm ci..."
+                        npm ci && echo "✓ npm ci succeeded" || (
+                            echo "⚠ npm ci failed, trying npm install instead..."
+                            npm install
+                        )
+                        
+                        echo "Verifying @angular/cli installation..."
+                        if [ -d "node_modules/@angular/cli" ]; then
+                            echo "✓ @angular/cli is installed"
+                            ls -la node_modules/@angular/cli/package.json | head -1
+                        else
+                            echo "✗ @angular/cli not found!"
+                            ls -la node_modules/.bin/ng 2>/dev/null || echo "ng binary not found"
+                            exit 1
+                        fi
                     '''
                 }
             }

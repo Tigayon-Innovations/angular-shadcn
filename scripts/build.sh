@@ -26,25 +26,36 @@ nvm use $NODE_VERSION
 echo "Node version: $(node --version)"
 echo "NPM version: $(npm --version)"
 
-# Add node_modules/.bin to PATH
-export PATH="$(pwd)/node_modules/.bin:$(npm bin):$PATH"
+# Install dependencies if node_modules is empty or incomplete
+echo ""
+echo "Checking dependencies..."
+if [ ! -d "node_modules/@angular/cli" ]; then
+    echo "⚠ @angular/cli not found, installing dependencies..."
+    npm install
+else
+    echo "✓ @angular/cli found"
+fi
 
-echo "Current PATH:"
-echo "$PATH"
+# Add node_modules/.bin to PATH
+export PATH="$(pwd)/node_modules/.bin:$PATH"
+
+echo ""
+echo "Current PATH (first component):"
+echo "$(pwd)/node_modules/.bin"
 
 echo ""
 echo "Checking for ng command..."
-if which ng; then
-    echo "✓ ng found"
+if which ng > /dev/null 2>&1; then
+    echo "✓ ng found at: $(which ng)"
 else
-    echo "✗ ng not found, checking node_modules..."
+    echo "✗ ng not found in PATH"
     if [ -f "node_modules/.bin/ng" ]; then
         echo "✓ ng found in node_modules/.bin"
         ls -la node_modules/.bin/ng
     else
         echo "✗ ng not found in node_modules/.bin"
-        echo "Available binaries:"
-        ls -la node_modules/.bin/ 2>/dev/null | head -20 || echo "node_modules/.bin not found"
+        echo "Available binaries in node_modules/.bin:"
+        ls -la node_modules/.bin/ 2>/dev/null || echo "node_modules/.bin not found"
         exit 1
     fi
 fi
@@ -52,10 +63,15 @@ fi
 echo ""
 echo "Building Angular application..."
 
-# Run build with explicit bash shell for npm
-bash -c 'export PATH="$(pwd)/node_modules/.bin:$PATH" && npm run build'
+# Run build
+npm run build
 
 echo ""
 echo "========== Build Complete =========="
 echo "Build output:"
-ls -la dist/ || echo "dist folder not found"
+if [ -d "dist" ]; then
+    ls -la dist/
+else
+    echo "dist folder not found"
+    exit 1
+fi
