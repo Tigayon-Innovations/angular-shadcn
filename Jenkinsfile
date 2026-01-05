@@ -45,11 +45,8 @@ pipeline {
                         # Install all dependencies (including devDependencies for build)
                         npm install
 
-                        # Build Angular SSR app (includes MCP build)
+                        # Build Angular SSR app
                         npm run build
-
-                        # Build MCP server separately
-                        npm run build:mcp
                     '''
                 }
             }
@@ -70,11 +67,8 @@ pipeline {
                         # Clear old deployment
                         rm -rf ${DEPLOY_DIR}/*
 
-                        # Copy dist folder (Angular SSR)
-                        cp -r dist ${DEPLOY_DIR}/
-
-                        # Copy MCP server build
-                        cp -r mcp-server ${DEPLOY_DIR}/
+                        # Copy Angular SSR build output
+                        cp -r dist/shadcn-angular ${DEPLOY_DIR}/dist/
 
                         # Copy necessary config files
                         cp package.json ${DEPLOY_DIR}/
