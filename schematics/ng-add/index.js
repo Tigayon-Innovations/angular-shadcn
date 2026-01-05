@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ngAdd = ngAdd;
 const tasks_1 = require("@angular-devkit/schematics/tasks");
+const jsonc_parser_1 = require("jsonc-parser");
 // CSS Variables template for shadcn theming
 const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
 @use "tailwindcss";
@@ -253,7 +254,8 @@ function ngAdd(options) {
         context.logger.info('⚙️  TypeScript Config');
         const tsconfigPath = '/tsconfig.json';
         if (tree.exists(tsconfigPath)) {
-            const tsconfig = JSON.parse(tree.read(tsconfigPath).toString('utf-8'));
+            const tsconfigContent = tree.read(tsconfigPath).toString('utf-8');
+            const tsconfig = (0, jsonc_parser_1.parse)(tsconfigContent);
             tsconfig.compilerOptions = tsconfig.compilerOptions || {};
             tsconfig.compilerOptions.paths = tsconfig.compilerOptions.paths || {};
             const pathAliases = {
@@ -277,6 +279,27 @@ function ngAdd(options) {
                 context.logger.info('   ✓ Path aliases already set');
             }
         }
+        // Install selected components
+        if (options.components && options.components.length > 0) {
+            context.logger.info('');
+            context.logger.info('📦 Selected Components');
+            const packageJson = JSON.parse(tree.read(packageJsonPath).toString('utf-8'));
+            for (const component of options.components) {
+                const packageName = `@ng-cn/${component}`;
+                if (!packageJson.dependencies?.[packageName]) {
+                    packageJson.dependencies = packageJson.dependencies || {};
+                    packageJson.dependencies[packageName] = 'latest';
+                    context.logger.info(`   + ${packageName}`);
+                }
+                else {
+                    context.logger.info(`   ✓ ${packageName} already installed`);
+                }
+            }
+            tree.overwrite(packageJsonPath, JSON.stringify(packageJson, null, 2));
+            if (!options.skipInstall) {
+                context.addTask(new tasks_1.NodePackageInstallTask());
+            }
+        }
         // Success message with ASCII art banner
         context.logger.info('');
         context.logger.info('');
@@ -289,10 +312,23 @@ function ngAdd(options) {
         context.logger.info('');
         context.logger.info('  ✅ Setup complete! shadcn for Angular');
         context.logger.info('');
+        // Show selected components summary if any were installed
+        if (options.components && options.components.length > 0) {
+            context.logger.info('╭──────────────────────────────────────────────────╮');
+            context.logger.info('│  ✨ Components installed:                        │');
+            context.logger.info('│                                                  │');
+            for (const component of options.components) {
+                const paddedComponent = `@ng-cn/${component}`.padEnd(40);
+                context.logger.info(`│     ${paddedComponent}│`);
+            }
+            context.logger.info('│                                                  │');
+            context.logger.info('╰──────────────────────────────────────────────────╯');
+            context.logger.info('');
+        }
         context.logger.info('╭──────────────────────────────────────────────────╮');
         context.logger.info('│  🚀 Next steps:                                  │');
         context.logger.info('│                                                  │');
-        context.logger.info('│  1. Add components:                              │');
+        context.logger.info('│  1. Add more components:                         │');
         context.logger.info('│     ng g @ng-cn/core:c button                    │');
         context.logger.info('│     ng g @ng-cn/core:c card                      │');
         context.logger.info('│                                                  │');
@@ -300,7 +336,7 @@ function ngAdd(options) {
         context.logger.info('│     npm i @ng-cn/button @ng-cn/card              │');
         context.logger.info('│                                                  │');
         context.logger.info('│  3. Import and use:                              │');
-        context.logger.info("│     import { Button } from '@/ui/button';        │");
+        context.logger.info("│     import { Button } from '@ng-cn/button';      │");
         context.logger.info('│                                                  │');
         context.logger.info('│  📚 Docs: https://shadcn-angular.tigayon.com     │');
         context.logger.info('╰──────────────────────────────────────────────────╯');

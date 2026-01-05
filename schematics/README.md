@@ -9,12 +9,43 @@ Angular schematics for installing shadcn-angular components individually.
 First, add shadcn-angular to your project:
 
 ```bash
-ng add shadcn-angular
+ng add @ng-cn/core
 ```
 
 This will:
 - Install required dependencies (lucide-angular, class-variance-authority, clsx, tailwind-merge, @angular/cdk)
 - Set up the project for shadcn-angular components
+- **Prompt you to select components** to install initially (multi-select checkbox)
+
+### Interactive Component Selection
+
+When running `ng add @ng-cn/core`, you'll be presented with an interactive multi-select prompt:
+
+```
+? Which components would you like to add? (Press space to select, enter to confirm)
+❯◯ Button - Displays a button or a component that looks like a button
+ ◯ Card - Displays a card with header, content, and footer
+ ◯ Input - Displays a form input field
+ ◯ Label - Renders an accessible label associated with controls
+ ◯ Checkbox - A control that allows toggling between checked and not checked
+ ...
+```
+
+Use **space** to select/deselect components and **enter** to confirm your selection.
+
+### Skip Component Selection
+
+If you want to skip the component selection prompt:
+
+```bash
+ng add @ng-cn/core --components=button,card,input
+```
+
+Or to skip adding any components initially:
+
+```bash
+ng add @ng-cn/core --components=
+```
 
 ### Install Individual Components
 
@@ -65,10 +96,47 @@ ng g shadcn-angular:c button --path=src/components
 To build the schematics:
 
 ```bash
-npm run build:schematics
+cd schematics
+npx tsc -p tsconfig.json
 ```
 
 This compiles the TypeScript files in the `schematics` directory to JavaScript.
+
+### Testing
+
+Run the test script to verify the schematics work correctly:
+
+```bash
+cd schematics
+node test-schematic.js
+```
+
+This will:
+- Create a mock Angular project with a tsconfig.json containing comments (like real projects)
+- Run the ng-add schematic
+- Verify all expected files are created
+- Verify tsconfig path aliases are configured
+- Verify styles are imported correctly
+- Verify dependencies are added
+
+### Local Testing
+
+To test the schematic locally with a real Angular project:
+
+```bash
+# 1. Build the schematics
+cd schematics && npx tsc -p tsconfig.json && cd ..
+
+# 2. Create a test project
+ng new test-app --style=scss --routing=true
+
+# 3. Link the local package
+cd test-app
+npm link ../shadcn-angular
+
+# 4. Run the schematic
+ng add @ng-cn/core --skip-confirmation
+```
 
 ## Structure
 

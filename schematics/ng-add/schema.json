@@ -20,6 +20,49 @@
       "type": "boolean",
       "default": false,
       "description": "Skip creating ng-cn.scss styles file."
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Components to install initially.",
+      "x-prompt": {
+        "message": "Which components would you like to add? (Press space to select, enter to confirm)",
+        "type": "list",
+        "multiselect": true,
+        "items": [
+          { "value": "button", "label": "Button - Displays a button or a component that looks like a button" },
+          { "value": "card", "label": "Card - Displays a card with header, content, and footer" },
+          { "value": "input", "label": "Input - Displays a form input field" },
+          { "value": "label", "label": "Label - Renders an accessible label associated with controls" },
+          { "value": "checkbox", "label": "Checkbox - A control that allows toggling between checked and not checked" },
+          { "value": "select", "label": "Select - Displays a list of options for the user to pick from" },
+          { "value": "dialog", "label": "Dialog - A window overlaid on the primary window" },
+          { "value": "toast", "label": "Toast - A succinct message that is displayed temporarily" },
+          { "value": "dropdown-menu", "label": "Dropdown Menu - Displays a menu when triggered" },
+          { "value": "tabs", "label": "Tabs - A set of layered sections of content" },
+          { "value": "table", "label": "Table - A responsive table component" },
+          { "value": "avatar", "label": "Avatar - An image element with a fallback for representing the user" },
+          { "value": "badge", "label": "Badge - Displays a badge or a component that looks like a badge" },
+          { "value": "alert", "label": "Alert - Displays a callout for user attention" },
+          { "value": "tooltip", "label": "Tooltip - A popup that displays information related to an element" },
+          { "value": "progress", "label": "Progress - Displays an indicator showing the completion progress" },
+          { "value": "skeleton", "label": "Skeleton - Use to show a placeholder while content is loading" },
+          { "value": "separator", "label": "Separator - Visually or semantically separates content" },
+          { "value": "switch", "label": "Switch - A control that allows toggling between checked and not checked" },
+          { "value": "textarea", "label": "Textarea - Displays a form textarea" },
+          { "value": "accordion", "label": "Accordion - A vertically stacked set of interactive headings" },
+          { "value": "sheet", "label": "Sheet - Extends the Dialog component to display complementary content" },
+          { "value": "popover", "label": "Popover - Displays rich content in a portal, triggered by a button" },
+          { "value": "calendar", "label": "Calendar - A date field component for entering and editing dates" },
+          { "value": "command", "label": "Command - Fast, composable, unstyled command menu" },
+          { "value": "form", "label": "Form - Building forms with validation" },
+          { "value": "sidebar", "label": "Sidebar - A composable, themeable and customizable sidebar" },
+          { "value": "spinner", "label": "Spinner - Loading indicator animations" }
+        ]
+      }
     }
   }
 }
