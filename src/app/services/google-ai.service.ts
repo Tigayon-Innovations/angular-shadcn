@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 interface GenerationConfig {
   temperature: number;
@@ -50,7 +51,7 @@ Guidelines:
  */
 @Injectable({ providedIn: 'root' })
 export class GoogleAiService {
-  private readonly API_KEY = 'AIzaSyDb_dqTMFOquZTVEprMYsjerYtFu-uywo4';
+  private readonly API_KEY = environment.googleAiApiKey;
   private readonly MODEL = 'gemini-flash-lite-latest';
   private readonly BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 

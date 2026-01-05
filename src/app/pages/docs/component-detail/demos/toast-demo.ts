@@ -1,6 +1,6 @@
 import { Button } from '@/ui/button';
-import { Toaster } from '@/ui/toast';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Toaster, ToastService } from '@/ui/toast';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 @Component({
   selector: 'ToastDemo',
@@ -14,8 +14,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
 })
 export class ToastDemo {
+  private readonly toastService = inject(ToastService);
+
   protected showToast(): void {
-    // Toast service would be injected and used here
-    console.log('Toast triggered');
+    this.toastService.success({
+      title: 'Success',
+      description: 'Your action was completed successfully.',
+    });
   }
 }

@@ -1,5 +1,5 @@
 /**
- * shadcn-angular MCP HTTP/SSE Server
+ * ng-cn MCP HTTP/SSE Server
  *
  * Provides Model Context Protocol over HTTP with Server-Sent Events.
  * This can be deployed as part of your Angular SSR application.
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 // Health check endpoint
 app.get('/health', (req: Request, res: Response) => {
-  res.json({ status: 'ok', server: 'shadcn-angular-mcp' });
+  res.json({ status: 'ok', server: 'ng-cn-mcp' });
 });
 
 // MCP SSE endpoint
@@ -40,7 +40,7 @@ app.get('/sse', async (req: Request, res: Response) => {
   const transport = new SSEServerTransport('/message', res);
   const server = new Server(
     {
-      name: 'shadcn-angular',
+      name: 'ng-cn',
       version: '0.1.0',
     },
     {
@@ -94,9 +94,9 @@ app.post('/message', async (req: Request, res: Response) => {
 // Simple info endpoint
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    name: 'shadcn-angular MCP Server',
+    name: 'ng-cn MCP Server',
     version: '0.1.0',
-    description: 'Model Context Protocol server for shadcn-angular components',
+    description: 'Model Context Protocol server for ng-cn components',
     endpoints: {
       sse: '/sse',
       message: '/message',
@@ -110,7 +110,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🚀 shadcn-angular MCP Server running on http://localhost:${PORT}`);
+  console.log(`\n🚀 ng-cn MCP Server running on http://localhost:${PORT}`);
   console.log(`📡 SSE endpoint: http://localhost:${PORT}/sse`);
   console.log(`💚 Health check: http://localhost:${PORT}/health\n`);
 });

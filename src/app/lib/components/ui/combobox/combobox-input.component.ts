@@ -6,6 +6,7 @@ import {
     inject,
     input,
 } from '@angular/core';
+import { LucideAngularModule, Search } from 'lucide-angular';
 import { COMBOBOX_CONTEXT } from './combobox-context';
 
 /**
@@ -13,7 +14,9 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
  */
 @Component({
   selector: 'ComboboxInput',
+  imports: [LucideAngularModule],
   template: `
+    <lucide-icon [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 opacity-50" />
     <input
       [class]="inputClass()"
       [placeholder]="placeholder()"
@@ -29,6 +32,7 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
 })
 export class ComboboxInput {
   protected readonly context = inject(COMBOBOX_CONTEXT);
+  protected readonly SearchIcon = Search;
 
   /** Placeholder text */
   readonly placeholder = input<string>('Search...');

@@ -1,16 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  inject,
+  input,
 } from '@angular/core';
 import {
-    ACCORDION_CONTEXT,
-    ACCORDION_ITEM_CONTEXT,
-    AccordionItemContext,
+  ACCORDION_CONTEXT,
+  ACCORDION_ITEM_CONTEXT,
+  AccordionItemContext,
 } from './accordion-context';
 
 /**
@@ -54,5 +54,5 @@ export class AccordionItem implements AccordionItemContext {
     this.accordion.onValueChange(this.value());
   }
 
-  protected readonly computedClass = computed(() => cn('border-b', this.class()));
+  protected readonly computedClass = computed(() => cn('border-b w-full', this.class()));
 }

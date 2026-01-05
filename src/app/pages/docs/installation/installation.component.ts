@@ -3,10 +3,10 @@ import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, ArrowRight, FolderTree, LucideAngularModule, Package, Terminal, Zap } from 'lucide-angular';
 
 /**
- * Installation documentation page.
+ * Installation documentation page - Developer-first UX
  */
 @Component({
   selector: 'InstallationPage',
@@ -21,7 +21,7 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
             Installation
           </h1>
           <p class="text-xl text-muted-foreground leading-7">
-            Get set up fast. Install what you need, then start building.
+            One command. Zero config. Start building in seconds.
           </p>
         </div>
       </div>
@@ -29,267 +29,180 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
       <Separator class="mb-10" />
 
       <!-- Content -->
-      <div class="space-y-16">
-        <!-- Prerequisites -->
+      <div class="space-y-12">
+        <!-- Quick Start -->
         <section class="scroll-mt-20">
-          <div class="space-y-6">
-            <div class="space-y-2">
-              <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight border-b pb-2">
-                Prerequisites
-              </h2>
-              <p class="text-muted-foreground">
-                Make sure you have the following tools installed before you begin.
-              </p>
-            </div>
-            <div class="rounded-lg border bg-muted/50 p-6">
-              <ul class="space-y-3">
-                <li class="flex items-start gap-3">
-                  <div class="mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-                  </div>
-                  <div>
-                    <span class="font-medium">Node.js 18.19 or later</span>
-                    <p class="text-sm text-muted-foreground mt-0.5">Required for running Angular CLI and build tools</p>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <div class="mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-                  </div>
-                  <div>
-                    <span class="font-medium">Angular CLI 21 or later</span>
-                    <p class="text-sm text-muted-foreground mt-0.5">Install globally with <code class="bg-background px-1.5 py-0.5 rounded text-xs">npm i -g &#64;angular/cli</code></p>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <div class="mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-                  </div>
-                  <div>
-                    <span class="font-medium">A package manager</span>
-                    <p class="text-sm text-muted-foreground mt-0.5">npm, pnpm, or yarn</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- Step 1: Create Project -->
-        <section class="scroll-mt-20">
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background font-bold text-primary">
-                1
-              </div>
-              <div class="space-y-2 flex-1">
-                <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                  Create a New Project
-                </h2>
-                <p class="text-muted-foreground">
-                  Start by creating a new Angular application, or use an existing one.
-                </p>
-              </div>
-            </div>
-            <div class="pl-14">
-              <CodeBlock
-                [code]="createProjectCode"
-                language="bash"
-              />
-            </div>
-          </div>
-        </section>
-
-        <!-- Step 2: Add Tailwind -->
-        <section class="scroll-mt-20">
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background font-bold text-primary">
-                2
-              </div>
-              <div class="space-y-2 flex-1">
-                <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                  Add Tailwind CSS
-                </h2>
-                <p class="text-muted-foreground">
-                  Install and configure Tailwind CSS using the Angular CLI schematic.
-                </p>
-              </div>
-            </div>
-            <div class="pl-14">
-              <CodeBlock
-                [code]="addTailwindCode"
-                language="bash"
-              />
-            </div>
-          </div>
-        </section>
-
-        <!-- Step 3: CSS Variables -->
-        <section class="scroll-mt-20">
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background font-bold text-primary">
-                3
-              </div>
-              <div class="space-y-2 flex-1">
-                <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                  Configure CSS Variables
-                </h2>
-                <p class="text-muted-foreground">
-                  Replace the contents of your <code class="bg-muted px-1.5 py-0.5 rounded text-sm">styles.scss</code> file with the shadcn CSS variables.
-                </p>
-              </div>
-            </div>
-            <div class="pl-14 space-y-4">
-              <div class="rounded-lg border bg-amber-500/10 border-amber-500/20 p-4 flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5">
-                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
-                  <path d="M12 9v4"/>
-                  <path d="M12 17h.01"/>
-                </svg>
-                <div class="text-sm">
-                  <p class="font-medium text-amber-900 dark:text-amber-200">Important</p>
-                  <p class="text-amber-800 dark:text-amber-300 mt-1">
-                    This will replace your existing styles. Make sure to backup any custom CSS first.
-                  </p>
+          <div class="rounded-xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8">
+            <div class="space-y-6">
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                  <lucide-icon [img]="icons.Zap" class="h-5 w-5" />
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold">Quick Start</h2>
+                  <p class="text-sm text-muted-foreground">Get up and running in one command</p>
                 </div>
               </div>
               <CodeBlock
-                [code]="cssVariablesCode"
-                language="css"
+                [code]="quickStartCode"
+                language="bash"
               />
+              <div class="grid gap-3 text-sm md:grid-cols-2">
+                <div class="flex items-center gap-2 text-muted-foreground">
+                  <svg class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  Installs all dependencies
+                </div>
+                <div class="flex items-center gap-2 text-muted-foreground">
+                  <svg class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  Creates theme styles
+                </div>
+                <div class="flex items-center gap-2 text-muted-foreground">
+                  <svg class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  Sets up utilities
+                </div>
+                <div class="flex items-center gap-2 text-muted-foreground">
+                  <svg class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  Configures path aliases
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- Step 4: Add cn Utility -->
+        <!-- Add Components -->
         <section class="scroll-mt-20">
           <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background font-bold text-primary">
-                4
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                <lucide-icon [img]="icons.Package" class="h-5 w-5" />
               </div>
-              <div class="space-y-2 flex-1">
-                <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                  Add the cn Utility
-                </h2>
-                <p class="text-muted-foreground">
-                  Install utility libraries and create the <code class="bg-muted px-1.5 py-0.5 rounded text-sm">cn</code> helper for merging class names.
-                </p>
+              <div>
+                <h2 class="text-2xl font-bold">Add Components</h2>
+                <p class="text-sm text-muted-foreground">Install only what you need</p>
               </div>
             </div>
-            <div class="pl-14 space-y-6">
-              <div>
-                <h3 class="text-lg font-semibold mb-3">Install dependencies</h3>
-                <CodeBlock
-                  [code]="installDepsCode"
-                  language="bash"
-                />
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold mb-3">Create the utility function</h3>
-                <CodeBlock
-                  [code]="cnUtilityCode"
-                  language="typescript"
-                />
+            <CodeBlock
+              [code]="addComponentsCode"
+              language="bash"
+            />
+            <div class="rounded-lg border bg-muted/30 p-4">
+              <p class="text-sm font-medium mb-3">Available components:</p>
+              <div class="flex flex-wrap gap-2">
+                @for (comp of popularComponents; track comp) {
+                  <code class="bg-background px-2 py-1 rounded text-xs">{{ comp }}</code>
+                }
+                <span class="text-xs text-muted-foreground self-center">and 50+ more...</span>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Step 5: Path Aliases -->
+        <!-- What Gets Created -->
         <section class="scroll-mt-20">
           <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background font-bold text-primary">
-                5
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                <lucide-icon [img]="icons.FolderTree" class="h-5 w-5" />
               </div>
-              <div class="space-y-2 flex-1">
-                <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                  Add Path Aliases
-                </h2>
-                <p class="text-muted-foreground">
-                  Configure path aliases in <code class="bg-muted px-1.5 py-0.5 rounded text-sm">tsconfig.json</code> for cleaner imports.
-                </p>
+              <div>
+                <h2 class="text-2xl font-bold">What Gets Created</h2>
+                <p class="text-sm text-muted-foreground">Clean, organized project structure</p>
               </div>
             </div>
-            <div class="pl-14">
-              <CodeBlock
-                [code]="pathAliasesCode"
-                language="json"
-              />
+            <CodeBlock
+              [code]="projectStructureCode"
+              language="plaintext"
+            />
+          </div>
+        </section>
+
+        <!-- Manual Setup -->
+        <section class="scroll-mt-20">
+          <div class="space-y-6">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                <lucide-icon [img]="icons.Terminal" class="h-5 w-5" />
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">Manual Setup</h2>
+                <p class="text-sm text-muted-foreground">For those who prefer full control</p>
+              </div>
+            </div>
+
+            <div class="space-y-8">
+              <!-- Step 1 -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">1</span>
+                  <h3 class="font-semibold">Install dependencies</h3>
+                </div>
+                <CodeBlock [code]="manualDepsCode" language="bash" />
+              </div>
+
+              <!-- Step 2 -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">2</span>
+                  <h3 class="font-semibold">Add Tailwind CSS</h3>
+                </div>
+                <CodeBlock [code]="tailwindCode" language="bash" />
+              </div>
+
+              <!-- Step 3 -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">3</span>
+                  <h3 class="font-semibold">Create the cn utility</h3>
+                </div>
+                <p class="text-sm text-muted-foreground">Create <code class="bg-muted px-1.5 py-0.5 rounded">src/app/lib/utils/cn.ts</code>:</p>
+                <CodeBlock [code]="cnUtilityCode" language="typescript" />
+              </div>
+
+              <!-- Step 4 -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">4</span>
+                  <h3 class="font-semibold">Add CSS variables</h3>
+                </div>
+                <p class="text-sm text-muted-foreground">Add to your <code class="bg-muted px-1.5 py-0.5 rounded">styles.scss</code>:</p>
+                <CodeBlock [code]="cssVariablesCode" language="scss" />
+              </div>
+
+              <!-- Step 5 -->
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">5</span>
+                  <h3 class="font-semibold">Configure path aliases</h3>
+                </div>
+                <p class="text-sm text-muted-foreground">Add to <code class="bg-muted px-1.5 py-0.5 rounded">tsconfig.json</code>:</p>
+                <CodeBlock [code]="pathAliasesCode" language="json" />
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- That's it Section -->
+        <!-- Success -->
         <section class="scroll-mt-20">
-          <div class="rounded-lg border bg-gradient-to-br from-primary/10 to-primary/5 p-8">
-            <div class="space-y-4 text-center">
+          <div class="rounded-xl border bg-gradient-to-br from-green-500/10 to-transparent p-8 text-center">
+            <div class="space-y-4">
               <div class="flex justify-center">
-                <div class="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
-                    <path d="M20 6 9 17l-5-5"/>
+                <div class="h-12 w-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                   </svg>
                 </div>
               </div>
-              <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight">
-                That's it!
-              </h2>
-              <p class="text-muted-foreground max-w-2xl mx-auto">
-                You're now ready to start using shadcn-angular components. Install the components you need and start building beautiful interfaces.
+              <h2 class="text-2xl font-bold">You're ready!</h2>
+              <p class="text-muted-foreground max-w-md mx-auto">
+                Start adding components and building your UI.
               </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Installing Components -->
-        <section class="scroll-mt-20">
-          <div class="space-y-6">
-            <div class="space-y-2">
-              <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight border-b pb-2">
-                Installing Components
-              </h2>
-              <p class="text-muted-foreground">
-                Add individual components to your project using Angular schematics or copy them manually.
-              </p>
-            </div>
-            <div class="space-y-6">
-              <div>
-                <h3 class="text-lg font-semibold mb-3">Using the CLI (Recommended)</h3>
-                <CodeBlock
-                  [code]="installComponentCode"
-                  language="bash"
-                />
-              </div>
-              <div class="rounded-lg border bg-muted/50 p-6 space-y-4">
-                <h3 class="text-lg font-semibold">Available components</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                  <code class="bg-background px-2 py-1.5 rounded">button</code>
-                  <code class="bg-background px-2 py-1.5 rounded">card</code>
-                  <code class="bg-background px-2 py-1.5 rounded">input</code>
-                  <code class="bg-background px-2 py-1.5 rounded">label</code>
-                  <code class="bg-background px-2 py-1.5 rounded">separator</code>
-                  <code class="bg-background px-2 py-1.5 rounded">badge</code>
-                  <code class="bg-background px-2 py-1.5 rounded">alert</code>
-                  <code class="bg-background px-2 py-1.5 rounded">dialog</code>
-                  <code class="bg-background px-2 py-1.5 rounded">data-table</code>
-                  <code class="bg-background px-2 py-1.5 rounded">and many more...</code>
-                </div>
-              </div>
-              <div class="rounded-lg border bg-blue-500/10 border-blue-500/20 p-4 flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-600 dark:text-blue-500 shrink-0 mt-0.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 16v-4"/>
-                  <path d="M12 8h.01"/>
-                </svg>
-                <div class="text-sm">
-                  <p class="font-medium text-blue-900 dark:text-blue-200">Manual Installation</p>
-                  <p class="text-blue-800 dark:text-blue-300 mt-1">
-                    You can also copy components manually from the documentation pages. Each component page has installation instructions and source code.
-                  </p>
-                </div>
+              <div class="flex justify-center gap-3 pt-2">
+                <Button routerLink="/components/button">
+                  Browse Components
+                </Button>
+                <Button routerLink="/docs/theming" variant="outline">
+                  Customize Theme
+                </Button>
               </div>
             </div>
           </div>
@@ -311,12 +224,47 @@ import { ArrowLeft, ArrowRight, Check, Copy, LucideAngularModule } from 'lucide-
   `,
 })
 export class InstallationPage {
-  protected readonly icons = { ArrowRight, ArrowLeft, Copy, Check };
+  protected readonly icons = { ArrowRight, ArrowLeft, Terminal, Zap, FolderTree, Package };
 
-  protected readonly createProjectCode = `ng new my-app
-cd my-app`;
+  protected readonly popularComponents = [
+    'button', 'card', 'dialog', 'input', 'select',
+    'checkbox', 'tabs', 'table', 'toast', 'dropdown-menu'
+  ];
 
-  protected readonly addTailwindCode = `ng add tailwindcss`;
+  protected readonly quickStartCode = `ng add @ng-cn/core`;
+
+  protected readonly addComponentsCode = `# Add components to your project
+ng g @ng-cn/core:c button
+ng g @ng-cn/core:c card
+ng g @ng-cn/core:c dialog
+
+# Multiple at once
+ng g @ng-cn/core:c input && ng g @ng-cn/core:c label`;
+
+  protected readonly projectStructureCode = `src/
+├── ng-cn.scss                    # Theme CSS variables
+├── styles.scss                   # Auto-imports ng-cn.scss
+└── app/
+    └── lib/
+        ├── utils/
+        │   ├── cn.ts             # Class merging utility
+        │   └── index.ts
+        └── components/
+            └── ui/               # Your components
+                ├── button/
+                ├── card/
+                └── ...`;
+
+  protected readonly manualDepsCode = `npm install clsx tailwind-merge class-variance-authority @angular/cdk lucide-angular`;
+
+  protected readonly tailwindCode = `ng add tailwindcss`;
+
+  protected readonly cnUtilityCode = `import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
+}`;
 
   protected readonly cssVariablesCode = `@use "tailwindcss";
 
@@ -326,38 +274,21 @@ cd my-app`;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  /* See docs for full variable list */
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  /* ... dark mode colors */
-}`;
-
-  protected readonly installDepsCode = `npm install clsx tailwind-merge class-variance-authority`;
-
-  protected readonly cnUtilityCode = `// src/app/lib/utils/cn.ts
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-export function cn(...inputs: ClassValue[]): string {
-  return twMerge(clsx(inputs));
+  /* ... dark mode overrides */
 }`;
 
   protected readonly pathAliasesCode = `{
@@ -371,10 +302,4 @@ export function cn(...inputs: ClassValue[]): string {
     }
   }
 }`;
-
-  protected readonly installComponentCode = `# Install a specific component
-ng generate shadcn-angular:component button
-
-# Or use the alias
-ng g shadcn-angular:c data-table`;
 }

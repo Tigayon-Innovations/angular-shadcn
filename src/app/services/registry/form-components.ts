@@ -9,7 +9,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'button',
     description: 'Displays a button or a component that looks like a button.',
     category: 'form',
-    package: '@jamelyassin/button',
+    package: '@ng-cn/button',
     imports: ['Button', 'buttonVariants'],
     examples: [
       {
@@ -54,7 +54,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'checkbox',
     description: 'A control that allows the user to toggle between checked and not checked.',
     category: 'form',
-    package: '@jamelyassin/checkbox',
+    package: '@ng-cn/checkbox',
     imports: ['Checkbox'],
     examples: [
       {
@@ -83,7 +83,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'combobox',
     description: 'Autocomplete input and command palette with a list of suggestions.',
     category: 'form',
-    package: '@jamelyassin/combobox',
+    package: '@ng-cn/combobox',
     imports: ['Combobox', 'ComboboxTrigger', 'ComboboxContent', 'ComboboxItem'],
     examples: [
       {
@@ -111,7 +111,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'date-picker',
     description: 'A date picker component with calendar popup.',
     category: 'form',
-    package: '@jamelyassin/date-picker',
+    package: '@ng-cn/date-picker',
     imports: ['DatePicker', 'Calendar'],
     examples: [
       {
@@ -130,7 +130,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'form',
     description: 'Building forms with Angular Reactive Forms.',
     category: 'form',
-    package: '@jamelyassin/form',
+    package: '@ng-cn/form',
     imports: ['FormField', 'FormLabel', 'FormControl', 'FormDescription', 'FormMessage'],
     examples: [
       {
@@ -157,7 +157,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'input',
     description: 'Displays a form input field.',
     category: 'form',
-    package: '@jamelyassin/input',
+    package: '@ng-cn/input',
     imports: ['Input'],
     examples: [
       {
@@ -188,7 +188,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'input-otp',
     description: 'Accessible one-time password component with copy paste functionality.',
     category: 'form',
-    package: '@jamelyassin/input-otp',
+    package: '@ng-cn/input-otp',
     imports: ['InputOTP', 'InputOTPGroup', 'InputOTPSlot', 'InputOTPSeparator'],
     examples: [
       {
@@ -218,7 +218,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'label',
     description: 'Renders an accessible label associated with controls.',
     category: 'form',
-    package: '@jamelyassin/label',
+    package: '@ng-cn/label',
     imports: ['Label'],
     examples: [
       {
@@ -239,7 +239,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'radio-group',
     description: 'A set of checkable buttons where only one can be checked at a time.',
     category: 'form',
-    package: '@jamelyassin/radio-group',
+    package: '@ng-cn/radio-group',
     imports: ['RadioGroup', 'RadioGroupItem'],
     examples: [
       {
@@ -271,7 +271,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'select',
     description: 'Displays a list of options for the user to pick from.',
     category: 'form',
-    package: '@jamelyassin/select',
+    package: '@ng-cn/select',
     imports: ['Select', 'SelectTrigger', 'SelectValue', 'SelectContent', 'SelectItem', 'SelectGroup', 'SelectLabel'],
     examples: [
       {
@@ -317,7 +317,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'slider',
     description: 'An input where the user selects a value from within a given range.',
     category: 'form',
-    package: '@jamelyassin/slider',
+    package: '@ng-cn/slider',
     imports: ['Slider'],
     examples: [
       {
@@ -341,7 +341,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'switch',
     description: 'A control that allows the user to toggle between checked and not checked.',
     category: 'form',
-    package: '@jamelyassin/switch',
+    package: '@ng-cn/switch',
     imports: ['Switch'],
     examples: [
       {
@@ -363,7 +363,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'textarea',
     description: 'Displays a form textarea.',
     category: 'form',
-    package: '@jamelyassin/textarea',
+    package: '@ng-cn/textarea',
     imports: ['Textarea'],
     examples: [
       {
@@ -389,7 +389,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'toggle',
     description: 'A two-state button that can be either on or off.',
     category: 'form',
-    package: '@jamelyassin/toggle',
+    package: '@ng-cn/toggle',
     imports: ['Toggle'],
     examples: [
       {
@@ -423,7 +423,7 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     slug: 'toggle-group',
     description: 'A set of two-state buttons that can be toggled on or off.',
     category: 'form',
-    package: '@jamelyassin/toggle-group',
+    package: '@ng-cn/toggle-group',
     imports: ['ToggleGroup', 'ToggleGroupItem'],
     examples: [
       {

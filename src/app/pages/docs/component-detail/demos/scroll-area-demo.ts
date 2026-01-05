@@ -7,12 +7,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ScrollArea, Separator],
   template: `
-    <ScrollArea class="h-72 w-48 rounded-md border">
-      <div class="p-4">
-        <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
-        @for (tag of tags; track tag) {
-          <div class="text-sm">{{ tag }}</div>
-          <Separator class="my-2" />
+    <ScrollArea class="h-80 w-64 rounded-xl border bg-card shadow-sm">
+      <div class="p-5">
+        <h4 class="mb-4 text-base font-semibold leading-none">Tags</h4>
+        @for (tag of tags; track tag; let last = $last) {
+          <div class="text-sm py-2 px-1 hover:bg-accent/50 rounded-md transition-colors cursor-pointer">
+            {{ tag }}
+          </div>
+          @if (!last) {
+            <Separator class="my-1" />
+          }
         }
       </div>
     </ScrollArea>

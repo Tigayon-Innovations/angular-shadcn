@@ -26,7 +26,7 @@ export async function handleMcpSse(req: Request, res: Response): Promise<void> {
   const transport = new SSEServerTransport('/api/mcp/message', res);
   const server = new Server(
     {
-      name: 'shadcn-angular',
+      name: 'ng-cn',
       version: '0.1.0',
     },
     {
@@ -92,9 +92,9 @@ export function handleMcpMessage(req: Request, res: Response): void {
  */
 export function getMcpInfo(req: Request, res: Response): void {
   res.json({
-    name: 'shadcn-angular MCP Server',
+    name: 'ng-cn MCP Server',
     version: '0.1.0',
-    description: 'Model Context Protocol server for shadcn-angular components',
+    description: 'Model Context Protocol server for ng-cn components',
     transport: 'Server-Sent Events (SSE)',
     endpoints: {
       sse: '/api/mcp/sse',

@@ -22,7 +22,7 @@ export class DropdownMenuLabel {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'px-2 py-1.5 text-sm font-semibold',
+      'px-3 py-2 text-sm font-semibold',
       this.inset() && 'pl-8',
       this.class()
     )

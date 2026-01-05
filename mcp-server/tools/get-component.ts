@@ -1,7 +1,7 @@
 /**
  * Get Component Tool
  *
- * Gets detailed information about a specific shadcn-angular component.
+ * Gets detailed information about a specific ng-cn component.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -11,7 +11,7 @@ import { ComponentMetadata } from '../types.js';
 export const getComponentTool: Tool = {
   name: 'get_component',
   description:
-    'Get detailed information about a specific shadcn-angular component including inputs, outputs, examples, and installation instructions for all package managers (npm, pnpm, yarn, bun) and ng add.',
+    'Get detailed information about a specific ng-cn component including inputs, outputs, examples, and installation instructions for all package managers (npm, pnpm, yarn, bun) and ng add.',
   inputSchema: {
     type: 'object',
     properties: {

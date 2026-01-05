@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Accordion, AccordionContent, AccordionItem, AccordionTrigger],
   template: `
-    <Accordion type="single" collapsible class="w-full max-w-md">
+    <Accordion type="single" collapsible class="w-full min-w-96 max-w-lg">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>

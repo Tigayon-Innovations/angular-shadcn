@@ -12,9 +12,9 @@ import {
  */
 @Component({
   selector: 'TableCaption',
-  template: `<ng-content />`,
+  template: `<caption [class]="computedClass()"><ng-content /></caption>`,
   host: {
-    '[class]': 'computedClass()',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

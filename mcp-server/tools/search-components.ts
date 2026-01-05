@@ -1,7 +1,7 @@
 /**
  * Search Components Tool
  *
- * Searches for shadcn-angular components by name, description, or category.
+ * Searches for ng-cn components by name, description, or category.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -10,7 +10,7 @@ import { searchComponents } from '../components-data.js';
 export const searchComponentsTool: Tool = {
   name: 'search_components',
   description:
-    'Search for shadcn-angular components by name, description, or category. Returns a list of matching components with their basic information.',
+    'Search for ng-cn components by name, description, or category. Returns a list of matching components with their basic information.',
   inputSchema: {
     type: 'object',
     properties: {

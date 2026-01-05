@@ -1,7 +1,7 @@
 import { Button } from '@/ui/button';
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxTrigger } from '@/ui/combobox';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { Check, ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
+import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'ComboboxDemo',
@@ -29,12 +29,6 @@ import { Check, ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         @for (framework of frameworks; track framework.value) {
           <ComboboxItem [value]="framework.value">
-            <lucide-icon
-              [img]="Check"
-              class="mr-2 h-4 w-4"
-              [class.opacity-100]="value() === framework.value"
-              [class.opacity-0]="value() !== framework.value"
-            />
             {{ framework.label }}
           </ComboboxItem>
         }
@@ -43,17 +37,16 @@ import { Check, ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
   `,
 })
 export class ComboboxDemo {
-  protected readonly Check = Check;
   protected readonly ChevronsUpDown = ChevronsUpDown;
 
   protected readonly value = signal('');
 
   protected readonly frameworks = [
-    { value: 'angular', label: 'Angular' },
-    { value: 'react', label: 'React' },
-    { value: 'vue', label: 'Vue' },
-    { value: 'svelte', label: 'Svelte' },
-    { value: 'solid', label: 'Solid' },
+    { value: 'next', label: 'Next.js' },
+    { value: 'sveltekit', label: 'SvelteKit' },
+    { value: 'nuxt', label: 'Nuxt.js' },
+    { value: 'remix', label: 'Remix' },
+    { value: 'astro', label: 'Astro' },
   ];
 
   protected readonly selectedLabel = () => {

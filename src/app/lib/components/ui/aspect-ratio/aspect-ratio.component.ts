@@ -27,10 +27,14 @@ import {
  */
 @Component({
   selector: 'AspectRatio',
-  template: `<ng-content />`,
+  template: `
+    <div class="absolute inset-0 h-full w-full">
+      <ng-content />
+    </div>
+  `,
   host: {
     '[class]': 'computedClass()',
-    '[style.--aspect-ratio]': 'ratio()',
+    '[style.padding-bottom]': 'paddingBottom()',
     'data-slot': 'aspect-ratio',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,12 +46,16 @@ export class AspectRatio {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  /** Calculate padding-bottom for aspect ratio */
+  protected readonly paddingBottom = computed(() => {
+    const r = this.ratio();
+    return r > 0 ? `${(1 / r) * 100}%` : '56.25%';
+  });
+
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'relative w-full',
-      '[&>*]:absolute [&>*]:inset-0 [&>*]:h-full [&>*]:w-full',
-      'aspect-[var(--aspect-ratio)]',
+      'relative block w-full',
       this.class()
     )
   );

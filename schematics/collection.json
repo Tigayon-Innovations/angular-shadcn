@@ -2,15 +2,15 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add @jamelyassin/shadcn-angular to your project",
+      "description": "Initialize @ng-cn/core in your Angular project - sets up Tailwind, styles, and utilities",
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
     },
     "component": {
-      "description": "Install a specific @jamelyassin component",
+      "description": "Add a shadcn component to your project",
       "factory": "./component/index#component",
       "schema": "./component/schema.json",
-      "aliases": ["c"]
+      "aliases": ["c", "add"]
     }
   }
 }

@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
     inject,
     input,
 } from '@angular/core';
@@ -28,6 +29,15 @@ export class SelectValue {
   /** Placeholder text when no value is selected */
   readonly placeholder = input<string>('');
 
+  constructor() {
+    // Update context placeholder on init and changes
+    effect(() => {
+      if (this.context) {
+        this.context.placeholder.set(this.placeholder());
+      }
+    });
+  }
+
   /** Computed display value */
   protected readonly displayValue = computed(() => {
     const label = this.context?.selectedLabel();
@@ -36,11 +46,4 @@ export class SelectValue {
     if (value) return value;
     return this.placeholder();
   });
-
-  constructor() {
-    // Update context placeholder
-    if (this.context) {
-      this.context.placeholder.set(this.placeholder());
-    }
-  }
 }

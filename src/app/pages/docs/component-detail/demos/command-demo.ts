@@ -6,6 +6,7 @@ import {
     CommandItem,
     CommandList,
     CommandSeparator,
+    CommandShortcut,
 } from '@/ui/command';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile, User } from 'lucide-angular';
@@ -21,10 +22,11 @@ import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile,
     CommandItem,
     CommandList,
     CommandSeparator,
+    CommandShortcut,
     LucideAngularModule,
   ],
   template: `
-    <Command class="rounded-lg border shadow-md">
+    <Command class="rounded-lg border shadow-md md:min-w-[450px]">
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -47,14 +49,17 @@ import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile,
           <CommandItem>
             <lucide-icon [img]="User" class="mr-2 h-4 w-4" />
             <span>Profile</span>
+            <CommandShortcut>⌘P</CommandShortcut>
           </CommandItem>
           <CommandItem>
             <lucide-icon [img]="CreditCard" class="mr-2 h-4 w-4" />
             <span>Billing</span>
+            <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
           <CommandItem>
             <lucide-icon [img]="Settings" class="mr-2 h-4 w-4" />
             <span>Settings</span>
+            <CommandShortcut>⌘S</CommandShortcut>
           </CommandItem>
         </CommandGroup>
       </CommandList>

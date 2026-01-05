@@ -3,8 +3,8 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/ui/collapsible';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ChevronRight, LucideAngularModule } from 'lucide-angular';
 
 interface NavItem {
@@ -52,6 +52,7 @@ interface NavItem {
                             <a
                               [routerLink]="subItem.href"
                               routerLinkActive="font-medium text-foreground"
+                              (click)="scrollToTop()"
                               class="rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground"
                             >
                               {{ subItem.title }}
@@ -65,6 +66,7 @@ interface NavItem {
                     <a
                       [routerLink]="item.href"
                       routerLinkActive="font-medium text-foreground"
+                      (click)="scrollToTop()"
                       class="rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground"
                     >
                       {{ item.title }}
@@ -81,6 +83,14 @@ interface NavItem {
 })
 export class DocsSidebar {
   protected readonly icons = { ChevronRight };
+  private readonly router = inject(Router);
+
+  protected scrollToTop(): void {
+    // Use setTimeout to ensure navigation happens first
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+  }
 
   protected readonly navigation: NavItem[] = [
     {

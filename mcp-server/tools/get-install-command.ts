@@ -1,7 +1,7 @@
 /**
  * Get Install Command Tool
  *
- * Generates installation commands for multiple shadcn-angular components at once.
+ * Generates installation commands for multiple ng-cn components at once.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -11,7 +11,7 @@ import { ComponentMetadata, PackageManager } from '../types.js';
 export const getInstallCommandTool: Tool = {
   name: 'get_install_command',
   description:
-    'Generate installation commands for multiple shadcn-angular components at once. Supports npm, pnpm, yarn, bun, and ng add.',
+    'Generate installation commands for multiple ng-cn components at once. Supports npm, pnpm, yarn, bun, and ng add.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
 } from '@angular/core';
 
 /**
@@ -12,9 +12,9 @@ import {
  */
 @Component({
   selector: 'TableHead',
-  template: `<ng-content />`,
+  template: `<th [class]="computedClass()"><ng-content /></th>`,
   host: {
-    '[class]': 'computedClass()',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

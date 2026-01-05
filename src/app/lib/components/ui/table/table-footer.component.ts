@@ -12,9 +12,9 @@ import {
  */
 @Component({
   selector: 'TableFooter',
-  template: `<ng-content />`,
+  template: `<tfoot [class]="computedClass()"><ng-content /></tfoot>`,
   host: {
-    '[class]': 'computedClass()',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

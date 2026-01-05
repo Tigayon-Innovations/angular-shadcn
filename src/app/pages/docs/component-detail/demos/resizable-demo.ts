@@ -6,24 +6,24 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ResizablePanelGroup, ResizablePanel, ResizableHandle],
   template: `
-    <ResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
+    <ResizablePanelGroup direction="horizontal" class="min-h-[350px] w-full max-w-2xl rounded-lg border">
       <ResizablePanel [defaultSize]="50">
         <div class="flex h-full items-center justify-center p-6">
-          <span class="font-semibold">One</span>
+          <span class="font-semibold text-lg">One</span>
         </div>
       </ResizablePanel>
       <ResizableHandle [withHandle]="true" />
       <ResizablePanel [defaultSize]="50">
         <ResizablePanelGroup direction="vertical">
-          <ResizablePanel [defaultSize]="25">
+          <ResizablePanel [defaultSize]="50">
             <div class="flex h-full items-center justify-center p-6">
-              <span class="font-semibold">Two</span>
+              <span class="font-semibold text-lg">Two</span>
             </div>
           </ResizablePanel>
           <ResizableHandle [withHandle]="true" />
-          <ResizablePanel [defaultSize]="75">
+          <ResizablePanel [defaultSize]="50">
             <div class="flex h-full items-center justify-center p-6">
-              <span class="font-semibold">Three</span>
+              <span class="font-semibold text-lg">Three</span>
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>

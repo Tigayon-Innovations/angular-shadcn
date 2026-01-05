@@ -3,6 +3,7 @@ interface ComponentOptions {
     name: string;
     project?: string;
     path?: string;
+    overwrite?: boolean;
 }
 export declare function component(options: ComponentOptions): Rule;
 export {};

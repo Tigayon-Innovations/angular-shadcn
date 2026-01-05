@@ -36,7 +36,7 @@ export class NavigationMenu {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'relative z-10 flex max-w-max flex-1 items-center justify-center',
+      'relative z-10 flex max-w-max flex-1 items-center justify-center gap-1',
       this.class()
     )
   );

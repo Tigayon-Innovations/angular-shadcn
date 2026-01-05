@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "JamelYassinNgAddSchema",
-  "title": "@jamelyassin/shadcn-angular ng-add schematic",
+  "$id": "NgCnCoreNgAddSchema",
+  "title": "@ng-cn/core initialization schematic",
   "type": "object",
   "properties": {
     "project": {
       "type": "string",
-      "description": "The name of the project to add @jamelyassin/shadcn-angular to.",
+      "description": "The name of the project to initialize.",
       "$default": {
         "$source": "projectName"
       }
@@ -15,6 +15,11 @@
       "type": "boolean",
       "default": false,
       "description": "Skip installing dependency packages."
+    },
+    "skipStyles": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip creating ng-cn.scss styles file."
     }
   }
 }

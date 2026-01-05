@@ -47,6 +47,6 @@ export class Table {
   );
 
   protected readonly tableClass = computed(() =>
-    cn('w-full caption-bottom text-sm')
+    cn('w-full caption-bottom text-sm border-collapse')
   );
 }

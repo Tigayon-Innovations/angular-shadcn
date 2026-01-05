@@ -12,9 +12,9 @@ import {
  */
 @Component({
   selector: 'TableBody',
-  template: `<ng-content />`,
+  template: `<tbody [class]="computedClass()"><ng-content /></tbody>`,
   host: {
-    '[class]': 'computedClass()',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

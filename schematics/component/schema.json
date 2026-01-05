@@ -1,17 +1,17 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "JamelYassinComponentSchema",
-  "title": "@jamelyassin component schematic",
+  "$id": "NgCnComponentSchema",
+  "title": "@ng-cn/core component schematic",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "The name of the component to install.",
+      "description": "The name of the component to add (e.g., button, card, dialog).",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "Which component would you like to install?"
+      "x-prompt": "Which component would you like to add?"
     },
     "project": {
       "type": "string",
@@ -23,8 +23,13 @@
     "path": {
       "type": "string",
       "format": "path",
-      "description": "The path to install the component.",
+      "description": "Custom path to install the component.",
       "default": "src/app/lib/components/ui"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Overwrite existing component files."
     }
   },
   "required": ["name"]

@@ -9,7 +9,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'alert',
     description: 'Displays a callout for user attention.',
     category: 'overlay',
-    package: '@jamelyassin/alert',
+    package: '@ng-cn/alert',
     imports: ['Alert', 'AlertTitle', 'AlertDescription'],
     examples: [
       {
@@ -43,7 +43,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'alert-dialog',
     description: 'A modal dialog that interrupts the user with important content.',
     category: 'overlay',
-    package: '@jamelyassin/alert-dialog',
+    package: '@ng-cn/alert-dialog',
     imports: ['AlertDialog', 'AlertDialogTrigger', 'AlertDialogContent', 'AlertDialogHeader', 'AlertDialogTitle', 'AlertDialogDescription', 'AlertDialogFooter', 'AlertDialogCancel', 'AlertDialogAction'],
     examples: [
       {
@@ -77,7 +77,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'dialog',
     description: 'A window overlaid on the primary window.',
     category: 'overlay',
-    package: '@jamelyassin/dialog',
+    package: '@ng-cn/dialog',
     imports: ['Dialog', 'DialogTrigger', 'DialogContent', 'DialogHeader', 'DialogTitle', 'DialogDescription', 'DialogFooter', 'DialogClose'],
     examples: [
       {
@@ -119,7 +119,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'drawer',
     description: 'A drawer component for Angular.',
     category: 'overlay',
-    package: '@jamelyassin/drawer',
+    package: '@ng-cn/drawer',
     imports: ['Drawer', 'DrawerTrigger', 'DrawerContent', 'DrawerHeader', 'DrawerTitle', 'DrawerDescription', 'DrawerFooter', 'DrawerClose'],
     examples: [
       {
@@ -159,7 +159,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'hover-card',
     description: 'For sighted users to preview content available behind a link.',
     category: 'overlay',
-    package: '@jamelyassin/hover-card',
+    package: '@ng-cn/hover-card',
     imports: ['HoverCard', 'HoverCardTrigger', 'HoverCardContent'],
     examples: [
       {
@@ -201,7 +201,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'popover',
     description: 'Displays rich content in a portal, triggered by a button.',
     category: 'overlay',
-    package: '@jamelyassin/popover',
+    package: '@ng-cn/popover',
     imports: ['Popover', 'PopoverTrigger', 'PopoverContent'],
     examples: [
       {
@@ -243,7 +243,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'sheet',
     description: 'Extends the Dialog component to display content that complements the main content.',
     category: 'overlay',
-    package: '@jamelyassin/sheet',
+    package: '@ng-cn/sheet',
     imports: ['Sheet', 'SheetTrigger', 'SheetContent', 'SheetHeader', 'SheetTitle', 'SheetDescription', 'SheetFooter', 'SheetClose'],
     examples: [
       {
@@ -299,7 +299,7 @@ export const OVERLAY_COMPONENTS: ComponentInfo[] = [
     slug: 'toast',
     description: 'A succinct message that is displayed temporarily.',
     category: 'overlay',
-    package: '@jamelyassin/toast',
+    package: '@ng-cn/toast',
     imports: ['Toaster', 'ToastService'],
     examples: [
       {
@@ -341,7 +341,7 @@ showToast() {
     slug: 'tooltip',
     description: 'A popup that displays information related to an element.',
     category: 'overlay',
-    package: '@jamelyassin/tooltip',
+    package: '@ng-cn/tooltip',
     imports: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'TooltipProvider'],
     examples: [
       {

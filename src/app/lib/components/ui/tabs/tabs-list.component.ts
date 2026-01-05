@@ -31,7 +31,7 @@ export class TabsList {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-1',
+      'bg-muted text-muted-foreground inline-flex h-11 w-fit items-center justify-center rounded-full p-1.5 gap-1',
       this.class()
     )
   );

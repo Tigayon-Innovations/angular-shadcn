@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * One-Click MCP Setup for shadcn-angular
+ * One-Click MCP Setup for ng-cn
  *
  * This script configures Claude Desktop to use your deployed MCP server URL
  * or localhost for development.
@@ -34,7 +34,7 @@ function getConfigPath(): string {
 }
 
 async function main() {
-  console.log('\n🚀 shadcn-angular MCP Setup\n');
+  console.log('\n🚀 ng-cn MCP Setup\n');
   console.log('This tool will configure Claude Desktop to use your MCP server.\n');
 
   // Get the MCP URL from user
@@ -68,8 +68,8 @@ async function main() {
     }
   }
 
-  // Add or update shadcn-angular MCP server config
-  config.mcpServers['shadcn-angular'] = {
+  // Add or update ng-cn MCP server config
+  config.mcpServers['ng-cn'] = {
     url: mcpUrl,
     transport: {
       type: 'sse'
@@ -81,7 +81,7 @@ async function main() {
     writeFileSync(configPath, JSON.stringify(config, null, 2));
     console.log('\n✅ Configuration saved successfully!');
     console.log('\n📝 Configuration:');
-    console.log(JSON.stringify(config.mcpServers['shadcn-angular'], null, 2));
+    console.log(JSON.stringify(config.mcpServers['ng-cn'], null, 2));
     console.log('\n🎉 Setup complete!');
     console.log('\nNext steps:');
     console.log('1. Restart Claude Desktop');
@@ -90,12 +90,12 @@ async function main() {
     } else {
       console.log('2. Make sure your app is deployed and accessible');
     }
-    console.log('3. Ask Claude: "What shadcn-angular components are available?"');
+    console.log('3. Ask Claude: "What ng-cn components are available?"');
   } catch (error) {
     console.error('\n❌ Error writing config:', error);
     console.log('\n📋 Manual Configuration:');
     console.log(`Add this to ${configPath}:`);
-    console.log(JSON.stringify(config.mcpServers['shadcn-angular'], null, 2));
+    console.log(JSON.stringify(config.mcpServers['ng-cn'], null, 2));
   }
 
   rl.close();

@@ -1,5 +1,5 @@
 /**
- * Types for shadcn-angular MCP Server
+ * Types for ng-cn MCP Server
  */
 
 export interface PackageManager {

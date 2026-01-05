@@ -161,7 +161,7 @@ export class SearchDialog {
       title: 'Pages',
       items: [
         { icon: Book, label: 'Docs', route: '/docs', description: 'Documentation' },
-        { icon: Boxes, label: 'Components', route: '/docs/components', description: '57+ components' },
+        { icon: Boxes, label: 'Components', route: '/docs/components', description: '60+ components' },
       ],
     },
     {

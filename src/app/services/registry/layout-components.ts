@@ -9,7 +9,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'aspect-ratio',
     description: 'Displays content within a desired ratio.',
     category: 'layout',
-    package: '@jamelyassin/aspect-ratio',
+    package: '@ng-cn/aspect-ratio',
     imports: ['AspectRatio'],
     examples: [
       {
@@ -47,7 +47,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'card',
     description: 'Displays a card with header, content, and footer.',
     category: 'layout',
-    package: '@jamelyassin/card',
+    package: '@ng-cn/card',
     imports: ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter', 'CardAction'],
     examples: [
       {
@@ -115,7 +115,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'collapsible',
     description: 'An interactive component which expands/collapses a panel.',
     category: 'layout',
-    package: '@jamelyassin/collapsible',
+    package: '@ng-cn/collapsible',
     imports: ['Collapsible', 'CollapsibleTrigger', 'CollapsibleContent'],
     examples: [
       {
@@ -148,7 +148,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'resizable',
     description: 'Resizable panel groups and panels.',
     category: 'layout',
-    package: '@jamelyassin/resizable',
+    package: '@ng-cn/resizable',
     imports: ['ResizablePanelGroup', 'ResizablePanel', 'ResizableHandle'],
     examples: [
       {
@@ -189,7 +189,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'scroll-area',
     description: 'Augments native scroll functionality for custom styling.',
     category: 'layout',
-    package: '@jamelyassin/scroll-area',
+    package: '@ng-cn/scroll-area',
     imports: ['ScrollArea', 'ScrollBar'],
     examples: [
       {
@@ -233,7 +233,7 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     slug: 'separator',
     description: 'Visually or semantically separates content.',
     category: 'layout',
-    package: '@jamelyassin/separator',
+    package: '@ng-cn/separator',
     imports: ['Separator'],
     examples: [
       {

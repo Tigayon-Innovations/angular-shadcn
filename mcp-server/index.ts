@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * shadcn-angular MCP Server (Stdio)
+ * ng-cn MCP Server (Stdio)
  *
- * Provides Model Context Protocol tools for querying and installing shadcn-angular components.
+ * Provides Model Context Protocol tools for querying and installing ng-cn components.
  * This version uses stdio transport for local development.
  */
 
@@ -21,7 +21,7 @@ class ShadcnAngularServer {
   constructor() {
     this.server = new Server(
       {
-        name: 'shadcn-angular',
+        name: 'ng-cn',
         version: '0.1.0',
       },
       {
@@ -79,7 +79,7 @@ class ShadcnAngularServer {
   async run(): Promise<void> {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error('shadcn-angular MCP server running on stdio');
+    console.error('ng-cn MCP server running on stdio');
   }
 }
 

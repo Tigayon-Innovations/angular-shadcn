@@ -9,7 +9,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'button-group',
     description: 'Groups multiple buttons together.',
     category: 'advanced',
-    package: '@jamelyassin/button-group',
+    package: '@ng-cn/button-group',
     imports: ['ButtonGroup'],
     examples: [
       {
@@ -36,7 +36,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'empty',
     description: 'Empty state placeholder component.',
     category: 'advanced',
-    package: '@jamelyassin/empty',
+    package: '@ng-cn/empty',
     imports: ['Empty', 'EmptyIcon', 'EmptyTitle', 'EmptyDescription'],
     examples: [
       {
@@ -61,7 +61,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'input-group',
     description: 'Input with prefix/suffix addons.',
     category: 'advanced',
-    package: '@jamelyassin/input-group',
+    package: '@ng-cn/input-group',
     imports: ['InputGroup', 'InputGroupAddon'],
     examples: [
       {
@@ -97,7 +97,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'kbd',
     description: 'Keyboard key indicator component.',
     category: 'advanced',
-    package: '@jamelyassin/kbd',
+    package: '@ng-cn/kbd',
     imports: ['Kbd'],
     examples: [
       {
@@ -131,7 +131,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'native-select',
     description: 'HTML native select with styling.',
     category: 'advanced',
-    package: '@jamelyassin/native-select',
+    package: '@ng-cn/native-select',
     imports: ['NativeSelect'],
     examples: [
       {
@@ -157,7 +157,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'segmented',
     description: 'iOS-style segmented control buttons.',
     category: 'advanced',
-    package: '@jamelyassin/segmented',
+    package: '@ng-cn/segmented',
     imports: ['Segmented', 'SegmentedItem'],
     examples: [
       {
@@ -180,7 +180,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'sidebar',
     description: 'A composable, themeable and customizable sidebar component.',
     category: 'advanced',
-    package: '@jamelyassin/sidebar',
+    package: '@ng-cn/sidebar',
     imports: ['SidebarProvider', 'Sidebar', 'SidebarHeader', 'SidebarContent', 'SidebarFooter', 'SidebarGroup', 'SidebarMenu', 'SidebarMenuItem', 'SidebarMenuButton', 'SidebarTrigger'],
     examples: [
       {
@@ -239,7 +239,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'spinner',
     description: 'Loading indicator animations.',
     category: 'advanced',
-    package: '@jamelyassin/spinner',
+    package: '@ng-cn/spinner',
     imports: ['Spinner'],
     examples: [
       {
@@ -267,7 +267,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     slug: 'typography',
     description: 'Text styling components.',
     category: 'advanced',
-    package: '@jamelyassin/typography',
+    package: '@ng-cn/typography',
     imports: ['TypographyH1', 'TypographyH2', 'TypographyH3', 'TypographyH4', 'TypographyP', 'TypographyLead', 'TypographyLarge', 'TypographySmall', 'TypographyMuted', 'TypographyBlockquote', 'TypographyInlineCode'],
     examples: [
       {

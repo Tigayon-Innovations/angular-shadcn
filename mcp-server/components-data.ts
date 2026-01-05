@@ -1,5 +1,5 @@
 /**
- * Component metadata for shadcn-angular MCP Server
+ * Component metadata for ng-cn MCP Server
  * Automatically generated from ComponentRegistry
  */
 
@@ -9,7 +9,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Aspect Ratio",
     "selector": "AspectRatio",
-    "package": "@shadcn-angular/aspect-ratio",
+    "package": "@ng-cn/aspect-ratio",
     "description": "Displays content within a desired ratio.",
     "category": "layout",
     "dependencies": [
@@ -34,11 +34,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/aspect-ratio",
-      "pnpm": "pnpm add @shadcn-angular/aspect-ratio",
-      "yarn": "yarn add @shadcn-angular/aspect-ratio",
-      "bun": "bun add @shadcn-angular/aspect-ratio",
-      "ngAdd": "ng add @shadcn-angular/aspect-ratio",
+      "npm": "npm install @ng-cn/aspect-ratio",
+      "pnpm": "pnpm add @ng-cn/aspect-ratio",
+      "yarn": "yarn add @ng-cn/aspect-ratio",
+      "bun": "bun add @ng-cn/aspect-ratio",
+      "ngAdd": "ng g @ng-cn/core:c aspect-ratio",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -56,7 +56,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Card",
     "selector": "Card",
-    "package": "@shadcn-angular/card",
+    "package": "@ng-cn/card",
     "description": "Displays a card with header, content, and footer.",
     "category": "layout",
     "dependencies": [
@@ -74,11 +74,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/card",
-      "pnpm": "pnpm add @shadcn-angular/card",
-      "yarn": "yarn add @shadcn-angular/card",
-      "bun": "bun add @shadcn-angular/card",
-      "ngAdd": "ng add @shadcn-angular/card",
+      "npm": "npm install @ng-cn/card",
+      "pnpm": "pnpm add @ng-cn/card",
+      "yarn": "yarn add @ng-cn/card",
+      "bun": "bun add @ng-cn/card",
+      "ngAdd": "ng g @ng-cn/core:c card",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -96,7 +96,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Collapsible",
     "selector": "Collapsible",
-    "package": "@shadcn-angular/collapsible",
+    "package": "@ng-cn/collapsible",
     "description": "An interactive component which expands/collapses a panel.",
     "category": "layout",
     "dependencies": [
@@ -121,11 +121,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/collapsible",
-      "pnpm": "pnpm add @shadcn-angular/collapsible",
-      "yarn": "yarn add @shadcn-angular/collapsible",
-      "bun": "bun add @shadcn-angular/collapsible",
-      "ngAdd": "ng add @shadcn-angular/collapsible",
+      "npm": "npm install @ng-cn/collapsible",
+      "pnpm": "pnpm add @ng-cn/collapsible",
+      "yarn": "yarn add @ng-cn/collapsible",
+      "bun": "bun add @ng-cn/collapsible",
+      "ngAdd": "ng g @ng-cn/core:c collapsible",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -143,7 +143,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Resizable",
     "selector": "Resizable",
-    "package": "@shadcn-angular/resizable",
+    "package": "@ng-cn/resizable",
     "description": "Resizable panel groups and panels.",
     "category": "layout",
     "dependencies": [
@@ -154,11 +154,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/resizable",
-      "pnpm": "pnpm add @shadcn-angular/resizable",
-      "yarn": "yarn add @shadcn-angular/resizable",
-      "bun": "bun add @shadcn-angular/resizable",
-      "ngAdd": "ng add @shadcn-angular/resizable",
+      "npm": "npm install @ng-cn/resizable",
+      "pnpm": "pnpm add @ng-cn/resizable",
+      "yarn": "yarn add @ng-cn/resizable",
+      "bun": "bun add @ng-cn/resizable",
+      "ngAdd": "ng g @ng-cn/core:c resizable",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -176,7 +176,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Scroll Area",
     "selector": "ScrollArea",
-    "package": "@shadcn-angular/scroll-area",
+    "package": "@ng-cn/scroll-area",
     "description": "Augments native scroll functionality for custom styling.",
     "category": "layout",
     "dependencies": [
@@ -194,11 +194,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/scroll-area",
-      "pnpm": "pnpm add @shadcn-angular/scroll-area",
-      "yarn": "yarn add @shadcn-angular/scroll-area",
-      "bun": "bun add @shadcn-angular/scroll-area",
-      "ngAdd": "ng add @shadcn-angular/scroll-area",
+      "npm": "npm install @ng-cn/scroll-area",
+      "pnpm": "pnpm add @ng-cn/scroll-area",
+      "yarn": "yarn add @ng-cn/scroll-area",
+      "bun": "bun add @ng-cn/scroll-area",
+      "ngAdd": "ng g @ng-cn/core:c scroll-area",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -216,7 +216,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Separator",
     "selector": "Separator",
-    "package": "@shadcn-angular/separator",
+    "package": "@ng-cn/separator",
     "description": "Visually or semantically separates content.",
     "category": "layout",
     "dependencies": [
@@ -227,11 +227,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/separator",
-      "pnpm": "pnpm add @shadcn-angular/separator",
-      "yarn": "yarn add @shadcn-angular/separator",
-      "bun": "bun add @shadcn-angular/separator",
-      "ngAdd": "ng add @shadcn-angular/separator",
+      "npm": "npm install @ng-cn/separator",
+      "pnpm": "pnpm add @ng-cn/separator",
+      "yarn": "yarn add @ng-cn/separator",
+      "bun": "bun add @ng-cn/separator",
+      "ngAdd": "ng g @ng-cn/core:c separator",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -249,7 +249,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Accordion",
     "selector": "Accordion",
-    "package": "@shadcn-angular/accordion",
+    "package": "@ng-cn/accordion",
     "description": "A vertically stacked set of interactive headings.",
     "category": "basic",
     "dependencies": [
@@ -268,11 +268,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/accordion",
-      "pnpm": "pnpm add @shadcn-angular/accordion",
-      "yarn": "yarn add @shadcn-angular/accordion",
-      "bun": "bun add @shadcn-angular/accordion",
-      "ngAdd": "ng add @shadcn-angular/accordion",
+      "npm": "npm install @ng-cn/accordion",
+      "pnpm": "pnpm add @ng-cn/accordion",
+      "yarn": "yarn add @ng-cn/accordion",
+      "bun": "bun add @ng-cn/accordion",
+      "ngAdd": "ng g @ng-cn/core:c accordion",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -290,7 +290,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Breadcrumb",
     "selector": "Breadcrumb",
-    "package": "@shadcn-angular/breadcrumb",
+    "package": "@ng-cn/breadcrumb",
     "description": "Displays the path to the current resource.",
     "category": "basic",
     "dependencies": [
@@ -308,11 +308,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/breadcrumb",
-      "pnpm": "pnpm add @shadcn-angular/breadcrumb",
-      "yarn": "yarn add @shadcn-angular/breadcrumb",
-      "bun": "bun add @shadcn-angular/breadcrumb",
-      "ngAdd": "ng add @shadcn-angular/breadcrumb",
+      "npm": "npm install @ng-cn/breadcrumb",
+      "pnpm": "pnpm add @ng-cn/breadcrumb",
+      "yarn": "yarn add @ng-cn/breadcrumb",
+      "bun": "bun add @ng-cn/breadcrumb",
+      "ngAdd": "ng g @ng-cn/core:c breadcrumb",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -330,7 +330,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Context Menu",
     "selector": "ContextMenu",
-    "package": "@shadcn-angular/context-menu",
+    "package": "@ng-cn/context-menu",
     "description": "Displays a menu to the user on right click.",
     "category": "basic",
     "dependencies": [
@@ -348,11 +348,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/context-menu",
-      "pnpm": "pnpm add @shadcn-angular/context-menu",
-      "yarn": "yarn add @shadcn-angular/context-menu",
-      "bun": "bun add @shadcn-angular/context-menu",
-      "ngAdd": "ng add @shadcn-angular/context-menu",
+      "npm": "npm install @ng-cn/context-menu",
+      "pnpm": "pnpm add @ng-cn/context-menu",
+      "yarn": "yarn add @ng-cn/context-menu",
+      "bun": "bun add @ng-cn/context-menu",
+      "ngAdd": "ng g @ng-cn/core:c context-menu",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -370,7 +370,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Dropdown Menu",
     "selector": "DropdownMenu",
-    "package": "@shadcn-angular/dropdown-menu",
+    "package": "@ng-cn/dropdown-menu",
     "description": "Displays a menu when triggered.",
     "category": "basic",
     "dependencies": [
@@ -388,11 +388,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/dropdown-menu",
-      "pnpm": "pnpm add @shadcn-angular/dropdown-menu",
-      "yarn": "yarn add @shadcn-angular/dropdown-menu",
-      "bun": "bun add @shadcn-angular/dropdown-menu",
-      "ngAdd": "ng add @shadcn-angular/dropdown-menu",
+      "npm": "npm install @ng-cn/dropdown-menu",
+      "pnpm": "pnpm add @ng-cn/dropdown-menu",
+      "yarn": "yarn add @ng-cn/dropdown-menu",
+      "bun": "bun add @ng-cn/dropdown-menu",
+      "ngAdd": "ng g @ng-cn/core:c dropdown-menu",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -410,7 +410,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Menubar",
     "selector": "Menubar",
-    "package": "@shadcn-angular/menubar",
+    "package": "@ng-cn/menubar",
     "description": "A visually persistent menu common in desktop applications.",
     "category": "basic",
     "dependencies": [
@@ -428,11 +428,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/menubar",
-      "pnpm": "pnpm add @shadcn-angular/menubar",
-      "yarn": "yarn add @shadcn-angular/menubar",
-      "bun": "bun add @shadcn-angular/menubar",
-      "ngAdd": "ng add @shadcn-angular/menubar",
+      "npm": "npm install @ng-cn/menubar",
+      "pnpm": "pnpm add @ng-cn/menubar",
+      "yarn": "yarn add @ng-cn/menubar",
+      "bun": "bun add @ng-cn/menubar",
+      "ngAdd": "ng g @ng-cn/core:c menubar",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -450,7 +450,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Navigation Menu",
     "selector": "NavigationMenu",
-    "package": "@shadcn-angular/navigation-menu",
+    "package": "@ng-cn/navigation-menu",
     "description": "A collection of links for navigating websites.",
     "category": "basic",
     "dependencies": [
@@ -468,11 +468,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/navigation-menu",
-      "pnpm": "pnpm add @shadcn-angular/navigation-menu",
-      "yarn": "yarn add @shadcn-angular/navigation-menu",
-      "bun": "bun add @shadcn-angular/navigation-menu",
-      "ngAdd": "ng add @shadcn-angular/navigation-menu",
+      "npm": "npm install @ng-cn/navigation-menu",
+      "pnpm": "pnpm add @ng-cn/navigation-menu",
+      "yarn": "yarn add @ng-cn/navigation-menu",
+      "bun": "bun add @ng-cn/navigation-menu",
+      "ngAdd": "ng g @ng-cn/core:c navigation-menu",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -490,7 +490,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Pagination",
     "selector": "Pagination",
-    "package": "@shadcn-angular/pagination",
+    "package": "@ng-cn/pagination",
     "description": "Pagination with page navigation, next and previous links.",
     "category": "basic",
     "dependencies": [
@@ -508,11 +508,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/pagination",
-      "pnpm": "pnpm add @shadcn-angular/pagination",
-      "yarn": "yarn add @shadcn-angular/pagination",
-      "bun": "bun add @shadcn-angular/pagination",
-      "ngAdd": "ng add @shadcn-angular/pagination",
+      "npm": "npm install @ng-cn/pagination",
+      "pnpm": "pnpm add @ng-cn/pagination",
+      "yarn": "yarn add @ng-cn/pagination",
+      "bun": "bun add @ng-cn/pagination",
+      "ngAdd": "ng g @ng-cn/core:c pagination",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -530,7 +530,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Tabs",
     "selector": "Tabs",
-    "package": "@shadcn-angular/tabs",
+    "package": "@ng-cn/tabs",
     "description": "A set of layered sections of content.",
     "category": "basic",
     "dependencies": [
@@ -548,11 +548,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/tabs",
-      "pnpm": "pnpm add @shadcn-angular/tabs",
-      "yarn": "yarn add @shadcn-angular/tabs",
-      "bun": "bun add @shadcn-angular/tabs",
-      "ngAdd": "ng add @shadcn-angular/tabs",
+      "npm": "npm install @ng-cn/tabs",
+      "pnpm": "pnpm add @ng-cn/tabs",
+      "yarn": "yarn add @ng-cn/tabs",
+      "bun": "bun add @ng-cn/tabs",
+      "ngAdd": "ng g @ng-cn/core:c tabs",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -570,7 +570,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Button",
     "selector": "Button",
-    "package": "@shadcn-angular/button",
+    "package": "@ng-cn/button",
     "description": "Displays a button or a component that looks like a button.",
     "category": "form",
     "dependencies": [
@@ -588,11 +588,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/button",
-      "pnpm": "pnpm add @shadcn-angular/button",
-      "yarn": "yarn add @shadcn-angular/button",
-      "bun": "bun add @shadcn-angular/button",
-      "ngAdd": "ng add @shadcn-angular/button",
+      "npm": "npm install @ng-cn/button",
+      "pnpm": "pnpm add @ng-cn/button",
+      "yarn": "yarn add @ng-cn/button",
+      "bun": "bun add @ng-cn/button",
+      "ngAdd": "ng g @ng-cn/core:c button",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -610,7 +610,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Checkbox",
     "selector": "Checkbox",
-    "package": "@shadcn-angular/checkbox",
+    "package": "@ng-cn/checkbox",
     "description": "A control that allows the user to toggle between checked and not checked.",
     "category": "form",
     "dependencies": [
@@ -636,11 +636,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/checkbox",
-      "pnpm": "pnpm add @shadcn-angular/checkbox",
-      "yarn": "yarn add @shadcn-angular/checkbox",
-      "bun": "bun add @shadcn-angular/checkbox",
-      "ngAdd": "ng add @shadcn-angular/checkbox",
+      "npm": "npm install @ng-cn/checkbox",
+      "pnpm": "pnpm add @ng-cn/checkbox",
+      "yarn": "yarn add @ng-cn/checkbox",
+      "bun": "bun add @ng-cn/checkbox",
+      "ngAdd": "ng g @ng-cn/core:c checkbox",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -658,7 +658,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Combobox",
     "selector": "Combobox",
-    "package": "@shadcn-angular/combobox",
+    "package": "@ng-cn/combobox",
     "description": "Autocomplete input and command palette with a list of suggestions.",
     "category": "form",
     "dependencies": [
@@ -669,11 +669,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/combobox",
-      "pnpm": "pnpm add @shadcn-angular/combobox",
-      "yarn": "yarn add @shadcn-angular/combobox",
-      "bun": "bun add @shadcn-angular/combobox",
-      "ngAdd": "ng add @shadcn-angular/combobox",
+      "npm": "npm install @ng-cn/combobox",
+      "pnpm": "pnpm add @ng-cn/combobox",
+      "yarn": "yarn add @ng-cn/combobox",
+      "bun": "bun add @ng-cn/combobox",
+      "ngAdd": "ng g @ng-cn/core:c combobox",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -691,7 +691,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Date Picker",
     "selector": "DatePicker",
-    "package": "@shadcn-angular/date-picker",
+    "package": "@ng-cn/date-picker",
     "description": "A date picker component with calendar popup.",
     "category": "form",
     "dependencies": [
@@ -709,11 +709,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/date-picker",
-      "pnpm": "pnpm add @shadcn-angular/date-picker",
-      "yarn": "yarn add @shadcn-angular/date-picker",
-      "bun": "bun add @shadcn-angular/date-picker",
-      "ngAdd": "ng add @shadcn-angular/date-picker",
+      "npm": "npm install @ng-cn/date-picker",
+      "pnpm": "pnpm add @ng-cn/date-picker",
+      "yarn": "yarn add @ng-cn/date-picker",
+      "bun": "bun add @ng-cn/date-picker",
+      "ngAdd": "ng g @ng-cn/core:c date-picker",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -731,7 +731,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Form",
     "selector": "Form",
-    "package": "@shadcn-angular/form",
+    "package": "@ng-cn/form",
     "description": "Building forms with React Hook Form and Zod.",
     "category": "form",
     "dependencies": [
@@ -749,11 +749,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/form",
-      "pnpm": "pnpm add @shadcn-angular/form",
-      "yarn": "yarn add @shadcn-angular/form",
-      "bun": "bun add @shadcn-angular/form",
-      "ngAdd": "ng add @shadcn-angular/form",
+      "npm": "npm install @ng-cn/form",
+      "pnpm": "pnpm add @ng-cn/form",
+      "yarn": "yarn add @ng-cn/form",
+      "bun": "bun add @ng-cn/form",
+      "ngAdd": "ng g @ng-cn/core:c form",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -771,7 +771,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Input",
     "selector": "Input",
-    "package": "@shadcn-angular/input",
+    "package": "@ng-cn/input",
     "description": "Displays a form input field.",
     "category": "form",
     "dependencies": [
@@ -796,11 +796,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/input",
-      "pnpm": "pnpm add @shadcn-angular/input",
-      "yarn": "yarn add @shadcn-angular/input",
-      "bun": "bun add @shadcn-angular/input",
-      "ngAdd": "ng add @shadcn-angular/input",
+      "npm": "npm install @ng-cn/input",
+      "pnpm": "pnpm add @ng-cn/input",
+      "yarn": "yarn add @ng-cn/input",
+      "bun": "bun add @ng-cn/input",
+      "ngAdd": "ng g @ng-cn/core:c input",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -818,7 +818,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Input OTP",
     "selector": "InputOTP",
-    "package": "@shadcn-angular/input-otp",
+    "package": "@ng-cn/input-otp",
     "description": "Accessible one-time password component with copy paste functionality.",
     "category": "form",
     "dependencies": [
@@ -842,11 +842,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/input-otp",
-      "pnpm": "pnpm add @shadcn-angular/input-otp",
-      "yarn": "yarn add @shadcn-angular/input-otp",
-      "bun": "bun add @shadcn-angular/input-otp",
-      "ngAdd": "ng add @shadcn-angular/input-otp",
+      "npm": "npm install @ng-cn/input-otp",
+      "pnpm": "pnpm add @ng-cn/input-otp",
+      "yarn": "yarn add @ng-cn/input-otp",
+      "bun": "bun add @ng-cn/input-otp",
+      "ngAdd": "ng g @ng-cn/core:c input-otp",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -864,7 +864,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Label",
     "selector": "Label",
-    "package": "@shadcn-angular/label",
+    "package": "@ng-cn/label",
     "description": "Renders an accessible label associated with controls.",
     "category": "form",
     "dependencies": [
@@ -882,11 +882,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/label",
-      "pnpm": "pnpm add @shadcn-angular/label",
-      "yarn": "yarn add @shadcn-angular/label",
-      "bun": "bun add @shadcn-angular/label",
-      "ngAdd": "ng add @shadcn-angular/label",
+      "npm": "npm install @ng-cn/label",
+      "pnpm": "pnpm add @ng-cn/label",
+      "yarn": "yarn add @ng-cn/label",
+      "bun": "bun add @ng-cn/label",
+      "ngAdd": "ng g @ng-cn/core:c label",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -904,7 +904,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Radio Group",
     "selector": "RadioGroup",
-    "package": "@shadcn-angular/radio-group",
+    "package": "@ng-cn/radio-group",
     "description": "A set of checkable buttons where only one can be checked at a time.",
     "category": "form",
     "dependencies": [
@@ -928,11 +928,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/radio-group",
-      "pnpm": "pnpm add @shadcn-angular/radio-group",
-      "yarn": "yarn add @shadcn-angular/radio-group",
-      "bun": "bun add @shadcn-angular/radio-group",
-      "ngAdd": "ng add @shadcn-angular/radio-group",
+      "npm": "npm install @ng-cn/radio-group",
+      "pnpm": "pnpm add @ng-cn/radio-group",
+      "yarn": "yarn add @ng-cn/radio-group",
+      "bun": "bun add @ng-cn/radio-group",
+      "ngAdd": "ng g @ng-cn/core:c radio-group",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -950,7 +950,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Select",
     "selector": "Select",
-    "package": "@shadcn-angular/select",
+    "package": "@ng-cn/select",
     "description": "Displays a list of options for the user to pick from.",
     "category": "form",
     "dependencies": [
@@ -974,11 +974,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/select",
-      "pnpm": "pnpm add @shadcn-angular/select",
-      "yarn": "yarn add @shadcn-angular/select",
-      "bun": "bun add @shadcn-angular/select",
-      "ngAdd": "ng add @shadcn-angular/select",
+      "npm": "npm install @ng-cn/select",
+      "pnpm": "pnpm add @ng-cn/select",
+      "yarn": "yarn add @ng-cn/select",
+      "bun": "bun add @ng-cn/select",
+      "ngAdd": "ng g @ng-cn/core:c select",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -996,7 +996,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Slider",
     "selector": "Slider",
-    "package": "@shadcn-angular/slider",
+    "package": "@ng-cn/slider",
     "description": "An input where the user selects a value from within a given range.",
     "category": "form",
     "dependencies": [
@@ -1007,11 +1007,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/slider",
-      "pnpm": "pnpm add @shadcn-angular/slider",
-      "yarn": "yarn add @shadcn-angular/slider",
-      "bun": "bun add @shadcn-angular/slider",
-      "ngAdd": "ng add @shadcn-angular/slider",
+      "npm": "npm install @ng-cn/slider",
+      "pnpm": "pnpm add @ng-cn/slider",
+      "yarn": "yarn add @ng-cn/slider",
+      "bun": "bun add @ng-cn/slider",
+      "ngAdd": "ng g @ng-cn/core:c slider",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1029,7 +1029,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Switch",
     "selector": "Switch",
-    "package": "@shadcn-angular/switch",
+    "package": "@ng-cn/switch",
     "description": "A control that allows the user to toggle between checked and not checked.",
     "category": "form",
     "dependencies": [
@@ -1055,11 +1055,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/switch",
-      "pnpm": "pnpm add @shadcn-angular/switch",
-      "yarn": "yarn add @shadcn-angular/switch",
-      "bun": "bun add @shadcn-angular/switch",
-      "ngAdd": "ng add @shadcn-angular/switch",
+      "npm": "npm install @ng-cn/switch",
+      "pnpm": "pnpm add @ng-cn/switch",
+      "yarn": "yarn add @ng-cn/switch",
+      "bun": "bun add @ng-cn/switch",
+      "ngAdd": "ng g @ng-cn/core:c switch",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1077,7 +1077,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Textarea",
     "selector": "Textarea",
-    "package": "@shadcn-angular/textarea",
+    "package": "@ng-cn/textarea",
     "description": "Displays a form textarea.",
     "category": "form",
     "dependencies": [
@@ -1102,11 +1102,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/textarea",
-      "pnpm": "pnpm add @shadcn-angular/textarea",
-      "yarn": "yarn add @shadcn-angular/textarea",
-      "bun": "bun add @shadcn-angular/textarea",
-      "ngAdd": "ng add @shadcn-angular/textarea",
+      "npm": "npm install @ng-cn/textarea",
+      "pnpm": "pnpm add @ng-cn/textarea",
+      "yarn": "yarn add @ng-cn/textarea",
+      "bun": "bun add @ng-cn/textarea",
+      "ngAdd": "ng g @ng-cn/core:c textarea",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1124,7 +1124,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Toggle",
     "selector": "Toggle",
-    "package": "@shadcn-angular/toggle",
+    "package": "@ng-cn/toggle",
     "description": "A two-state button that can be either on or off.",
     "category": "form",
     "dependencies": [
@@ -1143,11 +1143,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/toggle",
-      "pnpm": "pnpm add @shadcn-angular/toggle",
-      "yarn": "yarn add @shadcn-angular/toggle",
-      "bun": "bun add @shadcn-angular/toggle",
-      "ngAdd": "ng add @shadcn-angular/toggle",
+      "npm": "npm install @ng-cn/toggle",
+      "pnpm": "pnpm add @ng-cn/toggle",
+      "yarn": "yarn add @ng-cn/toggle",
+      "bun": "bun add @ng-cn/toggle",
+      "ngAdd": "ng g @ng-cn/core:c toggle",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1165,7 +1165,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Toggle Group",
     "selector": "ToggleGroup",
-    "package": "@shadcn-angular/toggle-group",
+    "package": "@ng-cn/toggle-group",
     "description": "A set of two-state buttons that can be toggled on or off.",
     "category": "form",
     "dependencies": [
@@ -1176,11 +1176,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/toggle-group",
-      "pnpm": "pnpm add @shadcn-angular/toggle-group",
-      "yarn": "yarn add @shadcn-angular/toggle-group",
-      "bun": "bun add @shadcn-angular/toggle-group",
-      "ngAdd": "ng add @shadcn-angular/toggle-group",
+      "npm": "npm install @ng-cn/toggle-group",
+      "pnpm": "pnpm add @ng-cn/toggle-group",
+      "yarn": "yarn add @ng-cn/toggle-group",
+      "bun": "bun add @ng-cn/toggle-group",
+      "ngAdd": "ng g @ng-cn/core:c toggle-group",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1198,7 +1198,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Alert",
     "selector": "Alert",
-    "package": "@shadcn-angular/alert",
+    "package": "@ng-cn/alert",
     "description": "Displays a callout for user attention.",
     "category": "overlay",
     "dependencies": [
@@ -1209,11 +1209,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/alert",
-      "pnpm": "pnpm add @shadcn-angular/alert",
-      "yarn": "yarn add @shadcn-angular/alert",
-      "bun": "bun add @shadcn-angular/alert",
-      "ngAdd": "ng add @shadcn-angular/alert",
+      "npm": "npm install @ng-cn/alert",
+      "pnpm": "pnpm add @ng-cn/alert",
+      "yarn": "yarn add @ng-cn/alert",
+      "bun": "bun add @ng-cn/alert",
+      "ngAdd": "ng g @ng-cn/core:c alert",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1231,7 +1231,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Alert Dialog",
     "selector": "AlertDialog",
-    "package": "@shadcn-angular/alert-dialog",
+    "package": "@ng-cn/alert-dialog",
     "description": "A modal dialog that interrupts the user with important content.",
     "category": "overlay",
     "dependencies": [
@@ -1249,11 +1249,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/alert-dialog",
-      "pnpm": "pnpm add @shadcn-angular/alert-dialog",
-      "yarn": "yarn add @shadcn-angular/alert-dialog",
-      "bun": "bun add @shadcn-angular/alert-dialog",
-      "ngAdd": "ng add @shadcn-angular/alert-dialog",
+      "npm": "npm install @ng-cn/alert-dialog",
+      "pnpm": "pnpm add @ng-cn/alert-dialog",
+      "yarn": "yarn add @ng-cn/alert-dialog",
+      "bun": "bun add @ng-cn/alert-dialog",
+      "ngAdd": "ng g @ng-cn/core:c alert-dialog",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1271,7 +1271,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Dialog",
     "selector": "Dialog",
-    "package": "@shadcn-angular/dialog",
+    "package": "@ng-cn/dialog",
     "description": "A window overlaid on the primary window.",
     "category": "overlay",
     "dependencies": [
@@ -1289,11 +1289,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/dialog",
-      "pnpm": "pnpm add @shadcn-angular/dialog",
-      "yarn": "yarn add @shadcn-angular/dialog",
-      "bun": "bun add @shadcn-angular/dialog",
-      "ngAdd": "ng add @shadcn-angular/dialog",
+      "npm": "npm install @ng-cn/dialog",
+      "pnpm": "pnpm add @ng-cn/dialog",
+      "yarn": "yarn add @ng-cn/dialog",
+      "bun": "bun add @ng-cn/dialog",
+      "ngAdd": "ng g @ng-cn/core:c dialog",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1311,7 +1311,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Drawer",
     "selector": "Drawer",
-    "package": "@shadcn-angular/drawer",
+    "package": "@ng-cn/drawer",
     "description": "A drawer component for Angular.",
     "category": "overlay",
     "dependencies": [
@@ -1329,11 +1329,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/drawer",
-      "pnpm": "pnpm add @shadcn-angular/drawer",
-      "yarn": "yarn add @shadcn-angular/drawer",
-      "bun": "bun add @shadcn-angular/drawer",
-      "ngAdd": "ng add @shadcn-angular/drawer",
+      "npm": "npm install @ng-cn/drawer",
+      "pnpm": "pnpm add @ng-cn/drawer",
+      "yarn": "yarn add @ng-cn/drawer",
+      "bun": "bun add @ng-cn/drawer",
+      "ngAdd": "ng g @ng-cn/core:c drawer",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1351,7 +1351,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Hover Card",
     "selector": "HoverCard",
-    "package": "@shadcn-angular/hover-card",
+    "package": "@ng-cn/hover-card",
     "description": "For sighted users to preview content available behind a link.",
     "category": "overlay",
     "dependencies": [
@@ -1377,11 +1377,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/hover-card",
-      "pnpm": "pnpm add @shadcn-angular/hover-card",
-      "yarn": "yarn add @shadcn-angular/hover-card",
-      "bun": "bun add @shadcn-angular/hover-card",
-      "ngAdd": "ng add @shadcn-angular/hover-card",
+      "npm": "npm install @ng-cn/hover-card",
+      "pnpm": "pnpm add @ng-cn/hover-card",
+      "yarn": "yarn add @ng-cn/hover-card",
+      "bun": "bun add @ng-cn/hover-card",
+      "ngAdd": "ng g @ng-cn/core:c hover-card",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1399,7 +1399,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Popover",
     "selector": "Popover",
-    "package": "@shadcn-angular/popover",
+    "package": "@ng-cn/popover",
     "description": "Displays rich content in a portal, triggered by a button.",
     "category": "overlay",
     "dependencies": [
@@ -1410,11 +1410,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/popover",
-      "pnpm": "pnpm add @shadcn-angular/popover",
-      "yarn": "yarn add @shadcn-angular/popover",
-      "bun": "bun add @shadcn-angular/popover",
-      "ngAdd": "ng add @shadcn-angular/popover",
+      "npm": "npm install @ng-cn/popover",
+      "pnpm": "pnpm add @ng-cn/popover",
+      "yarn": "yarn add @ng-cn/popover",
+      "bun": "bun add @ng-cn/popover",
+      "ngAdd": "ng g @ng-cn/core:c popover",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1432,7 +1432,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Progress",
     "selector": "Progress",
-    "package": "@shadcn-angular/progress",
+    "package": "@ng-cn/progress",
     "description": "Displays an indicator showing the completion progress of a task.",
     "category": "overlay",
     "dependencies": [
@@ -1451,11 +1451,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/progress",
-      "pnpm": "pnpm add @shadcn-angular/progress",
-      "yarn": "yarn add @shadcn-angular/progress",
-      "bun": "bun add @shadcn-angular/progress",
-      "ngAdd": "ng add @shadcn-angular/progress",
+      "npm": "npm install @ng-cn/progress",
+      "pnpm": "pnpm add @ng-cn/progress",
+      "yarn": "yarn add @ng-cn/progress",
+      "bun": "bun add @ng-cn/progress",
+      "ngAdd": "ng g @ng-cn/core:c progress",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1473,7 +1473,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Sheet",
     "selector": "Sheet",
-    "package": "@shadcn-angular/sheet",
+    "package": "@ng-cn/sheet",
     "description": "Extends the Dialog component to display content that complements the main content.",
     "category": "overlay",
     "dependencies": [
@@ -1484,11 +1484,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/sheet",
-      "pnpm": "pnpm add @shadcn-angular/sheet",
-      "yarn": "yarn add @shadcn-angular/sheet",
-      "bun": "bun add @shadcn-angular/sheet",
-      "ngAdd": "ng add @shadcn-angular/sheet",
+      "npm": "npm install @ng-cn/sheet",
+      "pnpm": "pnpm add @ng-cn/sheet",
+      "yarn": "yarn add @ng-cn/sheet",
+      "bun": "bun add @ng-cn/sheet",
+      "ngAdd": "ng g @ng-cn/core:c sheet",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1506,7 +1506,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Skeleton",
     "selector": "Skeleton",
-    "package": "@shadcn-angular/skeleton",
+    "package": "@ng-cn/skeleton",
     "description": "Use to show a placeholder while content is loading.",
     "category": "overlay",
     "dependencies": [
@@ -1524,11 +1524,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/skeleton",
-      "pnpm": "pnpm add @shadcn-angular/skeleton",
-      "yarn": "yarn add @shadcn-angular/skeleton",
-      "bun": "bun add @shadcn-angular/skeleton",
-      "ngAdd": "ng add @shadcn-angular/skeleton",
+      "npm": "npm install @ng-cn/skeleton",
+      "pnpm": "pnpm add @ng-cn/skeleton",
+      "yarn": "yarn add @ng-cn/skeleton",
+      "bun": "bun add @ng-cn/skeleton",
+      "ngAdd": "ng g @ng-cn/core:c skeleton",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1546,7 +1546,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Toast",
     "selector": "Toast",
-    "package": "@shadcn-angular/toast",
+    "package": "@ng-cn/toast",
     "description": "A succinct message that is displayed temporarily.",
     "category": "overlay",
     "dependencies": [
@@ -1570,11 +1570,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/toast",
-      "pnpm": "pnpm add @shadcn-angular/toast",
-      "yarn": "yarn add @shadcn-angular/toast",
-      "bun": "bun add @shadcn-angular/toast",
-      "ngAdd": "ng add @shadcn-angular/toast",
+      "npm": "npm install @ng-cn/toast",
+      "pnpm": "pnpm add @ng-cn/toast",
+      "yarn": "yarn add @ng-cn/toast",
+      "bun": "bun add @ng-cn/toast",
+      "ngAdd": "ng g @ng-cn/core:c toast",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1592,7 +1592,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Tooltip",
     "selector": "Tooltip",
-    "package": "@shadcn-angular/tooltip",
+    "package": "@ng-cn/tooltip",
     "description": "A popup that displays information related to an element.",
     "category": "overlay",
     "dependencies": [
@@ -1611,11 +1611,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/tooltip",
-      "pnpm": "pnpm add @shadcn-angular/tooltip",
-      "yarn": "yarn add @shadcn-angular/tooltip",
-      "bun": "bun add @shadcn-angular/tooltip",
-      "ngAdd": "ng add @shadcn-angular/tooltip",
+      "npm": "npm install @ng-cn/tooltip",
+      "pnpm": "pnpm add @ng-cn/tooltip",
+      "yarn": "yarn add @ng-cn/tooltip",
+      "bun": "bun add @ng-cn/tooltip",
+      "ngAdd": "ng g @ng-cn/core:c tooltip",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1633,7 +1633,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Avatar",
     "selector": "Avatar",
-    "package": "@shadcn-angular/avatar",
+    "package": "@ng-cn/avatar",
     "description": "An image element with a fallback for representing the user.",
     "category": "complex",
     "dependencies": [
@@ -1657,11 +1657,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/avatar",
-      "pnpm": "pnpm add @shadcn-angular/avatar",
-      "yarn": "yarn add @shadcn-angular/avatar",
-      "bun": "bun add @shadcn-angular/avatar",
-      "ngAdd": "ng add @shadcn-angular/avatar",
+      "npm": "npm install @ng-cn/avatar",
+      "pnpm": "pnpm add @ng-cn/avatar",
+      "yarn": "yarn add @ng-cn/avatar",
+      "bun": "bun add @ng-cn/avatar",
+      "ngAdd": "ng g @ng-cn/core:c avatar",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1679,7 +1679,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Badge",
     "selector": "Badge",
-    "package": "@shadcn-angular/badge",
+    "package": "@ng-cn/badge",
     "description": "Displays a badge or a component that looks like a badge.",
     "category": "complex",
     "dependencies": [
@@ -1690,11 +1690,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/badge",
-      "pnpm": "pnpm add @shadcn-angular/badge",
-      "yarn": "yarn add @shadcn-angular/badge",
-      "bun": "bun add @shadcn-angular/badge",
-      "ngAdd": "ng add @shadcn-angular/badge",
+      "npm": "npm install @ng-cn/badge",
+      "pnpm": "pnpm add @ng-cn/badge",
+      "yarn": "yarn add @ng-cn/badge",
+      "bun": "bun add @ng-cn/badge",
+      "ngAdd": "ng g @ng-cn/core:c badge",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1712,7 +1712,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Calendar",
     "selector": "Calendar",
-    "package": "@shadcn-angular/calendar",
+    "package": "@ng-cn/calendar",
     "description": "A date field component that allows users to enter and edit date.",
     "category": "complex",
     "dependencies": [
@@ -1730,11 +1730,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/calendar",
-      "pnpm": "pnpm add @shadcn-angular/calendar",
-      "yarn": "yarn add @shadcn-angular/calendar",
-      "bun": "bun add @shadcn-angular/calendar",
-      "ngAdd": "ng add @shadcn-angular/calendar",
+      "npm": "npm install @ng-cn/calendar",
+      "pnpm": "pnpm add @ng-cn/calendar",
+      "yarn": "yarn add @ng-cn/calendar",
+      "bun": "bun add @ng-cn/calendar",
+      "ngAdd": "ng g @ng-cn/core:c calendar",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1752,7 +1752,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Carousel",
     "selector": "Carousel",
-    "package": "@shadcn-angular/carousel",
+    "package": "@ng-cn/carousel",
     "description": "A carousel with motion and swipe built using Embla.",
     "category": "complex",
     "dependencies": [
@@ -1763,11 +1763,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/carousel",
-      "pnpm": "pnpm add @shadcn-angular/carousel",
-      "yarn": "yarn add @shadcn-angular/carousel",
-      "bun": "bun add @shadcn-angular/carousel",
-      "ngAdd": "ng add @shadcn-angular/carousel",
+      "npm": "npm install @ng-cn/carousel",
+      "pnpm": "pnpm add @ng-cn/carousel",
+      "yarn": "yarn add @ng-cn/carousel",
+      "bun": "bun add @ng-cn/carousel",
+      "ngAdd": "ng g @ng-cn/core:c carousel",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1785,7 +1785,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Chart",
     "selector": "Chart",
-    "package": "@shadcn-angular/chart",
+    "package": "@ng-cn/chart",
     "description": "Beautiful charts built with SVG.",
     "category": "complex",
     "dependencies": [
@@ -1796,11 +1796,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/chart",
-      "pnpm": "pnpm add @shadcn-angular/chart",
-      "yarn": "yarn add @shadcn-angular/chart",
-      "bun": "bun add @shadcn-angular/chart",
-      "ngAdd": "ng add @shadcn-angular/chart",
+      "npm": "npm install @ng-cn/chart",
+      "pnpm": "pnpm add @ng-cn/chart",
+      "yarn": "yarn add @ng-cn/chart",
+      "bun": "bun add @ng-cn/chart",
+      "ngAdd": "ng g @ng-cn/core:c chart",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1818,7 +1818,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Command",
     "selector": "Command",
-    "package": "@shadcn-angular/command",
+    "package": "@ng-cn/command",
     "description": "Fast, composable, unstyled command menu.",
     "category": "complex",
     "dependencies": [
@@ -1836,11 +1836,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/command",
-      "pnpm": "pnpm add @shadcn-angular/command",
-      "yarn": "yarn add @shadcn-angular/command",
-      "bun": "bun add @shadcn-angular/command",
-      "ngAdd": "ng add @shadcn-angular/command",
+      "npm": "npm install @ng-cn/command",
+      "pnpm": "pnpm add @ng-cn/command",
+      "yarn": "yarn add @ng-cn/command",
+      "bun": "bun add @ng-cn/command",
+      "ngAdd": "ng g @ng-cn/core:c command",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1858,7 +1858,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Data Table",
     "selector": "DataTable",
-    "package": "@shadcn-angular/data-table",
+    "package": "@ng-cn/data-table",
     "description": "Powerful table and datagrids.",
     "category": "complex",
     "dependencies": [
@@ -1869,11 +1869,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/data-table",
-      "pnpm": "pnpm add @shadcn-angular/data-table",
-      "yarn": "yarn add @shadcn-angular/data-table",
-      "bun": "bun add @shadcn-angular/data-table",
-      "ngAdd": "ng add @shadcn-angular/data-table",
+      "npm": "npm install @ng-cn/data-table",
+      "pnpm": "pnpm add @ng-cn/data-table",
+      "yarn": "yarn add @ng-cn/data-table",
+      "bun": "bun add @ng-cn/data-table",
+      "ngAdd": "ng g @ng-cn/core:c data-table",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1891,7 +1891,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Table",
     "selector": "Table",
-    "package": "@shadcn-angular/table",
+    "package": "@ng-cn/table",
     "description": "A responsive table component.",
     "category": "complex",
     "dependencies": [
@@ -1909,11 +1909,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/table",
-      "pnpm": "pnpm add @shadcn-angular/table",
-      "yarn": "yarn add @shadcn-angular/table",
-      "bun": "bun add @shadcn-angular/table",
-      "ngAdd": "ng add @shadcn-angular/table",
+      "npm": "npm install @ng-cn/table",
+      "pnpm": "pnpm add @ng-cn/table",
+      "yarn": "yarn add @ng-cn/table",
+      "bun": "bun add @ng-cn/table",
+      "ngAdd": "ng g @ng-cn/core:c table",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1931,7 +1931,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Button Group",
     "selector": "ButtonGroup",
-    "package": "@shadcn-angular/button-group",
+    "package": "@ng-cn/button-group",
     "description": "Groups multiple buttons together.",
     "category": "advanced",
     "dependencies": [
@@ -1942,11 +1942,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/button-group",
-      "pnpm": "pnpm add @shadcn-angular/button-group",
-      "yarn": "yarn add @shadcn-angular/button-group",
-      "bun": "bun add @shadcn-angular/button-group",
-      "ngAdd": "ng add @shadcn-angular/button-group",
+      "npm": "npm install @ng-cn/button-group",
+      "pnpm": "pnpm add @ng-cn/button-group",
+      "yarn": "yarn add @ng-cn/button-group",
+      "bun": "bun add @ng-cn/button-group",
+      "ngAdd": "ng g @ng-cn/core:c button-group",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -1964,7 +1964,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Empty",
     "selector": "Empty",
-    "package": "@shadcn-angular/empty",
+    "package": "@ng-cn/empty",
     "description": "Empty state placeholder component.",
     "category": "advanced",
     "dependencies": [
@@ -1982,11 +1982,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/empty",
-      "pnpm": "pnpm add @shadcn-angular/empty",
-      "yarn": "yarn add @shadcn-angular/empty",
-      "bun": "bun add @shadcn-angular/empty",
-      "ngAdd": "ng add @shadcn-angular/empty",
+      "npm": "npm install @ng-cn/empty",
+      "pnpm": "pnpm add @ng-cn/empty",
+      "yarn": "yarn add @ng-cn/empty",
+      "bun": "bun add @ng-cn/empty",
+      "ngAdd": "ng g @ng-cn/core:c empty",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2004,7 +2004,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Input Group",
     "selector": "InputGroup",
-    "package": "@shadcn-angular/input-group",
+    "package": "@ng-cn/input-group",
     "description": "Input with prefix/suffix addons.",
     "category": "advanced",
     "dependencies": [
@@ -2022,11 +2022,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/input-group",
-      "pnpm": "pnpm add @shadcn-angular/input-group",
-      "yarn": "yarn add @shadcn-angular/input-group",
-      "bun": "bun add @shadcn-angular/input-group",
-      "ngAdd": "ng add @shadcn-angular/input-group",
+      "npm": "npm install @ng-cn/input-group",
+      "pnpm": "pnpm add @ng-cn/input-group",
+      "yarn": "yarn add @ng-cn/input-group",
+      "bun": "bun add @ng-cn/input-group",
+      "ngAdd": "ng g @ng-cn/core:c input-group",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2044,7 +2044,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Kbd",
     "selector": "Kbd",
-    "package": "@shadcn-angular/kbd",
+    "package": "@ng-cn/kbd",
     "description": "Keyboard key indicator component.",
     "category": "advanced",
     "dependencies": [
@@ -2062,11 +2062,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/kbd",
-      "pnpm": "pnpm add @shadcn-angular/kbd",
-      "yarn": "yarn add @shadcn-angular/kbd",
-      "bun": "bun add @shadcn-angular/kbd",
-      "ngAdd": "ng add @shadcn-angular/kbd",
+      "npm": "npm install @ng-cn/kbd",
+      "pnpm": "pnpm add @ng-cn/kbd",
+      "yarn": "yarn add @ng-cn/kbd",
+      "bun": "bun add @ng-cn/kbd",
+      "ngAdd": "ng g @ng-cn/core:c kbd",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2084,7 +2084,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Native Select",
     "selector": "NativeSelect",
-    "package": "@shadcn-angular/native-select",
+    "package": "@ng-cn/native-select",
     "description": "HTML native select with styling.",
     "category": "advanced",
     "dependencies": [
@@ -2102,11 +2102,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/native-select",
-      "pnpm": "pnpm add @shadcn-angular/native-select",
-      "yarn": "yarn add @shadcn-angular/native-select",
-      "bun": "bun add @shadcn-angular/native-select",
-      "ngAdd": "ng add @shadcn-angular/native-select",
+      "npm": "npm install @ng-cn/native-select",
+      "pnpm": "pnpm add @ng-cn/native-select",
+      "yarn": "yarn add @ng-cn/native-select",
+      "bun": "bun add @ng-cn/native-select",
+      "ngAdd": "ng g @ng-cn/core:c native-select",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2124,7 +2124,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Segmented",
     "selector": "Segmented",
-    "package": "@shadcn-angular/segmented",
+    "package": "@ng-cn/segmented",
     "description": "iOS-style segmented control buttons.",
     "category": "advanced",
     "dependencies": [
@@ -2148,11 +2148,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/segmented",
-      "pnpm": "pnpm add @shadcn-angular/segmented",
-      "yarn": "yarn add @shadcn-angular/segmented",
-      "bun": "bun add @shadcn-angular/segmented",
-      "ngAdd": "ng add @shadcn-angular/segmented",
+      "npm": "npm install @ng-cn/segmented",
+      "pnpm": "pnpm add @ng-cn/segmented",
+      "yarn": "yarn add @ng-cn/segmented",
+      "bun": "bun add @ng-cn/segmented",
+      "ngAdd": "ng g @ng-cn/core:c segmented",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2170,7 +2170,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Sidebar",
     "selector": "Sidebar",
-    "package": "@shadcn-angular/sidebar",
+    "package": "@ng-cn/sidebar",
     "description": "A composable, themeable and customizable sidebar component.",
     "category": "advanced",
     "dependencies": [
@@ -2181,11 +2181,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/sidebar",
-      "pnpm": "pnpm add @shadcn-angular/sidebar",
-      "yarn": "yarn add @shadcn-angular/sidebar",
-      "bun": "bun add @shadcn-angular/sidebar",
-      "ngAdd": "ng add @shadcn-angular/sidebar",
+      "npm": "npm install @ng-cn/sidebar",
+      "pnpm": "pnpm add @ng-cn/sidebar",
+      "yarn": "yarn add @ng-cn/sidebar",
+      "bun": "bun add @ng-cn/sidebar",
+      "ngAdd": "ng g @ng-cn/core:c sidebar",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2203,7 +2203,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Spinner",
     "selector": "Spinner",
-    "package": "@shadcn-angular/spinner",
+    "package": "@ng-cn/spinner",
     "description": "Loading indicator animations.",
     "category": "advanced",
     "dependencies": [
@@ -2214,11 +2214,11 @@ export const componentsData: ComponentMetadata[] = [
     "inputs": [],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/spinner",
-      "pnpm": "pnpm add @shadcn-angular/spinner",
-      "yarn": "yarn add @shadcn-angular/spinner",
-      "bun": "bun add @shadcn-angular/spinner",
-      "ngAdd": "ng add @shadcn-angular/spinner",
+      "npm": "npm install @ng-cn/spinner",
+      "pnpm": "pnpm add @ng-cn/spinner",
+      "yarn": "yarn add @ng-cn/spinner",
+      "bun": "bun add @ng-cn/spinner",
+      "ngAdd": "ng g @ng-cn/core:c spinner",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2236,7 +2236,7 @@ export const componentsData: ComponentMetadata[] = [
   {
     "name": "Typography",
     "selector": "Typography",
-    "package": "@shadcn-angular/typography",
+    "package": "@ng-cn/typography",
     "description": "Text styling components.",
     "category": "advanced",
     "dependencies": [
@@ -2254,11 +2254,11 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "examples": [],
     "installation": {
-      "npm": "npm install @shadcn-angular/typography",
-      "pnpm": "pnpm add @shadcn-angular/typography",
-      "yarn": "yarn add @shadcn-angular/typography",
-      "bun": "bun add @shadcn-angular/typography",
-      "ngAdd": "ng add @shadcn-angular/typography",
+      "npm": "npm install @ng-cn/typography",
+      "pnpm": "pnpm add @ng-cn/typography",
+      "yarn": "yarn add @ng-cn/typography",
+      "bun": "bun add @ng-cn/typography",
+      "ngAdd": "ng g @ng-cn/core:c typography",
       "manual": {
         "description": "Manually copy the component files to your project",
         "steps": [
@@ -2290,7 +2290,7 @@ export function getComponent(nameOrSelector: string): ComponentMetadata | undefi
     (c) =>
       c.name.toLowerCase() === lowerName ||
       c.selector.toLowerCase() === lowerName ||
-      c.package.toLowerCase() === `@shadcn-angular/${lowerName}`
+      c.package.toLowerCase() === `@ng-cn/${lowerName}`
   );
 }
 

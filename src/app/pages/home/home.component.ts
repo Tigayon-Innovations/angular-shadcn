@@ -96,7 +96,7 @@ import {
             <!-- Stats -->
             <div class="flex items-center gap-8 text-center mt-8">
               <div>
-                <div class="text-3xl font-bold">57+</div>
+                <div class="text-3xl font-bold">60+</div>
                 <div class="text-sm text-muted-foreground">Components</div>
               </div>
               <Separator orientation="vertical" class="h-12" />
@@ -252,7 +252,7 @@ import {
           <!-- View All Link -->
           <div class="text-center mt-12">
             <Button routerLink="/docs/components" variant="outline" class="gap-2">
-              See all 57+ components
+              See all 60+ components
               <lucide-icon [img]="icons.ChevronRight" class="h-4 w-4" />
             </Button>
           </div>

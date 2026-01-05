@@ -12,10 +12,9 @@ import {
  */
 @Component({
   selector: 'TableRow',
-  template: `<ng-content />`,
+  template: `<tr [class]="computedClass()" [attr.data-state]="selected() ? 'selected' : null"><ng-content /></tr>`,
   host: {
-    '[class]': 'computedClass()',
-    '[attr.data-state]': 'selected() ? "selected" : null',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

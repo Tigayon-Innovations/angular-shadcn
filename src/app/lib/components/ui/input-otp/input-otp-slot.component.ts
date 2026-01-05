@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { INPUT_OTP_CONTEXT } from './input-otp-context';
 
 /**
  * InputOTPSlot component - individual OTP digit slot.
@@ -24,17 +25,25 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOTPSlot {
+  private readonly context = inject(INPUT_OTP_CONTEXT, { optional: true });
+
   /** Index of this slot */
   readonly index = input.required<number>();
 
-  /** Character to display */
-  readonly char = input<string>('');
-
-  /** Whether this slot is active */
-  readonly isActive = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Character to display - reads from context value at this index */
+  protected readonly char = computed(() => {
+    const value = this.context?.value() ?? '';
+    return value[this.index()] ?? '';
+  });
+
+  /** Whether this slot is active - based on context activeIndex */
+  protected readonly isActive = computed(() => {
+    const activeIndex = this.context?.activeIndex() ?? -1;
+    return activeIndex === this.index();
+  });
 
   protected readonly computedClass = computed(() =>
     cn(

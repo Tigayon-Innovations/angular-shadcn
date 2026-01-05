@@ -1,7 +1,7 @@
 /**
  * Get All Components Tool
  *
- * Gets a complete list of all available shadcn-angular components.
+ * Gets a complete list of all available ng-cn components.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -9,7 +9,7 @@ import { componentCategories, componentsData } from '../components-data.js';
 
 export const getAllComponentsTool: Tool = {
   name: 'get_all_components',
-  description: 'Get a complete list of all available shadcn-angular components with their basic information.',
+  description: 'Get a complete list of all available ng-cn components with their basic information.',
   inputSchema: {
     type: 'object',
     properties: {},
@@ -17,7 +17,7 @@ export const getAllComponentsTool: Tool = {
 };
 
 export function handleGetAllComponents() {
-  let text = `# All shadcn-angular Components\n\n`;
+  let text = `# All ng-cn Components\n\n`;
   text += `Total: ${componentsData.length} components\n\n`;
 
   Object.entries(componentCategories).forEach(([key, value]) => {

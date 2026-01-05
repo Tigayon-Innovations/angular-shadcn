@@ -40,10 +40,10 @@ export class AccordionContent {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-      this.item.isOpen() ? 'animate-accordion-down' : 'animate-accordion-up'
+      'overflow-hidden text-sm',
+      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
     )
   );
 
-  protected readonly innerClass = computed(() => cn('pb-4 pt-0', this.class()));
+  protected readonly innerClass = computed(() => cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed', this.class()));
 }

@@ -4,6 +4,7 @@ import {
     Component,
     computed,
     ElementRef,
+    forwardRef,
     input,
     model,
     output,
@@ -21,7 +22,7 @@ import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-contex
   selector: 'InputOTP',
   imports: [FormsModule],
   template: `
-    <div [class]="computedClass()">
+    <div [class]="computedClass()" (click)="focus()">
       <input
         #hiddenInput
         type="text"
@@ -34,7 +35,7 @@ import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-contex
         (keydown)="onKeyDown($event)"
         (focus)="onFocus()"
         (blur)="onBlur()"
-        class="absolute inset-0 w-full h-full opacity-0 cursor-text"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-text z-10"
         [disabled]="disabled()"
       />
       <ng-content />
@@ -43,11 +44,12 @@ import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-contex
   providers: [
     {
       provide: INPUT_OTP_CONTEXT,
-      useFactory: (): InputOTPContextValue => ({
-        value: signal(''),
+      useFactory: (component: InputOTP): InputOTPContextValue => ({
+        value: component.internalValue,
         maxLength: signal(6),
-        activeIndex: signal(-1),
+        activeIndex: component.activeIndex,
       }),
+      deps: [forwardRef(() => InputOTP)],
     },
   ],
   host: {
@@ -60,6 +62,9 @@ export class InputOTP {
 
   /** Current value */
   readonly value = model<string>('');
+
+  /** Internal value signal for context sharing */
+  readonly internalValue = signal<string>('');
 
   /** Maximum length of OTP */
   readonly maxLength = input<number>(6);
@@ -77,7 +82,7 @@ export class InputOTP {
   readonly onComplete = output<string>();
 
   protected readonly isFocused = signal(false);
-  protected readonly activeIndex = signal(-1);
+  readonly activeIndex = signal(-1);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -91,6 +96,7 @@ export class InputOTP {
     const newValue = target.value.replace(/\D/g, '').slice(0, this.maxLength());
 
     this.value.set(newValue);
+    this.internalValue.set(newValue);
     this.activeIndex.set(newValue.length);
     this.onChange.emit(newValue);
 
@@ -105,6 +111,7 @@ export class InputOTP {
       if (currentValue.length > 0) {
         const newValue = currentValue.slice(0, -1);
         this.value.set(newValue);
+        this.internalValue.set(newValue);
         this.activeIndex.set(newValue.length);
         this.onChange.emit(newValue);
       }

@@ -5,36 +5,48 @@ const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
 // Component registry - maps component names to their file structure
 const COMPONENT_REGISTRY = {
-    button: {
-        files: ['button.component.ts', 'index.ts'],
-        dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge', '@angular/cdk']
+    accordion: {
+        files: ['accordion.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge', 'lucide-angular']
     },
-    card: {
-        files: ['card.component.ts', 'card-header.component.ts', 'card-title.component.ts', 'card-description.component.ts', 'card-content.component.ts', 'card-footer.component.ts', 'index.ts'],
-        dependencies: ['clsx', 'tailwind-merge']
-    },
-    input: {
-        files: ['input.component.ts', 'index.ts'],
-        dependencies: ['clsx', 'tailwind-merge', '@angular/forms']
-    },
-    label: {
-        files: ['label.component.ts', 'index.ts'],
+    alert: {
+        files: ['alert.component.ts', 'alert-title.component.ts', 'alert-description.component.ts', 'index.ts'],
         dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge']
     },
-    separator: {
-        files: ['separator.component.ts', 'index.ts'],
+    'alert-dialog': {
+        files: ['alert-dialog.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    avatar: {
+        files: ['avatar.component.ts', 'index.ts'],
         dependencies: ['clsx', 'tailwind-merge']
     },
     badge: {
         files: ['badge.component.ts', 'index.ts'],
         dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge']
     },
-    alert: {
-        files: ['alert.component.ts', 'alert-title.component.ts', 'alert-description.component.ts', 'index.ts'],
-        dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge']
+    breadcrumb: {
+        files: ['breadcrumb.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge', 'lucide-angular']
     },
-    dialog: {
-        files: ['dialog.component.ts', 'dialog-content.component.ts', 'dialog-header.component.ts', 'dialog-footer.component.ts', 'dialog-title.component.ts', 'dialog-description.component.ts', 'index.ts'],
+    button: {
+        files: ['button.component.ts', 'index.ts'],
+        dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge', '@angular/cdk']
+    },
+    calendar: {
+        files: ['calendar.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge', 'lucide-angular']
+    },
+    card: {
+        files: ['card.component.ts', 'card-header.component.ts', 'card-title.component.ts', 'card-description.component.ts', 'card-content.component.ts', 'card-footer.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge']
+    },
+    checkbox: {
+        files: ['checkbox.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge', 'lucide-angular']
+    },
+    collapsible: {
+        files: ['collapsible.component.ts', 'index.ts'],
         dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
     },
     'data-table': {
@@ -50,52 +62,145 @@ const COMPONENT_REGISTRY = {
         ],
         dependencies: ['clsx', 'tailwind-merge', 'lucide-angular']
     },
-    // Add more components as needed
+    dialog: {
+        files: ['dialog.component.ts', 'dialog-content.component.ts', 'dialog-header.component.ts', 'dialog-footer.component.ts', 'dialog-title.component.ts', 'dialog-description.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    drawer: {
+        files: ['drawer.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    'dropdown-menu': {
+        files: ['dropdown-menu.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    input: {
+        files: ['input.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge', '@angular/forms']
+    },
+    label: {
+        files: ['label.component.ts', 'index.ts'],
+        dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge']
+    },
+    popover: {
+        files: ['popover.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    progress: {
+        files: ['progress.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge']
+    },
+    'radio-group': {
+        files: ['radio-group.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    select: {
+        files: ['select.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge', 'lucide-angular']
+    },
+    separator: {
+        files: ['separator.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge']
+    },
+    sheet: {
+        files: ['sheet.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge', 'lucide-angular']
+    },
+    skeleton: {
+        files: ['skeleton.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge']
+    },
+    slider: {
+        files: ['slider.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    switch: {
+        files: ['switch.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    table: {
+        files: ['table.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge']
+    },
+    tabs: {
+        files: ['tabs.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
+    textarea: {
+        files: ['textarea.component.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge', '@angular/forms']
+    },
+    toast: {
+        files: ['toast.component.ts', 'toaster.component.ts', 'toast.service.ts', 'index.ts'],
+        dependencies: ['clsx', 'tailwind-merge', 'lucide-angular']
+    },
+    toggle: {
+        files: ['toggle.component.ts', 'index.ts'],
+        dependencies: ['class-variance-authority', 'clsx', 'tailwind-merge']
+    },
+    tooltip: {
+        files: ['tooltip.component.ts', 'index.ts'],
+        dependencies: ['@angular/cdk', 'clsx', 'tailwind-merge']
+    },
 };
 function component(options) {
     return (tree, context) => {
         const componentName = options.name.toLowerCase();
         if (!COMPONENT_REGISTRY[componentName]) {
-            const availableComponents = Object.keys(COMPONENT_REGISTRY).join(', ');
-            throw new schematics_1.SchematicsException(`Component "${componentName}" not found. Available components: ${availableComponents}`);
+            const availableComponents = Object.keys(COMPONENT_REGISTRY).sort().join(', ');
+            throw new schematics_1.SchematicsException(`\n❌ Component "${componentName}" not found.\n\n` +
+                `Available components:\n${availableComponents}\n\n` +
+                `Usage: ng g @ng-cn/core:c <component-name>\n`);
         }
         const componentInfo = COMPONENT_REGISTRY[componentName];
         const basePath = options.path || 'src/app/lib/components/ui';
         const componentPath = (0, core_1.normalize)((0, core_1.join)((0, core_1.normalize)(basePath), (0, core_1.normalize)(componentName)));
-        context.logger.info(`📦 Installing ${componentName} component...`);
+        context.logger.info('');
+        context.logger.info(`📦 Installing ${componentName}...`);
+        context.logger.info('');
         // Check if component directory already exists
-        if (tree.exists(componentPath)) {
-            context.logger.warn(`⚠️  Component directory ${componentPath} already exists. Skipping...`);
+        const firstFilePath = (0, core_1.join)(componentPath, (0, core_1.normalize)(componentInfo.files[0]));
+        if (tree.exists(firstFilePath) && !options.overwrite) {
+            context.logger.warn(`⚠️  Component already exists at ${componentPath}`);
+            context.logger.info(`   Use --overwrite to replace existing files.`);
+            context.logger.info('');
             return tree;
         }
-        // Create component directory
-        tree.create((0, core_1.join)(componentPath, '.gitkeep'), '');
-        // Copy component files from the source
-        const sourceBasePath = `src/app/lib/components/ui/${componentName}`;
+        // Copy component files from the package source
+        const sourceBasePath = `node_modules/@ng-cn/core/lib/components/ui/${componentName}`;
+        const fallbackSourcePath = `src/app/lib/components/ui/${componentName}`;
+        let filesCreated = 0;
         for (const file of componentInfo.files) {
-            const sourcePath = (0, core_1.join)((0, core_1.normalize)(sourceBasePath), (0, core_1.normalize)(file));
+            let sourcePath = (0, core_1.join)((0, core_1.normalize)(sourceBasePath), (0, core_1.normalize)(file));
             const targetPath = (0, core_1.join)(componentPath, (0, core_1.normalize)(file));
-            if (tree.exists(sourcePath)) {
-                const content = tree.read(sourcePath);
-                if (content) {
-                    tree.create(targetPath, content);
-                    context.logger.info(`  ✅ Created ${file}`);
+            // Try package path first, then fallback to local dev path
+            let content = tree.read(sourcePath);
+            if (!content) {
+                sourcePath = (0, core_1.join)((0, core_1.normalize)(fallbackSourcePath), (0, core_1.normalize)(file));
+                content = tree.read(sourcePath);
+            }
+            if (content) {
+                if (tree.exists(targetPath)) {
+                    tree.overwrite(targetPath, content);
                 }
-            }
-            else {
-                context.logger.warn(`  ⚠️  Source file ${sourcePath} not found`);
+                else {
+                    tree.create(targetPath, content);
+                }
+                context.logger.info(`   ✓ ${componentName}/${file}`);
+                filesCreated++;
             }
         }
-        // Check dependencies
-        context.logger.info('');
-        context.logger.info('📚 Required dependencies:');
-        for (const dep of componentInfo.dependencies) {
-            context.logger.info(`  - ${dep}`);
+        if (filesCreated === 0) {
+            context.logger.warn(`⚠️  No source files found for ${componentName}`);
+            context.logger.info(`   Make sure @ng-cn/core is properly installed.`);
+            context.logger.info('');
+            return tree;
         }
+        // Success message
         context.logger.info('');
-        context.logger.info(`✅ ${componentName} component installed successfully!`);
+        context.logger.info(`✅ ${componentName} installed successfully!`);
         context.logger.info('');
-        context.logger.info('📖 Import the component:');
+        context.logger.info('   Import:');
         context.logger.info(`   import { ${toPascalCase(componentName)} } from '@/ui/${componentName}';`);
         context.logger.info('');
         return tree;

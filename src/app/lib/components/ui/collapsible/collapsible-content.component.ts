@@ -19,17 +19,26 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
 @Component({
   selector: 'CollapsibleContent',
   template: `
-    @if (collapsible.isOpen()) {
+    <div [class]="innerClass()">
       <ng-content />
-    }
+    </div>
   `,
   host: {
     '[class]': 'computedClass()',
     '[attr.data-state]': 'collapsible.isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',
     '[attr.aria-hidden]': '!collapsible.isOpen()',
-    '[attr.hidden]': '!collapsible.isOpen() ? true : null',
   },
+  styles: [`
+    :host {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 200ms ease-out;
+    }
+    :host[data-state="open"] {
+      grid-template-rows: 1fr;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollapsibleContent {
@@ -41,8 +50,9 @@ export class CollapsibleContent {
   protected readonly computedClass = computed(() =>
     cn(
       'overflow-hidden',
-      'data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down',
       this.class()
     )
   );
+
+  protected readonly innerClass = computed(() => 'min-h-0');
 }

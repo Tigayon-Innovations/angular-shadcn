@@ -1,227 +1,175 @@
-# 🎨 shadcn-angular
+# 🎨 ng-cn
 
-> **Beautifully designed Angular components** built with Tailwind CSS v4, Angular 21+, and modern TypeScript. A comprehensive port of the popular [shadcn/ui](https://ui.shadcn.com/) library.
+> **Beautiful Angular components built with Tailwind CSS v4** — The official Angular port of [shadcn/ui](https://ui.shadcn.com/)
 
-[![npm version](https://img.shields.io/npm/v/@jamelyassin/shadcn-angular.svg)](https://www.npmjs.com/package/@jamelyassin/shadcn-angular)
+[![npm version](https://img.shields.io/npm/v/@ng-cn/core.svg)](https://www.npmjs.com/package/@ng-cn/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Angular](https://img.shields.io/badge/Angular-21%2B-red.svg)](https://angular.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4.svg)](https://tailwindcss.com)
 
-**[🌐 Live Demo](https://shadcn-angular.tigayon.com/)** • **[📚 Documentation](https://shadcn-angular.tigayon.com/docs)** • **[🐛 Report Bug](https://github.com/Tigayon-Innovations/angular-shadcn/issues)** • **[✨ Request Feature](https://github.com/Tigayon-Innovations/angular-shadcn/issues)**
+**[🌐 Live Demo](https://shadcn-angular.tigayon.com/)** • **[📚 Documentation](https://shadcn-angular.tigayon.com/docs)** • **[🐛 Report Bug](https://github.com/Tigayon-Innovations/angular-shadcn/issues)**
 
 ---
 
-## ✨ Features
+## ✨ Why ng-cn?
 
-- **🎨 60+ Components** - Complete set of production-ready, accessible UI components
-- **⚡ Angular 21+** - Built for the latest Angular with signals, standalone components, and modern control flow
-- **🎯 Type-Safe** - Full TypeScript support with strict type checking and IntelliSense
-- **🌈 Tailwind CSS 4** - Latest Tailwind utilities for responsive, customizable designs
-- **📦 Multiple Install Methods** - npm, pnpm, yarn, bun, and `ng add` support
-- **🤖 AI Integration** - MCP (Model Context Protocol) server for AI assistant support
-- **♿ Accessible** - WCAG 2.1 AA compliant, keyboard navigation, screen reader support
-- **🌙 Dark Mode** - Built-in dark mode support with automatic detection
-- **🎭 Highly Customizable** - Easy theming with CSS variables
-- **📱 Responsive** - Mobile-first design, fully responsive
-
-- **🚀 Performance** - Optimized for speed with minimal bundle impact
-- **🧩 Copy-Paste Friendly** - Copy components directly into your project
+- **🎨 60+ Components** - Production-ready, accessible UI components
+- **⚡ Angular 21+** - Signals, standalone components, modern control flow
+- **📦 Zero Config** - One command sets up everything
+- **🧩 Own Your Code** - Components live in your project, customize freely
+- **🌙 Dark Mode** - Built-in theme support
+- **♿ Accessible** - WCAG 2.1 AA compliant
 
 ---
 
 ## 🚀 Quick Start
 
-### Installation
-
-Choose your package manager:
-
-
-
+### 1. Initialize
 
 ```bash
-# Angular CLI (recommended)
-ng add @jamelyassin/shadcn-angular
+ng add @ng-cn/core
 ```
 
+This automatically:
+- ✅ Installs dependencies (Tailwind, clsx, tailwind-merge, CDK)
+- ✅ Creates `ng-cn.scss` with theme CSS variables
+- ✅ Sets up `lib/utils/cn.ts` utility function
+- ✅ Configures TypeScript path aliases (`@/ui/*`, `@/utils/*`)
+- ✅ Creates the component folder structure
+
+### 2. Add Components
+
 ```bash
-# npm
-npm install @jamelyassin/shadcn-angular
-```
-```bash
-# pnpm
-pnpm add @jamelyassin/shadcn-angular
-```
-```bash
-# yarn
-yarn add @jamelyassin/shadcn-angular
-```
-```bash
-# bun
-bun add @jamelyassin/shadcn-angular
+# Add components to your project
+ng g @ng-cn/core:c button
+ng g @ng-cn/core:c card
+ng g @ng-cn/core:c dialog
+
+# Or use the short alias
+ng g @ng-cn/core:c accordion
 ```
 
-### Basic Usage
+### 3. Use
 
 ```typescript
 import { Component } from '@angular/core';
-import { Button } from '@jamelyassin/button';
+import { Button } from '@/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/ui/card';
 
 @Component({
   selector: 'app-example',
-  standalone: true,
-  imports: [Button],
-  template: `
-    <div class="flex gap-4">
-      <Button>Default</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="destructive">Delete</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button disabled>Disabled</Button>
-    </div>
-  `,
+  imports: [Button, Card, CardHeader, CardTitle, CardContent],
+  template: \`
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button>Get Started</Button>
+        <Button variant="outline">Learn More</Button>
+      </CardContent>
+    </Card>
+  \`,
 })
 export class ExampleComponent {}
 ```
 
 ---
 
-## 📚 Available Components
+## 📦 Available Components
 
-### Form Components
-- **Button** - Versatile button with multiple variants
-- **Input** - Text input with validation states
-- **Select** - Dropdown selection component
-- **Checkbox** - Accessible checkbox input
-- **Radio** - Radio button group
-- **Switch** - Toggle switch
-- **Textarea** - Multi-line text input
-- **Label** - Form label component
-- **Form** - Complete form builder
+### Form
+\`button\` \`input\` \`textarea\` \`select\` \`checkbox\` \`radio-group\` \`switch\` \`slider\` \`label\` \`toggle\`
 
-### Layout Components
-- **Card** - Container with header, content, footer
-- **Grid** - Responsive grid layout
-- **Separator** - Visual divider
-- **Spacer** - Flexible spacing element
-- **Stack** - Flex-based layout primitive
+### Layout  
+\`card\` \`separator\` \`collapsible\` \`accordion\` \`tabs\` \`table\`
 
-### Navigation Components
-- **Navigation Menu** - Horizontal navigation bar
-- **Tabs** - Tabbed content interface
-- **Breadcrumb** - Navigation trail
-- **Pagination** - Multi-page navigation
+### Feedback
+\`alert\` \`badge\` \`progress\` \`skeleton\` \`toast\` \`tooltip\`
 
-### Overlay Components
-- **Dialog** - Modal dialog box
-- **Popover** - Floating popover
-- **Tooltip** - Hover tooltip
-- **Alert Dialog** - Confirmation dialog
-- **Sheet** - Side panel/drawer
-- **Dropdown Menu** - Dropdown menu
+### Overlay
+\`dialog\` \`alert-dialog\` \`sheet\` \`drawer\` \`popover\` \`dropdown-menu\`
 
 ### Data Display
-- **Table** - Data table with sorting/filtering
-- **Badge** - Status badge
-- **Avatar** - User avatar
-- **Progress** - Progress bar
-- **Skeleton** - Loading skeleton
-- **Alert** - Alert message
-- **Chart** - Data visualization
-- **Code Block** - Syntax-highlighted code
+\`avatar\` \`calendar\` \`data-table\` \`breadcrumb\`
 
-### And Many More...
-
-[See all components →](https://shadcn-angular.tigayon.com/components)
+[See all 60+ components →](https://shadcn-angular.tigayon.com/components)
 
 ---
 
 ## 🎨 Theming
 
-Customize colors and appearance using CSS variables:
+The \`ng-cn.scss\` file contains all CSS variables for easy customization:
 
 ```scss
-// styles.scss
 :root {
-  --primary: 220 90% 56%;
-  --secondary: 210 40% 96%;
-  --destructive: 0 84% 60%;
-  --success: 142 76% 36%;
-  --warning: 38 92% 50%;
-  --muted: 210 10% 12%;
-  --background: 0 0% 100%;
-  --foreground: 220 13% 13%;
-  --border: 214 31% 91%;
-  --radius: 0.5rem;
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --accent: oklch(0.97 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --radius: 0.625rem;
+  /* ... more variables */
 }
 
-[data-theme="dark"] {
-  --background: 220 13% 13%;
-  --foreground: 0 0% 100%;
-  // ... override other variables
+.dark {
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  /* ... dark mode overrides */
 }
 ```
 
-[📖 Full theming guide →](https://shadcn-angular.tigayon.com/docs/theming)
+[📖 Theming Guide →](https://shadcn-angular.tigayon.com/docs/theming)
 
 ---
 
-## 🌙 Dark Mode
+## 📁 Project Structure
 
-Enable dark mode support automatically or manually:
+After running \`ng add @ng-cn/core\`, your project will have:
 
-```typescript
-import { Component, signal } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  template: `
-    <div [attr.data-theme]="isDark() ? 'dark' : 'light'">
-      <!-- Your content -->
-    </div>
-  `,
-})
-export class AppComponent {
-  isDark = signal(false);
-
-  toggleDarkMode() {
-    this.isDark.update(value => !value);
-  }
-}
+```
+src/
+├── ng-cn.scss              # Theme CSS variables (auto-imported)
+├── app/
+│   └── lib/
+│       ├── utils/
+│       │   ├── cn.ts       # Utility for merging classes
+│       │   └── index.ts
+│       └── components/
+│           └── ui/         # Your components live here
+│               ├── button/
+│               ├── card/
+│               └── ...
 ```
 
 ---
 
-## 🤖 AI Integration (MCP Server)
+## 🔧 Manual Installation
 
-## 🤖 AI Integration (MCP Server)
+If you prefer manual setup:
 
-Use the included MCP (Model Context Protocol) server to integrate shadcn-angular with AI assistants like Claude:
+```bash
+# 1. Install dependencies
+npm i @ng-cn/core clsx tailwind-merge class-variance-authority @angular/cdk lucide-angular
 
-### Setup
+# 2. Add Tailwind
+ng add tailwindcss
 
-1. **Build the MCP server:**
-   ```bash
-   npm run build:mcp
-   ```
+# 3. Copy the CSS variables from docs to your styles.scss
 
-2. **Configure Claude Desktop** (`~/.config/Claude/claude_desktop_config.json`):
-   ```json
-   {
-     "mcpServers": {
-       "shadcn-angular": {
-         "command": "node",
-         "args": ["/absolute/path/to/dist/mcp-server/index.js"]
-       }
-     }
-   }
-   ```
+# 4. Create the cn utility in src/app/lib/utils/cn.ts
+```
 
-3. **Start using AI assistance:**
-   - Ask Claude about component documentation
-   - Get installation commands for specific components
-   - Receive code examples and implementation guidance
+---
+
+## 🤖 AI Integration (MCP)
+
+ng-cn includes an MCP server for AI assistant integration:
+
+```bash
+npm run build:mcp
+```
 
 [🤖 MCP Setup Guide →](docs/MCP-SETUP.md)
 
@@ -229,155 +177,22 @@ Use the included MCP (Model Context Protocol) server to integrate shadcn-angular
 
 ## 📖 Documentation
 
-- **[Component Library](https://shadcn-angular.tigayon.com/components)** - Browse all available components
-- **[Installation Guide](https://shadcn-angular.tigayon.com/docs/installation)** - Setup instructions
-- **[Theming Guide](https://shadcn-angular.tigayon.com/docs/theming)** - Customize your design system
-- **[Dark Mode](https://shadcn-angular.tigayon.com/docs/dark-mode)** - Implement dark mode
-- **[API Reference](https://shadcn-angular.tigayon.com/docs/api)** - Component props and methods
-- **[Examples](https://shadcn-angular.tigayon.com/examples)** - Real-world examples
-
----
-
-## 🛠️ Development
-
-### Prerequisites
-- Node.js 18+ or higher
-- Angular 21+
-- Tailwind CSS 4+
-
-### Local Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Tigayon-Innovations/angular-shadcn.git
-   cd shadcn-angular
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   npm start
-   # or
-   ng serve
-   ```
-
-4. **Open your browser:**
-   ```
-   http://localhost:4200
-   ```
-
----
-
-## 📋 Building & Testing
-
-### Building
-
-```bash
-# Build for production
-ng build
-
-# Build with SSR support
-ng build -- --configuration production
-
-# Build only schematics
-npm run build:schematics
-
-# Build only MCP server
-npm run build:mcp
-```
-
-### Testing
-
-```bash
-# Run tests
-npm test
-
-# Run tests with UI
-npm run test:ui
-
-# Generate coverage report
-npm run test:coverage
-```
-
----
-
-## 🔗 Project Structure
-
-```
-shadcn-angular/
-├── src/
-│   ├── app/
-│   │   ├── components/          # UI components
-│   │   │   ├── ui/             # shadcn-angular components
-│   │   │   └── ...
-│   │   ├── blocks/             # Pre-built component blocks
-│   │   ├── lib/                # Utilities and helpers
-│   │   └── pages/              # Application pages
-│   ├── styles.scss             # Global styles
-│   └── main.ts                 # Application entry point
-├── mcp-server/                 # MCP server implementation
-├── schematics/                 # Angular CLI schematics
-├── docs/                       # Documentation
-└── package.json
-```
-
----
-
-## 🎓 Learning Resources
-
-- **[Angular Documentation](https://angular.io/docs)** - Official Angular docs
-- **[Tailwind CSS](https://tailwindcss.com/docs)** - Tailwind CSS v4 documentation
-- **[shadcn/ui](https://ui.shadcn.com/)** - Original React component library
-- **[TypeScript Handbook](https://www.typescriptlang.org/docs/)** - TypeScript documentation
+- [Installation](https://shadcn-angular.tigayon.com/docs/installation)
+- [Theming](https://shadcn-angular.tigayon.com/docs/theming)  
+- [Dark Mode](https://shadcn-angular.tigayon.com/docs/dark-mode)
+- [Components](https://shadcn-angular.tigayon.com/components)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE)
 
-Inspired by [shadcn/ui](https://github.com/shadcn-ui/ui) by [shadcn](https://twitter.com/shadcn).
-
----
-
-## 🙏 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Ways to Contribute
-- 🐛 Report bugs and issues
-- ✨ Request new components
-- 📝 Improve documentation
-- 🎨 Suggest design improvements
-- 🚀 Submit pull requests
-
----
-
-## 🤝 Support
-
-- **[GitHub Issues](https://github.com/Tigayon-Innovations/angular-shadcn/issues)** - Report bugs
-- **[GitHub Discussions](https://github.com/Tigayon-Innovations/angular-shadcn/discussions)** - Ask questions
-- **[Website](https://shadcn-angular.tigayon.com/)** - Visit our site
-
----
-
-## 📊 Stats
-
-- **60+** Components
-- **100%** Type-Safe
-- **WCAG 2.1 AA** Compliant
-- **2000+** Hours Development
-- **Active** Community
+Inspired by [shadcn/ui](https://github.com/shadcn-ui/ui)
 
 ---
 
 <div align="center">
-
-**[⬆ back to top](#-shadcn-angular)**
 
 Made with ❤️ by [Tigayon Innovations](https://tigayon.com)
 

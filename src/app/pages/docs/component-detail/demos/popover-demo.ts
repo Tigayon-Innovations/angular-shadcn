@@ -24,7 +24,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <PopoverTrigger>
         <Button variant="outline">Open popover</Button>
       </PopoverTrigger>
-      <PopoverContent class="w-80">
+      <PopoverContent class="w-80 overflow-visible">
         <div class="grid gap-4">
           <div class="space-y-2">
             <h4 class="font-medium leading-none">Dimensions</h4>

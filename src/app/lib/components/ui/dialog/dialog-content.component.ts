@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    HostListener,
     inject,
     input,
 } from '@angular/core';
@@ -28,7 +29,6 @@ import { DIALOG_CONTEXT } from './dialog-context';
         [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         role="dialog"
         aria-modal="true"
-        (keydown.escape)="onEscapeKey()"
       >
         <ng-content />
         <!-- Close button -->
@@ -84,12 +84,15 @@ export class DialogContent {
     )
   );
 
-  onOverlayClick(event: Event): void {
-    event.stopPropagation();
-    this.context.setOpen(false);
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.context.isOpen()) {
+      this.context.setOpen(false);
+    }
   }
 
-  onEscapeKey(): void {
+  onOverlayClick(event: Event): void {
+    event.stopPropagation();
     this.context.setOpen(false);
   }
 

@@ -167,7 +167,7 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
                     <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <span class="text-lg font-bold text-primary">57</span>
                     </div>
-                    <h3 class="text-xl font-semibold">57+ Components</h3>
+                    <h3 class="text-xl font-semibold">60+ Components</h3>
                   </div>
                   <p class="text-sm text-muted-foreground leading-relaxed">
                     Comprehensive set of components for forms, navigation, feedback, data display, and more.

@@ -32,7 +32,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <AlertDialogTrigger>
         <Button variant="outline">Show Dialog</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent class="max-w-sm">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>

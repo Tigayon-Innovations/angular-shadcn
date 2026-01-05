@@ -9,7 +9,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'avatar',
     description: 'An image element with a fallback for representing the user.',
     category: 'complex',
-    package: '@jamelyassin/avatar',
+    package: '@ng-cn/avatar',
     imports: ['Avatar', 'AvatarImage', 'AvatarFallback'],
     examples: [
       {
@@ -47,7 +47,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'badge',
     description: 'Displays a badge or a component that looks like a badge.',
     category: 'complex',
-    package: '@jamelyassin/badge',
+    package: '@ng-cn/badge',
     imports: ['Badge', 'badgeVariants'],
     examples: [
       {
@@ -70,7 +70,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'calendar',
     description: 'A date field component that allows users to enter and edit date.',
     category: 'complex',
-    package: '@jamelyassin/calendar',
+    package: '@ng-cn/calendar',
     imports: ['Calendar'],
     examples: [
       {
@@ -94,7 +94,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'carousel',
     description: 'A carousel with motion and swipe built using Embla.',
     category: 'complex',
-    package: '@jamelyassin/carousel',
+    package: '@ng-cn/carousel',
     imports: ['Carousel', 'CarouselContent', 'CarouselItem', 'CarouselPrevious', 'CarouselNext'],
     examples: [
       {
@@ -128,7 +128,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'chart',
     description: 'Beautiful charts built with SVG.',
     category: 'complex',
-    package: '@jamelyassin/chart',
+    package: '@ng-cn/chart',
     imports: ['Chart', 'ChartConfig'],
     examples: [
       {
@@ -147,7 +147,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'command',
     description: 'Fast, composable, unstyled command menu.',
     category: 'complex',
-    package: '@jamelyassin/command',
+    package: '@ng-cn/command',
     imports: ['Command', 'CommandInput', 'CommandList', 'CommandEmpty', 'CommandGroup', 'CommandItem', 'CommandSeparator', 'CommandShortcut'],
     examples: [
       {
@@ -196,7 +196,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'progress',
     description: 'Displays an indicator showing the completion progress.',
     category: 'complex',
-    package: '@jamelyassin/progress',
+    package: '@ng-cn/progress',
     imports: ['Progress'],
     examples: [
       {
@@ -214,7 +214,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'skeleton',
     description: 'Used to show a placeholder while content is loading.',
     category: 'complex',
-    package: '@jamelyassin/skeleton',
+    package: '@ng-cn/skeleton',
     imports: ['Skeleton'],
     examples: [
       {
@@ -247,7 +247,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'spinner',
     description: 'A loading spinner indicator.',
     category: 'complex',
-    package: '@jamelyassin/spinner',
+    package: '@ng-cn/spinner',
     imports: ['Spinner'],
     examples: [
       {
@@ -273,7 +273,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     slug: 'table',
     description: 'A responsive table component.',
     category: 'complex',
-    package: '@jamelyassin/table',
+    package: '@ng-cn/table',
     imports: ['Table', 'TableHeader', 'TableBody', 'TableFooter', 'TableHead', 'TableRow', 'TableCell', 'TableCaption'],
     examples: [
       {

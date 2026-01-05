@@ -31,24 +31,22 @@ import {
   template: `
     <span
       data-slot="checkbox-indicator"
-      class="flex items-center justify-center text-current transition-none"
+      class="flex items-center justify-center text-current"
     >
-      @if (checked()) {
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-3.5"
-        >
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      }
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        [class]="checkIconClass()"
+      >
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
     </span>
   `,
   host: {
@@ -83,10 +81,20 @@ export class Checkbox {
     }
   }
 
+  /** Computed class for the check icon with animation */
+  protected readonly checkIconClass = computed(() =>
+    cn(
+      'size-3.5 transition-all duration-200 ease-in-out',
+      this.checked()
+        ? 'opacity-100 scale-100'
+        : 'opacity-0 scale-0'
+    )
+  );
+
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+      'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-all duration-200 outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
       'inline-flex items-center justify-center cursor-pointer',
       this.disabled() && 'cursor-not-allowed opacity-50',
       this.class()

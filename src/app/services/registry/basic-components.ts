@@ -9,7 +9,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'accordion',
     description: 'A vertically stacked set of interactive headings.',
     category: 'basic',
-    package: '@jamelyassin/accordion',
+    package: '@ng-cn/accordion',
     imports: ['Accordion', 'AccordionItem', 'AccordionTrigger', 'AccordionContent'],
     examples: [
       {
@@ -52,7 +52,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'breadcrumb',
     description: 'Displays the path to the current resource.',
     category: 'basic',
-    package: '@jamelyassin/breadcrumb',
+    package: '@ng-cn/breadcrumb',
     imports: ['Breadcrumb', 'BreadcrumbList', 'BreadcrumbItem', 'BreadcrumbLink', 'BreadcrumbPage', 'BreadcrumbSeparator', 'BreadcrumbEllipsis'],
     examples: [
       {
@@ -101,7 +101,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'context-menu',
     description: 'Displays a menu to the user on right click.',
     category: 'basic',
-    package: '@jamelyassin/context-menu',
+    package: '@ng-cn/context-menu',
     imports: ['ContextMenu', 'ContextMenuTrigger', 'ContextMenuContent', 'ContextMenuItem', 'ContextMenuSeparator', 'ContextMenuShortcut'],
     examples: [
       {
@@ -139,7 +139,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'dropdown-menu',
     description: 'Displays a menu when triggered.',
     category: 'basic',
-    package: '@jamelyassin/dropdown-menu',
+    package: '@ng-cn/dropdown-menu',
     imports: ['DropdownMenu', 'DropdownMenuTrigger', 'DropdownMenuContent', 'DropdownMenuItem', 'DropdownMenuLabel', 'DropdownMenuSeparator', 'DropdownMenuShortcut', 'DropdownMenuGroup'],
     examples: [
       {
@@ -184,7 +184,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'menubar',
     description: 'A visually persistent menu common in desktop applications.',
     category: 'basic',
-    package: '@jamelyassin/menubar',
+    package: '@ng-cn/menubar',
     imports: ['Menubar', 'MenubarMenu', 'MenubarTrigger', 'MenubarContent', 'MenubarItem', 'MenubarSeparator', 'MenubarShortcut'],
     examples: [
       {
@@ -239,7 +239,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'navigation-menu',
     description: 'A collection of links for navigating websites.',
     category: 'basic',
-    package: '@jamelyassin/navigation-menu',
+    package: '@ng-cn/navigation-menu',
     imports: ['NavigationMenu', 'NavigationMenuList', 'NavigationMenuItem', 'NavigationMenuTrigger', 'NavigationMenuContent', 'NavigationMenuLink'],
     examples: [
       {
@@ -265,7 +265,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'pagination',
     description: 'Pagination with page navigation, next and previous links.',
     category: 'basic',
-    package: '@jamelyassin/pagination',
+    package: '@ng-cn/pagination',
     imports: ['Pagination', 'PaginationContent', 'PaginationItem', 'PaginationLink', 'PaginationPrevious', 'PaginationNext', 'PaginationEllipsis'],
     examples: [
       {
@@ -304,7 +304,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     slug: 'tabs',
     description: 'A set of layered sections of content.',
     category: 'basic',
-    package: '@jamelyassin/tabs',
+    package: '@ng-cn/tabs',
     imports: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
     examples: [
       {

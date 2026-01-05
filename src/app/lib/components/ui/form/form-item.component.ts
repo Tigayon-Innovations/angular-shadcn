@@ -35,7 +35,7 @@ export class FormItem {
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'grid gap-2 [&_[data-slot=form-control]]:col-start-1 [&_[data-slot=form-control]]:row-start-2 [&_[data-slot=form-description]:not(:first-child)]:row-start-3 [&_[data-slot=form-message]:not(:first-child)]:row-start-4 has-[[aria-invalid=true]]:text-destructive',
+      'flex flex-col gap-2',
       this.class()
     )
   );

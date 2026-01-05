@@ -4,7 +4,7 @@ import type { ApiProperty } from '@/components/api-reference';
  * Package scope for npm publishing - change this to update all component packages
  * Update this value when you want to change the npm scope (e.g., @newscope)
  */
-export const PACKAGE_SCOPE = '@jamelyassin';
+export const PACKAGE_SCOPE = '@ng-cn';
 
 export type ComponentCategory =
   | 'basic'

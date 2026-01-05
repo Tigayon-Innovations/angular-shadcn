@@ -1,18 +1,18 @@
 import { cn } from '@/lib/utils';
 import {
-    booleanAttribute,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    input,
-    signal,
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  signal,
 } from '@angular/core';
 import {
-    ACCORDION_CONTEXT,
-    AccordionContext,
-    AccordionType,
+  ACCORDION_CONTEXT,
+  AccordionContext,
+  AccordionType,
 } from './accordion-context';
 
 /**
