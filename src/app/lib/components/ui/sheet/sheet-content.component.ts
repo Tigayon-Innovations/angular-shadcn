@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { SHEET_CONTEXT } from './sheet-context';
 import { sheetVariants, type SheetVariants } from './sheet-variants';
@@ -19,7 +19,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
     @if (context.open()) {
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        class="fixed inset-0 z-[100] bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
       ></div>

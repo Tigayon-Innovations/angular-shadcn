@@ -1,6 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
+    effect,
     forwardRef,
     input,
     output,
@@ -50,22 +52,33 @@ export class Sheet implements SheetContextValue {
   /** Open change event */
   readonly openChange = output<boolean>();
 
-  readonly open = signal(false);
+  private readonly _internalOpen = signal(false);
+
+  /** Computed open state - uses controlled value if provided, otherwise internal state */
+  readonly open = computed(() => {
+    const controlled = this.controlledOpen();
+    if (controlled !== undefined) {
+      return controlled;
+    }
+    return this._internalOpen();
+  });
 
   constructor() {
-    if (this.defaultOpen()) {
-      this.open.set(true);
-    }
+    // Sync defaultOpen on init
+    effect(() => {
+      if (this.defaultOpen() && this.controlledOpen() === undefined) {
+        this._internalOpen.set(true);
+      }
+    }, { allowSignalWrites: true });
   }
 
   setOpen(open: boolean): void {
-    if (this.controlledOpen() === undefined) {
-      this.open.set(open);
-    }
+    // Always update internal state for uncontrolled mode
+    this._internalOpen.set(open);
     this.openChange.emit(open);
   }
 
   isOpen(): boolean {
-    return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
+    return this.open();
   }
 }

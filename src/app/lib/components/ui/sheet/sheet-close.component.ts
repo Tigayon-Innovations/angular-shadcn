@@ -1,8 +1,8 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
 } from '@angular/core';
 import { SHEET_CONTEXT } from './sheet-context';
 
@@ -14,6 +14,7 @@ import { SHEET_CONTEXT } from './sheet-context';
   selector: 'SheetClose',
   template: `<ng-content />`,
   host: {
+    class: 'contents',
     '(click)': 'onClick($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,7 +1,7 @@
-import { InjectionToken, WritableSignal } from '@angular/core';
+import { InjectionToken, Signal } from '@angular/core';
 
 export interface SheetContextValue {
-  open: WritableSignal<boolean>;
+  open: Signal<boolean>;
   setOpen: (open: boolean) => void;
   side: 'top' | 'right' | 'bottom' | 'left';
 }
