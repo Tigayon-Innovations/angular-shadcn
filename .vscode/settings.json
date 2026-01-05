@@ -1,0 +1,7 @@
+{
+    "chat.mcp.serverSampling": {
+        "shadcn-angular/.vscode/mcp.json: angular-cli": {
+            "allowedDuringChat": true
+        }
+    }
+}

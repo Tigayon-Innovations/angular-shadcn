@@ -1,5 +1,5 @@
 import { BlocksSidebar } from '@/components/blocks-sidebar';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 /**
@@ -8,6 +8,7 @@ import { RouterOutlet } from '@angular/router';
  */
 @Component({
   selector: 'app-blocks-layout',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet, BlocksSidebar],
   template: `
     <div class="flex h-[calc(100vh-3.5rem)]">

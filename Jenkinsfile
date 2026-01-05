@@ -42,6 +42,9 @@ pipeline {
                         # Clean start
                         rm -rf node_modules package-lock.json
 
+                        # Copy environment file from example (gitignored)
+                        cp src/environments/environment.example.ts src/environments/environment.ts
+
                         # Install all dependencies (including devDependencies for build)
                         npm install
 
