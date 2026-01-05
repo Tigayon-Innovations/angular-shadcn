@@ -181,6 +181,7 @@ npm run build:mcp
 - [Theming](https://shadcn-angular.tigayon.com/docs/theming)  
 - [Dark Mode](https://shadcn-angular.tigayon.com/docs/dark-mode)
 - [Components](https://shadcn-angular.tigayon.com/components)
+- [Contributing Guide](CONTRIBUTING.md)
 
 ---
 
