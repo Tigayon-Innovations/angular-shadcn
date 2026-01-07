@@ -62,6 +62,11 @@ export const routes: Routes = [
       import('@/pages/playground').then((m) => m.PlaygroundPage),
   },
   {
+    path: 'charts',
+    loadComponent: () =>
+      import('@/pages/charts').then((m) => m.ChartsPage),
+  },
+  {
     path: 'blocks',
     loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksLayout),
     children: [

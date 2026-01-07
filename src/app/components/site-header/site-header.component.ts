@@ -61,7 +61,7 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
         <!-- Main Nav -->
         <nav class="hidden md:flex flex-1 items-center gap-6 text-sm">
           <a routerLink="/docs" class="text-foreground/60 transition-colors hover:text-foreground/80">
-            Documentation
+            Docs
           </a>
           <a routerLink="/docs/components" class="text-foreground/60 transition-colors hover:text-foreground/80">
             Components
@@ -69,14 +69,14 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
           <a routerLink="/blocks" class="text-foreground/60 transition-colors hover:text-foreground/80">
             Blocks
           </a>
+          <a routerLink="/charts" class="text-foreground/60 transition-colors hover:text-foreground/80">
+            Charts
+          </a>
           <a routerLink="/playground" class="text-foreground/60 transition-colors hover:text-foreground/80">
             Playground
           </a>
           <a routerLink="/theme-editor" class="text-foreground/60 transition-colors hover:text-foreground/80">
             Theme Editor
-          </a>
-          <a routerLink="/docs/mcp-setup" class="text-foreground/60 transition-colors hover:text-foreground/80">
-            MCP Setup
           </a>
           <a
             href="https://github.com/example/shadcn-angular"
@@ -192,7 +192,7 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
           class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
           (click)="closeMobileMenu()"
         >
-          Documentation
+          Docs
         </a>
         <a
           routerLink="/docs/components"
@@ -209,6 +209,13 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
           Blocks
         </a>
         <a
+          routerLink="/charts"
+          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+          (click)="closeMobileMenu()"
+        >
+          Charts
+        </a>
+        <a
           routerLink="/playground"
           class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
           (click)="closeMobileMenu()"
@@ -221,13 +228,6 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
           (click)="closeMobileMenu()"
         >
           Theme Editor
-        </a>
-        <a
-          routerLink="/docs/mcp-setup"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          MCP Setup
         </a>
 
         <div class="border-t border-border my-3"></div>
