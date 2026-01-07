@@ -31,6 +31,9 @@ import {
   template: ``,
   host: {
     '[class]': 'computedClass()',
+    'aria-busy': 'true',
+    '[attr.aria-label]': 'ariaLabel()',
+    'role': 'status',
     'data-slot': 'skeleton',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +41,9 @@ import {
 export class Skeleton {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  /** Accessible label for the loading skeleton */
+  readonly ariaLabel = input<string>('Loading...');
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>

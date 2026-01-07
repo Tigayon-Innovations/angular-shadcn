@@ -1,16 +1,18 @@
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-  output,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    forwardRef,
+    inject,
+    input,
+    output,
+    signal,
 } from '@angular/core';
 import { DRAWER_CONTEXT, type DrawerContextValue } from './drawer-context';
 
 /**
  * Drawer component - a modal drawer that slides up from the bottom.
- * Matches shadcn/ui React Drawer exactly.
+ * Matches shadcn/ui React Drawer exactly with enhanced accessibility.
  *
  * @example
  * <Drawer>
@@ -44,6 +46,9 @@ import { DRAWER_CONTEXT, type DrawerContextValue } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Drawer implements DrawerContextValue {
+  private readonly ariaIdService = inject(AriaIdService);
+  private readonly ariaIds = this.ariaIdService.generateDialogIds('drawer');
+
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
@@ -60,6 +65,14 @@ export class Drawer implements DrawerContextValue {
   readonly openChange = output<boolean>();
 
   readonly open = signal(false);
+
+  /** ARIA IDs for accessibility */
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
+
+  /** Reference to the trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
 
   constructor() {
     if (this.defaultOpen()) {

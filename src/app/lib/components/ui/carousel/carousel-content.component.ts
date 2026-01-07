@@ -15,6 +15,7 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   `,
   host: {
     '[class]': 'computedClass()',
+    'aria-atomic': 'false',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

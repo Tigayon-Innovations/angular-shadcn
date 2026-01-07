@@ -12,6 +12,7 @@ import { SELECT_CONTEXT } from './select-context';
 
 /**
  * SelectContent component - the dropdown content container.
+ * Implements proper ARIA listbox pattern.
  *
  * @example
  * <SelectContent>
@@ -30,10 +31,12 @@ import { SELECT_CONTEXT } from './select-context';
   `,
   host: {
     '[class]': 'computedClass()',
+    '[attr.id]': 'context?.contentId',
     '[attr.data-state]': 'context?.open() ? "open" : "closed"',
     '[attr.data-side]': 'side()',
     '[attr.data-align]': 'align()',
     'role': 'listbox',
+    '[attr.aria-label]': '"Options"',
     'data-slot': 'select-content',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -12,6 +12,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 /**
  * AlertDialogCancel component - cancel button that closes dialog.
  * Matches shadcn/ui React AlertDialogCancel exactly.
+ * This is the default focus target when AlertDialog opens.
  */
 @Component({
   selector: 'AlertDialogCancel',
@@ -19,6 +20,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   host: {
     '[class]': 'computedClass()',
     '(click)': 'onClick($event)',
+    'data-slot': 'alert-dialog-cancel',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

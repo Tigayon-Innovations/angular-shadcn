@@ -1,6 +1,7 @@
+import { SeoService } from '@/services/seo.service';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-angular';
 
@@ -246,5 +247,30 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
   `,
 })
 export class IntroductionPage {
+  private readonly seo = inject(SeoService);
+
   protected readonly icons = { ArrowRight, Github, ExternalLink };
+
+  constructor() {
+    this.seo.updateMetaTags({
+      title: 'Introduction',
+      description:
+        'Learn about shadcn-angular, a collection of beautiful, accessible, and customizable UI components for Angular built with Tailwind CSS.',
+      keywords: [
+        'angular',
+        'shadcn',
+        'introduction',
+        'getting started',
+        'ui components',
+        'tailwind css',
+        'component library',
+      ],
+      canonicalUrl: '/docs/introduction',
+      structuredData: this.seo.getBreadcrumbStructuredData([
+        { name: 'Home', url: '/' },
+        { name: 'Documentation', url: '/docs' },
+        { name: 'Introduction', url: '/docs/introduction' },
+      ]),
+    });
+  }
 }

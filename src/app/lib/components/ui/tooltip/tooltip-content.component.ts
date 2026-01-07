@@ -16,7 +16,7 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
   selector: 'TooltipContent',
   template: `
     @if (context.open()) {
-      <div [class]="computedClass()" role="tooltip" id="tooltip-content">
+      <div [class]="computedClass()" role="tooltip" [id]="context.tooltipId">
         <ng-content />
       </div>
     }

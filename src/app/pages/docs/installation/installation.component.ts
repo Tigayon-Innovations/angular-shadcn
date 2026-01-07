@@ -1,7 +1,8 @@
 import { CodeBlock } from '@/components/code-block';
+import { SeoService } from '@/services/seo.service';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArrowLeft, ArrowRight, FolderTree, LucideAngularModule, Package, Terminal, Zap } from 'lucide-angular';
 
@@ -224,12 +225,38 @@ import { ArrowLeft, ArrowRight, FolderTree, LucideAngularModule, Package, Termin
   `,
 })
 export class InstallationPage {
+  private readonly seo = inject(SeoService);
+
   protected readonly icons = { ArrowRight, ArrowLeft, Terminal, Zap, FolderTree, Package };
 
   protected readonly popularComponents = [
     'button', 'card', 'dialog', 'input', 'select',
     'checkbox', 'tabs', 'table', 'toast', 'dropdown-menu'
   ];
+
+  constructor() {
+    this.seo.updateMetaTags({
+      title: 'Installation',
+      description:
+        'Learn how to install and set up shadcn-angular in your Angular project. One command setup with zero configuration.',
+      keywords: [
+        'angular',
+        'shadcn',
+        'installation',
+        'setup',
+        'getting started',
+        'ng add',
+        'tailwind css',
+        'npm',
+      ],
+      canonicalUrl: '/docs/installation',
+      structuredData: this.seo.getBreadcrumbStructuredData([
+        { name: 'Home', url: '/' },
+        { name: 'Documentation', url: '/docs' },
+        { name: 'Installation', url: '/docs/installation' },
+      ]),
+    });
+  }
 
   protected readonly quickStartCode = `ng add @ng-cn/core`;
 

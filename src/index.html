@@ -2,10 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Shadcn/ui for Angular</title>
+  <title>shadcn-angular - Beautiful UI Components for Angular</title>
   <base href="/">
+
+  <!-- Primary Meta Tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Angular_gradient_logo.png/1200px-Angular_gradient_logo.png">
+  <meta name="title" content="shadcn-angular - Beautiful UI Components for Angular">
+  <meta name="description" content="Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS. Open source and ready to use.">
+  <meta name="keywords" content="angular, shadcn, ui components, tailwind css, typescript, accessible, open source, angular components, design system, component library, radix, headless ui">
+  <meta name="author" content="shadcn-angular">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="generator" content="Angular">
+
+  <!-- Theme & App Meta -->
+  <meta name="theme-color" content="#18181B">
+  <meta name="color-scheme" content="light dark">
+  <meta name="msapplication-TileColor" content="#18181B">
+  <meta name="application-name" content="shadcn-angular">
+
+  <!-- Mobile Meta -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="shadcn-angular">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shadcn-angular.dev/">
+  <meta property="og:title" content="shadcn-angular - Beautiful UI Components for Angular">
+  <meta property="og:description" content="Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS. Open source and ready to use.">
+  <meta property="og:image" content="https://shadcn-angular.dev/og-image.png">
+  <meta property="og:image:alt" content="shadcn-angular - Beautiful UI components for Angular">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="shadcn-angular">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://shadcn-angular.dev/">
+  <meta name="twitter:title" content="shadcn-angular - Beautiful UI Components for Angular">
+  <meta name="twitter:description" content="Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS. Open source and ready to use.">
+  <meta name="twitter:image" content="https://shadcn-angular.dev/og-image.png">
+  <meta name="twitter:image:alt" content="shadcn-angular - Beautiful UI components for Angular">
+  <meta name="twitter:site" content="@shadcn_angular">
+  <meta name="twitter:creator" content="@shadcn_angular">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://shadcn-angular.dev/">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAAb1BMVEUAAAD///8XFxfGxsbJycm5ubkgICAYGBjMzMwqKiqkpKShoaHZ2dkcHBzW1tYtLS0PDw/19fU8PDwICAgkJCS/v7/n5+cxMTE3NzcSEhKEhISYmJjh4eE9PT3r6+uLi4tVVVVoaGiwsLBRUVFdXV34CXnyAAACxUlEQVR4nO2bbXObQAyEfeAXcDDFPYcE26VNmv//Gxu7IYgZt3PIw4nN7POdyUaj22MlvFgQQgghhBBCCCGEEEIIIYQQQr4ojbWA0VQ/W1f88tYyRpGn7sIRSbVfXjW79mCtJJw8cx+8WUsJZpd2mt2LtZZQ1stPzftnazGB5H2d3WtlrSaMKus1nxNrNWHkfW+4FYjmSmjOdtZqwjgIzY8gdV6LM/i4tlYTxk72BkidpdetQPrZI3qd0IzidYnojQzkDA68bmOtJowDoNclos4lSD+je10B0s+IXieylUtBzqDIVi4FqbP0uhVIneU7fwFS50G2AvENWecSxJ+l1zFbTccgW4H0cw7odZDZCnCO1HCOFAXEbLXhHCkOiF4HmK02ojeWIGdQel0K8r6B6HWNbo7UJI3dhlyXrZpjua+3T1MK+w9e1jm8n7fXB2obo9Flq+Th45HTlNr+hXKO1Gl2mcG+Wc6RluH9vHWGonXZqnron4rfHrodve/rbHAQddkqEXUuv0+p7xbKHb2oc/xPVXTZKhGai+hXi3KOJHqjjt4buh19Jep8/jalvlvospX0uiJ6nZVzJHkG49dZla0GXhfdN5Q7eqHZ2Os07xuuiN4bumzlTb1Ot6MfvG+AeF0zG68bsaOXXhf97kb0unuzlYXX6Xb08/G68Gwlve78Y0p9t9Dt6KXXtfG9TjdHmk22GrGjn43XKeZIl/8UMFu1ttkquJ9nlK1Uc6QiutdBZqv750jR7+5KZiuQOdLiqPI60znSwu8VXmebrd7v4b43VHOk+NnqQtGdQZBsdeU3ltf9xR/b9z/+CuJ1Hf7w9vIcvs4xzVY6bLOVEuHqZ5szOJ6mNPY6DcnnVWTkdRqaujuDVp8XKOiyt53XaXiqrd437iE5ZdkJ5GsxQQXy43tCCCGEEEIIIYQQQgghhBBCCCFfnT9MgR8dTROf8AAAAABJRU5ErkJggg==">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#18181B">
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "shadcn-angular",
+    "url": "https://shadcn-angular.dev",
+    "description": "Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS. Open source and ready to use.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://shadcn-angular.dev/docs/components?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "shadcn-angular",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS.",
+    "author": {
+      "@type": "Organization",
+      "name": "shadcn-angular"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "ratingCount": "100"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "shadcn-angular",
+    "url": "https://shadcn-angular.dev",
+    "logo": "https://shadcn-angular.dev/logo.png",
+    "sameAs": [
+      "https://github.com/shadcn-angular/ui",
+      "https://twitter.com/shadcn_angular"
+    ]
+  }
+  </script>
 </head>
 <body>
   <app-root></app-root>

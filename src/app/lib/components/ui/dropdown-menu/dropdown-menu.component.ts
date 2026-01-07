@@ -1,3 +1,4 @@
+import { AriaIdService } from '@/lib/utils/accessibility';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT, type DropdownMenuContextValue } from './dropdown-menu-context';
 
@@ -11,9 +12,16 @@ import { DROPDOWN_MENU_CONTEXT, type DropdownMenuContextValue } from './dropdown
   providers: [
     {
       provide: DROPDOWN_MENU_CONTEXT,
-      useFactory: (): DropdownMenuContextValue => ({
-        open: signal(false),
-      }),
+      useFactory: (ariaIdService: AriaIdService): DropdownMenuContextValue => {
+        const menuIds = ariaIdService.generateMenuIds('dropdown-menu');
+        return {
+          open: signal(false),
+          contentId: menuIds.contentId,
+          triggerElement: signal(null),
+          focusedIndex: signal(-1),
+        };
+      },
+      deps: [AriaIdService],
     },
   ],
   host: {

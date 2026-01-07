@@ -1,15 +1,17 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    inject,
+    input
 } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
 /**
  * SelectTrigger component - the button that opens the select dropdown.
+ * Implements proper ARIA combobox trigger pattern with keyboard navigation.
  *
  * @example
  * <SelectTrigger class="w-[180px]">
@@ -42,20 +44,20 @@ import { SELECT_CONTEXT } from './select-context';
     'role': 'combobox',
     '[attr.aria-expanded]': 'context?.open()',
     '[attr.aria-haspopup]': '"listbox"',
+    '[attr.aria-controls]': 'context?.contentId',
     '[attr.data-state]': 'context?.open() ? "open" : "closed"',
     '[attr.data-disabled]': 'context?.disabled() ? "" : null',
     '[attr.data-placeholder]': '!context?.value() ? "" : null',
     '[attr.disabled]': 'context?.disabled() ? "" : null',
     '(click)': 'toggleOpen()',
-    '(keydown.space)': 'toggleOpen(); $event.preventDefault()',
-    '(keydown.enter)': 'toggleOpen(); $event.preventDefault()',
-    '(keydown.escape)': 'close()',
+    '(keydown)': 'onKeyDown($event)',
     'data-slot': 'select-trigger',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTrigger {
   protected readonly context = inject(SELECT_CONTEXT, { optional: true });
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -63,14 +65,78 @@ export class SelectTrigger {
   /** Toggle the select open state */
   toggleOpen() {
     if (!this.context?.disabled()) {
+      // Save trigger element for focus restoration
+      this.context?.triggerElement.set(this.elementRef.nativeElement);
       const newState = !this.context?.open();
       this.context?.open.set(newState);
+      if (newState) {
+        // Focus first item when opening
+        setTimeout(() => this.context?.focusItem(0));
+      }
     }
   }
 
   /** Close the select */
   close() {
     this.context?.open.set(false);
+  }
+
+  /** Handle keyboard navigation */
+  onKeyDown(event: KeyboardEvent): void {
+    if (!this.context || this.context.disabled()) return;
+
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.toggleOpen();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        if (!this.context.open()) {
+          // Save trigger element
+          this.context.triggerElement.set(this.elementRef.nativeElement);
+          this.context.open.set(true);
+          setTimeout(() => this.context?.focusItem(0));
+        } else {
+          // Move to next item
+          const currentIndex = this.context.focusedIndex();
+          const itemCount = this.context.itemValues().length;
+          this.context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (!this.context.open()) {
+          // Save trigger element
+          this.context.triggerElement.set(this.elementRef.nativeElement);
+          this.context.open.set(true);
+          const lastIndex = this.context.itemValues().length - 1;
+          setTimeout(() => this.context?.focusItem(lastIndex));
+        } else {
+          // Move to previous item
+          const currentIndex = this.context.focusedIndex();
+          this.context.focusItem(Math.max(currentIndex - 1, 0));
+        }
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.close();
+        break;
+      case 'Home':
+        if (this.context.open()) {
+          event.preventDefault();
+          this.context.focusItem(0);
+        }
+        break;
+      case 'End':
+        if (this.context.open()) {
+          event.preventDefault();
+          const lastIndex = this.context.itemValues().length - 1;
+          this.context.focusItem(lastIndex);
+        }
+        break;
+    }
   }
 
   /** Computed class combining base styles and custom classes */

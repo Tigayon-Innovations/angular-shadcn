@@ -1,23 +1,24 @@
 import { cn } from '@/lib/utils';
 import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  input,
-  signal,
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    forwardRef,
+    input,
+    signal,
 } from '@angular/core';
 import {
-  ACCORDION_CONTEXT,
-  AccordionContext,
-  AccordionType,
+    ACCORDION_CONTEXT,
+    AccordionContext,
+    AccordionType,
 } from './accordion-context';
 
 /**
  * Accordion component - root container for accordion items.
  * Matches shadcn/ui React Accordion exactly.
+ * Includes full keyboard navigation with arrow keys.
  *
  * @example
  * <Accordion type="single" collapsible defaultValue="item-1">
@@ -33,6 +34,7 @@ import {
   host: {
     '[class]': 'computedClass()',
     '[attr.data-orientation]': '"vertical"',
+    '(keydown)': 'onKeydown($event)',
   },
   providers: [
     {
@@ -60,6 +62,9 @@ export class Accordion implements AccordionContext {
 
   /** Internal state for open items */
   private readonly openItems = signal<Set<string>>(new Set());
+
+  /** Registry of item values for keyboard navigation */
+  readonly itemValues = signal<string[]>([]);
 
   /** Flag to track if initialized */
   private initialized = false;
@@ -134,6 +139,58 @@ export class Accordion implements AccordionContext {
       return controlled === itemValue;
     }
     return this.openItems().has(itemValue);
+  }
+
+  /** Handle keyboard navigation */
+  onKeydown(event: KeyboardEvent): void {
+    const values = this.itemValues();
+    if (values.length === 0) return;
+
+    // Find the currently focused trigger
+    const activeElement = document.activeElement;
+    const currentTrigger = activeElement?.closest('[role="button"][aria-expanded]');
+    if (!currentTrigger) return;
+
+    // Find current index by looking at the accordion item
+    const accordionItem = currentTrigger.closest('AccordionItem');
+    const itemValue = accordionItem?.getAttribute('data-value') ||
+                     values.find(v => document.querySelector(`AccordionItem[data-state][data-value="${v}"]`)?.contains(currentTrigger));
+
+    if (!itemValue) return;
+    const currentIndex = values.indexOf(itemValue);
+    if (currentIndex === -1) return;
+
+    let newIndex = currentIndex;
+    let handled = false;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        newIndex = currentIndex < values.length - 1 ? currentIndex + 1 : 0;
+        handled = true;
+        break;
+      case 'ArrowUp':
+        newIndex = currentIndex > 0 ? currentIndex - 1 : values.length - 1;
+        handled = true;
+        break;
+      case 'Home':
+        newIndex = 0;
+        handled = true;
+        break;
+      case 'End':
+        newIndex = values.length - 1;
+        handled = true;
+        break;
+    }
+
+    if (handled) {
+      event.preventDefault();
+      // Focus the trigger of the new item
+      const newValue = values[newIndex];
+      const newTrigger = document.querySelector(
+        `AccordionItem[data-value="${newValue}"] AccordionTrigger, [data-accordion-trigger="${newValue}"]`
+      ) as HTMLElement;
+      newTrigger?.focus();
+    }
   }
 
   protected readonly computedClass = computed(() => cn('w-full', this.class()));

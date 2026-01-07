@@ -14,7 +14,13 @@ import { ToastService } from './toast.service';
   selector: 'Toaster',
   imports: [Toast, ToastTitle, ToastDescription, ToastAction],
   template: `
-    <div [class]="computedClass()">
+    <div
+      [class]="computedClass()"
+      role="region"
+      aria-label="Notifications"
+      aria-live="polite"
+      aria-relevant="additions"
+    >
       @for (toast of toastService.toasts(); track toast.id) {
         <Toast
           [variant]="toast.type"

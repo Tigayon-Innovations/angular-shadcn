@@ -1,10 +1,12 @@
 import { cn } from '@/lib/utils';
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
     effect,
     forwardRef,
+    inject,
     input,
     output,
     signal,
@@ -14,6 +16,7 @@ import { TABS_CONTEXT, TabsContext } from './tabs-context';
 /**
  * Tabs component - root container for tabbed interface.
  * Matches shadcn/ui React Tabs exactly.
+ * Includes full keyboard navigation with arrow keys.
  *
  * @example
  * <Tabs defaultValue="account" class="w-[400px]">
@@ -30,7 +33,7 @@ import { TABS_CONTEXT, TabsContext } from './tabs-context';
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    '[attr.data-orientation]': '"horizontal"',
+    '[attr.data-orientation]': 'orientation()',
   },
   providers: [
     {
@@ -41,11 +44,17 @@ import { TABS_CONTEXT, TabsContext } from './tabs-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Tabs implements TabsContext {
+  private readonly ariaIdService = inject(AriaIdService);
+  private readonly ariaIds = this.ariaIdService.generateTabIds('tabs');
+
   /** Default value - the tab that should be open initially */
   readonly defaultValue = input<string>('');
 
   /** Controlled value - external control of active tab */
   readonly controlledValue = input<string | undefined>(undefined, { alias: 'value' });
+
+  /** Orientation for keyboard navigation */
+  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 
   /** Additional CSS classes */
   readonly class = input<string>('');
@@ -55,6 +64,18 @@ export class Tabs implements TabsContext {
 
   /** Internal state for the active tab value */
   private readonly _value = signal<string>('');
+
+  /** ARIA IDs */
+  readonly tablistId = this.ariaIds.tablistId;
+
+  /** Registry of tab values for keyboard navigation */
+  readonly tabValues = signal<string[]>([]);
+
+  /** Generate tab ID for a specific value */
+  getTabId = (value: string): string => `${this.tablistId}-tab-${value}`;
+
+  /** Generate panel ID for a specific value */
+  getPanelId = (value: string): string => `${this.tablistId}-panel-${value}`;
 
   constructor() {
     // Initialize with defaultValue

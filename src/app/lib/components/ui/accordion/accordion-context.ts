@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, WritableSignal } from '@angular/core';
 
 // ============================================================================
 // Types
@@ -12,12 +12,17 @@ export interface AccordionContext {
   value: () => string | string[] | undefined;
   onValueChange: (itemValue: string) => void;
   isItemOpen: (itemValue: string) => boolean;
+  /** Registry of item values for keyboard navigation */
+  itemValues: WritableSignal<string[]>;
 }
 
 export interface AccordionItemContext {
   value: () => string;
   isOpen: () => boolean;
   toggle: () => void;
+  /** Unique IDs for ARIA relationships */
+  triggerId: string;
+  contentId: string;
 }
 
 // ============================================================================

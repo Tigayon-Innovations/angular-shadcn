@@ -1,20 +1,27 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  input,
-  model,
-  viewChild,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    forwardRef,
+    input,
+    model,
+    signal,
+    viewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * Slider component for range selection.
+ * Implements ControlValueAccessor for Angular Forms integration.
  *
  * @example
  * <!-- Basic slider -->
  * <Slider [(value)]="volume" />
+ *
+ * <!-- With reactive forms -->
+ * <Slider formControlName="temperature" />
  *
  * <!-- With min/max/step -->
  * <Slider [(value)]="temperature" [min]="0" [max]="100" [step]="5" />
@@ -40,22 +47,32 @@ import {
       [attr.aria-valuenow]="value()"
       [attr.aria-valuemin]="min()"
       [attr.aria-valuemax]="max()"
+      [attr.aria-valuetext]="ariaValueText()"
+      [attr.aria-disabled]="isDisabled()"
       role="slider"
       tabindex="0"
       (keydown)="onKeyDown($event)"
+      (blur)="onBlur()"
     ></span>
   `,
   host: {
     '[class]': 'computedClass()',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'isDisabled() ? "" : null',
     '[attr.data-orientation]': 'orientation()',
     '(mousedown)': 'onMouseDown($event)',
     '(touchstart)': 'onTouchStart($event)',
     'data-slot': 'slider',
   },
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Slider),
+      multi: true,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Slider {
+export class Slider implements ControlValueAccessor {
   /** The current slider value */
   readonly value = model<number>(0);
 
@@ -68,16 +85,29 @@ export class Slider {
   /** The step increment */
   readonly step = input<number>(1);
 
-  /** Whether the slider is disabled */
+  /** Whether the slider is disabled via input */
   readonly disabled = input<boolean>(false);
+
+  /** Whether the slider is disabled via forms */
+  private readonly formsDisabled = signal<boolean>(false);
+
+  /** Whether the slider is disabled (either via input or forms) */
+  readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
 
   /** The orientation of the slider */
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+
+  /** Custom aria-valuetext function */
+  readonly ariaValueTextFn = input<((value: number) => string) | undefined>(undefined);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   private readonly thumb = viewChild<ElementRef>('thumb');
+
+  /** ControlValueAccessor callbacks */
+  private onChange: (value: number) => void = () => {};
+  private onTouched: () => void = () => {};
 
   /** Calculate percentage position */
   protected readonly percentage = computed(() => {
@@ -87,11 +117,17 @@ export class Slider {
     return ((val - minVal) / (maxVal - minVal)) * 100;
   });
 
+  /** Generate aria-valuetext */
+  protected readonly ariaValueText = computed(() => {
+    const fn = this.ariaValueTextFn();
+    return fn ? fn(this.value()) : undefined;
+  });
+
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
       'relative flex w-full touch-none select-none items-center data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
-      this.disabled() && 'pointer-events-none',
+      this.isDisabled() && 'pointer-events-none',
       this.class()
     )
   );
@@ -116,9 +152,31 @@ export class Slider {
     )
   );
 
+  // ControlValueAccessor implementation
+  writeValue(value: number): void {
+    this.value.set(value ?? 0);
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.formsDisabled.set(isDisabled);
+  }
+
+  /** Handle blur for forms touched state */
+  onBlur(): void {
+    this.onTouched();
+  }
+
   /** Update value from position */
   private updateValue(clientX: number, rect: DOMRect) {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
 
     const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const range = this.max() - this.min();
@@ -128,11 +186,12 @@ export class Slider {
     const clampedValue = Math.max(this.min(), Math.min(this.max(), steppedValue));
 
     this.value.set(clampedValue);
+    this.onChange(clampedValue);
   }
 
   /** Handle mouse down */
   onMouseDown(event: MouseEvent) {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
 
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     this.updateValue(event.clientX, rect);
@@ -144,6 +203,7 @@ export class Slider {
     const onMouseUp = () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      this.onTouched();
     };
 
     document.addEventListener('mousemove', onMouseMove);
@@ -152,7 +212,7 @@ export class Slider {
 
   /** Handle touch start */
   onTouchStart(event: TouchEvent) {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
 
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     const touch = event.touches[0];
@@ -166,6 +226,7 @@ export class Slider {
     const onTouchEnd = () => {
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('touchend', onTouchEnd);
+      this.onTouched();
     };
 
     document.addEventListener('touchmove', onTouchMove);
@@ -174,7 +235,7 @@ export class Slider {
 
   /** Handle keyboard navigation */
   onKeyDown(event: KeyboardEvent) {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
 
     const stepValue = this.step();
     const largeStep = stepValue * 10;
@@ -207,5 +268,6 @@ export class Slider {
 
     event.preventDefault();
     this.value.set(newValue);
+    this.onChange(newValue);
   }
 }

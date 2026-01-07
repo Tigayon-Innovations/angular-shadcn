@@ -12,7 +12,7 @@ import type { ToastType } from './toast.service';
   selector: 'Toast',
   imports: [LucideAngularModule],
   template: `
-    <div [class]="computedClass()">
+    <div [class]="computedClass()" role="status" aria-atomic="true">
       <div class="flex items-start gap-3">
         @if (showIcon()) {
           <span class="shrink-0">

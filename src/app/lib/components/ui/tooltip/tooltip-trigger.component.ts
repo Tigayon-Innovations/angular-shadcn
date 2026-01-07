@@ -18,7 +18,7 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
     '(mouseleave)': 'onMouseLeave()',
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
-    '[attr.aria-describedby]': 'context.open() ? "tooltip-content" : null',
+    '[attr.aria-describedby]': 'context.open() ? context.tooltipId : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

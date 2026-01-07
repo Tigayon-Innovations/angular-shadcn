@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 
+let tooltipIdCounter = 0;
+
 /**
  * Tooltip component - wrapper for tooltip trigger and content.
  * Matches shadcn/ui React Tooltip exactly.
@@ -42,6 +44,9 @@ export class Tooltip implements TooltipContextValue {
 
   /** Delay before showing tooltip */
   readonly delayDuration = 200;
+
+  /** Unique ID for aria-describedby relationship */
+  readonly tooltipId = `tooltip-${++tooltipIdCounter}`;
 
   readonly open = signal(false);
 

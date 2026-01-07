@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    ElementRef,
     forwardRef,
     input,
     model,
@@ -13,6 +14,7 @@ import { TOGGLE_GROUP_CONTEXT, type ToggleGroupContext } from './toggle-group-co
 
 /**
  * ToggleGroup component - a set of toggle buttons where one or more can be pressed.
+ * Implements keyboard navigation per WAI-ARIA toolbar pattern.
  *
  * @example
  * <!-- Single selection -->
@@ -53,6 +55,8 @@ import { TOGGLE_GROUP_CONTEXT, type ToggleGroupContext } from './toggle-group-co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleGroup {
+  private readonly elementRef: ElementRef<HTMLElement> = new ElementRef(document.createElement('div'));
+
   /** The current selected value(s) */
   readonly value = model<string | string[]>('');
 
@@ -74,6 +78,10 @@ export class ToggleGroup {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  constructor(elementRef: ElementRef<HTMLElement>) {
+    this.elementRef = elementRef;
+  }
+
   /** Context for child ToggleGroupItem components */
   readonly context: ToggleGroupContext = {
     value: signal(this.value()),
@@ -81,6 +89,8 @@ export class ToggleGroup {
     disabled: signal(this.disabled()),
     variant: signal(this.variant()),
     size: signal(this.size()),
+    orientation: signal(this.orientation()),
+    itemValues: signal<string[]>([]),
     toggle: (itemValue: string) => {
       const currentType = this.type();
       const currentValue = this.value();
@@ -105,6 +115,10 @@ export class ToggleGroup {
       }
       return currentValue === itemValue;
     },
+    focusNext: (currentValue: string) => this.focusItem(currentValue, 1),
+    focusPrevious: (currentValue: string) => this.focusItem(currentValue, -1),
+    focusFirst: () => this.focusItemByIndex(0),
+    focusLast: () => this.focusItemByIndex(this.context.itemValues().length - 1),
   };
 
   /** Computed class combining base styles and custom classes */
@@ -122,5 +136,34 @@ export class ToggleGroup {
     this.context.disabled.set(this.disabled());
     this.context.variant.set(this.variant());
     this.context.size.set(this.size());
+    this.context.orientation.set(this.orientation());
+  }
+
+  /** Focus a toggle item relative to the current item */
+  private focusItem(currentValue: string, direction: number): void {
+    const values = this.context.itemValues();
+    const currentIndex = values.indexOf(currentValue);
+    if (currentIndex === -1) return;
+
+    // Wrap around
+    let nextIndex = currentIndex + direction;
+    if (nextIndex < 0) nextIndex = values.length - 1;
+    if (nextIndex >= values.length) nextIndex = 0;
+
+    this.focusItemByIndex(nextIndex);
+  }
+
+  /** Focus a toggle item by index */
+  private focusItemByIndex(index: number): void {
+    const values = this.context.itemValues();
+    if (index < 0 || index >= values.length) return;
+
+    const value = values[index];
+    const item = this.elementRef.nativeElement.querySelector(
+      `[data-slot="toggle-group-item"][data-value="${value}"]`
+    ) as HTMLElement;
+    if (item) {
+      item.focus();
+    }
   }
 }

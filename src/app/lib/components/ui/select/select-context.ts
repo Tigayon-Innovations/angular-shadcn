@@ -7,6 +7,16 @@ export interface SelectContext {
   placeholder: WritableSignal<string>;
   setValue: (value: string, label?: string) => void;
   selectedLabel: WritableSignal<string>;
+  /** ARIA ID for the listbox */
+  contentId: string;
+  /** Reference to the trigger element for focus restoration */
+  triggerElement: WritableSignal<HTMLElement | null>;
+  /** Registry of all item values for keyboard navigation */
+  itemValues: WritableSignal<string[]>;
+  /** Currently focused item index */
+  focusedIndex: WritableSignal<number>;
+  /** Focus a specific item by index */
+  focusItem: (index: number) => void;
 }
 
 export const SELECT_CONTEXT = new InjectionToken<SelectContext>(

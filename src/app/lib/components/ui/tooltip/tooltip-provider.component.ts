@@ -1,11 +1,13 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    forwardRef,
+    input,
+    signal,
 } from '@angular/core';
 import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
+
+let tooltipIdCounter = 0;
 
 /**
  * TooltipProvider component - provides tooltip context.
@@ -33,6 +35,9 @@ import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 export class TooltipProvider implements TooltipContextValue {
   /** Delay before showing tooltip (ms) */
   readonly delayDuration = 700;
+
+  /** Unique ID for aria-describedby relationship */
+  readonly tooltipId = `tooltip-provider-${++tooltipIdCounter}`;
 
   /** Skip delay when switching between tooltips */
   readonly skipDelayDuration = input<number>(300);

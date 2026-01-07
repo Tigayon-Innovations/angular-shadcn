@@ -10,6 +10,7 @@ import { TABS_CONTEXT } from './tabs-context';
 
 /**
  * TabsContent component - content panel for a tab.
+ * Provides proper ARIA tabpanel role and relationships.
  *
  * @example
  * <TabsContent value="account">
@@ -25,9 +26,11 @@ import { TABS_CONTEXT } from './tabs-context';
   `,
   host: {
     '[class]': 'computedClass()',
+    '[attr.id]': 'panelId()',
     '[attr.data-state]': 'isActive() ? "active" : "inactive"',
-    '[attr.aria-hidden]': '!isActive()',
+    '[attr.aria-labelledby]': 'tabId()',
     '[attr.hidden]': '!isActive() ? true : null',
+    '[attr.tabindex]': 'isActive() ? 0 : -1',
     'role': 'tabpanel',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,6 +46,12 @@ export class TabsContent {
 
   /** Check if this content should be visible */
   protected readonly isActive = computed(() => this.tabs.value() === this.value());
+
+  /** Generate panel ID */
+  protected readonly panelId = computed(() => this.tabs.getPanelId(this.value()));
+
+  /** Generate tab ID for aria-labelledby */
+  protected readonly tabId = computed(() => this.tabs.getTabId(this.value()));
 
   protected readonly computedClass = computed(() =>
     cn(

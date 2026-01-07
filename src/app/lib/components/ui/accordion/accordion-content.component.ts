@@ -10,6 +10,7 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
 /**
  * AccordionContent component - expandable content area.
+ * Uses role="region" and aria-labelledby to associate with trigger.
  *
  * @example
  * <AccordionContent>
@@ -26,8 +27,11 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
     }
   `,
   host: {
+    'role': 'region',
     '[class]': 'computedClass()',
+    '[attr.id]': 'item.contentId',
     '[attr.data-state]': 'item.isOpen() ? "open" : "closed"',
+    '[attr.aria-labelledby]': 'item.triggerId',
     '[attr.aria-hidden]': '!item.isOpen()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

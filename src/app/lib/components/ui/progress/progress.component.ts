@@ -34,9 +34,12 @@ import {
   host: {
     '[class]': 'computedClass()',
     'role': 'progressbar',
+    '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-valuemin]': '0',
     '[attr.aria-valuemax]': 'max()',
     '[attr.aria-valuenow]': 'value()',
+    '[attr.aria-valuetext]': 'ariaValueText() || (value() !== null ? percentage().toFixed(0) + "% complete" : "Loading")',
+    '[attr.aria-live]': '"polite"',
     '[attr.data-state]': 'state()',
     '[attr.data-value]': 'value()',
     '[attr.data-max]': 'max()',
@@ -50,6 +53,12 @@ export class Progress {
 
   /** The maximum progress value */
   readonly max = input<number>(100);
+
+  /** Accessible label for the progress bar */
+  readonly ariaLabel = input<string>('Progress');
+
+  /** Text description of current progress (e.g., "50% complete") */
+  readonly ariaValueText = input<string | undefined>(undefined);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');

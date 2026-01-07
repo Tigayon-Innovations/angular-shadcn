@@ -1,17 +1,21 @@
 import { cn } from '@/lib/utils';
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  input,
-  model,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    forwardRef,
+    inject,
+    input,
+    model,
+    signal,
 } from '@angular/core';
 import { SELECT_CONTEXT, type SelectContext } from './select-context';
 
 /**
  * Select component - a dropdown selection input.
+ * Implements WAI-ARIA listbox pattern with keyboard navigation.
  *
  * @example
  * <Select [(value)]="selectedFruit">
@@ -44,6 +48,10 @@ import { SELECT_CONTEXT, type SelectContext } from './select-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly ariaIdService = inject(AriaIdService);
+  private readonly ariaIds = this.ariaIdService.generateMenuIds('select');
+
   /** The current selected value */
   readonly value = model<string>('');
 
@@ -63,6 +71,10 @@ export class Select {
     disabled: signal(this.disabled()),
     placeholder: signal(''),
     selectedLabel: signal(''),
+    contentId: this.ariaIds.contentId,
+    triggerElement: signal<HTMLElement | null>(null),
+    itemValues: signal<string[]>([]),
+    focusedIndex: signal(-1),
     setValue: (value: string, label?: string) => {
       this.value.set(value);
       this.context.value.set(value);
@@ -71,7 +83,13 @@ export class Select {
       }
       this.open.set(false);
       this.context.open.set(false);
+      // Restore focus to trigger
+      const trigger = this.context.triggerElement();
+      if (trigger) {
+        setTimeout(() => trigger.focus());
+      }
     },
+    focusItem: (index: number) => this.focusItemByIndex(index),
   };
 
   /** Computed class combining base styles and custom classes */
@@ -83,5 +101,20 @@ export class Select {
     this.context.value.set(this.value());
     this.context.open.set(this.open());
     this.context.disabled.set(this.disabled());
+  }
+
+  /** Focus an item by index */
+  private focusItemByIndex(index: number): void {
+    const values = this.context.itemValues();
+    if (index < 0 || index >= values.length) return;
+
+    this.context.focusedIndex.set(index);
+    const value = values[index];
+    const item = this.elementRef.nativeElement.querySelector(
+      `[data-slot="select-item"][data-value="${value}"]`
+    ) as HTMLElement;
+    if (item) {
+      item.focus();
+    }
   }
 }

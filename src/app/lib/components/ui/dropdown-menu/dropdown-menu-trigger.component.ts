@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
 
 /**
@@ -11,15 +11,35 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   host: {
     class: 'cursor-pointer',
     '(click)': 'toggle()',
+    '(keydown)': 'onKeyDown($event)',
     '[attr.aria-expanded]': 'context.open()',
     '[attr.aria-haspopup]': '"menu"',
+    '[attr.aria-controls]': 'context.open() ? context.contentId : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuTrigger {
   protected readonly context = inject(DROPDOWN_MENU_CONTEXT);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   toggle(): void {
+    this.context.triggerElement.set(this.elementRef.nativeElement);
     this.context.open.update(v => !v);
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.context.triggerElement.set(this.elementRef.nativeElement);
+        this.context.open.set(true);
+        this.context.focusedIndex.set(0);
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        this.toggle();
+        break;
+    }
   }
 }

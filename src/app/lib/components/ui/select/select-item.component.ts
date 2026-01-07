@@ -6,12 +6,15 @@ import {
     ElementRef,
     inject,
     input,
+    OnDestroy,
+    OnInit,
     viewChild,
 } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
 /**
  * SelectItem component - individual selectable option.
+ * Implements proper ARIA option pattern with keyboard navigation.
  *
  * @example
  * <SelectItem value="apple">Apple</SelectItem>
@@ -49,16 +52,16 @@ import { SELECT_CONTEXT } from './select-context';
     '[attr.aria-selected]': 'isSelected()',
     '[attr.data-state]': 'isSelected() ? "checked" : "unchecked"',
     '[attr.data-disabled]': 'disabled() ? "" : null',
-    '[attr.data-highlighted]': 'null',
+    '[attr.data-value]': 'value()',
+    '[attr.data-highlighted]': 'isFocused() ? "" : null',
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(click)': 'select()',
-    '(keydown.space)': 'select(); $event.preventDefault()',
-    '(keydown.enter)': 'select(); $event.preventDefault()',
+    '(keydown)': 'onKeyDown($event)',
     'data-slot': 'select-item',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectItem {
+export class SelectItem implements OnInit, OnDestroy {
   private readonly context = inject(SELECT_CONTEXT, { optional: true });
 
   private readonly textContent = viewChild<ElementRef>('textContent');
@@ -77,12 +80,74 @@ export class SelectItem {
     return this.context?.value() === this.value();
   });
 
+  /** Whether this item is focused */
+  protected readonly isFocused = computed(() => {
+    if (!this.context) return false;
+    const values = this.context.itemValues();
+    const focusedIndex = this.context.focusedIndex();
+    return values[focusedIndex] === this.value();
+  });
+
+  ngOnInit(): void {
+    // Register this item
+    this.context?.itemValues.update(values => {
+      if (!values.includes(this.value())) {
+        return [...values, this.value()];
+      }
+      return values;
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Unregister this item
+    this.context?.itemValues.update(values =>
+      values.filter(v => v !== this.value())
+    );
+  }
+
   /** Select this option */
   select() {
     if (!this.disabled()) {
       const textEl = this.textContent()?.nativeElement;
       const label = textEl?.textContent?.trim() || this.value();
       this.context?.setValue(this.value(), label);
+    }
+  }
+
+  /** Handle keyboard navigation */
+  onKeyDown(event: KeyboardEvent): void {
+    if (!this.context || this.disabled()) return;
+
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.select();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        const currentIndex = this.context.focusedIndex();
+        const itemCount = this.context.itemValues().length;
+        this.context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        const idx = this.context.focusedIndex();
+        this.context.focusItem(Math.max(idx - 1, 0));
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.context.focusItem(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        const lastIndex = this.context.itemValues().length - 1;
+        this.context.focusItem(lastIndex);
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.context.open.set(false);
+        break;
     }
   }
 

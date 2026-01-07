@@ -10,6 +10,7 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
 /**
  * AccordionTrigger component - clickable header that toggles content.
+ * Implements proper ARIA pattern for accordion triggers.
  *
  * @example
  * <AccordionTrigger>Click to expand</AccordionTrigger>
@@ -36,8 +37,10 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
   `,
   host: {
     '[class]': 'computedClass()',
+    '[attr.id]': 'item.triggerId',
     '[attr.data-state]': 'item.isOpen() ? "open" : "closed"',
     '[attr.aria-expanded]': 'item.isOpen()',
+    '[attr.aria-controls]': 'item.contentId',
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',

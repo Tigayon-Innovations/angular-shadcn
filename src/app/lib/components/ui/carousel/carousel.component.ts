@@ -67,7 +67,9 @@ import {
   host: {
     '[class]': 'computedClass()',
     'role': 'region',
+    '[attr.aria-label]': 'ariaLabel()',
     'aria-roledescription': 'carousel',
+    '[attr.aria-live]': '"polite"',
     '(keydown.arrowleft)': 'onKeyDown($event, "left")',
     '(keydown.arrowright)': 'onKeyDown($event, "right")',
   },
@@ -76,6 +78,9 @@ import {
 export class Carousel {
   /** Carousel orientation */
   readonly orientation = input<CarouselOrientation>('horizontal');
+
+  /** Accessible label for the carousel */
+  readonly ariaLabel = input<string>('Carousel');
 
   /** Additional CSS classes */
   readonly class = input<string>('');

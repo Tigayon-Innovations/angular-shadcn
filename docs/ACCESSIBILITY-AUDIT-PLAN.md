@@ -662,12 +662,14 @@ After scanning all 57 components, I've identified **significant accessibility ga
 
 ## 🛠️ Implementation Phases
 
-### Phase 1: Critical Infrastructure (Week 1-2)
+### Phase 0: Foundation — Accessibility Primitives (Week 1-2)
+
+> **Goal:** Build reusable accessibility infrastructure that all components will leverage.
 
 **Create shared accessibility utilities:**
 
 ```typescript
-// src/app/lib/utils/accessibility/
+// src/app/lib/primitives/accessibility/
 
 1. focus-trap.directive.ts
    - Trap focus within container
@@ -697,7 +699,11 @@ After scanning all 57 components, I've identified **significant accessibility ga
    - Handle priority (polite vs assertive)
 ```
 
-### Phase 2: Fix P0 Components (Week 2-3)
+---
+
+### Phase 1: P0 Critical — Overlays & Modals (Week 2-3)
+
+> **Goal:** Fix all overlay components that trap user interaction.
 
 1. **Dialog/Sheet/Drawer**
    - Add focus trap
@@ -727,7 +733,11 @@ After scanning all 57 components, I've identified **significant accessibility ga
    - Add optional focus trap
    - Add focus restoration
 
-### Phase 3: Fix P1 Components (Week 3-4)
+---
+
+### Phase 2: P1 High — Navigation & Selection (Week 3-4)
+
+> **Goal:** Fix all navigation and selection patterns with proper keyboard support.
 
 1. **Tabs**
    - Add arrow navigation
@@ -751,7 +761,11 @@ After scanning all 57 components, I've identified **significant accessibility ga
    - Add arrow navigation
    - Add roving tabindex
 
-### Phase 4: Fix P2 Components (Week 4-5)
+---
+
+### Phase 3: P2 Medium — Form Controls (Week 4-5)
+
+> **Goal:** Ensure all form controls have proper Angular forms integration and labeling.
 
 1. **Form Controls** (Checkbox, Switch, Slider)
    - Add ControlValueAccessor
@@ -766,7 +780,11 @@ After scanning all 57 components, I've identified **significant accessibility ga
    - Full keyboard navigation
    - Proper ARIA grid pattern
 
-### Phase 5: Fix P3 Components (Week 5-6)
+---
+
+### Phase 4: P3 Lower — Display & Feedback (Week 5-6)
+
+> **Goal:** Polish display components with proper screen reader support.
 
 1. **Toast** - Add live region
 2. **Tooltip** - Add describedby link

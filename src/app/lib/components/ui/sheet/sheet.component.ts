@@ -1,9 +1,11 @@
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
     effect,
     forwardRef,
+    inject,
     input,
     output,
     signal,
@@ -40,6 +42,8 @@ import { SHEET_CONTEXT, type SheetContextValue } from './sheet-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sheet implements SheetContextValue {
+  private readonly ariaIdService = inject(AriaIdService);
+
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
@@ -53,6 +57,15 @@ export class Sheet implements SheetContextValue {
   readonly openChange = output<boolean>();
 
   private readonly _internalOpen = signal(false);
+
+  /** ARIA IDs for accessibility relationships */
+  private readonly ariaIds = this.ariaIdService.generateDialogIds('sheet');
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
+
+  /** Reference to trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
 
   /** Computed open state - uses controlled value if provided, otherwise internal state */
   readonly open = computed(() => {

@@ -1,15 +1,18 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
+    OnDestroy,
+    OnInit,
 } from '@angular/core';
 import { RADIO_GROUP_CONTEXT } from './radio-group-context';
 
 /**
  * RadioGroupItem component - individual radio option.
+ * Implements roving tabindex (only checked or first item is tabbable).
  *
  * @example
  * <RadioGroupItem value="option1" id="option1" />
@@ -42,15 +45,15 @@ import { RADIO_GROUP_CONTEXT } from './radio-group-context';
     '[attr.aria-disabled]': 'isDisabled()',
     '[attr.data-state]': 'isChecked() ? "checked" : "unchecked"',
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
-    '[attr.tabindex]': 'isDisabled() ? -1 : 0',
+    '[attr.data-value]': 'value()',
+    '[attr.tabindex]': 'tabIndex()',
     '(click)': 'select()',
-    '(keydown.space)': 'select(); $event.preventDefault()',
-    '(keydown.enter)': 'select(); $event.preventDefault()',
+    '(keydown)': 'onKeyDown($event)',
     'data-slot': 'radio-group-item',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioGroupItem {
+export class RadioGroupItem implements OnInit, OnDestroy {
   private readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
 
   /** The value of this radio option */
@@ -72,10 +75,97 @@ export class RadioGroupItem {
     return this.disabled() || this.context?.disabled() || false;
   });
 
+  /**
+   * Roving tabindex: only the checked item (or first item if none checked) is tabbable.
+   */
+  protected readonly tabIndex = computed(() => {
+    if (this.isDisabled()) return -1;
+    if (!this.context) return 0;
+
+    const currentValue = this.context.value();
+    const itemValues = this.context.itemValues();
+
+    // If this item is checked, it's tabbable
+    if (currentValue === this.value()) return 0;
+
+    // If no item is checked and this is the first item, it's tabbable
+    if (!currentValue && itemValues.length > 0 && itemValues[0] === this.value()) {
+      return 0;
+    }
+
+    return -1;
+  });
+
+  ngOnInit(): void {
+    // Register this item
+    this.context?.itemValues.update(values => {
+      if (!values.includes(this.value())) {
+        return [...values, this.value()];
+      }
+      return values;
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Unregister this item
+    this.context?.itemValues.update(values =>
+      values.filter(v => v !== this.value())
+    );
+  }
+
   /** Select this radio option */
   select() {
     if (!this.isDisabled()) {
       this.context?.setValue(this.value());
+    }
+  }
+
+  /** Handle keyboard navigation */
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.isDisabled() || !this.context) return;
+
+    const orientation = this.context.orientation();
+    const isVertical = orientation === 'vertical';
+    const isHorizontal = orientation === 'horizontal';
+
+    switch (event.key) {
+      case 'ArrowDown':
+        if (isVertical) {
+          event.preventDefault();
+          this.context.focusNext(this.value());
+        }
+        break;
+      case 'ArrowUp':
+        if (isVertical) {
+          event.preventDefault();
+          this.context.focusPrevious(this.value());
+        }
+        break;
+      case 'ArrowRight':
+        if (isHorizontal) {
+          event.preventDefault();
+          this.context.focusNext(this.value());
+        }
+        break;
+      case 'ArrowLeft':
+        if (isHorizontal) {
+          event.preventDefault();
+          this.context.focusPrevious(this.value());
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.context.focusFirst();
+        break;
+      case 'End':
+        event.preventDefault();
+        this.context.focusLast();
+        break;
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.select();
+        break;
     }
   }
 

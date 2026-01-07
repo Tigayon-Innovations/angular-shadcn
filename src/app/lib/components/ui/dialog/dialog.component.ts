@@ -1,8 +1,10 @@
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
     forwardRef,
+    inject,
     input,
     output,
     signal,
@@ -41,6 +43,8 @@ import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dialog implements DialogContextValue {
+  private readonly ariaIdService = inject(AriaIdService);
+
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
@@ -54,6 +58,15 @@ export class Dialog implements DialogContextValue {
   readonly openChange = output<boolean>();
 
   readonly open = signal(false);
+
+  /** ARIA IDs for accessibility relationships */
+  private readonly ariaIds = this.ariaIdService.generateDialogIds('dialog');
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
+
+  /** Reference to trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
 
   constructor() {
     if (this.defaultOpen()) {

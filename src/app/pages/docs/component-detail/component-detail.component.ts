@@ -3,6 +3,7 @@ import { CodeBlock } from '@/components/code-block';
 import { ComponentPreview } from '@/components/component-preview';
 import { ComponentDemos } from '@/services/component-demos.service';
 import { ComponentRegistry } from '@/services/component-registry.service';
+import { SeoService } from '@/services/seo.service';
 import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
@@ -249,6 +250,7 @@ export class ComponentDetailPage {
   private readonly registry = inject(ComponentRegistry);
   private readonly demos = inject(ComponentDemos);
   private readonly router = inject(Router);
+  private readonly seo = inject(SeoService);
 
   readonly slug = input.required<string>();
 
@@ -345,6 +347,35 @@ export class MyComponent { }`;
             }
           });
         }
+      }
+    });
+
+    // Update SEO meta tags when component changes
+    effect(() => {
+      const comp = this.component();
+      if (comp) {
+        this.seo.updateMetaTags({
+          title: `${comp.name} - Components`,
+          description: `${comp.description} Learn how to install and use the ${comp.name} component in your Angular application with shadcn-angular.`,
+          keywords: [
+            'angular',
+            comp.name.toLowerCase(),
+            'component',
+            'shadcn',
+            'ui',
+            'tailwind css',
+            comp.category,
+            ...comp.imports.map((i) => i.toLowerCase()),
+          ],
+          ogType: 'article',
+          canonicalUrl: `/docs/components/${comp.slug}`,
+          structuredData: this.seo.getBreadcrumbStructuredData([
+            { name: 'Home', url: '/' },
+            { name: 'Documentation', url: '/docs' },
+            { name: 'Components', url: '/docs/components' },
+            { name: comp.name, url: `/docs/components/${comp.slug}` },
+          ]),
+        });
       }
     });
   }

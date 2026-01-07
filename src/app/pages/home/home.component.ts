@@ -1,3 +1,4 @@
+import { SeoService } from '@/services/seo.service';
 import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
@@ -7,20 +8,20 @@ import { Input } from '@/ui/input';
 import { Progress } from '@/ui/progress';
 import { Separator } from '@/ui/separator';
 import { Switch } from '@/ui/switch';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ArrowRight,
-  Boxes,
-  ChevronRight,
-  Code2,
-  Github,
-  LucideAngularModule,
-  Palette,
-  Shield,
-  Star,
-  Users,
-  Zap,
+    ArrowRight,
+    Boxes,
+    ChevronRight,
+    Code2,
+    Github,
+    LucideAngularModule,
+    Palette,
+    Shield,
+    Star,
+    Users,
+    Zap,
 } from 'lucide-angular';
 
 /**
@@ -373,6 +374,8 @@ import {
   `,
 })
 export class HomePage {
+  private readonly seo = inject(SeoService);
+
   protected readonly icons = {
     Zap,
     Palette,
@@ -385,6 +388,30 @@ export class HomePage {
     Star,
     ChevronRight,
   };
+
+  constructor() {
+    this.seo.updateMetaTags({
+      title: 'Beautiful UI Components for Angular',
+      description:
+        'Beautiful, accessible, and customizable UI components for Angular. Built with Tailwind CSS. 60+ components. Open source and ready to use.',
+      keywords: [
+        'angular',
+        'shadcn',
+        'ui components',
+        'tailwind css',
+        'typescript',
+        'accessible',
+        'open source',
+        'angular components',
+        'design system',
+        'component library',
+        'radix',
+        'headless ui',
+      ],
+      ogType: 'website',
+      structuredData: this.seo.getWebsiteStructuredData(),
+    });
+  }
 
   protected openGitHub(): void {
     window.open('https://github.com/example/shadcn-angular', '_blank');

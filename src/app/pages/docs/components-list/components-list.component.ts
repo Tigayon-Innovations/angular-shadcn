@@ -1,4 +1,5 @@
 import { ComponentRegistry, type ComponentCategory } from '@/services/component-registry.service';
+import { SeoService } from '@/services/seo.service';
 import { Badge } from '@/ui/badge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { Input } from '@/ui/input';
@@ -151,6 +152,7 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
 })
 export class ComponentsListPage {
   private readonly registry = inject(ComponentRegistry);
+  private readonly seo = inject(SeoService);
 
   protected readonly icons = { Search, ArrowRight };
   protected readonly searchQuery = signal('');
@@ -158,6 +160,33 @@ export class ComponentsListPage {
 
   protected readonly allComponents = computed(() => this.registry.getAll());
   protected readonly categories = computed(() => this.registry.getCategories());
+
+  constructor() {
+    this.seo.updateMetaTags({
+      title: 'Components',
+      description:
+        'Browse 60+ beautifully designed Angular UI components. Buttons, cards, dialogs, forms, tables, and more. Built with Tailwind CSS and fully accessible.',
+      keywords: [
+        'angular components',
+        'ui components',
+        'shadcn',
+        'tailwind css',
+        'button',
+        'card',
+        'dialog',
+        'form',
+        'table',
+        'tabs',
+        'accessible components',
+      ],
+      canonicalUrl: '/docs/components',
+      structuredData: this.seo.getBreadcrumbStructuredData([
+        { name: 'Home', url: '/' },
+        { name: 'Documentation', url: '/docs' },
+        { name: 'Components', url: '/docs/components' },
+      ]),
+    });
+  }
 
   protected readonly filteredComponents = computed(() => {
     const query = this.searchQuery().toLowerCase();

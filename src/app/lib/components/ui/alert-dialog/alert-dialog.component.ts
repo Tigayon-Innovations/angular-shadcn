@@ -1,15 +1,19 @@
+import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-  output,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    forwardRef,
+    inject,
+    input,
+    output,
+    signal,
 } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dialog-context';
 
 /**
  * AlertDialog component - a modal dialog for important actions.
+ * Unlike Dialog, AlertDialog does NOT close on Escape or overlay click.
+ * User must explicitly click Cancel or Action to close.
  * Matches shadcn/ui React AlertDialog exactly.
  *
  * @example
@@ -41,6 +45,8 @@ import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dial
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialog implements AlertDialogContextValue {
+  private readonly ariaIdService = inject(AriaIdService);
+
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
@@ -51,6 +57,15 @@ export class AlertDialog implements AlertDialogContextValue {
   readonly openChange = output<boolean>();
 
   readonly open = signal(false);
+
+  /** ARIA IDs for accessibility relationships */
+  private readonly ariaIds = this.ariaIdService.generateDialogIds('alertdialog');
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
+
+  /** Reference to trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
 
   constructor() {
     if (this.defaultOpen()) {

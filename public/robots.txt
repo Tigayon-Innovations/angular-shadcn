@@ -1,0 +1,34 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://shadcn-angular.dev/sitemap.xml
+
+# Disallow admin and internal paths
+Disallow: /api/
+Disallow: /_/
+Disallow: /admin/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Crawl-delay for less aggressive crawlers
+User-agent: *
+Crawl-delay: 1

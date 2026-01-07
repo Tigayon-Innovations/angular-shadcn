@@ -4,7 +4,7 @@ import { INPUT_OTP_CONTEXT } from './input-otp-context';
 
 /**
  * InputOTPSlot component - individual OTP digit slot.
- * Matches shadcn/ui React InputOTPSlot exactly.
+ * Matches shadcn/ui React InputOTPSlot exactly with ARIA labeling.
  */
 @Component({
   selector: 'InputOTPSlot',
@@ -21,6 +21,7 @@ import { INPUT_OTP_CONTEXT } from './input-otp-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.data-active]': 'isActive() ? "" : null',
+    '[attr.aria-label]': 'ariaLabel()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -43,6 +44,17 @@ export class InputOTPSlot {
   protected readonly isActive = computed(() => {
     const activeIndex = this.context?.activeIndex() ?? -1;
     return activeIndex === this.index();
+  });
+
+  /** ARIA label for the slot */
+  protected readonly ariaLabel = computed(() => {
+    const maxLength = this.context?.maxLength() ?? 6;
+    const position = this.index() + 1;
+    const char = this.char();
+    if (char) {
+      return `Digit ${position} of ${maxLength}: ${char}`;
+    }
+    return `Digit ${position} of ${maxLength}: empty`;
   });
 
   protected readonly computedClass = computed(() =>
