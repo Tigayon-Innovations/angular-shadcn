@@ -4,6 +4,7 @@ export type SidebarState = 'expanded' | 'collapsed';
 export type SidebarSide = 'left' | 'right';
 export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
 export type SidebarCollapsible = 'offcanvas' | 'icon' | 'none';
+export type AriaCurrentValue = 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false';
 
 export interface SidebarContext {
   state: WritableSignal<SidebarState>;

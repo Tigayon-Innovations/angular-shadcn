@@ -183,17 +183,41 @@
 }
 
 /* ========================================
+   Animation System Foundation
+   Phase 1: Core Animation Tokens & Utilities
+   ======================================== */
+
+:root {
+  /* Animation Duration Tokens */
+  --animation-duration-fast: 150ms;
+  --animation-duration-base: 200ms;
+  --animation-duration-slow: 300ms;
+
+  /* Animation Easing Tokens */
+  --animation-easing-in: ease-out;
+  --animation-easing-out: ease-in;
+  --animation-easing-in-out: ease-in-out;
+
+  /* Animation Transform Origins */
+  --animation-origin-center: 50% 50%;
+  --animation-origin-top: 50% 0%;
+  --animation-origin-bottom: 50% 100%;
+  --animation-origin-left: 0% 50%;
+  --animation-origin-right: 100% 50%;
+}
+
+/* ========================================
    Component Animations
    ======================================== */
 
 @layer utilities {
   /* Accordion animations */
   .animate-accordion-down {
-    animation: accordion-down 0.2s ease-out;
+    animation: accordion-down var(--animation-duration-base) var(--animation-easing-in);
   }
 
   .animate-accordion-up {
-    animation: accordion-up 0.2s ease-out;
+    animation: accordion-up var(--animation-duration-base) var(--animation-easing-out);
   }
 
   @keyframes accordion-down {
@@ -216,11 +240,11 @@
 
   /* Collapsible animations */
   .animate-collapsible-down {
-    animation: collapsible-down 0.2s ease-out;
+    animation: collapsible-down var(--animation-duration-base) var(--animation-easing-in);
   }
 
   .animate-collapsible-up {
-    animation: collapsible-up 0.2s ease-out;
+    animation: collapsible-up var(--animation-duration-base) var(--animation-easing-out);
   }
 
   @keyframes collapsible-down {
@@ -241,36 +265,268 @@
     }
   }
 
-  /* Search dialog animations */
+  /* ========================================
+     Enter/Exit Animation Utilities
+     shadcn-compatible animation classes
+     ======================================== */
+
+  /* Base animation classes */
   .animate-in {
-    animation: animate-in 0.2s ease-out;
+    animation-name: enter;
+    animation-duration: var(--animation-duration-base);
+    animation-timing-function: var(--animation-easing-in);
+    animation-fill-mode: both;
   }
 
-  .fade-in-0 {
-    --tw-enter-opacity: 0;
+  .animate-out {
+    animation-name: exit;
+    animation-duration: var(--animation-duration-fast);
+    animation-timing-function: var(--animation-easing-out);
+    animation-fill-mode: both;
   }
 
-  .zoom-in-95 {
-    --tw-enter-scale: 0.95;
-  }
+  /* Enter animation variables */
+  .fade-in-0 { --tw-enter-opacity: 0; }
+  .fade-in-50 { --tw-enter-opacity: 0.5; }
+  .fade-in-80 { --tw-enter-opacity: 0.8; }
 
-  .slide-in-from-left-1\/2 {
-    --tw-enter-translate-x: -50%;
-  }
+  .zoom-in-50 { --tw-enter-scale: 0.5; }
+  .zoom-in-75 { --tw-enter-scale: 0.75; }
+  .zoom-in-90 { --tw-enter-scale: 0.9; }
+  .zoom-in-95 { --tw-enter-scale: 0.95; }
 
-  .slide-in-from-top-\[48\%\] {
-    --tw-enter-translate-y: -48%;
-  }
+  .slide-in-from-top { --tw-enter-translate-y: -100%; }
+  .slide-in-from-top-1 { --tw-enter-translate-y: -0.25rem; }
+  .slide-in-from-top-2 { --tw-enter-translate-y: -0.5rem; }
+  .slide-in-from-top-4 { --tw-enter-translate-y: -1rem; }
+  .slide-in-from-top-full { --tw-enter-translate-y: -100%; }
 
-  @keyframes animate-in {
+  .slide-in-from-bottom { --tw-enter-translate-y: 100%; }
+  .slide-in-from-bottom-1 { --tw-enter-translate-y: 0.25rem; }
+  .slide-in-from-bottom-2 { --tw-enter-translate-y: 0.5rem; }
+  .slide-in-from-bottom-4 { --tw-enter-translate-y: 1rem; }
+  .slide-in-from-bottom-full { --tw-enter-translate-y: 100%; }
+
+  .slide-in-from-left { --tw-enter-translate-x: -100%; }
+  .slide-in-from-left-1 { --tw-enter-translate-x: -0.25rem; }
+  .slide-in-from-left-2 { --tw-enter-translate-x: -0.5rem; }
+  .slide-in-from-left-4 { --tw-enter-translate-x: -1rem; }
+  .slide-in-from-left-full { --tw-enter-translate-x: -100%; }
+  .slide-in-from-left-1\/2 { --tw-enter-translate-x: -50%; }
+
+  .slide-in-from-right { --tw-enter-translate-x: 100%; }
+  .slide-in-from-right-1 { --tw-enter-translate-x: 0.25rem; }
+  .slide-in-from-right-2 { --tw-enter-translate-x: 0.5rem; }
+  .slide-in-from-right-4 { --tw-enter-translate-x: 1rem; }
+  .slide-in-from-right-full { --tw-enter-translate-x: 100%; }
+
+  .slide-in-from-top-\[48\%\] { --tw-enter-translate-y: -48%; }
+
+  /* Exit animation variables */
+  .fade-out-0 { --tw-exit-opacity: 0; }
+  .fade-out-50 { --tw-exit-opacity: 0.5; }
+  .fade-out-80 { --tw-exit-opacity: 0.8; }
+
+  .zoom-out-50 { --tw-exit-scale: 0.5; }
+  .zoom-out-75 { --tw-exit-scale: 0.75; }
+  .zoom-out-90 { --tw-exit-scale: 0.9; }
+  .zoom-out-95 { --tw-exit-scale: 0.95; }
+
+  .slide-out-to-top { --tw-exit-translate-y: -100%; }
+  .slide-out-to-top-2 { --tw-exit-translate-y: -0.5rem; }
+  .slide-out-to-top-full { --tw-exit-translate-y: -100%; }
+  .slide-out-to-top-\[48\%\] { --tw-exit-translate-y: -48%; }
+
+  .slide-out-to-bottom { --tw-exit-translate-y: 100%; }
+  .slide-out-to-bottom-2 { --tw-exit-translate-y: 0.5rem; }
+  .slide-out-to-bottom-full { --tw-exit-translate-y: 100%; }
+
+  .slide-out-to-left { --tw-exit-translate-x: -100%; }
+  .slide-out-to-left-2 { --tw-exit-translate-x: -0.5rem; }
+  .slide-out-to-left-full { --tw-exit-translate-x: -100%; }
+  .slide-out-to-left-1\/2 { --tw-exit-translate-x: -50%; }
+
+  .slide-out-to-right { --tw-exit-translate-x: 100%; }
+  .slide-out-to-right-2 { --tw-exit-translate-x: 0.5rem; }
+  .slide-out-to-right-full { --tw-exit-translate-x: 100%; }
+
+  /* Animation duration utilities */
+  .duration-fast { animation-duration: var(--animation-duration-fast); }
+  .duration-base { animation-duration: var(--animation-duration-base); }
+  .duration-slow { animation-duration: var(--animation-duration-slow); }
+  .duration-150 { animation-duration: 150ms; }
+  .duration-200 { animation-duration: 200ms; }
+  .duration-300 { animation-duration: 300ms; }
+  .duration-500 { animation-duration: 500ms; }
+
+  /* Enter keyframes */
+  @keyframes enter {
     from {
       opacity: var(--tw-enter-opacity, 1);
-      transform: translate(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0))
-        scale(var(--tw-enter-scale, 1));
+      transform: translate3d(
+        var(--tw-enter-translate-x, 0),
+        var(--tw-enter-translate-y, 0),
+        0
+      ) scale(var(--tw-enter-scale, 1));
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  /* Exit keyframes */
+  @keyframes exit {
+    from {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      opacity: var(--tw-exit-opacity, 1);
+      transform: translate3d(
+        var(--tw-exit-translate-x, 0),
+        var(--tw-exit-translate-y, 0),
+        0
+      ) scale(var(--tw-exit-scale, 1));
+    }
+  }
+
+  /* Dialog/Modal specific animations (centered positioning) */
+  @keyframes dialog-enter {
+    from {
+      opacity: var(--tw-enter-opacity, 0);
+      transform: translate(-50%, -50%) scale(var(--tw-enter-scale, 0.95));
     }
     to {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes dialog-exit {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: var(--tw-exit-opacity, 0);
+      transform: translate(-50%, -50%) scale(var(--tw-exit-scale, 0.95));
+    }
+  }
+
+  /* Sheet/Drawer slide animations */
+  @keyframes sheet-slide-in-from-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes sheet-slide-out-to-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+
+  @keyframes sheet-slide-in-from-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes sheet-slide-out-to-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes sheet-slide-in-from-top {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes sheet-slide-out-to-top {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
+
+  @keyframes sheet-slide-in-from-bottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes sheet-slide-out-to-bottom {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+
+  /* Toast animations */
+  @keyframes toast-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toast-slide-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  /* Spinner animation */
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Pulse animation */
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Bounce animation */
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-in,
+    .animate-out,
+    .animate-accordion-down,
+    .animate-accordion-up,
+    .animate-collapsible-down,
+    .animate-collapsible-up,
+    .animate-spin,
+    .animate-pulse,
+    .animate-bounce {
+      animation: none !important;
+      transition: none !important;
     }
   }
 }

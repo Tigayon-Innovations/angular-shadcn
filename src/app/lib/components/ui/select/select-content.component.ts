@@ -1,10 +1,9 @@
 import { cn } from '@/lib/utils';
+import { ClickOutsideDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    ElementRef,
-    HostListener,
     inject,
     input,
 } from '@angular/core';
@@ -22,28 +21,34 @@ import { SELECT_CONTEXT } from './select-context';
  */
 @Component({
   selector: 'SelectContent',
+  imports: [ClickOutsideDirective],
   template: `
     @if (context?.open()) {
-      <div [class]="viewportClass()">
-        <ng-content />
+      <div
+        [class]="dropdownClass()"
+        [attr.id]="context?.contentId"
+        [attr.data-state]="context?.open() ? 'open' : 'closed'"
+        [attr.data-side]="side()"
+        [attr.data-align]="align()"
+        role="listbox"
+        aria-label="Options"
+        (clickOutside)="onClickOutside()"
+        (keydown.escape)="onEscape()"
+      >
+        <div [class]="viewportClass()">
+          <ng-content />
+        </div>
       </div>
     }
   `,
   host: {
-    '[class]': 'computedClass()',
-    '[attr.id]': 'context?.contentId',
-    '[attr.data-state]': 'context?.open() ? "open" : "closed"',
-    '[attr.data-side]': 'side()',
-    '[attr.data-align]': 'align()',
-    'role': 'listbox',
-    '[attr.aria-label]': '"Options"',
+    'class': 'contents',
     'data-slot': 'select-content',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectContent {
   protected readonly context = inject(SELECT_CONTEXT, { optional: true });
-  private readonly elementRef = inject(ElementRef);
 
   /** The side of the trigger to show the content */
   readonly side = input<'top' | 'bottom'>('bottom');
@@ -57,29 +62,27 @@ export class SelectContent {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target) && this.context?.open()) {
-      // Check if click was on the trigger
-      const trigger = this.elementRef.nativeElement.parentElement?.querySelector('[data-slot="select-trigger"]');
-      if (!trigger?.contains(event.target as Node)) {
-        this.context.open.set(false);
-      }
-    }
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() {
+  protected onClickOutside(): void {
     this.context?.open.set(false);
   }
 
+  protected onEscape(): void {
+    this.context?.open.set(false);
+    // Restore focus to trigger
+    const trigger = this.context?.triggerElement();
+    if (trigger) {
+      setTimeout(() => trigger.focus());
+    }
+  }
+
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
+  protected readonly dropdownClass = computed(() =>
     cn(
-      'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[8rem] origin-[var(--radix-select-content-transform-origin)] overflow-x-hidden overflow-y-auto rounded-md border shadow-md',
+      'bg-popover text-popover-foreground absolute z-50 mt-1 max-h-60 min-w-[8rem] overflow-hidden rounded-md border shadow-md',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2',
       this.position() === 'popper' &&
         'data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1',
-      !this.context?.open() && 'hidden',
       this.class()
     )
   );
@@ -87,9 +90,8 @@ export class SelectContent {
   /** Viewport class */
   protected readonly viewportClass = computed(() =>
     cn(
-      'p-1',
-      this.position() === 'popper' &&
-        'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1'
+      'p-1 overflow-y-auto max-h-60',
+      this.position() === 'popper' && 'w-full min-w-[var(--radix-select-trigger-width)]'
     )
   );
 }

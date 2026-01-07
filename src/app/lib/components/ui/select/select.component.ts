@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
     ElementRef,
     forwardRef,
     inject,
@@ -34,7 +35,7 @@ import { SELECT_CONTEXT, type SelectContext } from './select-context';
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    '[attr.data-state]': 'open() ? "open" : "closed"',
+    '[attr.data-state]': 'context.open() ? "open" : "closed"',
     '[attr.data-disabled]': 'disabled() ? "" : null',
     'data-slot': 'select',
   },
@@ -64,11 +65,16 @@ export class Select {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  /** Internal signals for context */
+  private readonly _value = signal<string>('');
+  private readonly _open = signal<boolean>(false);
+  private readonly _disabled = signal<boolean>(false);
+
   /** Context for child components */
   readonly context: SelectContext = {
-    value: signal(this.value()),
-    open: signal(this.open()),
-    disabled: signal(this.disabled()),
+    value: this._value,
+    open: this._open,
+    disabled: this._disabled,
     placeholder: signal(''),
     selectedLabel: signal(''),
     contentId: this.ariaIds.contentId,
@@ -76,13 +82,13 @@ export class Select {
     itemValues: signal<string[]>([]),
     focusedIndex: signal(-1),
     setValue: (value: string, label?: string) => {
+      this._value.set(value);
       this.value.set(value);
-      this.context.value.set(value);
       if (label) {
         this.context.selectedLabel.set(label);
       }
+      this._open.set(false);
       this.open.set(false);
-      this.context.open.set(false);
       // Restore focus to trigger
       const trigger = this.context.triggerElement();
       if (trigger) {
@@ -97,10 +103,21 @@ export class Select {
     cn('relative inline-block', this.class())
   );
 
-  ngOnChanges() {
-    this.context.value.set(this.value());
-    this.context.open.set(this.open());
-    this.context.disabled.set(this.disabled());
+  constructor() {
+    // Sync value input to internal signal
+    effect(() => {
+      this._value.set(this.value());
+    });
+
+    // Sync open input to internal signal
+    effect(() => {
+      this._open.set(this.open());
+    });
+
+    // Sync disabled input to internal signal
+    effect(() => {
+      this._disabled.set(this.disabled());
+    });
   }
 
   /** Focus an item by index */

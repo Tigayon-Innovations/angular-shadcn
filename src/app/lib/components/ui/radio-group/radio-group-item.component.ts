@@ -3,10 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    ElementRef,
     inject,
     input,
     OnDestroy,
     OnInit,
+    viewChild,
 } from '@angular/core';
 import { RADIO_GROUP_CONTEXT } from './radio-group-context';
 
@@ -20,41 +22,54 @@ import { RADIO_GROUP_CONTEXT } from './radio-group-context';
 @Component({
   selector: 'RadioGroupItem',
   template: `
-    <span
-      data-slot="radio-group-indicator"
-      class="flex items-center justify-center"
+    <input
+      #inputElement
+      type="radio"
+      [attr.id]="id()"
+      [attr.name]="context?.name()"
+      [attr.value]="value()"
+      [checked]="isChecked()"
+      [disabled]="isDisabled()"
+      (change)="select()"
+      class="sr-only peer"
+    />
+    <div
+      [class]="radioClass()"
+      [attr.data-state]="isChecked() ? 'checked' : 'unchecked'"
+      [attr.data-disabled]="isDisabled() ? '' : null"
+      aria-hidden="true"
     >
-      @if (isChecked()) {
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="size-2.5"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-        </svg>
-      }
-    </span>
+      <span
+        data-slot="radio-group-indicator"
+        class="flex items-center justify-center"
+      >
+        @if (isChecked()) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-2.5"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+        }
+      </span>
+    </div>
   `,
   host: {
     '[class]': 'computedClass()',
-    'role': 'radio',
-    '[attr.aria-checked]': 'isChecked()',
-    '[attr.aria-disabled]': 'isDisabled()',
-    '[attr.data-state]': 'isChecked() ? "checked" : "unchecked"',
-    '[attr.data-disabled]': 'isDisabled() ? "" : null',
-    '[attr.data-value]': 'value()',
-    '[attr.tabindex]': 'tabIndex()',
-    '(click)': 'select()',
-    '(keydown)': 'onKeyDown($event)',
     'data-slot': 'radio-group-item',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroupItem implements OnInit, OnDestroy {
-  private readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
+  protected readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
+  private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+
+  /** The id for the radio input - used for label association */
+  readonly id = input<string>();
 
   /** The value of this radio option */
   readonly value = input.required<string>();
@@ -172,10 +187,19 @@ export class RadioGroupItem implements OnInit, OnDestroy {
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-      'inline-flex items-center justify-center cursor-pointer',
-      this.isDisabled() && 'cursor-not-allowed opacity-50',
+      'relative inline-flex',
       this.class()
+    )
+  );
+
+  /** Computed radio visual class */
+  protected readonly radioClass = computed(() =>
+    cn(
+      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px]',
+      'border-input text-primary aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
+      'aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none',
+      'inline-flex items-center justify-center cursor-pointer',
+      this.isDisabled() && 'cursor-not-allowed opacity-50'
     )
   );
 }

@@ -3,10 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    ElementRef,
     forwardRef,
     input,
     model,
     signal,
+    viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -36,37 +38,44 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'Checkbox',
   template: `
-    <span
-      data-slot="checkbox-indicator"
-      class="flex items-center justify-center text-current"
+    <input
+      #inputElement
+      type="checkbox"
+      [attr.id]="id()"
+      [checked]="checked()"
+      [disabled]="isDisabled()"
+      (change)="toggle()"
+      class="sr-only peer"
+    />
+    <div
+      [class]="boxClass()"
+      [attr.data-state]="checked() ? 'checked' : 'unchecked'"
+      [attr.data-disabled]="isDisabled() ? '' : null"
+      aria-hidden="true"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        [class]="checkIconClass()"
+      <span
+        data-slot="checkbox-indicator"
+        class="flex items-center justify-center text-current"
       >
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
-    </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          [class]="checkIconClass()"
+        >
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </span>
+    </div>
   `,
   host: {
     '[class]': 'computedClass()',
-    '[attr.role]': '"checkbox"',
-    '[attr.aria-checked]': 'checked()',
-    '[attr.aria-disabled]': 'isDisabled()',
-    '[attr.data-state]': 'checked() ? "checked" : "unchecked"',
-    '[attr.data-disabled]': 'isDisabled() ? "" : null',
-    '[attr.tabindex]': 'isDisabled() ? -1 : 0',
-    '(click)': 'toggle()',
-    '(keydown.space)': 'toggle(); $event.preventDefault()',
-    '(keydown.enter)': 'toggle(); $event.preventDefault()',
     'data-slot': 'checkbox',
   },
   providers: [
@@ -79,6 +88,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Checkbox implements ControlValueAccessor {
+  private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+
+  /** The id for the checkbox input - used for label association */
+  readonly id = input<string>();
+
   /** Whether the checkbox is checked */
   readonly checked = model<boolean>(false);
 
@@ -134,12 +148,21 @@ export class Checkbox implements ControlValueAccessor {
     )
   );
 
+  /** Computed class for the visual checkbox box */
+  protected readonly boxClass = computed(() =>
+    cn(
+      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px]',
+      'border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary',
+      'size-4 shrink-0 rounded-[4px] border shadow-xs transition-all duration-200 outline-none',
+      'inline-flex items-center justify-center cursor-pointer',
+      this.isDisabled() && 'cursor-not-allowed opacity-50'
+    )
+  );
+
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-all duration-200 outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-      'inline-flex items-center justify-center cursor-pointer',
-      this.isDisabled() && 'cursor-not-allowed opacity-50',
+      'relative inline-flex',
       this.class()
     )
   );

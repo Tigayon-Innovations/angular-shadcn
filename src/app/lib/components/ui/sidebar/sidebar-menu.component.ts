@@ -8,6 +8,8 @@ import {
 
 /**
  * SidebarMenu component - menu container in sidebar.
+ *
+ * Provides semantic navigation grouping with proper ARIA roles.
  */
 @Component({
   selector: 'SidebarMenu',
@@ -15,6 +17,7 @@ import {
   host: {
     '[class]': 'computedClass()',
     'data-sidebar': 'menu',
+    '[attr.role]': '"menu"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

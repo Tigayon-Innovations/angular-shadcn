@@ -1,10 +1,25 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    OnDestroy,
+    OnInit,
+    output,
+} from '@angular/core';
 import { COMMAND_CONTEXT } from './command-context';
+
+let itemIndexCounter = 0;
 
 /**
  * CommandItem component - a single item in the command list.
  * Matches shadcn/ui React CommandItem exactly.
+ * Implements option role with proper focus management.
  */
 @Component({
   selector: 'CommandItem',
@@ -12,15 +27,24 @@ import { COMMAND_CONTEXT } from './command-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.role]': '"option"',
+    '[attr.id]': 'itemId',
+    '[attr.data-command-index]': 'visibleIndex()',
+    '[attr.tabindex]': '"-1"',
     '[attr.data-disabled]': 'disabled() ? "" : null',
-    '[attr.data-selected]': 'isSelected() ? "" : null',
+    '[attr.data-selected]': 'isFocused() ? "" : null',
+    '[attr.aria-selected]': 'isFocused()',
+    '[attr.aria-disabled]': 'disabled()',
+    '[hidden]': '!isVisible()',
     '(click)': 'handleClick()',
-    '(keydown.enter)': 'handleClick()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommandItem {
+export class CommandItem implements OnInit, AfterViewInit, OnDestroy {
   protected readonly context = inject(COMMAND_CONTEXT);
+  private readonly elementRef = inject(ElementRef);
+
+  readonly itemIndex = itemIndexCounter++;
+  readonly itemId = `command-item-${this.itemIndex}`;
 
   /** Unique value for this item */
   readonly value = input<string>('');
@@ -37,7 +61,31 @@ export class CommandItem {
   /** Select event emitted when item is clicked */
   readonly onSelect = output<string>();
 
-  protected readonly isSelected = computed(() => this.context.selectedValue() === this.value());
+  /** Whether item matches current search filter */
+  protected readonly isVisible = computed(() => {
+    return this.context.shouldShowItem(this.value(), this.keywords());
+  });
+
+  /** Get visible index among shown items */
+  protected readonly visibleIndex = computed(() => {
+    if (!this.isVisible()) return -1;
+
+    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    if (parent) {
+      const visibleItems = Array.from(
+        parent.querySelectorAll('CommandItem:not([hidden])')
+      );
+      return visibleItems.indexOf(this.elementRef.nativeElement);
+    }
+    return this.localIndex;
+  });
+
+  protected readonly isFocused = computed(() => {
+    const focusedIdx = this.context.focusedIndex();
+    return this.isVisible() && this.getLocalIndex() === focusedIdx;
+  });
+
+  private localIndex = -1;
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -47,8 +95,52 @@ export class CommandItem {
     )
   );
 
+  constructor() {
+    // Scroll into view when focused
+    effect(() => {
+      if (this.isFocused()) {
+        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.context.registerItem(this.value());
+  }
+
+  ngAfterViewInit(): void {
+    this.updateLocalIndex();
+    this.context.itemCount.update(c => c + 1);
+  }
+
+  ngOnDestroy(): void {
+    this.context.unregisterItem(this.value());
+    this.context.itemCount.update(c => Math.max(0, c - 1));
+  }
+
+  private updateLocalIndex(): void {
+    // Find our position among sibling command items
+    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    if (parent) {
+      const items = Array.from(parent.querySelectorAll('CommandItem'));
+      this.localIndex = items.indexOf(this.elementRef.nativeElement);
+    }
+  }
+
+  private getLocalIndex(): number {
+    // Dynamically compute index based on visible DOM position
+    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    if (parent) {
+      const visibleItems = Array.from(
+        parent.querySelectorAll('CommandItem:not([hidden])')
+      );
+      return visibleItems.indexOf(this.elementRef.nativeElement);
+    }
+    return this.localIndex;
+  }
+
   protected handleClick(): void {
-    if (this.disabled()) return;
+    if (this.disabled() || !this.isVisible()) return;
     this.context.selectedValue.set(this.value());
     this.onSelect.emit(this.value());
   }

@@ -45,13 +45,14 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
   {
     name: 'Card',
     slug: 'card',
-    description: 'Displays a card with header, content, and footer.',
+    description: 'Displays a card with header, content, and footer. Perfect for displaying grouped information, forms, or media.',
     category: 'layout',
     package: '@ng-cn/card',
     imports: ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter', 'CardAction'],
     examples: [
       {
         title: 'Basic',
+        description: 'A simple card with all sections.',
         code: `<Card class="w-[350px]">
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -67,18 +68,33 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
       },
       {
         title: 'With Form',
+        description: 'Card containing a form for user input.',
         code: `<Card class="w-[350px]">
   <CardHeader>
     <CardTitle>Create project</CardTitle>
     <CardDescription>Deploy your new project in one-click.</CardDescription>
   </CardHeader>
   <CardContent>
-    <div class="grid w-full items-center gap-4">
+    <form class="grid w-full items-center gap-4">
       <div class="flex flex-col space-y-1.5">
         <Label htmlFor="name">Name</Label>
         <Input id="name" placeholder="Name of your project" />
       </div>
-    </div>
+      <div class="flex flex-col space-y-1.5">
+        <Label htmlFor="framework">Framework</Label>
+        <Select>
+          <SelectTrigger id="framework">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="next">Next.js</SelectItem>
+            <SelectItem value="sveltekit">SvelteKit</SelectItem>
+            <SelectItem value="angular">Angular</SelectItem>
+            <SelectItem value="nuxt">Nuxt.js</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </form>
   </CardContent>
   <CardFooter class="flex justify-between">
     <Button variant="outline">Cancel</Button>
@@ -87,7 +103,8 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
 </Card>`,
       },
       {
-        title: 'With Action',
+        title: 'With Action Button',
+        description: 'Card header with an action button.',
         code: `<Card class="w-[350px]">
   <CardHeader>
     <CardTitle>Notifications</CardTitle>
@@ -105,9 +122,78 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
   </CardContent>
 </Card>`,
       },
+      {
+        title: 'Interactive Card',
+        description: 'Card that acts as a clickable element.',
+        code: `<Card
+  class="w-[350px] cursor-pointer transition-colors hover:bg-accent"
+  tabindex="0"
+  role="button"
+  (click)="handleCardClick()"
+  (keydown.enter)="handleCardClick()"
+>
+  <CardHeader>
+    <CardTitle>Click me</CardTitle>
+    <CardDescription>This entire card is interactive.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p class="text-sm text-muted-foreground">
+      Cards can be made clickable for navigation or actions.
+    </p>
+  </CardContent>
+</Card>`,
+      },
+      {
+        title: 'With Image',
+        description: 'Card with featured image at the top.',
+        code: `<Card class="w-[350px] overflow-hidden">
+  <img
+    src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800"
+    alt="Featured image"
+    class="w-full h-48 object-cover"
+  />
+  <CardHeader>
+    <CardTitle>Beautiful Landscape</CardTitle>
+    <CardDescription>Photography by Drew Beamer</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p class="text-sm text-muted-foreground">
+      A stunning capture of natural beauty.
+    </p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline" class="w-full">View Gallery</Button>
+  </CardFooter>
+</Card>`,
+      },
+      {
+        title: 'Card Grid Layout',
+        description: 'Multiple cards in a responsive grid.',
+        code: `<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  @for (item of items; track item.id) {
+    <Card>
+      <CardHeader>
+        <CardTitle>{{ item.title }}</CardTitle>
+        <CardDescription>{{ item.description }}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p class="text-sm text-muted-foreground">{{ item.content }}</p>
+      </CardContent>
+      <CardFooter>
+        <Button variant="outline" size="sm">Learn more</Button>
+      </CardFooter>
+    </Card>
+  }
+</div>`,
+      },
     ],
     props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'Card' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardHeader' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardTitle' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardDescription' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardContent' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardFooter' },
     ],
   },
   {
@@ -231,32 +317,92 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
   {
     name: 'Separator',
     slug: 'separator',
-    description: 'Visually or semantically separates content.',
+    description: 'Visually or semantically separates content. Renders as an hr element with proper accessibility.',
     category: 'layout',
     package: '@ng-cn/separator',
     imports: ['Separator'],
     examples: [
       {
-        title: 'Basic',
+        title: 'Horizontal',
+        description: 'Default horizontal separator between content sections.',
         code: `<div class="w-full max-w-md">
   <div class="space-y-1">
     <h4 class="text-sm font-medium leading-none">Radix Primitives</h4>
     <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
   </div>
   <Separator class="my-4" />
-  <div class="flex h-5 items-center space-x-4 text-sm">
-    <div>Blog</div>
-    <Separator orientation="vertical" />
-    <div>Docs</div>
-    <Separator orientation="vertical" />
-    <div>Source</div>
+  <div class="space-y-1">
+    <h4 class="text-sm font-medium leading-none">Installation</h4>
+    <p class="text-sm text-muted-foreground">How to install dependencies and structure your app.</p>
   </div>
 </div>`,
+      },
+      {
+        title: 'Vertical',
+        description: 'Vertical separator between inline elements.',
+        code: `<div class="flex h-5 items-center space-x-4 text-sm">
+  <div>Blog</div>
+  <Separator orientation="vertical" />
+  <div>Docs</div>
+  <Separator orientation="vertical" />
+  <div>Source</div>
+</div>`,
+      },
+      {
+        title: 'In Navigation',
+        description: 'Separator used in navigation menus.',
+        code: `<nav class="flex items-center space-x-4">
+  <a href="#" class="text-sm font-medium">Home</a>
+  <a href="#" class="text-sm font-medium">Products</a>
+  <a href="#" class="text-sm font-medium">About</a>
+  <Separator orientation="vertical" class="h-6" />
+  <Button variant="outline" size="sm">Sign In</Button>
+  <Button size="sm">Sign Up</Button>
+</nav>`,
+      },
+      {
+        title: 'With Text Label',
+        description: 'Separator with centered text label.',
+        code: `<div class="relative">
+  <div class="absolute inset-0 flex items-center">
+    <Separator class="w-full" />
+  </div>
+  <div class="relative flex justify-center text-xs uppercase">
+    <span class="bg-background px-2 text-muted-foreground">
+      Or continue with
+    </span>
+  </div>
+</div>`,
+      },
+      {
+        title: 'In Card Layout',
+        description: 'Separator between card sections.',
+        code: `<Card class="w-[350px]">
+  <CardHeader>
+    <CardTitle>Account Settings</CardTitle>
+    <CardDescription>Manage your account preferences.</CardDescription>
+  </CardHeader>
+  <Separator />
+  <CardContent class="pt-4">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-medium">Email notifications</span>
+        <Switch />
+      </div>
+      <Separator />
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-medium">Push notifications</span>
+        <Switch />
+      </div>
+    </div>
+  </CardContent>
+</Card>`,
       },
     ],
     props: [
       { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'The orientation of the separator.' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
+      { name: 'decorative', type: 'boolean', default: 'true', description: 'Whether the separator is decorative (aria-hidden).' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
     ],
   },
 ];

@@ -9,6 +9,7 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
 /**
  * TooltipTrigger component - element that triggers tooltip on hover.
  * Matches shadcn/ui React TooltipTrigger exactly.
+ * Supports Escape key to dismiss tooltip per WCAG 1.4.13.
  */
 @Component({
   selector: 'TooltipTrigger',
@@ -18,6 +19,7 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
     '(mouseleave)': 'onMouseLeave()',
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
+    '(keydown.escape)': 'onEscape()',
     '[attr.aria-describedby]': 'context.open() ? context.tooltipId : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,6 +53,16 @@ export class TooltipTrigger {
 
   onBlur(): void {
     this.context.setOpen(false);
+  }
+
+  /**
+   * Escape key handler for WCAG 1.4.13 compliance.
+   * Content on hover/focus must be dismissible via Escape.
+   */
+  onEscape(): void {
+    if (this.context.open()) {
+      this.context.setOpen(false);
+    }
   }
 
   private clearTimeouts(): void {

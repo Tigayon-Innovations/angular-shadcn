@@ -5,7 +5,8 @@ import {
     computed,
     ElementRef,
     inject,
-    input
+    input,
+    viewChild,
 } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
@@ -21,43 +22,48 @@ import { SELECT_CONTEXT } from './select-context';
 @Component({
   selector: 'SelectTrigger',
   template: `
-    <ng-content />
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="size-4 opacity-50"
-      aria-hidden="true"
+    <button
+      #triggerButton
+      type="button"
+      role="combobox"
+      [class]="computedClass()"
+      [attr.aria-expanded]="context?.open()"
+      aria-haspopup="listbox"
+      [attr.aria-controls]="context?.contentId"
+      [attr.data-state]="context?.open() ? 'open' : 'closed'"
+      [attr.data-disabled]="context?.disabled() ? '' : null"
+      [attr.data-placeholder]="!context?.value() ? '' : null"
+      [disabled]="context?.disabled()"
+      (click)="toggleOpen()"
+      (keydown)="onKeyDown($event)"
     >
-      <path d="m6 9 6 6 6-6"></path>
-    </svg>
+      <ng-content />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4 opacity-50 shrink-0"
+        aria-hidden="true"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </button>
   `,
   host: {
-    '[class]': 'computedClass()',
-    'type': 'button',
-    'role': 'combobox',
-    '[attr.aria-expanded]': 'context?.open()',
-    '[attr.aria-haspopup]': '"listbox"',
-    '[attr.aria-controls]': 'context?.contentId',
-    '[attr.data-state]': 'context?.open() ? "open" : "closed"',
-    '[attr.data-disabled]': 'context?.disabled() ? "" : null',
-    '[attr.data-placeholder]': '!context?.value() ? "" : null',
-    '[attr.disabled]': 'context?.disabled() ? "" : null',
-    '(click)': 'toggleOpen()',
-    '(keydown)': 'onKeyDown($event)',
+    'class': 'contents',
     'data-slot': 'select-trigger',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTrigger {
   protected readonly context = inject(SELECT_CONTEXT, { optional: true });
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly triggerButton = viewChild<ElementRef<HTMLButtonElement>>('triggerButton');
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -66,7 +72,10 @@ export class SelectTrigger {
   toggleOpen() {
     if (!this.context?.disabled()) {
       // Save trigger element for focus restoration
-      this.context?.triggerElement.set(this.elementRef.nativeElement);
+      const button = this.triggerButton()?.nativeElement;
+      if (button) {
+        this.context?.triggerElement.set(button);
+      }
       const newState = !this.context?.open();
       this.context?.open.set(newState);
       if (newState) {
@@ -95,7 +104,10 @@ export class SelectTrigger {
         event.preventDefault();
         if (!this.context.open()) {
           // Save trigger element
-          this.context.triggerElement.set(this.elementRef.nativeElement);
+          const button = this.triggerButton()?.nativeElement;
+          if (button) {
+            this.context.triggerElement.set(button);
+          }
           this.context.open.set(true);
           setTimeout(() => this.context?.focusItem(0));
         } else {
@@ -109,7 +121,10 @@ export class SelectTrigger {
         event.preventDefault();
         if (!this.context.open()) {
           // Save trigger element
-          this.context.triggerElement.set(this.elementRef.nativeElement);
+          const button = this.triggerButton()?.nativeElement;
+          if (button) {
+            this.context.triggerElement.set(button);
+          }
           this.context.open.set(true);
           const lastIndex = this.context.itemValues().length - 1;
           setTimeout(() => this.context?.focusItem(lastIndex));

@@ -23,7 +23,7 @@ import {
  */
 @Component({
   selector: 'Label',
-  template: `<label [attr.for]="for()" [class]="computedClass()"><ng-content /></label>`,
+  template: `<label [attr.for]="forId()" [class]="computedClass()"><ng-content /></label>`,
   host: {
     'data-slot': 'label',
     'class': 'contents',
@@ -33,6 +33,12 @@ import {
 export class Label {
   /** ID of the form element this label is for */
   readonly for = input<string>();
+
+  /** Alternative binding for 'for' attribute (React-style) */
+  readonly htmlFor = input<string>();
+
+  /** Computed ID - prefers 'for' over 'htmlFor' */
+  protected readonly forId = computed(() => this.for() || this.htmlFor());
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');

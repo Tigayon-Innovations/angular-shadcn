@@ -8,6 +8,7 @@ export {
     SIDEBAR_WIDTH,
     SIDEBAR_WIDTH_ICON,
     SIDEBAR_WIDTH_MOBILE,
+    type AriaCurrentValue,
     type SidebarCollapsible,
     type SidebarContext,
     type SidebarSide,
@@ -33,6 +34,7 @@ export { SidebarMenuSub } from './sidebar-menu-sub.component';
 export { SidebarMenu } from './sidebar-menu.component';
 export { SidebarProvider } from './sidebar-provider.component';
 export { SidebarRail } from './sidebar-rail.component';
+export { SidebarRouteActiveService } from './sidebar-route-active.service';
 export { SidebarSeparator } from './sidebar-separator.component';
 export { SidebarTrigger } from './sidebar-trigger.component';
 export { Sidebar } from './sidebar.component';

@@ -8,6 +8,9 @@ import {
 
 /**
  * SidebarMenuItem component - individual menu item.
+ *
+ * Wraps a menu button and provides semantic grouping and context.
+ * Supports active state tracking and accessibility features.
  */
 @Component({
   selector: 'SidebarMenuItem',
@@ -15,6 +18,7 @@ import {
   host: {
     '[class]': 'computedClass()',
     'data-sidebar': 'menu-item',
+    '[attr.role]': '"presentation"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

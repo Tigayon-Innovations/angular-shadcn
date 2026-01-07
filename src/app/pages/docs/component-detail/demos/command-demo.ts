@@ -1,12 +1,12 @@
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-    CommandShortcut,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
 } from '@/ui/command';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile, User } from 'lucide-angular';
@@ -27,36 +27,36 @@ import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile,
   ],
   template: `
     <Command class="rounded-lg border shadow-md md:min-w-[450px]">
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder="Type to search (try 'search', 'calendar', 'profile')..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
-          <CommandItem>
+          <CommandItem [value]="'calendar'" [keywords]="['date', 'event', 'schedule']">
             <lucide-icon [img]="Calendar" class="mr-2 h-4 w-4" />
             <span>Calendar</span>
           </CommandItem>
-          <CommandItem>
+          <CommandItem [value]="'search-emoji'" [keywords]="['emoji', 'emoticon', 'face']">
             <lucide-icon [img]="Smile" class="mr-2 h-4 w-4" />
             <span>Search Emoji</span>
           </CommandItem>
-          <CommandItem>
+          <CommandItem [value]="'calculator'" [keywords]="['math', 'compute', 'calc']">
             <lucide-icon [img]="Calculator" class="mr-2 h-4 w-4" />
             <span>Calculator</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Settings">
-          <CommandItem>
+          <CommandItem [value]="'profile'" [keywords]="['account', 'user', 'me']">
             <lucide-icon [img]="User" class="mr-2 h-4 w-4" />
             <span>Profile</span>
             <CommandShortcut>⌘P</CommandShortcut>
           </CommandItem>
-          <CommandItem>
+          <CommandItem [value]="'billing'" [keywords]="['payment', 'invoice', 'charge']">
             <lucide-icon [img]="CreditCard" class="mr-2 h-4 w-4" />
             <span>Billing</span>
             <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
-          <CommandItem>
+          <CommandItem [value]="'settings'" [keywords]="['config', 'preferences', 'options']">
             <lucide-icon [img]="Settings" class="mr-2 h-4 w-4" />
             <span>Settings</span>
             <CommandShortcut>⌘S</CommandShortcut>

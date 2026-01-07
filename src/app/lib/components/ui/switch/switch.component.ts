@@ -3,10 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    ElementRef,
     forwardRef,
     input,
     model,
     signal,
+    viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -36,22 +38,30 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'Switch',
   template: `
-    <span
-      data-slot="switch-thumb"
-      [class]="thumbClass()"
-    ></span>
+    <input
+      #inputElement
+      type="checkbox"
+      role="switch"
+      [attr.id]="id()"
+      [checked]="checked()"
+      [disabled]="isDisabled()"
+      (change)="toggle()"
+      class="sr-only peer"
+    />
+    <div
+      [class]="trackClass()"
+      [attr.data-state]="checked() ? 'checked' : 'unchecked'"
+      [attr.data-disabled]="isDisabled() ? '' : null"
+      aria-hidden="true"
+    >
+      <span
+        data-slot="switch-thumb"
+        [class]="thumbClass()"
+      ></span>
+    </div>
   `,
   host: {
     '[class]': 'computedClass()',
-    '[attr.role]': '"switch"',
-    '[attr.aria-checked]': 'checked()',
-    '[attr.aria-disabled]': 'isDisabled()',
-    '[attr.data-state]': 'checked() ? "checked" : "unchecked"',
-    '[attr.data-disabled]': 'isDisabled() ? "" : null',
-    '[attr.tabindex]': 'isDisabled() ? -1 : 0',
-    '(click)': 'toggle()',
-    '(keydown.space)': 'toggle(); $event.preventDefault()',
-    '(keydown.enter)': 'toggle(); $event.preventDefault()',
     'data-slot': 'switch',
   },
   providers: [
@@ -64,6 +74,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Switch implements ControlValueAccessor {
+  private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+
+  /** The id for the switch input - used for label association */
+  readonly id = input<string>();
+
   /** Whether the switch is checked/on */
   readonly checked = model<boolean>(false);
 
@@ -112,9 +127,18 @@ export class Switch implements ControlValueAccessor {
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'peer data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer',
-      this.isDisabled() && 'cursor-not-allowed opacity-50',
+      'relative inline-flex',
       this.class()
+    )
+  );
+
+  /** Computed track class */
+  protected readonly trackClass = computed(() =>
+    cn(
+      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px]',
+      'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80',
+      'inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none cursor-pointer',
+      this.isDisabled() && 'cursor-not-allowed opacity-50'
     )
   );
 

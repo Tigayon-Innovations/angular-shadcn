@@ -5,6 +5,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
 /**
  * MenubarItem component - individual menu item.
  * Matches shadcn/ui React MenubarItem exactly.
+ * Supports roving tabindex for proper keyboard navigation.
  */
 @Component({
   selector: 'MenubarItem',
@@ -12,8 +13,9 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitem"',
-    '[attr.tabindex]': 'disabled() ? -1 : 0',
+    '[attr.tabindex]': 'disabled() ? -1 : -1',
     '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.aria-disabled]': 'disabled()',
     '(click)': 'handleClick($event)',
     '(keydown.enter)': 'handleClick($event)',
     '(keydown.space)': 'handleClick($event)',
@@ -53,5 +55,6 @@ export class MenubarItem {
     this.onSelect.emit();
     this.menuContext.open.set(false);
     this.context.activeMenu.set(null);
+    this.menuContext.focusedItemIndex.set(-1);
   }
 }

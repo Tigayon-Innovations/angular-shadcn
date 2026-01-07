@@ -8,6 +8,8 @@ export interface ContextMenuPosition {
 export interface ContextMenuContextValue {
   open: WritableSignal<boolean>;
   position: WritableSignal<ContextMenuPosition>;
+  focusedIndex: WritableSignal<number>;
+  triggerElement: WritableSignal<HTMLElement | null>;
 }
 
 export const CONTEXT_MENU_CONTEXT = new InjectionToken<ContextMenuContextValue>(

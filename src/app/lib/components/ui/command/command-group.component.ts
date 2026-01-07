@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input } from '@angular/core';
 
 /**
  * CommandGroup component - a group of command items.
  * Matches shadcn/ui React CommandGroup exactly.
+ * Automatically hides groups with no visible items.
  */
 @Component({
   selector: 'CommandGroup',
@@ -15,15 +16,26 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   `,
   host: {
     '[class]': 'computedClass()',
+    '[hidden]': '!hasVisibleItems()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandGroup {
+  private readonly elementRef = inject(ElementRef);
+
   /** Group heading */
   readonly heading = input<string>('');
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Check if group has any visible items */
+  protected readonly hasVisibleItems = computed(() => {
+    // This will be re-evaluated whenever DOM changes
+    const element = this.elementRef.nativeElement;
+    const visibleItems = element.querySelectorAll('CommandItem:not([hidden])');
+    return visibleItems.length > 0;
+  });
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -31,4 +43,24 @@ export class CommandGroup {
       this.class()
     )
   );
+
+  constructor() {
+    // Trigger re-evaluation of hasVisibleItems when children change
+    effect(() => {
+      // Create a MutationObserver to detect when child visibility changes
+      const observer = new MutationObserver(() => {
+        // Mark for change detection by accessing the computed signal
+        this.hasVisibleItems();
+      });
+
+      const element = this.elementRef.nativeElement;
+      observer.observe(element, {
+        attributes: true,
+        attributeFilter: ['hidden'],
+        subtree: true,
+      });
+
+      return () => observer.disconnect();
+    });
+  }
 }

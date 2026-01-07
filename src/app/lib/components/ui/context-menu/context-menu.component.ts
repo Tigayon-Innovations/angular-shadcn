@@ -14,6 +14,8 @@ import { CONTEXT_MENU_CONTEXT, type ContextMenuContextValue } from './context-me
       useFactory: (): ContextMenuContextValue => ({
         open: signal(false),
         position: signal({ x: 0, y: 0 }),
+        focusedIndex: signal(-1),
+        triggerElement: signal(null),
       }),
     },
   ],

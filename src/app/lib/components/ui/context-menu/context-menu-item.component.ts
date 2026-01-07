@@ -5,6 +5,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
 /**
  * ContextMenuItem component - a single item in the context menu.
  * Matches shadcn/ui React ContextMenuItem exactly.
+ * Supports roving tabindex for proper keyboard navigation.
  */
 @Component({
   selector: 'ContextMenuItem',
@@ -12,7 +13,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitem"',
-    '[attr.tabindex]': 'disabled() ? -1 : 0',
+    '[attr.tabindex]': 'disabled() ? -1 : -1',
     '[attr.aria-disabled]': 'disabled()',
     '[attr.data-disabled]': 'disabled() ? "" : null',
     '(click)': 'handleClick($event)',
@@ -52,5 +53,11 @@ export class ContextMenuItem {
     }
     this.onSelect.emit();
     this.context.open.set(false);
+    this.context.focusedIndex.set(-1);
+    // Restore focus to trigger element
+    const triggerEl = this.context.triggerElement();
+    if (triggerEl) {
+      triggerEl.focus();
+    }
   }
 }

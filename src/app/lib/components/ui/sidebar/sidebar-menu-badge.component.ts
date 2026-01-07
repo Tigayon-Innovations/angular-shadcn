@@ -8,6 +8,9 @@ import {
 
 /**
  * SidebarMenuBadge component - badge in menu item.
+ *
+ * Displays badge with interactive visual feedback.
+ * Inherits color and styling from parent menu button state.
  */
 @Component({
   selector: 'SidebarMenuBadge',
@@ -24,11 +27,14 @@ export class SidebarMenuBadge {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums text-sidebar-foreground select-none pointer-events-none',
+      'absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums text-sidebar-foreground select-none pointer-events-none transition-colors ease-linear duration-150',
+      // Inherit color from parent button state
       'peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground',
+      // Size responsive positioning
       'peer-data-[size=sm]/menu-button:top-1',
       'peer-data-[size=default]/menu-button:top-1.5',
       'peer-data-[size=lg]/menu-button:top-2.5',
+      // Hide in collapsed icon mode
       'group-data-[collapsible=icon]/sidebar-wrapper:hidden',
       this.class()
     )
