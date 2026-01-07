@@ -7,12 +7,11 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   imports: [Slider],
   template: `
     <div class="w-full max-w-md space-y-4">
-      <Slider
-        [(value)]="value"
+      <Slider [(value)]="value"
         [max]="100"
         [step]="1"
         class="w-full"
-      ></Slider>
+       />
       <p class="text-sm text-muted-foreground text-center">Value: {{ value() }}</p>
     </div>
   `,

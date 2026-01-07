@@ -9,7 +9,7 @@ import { Checkbox } from '@/ui/checkbox';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
-import { Textarea } from '@/ui/textarea';
+
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -54,7 +54,6 @@ interface ComponentExample {
     TabsContent,
     TabsList,
     TabsTrigger,
-    Textarea,
     RouterLink,
     LucideAngularModule,
     FormsModule,

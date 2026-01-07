@@ -142,7 +142,7 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
                 <span>{{ task.name }}</span>
                 <span class="text-muted-foreground">{{ task.progress }}%</span>
               </div>
-              <Progress [value]="task.progress"></Progress>
+              <Progress [value]="task.progress" />
             </div>
           }
         </CardContent>

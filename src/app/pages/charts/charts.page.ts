@@ -7,7 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/ui/select';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -35,7 +35,6 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
   selector: 'ChartsPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
     Button,
     Card,
     CardContent,
@@ -47,8 +46,8 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
     SelectItem,
     SelectTrigger,
     SelectValue,
-    LucideAngularModule,
-  ],
+    LucideAngularModule
+],
   template: `
     <div class="min-h-screen bg-background">
       <section class="container mx-auto px-4 py-16 text-center">

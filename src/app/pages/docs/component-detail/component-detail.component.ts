@@ -83,7 +83,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
               >
                 @if (hasDemo()) {
                   <div class="w-full flex items-center justify-center p-10">
-                    <ng-container #demoContainer></ng-container>
+                    <ng-container #demoContainer />
                   </div>
                 } @else {
                   <div class="flex items-center justify-center p-10">
@@ -189,7 +189,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
                     >
                       @if (hasDemo()) {
                         <div class="w-full flex items-center justify-center p-10">
-                          <ng-container #exampleContainer></ng-container>
+                          <ng-container #exampleContainer />
                         </div>
                       } @else {
                         <div class="flex items-center justify-center p-10 min-h-[200px]">

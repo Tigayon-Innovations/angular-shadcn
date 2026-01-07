@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, signal } from '@
   imports: [Progress],
   template: `
     <div class="w-full max-w-lg space-y-2">
-      <Progress [value]="progress()" class="w-full h-4"></Progress>
+      <Progress [value]="progress()" class="w-full h-4" />
       <p class="text-sm text-muted-foreground text-center">{{ progress() }}%</p>
     </div>
   `,

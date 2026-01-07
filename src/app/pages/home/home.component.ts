@@ -211,8 +211,8 @@ import {
                 <CardDescription class="text-xs">A better sense of progress</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-col gap-3">
-                <Progress [value]="66"></Progress>
-                <Progress [value]="33"></Progress>
+                <Progress [value]="66" />
+                <Progress [value]="33" />
               </CardContent>
             </Card>
 

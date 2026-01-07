@@ -183,7 +183,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                       Receive updates about new features
                     </p>
                   </div>
-                  <Checkbox></Checkbox>
+                  <Checkbox />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
@@ -192,7 +192,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                       Important security updates
                     </p>
                   </div>
-                  <Checkbox [checked]="true"></Checkbox>
+                  <Checkbox [checked]="true" />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
@@ -201,7 +201,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                       News about product changes
                     </p>
                   </div>
-                  <Checkbox></Checkbox>
+                  <Checkbox />
                 </div>
               </CardContent>
             </Card>
@@ -219,7 +219,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                       Get notified about new messages
                     </p>
                   </div>
-                  <Checkbox [checked]="true"></Checkbox>
+                  <Checkbox [checked]="true" />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
@@ -228,7 +228,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                       Updates on your projects
                     </p>
                   </div>
-                  <Checkbox [checked]="true"></Checkbox>
+                  <Checkbox [checked]="true" />
                 </div>
               </CardContent>
             </Card>

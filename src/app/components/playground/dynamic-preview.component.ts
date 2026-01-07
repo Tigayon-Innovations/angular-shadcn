@@ -1,4 +1,4 @@
-import { NgComponentOutlet } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,7 +12,7 @@ import { DynamicRendererService, RenderableNode } from './dynamic-renderer.servi
 // Import all UI components for dynamic rendering
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '@/ui/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
+import { Avatar, AvatarFallback } from '@/ui/avatar';
 import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/ui/card';
@@ -35,7 +35,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
   selector: 'DynamicNode',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgComponentOutlet,
     // Import all UI components for template usage
     Accordion,
     AccordionContent,
@@ -68,7 +67,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
     DialogTrigger,
     Avatar,
     AvatarFallback,
-    AvatarImage,
     Separator,
     Switch,
     Textarea,
@@ -265,7 +263,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
             <Checkbox [id]="getInput('id')" [checked]="getInput('checked')" [disabled]="getInput('disabled')" [class]="getInput('class')" />
         }
         @case ('Textarea') {
-            <Textarea [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')"></Textarea>
+            <Textarea [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')" />
         }
         @case ('Separator') {
             <Separator [orientation]="getInput('orientation')" [class]="getInput('class')" />
@@ -344,7 +342,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
             </TooltipContent>
         }
         @case ('Progress') {
-            <Progress [value]="getInput('value')" [class]="getInput('class')"></Progress>
+            <Progress [value]="getInput('value')" [class]="getInput('class')" />
         }
         @default {
             <!-- Fallback for unknown tags or unhandled components -->
