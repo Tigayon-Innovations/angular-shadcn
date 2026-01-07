@@ -1,28 +1,42 @@
 import { cn } from '@/lib/utils';
 import {
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
+    ElementRef,
     inject,
     input,
+    viewChild,
 } from '@angular/core';
 import { LucideAngularModule, Search } from 'lucide-angular';
 import { COMBOBOX_CONTEXT } from './combobox-context';
 
 /**
  * ComboboxInput component - search input for filtering options.
+ * Supports keyboard navigation within the combobox.
  */
 @Component({
   selector: 'ComboboxInput',
   imports: [LucideAngularModule],
   template: `
-    <lucide-icon [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <lucide-icon [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 opacity-50" aria-hidden="true" />
     <input
+      #searchInput
+      type="text"
       [class]="inputClass()"
       [placeholder]="placeholder()"
       [value]="context.search()"
+      role="searchbox"
+      [attr.aria-label]="placeholder()"
+      [attr.aria-controls]="context.listboxId"
+      [attr.aria-activedescendant]="context.activeDescendantId()"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
       (input)="onInput($event)"
-      (keydown.escape)="onEscape()"
+      (keydown)="onKeyDown($event)"
     />
   `,
   host: {
@@ -33,6 +47,8 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
 export class ComboboxInput {
   protected readonly context = inject(COMBOBOX_CONTEXT);
   protected readonly SearchIcon = Search;
+
+  private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   /** Placeholder text */
   readonly placeholder = input<string>('Search...');
@@ -50,12 +66,22 @@ export class ComboboxInput {
     )
   );
 
-  protected onInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.context.search.set(target.value);
+  constructor() {
+    // Auto-focus input when combobox opens
+    afterNextRender(() => {
+      setTimeout(() => {
+        this.searchInput()?.nativeElement?.focus();
+      }, 0);
+    });
   }
 
-  protected onEscape(): void {
-    this.context.onOpenChange(false);
+  protected onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.context.onSearch(target.value);
+  }
+
+  protected onKeyDown(event: KeyboardEvent): void {
+    // Pass keyboard events to the main handler for navigation
+    this.context.onKeyDown(event);
   }
 }

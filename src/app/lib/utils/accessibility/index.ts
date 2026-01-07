@@ -7,6 +7,7 @@ export { FocusManagementService, type FocusOptions } from './focus-management.se
 export { LiveAnnouncerService, type Announcement, type AnnouncementPriority } from './live-region.directive';
 
 // Directives
+export { ClickOutsideDirective } from './click-outside.directive';
 export { FocusTrapDirective } from './focus-trap.directive';
 export {
     KeyboardNavigationDirective, type KeyboardNavigationConfig, type NavigationDirection,

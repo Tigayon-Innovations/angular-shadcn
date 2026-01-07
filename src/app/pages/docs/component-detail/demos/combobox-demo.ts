@@ -1,5 +1,5 @@
 import { Button } from '@/ui/button';
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxTrigger } from '@/ui/combobox';
+import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxList, ComboboxTrigger } from '@/ui/combobox';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
 
@@ -11,15 +11,16 @@ import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
     Combobox,
     ComboboxContent,
     ComboboxEmpty,
+    ComboboxGroup,
     ComboboxInput,
-    ComboboxItem,
+    ComboboxList,
     ComboboxTrigger,
     LucideAngularModule,
   ],
   template: `
-    <Combobox [value]="value()" (valueChange)="value.set($event)">
+    <Combobox [options]="frameworks" [value]="value()" (valueChange)="value.set($event)">
       <ComboboxTrigger class="w-[200px]">
-        <Button variant="outline" role="combobox" class="w-[200px] justify-between">
+        <Button variant="outline" class="w-[200px] justify-between">
           {{ selectedLabel() || 'Select framework...' }}
           <lucide-icon [img]="ChevronsUpDown" class="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -27,11 +28,9 @@ import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
       <ComboboxContent>
         <ComboboxInput placeholder="Search framework..." />
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
-        @for (framework of frameworks; track framework.value) {
-          <ComboboxItem [value]="framework.value">
-            {{ framework.label }}
-          </ComboboxItem>
-        }
+        <ComboboxGroup>
+          <ComboboxList />
+        </ComboboxGroup>
       </ComboboxContent>
     </Combobox>
   `,

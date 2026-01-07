@@ -464,6 +464,7 @@ export {
     ComboboxGroup,
     ComboboxInput,
     ComboboxItem,
+    ComboboxList,
     ComboboxTrigger,
     ComboboxValue,
     type ComboboxContext,

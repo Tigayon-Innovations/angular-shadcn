@@ -1,15 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
 } from '@angular/core';
 import { COMBOBOX_CONTEXT } from './combobox-context';
 
 /**
  * ComboboxTrigger component - button that opens the combobox.
+ * Implements WAI-ARIA combobox trigger pattern.
  */
 @Component({
   selector: 'ComboboxTrigger',
@@ -17,14 +18,14 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   host: {
     '[class]': 'computedClass()',
     role: 'combobox',
+    '[attr.id]': 'context.id + "-trigger"',
     '[attr.aria-expanded]': 'context.open()',
     '[attr.aria-haspopup]': '"listbox"',
+    '[attr.aria-controls]': 'context.listboxId',
+    '[attr.aria-activedescendant]': 'context.open() ? context.activeDescendantId() : null',
+    '[attr.tabindex]': '0',
     '(click)': 'onClick()',
-    '(keydown.enter)': 'onClick()',
-    '(keydown.space)': 'onClick(); $event.preventDefault()',
-    '(keydown.arrowdown)': 'onArrowDown($event)',
-    '(keydown.arrowup)': 'onArrowUp($event)',
-    '(keydown.escape)': 'onEscape()',
+    '(keydown)': 'onKeyDown($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,21 +46,8 @@ export class ComboboxTrigger {
     this.context.onOpenChange(!this.context.open());
   }
 
-  protected onArrowDown(event: Event): void {
-    event.preventDefault();
-    if (!this.context.open()) {
-      this.context.onOpenChange(true);
-    }
-  }
-
-  protected onArrowUp(event: Event): void {
-    event.preventDefault();
-    if (!this.context.open()) {
-      this.context.onOpenChange(true);
-    }
-  }
-
-  protected onEscape(): void {
-    this.context.onOpenChange(false);
+  protected onKeyDown(event: KeyboardEvent): void {
+    // Let the main combobox handle most keyboard events
+    this.context.onKeyDown(event);
   }
 }

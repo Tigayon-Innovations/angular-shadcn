@@ -4,7 +4,7 @@ export {
     type FormContext,
     type FormFieldContext
 } from './form-context';
-export { FormControl } from './form-control.component';
+export { FormControl, FormControlInput } from './form-control.component';
 export { FormDescription } from './form-description.component';
 export { FormField } from './form-field.component';
 export { FormItem } from './form-item.component';

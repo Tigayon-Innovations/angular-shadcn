@@ -8,6 +8,7 @@ export { ComboboxEmpty } from './combobox-empty.component';
 export { ComboboxGroup } from './combobox-group.component';
 export { ComboboxInput } from './combobox-input.component';
 export { ComboboxItem } from './combobox-item.component';
+export { ComboboxList } from './combobox-list.component';
 export { ComboboxTrigger } from './combobox-trigger.component';
 export { ComboboxValue } from './combobox-value.component';
 export { Combobox } from './combobox.component';

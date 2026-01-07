@@ -8,14 +8,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [Label, NativeSelect],
   template: `
     <div class="grid w-full max-w-sm gap-1.5">
-      <Label htmlFor="framework">Framework</Label>
-      <NativeSelect id="framework">
+      <Label for="framework">Framework</Label>
+      <select NativeSelect id="framework">
         <option value="">Select a framework</option>
         <option value="angular">Angular</option>
         <option value="react">React</option>
         <option value="vue">Vue</option>
         <option value="svelte">Svelte</option>
-      </NativeSelect>
+      </select>
     </div>
   `,
 })

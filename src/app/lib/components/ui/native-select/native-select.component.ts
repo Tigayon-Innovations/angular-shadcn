@@ -1,42 +1,51 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
 } from '@angular/core';
 import {
-  nativeSelectVariants,
-  type NativeSelectVariants,
+    nativeSelectVariants,
+    type NativeSelectVariants,
 } from './native-select-variants';
 
 /**
  * NativeSelect component - styled HTML native select element.
+ * Use as a host element selector on a native <select> element.
  *
  * @example
  * <!-- Basic usage -->
- * <NativeSelect>
+ * <select NativeSelect>
  *   <option value="">Select an option</option>
  *   <option value="1">Option 1</option>
  *   <option value="2">Option 2</option>
  *   <option value="3">Option 3</option>
- * </NativeSelect>
+ * </select>
  *
  * <!-- With size -->
- * <NativeSelect size="lg">
+ * <select NativeSelect size="lg">
  *   <option value="">Select size</option>
  *   <option value="sm">Small</option>
  *   <option value="md">Medium</option>
  *   <option value="lg">Large</option>
- * </NativeSelect>
+ * </select>
  *
  * <!-- Disabled -->
- * <NativeSelect disabled>
+ * <select NativeSelect disabled>
  *   <option value="">Disabled select</option>
- * </NativeSelect>
+ * </select>
+ *
+ * <!-- With Label for accessibility -->
+ * <Label for="framework">Framework</Label>
+ * <select NativeSelect id="framework">
+ *   <option value="">Select a framework</option>
+ *   <option value="angular">Angular</option>
+ * </select>
  */
 @Component({
-  selector: 'NativeSelect',
+  // Use attribute selector to apply to native select elements
+  selector: 'select[NativeSelect], NativeSelect',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
