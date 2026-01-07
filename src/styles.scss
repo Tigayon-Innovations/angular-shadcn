@@ -184,19 +184,31 @@
 
 /* ========================================
    Animation System Foundation
+   Radix-Ready Animation Layer for shadcn-angular
    Phase 1: Core Animation Tokens & Utilities
    ======================================== */
 
 :root {
-  /* Animation Duration Tokens */
+  /* Animation Duration Tokens - configurable */
   --animation-duration-fast: 150ms;
   --animation-duration-base: 200ms;
   --animation-duration-slow: 300ms;
+  --animation-duration-slower: 500ms;
 
   /* Animation Easing Tokens */
-  --animation-easing-in: ease-out;
-  --animation-easing-out: ease-in;
-  --animation-easing-in-out: ease-in-out;
+  --animation-easing-in: cubic-bezier(0.32, 0.72, 0, 1);
+  --animation-easing-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --animation-easing-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Default animation values (can be overridden per-element) */
+  --tw-enter-opacity: 1;
+  --tw-enter-scale: 1;
+  --tw-enter-translate-x: 0;
+  --tw-enter-translate-y: 0;
+  --tw-exit-opacity: 1;
+  --tw-exit-scale: 1;
+  --tw-exit-translate-x: 0;
+  --tw-exit-translate-y: 0;
 
   /* Animation Transform Origins */
   --animation-origin-center: 50% 50%;
@@ -514,6 +526,59 @@
     }
   }
 
+  /* ========================================
+     State-based Animation Triggers (Radix-compatible)
+     These work via data attributes: data-state="open|closed"
+     ======================================== */
+
+  /* Auto-apply animations based on data-state */
+  [data-state="open"] {
+    &.animate-in,
+    &[class*="animate-in"] {
+      animation-name: enter;
+    }
+  }
+
+  [data-state="closed"] {
+    &.animate-out,
+    &[class*="animate-out"] {
+      animation-name: exit;
+    }
+  }
+
+  /* Side-aware slide animations (works with data-side attribute) */
+  [data-side="top"][data-state="open"] {
+    --tw-enter-translate-y: -0.5rem;
+  }
+
+  [data-side="bottom"][data-state="open"] {
+    --tw-enter-translate-y: 0.5rem;
+  }
+
+  [data-side="left"][data-state="open"] {
+    --tw-enter-translate-x: -0.5rem;
+  }
+
+  [data-side="right"][data-state="open"] {
+    --tw-enter-translate-x: 0.5rem;
+  }
+
+  [data-side="top"][data-state="closed"] {
+    --tw-exit-translate-y: -0.5rem;
+  }
+
+  [data-side="bottom"][data-state="closed"] {
+    --tw-exit-translate-y: 0.5rem;
+  }
+
+  [data-side="left"][data-state="closed"] {
+    --tw-exit-translate-x: -0.5rem;
+  }
+
+  [data-side="right"][data-state="closed"] {
+    --tw-exit-translate-x: 0.5rem;
+  }
+
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .animate-in,
@@ -524,7 +589,9 @@
     .animate-collapsible-up,
     .animate-spin,
     .animate-pulse,
-    .animate-bounce {
+    .animate-bounce,
+    [data-state="open"],
+    [data-state="closed"] {
       animation: none !important;
       transition: none !important;
     }

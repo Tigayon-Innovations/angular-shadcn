@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
@@ -17,13 +17,14 @@ import { DIALOG_CONTEXT } from './dialog-context';
 /**
  * DialogContent component - the content of the dialog.
  * Matches shadcn/ui React DialogContent exactly.
- * Includes focus trapping, focus restoration, and proper ARIA relationships.
+ * Includes focus trapping, focus restoration, proper ARIA relationships,
+ * and Radix-compatible exit animations via Presence component.
  */
 @Component({
   selector: 'DialogContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (context.isOpen()) {
+    <Presence [present]="context.isOpen()">
       <!-- Overlay -->
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
@@ -76,7 +77,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
           </button>
         }
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',

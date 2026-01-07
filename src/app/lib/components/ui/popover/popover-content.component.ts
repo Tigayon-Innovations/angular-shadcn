@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,15 +12,23 @@ import { POPOVER_CONTEXT } from './popover-context';
 /**
  * PopoverContent component - the content displayed in the popover.
  * Matches shadcn/ui React PopoverContent exactly.
+ * Uses Presence component for proper exit animations.
  */
 @Component({
   selector: 'PopoverContent',
+  imports: [Presence],
   template: `
-    @if (context.open()) {
-      <div [class]="computedClass()" role="dialog">
+    <Presence [present]="context.open()">
+      <div
+        [class]="computedClass()"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-side]="side()"
+        [attr.data-align]="align()"
+        role="dialog"
+      >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',

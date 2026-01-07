@@ -11,17 +11,17 @@ import { Switch } from '@/ui/switch';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-    ArrowRight,
-    Boxes,
-    ChevronRight,
-    Code2,
-    Github,
-    LucideAngularModule,
-    Palette,
-    Shield,
-    Star,
-    Users,
-    Zap,
+  ArrowRight,
+  Boxes,
+  ChevronRight,
+  Code2,
+  Github,
+  LucideAngularModule,
+  Palette,
+  Shield,
+  Star,
+  Users,
+  Zap,
 } from 'lucide-angular';
 
 /**
@@ -211,8 +211,8 @@ import {
                 <CardDescription class="text-xs">A better sense of progress</CardDescription>
               </CardHeader>
               <CardContent class="flex flex-col gap-3">
-                <Progress [value]="66" />
-                <Progress [value]="33" />
+                <Progress [value]="66" ></Progress>
+                <Progress [value]="33" ></Progress>
               </CardContent>
             </Card>
 

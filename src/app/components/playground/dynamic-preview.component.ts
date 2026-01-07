@@ -1,11 +1,11 @@
 
 import {
-    ChangeDetectionStrategy,
-    Component,
-    effect,
-    inject,
-    input,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  signal,
 } from '@angular/core';
 import { DynamicRendererService, RenderableNode } from './dynamic-renderer.service';
 
@@ -263,10 +263,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
             <Checkbox [id]="getInput('id')" [checked]="getInput('checked')" [disabled]="getInput('disabled')" [class]="getInput('class')" />
         }
         @case ('Textarea') {
-            <Textarea [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')" />
+            <Textarea [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')" ></Textarea>
         }
         @case ('Separator') {
-            <Separator [orientation]="getInput('orientation')" [class]="getInput('class')" />
+            <Separator [orientation]="getInput('orientation')" [class]="getInput('class')" ></Separator>
         }
         @case ('Skeleton') {
             <Skeleton [class]="getInput('class')" />
@@ -342,7 +342,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
             </TooltipContent>
         }
         @case ('Progress') {
-            <Progress [value]="getInput('value')" [class]="getInput('class')" />
+            <Progress [value]="getInput('value')" [class]="getInput('class')" ></Progress>
         }
         @default {
             <!-- Fallback for unknown tags or unhandled components -->

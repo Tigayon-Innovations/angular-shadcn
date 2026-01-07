@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
@@ -15,13 +15,14 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
 /**
  * SheetContent component - the content of the sheet panel.
  * Matches shadcn/ui React SheetContent exactly.
- * Includes focus trapping, focus restoration, and proper ARIA relationships.
+ * Includes focus trapping, focus restoration, proper ARIA relationships,
+ * and Radix-compatible exit animations via Presence component.
  */
 @Component({
   selector: 'SheetContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <!-- Overlay -->
       <div
         class="fixed inset-0 z-[100] bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
@@ -37,6 +38,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
         [restoreFocus]="false"
         [class]="computedClass()"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-side]="side()"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="context.titleId"
         [attr.aria-describedby]="context.descriptionId"
@@ -71,7 +73,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
           <span class="sr-only">Close</span>
         </button>
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',

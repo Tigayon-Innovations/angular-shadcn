@@ -3,3 +3,6 @@ export { cn } from './cn';
 
 // Accessibility utilities
 export * from './accessibility';
+
+// Animation utilities
+export * from './animation';

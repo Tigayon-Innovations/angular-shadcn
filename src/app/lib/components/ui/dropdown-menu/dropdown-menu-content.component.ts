@@ -1,14 +1,14 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy
 } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
 
@@ -16,15 +16,20 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
  * DropdownMenuContent component - the content panel of the dropdown.
  * Matches shadcn/ui React DropdownMenuContent exactly.
  * Includes keyboard navigation with arrow keys, Home/End, and typeahead.
+ * Uses Presence component for proper exit animations.
  */
 @Component({
   selector: 'DropdownMenuContent',
+  imports: [Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <div
         [class]="computedClass()"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="null"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-side]="side()"
+        [attr.data-align]="align()"
         role="menu"
         aria-orientation="vertical"
         tabindex="-1"
@@ -32,7 +37,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
       >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',
