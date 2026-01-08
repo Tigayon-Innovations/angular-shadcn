@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { ClickOutsideDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
@@ -21,9 +21,9 @@ import { SELECT_CONTEXT } from './select-context';
  */
 @Component({
   selector: 'SelectContent',
-  imports: [ClickOutsideDirective],
+  imports: [ClickOutsideDirective, Presence],
   template: `
-    @if (context?.open()) {
+    <Presence [present]="context?.open() ?? false">
       <div
         [class]="dropdownClass()"
         [attr.id]="context?.contentId"
@@ -39,7 +39,7 @@ import { SELECT_CONTEXT } from './select-context';
           <ng-content />
         </div>
       </div>
-    }
+    </Presence>
   `,
   host: {
     'class': 'contents',

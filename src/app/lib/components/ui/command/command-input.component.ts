@@ -1,5 +1,14 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    viewChild,
+} from '@angular/core';
 import { LucideAngularModule, Search } from 'lucide-angular';
 import { COMMAND_CONTEXT } from './command-context';
 
@@ -50,6 +59,20 @@ export class CommandInput {
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  constructor() {
+    // Auto-focus input when it's rendered
+    effect(() => {
+      // Trigger whenever inputEl is available
+      const el = this.inputEl();
+      if (el) {
+        // Use setTimeout to ensure DOM is ready
+        setTimeout(() => {
+          el.nativeElement.focus();
+        }, 0);
+      }
+    });
+  }
 
   protected readonly computedClass = computed(() =>
     cn(

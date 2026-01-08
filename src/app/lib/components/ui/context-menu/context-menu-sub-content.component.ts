@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { CONTEXT_MENU_SUB_CONTEXT } from './context-menu-sub.component';
 
@@ -8,12 +8,17 @@ import { CONTEXT_MENU_SUB_CONTEXT } from './context-menu-sub.component';
  */
 @Component({
   selector: 'ContextMenuSubContent',
+  imports: [Presence],
   template: `
-    @if (subContext.open()) {
-      <div [class]="computedClass()" role="menu">
+    <Presence [present]="subContext.open()">
+      <div
+        [class]="computedClass()"
+        [attr.data-state]="subContext.open() ? 'open' : 'closed'"
+        role="menu"
+      >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',

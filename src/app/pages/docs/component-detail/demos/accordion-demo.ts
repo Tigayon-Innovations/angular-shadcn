@@ -6,19 +6,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Accordion, AccordionContent, AccordionItem, AccordionTrigger],
   template: `
-    <Accordion type="single" collapsible class="w-full min-w-96 max-w-lg">
+    <Accordion type="single" collapsible class="w-full min-w-126 max-w-lg">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
           Yes. It adheres to the WAI-ARIA design pattern.
         </AccordionContent>
       </AccordionItem>
+
       <AccordionItem value="item-2">
         <AccordionTrigger>Is it styled?</AccordionTrigger>
         <AccordionContent>
           Yes. It comes with default styles that match the shadcn/ui aesthetic.
         </AccordionContent>
       </AccordionItem>
+
       <AccordionItem value="item-3">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
         <AccordionContent>

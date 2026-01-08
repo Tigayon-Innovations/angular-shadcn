@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
     AfterViewInit,
@@ -21,18 +21,20 @@ import { DRAWER_CONTEXT } from './drawer-context';
  */
 @Component({
   selector: 'DrawerContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/80"
+        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
       ></div>
       <!-- Content -->
       <div
         #contentEl
         [class]="computedClass()"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
         role="dialog"
         aria-modal="true"
         [attr.id]="context.contentId"
@@ -46,7 +48,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
         <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',
@@ -88,14 +90,16 @@ export class DrawerContent implements AfterViewInit, OnDestroy {
 
   protected readonly computedClass = computed(() => {
     const directionClasses = {
-      top: 'inset-x-0 top-0 mb-24 rounded-b-[10px] border-b',
-      bottom: 'inset-x-0 bottom-0 mt-24 rounded-t-[10px] border-t',
-      left: 'inset-y-0 left-0 mr-24 w-auto rounded-r-[10px] border-r',
-      right: 'inset-y-0 right-0 ml-24 w-auto rounded-l-[10px] border-l',
+      top: 'inset-x-0 top-0 mb-24 rounded-b-[10px] border-b data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top',
+      bottom: 'inset-x-0 bottom-0 mt-24 rounded-t-[10px] border-t data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom',
+      left: 'inset-y-0 left-0 mr-24 w-auto rounded-r-[10px] border-r data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left',
+      right: 'inset-y-0 right-0 ml-24 w-auto rounded-l-[10px] border-l data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right',
     };
 
     return cn(
       'fixed z-50 flex flex-col bg-background',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=open]:duration-500 data-[state=closed]:duration-300',
       directionClasses[this.context.direction],
       this.class()
     );

@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
@@ -18,9 +18,9 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 @Component({
   selector: 'AccordionTrigger',
   template: `
-    <ng-content />
+    <span class="me-2"><ng-content /></span>
     <svg
-      class="size-4 shrink-0 text-muted-foreground transition-transform duration-200"
+      class="size-4 shrink-0 ms-auto text-muted-foreground transition-transform duration-200"
       [class.rotate-180]="item.isOpen()"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

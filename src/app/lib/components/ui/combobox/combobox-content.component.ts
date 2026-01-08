@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { ClickOutsideDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
@@ -15,19 +15,20 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
  */
 @Component({
   selector: 'ComboboxContent',
-  imports: [ClickOutsideDirective],
+  imports: [ClickOutsideDirective, Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <div
         [id]="context.listboxId"
         [class]="dropdownClass()"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
         role="listbox"
         [attr.aria-labelledby]="context.id + '-trigger'"
         (clickOutside)="onClickOutside()"
       >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     '[class]': 'computedClass()',

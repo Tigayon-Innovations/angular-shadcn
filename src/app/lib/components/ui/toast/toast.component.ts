@@ -12,7 +12,12 @@ import type { ToastType } from './toast.service';
   selector: 'Toast',
   imports: [LucideAngularModule],
   template: `
-    <div [class]="computedClass()" role="status" aria-atomic="true">
+    <div
+      [class]="computedClass()"
+      [attr.data-state]="isVisible() ? 'open' : 'closed'"
+      role="status"
+      aria-atomic="true"
+    >
       <div class="flex items-start gap-3">
         @if (showIcon()) {
           <span class="shrink-0">
@@ -63,6 +68,9 @@ export class Toast {
 
   /** Whether to show icon */
   readonly showIcon = input<boolean>(true);
+
+  /** Whether the toast is visible (for animation state) */
+  readonly isVisible = input<boolean>(true);
 
   /** Additional CSS classes */
   readonly class = input<string>('');

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
@@ -22,9 +22,9 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
  */
 @Component({
   selector: 'AlertDialogContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <!-- Overlay - does NOT close on click -->
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
@@ -48,7 +48,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
       >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',

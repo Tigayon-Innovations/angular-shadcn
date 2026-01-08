@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -19,10 +19,12 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
  */
 @Component({
   selector: 'ContextMenuContent',
+  imports: [Presence],
   template: `
-    @if (context.open()) {
+    <Presence [present]="context.open()">
       <div
         [class]="computedClass()"
+        [attr.data-state]="context.open() ? 'open' : 'closed'"
         [style.position]="'fixed'"
         [style.left.px]="context.position().x"
         [style.top.px]="context.position().y"
@@ -33,7 +35,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
       >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',
@@ -57,7 +59,9 @@ export class ContextMenuContent implements AfterViewInit, OnDestroy {
   protected readonly computedClass = computed(() =>
     cn(
       'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
-      'animate-in fade-in-0 zoom-in-95 duration-150 ease-out',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
       this.class()
     )
   );

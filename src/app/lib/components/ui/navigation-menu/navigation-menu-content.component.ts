@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core';
 import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigation-menu-context';
 
@@ -8,12 +8,16 @@ import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigat
  */
 @Component({
   selector: 'NavigationMenuContent',
+  imports: [Presence],
   template: `
-    @if (itemContext.open()) {
-      <div [class]="computedClass()">
+    <Presence [present]="itemContext.open()">
+      <div
+        [class]="computedClass()"
+        [attr.data-state]="itemContext.open() ? 'open' : 'closed'"
+      >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     class: 'contents',
@@ -32,7 +36,14 @@ export class NavigationMenuContent {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'absolute left-0 top-full mt-2 w-full rounded-xl border bg-popover p-4 text-popover-foreground shadow-lg data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto',
+      'absolute left-0 top-full mt-2 w-full rounded-xl border bg-popover p-4 text-popover-foreground shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      'data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out',
+      'data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52',
+      'data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52',
+      'md:absolute md:w-auto',
       this.class()
     )
   );

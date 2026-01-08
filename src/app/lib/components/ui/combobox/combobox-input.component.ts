@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils';
 import {
-    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
     ElementRef,
     inject,
     input,
-    viewChild,
+    viewChild
 } from '@angular/core';
 import { LucideAngularModule, Search } from 'lucide-angular';
 import { COMBOBOX_CONTEXT } from './combobox-context';
@@ -68,10 +68,12 @@ export class ComboboxInput {
 
   constructor() {
     // Auto-focus input when combobox opens
-    afterNextRender(() => {
-      setTimeout(() => {
-        this.searchInput()?.nativeElement?.focus();
-      }, 0);
+    effect(() => {
+      if (this.context.open()) {
+        setTimeout(() => {
+          this.searchInput()?.nativeElement?.focus();
+        }, 0);
+      }
     });
   }
 

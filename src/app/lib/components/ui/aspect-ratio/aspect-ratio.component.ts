@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
 } from '@angular/core';
 
 /**
@@ -28,7 +28,8 @@ import {
 @Component({
   selector: 'AspectRatio',
   template: `
-    <div class="absolute inset-0 h-full w-full">
+    <div
+    class="absolute inset-0 h-full w-full">
       <ng-content />
     </div>
   `,
