@@ -1,17 +1,17 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  input,
-  signal,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    forwardRef,
+    input,
+    signal,
 } from '@angular/core';
 import {
-  CHART_CONTEXT,
-  type ChartConfig,
-  type ChartContext,
+    CHART_CONTEXT,
+    type ChartConfig,
+    type ChartContext,
 } from './chart-context';
 
 /**
