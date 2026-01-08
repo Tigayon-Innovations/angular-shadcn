@@ -9,17 +9,59 @@ import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 
 let tooltipIdCounter = 0;
 
+// ============================================================================
+// Types
+// ============================================================================
+
 /**
- * TooltipProvider component - provides tooltip context.
- * Matches shadcn/ui React TooltipProvider exactly.
+ * Props for the TooltipProvider component
+ */
+export interface TooltipProviderProps {
+  /** The duration from when the pointer enters the trigger until the tooltip opens.
+   * @default 700 */
+  delayDuration?: number;
+  /** How much time a user has to enter another trigger without incurring a delay again.
+   * @default 300 */
+  skipDelayDuration?: number;
+  /** When true, trying to hover the content will result in the tooltip closing.
+   * @default false */
+  disableHoverableContent?: boolean;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component TooltipProvider
  *
- * @example
+ * Wraps your app to provide global tooltip behavior configuration.
+ *
+ * @description
+ * TooltipProvider allows you to configure shared tooltip behavior for all
+ * tooltips in your application. Place it near the root of your app.
+ *
+ * ## Features
+ * - Shared delay duration for all tooltips
+ * - Skip delay when rapidly moving between tooltips
+ * - Control hoverable content behavior
+ *
+ * @example Basic usage
+ * ```html
  * <TooltipProvider>
  *   <Tooltip>
  *     <TooltipTrigger>Hover me</TooltipTrigger>
  *     <TooltipContent>Tooltip content</TooltipContent>
  *   </Tooltip>
  * </TooltipProvider>
+ * ```
+ *
+ * @example Custom delays
+ * ```html
+ * <TooltipProvider [delayDuration]="400" [skipDelayDuration]="200">
+ *   <!-- Tooltips will use these delays -->
+ * </TooltipProvider>
+ * ```
  */
 @Component({
   selector: 'TooltipProvider',
@@ -33,16 +75,16 @@ let tooltipIdCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipProvider implements TooltipContextValue {
-  /** Delay before showing tooltip (ms) */
+  /** The duration from when the pointer enters the trigger until the tooltip opens */
   readonly delayDuration = 700;
+
+  /** How much time a user has to enter another trigger without incurring a delay again */
+  readonly skipDelayDuration = 300;
 
   /** Unique ID for aria-describedby relationship */
   readonly tooltipId = `tooltip-provider-${++tooltipIdCounter}`;
 
-  /** Skip delay when switching between tooltips */
-  readonly skipDelayDuration = input<number>(300);
-
-  /** Disable closing on hover away */
+  /** When true, trying to hover the content will result in the tooltip closing */
   readonly disableHoverableContent = input<boolean>(false);
 
   readonly open = signal(false);

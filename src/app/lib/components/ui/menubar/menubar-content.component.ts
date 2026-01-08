@@ -1,6 +1,6 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -41,7 +41,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenubarContent implements AfterViewInit, OnDestroy {
+export class MenubarContent implements OnDestroy {
   protected readonly context = inject(MENUBAR_CONTEXT);
   protected readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
   private readonly elementRef = inject(ElementRef);
@@ -95,10 +95,11 @@ export class MenubarContent implements AfterViewInit, OnDestroy {
         }, 0);
       }
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.updateMenuItems();
+    // Initial menu items update (browser-only)
+    afterNextRender(() => {
+      this.updateMenuItems();
+    });
   }
 
   ngOnDestroy(): void {

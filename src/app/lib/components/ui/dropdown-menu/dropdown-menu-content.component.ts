@@ -1,14 +1,14 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  ElementRef,
-  inject,
-  input,
-  OnDestroy
+    afterNextRender,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    OnDestroy
 } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
 
@@ -46,7 +46,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuContent implements AfterViewInit, OnDestroy {
+export class DropdownMenuContent implements OnDestroy {
   protected readonly context = inject(DROPDOWN_MENU_CONTEXT);
   private readonly elementRef = inject(ElementRef);
 
@@ -105,10 +105,11 @@ export class DropdownMenuContent implements AfterViewInit, OnDestroy {
         }, 0);
       }
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.updateMenuItems();
+    // Initial menu items update (browser-only)
+    afterNextRender(() => {
+      this.updateMenuItems();
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,15 +1,15 @@
 import { ThemeService, type Theme } from '@/services/theme.service';
 import { Button } from '@/ui/button';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
 } from '@/ui/dropdown-menu';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject
+    ChangeDetectionStrategy,
+    Component,
+    inject
 } from '@angular/core';
 import { LucideAngularModule, Monitor, Moon, Sun } from 'lucide-angular';
 
@@ -42,15 +42,15 @@ import { LucideAngularModule, Monitor, Moon, Sun } from 'lucide-angular';
       <DropdownMenuContent align="end">
         <DropdownMenuItem (click)="setTheme('light')">
           <lucide-icon [img]="icons.Sun" class="mr-2 h-4 w-4" />
-          Light
+          <span>Light</span>
         </DropdownMenuItem>
         <DropdownMenuItem (click)="setTheme('dark')">
           <lucide-icon [img]="icons.Moon" class="mr-2 h-4 w-4" />
-          Dark
+          <span>Dark</span>
         </DropdownMenuItem>
         <DropdownMenuItem (click)="setTheme('system')">
           <lucide-icon [img]="icons.Monitor" class="mr-2 h-4 w-4" />
-          System
+          <span>System</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

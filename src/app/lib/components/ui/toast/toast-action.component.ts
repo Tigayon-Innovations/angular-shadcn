@@ -2,9 +2,47 @@ import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { buttonVariants } from '../button';
 
+// ============================================================================
+// Types
+// ============================================================================
+
 /**
- * ToastAction component - action button in toast.
- * Matches shadcn/ui React ToastAction exactly.
+ * Props for the ToastAction component
+ */
+export interface ToastActionProps {
+  /** Alt text for close button within destructive toasts.
+   * @default "Try again" */
+  altText?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component ToastAction
+ *
+ * Action button displayed within a toast notification.
+ *
+ * @description
+ * ToastAction provides an interactive button for users to take action
+ * directly from the toast notification. It's styled to match the toast
+ * variant and provides accessible interaction.
+ *
+ * ## Features
+ * - Styled as outline button
+ * - Adapts to destructive toast variants
+ * - Focus ring for accessibility
+ *
+ * @example Basic usage
+ * ```html
+ * <Toast variant="error">
+ *   <ToastTitle>Failed to save</ToastTitle>
+ *   <ToastAction (onClick)="retry()">Retry</ToastAction>
+ * </Toast>
+ * ```
  */
 @Component({
   selector: 'ToastAction',
@@ -26,7 +64,7 @@ export class ToastAction {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Click event */
+  /** Event emitted when the action button is clicked */
   readonly onClick = output<void>();
 
   protected readonly computedClass = computed(() =>

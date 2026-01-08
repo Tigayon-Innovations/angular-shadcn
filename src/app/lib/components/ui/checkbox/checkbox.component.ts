@@ -15,6 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 /**
  * Checkbox component for boolean selection.
  * Implements ControlValueAccessor for Angular Forms integration.
+ * Supports checked, unchecked, and indeterminate states (Radix UI compatible).
  *
  * @example
  * <!-- Basic checkbox -->
@@ -22,6 +23,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *
  * <!-- Controlled checkbox -->
  * <Checkbox [(checked)]="isChecked" />
+ *
+ * <!-- Indeterminate state -->
+ * <Checkbox [checked]="'indeterminate'" />
  *
  * <!-- With reactive forms -->
  * <Checkbox formControlName="agree" />
@@ -42,14 +46,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       #inputElement
       type="checkbox"
       [attr.id]="id()"
-      [checked]="checked()"
+      [checked]="checked() === true"
+      [indeterminate]="checked() === 'indeterminate'"
       [disabled]="isDisabled()"
       (change)="toggle()"
       class="sr-only peer"
     />
     <div
       [class]="boxClass()"
-      [attr.data-state]="checked() ? 'checked' : 'unchecked'"
+      [attr.data-state]="getDataState()"
       [attr.data-disabled]="isDisabled() ? '' : null"
       aria-hidden="true"
     >
@@ -57,20 +62,38 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         data-slot="checkbox-indicator"
         class="flex items-center justify-center text-current"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          [class]="checkIconClass()"
-        >
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
+        @if (checked() === true) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            [class]="checkIconClass()"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        }
+        @if (checked() === 'indeterminate') {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            [class]="checkIconClass()"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        }
       </span>
     </div>
   `,
@@ -93,8 +116,8 @@ export class Checkbox implements ControlValueAccessor {
   /** The id for the checkbox input - used for label association */
   readonly id = input<string>();
 
-  /** Whether the checkbox is checked */
-  readonly checked = model<boolean>(false);
+  /** Whether the checkbox is checked (boolean) or indeterminate ('indeterminate') */
+  readonly checked = model<boolean | 'indeterminate'>(false);
 
   /** Whether the checkbox is disabled via input */
   readonly disabled = input<boolean>(false);
@@ -109,24 +132,35 @@ export class Checkbox implements ControlValueAccessor {
   readonly class = input<string>('');
 
   /** ControlValueAccessor callbacks */
-  private onChange: (value: boolean) => void = () => {};
+  private onChange: (value: boolean | 'indeterminate') => void = () => {};
   private onTouched: () => void = () => {};
+
+  /** Get the data-state attribute value */
+  getDataState(): string {
+    const state = this.checked();
+    if (state === true) return 'checked';
+    if (state === 'indeterminate') return 'indeterminate';
+    return 'unchecked';
+  }
 
   /** Toggle the checkbox state */
   toggle() {
     if (!this.isDisabled()) {
-      this.checked.update((v) => !v);
-      this.onChange(this.checked());
+      const current = this.checked();
+      // Cycle through: unchecked -> checked -> unchecked
+      const next = current === true ? false : true;
+      this.checked.set(next);
+      this.onChange(next);
       this.onTouched();
     }
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: boolean): void {
+  writeValue(value: boolean | 'indeterminate'): void {
     this.checked.set(value ?? false);
   }
 
-  registerOnChange(fn: (value: boolean) => void): void {
+  registerOnChange(fn: (value: boolean | 'indeterminate') => void): void {
     this.onChange = fn;
   }
 

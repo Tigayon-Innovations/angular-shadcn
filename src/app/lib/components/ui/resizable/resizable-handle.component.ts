@@ -15,6 +15,11 @@ let handleIdCounter = 0;
  * ResizableHandle component - the draggable divider between panels.
  * Matches shadcn/ui React ResizableHandle exactly.
  *
+ * ACCESSIBILITY: Fully keyboard accessible with arrow keys.
+ * - Arrow keys resize in the direction of the handle
+ * - Shift+Arrow keys for larger resize steps
+ * - Home/End to set minimum/maximum sizes
+ *
  * @example
  * <ResizableHandle />
  * <ResizableHandle withHandle />
@@ -35,6 +40,7 @@ let handleIdCounter = 0;
           stroke-linecap="round"
           stroke-linejoin="round"
           class="h-2.5 w-2.5"
+          aria-hidden="true"
         >
           <circle cx="12" cy="12" r="1" />
           <circle cx="12" cy="5" r="1" />
@@ -47,13 +53,23 @@ let handleIdCounter = 0;
     '[class]': 'computedClass()',
     '[attr.data-panel-resize-handle]': 'true',
     '[attr.data-panel-resize-handle-id]': 'handleId',
+    '[attr.role]': '"separator"',
+    '[attr.aria-valuenow]': 'ariaValueNow()',
+    '[attr.aria-valuemin]': '0',
+    '[attr.aria-valuemax]': '100',
+    '[attr.aria-orientation]': 'context.direction() === "horizontal" ? "vertical" : "horizontal"',
+    '[attr.aria-label]': '"Resize handle. Use arrow keys to resize."',
+    '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(mousedown)': 'onMouseDown($event)',
     '(touchstart)': 'onTouchStart($event)',
+    '(keydown)': 'onKeyDown($event)',
+    '(focus)': 'onFocus()',
+    '(blur)': 'onBlur()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResizableHandle {
-  private readonly context = inject(RESIZABLE_CONTEXT);
+  protected readonly context = inject(RESIZABLE_CONTEXT);
 
   /** Show a visible handle grip */
   readonly withHandle = input<boolean>(false);
@@ -70,18 +86,92 @@ export class ResizableHandle {
   /** Whether dragging */
   private isDragging = signal(false);
 
+  /** Whether focused for keyboard interaction */
+  private isFocused = signal(false);
+
   /** Starting position */
   private startPosition = 0;
 
+  /** ARIA value (approximate percentage) */
+  protected readonly ariaValueNow = signal(50);
+
   protected readonly computedClass = computed(() =>
     cn(
-      'relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1',
+      'relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1',
       this.context.direction() === 'vertical' &&
         'h-px w-full after:left-0 after:h-1 after:w-full after:-translate-y-1/2 after:translate-x-0',
       '[&[data-panel-group-direction=vertical]>div]:rotate-90',
+      this.isFocused() && 'ring-2 ring-ring',
       this.class()
     )
   );
+
+  onFocus(): void {
+    this.isFocused.set(true);
+  }
+
+  onBlur(): void {
+    this.isFocused.set(false);
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.disabled()) return;
+
+    const isHorizontal = this.context.direction() === 'horizontal';
+    const step = event.shiftKey ? 5 : 1; // Larger steps with Shift
+
+    let delta = 0;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        if (isHorizontal) {
+          event.preventDefault();
+          delta = -step;
+        }
+        break;
+      case 'ArrowRight':
+        if (isHorizontal) {
+          event.preventDefault();
+          delta = step;
+        }
+        break;
+      case 'ArrowUp':
+        if (!isHorizontal) {
+          event.preventDefault();
+          delta = -step;
+        }
+        break;
+      case 'ArrowDown':
+        if (!isHorizontal) {
+          event.preventDefault();
+          delta = step;
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        delta = -100; // Go to minimum
+        break;
+      case 'End':
+        event.preventDefault();
+        delta = 100; // Go to maximum
+        break;
+      default:
+        return;
+    }
+
+    if (delta !== 0) {
+      this.context.startResize(this.handleId);
+      this.context.onResize(delta);
+      this.context.endResize();
+      this.updateAriaValue(delta);
+    }
+  }
+
+  private updateAriaValue(delta: number): void {
+    const current = this.ariaValueNow();
+    const newValue = Math.max(0, Math.min(100, current + delta));
+    this.ariaValueNow.set(newValue);
+  }
 
   onMouseDown(event: MouseEvent): void {
     if (this.disabled()) return;

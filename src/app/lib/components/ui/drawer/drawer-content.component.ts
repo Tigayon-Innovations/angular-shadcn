@@ -1,13 +1,14 @@
 import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
     effect,
     ElementRef,
     inject,
+    Injector,
     input,
     OnDestroy,
     viewChild,
@@ -26,7 +27,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
     <Presence [present]="context.open()">
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
       ></div>
@@ -55,9 +56,10 @@ import { DRAWER_CONTEXT } from './drawer-context';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerContent implements AfterViewInit, OnDestroy {
+export class DrawerContent implements OnDestroy {
   protected readonly context = inject(DRAWER_CONTEXT);
   private readonly contentEl = viewChild<ElementRef<HTMLElement>>('contentEl');
+  private readonly injector = inject(Injector);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
@@ -70,18 +72,15 @@ export class DrawerContent implements AfterViewInit, OnDestroy {
     effect(() => {
       if (this.context.open()) {
         this.lockBodyScroll();
+        // Focus first element when opened (browser-only, deferred)
+        afterNextRender(() => {
+          this.focusFirstElement();
+        }, { injector: this.injector });
       } else {
         this.unlockBodyScroll();
         this.restoreFocus();
       }
     });
-  }
-
-  ngAfterViewInit(): void {
-    // Focus first focusable element when opened
-    if (this.context.open()) {
-      this.focusFirstElement();
-    }
   }
 
   ngOnDestroy(): void {
@@ -97,7 +96,7 @@ export class DrawerContent implements AfterViewInit, OnDestroy {
     };
 
     return cn(
-      'fixed z-50 flex flex-col bg-background',
+      'fixed z-50 flex flex-col bg-background text-foreground',
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=open]:duration-500 data-[state=closed]:duration-300',
       directionClasses[this.context.direction],

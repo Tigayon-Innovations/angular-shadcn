@@ -10,10 +10,56 @@ import {
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FORM_CONTEXT, type FormContext } from './form-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
 /**
- * Form component - wrapper for reactive forms with validation styling.
+ * Props for the Form component
+ */
+export interface FormProps {
+  /** The reactive form group to bind to */
+  formGroup?: FormGroup | null;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component Form
  *
- * @example
+ * Building forms with Angular Reactive Forms.
+ *
+ * @description
+ * Form provides a wrapper for Angular Reactive Forms that integrates with
+ * the form component system for consistent styling and accessibility.
+ *
+ * ## Features
+ * - Integrates with Angular Reactive Forms
+ * - Provides context for FormField, FormItem, FormLabel, etc.
+ * - Automatic error message display
+ * - Accessible form structure with proper ARIA relationships
+ * - Consistent validation styling
+ *
+ * ## Form Components
+ * - `Form` - Wrapper providing form context
+ * - `FormField` - Wraps a form control with context
+ * - `FormItem` - Container for label, control, description, message
+ * - `FormLabel` - Label with accessibility bindings
+ * - `FormControl` - Control with ARIA attributes
+ * - `FormDescription` - Helper text for the field
+ * - `FormMessage` - Error/validation messages
+ *
+ * ## Accessibility
+ * - `aria-describedby` links controls to description and errors
+ * - `aria-invalid` when field has errors
+ * - Labels properly associated with controls
+ *
+ * @example Basic usage
+ * ```html
  * <Form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
  *   <FormField name="email">
  *     <FormItem>
@@ -25,7 +71,17 @@ import { FORM_CONTEXT, type FormContext } from './form-context';
  *       <FormMessage />
  *     </FormItem>
  *   </FormField>
+ *   <Button type="submit">Submit</Button>
  * </Form>
+ * ```
+ *
+ * @example With validation
+ * ```typescript
+ * loginForm = this.fb.group({
+ *   email: ['', [Validators.required, Validators.email]],
+ *   password: ['', [Validators.required, Validators.minLength(8)]],
+ * });
+ * ```
  */
 @Component({
   selector: 'Form',
@@ -48,7 +104,7 @@ export class Form {
   /** The reactive form group */
   readonly formGroup = input<FormGroup | null>(null);
 
-  /** Additional CSS classes to apply */
+  /** Additional CSS classes */
   readonly class = input<string>('');
 
   /** Context for child components */

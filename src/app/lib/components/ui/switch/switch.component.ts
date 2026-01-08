@@ -7,58 +7,132 @@ import {
     forwardRef,
     input,
     model,
+    output,
     signal,
     viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type SwitchState = 'checked' | 'unchecked';
+
+export type SwitchProps = {
+  /** The controlled checked state */
+  checked?: boolean;
+  /** Whether the switch starts checked (uncontrolled) */
+  defaultChecked?: boolean;
+  /** Whether the switch is disabled */
+  disabled?: boolean;
+  /** Whether the switch is required */
+  required?: boolean;
+  /** The name for the hidden input (form submission) */
+  name?: string;
+  /** The value for the hidden input (form submission) */
+  value?: string;
+  /** The id for the switch input */
+  id?: string;
+  /** Additional CSS classes */
+  class?: string;
+};
+
+// ============================================================================
+// Switch Component
+// ============================================================================
+
 /**
  * Switch component for toggling between on/off states.
+ * Based on Radix UI Switch primitive with shadcn/ui styling.
  * Implements ControlValueAccessor for Angular Forms integration.
+ *
+ * ## Features
+ * - Toggle between checked/unchecked states
+ * - Full keyboard support (Space, Enter)
+ * - Native form submission support via hidden input
+ * - Controlled and uncontrolled modes
+ * - Angular Forms integration (ngModel, formControl)
+ * - Focus ring styling
+ *
+ * ## Accessibility
+ * - Uses `role="switch"` per WAI-ARIA
+ * - `aria-checked` indicates current state
+ * - `aria-required` when required
+ * - Keyboard: Space/Enter to toggle
+ * - Focus visible ring for keyboard navigation
+ *
+ * ## Data Attributes
+ * - `data-state`: "checked" | "unchecked"
+ * - `data-disabled`: Present when disabled
  *
  * @example
  * <!-- Basic switch -->
  * <Switch id="airplane-mode" />
  *
- * <!-- Controlled switch -->
+ * @example
+ * <!-- Controlled with two-way binding -->
  * <Switch [(checked)]="isEnabled" />
  *
+ * @example
  * <!-- With reactive forms -->
  * <Switch formControlName="notifications" />
  *
- * <!-- Disabled switch -->
- * <Switch [disabled]="true" />
- *
+ * @example
  * <!-- With label -->
  * <div class="flex items-center gap-2">
  *   <Switch id="notifications" />
  *   <Label for="notifications">Enable notifications</Label>
  * </div>
+ *
+ * @example
+ * <!-- Disabled switch -->
+ * <Switch [disabled]="true" [checked]="true" />
+ *
+ * @example
+ * <!-- Required in form -->
+ * <Switch [required]="true" name="terms" value="accepted" />
+ *
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/switch Radix Switch}
+ * @see {@link https://ui.shadcn.com/docs/components/switch shadcn/ui Switch}
  */
 @Component({
   selector: 'Switch',
   template: `
-    <input
-      #inputElement
-      type="checkbox"
+    <!-- Accessible button with switch role -->
+    <button
+      #buttonElement
+      type="button"
       role="switch"
       [attr.id]="id()"
-      [checked]="checked()"
-      [disabled]="isDisabled()"
-      (change)="toggle()"
-      class="sr-only peer"
-    />
-    <div
-      [class]="trackClass()"
-      [attr.data-state]="checked() ? 'checked' : 'unchecked'"
+      [attr.aria-checked]="checked()"
+      [attr.aria-required]="required() || null"
+      [attr.data-state]="state()"
       [attr.data-disabled]="isDisabled() ? '' : null"
-      aria-hidden="true"
+      [disabled]="isDisabled()"
+      [class]="trackClass()"
+      (click)="toggle()"
+      (keydown)="onKeyDown($event)"
     >
       <span
         data-slot="switch-thumb"
         [class]="thumbClass()"
+        [attr.data-state]="state()"
       ></span>
-    </div>
+    </button>
+    <!-- Hidden input for form submission -->
+    @if (name()) {
+      <input
+        type="checkbox"
+        [attr.name]="name()"
+        [attr.value]="inputValue()"
+        [checked]="checked()"
+        [disabled]="isDisabled()"
+        aria-hidden="true"
+        tabindex="-1"
+        class="sr-only"
+      />
+    }
   `,
   host: {
     '[class]': 'computedClass()',
@@ -74,16 +148,35 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Switch implements ControlValueAccessor {
-  private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+  private readonly buttonElement =
+    viewChild<ElementRef<HTMLButtonElement>>('buttonElement');
 
-  /** The id for the switch input - used for label association */
+  /** The id for the switch button - used for label association */
   readonly id = input<string>();
 
   /** Whether the switch is checked/on */
   readonly checked = model<boolean>(false);
 
+  /** Whether the switch starts checked (uncontrolled mode) */
+  readonly defaultChecked = input<boolean>(false);
+
   /** Whether the switch is disabled via input */
   readonly disabled = input<boolean>(false);
+
+  /** Whether the switch is required */
+  readonly required = input<boolean>(false);
+
+  /** The name for the hidden input (form submission) */
+  readonly name = input<string>();
+
+  /** The value for the hidden input (form submission) */
+  readonly value = input<string>('on');
+
+  /** Additional CSS classes to apply */
+  readonly class = input<string>('');
+
+  /** Emitted when checked state changes */
+  readonly checkedChange = output<boolean>();
 
   /** Whether the switch is disabled via forms */
   private readonly formsDisabled = signal<boolean>(false);
@@ -91,20 +184,50 @@ export class Switch implements ControlValueAccessor {
   /** Whether the switch is disabled (either via input or forms) */
   readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
 
-  /** Additional CSS classes to apply */
-  readonly class = input<string>('');
-
   /** ControlValueAccessor callbacks */
   private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
 
-  /** Toggle the switch state */
-  toggle() {
-    if (!this.isDisabled()) {
-      this.checked.update((v) => !v);
-      this.onChange(this.checked());
-      this.onTouched();
+  /** Current state for data attribute */
+  protected readonly state = computed((): SwitchState =>
+    this.checked() ? 'checked' : 'unchecked'
+  );
+
+  /** Input value for form submission */
+  protected readonly inputValue = computed(() =>
+    this.checked() ? this.value() : undefined
+  );
+
+  constructor() {
+    // Initialize from defaultChecked if provided
+    if (this.defaultChecked()) {
+      this.checked.set(true);
     }
+  }
+
+  /** Toggle the switch state */
+  toggle(): void {
+    if (!this.isDisabled()) {
+      const newValue = !this.checked();
+      this.checked.set(newValue);
+      this.onChange(newValue);
+      this.onTouched();
+      this.checkedChange.emit(newValue);
+    }
+  }
+
+  /** Handle keyboard events */
+  protected onKeyDown(event: KeyboardEvent): void {
+    // Switch should only respond to Space (Enter is handled by button default)
+    if (event.key === ' ') {
+      // Let the click handler deal with it
+      return;
+    }
+  }
+
+  /** Focus the switch button */
+  focus(): void {
+    this.buttonElement()?.nativeElement.focus();
   }
 
   // ControlValueAccessor implementation
@@ -126,27 +249,34 @@ export class Switch implements ControlValueAccessor {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn(
-      'relative inline-flex',
-      this.class()
-    )
+    cn('relative inline-flex', this.class())
   );
 
   /** Computed track class */
   protected readonly trackClass = computed(() =>
     cn(
-      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px]',
-      'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80',
-      'inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none cursor-pointer',
-      this.isDisabled() && 'cursor-not-allowed opacity-50'
+      // Base styles
+      'inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent',
+      'shadow-xs transition-colors duration-200',
+      // Focus styles
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+      // State styles
+      'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+      'dark:data-[state=unchecked]:bg-input/80',
+      // Disabled styles
+      'disabled:cursor-not-allowed disabled:opacity-50'
     )
   );
 
   /** Computed thumb class */
   protected readonly thumbClass = computed(() =>
     cn(
-      'bg-background pointer-events-none block size-4 rounded-full shadow-lg ring-0 transition-transform',
-      this.checked() ? 'translate-x-4' : 'translate-x-0'
+      // Base styles
+      'pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0',
+      // Transition
+      'transition-transform duration-200',
+      // Position based on state
+      'data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0'
     )
   );
 }

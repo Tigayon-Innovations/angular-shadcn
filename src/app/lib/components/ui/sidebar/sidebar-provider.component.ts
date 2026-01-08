@@ -1,24 +1,25 @@
 import { cn } from '@/lib/utils';
 import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  HostListener,
-  input,
-  model,
-  output,
-  signal,
+    afterNextRender,
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    forwardRef,
+    HostListener,
+    input,
+    model,
+    output,
+    signal,
 } from '@angular/core';
 import {
-  SIDEBAR_CONTEXT,
-  SIDEBAR_KEYBOARD_SHORTCUT,
-  SIDEBAR_WIDTH,
-  SIDEBAR_WIDTH_ICON,
-  type SidebarContext,
-  type SidebarState,
+    SIDEBAR_CONTEXT,
+    SIDEBAR_KEYBOARD_SHORTCUT,
+    SIDEBAR_WIDTH,
+    SIDEBAR_WIDTH_ICON,
+    type SidebarContext,
+    type SidebarState,
 } from './sidebar-context';
 
 /**
@@ -97,8 +98,10 @@ export class SidebarProvider {
   };
 
   constructor() {
-    // Check for mobile on init and resize
-    this.checkMobile();
+    // Check for mobile on init (browser-only)
+    afterNextRender(() => {
+      this.checkMobile();
+    });
 
     // Sync open state
     effect(() => {

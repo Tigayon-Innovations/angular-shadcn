@@ -1,6 +1,6 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -45,7 +45,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContextMenuContent implements AfterViewInit, OnDestroy {
+export class ContextMenuContent implements OnDestroy {
   protected readonly context = inject(CONTEXT_MENU_CONTEXT);
   private readonly elementRef = inject(ElementRef);
 
@@ -82,10 +82,11 @@ export class ContextMenuContent implements AfterViewInit, OnDestroy {
         }, 0);
       }
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.updateMenuItems();
+    // Initial menu items update (browser-only)
+    afterNextRender(() => {
+      this.updateMenuItems();
+    });
   }
 
   ngOnDestroy(): void {

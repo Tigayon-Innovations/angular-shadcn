@@ -9,6 +9,13 @@ import {
 /**
  * AlertDialogHeader component - header area of the alert dialog.
  * Matches shadcn/ui React AlertDialogHeader exactly.
+ * Contains title and description elements.
+ *
+ * @example
+ * <AlertDialogHeader>
+ *   <AlertDialogTitle>Delete Account</AlertDialogTitle>
+ *   <AlertDialogDescription>Are you absolutely sure?</AlertDialogDescription>
+ * </AlertDialogHeader>
  */
 @Component({
   selector: 'AlertDialogHeader',
@@ -19,7 +26,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogHeader {
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

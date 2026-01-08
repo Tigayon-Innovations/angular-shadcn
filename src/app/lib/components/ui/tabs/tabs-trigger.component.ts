@@ -10,12 +10,73 @@ import {
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type TabsTriggerState = 'active' | 'inactive';
+
 /**
- * TabsTrigger component - clickable tab button.
- * Provides proper ARIA tab role and keyboard support.
+ * Props for the TabsTrigger component
+ */
+export interface TabsTriggerProps {
+  /** A unique value that associates the trigger with a content */
+  value: string;
+  /** When true, prevents the user from interacting with the tab.
+   * @default false */
+  disabled?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component TabsTrigger
  *
- * @example
+ * The button that activates its associated content.
+ *
+ * @description
+ * TabsTrigger is the interactive element users click or focus to activate
+ * a tab panel. It implements the tab role with proper ARIA attributes.
+ *
+ * ## Features
+ * - Click activation
+ * - Keyboard activation (Enter/Space)
+ * - Disabled state support
+ * - Roving tabindex for keyboard navigation
+ * - Auto-registration with parent TabsList
+ *
+ * ## Accessibility
+ * - `role="tab"` on the element
+ * - `aria-selected` reflects active state
+ * - `aria-controls` points to associated panel
+ * - `tabindex` follows roving tabindex pattern (0 for active, -1 for inactive)
+ * - `aria-disabled` when disabled
+ *
+ * @example Basic usage
+ * ```html
  * <TabsTrigger value="account">Account</TabsTrigger>
+ * ```
+ *
+ * @example Disabled trigger
+ * ```html
+ * <TabsTrigger value="settings" [disabled]="true">Settings</TabsTrigger>
+ * ```
+ *
+ * @example With icon
+ * ```html
+ * <TabsTrigger value="account">
+ *   <UserIcon class="size-4" />
+ *   Account
+ * </TabsTrigger>
+ * ```
+ *
+ * @data-attributes
+ * - `data-state` - 'active' | 'inactive'
+ * - `data-disabled` - Present when disabled
  */
 @Component({
   selector: 'TabsTrigger',
@@ -23,10 +84,13 @@ import { TABS_CONTEXT } from './tabs-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.id]': 'tabId()',
-    '[attr.data-state]': 'isActive() ? "active" : "inactive"',
+    '[attr.data-state]': 'state()',
+    '[attr.data-disabled]': 'disabled() ? "" : null',
     '[attr.aria-selected]': 'isActive()',
     '[attr.aria-controls]': 'panelId()',
+    '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'isActive() ? 0 : -1',
+    '[attr.disabled]': 'disabled() ? "" : null',
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',
@@ -37,10 +101,10 @@ import { TABS_CONTEXT } from './tabs-context';
 export class TabsTrigger implements OnInit, OnDestroy {
   protected readonly tabs = inject(TABS_CONTEXT);
 
-  /** The value that identifies this tab */
+  /** A unique value that associates the trigger with a content */
   readonly value = input.required<string>();
 
-  /** Whether this trigger is disabled */
+  /** When true, prevents the user from interacting with the tab */
   readonly disabled = input<boolean>(false);
 
   /** Additional CSS classes */
@@ -48,6 +112,11 @@ export class TabsTrigger implements OnInit, OnDestroy {
 
   /** Check if this tab is currently active */
   protected readonly isActive = computed(() => this.tabs.value() === this.value());
+
+  /** Current state: active or inactive */
+  protected readonly state = computed<TabsTriggerState>(() =>
+    this.isActive() ? 'active' : 'inactive'
+  );
 
   /** Generate tab ID */
   protected readonly tabId = computed(() => this.tabs.getTabId(this.value()));
@@ -57,12 +126,13 @@ export class TabsTrigger implements OnInit, OnDestroy {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium ring-offset-background transition-all duration-200',
+      'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-50',
-      'data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
-      'data-[state=inactive]:hover:text-foreground/80',
+      'data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:border data-[state=active]:border-border data-[state=active]:shadow-sm',
+      'data-[state=inactive]:hover:text-foreground',
       'cursor-pointer',
+      this.disabled() && 'pointer-events-none opacity-50',
       this.class()
     )
   );

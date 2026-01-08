@@ -9,16 +9,21 @@ import {
 /**
  * TableHead component - th wrapper.
  * Matches shadcn/ui React TableHead exactly.
+ *
+ * ACCESSIBILITY: Includes scope="col" by default for proper table semantics.
  */
 @Component({
   selector: 'TableHead',
-  template: `<th [class]="computedClass()"><ng-content /></th>`,
+  template: `<th [scope]="scope()" [class]="computedClass()"><ng-content /></th>`,
   host: {
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHead {
+  /** Scope attribute for accessibility (col, row, colgroup, rowgroup) */
+  readonly scope = input<'col' | 'row' | 'colgroup' | 'rowgroup'>('col');
+
   /** Additional CSS classes */
   readonly class = input<string>('');
 

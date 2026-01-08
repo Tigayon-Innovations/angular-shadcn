@@ -1,20 +1,59 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
 } from '@angular/core';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type ScrollBarOrientation = 'vertical' | 'horizontal';
+
 /**
- * ScrollBar component - custom styled scrollbar for ScrollArea.
- * Matches shadcn/ui React ScrollBar exactly.
+ * Props for the ScrollBar component
+ */
+export interface ScrollBarProps {
+  /** The orientation of the scrollbar.
+   * @default 'vertical' */
+  orientation?: ScrollBarOrientation;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component ScrollBar
  *
- * @example
- * <ScrollArea class="h-[200px]">
- *   <div>Content</div>
- *   <ScrollBar orientation="vertical" />
- * </ScrollArea>
+ * The scrollbar itself, shown inside ScrollArea.
+ *
+ * @description
+ * ScrollBar provides a visual indicator of scroll position and allows
+ * dragging to scroll. It matches the styling of shadcn/ui scrollbars.
+ *
+ * ## Features
+ * - Vertical and horizontal orientations
+ * - Styled thumb indicator
+ * - Touch-friendly
+ * - Consistent cross-browser appearance
+ *
+ * @example Vertical scrollbar (default)
+ * ```html
+ * <ScrollBar orientation="vertical" />
+ * ```
+ *
+ * @example Horizontal scrollbar
+ * ```html
+ * <ScrollBar orientation="horizontal" />
+ * ```
+ *
+ * @data-attributes
+ * - `data-orientation` - 'vertical' | 'horizontal'
  */
 @Component({
   selector: 'ScrollBar',
@@ -23,12 +62,13 @@ import {
   `,
   host: {
     '[class]': 'computedClass()',
+    '[attr.data-orientation]': 'orientation()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollBar {
-  /** Orientation of the scrollbar */
-  readonly orientation = input<'vertical' | 'horizontal'>('vertical');
+  /** The orientation of the scrollbar */
+  readonly orientation = input<ScrollBarOrientation>('vertical');
 
   /** Additional CSS classes */
   readonly class = input<string>('');

@@ -10,15 +10,86 @@ import {
     inject,
     input,
     model,
+    output,
     signal,
 } from '@angular/core';
 import { SELECT_CONTEXT, type SelectContext } from './select-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type SelectState = 'open' | 'closed';
+
 /**
- * Select component - a dropdown selection input.
- * Implements WAI-ARIA listbox pattern with keyboard navigation.
+ * Props for the Select component
+ */
+export interface SelectProps {
+  /** The value of the select when initially rendered.
+   * Use when you do not need to control the state of the select. */
+  defaultValue?: string;
+  /** The controlled value of the select.
+   * Should be used in conjunction with onValueChange. */
+  value?: string;
+  /** The controlled open state of the select.
+   * Must be used in conjunction with onOpenChange. */
+  open?: boolean;
+  /** When true, prevents the user from interacting with select.
+   * @default false */
+  disabled?: boolean;
+  /** The name of the select. Submitted with its owning form as part of a name/value pair. */
+  name?: string;
+  /** When true, indicates that the user must select a value before the owning form can be submitted.
+   * @default false */
+  required?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component Select
  *
- * @example
+ * Displays a list of options for the user to pick from—triggered by a button.
+ *
+ * @description
+ * Select provides a dropdown selection input that implements the WAI-ARIA
+ * listbox pattern with full keyboard navigation.
+ *
+ * ## Features
+ * - Full keyboard navigation
+ * - Supports controlled and uncontrolled usage
+ * - Groups and separators for organizing options
+ * - Disabled items and groups
+ * - Custom trigger and value display
+ * - Form submission with native hidden input
+ *
+ * ## Accessibility
+ * Implements the WAI-ARIA Listbox Pattern:
+ * - `role="listbox"` on content
+ * - `role="option"` on items
+ * - `aria-expanded` on trigger
+ * - `aria-labelledby` relationships
+ * - Roving tabindex for keyboard navigation
+ *
+ * ## Keyboard Navigation
+ * When focus is on the trigger:
+ * - `Enter` / `Space` / `ArrowDown` / `ArrowUp` - Open the select
+ *
+ * When focus is on an item:
+ * - `Enter` / `Space` - Select the focused item
+ * - `ArrowDown` - Focus next item
+ * - `ArrowUp` - Focus previous item
+ * - `Home` - Focus first item
+ * - `End` - Focus last item
+ * - `Escape` - Close the select
+ * - Type to search - Focus matching item
+ *
+ * @example Basic usage
+ * ```html
  * <Select [(value)]="selectedFruit">
  *   <SelectTrigger class="w-[180px]">
  *     <SelectValue placeholder="Select a fruit" />
@@ -29,6 +100,45 @@ import { SELECT_CONTEXT, type SelectContext } from './select-context';
  *     <SelectItem value="orange">Orange</SelectItem>
  *   </SelectContent>
  * </Select>
+ * ```
+ *
+ * @example With groups
+ * ```html
+ * <Select>
+ *   <SelectTrigger>
+ *     <SelectValue placeholder="Select a timezone" />
+ *   </SelectTrigger>
+ *   <SelectContent>
+ *     <SelectGroup>
+ *       <SelectLabel>North America</SelectLabel>
+ *       <SelectItem value="est">Eastern Time</SelectItem>
+ *       <SelectItem value="cst">Central Time</SelectItem>
+ *     </SelectGroup>
+ *     <SelectSeparator />
+ *     <SelectGroup>
+ *       <SelectLabel>Europe</SelectLabel>
+ *       <SelectItem value="gmt">GMT</SelectItem>
+ *       <SelectItem value="cet">Central European</SelectItem>
+ *     </SelectGroup>
+ *   </SelectContent>
+ * </Select>
+ * ```
+ *
+ * @example Form usage
+ * ```html
+ * <Select name="fruit" [required]="true">
+ *   <SelectTrigger>
+ *     <SelectValue placeholder="Required field" />
+ *   </SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="apple">Apple</SelectItem>
+ *   </SelectContent>
+ * </Select>
+ * ```
+ *
+ * @data-attributes
+ * - `data-state` - 'open' | 'closed'
+ * - `data-disabled` - Present when disabled
  */
 @Component({
   selector: 'Select',
@@ -53,17 +163,29 @@ export class Select {
   private readonly ariaIdService = inject(AriaIdService);
   private readonly ariaIds = this.ariaIdService.generateMenuIds('select');
 
-  /** The current selected value */
+  /** The controlled value of the select */
   readonly value = model<string>('');
 
-  /** Whether the select is open */
+  /** The controlled open state of the select */
   readonly open = model<boolean>(false);
 
-  /** Whether the select is disabled */
+  /** When true, prevents the user from interacting with select */
   readonly disabled = input<boolean>(false);
 
-  /** Additional CSS classes to apply */
+  /** The name of the select for form submission */
+  readonly name = input<string>('');
+
+  /** When true, indicates that the user must select a value */
+  readonly required = input<boolean>(false);
+
+  /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Event handler called when the value changes */
+  readonly valueChange = output<string>();
+
+  /** Event handler called when the open state changes */
+  readonly openChange = output<boolean>();
 
   /** Internal signals for context */
   private readonly _value = signal<string>('');
@@ -81,14 +203,18 @@ export class Select {
     triggerElement: signal<HTMLElement | null>(null),
     itemValues: signal<string[]>([]),
     focusedIndex: signal(-1),
+    required: () => this.required(),
+    name: () => this.name(),
     setValue: (value: string, label?: string) => {
       this._value.set(value);
       this.value.set(value);
+      this.valueChange.emit(value);
       if (label) {
         this.context.selectedLabel.set(label);
       }
       this._open.set(false);
       this.open.set(false);
+      this.openChange.emit(false);
       // Restore focus to trigger
       const trigger = this.context.triggerElement();
       if (trigger) {

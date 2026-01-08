@@ -1,3 +1,4 @@
+import { Separator } from "@/app/lib";
 import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/ui/button';
@@ -9,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angular';
+import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide-angular';
 
 /**
  * Site header component with logo, navigation, search, and theme toggle.
@@ -24,7 +25,8 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
     LucideAngularModule,
     SearchDialog,
     Kbd,
-  ],
+    Separator
+],
   host: {
     '(document:keydown)': 'onKeydown($event)',
   },
@@ -116,6 +118,8 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
             </span>
           </Button>
 
+          <Separator orientation="vertical" class="h-6 hidden md:block" />
+
           <!-- GitHub Stars -->
           <a
             href="https://github.com/example/shadcn-angular"
@@ -124,26 +128,26 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
             class="hidden sm:flex"
           >
             <Button variant="outline" size="sm" class="h-9 gap-2 px-3">
-              <lucide-icon [img]="icons.Star" class="h-4 w-4 fill-yellow-500 text-yellow-500" />
+              <lucide-icon [img]="icons.Github" class="h-4 w-4" />
               <span class="font-medium">{{ starCount() }}</span>
               <span class="text-muted-foreground hidden md:inline">Stars</span>
             </Button>
           </a>
 
-          <!-- GitHub Icon -->
-          <a
-            href="https://github.com/example/shadcn-angular"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="ghost" size="icon" class="h-9 w-9">
-              <lucide-icon [img]="icons.Github" class="h-4 w-4" />
-              <span class="sr-only">GitHub</span>
-            </Button>
-          </a>
+          <Separator orientation="vertical" class="h-6 hidden md:block" />
 
           <!-- Theme Toggle -->
           <ThemeToggle />
+
+          <Separator orientation="vertical" class="h-6 hidden md:block" />
+
+          <!-- Install Button -->
+          <a routerLink="/docs/installation">
+            <Button variant="default" size="sm" class="h-9 gap-2 px-3 rounded-lg hidden sm:flex">
+              <lucide-icon [img]="icons.Plus" class="h-4 w-4" />
+              <span class="font-medium">Install</span>
+            </Button>
+          </a>
         </div>
       </div>
     </header>
@@ -252,7 +256,7 @@ import { Github, LucideAngularModule, Menu, Search, Star, X } from 'lucide-angul
   `,
 })
 export class SiteHeader implements OnInit {
-  protected readonly icons = { Github, Menu, Search, Star, X };
+  protected readonly icons = { Github, Menu, Plus, Search, Star, X };
   protected readonly searchOpen = signal(false);
   protected readonly mobileMenuOpen = signal(false);
   protected readonly starCount = signal('1.2k');

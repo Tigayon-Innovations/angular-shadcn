@@ -6,3 +6,6 @@ export * from './accessibility';
 
 // Animation utilities
 export * from './animation';
+
+// Positioning utilities (collision detection)
+export * from './positioning';

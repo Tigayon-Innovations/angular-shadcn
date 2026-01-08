@@ -6,12 +6,86 @@ import {
     inject,
     input,
 } from '@angular/core';
-import { TOOLTIP_CONTEXT } from './tooltip-context';
+import { TOOLTIP_CONTEXT, TooltipAlign, TooltipSide } from './tooltip-context';
+
+// ============================================================================
+// Types
+// ============================================================================
+
+export type TooltipContentState = 'open' | 'closed';
 
 /**
- * TooltipContent component - the content displayed in the tooltip.
- * Matches shadcn/ui React TooltipContent exactly.
- * Uses Presence component for proper exit animations.
+ * Props for the TooltipContent component
+ */
+export interface TooltipContentProps {
+  /** The preferred side of the trigger to render against.
+   * @default 'top' */
+  side?: TooltipSide;
+  /** The distance in pixels from the trigger.
+   * @default 4 */
+  sideOffset?: number;
+  /** The preferred alignment against the trigger.
+   * @default 'center' */
+  align?: TooltipAlign;
+  /** An offset in pixels from the "start" or "end" alignment options.
+   * @default 0 */
+  alignOffset?: number;
+  /** The padding between the arrow and the edges of the content.
+   * @default 0 */
+  arrowPadding?: number;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component TooltipContent
+ *
+ * The component that pops out when the tooltip is open.
+ *
+ * @description
+ * TooltipContent displays the actual tooltip content. It supports positioning
+ * on different sides and alignments relative to the trigger.
+ *
+ * ## Features
+ * - Configurable side (top, right, bottom, left)
+ * - Configurable alignment (start, center, end)
+ * - Customizable offset from trigger
+ * - Smooth enter/exit animations
+ * - Uses Presence for proper exit animations
+ *
+ * ## Accessibility
+ * - `role="tooltip"` on the element
+ * - Unique ID for aria-describedby relationship with trigger
+ *
+ * @example Basic usage
+ * ```html
+ * <TooltipContent>
+ *   <p>Tooltip content</p>
+ * </TooltipContent>
+ * ```
+ *
+ * @example With side and alignment
+ * ```html
+ * <TooltipContent side="right" align="start">
+ *   <p>Right-aligned tooltip</p>
+ * </TooltipContent>
+ * ```
+ *
+ * @example With offset
+ * ```html
+ * <TooltipContent [sideOffset]="8">
+ *   <p>Tooltip with more spacing</p>
+ * </TooltipContent>
+ * ```
+ *
+ * @data-attributes
+ * - `data-state` - 'open' | 'closed'
+ * - `data-side` - 'top' | 'right' | 'bottom' | 'left'
+ * - `data-align` - 'start' | 'center' | 'end'
  */
 @Component({
   selector: 'TooltipContent',
@@ -20,7 +94,7 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
     <Presence [present]="context.open()">
       <div
         [class]="computedClass()"
-        [attr.data-state]="context.open() ? 'open' : 'closed'"
+        [attr.data-state]="state()"
         [attr.data-side]="side()"
         [attr.data-align]="align()"
         role="tooltip"
@@ -38,17 +112,25 @@ import { TOOLTIP_CONTEXT } from './tooltip-context';
 export class TooltipContent {
   protected readonly context = inject(TOOLTIP_CONTEXT);
 
-  /** Side of the trigger to place tooltip */
-  readonly side = input<'top' | 'right' | 'bottom' | 'left'>('top');
+  /** The preferred side of the trigger to render against */
+  readonly side = input<TooltipSide>('top');
 
-  /** Side offset */
+  /** The distance in pixels from the trigger */
   readonly sideOffset = input<number>(4);
 
-  /** Alignment of the tooltip */
-  readonly align = input<'start' | 'center' | 'end'>('center');
+  /** The preferred alignment against the trigger */
+  readonly align = input<TooltipAlign>('center');
+
+  /** An offset in pixels from the alignment options */
+  readonly alignOffset = input<number>(0);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Current state: open or closed */
+  protected readonly state = computed<TooltipContentState>(() =>
+    this.context.open() ? 'open' : 'closed'
+  );
 
   protected readonly computedClass = computed(() => {
     const sideClasses = {

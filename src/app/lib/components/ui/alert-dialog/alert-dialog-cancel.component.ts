@@ -10,9 +10,13 @@ import { buttonVariants } from '../button/button-variants';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
 /**
- * AlertDialogCancel component - cancel button that closes dialog.
+ * AlertDialogCancel component - cancel button that closes the dialog.
  * Matches shadcn/ui React AlertDialogCancel exactly.
+ * Styled as a secondary/outline button.
  * This is the default focus target when AlertDialog opens.
+ *
+ * @example
+ * <AlertDialogCancel>Cancel</AlertDialogCancel>
  */
 @Component({
   selector: 'AlertDialogCancel',
@@ -27,7 +31,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 export class AlertDialogCancel {
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

@@ -10,8 +10,8 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   imports: [Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Button, Input, Label],
   template: `
     <Dialog [(open)]="open">
-      <DialogTrigger>
-        <Button variant="outline">Edit Profile</Button>
+      <DialogTrigger [asChild]="true">
+        <Button>Edit Profile</Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-[425px]">
         <DialogHeader>

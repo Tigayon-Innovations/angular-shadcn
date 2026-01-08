@@ -1,1 +1,6 @@
-export { Progress } from './progress.component';
+export {
+    Progress,
+    type ProgressProps,
+    type ProgressState
+} from './progress.component';
+

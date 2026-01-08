@@ -12,9 +12,11 @@ import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dial
 
 /**
  * AlertDialog component - a modal dialog for important actions.
- * Unlike Dialog, AlertDialog does NOT close on Escape or overlay click.
- * User must explicitly click Cancel or Action to close.
  * Matches shadcn/ui React AlertDialog exactly.
+ * Follows Radix UI AlertDialog behavior:
+ * - Escape key closes the dialog
+ * - Overlay/backdrop click does NOT close the dialog
+ * - User can explicitly click Cancel or Action to close
  *
  * @example
  * <AlertDialog>
@@ -53,9 +55,10 @@ export class AlertDialog implements AlertDialogContextValue {
   /** Controlled open state */
   readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
 
-  /** Open change event */
+  /** Open change event emitted when dialog state changes */
   readonly openChange = output<boolean>();
 
+  /** Internal open state signal */
   readonly open = signal(false);
 
   /** ARIA IDs for accessibility relationships */
@@ -73,6 +76,7 @@ export class AlertDialog implements AlertDialogContextValue {
     }
   }
 
+  /** Set the open state and emit change event */
   setOpen(open: boolean): void {
     if (this.controlledOpen() === undefined) {
       this.open.set(open);
@@ -80,6 +84,7 @@ export class AlertDialog implements AlertDialogContextValue {
     this.openChange.emit(open);
   }
 
+  /** Get current open state */
   isOpen(): boolean {
     return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
   }

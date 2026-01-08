@@ -12,6 +12,9 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
  * AlertDialogTitle component - title text of the alert dialog.
  * Matches shadcn/ui React AlertDialogTitle exactly.
  * Automatically links to dialog via aria-labelledby.
+ *
+ * @example
+ * <AlertDialogTitle>Delete Account?</AlertDialogTitle>
  */
 @Component({
   selector: 'AlertDialogTitle',
@@ -25,7 +28,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 export class AlertDialogTitle {
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

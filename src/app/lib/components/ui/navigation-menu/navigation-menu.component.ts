@@ -1,11 +1,117 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { NAVIGATION_MENU_CONTEXT, type NavigationMenuContextValue } from './navigation-menu-context';
+import {
+    NAVIGATION_MENU_CONTEXT,
+    type NavigationMenuContextValue,
+    type NavigationMenuOrientation,
+} from './navigation-menu-context';
 import { NavigationMenuViewport } from './navigation-menu-viewport.component';
 
+// ============================================================================
+// Types
+// ============================================================================
+
 /**
- * NavigationMenu component - navigation menu with links.
- * Matches shadcn/ui React NavigationMenu exactly.
+ * Props for the NavigationMenu component
+ */
+export interface NavigationMenuProps {
+  /** Layout orientation of the menu.
+   * @default "horizontal" */
+  orientation?: NavigationMenuOrientation;
+  /** The value of the active item when controlled */
+  value?: string;
+  /** The default value when uncontrolled */
+  defaultValue?: string;
+  /** Time in ms before opening on hover.
+   * @default 200 */
+  delayDuration?: number;
+  /** Time in ms to skip delay when moving between items.
+   * @default 300 */
+  skipDelayDuration?: number;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component NavigationMenu
+ *
+ * A collection of links for navigating websites.
+ *
+ * @description
+ * NavigationMenu provides a horizontal or vertical navigation component
+ * with dropdown content panels. It's commonly used for main site navigation
+ * with mega-menu style dropdowns.
+ *
+ * ## Features
+ * - Horizontal and vertical orientations
+ * - Dropdown content panels
+ * - Animated viewport
+ * - Hover delay handling
+ * - Full keyboard navigation
+ * - Indicator for active items
+ *
+ * ## Accessibility
+ * - Uses `role="navigation"` for landmark
+ * - Proper `aria-expanded` states
+ * - `aria-haspopup` for dropdown triggers
+ * - Focus management within dropdowns
+ * - Escape key closes dropdowns
+ *
+ * ## Keyboard Navigation
+ * - `Tab` - Move focus between trigger and content
+ * - `Enter/Space` - Open dropdown, follow link
+ * - `ArrowDown` - Open dropdown (horizontal), next item (vertical)
+ * - `ArrowRight` - Next trigger (horizontal), open sub (vertical)
+ * - `Escape` - Close dropdown
+ *
+ * ## Data Attributes
+ * | Attribute | Values |
+ * |-----------|--------|
+ * | `data-state` | `"open"` \| `"closed"` |
+ * | `data-orientation` | `"horizontal"` \| `"vertical"` |
+ * | `data-motion` | `"from-start"` \| `"from-end"` \| `"to-start"` \| `"to-end"` |
+ *
+ * @example Basic usage
+ * ```html
+ * <NavigationMenu>
+ *   <NavigationMenuList>
+ *     <NavigationMenuItem>
+ *       <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+ *       <NavigationMenuContent>
+ *         <ul class="grid gap-3 p-6 md:w-[400px]">
+ *           <li>
+ *             <NavigationMenuLink routerLink="/docs">
+ *               Documentation
+ *             </NavigationMenuLink>
+ *           </li>
+ *         </ul>
+ *       </NavigationMenuContent>
+ *     </NavigationMenuItem>
+ *     <NavigationMenuItem>
+ *       <NavigationMenuLink routerLink="/about">About</NavigationMenuLink>
+ *     </NavigationMenuItem>
+ *   </NavigationMenuList>
+ * </NavigationMenu>
+ * ```
+ *
+ * @example With indicator
+ * ```html
+ * <NavigationMenu>
+ *   <NavigationMenuList>
+ *     <NavigationMenuItem>
+ *       <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+ *       <NavigationMenuContent>
+ *         <!-- Content -->
+ *       </NavigationMenuContent>
+ *     </NavigationMenuItem>
+ *   </NavigationMenuList>
+ *   <NavigationMenuIndicator />
+ * </NavigationMenu>
+ * ```
  */
 @Component({
   selector: 'NavigationMenu',
@@ -28,8 +134,8 @@ import { NavigationMenuViewport } from './navigation-menu-viewport.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationMenu {
-  /** Orientation */
-  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+  /** Layout orientation of the menu */
+  readonly orientation = input<NavigationMenuOrientation>('horizontal');
 
   /** Additional CSS classes */
   readonly class = input<string>('');

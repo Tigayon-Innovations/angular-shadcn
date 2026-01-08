@@ -9,16 +9,16 @@ import { Button } from '@/ui/button';
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    inject,
-    input,
-    signal,
-    Type,
-    viewChild,
-    ViewContainerRef
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  Type,
+  viewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } from 'lucide-angular';
@@ -29,6 +29,9 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
 @Component({
   selector: 'ComponentDetailPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'ngSkipHydration': 'true',
+  },
   imports: [
     RouterLink,
     Button,

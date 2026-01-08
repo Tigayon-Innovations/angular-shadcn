@@ -15,6 +15,11 @@ import {
 
 /**
  * Sidebar component - the main sidebar container.
+ *
+ * ACCESSIBILITY:
+ * - Uses <aside> element with proper role="complementary"
+ * - aria-label for screen reader identification
+ * - aria-hidden when sidebar is collapsed/closed
  */
 @Component({
   selector: 'Sidebar',
@@ -25,18 +30,30 @@ import {
         <div
           class="fixed inset-0 z-50 bg-black/80"
           (click)="context.setOpenMobile(false)"
+          aria-hidden="true"
         ></div>
-        <aside [class]="computedMobileClass()">
-          <ng-content />
+        <aside
+          [class]="computedMobileClass()"
+          role="complementary"
+          [attr.aria-label]="ariaLabel()"
+        >
+          <nav [attr.aria-label]="navLabel()">
+            <ng-content />
+          </nav>
         </aside>
       }
     } @else {
       <!-- Desktop sidebar -->
-      <div [class]="computedGapClass()" [attr.data-side]="side()"></div>
-      <aside [class]="computedClass()">
-        <div [attr.data-sidebar]="'sidebar'" [class]="computedInnerClass()">
+      <div [class]="computedGapClass()" [attr.data-side]="side()" aria-hidden="true"></div>
+      <aside
+        [class]="computedClass()"
+        role="complementary"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-hidden]="context.state() === 'collapsed' && collapsible() === 'offcanvas'"
+      >
+        <nav [attr.aria-label]="navLabel()" [attr.data-sidebar]="'sidebar'" [class]="computedInnerClass()">
           <ng-content />
-        </div>
+        </nav>
       </aside>
     }
   `,
@@ -46,6 +63,7 @@ import {
       'context.state() === "collapsed" ? collapsible() : ""',
     '[attr.data-variant]': 'variant()',
     '[attr.data-side]': 'side()',
+    'ngSkipHydration': 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -60,6 +78,12 @@ export class Sidebar {
 
   /** Collapsible behavior */
   readonly collapsible = input<SidebarCollapsible>('offcanvas');
+
+  /** Accessible label for the sidebar landmark */
+  readonly ariaLabel = input<string>('Sidebar');
+
+  /** Accessible label for the navigation within */
+  readonly navLabel = input<string>('Main navigation');
 
   /** Additional CSS classes */
   readonly class = input<string>('');

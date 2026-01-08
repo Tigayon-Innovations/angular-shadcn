@@ -21,6 +21,9 @@ export interface ComponentApiSection {
 @Component({
   selector: 'ApiReference',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'ngSkipHydration': 'true',
+  },
   styles: `
     /* Syntax highlighting for default values */
     .default-string {

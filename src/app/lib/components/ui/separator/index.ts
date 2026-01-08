@@ -1,1 +1,6 @@
-export { Separator } from './separator.component';
+export {
+    Separator,
+    type SeparatorOrientation,
+    type SeparatorProps
+} from './separator.component';
+

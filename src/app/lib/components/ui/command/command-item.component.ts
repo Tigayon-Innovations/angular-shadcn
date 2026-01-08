@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import {
-    AfterViewInit,
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -39,7 +39,7 @@ let itemIndexCounter = 0;
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommandItem implements OnInit, AfterViewInit, OnDestroy {
+export class CommandItem implements OnInit, OnDestroy {
   protected readonly context = inject(COMMAND_CONTEXT);
   private readonly elementRef = inject(ElementRef);
 
@@ -102,15 +102,16 @@ export class CommandItem implements OnInit, AfterViewInit, OnDestroy {
         this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
       }
     });
+
+    // Update local index after render (browser-only)
+    afterNextRender(() => {
+      this.updateLocalIndex();
+      this.context.itemCount.update(c => c + 1);
+    });
   }
 
   ngOnInit(): void {
     this.context.registerItem(this.value());
-  }
-
-  ngAfterViewInit(): void {
-    this.updateLocalIndex();
-    this.context.itemCount.update(c => c + 1);
   }
 
   ngOnDestroy(): void {

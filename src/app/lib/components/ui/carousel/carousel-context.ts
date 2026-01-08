@@ -11,6 +11,8 @@ export interface CarouselContextValue {
   scrollPrev: () => void;
   scrollNext: () => void;
   scrollTo: (index: number) => void;
+  /** Announce slide change to screen readers */
+  announceSlide?: (index: number, total: number) => void;
 }
 
 export const CAROUSEL_CONTEXT = new InjectionToken<CarouselContextValue>('CAROUSEL_CONTEXT');

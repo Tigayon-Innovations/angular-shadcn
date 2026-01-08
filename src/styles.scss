@@ -12,7 +12,7 @@
   /* Base radius for rounded corners */
   --radius: 0.625rem;
 
-  /* Light mode colors (neutral) */
+  /* Light mode colors (neutral) - WCAG AA compliant */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 
@@ -29,17 +29,29 @@
   --secondary-foreground: oklch(0.205 0 0);
 
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.45 0 0); /* Improved for WCAG AA (min 4.5:1 contrast) */
 
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
 
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0); /* High contrast white for readability */
 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  /* Success state - WCAG compliant green */
+  --success: oklch(0.52 0.15 145);
+  --success-foreground: oklch(0.985 0 0);
+
+  /* Warning state - WCAG compliant amber */
+  --warning: oklch(0.75 0.18 85);
+  --warning-foreground: oklch(0.205 0 0);
+
+  /* Info state - WCAG compliant blue */
+  --info: oklch(0.55 0.18 250);
+  --info-foreground: oklch(0.985 0 0);
 
   /* Chart colors */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -59,7 +71,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* Dark mode colors */
+/* Dark mode colors - WCAG AA compliant */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -77,17 +89,29 @@
   --secondary-foreground: oklch(0.985 0 0);
 
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.65 0 0); /* Improved for WCAG AA (min 4.5:1 contrast) */
 
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
 
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.985 0 0); /* High contrast for readability */
 
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
+
+  /* Success state - dark mode */
+  --success: oklch(0.6 0.15 145);
+  --success-foreground: oklch(0.145 0 0);
+
+  /* Warning state - dark mode */
+  --warning: oklch(0.78 0.18 85);
+  --warning-foreground: oklch(0.145 0 0);
+
+  /* Info state - dark mode */
+  --info: oklch(0.65 0.18 250);
+  --info-foreground: oklch(0.145 0 0);
 
   /* Chart colors - dark mode */
   --chart-1: oklch(0.488 0.243 264.376);
@@ -133,6 +157,18 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  /* Semantic state colors - WCAG compliant */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Overlay colors */
+  --color-overlay: var(--overlay);
+  --color-overlay-strong: var(--overlay-strong);
+
   /* Chart colors */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -168,6 +204,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -596,4 +633,133 @@
       transition: none !important;
     }
   }
+
+  /* ========================================
+     Touch Target Expansion Utilities
+     WCAG 2.5.5 Target Size (Enhanced) - 44x44px minimum
+     ======================================== */
+
+  .touch-target {
+    position: relative;
+  }
+
+  .touch-target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: var(--touch-target-size, 44px);
+    min-height: var(--touch-target-size, 44px);
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Mobile-only touch target expansion */
+  @media (hover: none) and (pointer: coarse) {
+    .touch-target-mobile-only::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: var(--touch-target-size, 44px);
+      min-height: var(--touch-target-size, 44px);
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  /* ========================================
+     Progress Bar Smooth Animation
+     ======================================== */
+
+  [data-slot="progress-indicator"] {
+    transition: transform 300ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  [data-state="indeterminate"] [data-slot="progress-indicator"] {
+    animation: progress-indeterminate 1.5s ease-in-out infinite;
+    width: 50% !important;
+    transform: translateX(-100%) !important;
+  }
+
+  @keyframes progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* ========================================
+     Tabs Animated Indicator
+     ======================================== */
+
+  [data-slot="tabs-indicator"] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: transform 200ms ease-out, width 200ms ease-out;
+  }
+
+  /* ========================================
+     Accordion/Collapsible Grid-Based Animation
+     Smooth height: auto animation using CSS Grid
+     ======================================== */
+
+  [data-slot="accordion-content"],
+  [data-slot="collapsible-content"] {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--animation-duration-base) var(--animation-easing-out);
+  }
+
+  [data-slot="accordion-content"][data-state="open"],
+  [data-slot="collapsible-content"][data-state="open"] {
+    grid-template-rows: 1fr;
+  }
+
+  [data-slot="accordion-content"] > div,
+  [data-slot="collapsible-content"] > div {
+    overflow: hidden;
+  }
+}
+
+/* ========================================
+   Radix-Compatible CSS Variables
+   These variables are set by components for dynamic animations
+   ======================================== */
+
+:root {
+  /* Accordion content height (set by JS) */
+  --radix-accordion-content-height: auto;
+  --radix-accordion-content-width: auto;
+
+  /* Collapsible content height (set by JS) */
+  --radix-collapsible-content-height: auto;
+  --radix-collapsible-content-width: auto;
+
+  /* Navigation menu viewport dimensions */
+  --radix-navigation-menu-viewport-width: auto;
+  --radix-navigation-menu-viewport-height: auto;
+
+  /* Popover/Tooltip/Menu transform origins */
+  --radix-popover-content-transform-origin: var(--animation-origin-center);
+  --radix-tooltip-content-transform-origin: var(--animation-origin-center);
+  --radix-hover-card-content-transform-origin: var(--animation-origin-center);
+  --radix-dropdown-menu-content-transform-origin: var(--animation-origin-center);
+  --radix-context-menu-content-transform-origin: var(--animation-origin-center);
+
+  /* Available height/width for positioning */
+  --radix-popper-available-width: 100vw;
+  --radix-popper-available-height: 100vh;
+  --radix-popper-anchor-width: auto;
+  --radix-popper-anchor-height: auto;
 }

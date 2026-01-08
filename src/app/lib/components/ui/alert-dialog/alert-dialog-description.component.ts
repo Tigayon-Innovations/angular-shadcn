@@ -12,6 +12,9 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
  * AlertDialogDescription component - description text of the alert dialog.
  * Matches shadcn/ui React AlertDialogDescription exactly.
  * Automatically links to dialog via aria-describedby.
+ *
+ * @example
+ * <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
  */
 @Component({
   selector: 'AlertDialogDescription',
@@ -25,7 +28,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 export class AlertDialogDescription {
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

@@ -8,6 +8,8 @@ import {
 
 /**
  * AspectRatio component that maintains a fixed aspect ratio for its content.
+ * Matches shadcn/ui React AspectRatio exactly.
+ * Follows Radix UI AspectRatio specification.
  *
  * @example
  * <!-- 16:9 aspect ratio (default) -->
@@ -28,20 +30,21 @@ import {
 @Component({
   selector: 'AspectRatio',
   template: `
-    <div
-    class="absolute inset-0 h-full w-full">
+    <div class="absolute inset-0 h-full w-full">
       <ng-content />
     </div>
   `,
   host: {
     '[class]': 'computedClass()',
     '[style.padding-bottom]': 'paddingBottom()',
-    'data-slot': 'aspect-ratio',
+    '[style.position]': '"relative"',
+    '[style.display]': '"block"',
+    '[style.width]': '"100%"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AspectRatio {
-  /** The desired aspect ratio (width / height) */
+  /** The desired aspect ratio (width / height). Defaults to 16/9 */
   readonly ratio = input<number>(16 / 9);
 
   /** Additional CSS classes to apply */
@@ -55,9 +58,6 @@ export class AspectRatio {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn(
-      'relative block w-full',
-      this.class()
-    )
+    cn('relative block w-full', this.class())
   );
 }

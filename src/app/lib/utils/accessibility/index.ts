@@ -15,3 +15,9 @@ export {
 } from './keyboard-navigation.directive';
 export { LiveRegionDirective, StatusAnnouncerDirective } from './live-region.directive';
 
+// Visually Hidden Components
+export { VisuallyHidden, VisuallyHiddenInput } from './visually-hidden.component';
+
+// Touch Target Utilities
+export { MinTouchTarget, TouchTargetDirective } from './touch-target.directive';
+

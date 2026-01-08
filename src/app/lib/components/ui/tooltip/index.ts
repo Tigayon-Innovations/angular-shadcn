@@ -1,6 +1,14 @@
-export { TooltipContent } from './tooltip-content.component';
-export { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
-export { TooltipProvider } from './tooltip-provider.component';
-export { TooltipTrigger } from './tooltip-trigger.component';
-export { Tooltip } from './tooltip.component';
+// Context and types
+export {
+    TOOLTIP_CONTEXT,
+    type TooltipAlign,
+    type TooltipContextValue,
+    type TooltipSide
+} from './tooltip-context';
+
+// Components and their types
+export { TooltipContent, type TooltipContentProps, type TooltipContentState } from './tooltip-content.component';
+export { TooltipProvider, type TooltipProviderProps } from './tooltip-provider.component';
+export { TooltipTrigger, type TooltipTriggerProps } from './tooltip-trigger.component';
+export { Tooltip, type TooltipProps, type TooltipState } from './tooltip.component';
 

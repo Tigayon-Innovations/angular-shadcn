@@ -8,11 +8,63 @@ import {
 } from '@angular/core';
 import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type PopoverState = 'open' | 'closed';
+
 /**
- * Popover component - container for popover trigger and content.
- * Matches shadcn/ui React Popover exactly.
+ * Props for the Popover component
+ */
+export interface PopoverProps {
+  /** The open state of the popover when initially rendered.
+   * Use when you do not need to control its open state.
+   * @default false */
+  defaultOpen?: boolean;
+  /** The controlled open state of the popover.
+   * Must be used in conjunction with onOpenChange. */
+  open?: boolean;
+  /** The modality of the popover. When set to true,
+   * interaction with outside elements will be disabled and only popover content will be visible to screen readers.
+   * @default false */
+  modal?: boolean;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component Popover
  *
- * @example
+ * Displays rich content in a portal, triggered by a button.
+ *
+ * @description
+ * Popover provides a container for displaying floating content triggered by
+ * a button. It manages open/closed state and provides context for positioning.
+ *
+ * ## Features
+ * - Click to toggle open/close
+ * - Modal and non-modal modes
+ * - Click outside to close
+ * - Escape key to close
+ * - Controlled and uncontrolled usage
+ * - Collision-aware positioning
+ *
+ * ## Accessibility
+ * - `aria-expanded` on trigger
+ * - `aria-haspopup="dialog"` on trigger
+ * - `role="dialog"` on content
+ * - Focus management in modal mode
+ * - Escape key dismisses popover
+ *
+ * ## Keyboard Navigation
+ * - `Enter` / `Space` - Toggle popover (on trigger)
+ * - `Escape` - Close popover
+ *
+ * @example Basic usage
+ * ```html
  * <Popover>
  *   <PopoverTrigger>
  *     <Button variant="outline">Open</Button>
@@ -21,6 +73,34 @@ import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
  *     <p>Content here</p>
  *   </PopoverContent>
  * </Popover>
+ * ```
+ *
+ * @example Controlled
+ * ```html
+ * <Popover [open]="isOpen" (openChange)="isOpen = $event">
+ *   <PopoverTrigger>
+ *     <Button>Settings</Button>
+ *   </PopoverTrigger>
+ *   <PopoverContent>
+ *     Settings panel content
+ *   </PopoverContent>
+ * </Popover>
+ * ```
+ *
+ * @example Modal mode
+ * ```html
+ * <Popover [modal]="true">
+ *   <PopoverTrigger>
+ *     <Button>Modal Popover</Button>
+ *   </PopoverTrigger>
+ *   <PopoverContent>
+ *     Focus is trapped here
+ *   </PopoverContent>
+ * </Popover>
+ * ```
+ *
+ * @data-attributes
+ * - `data-state` - 'open' | 'closed' (on content)
  */
 @Component({
   selector: 'Popover',
@@ -37,19 +117,22 @@ import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Popover implements PopoverContextValue {
-  /** Default open state */
+  /** The open state of the popover when initially rendered */
   readonly defaultOpen = input<boolean>(false);
 
-  /** Controlled open state */
+  /** The controlled open state of the popover */
   readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
 
-  /** Modal mode */
+  /** The modality of the popover */
   readonly modal = input<boolean>(false);
 
-  /** Open change event */
+  /** Event handler called when the open state changes */
   readonly openChange = output<boolean>();
 
   readonly open = signal(false);
+
+  /** Reference to the trigger element for positioning */
+  readonly triggerRef = signal<HTMLElement | null>(null);
 
   constructor() {
     // Initialize from defaultOpen
@@ -67,6 +150,11 @@ export class Popover implements PopoverContextValue {
 
   toggle(): void {
     this.setOpen(!this.open());
+  }
+
+  /** Set the trigger element reference */
+  setTriggerRef(element: HTMLElement | null): void {
+    this.triggerRef.set(element);
   }
 
   isOpen(): boolean {

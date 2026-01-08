@@ -4,10 +4,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
     inject,
     input,
-    OnDestroy,
-    OnInit,
+    OnDestroy
 } from '@angular/core';
 import { SHEET_CONTEXT } from './sheet-context';
 import { sheetVariants, type SheetVariants } from './sheet-variants';
@@ -25,7 +25,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
     <Presence [present]="context.open()">
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-[100] bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        class="fixed inset-0 z-[100] bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
         aria-hidden="true"
@@ -80,7 +80,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SheetContent implements OnInit, OnDestroy {
+export class SheetContent implements OnDestroy {
   protected readonly context = inject(SHEET_CONTEXT);
 
   /** Side from which the sheet appears */
@@ -89,22 +89,41 @@ export class SheetContent implements OnInit, OnDestroy {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Previous body overflow for restoration */
+  private previousBodyOverflow = '';
+
   protected readonly computedClass = computed(() =>
     cn(sheetVariants({ side: this.side() }), this.class())
   );
 
-  ngOnInit(): void {
-    // Lock body scroll when sheet opens
+  constructor() {
+    // Handle body scroll lock based on open state (browser-only via effect + afterNextRender)
+    effect(() => {
+      const isOpen = this.context.open();
+      if (isOpen) {
+        this.lockBodyScroll();
+      } else {
+        this.unlockBodyScroll();
+      }
+    });
+  }
+
+  private lockBodyScroll(): void {
     if (typeof document !== 'undefined') {
+      this.previousBodyOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+    }
+  }
+
+  private unlockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.previousBodyOverflow;
     }
   }
 
   ngOnDestroy(): void {
     // Restore body scroll
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
-    }
+    this.unlockBodyScroll();
     // Restore focus to trigger element
     this.restoreFocus();
   }

@@ -5,14 +5,14 @@ export const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border bg-background text-foreground',
+        default: 'border-border bg-background text-foreground',
         success:
-          'border-green-500/50 bg-green-50 text-green-900 dark:border-green-500/30 dark:bg-green-950 dark:text-green-100',
+          'border-success/50 bg-success/10 text-success dark:border-success/30 dark:bg-success/20 dark:text-success',
         error:
-          'destructive group border-destructive bg-destructive text-destructive-foreground',
+          'destructive group border-destructive/50 bg-destructive/10 text-destructive dark:border-destructive/30 dark:bg-destructive/20',
         warning:
-          'border-yellow-500/50 bg-yellow-50 text-yellow-900 dark:border-yellow-500/30 dark:bg-yellow-950 dark:text-yellow-100',
-        info: 'border-blue-500/50 bg-blue-50 text-blue-900 dark:border-blue-500/30 dark:bg-blue-950 dark:text-blue-100',
+          'border-warning/50 bg-warning/10 text-warning-foreground dark:border-warning/30 dark:bg-warning/20',
+        info: 'border-info/50 bg-info/10 text-info dark:border-info/30 dark:bg-info/20',
       },
     },
     defaultVariants: {

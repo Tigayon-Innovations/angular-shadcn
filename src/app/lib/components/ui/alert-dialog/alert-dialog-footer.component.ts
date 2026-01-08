@@ -9,6 +9,13 @@ import {
 /**
  * AlertDialogFooter component - footer area of the alert dialog.
  * Matches shadcn/ui React AlertDialogFooter exactly.
+ * Contains action and cancel buttons.
+ *
+ * @example
+ * <AlertDialogFooter>
+ *   <AlertDialogCancel>Cancel</AlertDialogCancel>
+ *   <AlertDialogAction>Delete</AlertDialogAction>
+ * </AlertDialogFooter>
  */
 @Component({
   selector: 'AlertDialogFooter',
@@ -19,7 +26,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogFooter {
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

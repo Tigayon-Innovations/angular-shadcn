@@ -4,12 +4,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
     ElementRef,
     HostListener,
     inject,
     input,
     OnDestroy,
-    OnInit,
     viewChild,
 } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
@@ -27,7 +27,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
     <Presence [present]="context.isOpen()">
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+        class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
         [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
         aria-hidden="true"
@@ -84,7 +84,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogContent implements OnInit, OnDestroy {
+export class DialogContent implements OnDestroy {
   readonly context = inject(DIALOG_CONTEXT);
   private readonly dialogContent = viewChild<ElementRef<HTMLElement>>('dialogContent');
 
@@ -97,9 +97,12 @@ export class DialogContent implements OnInit, OnDestroy {
   /** Selector for initial focus element */
   readonly initialFocus = input<string | undefined>(undefined);
 
+  /** Previous body overflow for restoration */
+  private previousBodyOverflow = '';
+
   protected readonly computedClass = computed(() =>
     cn(
-      'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200',
+      'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background text-foreground p-6 shadow-lg duration-200',
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -110,18 +113,34 @@ export class DialogContent implements OnInit, OnDestroy {
     )
   );
 
-  ngOnInit(): void {
-    // Lock body scroll when dialog opens
+  constructor() {
+    // Handle body scroll lock based on open state
+    effect(() => {
+      const isOpen = this.context.isOpen();
+      if (isOpen) {
+        this.lockBodyScroll();
+      } else {
+        this.unlockBodyScroll();
+      }
+    });
+  }
+
+  private lockBodyScroll(): void {
     if (typeof document !== 'undefined') {
+      this.previousBodyOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+    }
+  }
+
+  private unlockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.previousBodyOverflow;
     }
   }
 
   ngOnDestroy(): void {
     // Restore body scroll
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
-    }
+    this.unlockBodyScroll();
     // Restore focus to trigger element
     this.restoreFocus();
   }

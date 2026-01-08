@@ -1,26 +1,98 @@
 import { cn } from '@/lib/utils';
 import {
+    afterNextRender,
     ChangeDetectionStrategy,
     Component,
     computed,
+    effect,
+    ElementRef,
     inject,
+    Injector,
     input,
+    signal,
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
 /**
- * TabsList component - container for tab triggers.
- * Provides proper ARIA tablist role and keyboard navigation.
+ * Props for the TabsList component
+ */
+export interface TabsListProps {
+  /** Whether to show the animated indicator.
+   * @default true */
+  showIndicator?: boolean;
+  /** Additional CSS classes for the indicator */
+  indicatorClass?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
+/**
+ * @component TabsList
  *
- * @example
+ * Contains the tab triggers. Provides proper ARIA tablist role and keyboard navigation.
+ *
+ * @description
+ * TabsList serves as the container for TabsTrigger components and implements
+ * the tablist role with proper ARIA attributes and keyboard navigation.
+ *
+ * ## Features
+ * - Animated indicator showing active tab
+ * - Full keyboard navigation (arrow keys, Home, End)
+ * - Proper ARIA tablist role
+ * - Horizontal and vertical orientation support
+ * - Automatic or manual activation modes
+ *
+ * ## Accessibility
+ * - `role="tablist"` on the container
+ * - `aria-orientation` reflects the orientation
+ * - Manages focus between tabs via roving tabindex
+ *
+ * ## Keyboard Navigation
+ * - `ArrowRight/ArrowLeft` - Navigate tabs (horizontal)
+ * - `ArrowDown/ArrowUp` - Navigate tabs (vertical)
+ * - `Home` - Focus first tab
+ * - `End` - Focus last tab
+ *
+ * @example Basic usage
+ * ```html
  * <TabsList>
  *   <TabsTrigger value="tab1">Tab 1</TabsTrigger>
  *   <TabsTrigger value="tab2">Tab 2</TabsTrigger>
  * </TabsList>
+ * ```
+ *
+ * @example Without indicator
+ * ```html
+ * <TabsList [showIndicator]="false">
+ *   <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+ *   <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+ * </TabsList>
+ * ```
+ *
+ * @data-attributes Inherits data-orientation from parent Tabs
  */
 @Component({
   selector: 'TabsList',
-  template: `<ng-content />`,
+  template: `
+    <ng-content />
+    @if (showIndicator()) {
+      <span
+        data-slot="tabs-indicator"
+        [class]="computedIndicatorClass()"
+        [style.width.px]="indicatorStyle().width"
+        [style.left.px]="indicatorStyle().left"
+        aria-hidden="true"
+      ></span>
+    }
+  `,
   host: {
     '[class]': 'computedClass()',
     'role': 'tablist',
@@ -32,16 +104,64 @@ import { TABS_CONTEXT } from './tabs-context';
 })
 export class TabsList {
   protected readonly tabs = inject(TABS_CONTEXT);
+  private readonly elementRef = inject(ElementRef);
+  private readonly injector = inject(Injector);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Whether to show the animated indicator */
+  readonly showIndicator = input<boolean>(false);
+
+  /** Additional indicator CSS classes */
+  readonly indicatorClass = input<string>('');
+
+  /** Indicator position and size */
+  protected readonly indicatorStyle = signal({ width: 0, left: 0 });
+
   protected readonly computedClass = computed(() =>
     cn(
-      'bg-muted text-muted-foreground inline-flex h-11 w-fit items-center justify-center rounded-full p-1.5 gap-1',
+      'text-muted-foreground inline-flex h-9 w-fit items-center justify-center gap-1 rounded-lg bg-transparent p-1',
       this.class()
     )
   );
+
+  protected readonly computedIndicatorClass = computed(() =>
+    cn(
+      'absolute inset-y-1 bg-background rounded-md shadow-sm transition-all duration-200',
+      this.indicatorClass()
+    )
+  );
+
+  constructor() {
+    // Update indicator when value changes (browser-only via afterNextRender)
+    effect(() => {
+      const _ = this.tabs.value(); // Subscribe to value changes
+      // Schedule browser-only DOM update
+      afterNextRender(() => {
+        this.updateIndicator();
+      }, { injector: this.injector });
+    });
+  }
+
+  private updateIndicator(): void {
+    const activeValue = this.tabs.value();
+    if (!activeValue) return;
+
+    const tabId = this.tabs.getTabId(activeValue);
+    const tabElement = document.getElementById(tabId);
+    const listElement = this.elementRef.nativeElement;
+
+    if (tabElement && listElement) {
+      const tabRect = tabElement.getBoundingClientRect();
+      const listRect = listElement.getBoundingClientRect();
+
+      this.indicatorStyle.set({
+        width: tabRect.width,
+        left: tabRect.left - listRect.left,
+      });
+    }
+  }
 
   onKeydown(event: KeyboardEvent): void {
     const tabValues = this.tabs.tabValues();
@@ -50,6 +170,7 @@ export class TabsList {
     const currentValue = this.tabs.value();
     const currentIndex = tabValues.indexOf(currentValue);
     const orientation = this.tabs.orientation();
+    const activationMode = this.tabs.activationMode();
 
     let newIndex = currentIndex;
     let handled = false;
@@ -92,7 +213,11 @@ export class TabsList {
     if (handled) {
       event.preventDefault();
       const newValue = tabValues[newIndex];
-      this.tabs.onValueChange(newValue);
+
+      // In automatic mode, activate on focus; in manual mode, just focus
+      if (activationMode === 'automatic') {
+        this.tabs.onValueChange(newValue);
+      }
 
       // Focus the new tab
       const tabId = this.tabs.getTabId(newValue);

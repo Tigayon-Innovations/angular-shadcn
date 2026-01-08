@@ -82,7 +82,7 @@ export const routes: Routes = [
       {
         path: 'components/:slug',
         loadComponent: () =>
-          import('@/pages/docs/component-detail').then((m) => m.ComponentDetailPage),
+          import('@/pages/docs/component-detail').then((m) => m.ComponentDetailRouter),
         title: componentTitleResolver,
       },
     ],

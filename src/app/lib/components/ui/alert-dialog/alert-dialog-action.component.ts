@@ -1,17 +1,21 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    input,
 } from '@angular/core';
 import { buttonVariants } from '../button/button-variants';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
 /**
- * AlertDialogAction component - action button that confirms and closes dialog.
+ * AlertDialogAction component - action button that confirms and closes the dialog.
  * Matches shadcn/ui React AlertDialogAction exactly.
+ * Styled as the primary action button.
+ *
+ * @example
+ * <AlertDialogAction>Delete Account</AlertDialogAction>
  */
 @Component({
   selector: 'AlertDialogAction',
@@ -25,7 +29,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 export class AlertDialogAction {
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
@@ -34,6 +38,7 @@ export class AlertDialogAction {
 
   onClick(event: Event): void {
     // Allow the click to propagate for custom handlers
+    event.stopPropagation();
     this.context.setOpen(false);
   }
 }

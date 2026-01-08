@@ -11,23 +11,76 @@ import {
 import { toggleVariants, type ToggleVariants } from '../toggle/toggle-variants';
 import { TOGGLE_GROUP_CONTEXT } from './toggle-group-context';
 
+// ============================================================================
+// Types
+// ============================================================================
+
+export type ToggleGroupItemProps = {
+  /** The unique value for this toggle item */
+  value: string;
+  /** Override the variant from the group */
+  variant?: ToggleVariants['variant'];
+  /** Override the size from the group */
+  size?: ToggleVariants['size'];
+  /** Whether this toggle item is disabled */
+  disabled?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+};
+
+// ============================================================================
+// ToggleGroupItem Component
+// ============================================================================
+
 /**
  * ToggleGroupItem component - individual toggle button within a group.
+ * Based on Radix UI ToggleGroup.Item with shadcn/ui styling.
  * Supports keyboard navigation with arrow keys.
+ *
+ * ## Features
+ * - Can be individually styled with variant/size overrides
+ * - Inherits disabled state from parent group
+ * - Roving tabindex for efficient keyboard navigation
+ * - Full keyboard support
+ *
+ * ## Accessibility
+ * - Uses `aria-pressed` to indicate pressed state
+ * - Part of roving tabindex pattern
+ * - Supports keyboard navigation from parent group
+ *
+ * ## Data Attributes
+ * - `data-state`: "on" | "off"
+ * - `data-disabled`: Present when disabled
+ * - `data-value`: The item's value
  *
  * @example
  * <ToggleGroupItem value="bold" aria-label="Toggle bold">
- *   <svg>...</svg>
+ *   <BoldIcon />
  * </ToggleGroupItem>
+ *
+ * @example
+ * <!-- With custom variant override -->
+ * <ToggleGroupItem value="special" variant="outline">
+ *   Special
+ * </ToggleGroupItem>
+ *
+ * @example
+ * <!-- Individually disabled -->
+ * <ToggleGroupItem value="unavailable" [disabled]="true">
+ *   Unavailable
+ * </ToggleGroupItem>
+ *
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/toggle-group Radix ToggleGroup}
+ * @see {@link https://ui.shadcn.com/docs/components/toggle-group shadcn/ui ToggleGroup}
  */
 @Component({
   selector: 'ToggleGroupItem',
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    'type': 'button',
+    type: 'button',
     '[attr.aria-pressed]': 'isPressed()',
-    '[attr.data-state]': 'isPressed() ? "on" : "off"',
+    '[attr.data-state]': 'state()',
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
     '[attr.data-value]': 'value()',
     '[attr.disabled]': 'isDisabled() ? "" : null',
@@ -61,23 +114,39 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
     return this.context?.isPressed(this.value()) ?? false;
   });
 
+  /** State for data attribute */
+  protected readonly state = computed(() => (this.isPressed() ? 'on' : 'off'));
+
   /** Whether this item is disabled */
   protected readonly isDisabled = computed(() => {
     return this.disabled() || this.context?.disabled() || false;
   });
 
   /**
-   * Roving tabindex: first item is tabbable, others are navigated with arrow keys.
+   * Roving tabindex pattern:
+   * - If roving focus is enabled: first item or focused item is tabbable
+   * - Otherwise: all items are tabbable
    */
   protected readonly tabIndex = computed(() => {
     if (this.isDisabled()) return -1;
     if (!this.context) return 0;
 
+    const rovingFocus = this.context.rovingFocus();
+    if (!rovingFocus) return 0;
+
     const itemValues = this.context.itemValues();
-    // First item is tabbable
+    const focusedValue = this.context.focusedValue();
+
+    // If an item is explicitly focused, only that item is tabbable
+    if (focusedValue !== null) {
+      return focusedValue === this.value() ? 0 : -1;
+    }
+
+    // Otherwise, first item is tabbable
     if (itemValues.length > 0 && itemValues[0] === this.value()) {
       return 0;
     }
+
     return -1;
   });
 
@@ -92,8 +161,8 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    // Register this item
-    this.context?.itemValues.update(values => {
+    // Register this item with the group
+    this.context?.itemValues.update((values) => {
       if (!values.includes(this.value())) {
         return [...values, this.value()];
       }
@@ -102,14 +171,14 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Unregister this item
-    this.context?.itemValues.update(values =>
-      values.filter(v => v !== this.value())
+    // Unregister this item from the group
+    this.context?.itemValues.update((values) =>
+      values.filter((v) => v !== this.value())
     );
   }
 
   /** Toggle this item */
-  toggle() {
+  toggle(): void {
     if (!this.isDisabled()) {
       this.context?.toggle(this.value());
     }
