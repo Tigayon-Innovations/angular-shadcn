@@ -1,7 +1,7 @@
 import { Button } from '@/ui/button';
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxList, ComboboxTrigger } from '@/ui/combobox';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { Check, ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'ComboboxDemo',
@@ -18,29 +18,42 @@ import { ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
     LucideAngularModule,
   ],
   template: `
-    <Combobox [options]="frameworks" [value]="value()" (valueChange)="value.set($event)">
-      <ComboboxTrigger class="w-[200px]">
-        <Button variant="outline" class="w-[200px] justify-between">
-          {{ selectedLabel() || 'Select framework...' }}
-          <lucide-icon [img]="ChevronsUpDown" class="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </ComboboxTrigger>
-      <ComboboxContent>
-        <ComboboxInput placeholder="Search framework..." />
-        <ComboboxEmpty>No framework found.</ComboboxEmpty>
-        <ComboboxGroup>
-          <ComboboxList />
-        </ComboboxGroup>
-      </ComboboxContent>
-    </Combobox>
+    <div class="flex flex-col gap-2">
+      <Combobox [options]="frameworks" [value]="value()" (valueChange)="value.set($event)">
+        <ComboboxTrigger class="w-[220px]">
+          <Button variant="outline" class="w-[220px] justify-between font-normal">
+            @if (selectedLabel()) {
+              <span>{{ selectedLabel() }}</span>
+            } @else {
+              <span class="text-muted-foreground">Select framework...</span>
+            }
+            <lucide-icon [img]="ChevronsUpDown" class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </ComboboxTrigger>
+        <ComboboxContent class="w-[220px]">
+          <ComboboxInput placeholder="Search framework..." />
+          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+          <ComboboxGroup>
+            <ComboboxList />
+          </ComboboxGroup>
+        </ComboboxContent>
+      </Combobox>
+      @if (value()) {
+        <p class="text-sm text-muted-foreground">
+          Selected: <span class="font-medium text-foreground">{{ selectedLabel() }}</span>
+        </p>
+      }
+    </div>
   `,
 })
 export class ComboboxDemo {
   protected readonly ChevronsUpDown = ChevronsUpDown;
+  protected readonly Check = Check;
 
   protected readonly value = signal('');
 
   protected readonly frameworks = [
+    { value: 'angular', label: 'Angular' },
     { value: 'next', label: 'Next.js' },
     { value: 'sveltekit', label: 'SvelteKit' },
     { value: 'nuxt', label: 'Nuxt.js' },
@@ -48,8 +61,8 @@ export class ComboboxDemo {
     { value: 'astro', label: 'Astro' },
   ];
 
-  protected readonly selectedLabel = () => {
+  protected readonly selectedLabel = computed(() => {
     const framework = this.frameworks.find((f) => f.value === this.value());
     return framework?.label ?? '';
-  };
+  });
 }

@@ -6,9 +6,12 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, signal } from '@
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Progress],
   template: `
-    <div class="w-full max-w-lg space-y-2">
-      <Progress [value]="progress()" class="w-full h-4" ></Progress>
-      <p class="text-sm text-muted-foreground text-center">{{ progress() }}%</p>
+    <div class="w-full max-w-md space-y-3">
+      <Progress [value]="progress()" class="h-2"></Progress>
+      <div class="flex items-center justify-between text-sm text-muted-foreground">
+        <span>Loading...</span>
+        <span class="font-medium tabular-nums">{{ progress() }}%</span>
+      </div>
     </div>
   `,
 })

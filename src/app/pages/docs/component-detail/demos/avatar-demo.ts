@@ -7,16 +7,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [Avatar, AvatarFallback, AvatarImage],
   template: `
     <div class="flex items-center gap-4">
-      <Avatar>
+      <Avatar class="h-12 w-12">
         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <Avatar>
+      <Avatar class="h-12 w-12">
         <AvatarImage src="https://github.com/angular.png" alt="@angular" />
         <AvatarFallback>NG</AvatarFallback>
       </Avatar>
-      <Avatar>
-        <AvatarFallback>JD</AvatarFallback>
+      <Avatar class="h-12 w-12">
+        <AvatarFallback class="text-lg">JD</AvatarFallback>
       </Avatar>
     </div>
   `,

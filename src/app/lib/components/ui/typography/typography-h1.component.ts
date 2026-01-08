@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    input,
 } from '@angular/core';
 
 /**
@@ -17,6 +17,7 @@ import {
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
+    style: 'display: block',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

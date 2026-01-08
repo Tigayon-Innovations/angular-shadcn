@@ -17,6 +17,7 @@ import {
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
+    style: 'display: block',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
