@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -60,8 +61,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Input implements ControlValueAccessor {
-  @ViewChild('inputEl', { static: true }) inputEl!: ElementRef<HTMLInputElement>;
+export class Input implements ControlValueAccessor, AfterViewInit {
+  @ViewChild('inputEl') inputEl!: ElementRef<HTMLInputElement>;
 
   /** Input type */
   readonly type = input<string>('text');
@@ -113,6 +114,11 @@ export class Input implements ControlValueAccessor {
     }
   }
 
+  ngAfterViewInit(): void {
+    // View initialization logic after view is ready
+    // This ensures the element is available after hydration
+  }
+
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() => cn('relative inline-block w-full'));
 
@@ -152,6 +158,8 @@ export class Input implements ControlValueAccessor {
 
   /** Focus the input element */
   focus(): void {
-    this.inputEl?.nativeElement?.focus();
+    if (this.inputEl?.nativeElement) {
+      this.inputEl.nativeElement.focus();
+    }
   }
 }
