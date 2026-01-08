@@ -160,7 +160,7 @@ import {
               >
                 <lucide-icon [img]="icons.Terminal" class="h-4 w-4 text-muted-foreground" />
                 <code class="flex-1 text-sm font-mono text-muted-foreground">
-                  ng add ng-cn&#64;latest
+                  ng add @ng-cn/core@latest
                 </code>
                 <button
                   (click)="copyCommand()"
@@ -444,7 +444,7 @@ export class HomePage {
   }
 
   protected copyCommand(): void {
-    navigator.clipboard.writeText('ng add ng-cn@latest').then(() => {
+    navigator.clipboard.writeText('ng add @ng-cn/core@latest').then(() => {
       this.copied.set(true);
       setTimeout(() => this.copied.set(false), 2000);
     });
