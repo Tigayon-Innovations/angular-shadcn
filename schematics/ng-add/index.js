@@ -4,6 +4,19 @@ exports.ngAdd = ngAdd;
 const core_1 = require("@angular-devkit/core");
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const jsonc_parser_1 = require("jsonc-parser");
+// All available components in the registry
+const ALL_COMPONENTS = [
+    'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar', 'badge',
+    'breadcrumb', 'button', 'button-group', 'calendar', 'card', 'carousel',
+    'chart', 'checkbox', 'collapsible', 'combobox', 'command', 'context-menu',
+    'data-table', 'date-picker', 'dialog', 'drawer', 'dropdown-menu', 'empty',
+    'form', 'hover-card', 'input', 'input-group', 'input-otp', 'kbd', 'label',
+    'menubar', 'native-select', 'navigation-menu', 'pagination', 'popover',
+    'progress', 'radio-group', 'resizable', 'scroll-area', 'segmented', 'select',
+    'separator', 'sheet', 'sidebar', 'skeleton', 'slider', 'spinner', 'switch',
+    'table', 'tabs', 'textarea', 'toast', 'toggle', 'toggle-group', 'tooltip',
+    'typography'
+];
 // Registry of all utility files that need to be copied
 const UTILS_FILES_REGISTRY = [
     // Core utils
@@ -30,81 +43,409 @@ const UTILS_FILES_REGISTRY = [
     // Positioning utilities
     'positioning/index.ts',
 ];
-// CSS Variables template for shadcn theming
-const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
+const THEME_PALETTES = {
+    shadcn: {
+        name: 'shadcn',
+        description: 'The default shadcn/ui theme - clean, minimal, and professional',
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0.145 0 0)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0.145 0 0)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0.145 0 0)',
+            primary: 'oklch(0.205 0 0)',
+            primaryForeground: 'oklch(0.985 0 0)',
+            secondary: 'oklch(0.97 0 0)',
+            secondaryForeground: 'oklch(0.205 0 0)',
+            muted: 'oklch(0.97 0 0)',
+            mutedForeground: 'oklch(0.556 0 0)',
+            accent: 'oklch(0.97 0 0)',
+            accentForeground: 'oklch(0.205 0 0)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(0.985 0 0)',
+            border: 'oklch(0.922 0 0)',
+            input: 'oklch(0.922 0 0)',
+            ring: 'oklch(0.708 0 0)',
+        },
+        dark: {
+            background: 'oklch(0.145 0 0)',
+            foreground: 'oklch(0.985 0 0)',
+            card: 'oklch(0.205 0 0)',
+            cardForeground: 'oklch(0.985 0 0)',
+            popover: 'oklch(0.205 0 0)',
+            popoverForeground: 'oklch(0.985 0 0)',
+            primary: 'oklch(0.985 0 0)',
+            primaryForeground: 'oklch(0.205 0 0)',
+            secondary: 'oklch(0.269 0 0)',
+            secondaryForeground: 'oklch(0.985 0 0)',
+            muted: 'oklch(0.269 0 0)',
+            mutedForeground: 'oklch(0.708 0 0)',
+            accent: 'oklch(0.269 0 0)',
+            accentForeground: 'oklch(0.985 0 0)',
+            destructive: 'oklch(0.396 0.141 25.723)',
+            destructiveForeground: 'oklch(0.985 0 0)',
+            border: 'oklch(0.269 0 0)',
+            input: 'oklch(0.269 0 0)',
+            ring: 'oklch(0.439 0 0)',
+        },
+    },
+    github: {
+        name: 'GitHub',
+        description: "Inspired by GitHub's clean developer-focused design",
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0.208 0.042 265.755)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0.208 0.042 265.755)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0.208 0.042 265.755)',
+            primary: 'oklch(0.546 0.192 262.881)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.968 0.007 247.896)',
+            secondaryForeground: 'oklch(0.208 0.042 265.755)',
+            muted: 'oklch(0.968 0.007 247.896)',
+            mutedForeground: 'oklch(0.443 0.024 264.052)',
+            accent: 'oklch(0.968 0.007 247.896)',
+            accentForeground: 'oklch(0.208 0.042 265.755)',
+            destructive: 'oklch(0.577 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.883 0.012 247.896)',
+            input: 'oklch(0.883 0.012 247.896)',
+            ring: 'oklch(0.546 0.192 262.881)',
+        },
+        dark: {
+            background: 'oklch(0.177 0.015 265.755)',
+            foreground: 'oklch(0.922 0.007 247.896)',
+            card: 'oklch(0.208 0.018 265.755)',
+            cardForeground: 'oklch(0.922 0.007 247.896)',
+            popover: 'oklch(0.208 0.018 265.755)',
+            popoverForeground: 'oklch(0.922 0.007 247.896)',
+            primary: 'oklch(0.637 0.183 259.533)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.272 0.022 265.755)',
+            secondaryForeground: 'oklch(0.922 0.007 247.896)',
+            muted: 'oklch(0.272 0.022 265.755)',
+            mutedForeground: 'oklch(0.627 0.018 264.052)',
+            accent: 'oklch(0.272 0.022 265.755)',
+            accentForeground: 'oklch(0.922 0.007 247.896)',
+            destructive: 'oklch(0.527 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.336 0.024 265.755)',
+            input: 'oklch(0.336 0.024 265.755)',
+            ring: 'oklch(0.637 0.183 259.533)',
+        },
+    },
+    vercel: {
+        name: 'Vercel',
+        description: "Vercel's bold black and white design aesthetic",
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0 0 0)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0 0 0)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0 0 0)',
+            primary: 'oklch(0 0 0)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.968 0 0)',
+            secondaryForeground: 'oklch(0 0 0)',
+            muted: 'oklch(0.968 0 0)',
+            mutedForeground: 'oklch(0.443 0 0)',
+            accent: 'oklch(0.968 0 0)',
+            accentForeground: 'oklch(0 0 0)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.883 0 0)',
+            input: 'oklch(0.883 0 0)',
+            ring: 'oklch(0 0 0)',
+        },
+        dark: {
+            background: 'oklch(0 0 0)',
+            foreground: 'oklch(1 0 0)',
+            card: 'oklch(0.117 0 0)',
+            cardForeground: 'oklch(1 0 0)',
+            popover: 'oklch(0.117 0 0)',
+            popoverForeground: 'oklch(1 0 0)',
+            primary: 'oklch(1 0 0)',
+            primaryForeground: 'oklch(0 0 0)',
+            secondary: 'oklch(0.177 0 0)',
+            secondaryForeground: 'oklch(1 0 0)',
+            muted: 'oklch(0.177 0 0)',
+            mutedForeground: 'oklch(0.627 0 0)',
+            accent: 'oklch(0.177 0 0)',
+            accentForeground: 'oklch(1 0 0)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.269 0 0)',
+            input: 'oklch(0.269 0 0)',
+            ring: 'oklch(1 0 0)',
+        },
+    },
+    apple: {
+        name: 'Apple',
+        description: "Apple's elegant, sophisticated design language",
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0.208 0 0)',
+            card: 'oklch(0.985 0.003 247.858)',
+            cardForeground: 'oklch(0.208 0 0)',
+            popover: 'oklch(0.985 0.003 247.858)',
+            popoverForeground: 'oklch(0.208 0 0)',
+            primary: 'oklch(0.586 0.228 259.815)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.968 0.003 247.858)',
+            secondaryForeground: 'oklch(0.208 0 0)',
+            muted: 'oklch(0.968 0.003 247.858)',
+            mutedForeground: 'oklch(0.506 0 0)',
+            accent: 'oklch(0.968 0.003 247.858)',
+            accentForeground: 'oklch(0.208 0 0)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.922 0.003 247.858)',
+            input: 'oklch(0.922 0.003 247.858)',
+            ring: 'oklch(0.586 0.228 259.815)',
+        },
+        dark: {
+            background: 'oklch(0 0 0)',
+            foreground: 'oklch(0.985 0 0)',
+            card: 'oklch(0.145 0.003 247.858)',
+            cardForeground: 'oklch(0.985 0 0)',
+            popover: 'oklch(0.145 0.003 247.858)',
+            popoverForeground: 'oklch(0.985 0 0)',
+            primary: 'oklch(0.637 0.237 259.815)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.227 0.003 247.858)',
+            secondaryForeground: 'oklch(0.985 0 0)',
+            muted: 'oklch(0.227 0.003 247.858)',
+            mutedForeground: 'oklch(0.627 0 0)',
+            accent: 'oklch(0.227 0.003 247.858)',
+            accentForeground: 'oklch(0.985 0 0)',
+            destructive: 'oklch(0.527 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.295 0.003 247.858)',
+            input: 'oklch(0.295 0.003 247.858)',
+            ring: 'oklch(0.637 0.237 259.815)',
+        },
+    },
+    openai: {
+        name: 'OpenAI',
+        description: "OpenAI's modern, tech-forward aesthetic",
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0.208 0.01 255.841)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0.208 0.01 255.841)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0.208 0.01 255.841)',
+            primary: 'oklch(0.538 0.163 163.319)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.968 0.005 255.841)',
+            secondaryForeground: 'oklch(0.208 0.01 255.841)',
+            muted: 'oklch(0.968 0.005 255.841)',
+            mutedForeground: 'oklch(0.475 0.01 255.841)',
+            accent: 'oklch(0.968 0.005 255.841)',
+            accentForeground: 'oklch(0.208 0.01 255.841)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.906 0.006 255.841)',
+            input: 'oklch(0.906 0.006 255.841)',
+            ring: 'oklch(0.538 0.163 163.319)',
+        },
+        dark: {
+            background: 'oklch(0.168 0.015 255.841)',
+            foreground: 'oklch(0.968 0.005 255.841)',
+            card: 'oklch(0.208 0.015 255.841)',
+            cardForeground: 'oklch(0.968 0.005 255.841)',
+            popover: 'oklch(0.208 0.015 255.841)',
+            popoverForeground: 'oklch(0.968 0.005 255.841)',
+            primary: 'oklch(0.608 0.183 163.319)',
+            primaryForeground: 'oklch(0.168 0.015 255.841)',
+            secondary: 'oklch(0.268 0.015 255.841)',
+            secondaryForeground: 'oklch(0.968 0.005 255.841)',
+            muted: 'oklch(0.268 0.015 255.841)',
+            mutedForeground: 'oklch(0.627 0.01 255.841)',
+            accent: 'oklch(0.268 0.015 255.841)',
+            accentForeground: 'oklch(0.968 0.005 255.841)',
+            destructive: 'oklch(0.527 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.336 0.015 255.841)',
+            input: 'oklch(0.336 0.015 255.841)',
+            ring: 'oklch(0.608 0.183 163.319)',
+        },
+    },
+    clickup: {
+        name: 'ClickUp',
+        description: "ClickUp's vibrant, colorful productivity aesthetic",
+        light: {
+            background: 'oklch(1 0 0)',
+            foreground: 'oklch(0.229 0.034 277.508)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0.229 0.034 277.508)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0.229 0.034 277.508)',
+            primary: 'oklch(0.638 0.238 288.545)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.962 0.021 288.545)',
+            secondaryForeground: 'oklch(0.229 0.034 277.508)',
+            muted: 'oklch(0.962 0.021 288.545)',
+            mutedForeground: 'oklch(0.475 0.028 277.508)',
+            accent: 'oklch(0.807 0.181 85.391)',
+            accentForeground: 'oklch(0.229 0.034 277.508)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.906 0.018 277.508)',
+            input: 'oklch(0.906 0.018 277.508)',
+            ring: 'oklch(0.638 0.238 288.545)',
+        },
+        dark: {
+            background: 'oklch(0.177 0.028 277.508)',
+            foreground: 'oklch(0.968 0.008 277.508)',
+            card: 'oklch(0.208 0.032 277.508)',
+            cardForeground: 'oklch(0.968 0.008 277.508)',
+            popover: 'oklch(0.208 0.032 277.508)',
+            popoverForeground: 'oklch(0.968 0.008 277.508)',
+            primary: 'oklch(0.688 0.238 288.545)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.268 0.038 277.508)',
+            secondaryForeground: 'oklch(0.968 0.008 277.508)',
+            muted: 'oklch(0.268 0.038 277.508)',
+            mutedForeground: 'oklch(0.627 0.018 277.508)',
+            accent: 'oklch(0.757 0.181 85.391)',
+            accentForeground: 'oklch(0.177 0.028 277.508)',
+            destructive: 'oklch(0.527 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.336 0.038 277.508)',
+            input: 'oklch(0.336 0.038 277.508)',
+            ring: 'oklch(0.688 0.238 288.545)',
+        },
+    },
+    linear: {
+        name: 'Linear',
+        description: "Linear's sleek, issue tracking inspired design",
+        light: {
+            background: 'oklch(0.985 0.003 250)',
+            foreground: 'oklch(0.229 0.024 265)',
+            card: 'oklch(1 0 0)',
+            cardForeground: 'oklch(0.229 0.024 265)',
+            popover: 'oklch(1 0 0)',
+            popoverForeground: 'oklch(0.229 0.024 265)',
+            primary: 'oklch(0.538 0.207 262.881)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.962 0.008 250)',
+            secondaryForeground: 'oklch(0.229 0.024 265)',
+            muted: 'oklch(0.962 0.008 250)',
+            mutedForeground: 'oklch(0.506 0.018 265)',
+            accent: 'oklch(0.962 0.008 250)',
+            accentForeground: 'oklch(0.229 0.024 265)',
+            destructive: 'oklch(0.577 0.245 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.906 0.012 250)',
+            input: 'oklch(0.906 0.012 250)',
+            ring: 'oklch(0.538 0.207 262.881)',
+        },
+        dark: {
+            background: 'oklch(0.145 0.018 265)',
+            foreground: 'oklch(0.962 0.008 250)',
+            card: 'oklch(0.177 0.022 265)',
+            cardForeground: 'oklch(0.962 0.008 250)',
+            popover: 'oklch(0.177 0.022 265)',
+            popoverForeground: 'oklch(0.962 0.008 250)',
+            primary: 'oklch(0.608 0.217 262.881)',
+            primaryForeground: 'oklch(1 0 0)',
+            secondary: 'oklch(0.227 0.028 265)',
+            secondaryForeground: 'oklch(0.962 0.008 250)',
+            muted: 'oklch(0.227 0.028 265)',
+            mutedForeground: 'oklch(0.577 0.015 265)',
+            accent: 'oklch(0.227 0.028 265)',
+            accentForeground: 'oklch(0.962 0.008 250)',
+            destructive: 'oklch(0.527 0.215 27.325)',
+            destructiveForeground: 'oklch(1 0 0)',
+            border: 'oklch(0.295 0.028 265)',
+            input: 'oklch(0.295 0.028 265)',
+            ring: 'oklch(0.608 0.217 262.881)',
+        },
+    },
+};
+// Generate CSS Variables template based on selected theme
+function generateCssVariablesTemplate(theme) {
+    const palette = THEME_PALETTES[theme];
+    const { light, dark } = palette;
+    return `/* ng-cn/core - shadcn-angular styles */
+/* Theme: ${palette.name} - ${palette.description} */
 @use "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: ${light.background};
+  --foreground: ${light.foreground};
+  --card: ${light.card};
+  --card-foreground: ${light.cardForeground};
+  --popover: ${light.popover};
+  --popover-foreground: ${light.popoverForeground};
+  --primary: ${light.primary};
+  --primary-foreground: ${light.primaryForeground};
+  --secondary: ${light.secondary};
+  --secondary-foreground: ${light.secondaryForeground};
+  --muted: ${light.muted};
+  --muted-foreground: ${light.mutedForeground};
+  --accent: ${light.accent};
+  --accent-foreground: ${light.accentForeground};
+  --destructive: ${light.destructive};
+  --destructive-foreground: ${light.destructiveForeground};
+  --border: ${light.border};
+  --input: ${light.input};
+  --ring: ${light.ring};
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: ${light.background};
+  --sidebar-foreground: ${light.foreground};
+  --sidebar-primary: ${light.primary};
+  --sidebar-primary-foreground: ${light.primaryForeground};
+  --sidebar-accent: ${light.accent};
+  --sidebar-accent-foreground: ${light.accentForeground};
+  --sidebar-border: ${light.border};
+  --sidebar-ring: ${light.ring};
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --background: ${dark.background};
+  --foreground: ${dark.foreground};
+  --card: ${dark.card};
+  --card-foreground: ${dark.cardForeground};
+  --popover: ${dark.popover};
+  --popover-foreground: ${dark.popoverForeground};
+  --primary: ${dark.primary};
+  --primary-foreground: ${dark.primaryForeground};
+  --secondary: ${dark.secondary};
+  --secondary-foreground: ${dark.secondaryForeground};
+  --muted: ${dark.muted};
+  --muted-foreground: ${dark.mutedForeground};
+  --accent: ${dark.accent};
+  --accent-foreground: ${dark.accentForeground};
+  --destructive: ${dark.destructive};
+  --destructive-foreground: ${dark.destructiveForeground};
+  --border: ${dark.border};
+  --input: ${dark.input};
+  --ring: ${dark.ring};
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: ${dark.card};
+  --sidebar-foreground: ${dark.foreground};
+  --sidebar-primary: ${dark.primary};
+  --sidebar-primary-foreground: ${dark.primaryForeground};
+  --sidebar-accent: ${dark.accent};
+  --sidebar-accent-foreground: ${dark.accentForeground};
+  --sidebar-border: ${dark.border};
+  --sidebar-ring: ${dark.ring};
 }
 
 @theme inline {
@@ -164,6 +505,7 @@ const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
   @keyframes collapsible-up { from { height: var(--collapsible-content-height); } to { height: 0; } }
 }
 `;
+}
 // PostCSS config template for Tailwind CSS v4
 const POSTCSS_CONFIG_TEMPLATE = `/** @type {import('postcss').Config} */
 export default {
@@ -278,12 +620,17 @@ function ngAdd(options) {
         if (!options.skipStyles) {
             context.logger.info('');
             context.logger.info('🎨 Styles');
+            // Get the selected theme (default to shadcn)
+            const selectedTheme = options.theme || 'shadcn';
+            const themePalette = THEME_PALETTES[selectedTheme];
+            context.logger.info(`   Theme: ${themePalette.name} - ${themePalette.description}`);
             const ngCnStylesPath = '/src/ng-cn.scss';
             const stylesPath = '/src/styles.scss';
             const stylesCssPath = '/src/styles.css';
-            // Create ng-cn.scss with all CSS variables
-            tree.create(ngCnStylesPath, CSS_VARIABLES_TEMPLATE);
-            context.logger.info(`   + src/ng-cn.scss (theme variables)`);
+            // Create ng-cn.scss with CSS variables based on selected theme
+            const cssTemplate = generateCssVariablesTemplate(selectedTheme);
+            tree.create(ngCnStylesPath, cssTemplate);
+            context.logger.info(`   + src/ng-cn.scss (${themePalette.name} theme variables)`);
             // Import in styles.scss or styles.css
             if (tree.exists(stylesPath)) {
                 const stylesContent = tree.read(stylesPath).toString('utf-8');
@@ -356,11 +703,17 @@ function ngAdd(options) {
             }
         }
         // Install selected components
-        if (options.components && options.components.length > 0) {
+        const componentsToInstall = parseComponentsOption(options.components);
+        if (componentsToInstall.length > 0) {
             context.logger.info('');
-            context.logger.info('📦 Selected Components');
+            if (options.components === 'all') {
+                context.logger.info(`🚀 Installing ALL ${componentsToInstall.length} components... (Magic Mode)`);
+            }
+            else {
+                context.logger.info('📦 Selected Components');
+            }
             const packageJson = JSON.parse(tree.read(packageJsonPath).toString('utf-8'));
-            for (const component of options.components) {
+            for (const component of componentsToInstall) {
                 const packageName = `@ng-cn/${component}`;
                 if (!packageJson.dependencies?.[packageName]) {
                     packageJson.dependencies = packageJson.dependencies || {};
@@ -387,18 +740,33 @@ function ngAdd(options) {
         context.logger.info('  ╚═╝  ╚═══╝ ╚═════╝        ╚═════╝╚═╝  ╚═══╝');
         context.logger.info('');
         context.logger.info('  ✅ Setup complete! shadcn for Angular');
+        // Show theme info
+        const selectedTheme = options.theme || 'shadcn';
+        const themePalette = THEME_PALETTES[selectedTheme];
+        context.logger.info(`  🎨 Theme: ${themePalette.name}`);
         context.logger.info('');
         // Show selected components summary if any were installed
-        if (options.components && options.components.length > 0) {
-            context.logger.info('╭──────────────────────────────────────────────────╮');
-            context.logger.info('│  ✨ Components installed:                        │');
-            context.logger.info('│                                                  │');
-            for (const component of options.components) {
-                const paddedComponent = `@ng-cn/${component}`.padEnd(40);
-                context.logger.info(`│     ${paddedComponent}│`);
+        const componentsInstalled = parseComponentsOption(options.components);
+        if (componentsInstalled.length > 0) {
+            if (options.components === 'all') {
+                context.logger.info('╭──────────────────────────────────────────────────╮');
+                context.logger.info('│  ✨ MAGIC MODE - All components installed!       │');
+                context.logger.info('│                                                  │');
+                context.logger.info(`│     ${componentsInstalled.length} components ready to use                   │`);
+                context.logger.info('│                                                  │');
+                context.logger.info('╰──────────────────────────────────────────────────╯');
             }
-            context.logger.info('│                                                  │');
-            context.logger.info('╰──────────────────────────────────────────────────╯');
+            else {
+                context.logger.info('╭──────────────────────────────────────────────────╮');
+                context.logger.info('│  ✨ Components installed:                        │');
+                context.logger.info('│                                                  │');
+                for (const component of componentsInstalled) {
+                    const paddedComponent = `@ng-cn/${component}`.padEnd(40);
+                    context.logger.info(`│     ${paddedComponent}│`);
+                }
+                context.logger.info('│                                                  │');
+                context.logger.info('╰──────────────────────────────────────────────────╯');
+            }
             context.logger.info('');
         }
         context.logger.info('╭──────────────────────────────────────────────────╮');
@@ -421,4 +789,23 @@ function ngAdd(options) {
         context.logger.info('');
         return tree;
     };
+}
+/**
+ * Parse the components option which can be:
+ * - 'all' - install all components
+ * - comma-separated list like 'button,card,dialog'
+ * - empty string - no components
+ */
+function parseComponentsOption(components) {
+    if (!components || components.trim() === '') {
+        return [];
+    }
+    if (components.toLowerCase() === 'all') {
+        return ALL_COMPONENTS;
+    }
+    // Parse comma-separated list
+    return components
+        .split(',')
+        .map(c => c.trim().toLowerCase())
+        .filter(c => c.length > 0 && ALL_COMPONENTS.includes(c));
 }
