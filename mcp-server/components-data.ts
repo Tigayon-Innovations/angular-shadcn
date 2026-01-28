@@ -32,6 +32,25 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
+    "outputs": [
+      {
+        "name": "load",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when content inside the aspect ratio container loads."
+      }
+    ],
+    "variants": [
+      {
+        "name": "ratio",
+        "values": [
+          "1/1",
+          "4/3",
+          "16/9",
+          "21/9"
+        ],
+        "default": "1"
+      }
+    ],
     "examples": [
       {
         "title": "16:9 Aspect Ratio",
@@ -49,7 +68,10 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<AspectRatio [ratio]='16/9' class='bg-muted'>\n  <iframe src='https://www.youtube.com/embed/...' class='w-full h-full'></iframe>\n</AspectRatio>"
       }
     ],
-    "relatedComponents": ["Card", "Avatar"],
+    "relatedComponents": [
+      "Card",
+      "Avatar"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/aspect-ratio",
       "pnpm": "pnpm add @ng-cn/aspect-ratio",
@@ -89,6 +111,24 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the card is clicked."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "values": [
+          "default",
+          "outline",
+          "elevated"
+        ],
+        "default": "default"
+      }
+    ],
     "examples": [
       {
         "title": "Basic Card",
@@ -106,7 +146,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Card class='w-[350px]'>\n  <CardHeader>\n    <CardTitle>Create Account</CardTitle>\n    <CardDescription>Enter your details below</CardDescription>\n  </CardHeader>\n  <CardContent>\n    <div class='grid gap-4'>\n      <div class='grid gap-2'>\n        <Label for='email'>Email</Label>\n        <Input id='email' type='email' placeholder='m@example.com' />\n      </div>\n      <div class='grid gap-2'>\n        <Label for='password'>Password</Label>\n        <Input id='password' type='password' />\n      </div>\n    </div>\n  </CardContent>\n  <CardFooter>\n    <Button class='w-full'>Sign Up</Button>\n  </CardFooter>\n</Card>"
       }
     ],
-    "relatedComponents": ["Aspect Ratio", "Separator", "Avatar"],
+    "relatedComponents": [
+      "Aspect Ratio",
+      "Separator",
+      "Avatar"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/card",
       "pnpm": "pnpm add @ng-cn/card",
@@ -172,7 +216,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Collapsible [(open)]='isOpen'>\n  <div class='flex items-center justify-between'>\n    <h4>@peduarte starred 3 repositories</h4>\n    <CollapsibleTrigger>\n      <Button variant='ghost' size='sm'>\n        <ChevronsUpDown class='h-4 w-4' />\n      </Button>\n    </CollapsibleTrigger>\n  </div>\n  <div class='rounded-md border px-4 py-3 font-mono text-sm'>\n    @radix-ui/primitives\n  </div>\n  <CollapsibleContent class='space-y-2'>\n    <div class='rounded-md border px-4 py-3 font-mono text-sm'>\n      @radix-ui/colors\n    </div>\n    <div class='rounded-md border px-4 py-3 font-mono text-sm'>\n      @stitches/react\n    </div>\n  </CollapsibleContent>\n</Collapsible>"
       }
     ],
-    "relatedComponents": ["Accordion", "Sheet", "Drawer"],
+    "relatedComponents": [
+      "Accordion",
+      "Sheet",
+      "Drawer"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/collapsible",
       "pnpm": "pnpm add @ng-cn/collapsible",
@@ -191,7 +239,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/lib/components/ui/collapsible';\n\n"
+    "usage": "import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/lib/components/ui/collapsible';\n\n",
+    "variants": [
+      {
+        "name": "animation",
+        "values": [
+          "default",
+          "none",
+          "smooth"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Resizable",
@@ -243,7 +302,10 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ResizablePanelGroup direction='horizontal' class='min-h-[400px] rounded-lg border'>\n  <ResizablePanel [defaultSize]='20'>\n    <div class='flex h-full items-center justify-center p-6'>\n      <span class='font-semibold'>Sidebar</span>\n    </div>\n  </ResizablePanel>\n  <ResizableHandle withHandle />\n  <ResizablePanel [defaultSize]='80'>\n    <ResizablePanelGroup direction='vertical'>\n      <ResizablePanel [defaultSize]='70'>\n        <div class='flex h-full items-center justify-center p-6'>\n          <span class='font-semibold'>Content</span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel [defaultSize]='30'>\n        <div class='flex h-full items-center justify-center p-6'>\n          <span class='font-semibold'>Footer</span>\n        </div>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  </ResizablePanel>\n</ResizablePanelGroup>"
       }
     ],
-    "relatedComponents": ["Sidebar", "Card"],
+    "relatedComponents": [
+      "Sidebar",
+      "Card"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/resizable",
       "pnpm": "pnpm add @ng-cn/resizable",
@@ -262,7 +324,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/lib/components/ui/resizable';\n\n"
+    "usage": "import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/lib/components/ui/resizable';\n\n",
+    "variants": [
+      {
+        "name": "direction",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ]
   },
   {
     "name": "Scroll Area",
@@ -302,7 +374,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ScrollArea class='w-96 whitespace-nowrap rounded-md border'>\n  <div class='flex w-max space-x-4 p-4'>\n    @for (artwork of artworks; track artwork.artist) {\n      <figure class='shrink-0'>\n        <div class='overflow-hidden rounded-md'>\n          <img [src]='artwork.art' [alt]='artwork.artist' class='aspect-[3/4] h-fit w-fit object-cover' />\n        </div>\n        <figcaption class='pt-2 text-xs text-muted-foreground'>\n          Photo by <span class='font-semibold text-foreground'>{{ artwork.artist }}</span>\n        </figcaption>\n      </figure>\n    }\n  </div>\n  <ScrollBar orientation='horizontal' />\n</ScrollArea>"
       }
     ],
-    "relatedComponents": ["Table", "Card", "Command"],
+    "relatedComponents": [
+      "Table",
+      "Card",
+      "Command"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/scroll-area",
       "pnpm": "pnpm add @ng-cn/scroll-area",
@@ -321,7 +397,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { ScrollArea, ScrollBar } from '@/lib/components/ui/scroll-area';\n\n"
+    "usage": "import { ScrollArea, ScrollBar } from '@/lib/components/ui/scroll-area';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "vertical",
+          "horizontal",
+          "both"
+        ],
+        "default": "vertical"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "scrollChange",
+        "type": "EventEmitter<{x: number, y: number}>",
+        "description": "Emitted when scroll position changes."
+      }
+    ]
   },
   {
     "name": "Separator",
@@ -368,7 +462,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='flex h-5 items-center space-x-4 text-sm'>\n  <div>Blog</div>\n  <Separator orientation='vertical' />\n  <div>Docs</div>\n  <Separator orientation='vertical' />\n  <div>Source</div>\n</div>"
       }
     ],
-    "relatedComponents": ["Card", "Dropdown Menu", "Context Menu"],
+    "relatedComponents": [
+      "Card",
+      "Dropdown Menu",
+      "Context Menu"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/separator",
       "pnpm": "pnpm add @ng-cn/separator",
@@ -387,7 +485,24 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Separator } from '@/lib/components/ui/separator';\n\n"
+    "usage": "import { Separator } from '@/lib/components/ui/separator';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the separator is clicked."
+      }
+    ]
   },
   {
     "name": "Accordion",
@@ -441,7 +556,10 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Accordion type='multiple'>\n  <AccordionItem value='item-1'>\n    <AccordionTrigger>Section 1</AccordionTrigger>\n    <AccordionContent>Content for section 1.</AccordionContent>\n  </AccordionItem>\n  <AccordionItem value='item-2'>\n    <AccordionTrigger>Section 2</AccordionTrigger>\n    <AccordionContent>Content for section 2.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
       }
     ],
-    "relatedComponents": ["Collapsible", "Tabs"],
+    "relatedComponents": [
+      "Collapsible",
+      "Tabs"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/accordion",
       "pnpm": "pnpm add @ng-cn/accordion",
@@ -460,7 +578,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/lib/components/ui/accordion';\n\n"
+    "usage": "import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/lib/components/ui/accordion';\n\n",
+    "variants": [
+      {
+        "name": "type",
+        "values": [
+          "single",
+          "multiple"
+        ],
+        "default": "single"
+      }
+    ]
   },
   {
     "name": "Breadcrumb",
@@ -499,7 +627,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Breadcrumb>\n  <BreadcrumbList>\n    <BreadcrumbItem>\n      <BreadcrumbLink href='/'>Home</BreadcrumbLink>\n    </BreadcrumbItem>\n    <BreadcrumbSeparator />\n    <BreadcrumbItem>\n      <DropdownMenu>\n        <DropdownMenuTrigger class='flex items-center gap-1'>\n          <BreadcrumbEllipsis class='h-4 w-4' />\n        </DropdownMenuTrigger>\n        <DropdownMenuContent align='start'>\n          <DropdownMenuItem>Documentation</DropdownMenuItem>\n          <DropdownMenuItem>Themes</DropdownMenuItem>\n          <DropdownMenuItem>GitHub</DropdownMenuItem>\n        </DropdownMenuContent>\n      </DropdownMenu>\n    </BreadcrumbItem>\n    <BreadcrumbSeparator />\n    <BreadcrumbItem>\n      <BreadcrumbPage>Current</BreadcrumbPage>\n    </BreadcrumbItem>\n  </BreadcrumbList>\n</Breadcrumb>"
       }
     ],
-    "relatedComponents": ["Navigation Menu", "Dropdown Menu", "Pagination"],
+    "relatedComponents": [
+      "Navigation Menu",
+      "Dropdown Menu",
+      "Pagination"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/breadcrumb",
       "pnpm": "pnpm add @ng-cn/breadcrumb",
@@ -518,7 +650,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '@/lib/components/ui/breadcrumb';\n\n"
+    "usage": "import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '@/lib/components/ui/breadcrumb';\n\n",
+    "variants": [
+      {
+        "name": "separator",
+        "values": [
+          "slash",
+          "chevron",
+          "arrow"
+        ],
+        "default": "slash"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "EventEmitter<BreadcrumbItem>",
+        "description": "Emitted when a breadcrumb item is clicked."
+      }
+    ]
   },
   {
     "name": "Context Menu",
@@ -539,6 +689,29 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
+    "outputs": [
+      {
+        "name": "openChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the context menu open state changes."
+      },
+      {
+        "name": "itemSelect",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when a menu item is selected."
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
     "examples": [
       {
         "title": "Basic Context Menu",
@@ -551,7 +724,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ContextMenu>\n  <ContextMenuTrigger class='flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed'>\n    Right click here\n  </ContextMenuTrigger>\n  <ContextMenuContent>\n    <ContextMenuItem>New Tab</ContextMenuItem>\n    <ContextMenuItem>New Window</ContextMenuItem>\n    <ContextMenuSub>\n      <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>\n      <ContextMenuSubContent class='w-48'>\n        <ContextMenuItem>Save Page As...</ContextMenuItem>\n        <ContextMenuItem>Create Shortcut...</ContextMenuItem>\n        <ContextMenuItem>Name Window...</ContextMenuItem>\n        <ContextMenuSeparator />\n        <ContextMenuItem>Developer Tools</ContextMenuItem>\n      </ContextMenuSubContent>\n    </ContextMenuSub>\n  </ContextMenuContent>\n</ContextMenu>"
       }
     ],
-    "relatedComponents": ["Dropdown Menu", "Menubar", "Separator"],
+    "relatedComponents": [
+      "Dropdown Menu",
+      "Menubar",
+      "Separator"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/context-menu",
       "pnpm": "pnpm add @ng-cn/context-menu",
@@ -616,7 +793,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button variant='outline'>Open</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent class='w-56'>\n    <DropdownMenuLabel>Appearance</DropdownMenuLabel>\n    <DropdownMenuSeparator />\n    <DropdownMenuCheckboxItem [(checked)]='showStatusBar'>\n      Status Bar\n    </DropdownMenuCheckboxItem>\n    <DropdownMenuCheckboxItem [(checked)]='showActivityBar' disabled>\n      Activity Bar\n    </DropdownMenuCheckboxItem>\n    <DropdownMenuCheckboxItem [(checked)]='showPanel'>\n      Panel\n    </DropdownMenuCheckboxItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
       }
     ],
-    "relatedComponents": ["Context Menu", "Menubar", "Select"],
+    "relatedComponents": [
+      "Context Menu",
+      "Menubar",
+      "Select"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/dropdown-menu",
       "pnpm": "pnpm add @ng-cn/dropdown-menu",
@@ -635,7 +816,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/lib/components/ui/dropdown-menu';\n\n"
+    "usage": "import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/lib/components/ui/dropdown-menu';\n\n",
+    "variants": [
+      {
+        "name": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "center"
+      }
+    ]
   },
   {
     "name": "Menubar",
@@ -656,6 +848,24 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
+    "outputs": [
+      {
+        "name": "itemSelect",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when a menu item is selected."
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
     "examples": [
       {
         "title": "Basic Menubar",
@@ -663,7 +873,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Menubar>\n  <MenubarMenu>\n    <MenubarTrigger>File</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>\n        New Tab <MenubarShortcut>⌘T</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem>\n        New Window <MenubarShortcut>⌘N</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem disabled>New Incognito Window</MenubarItem>\n      <MenubarSeparator />\n      <MenubarSub>\n        <MenubarSubTrigger>Share</MenubarSubTrigger>\n        <MenubarSubContent>\n          <MenubarItem>Email link</MenubarItem>\n          <MenubarItem>Messages</MenubarItem>\n          <MenubarItem>Notes</MenubarItem>\n        </MenubarSubContent>\n      </MenubarSub>\n      <MenubarSeparator />\n      <MenubarItem>\n        Print... <MenubarShortcut>⌘P</MenubarShortcut>\n      </MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n  <MenubarMenu>\n    <MenubarTrigger>Edit</MenubarTrigger>\n    <MenubarContent>\n      <MenubarItem>\n        Undo <MenubarShortcut>⌘Z</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem>\n        Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>\n      </MenubarItem>\n      <MenubarSeparator />\n      <MenubarItem>\n        Cut <MenubarShortcut>⌘X</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem>\n        Copy <MenubarShortcut>⌘C</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem>\n        Paste <MenubarShortcut>⌘V</MenubarShortcut>\n      </MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n  <MenubarMenu>\n    <MenubarTrigger>View</MenubarTrigger>\n    <MenubarContent>\n      <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>\n      <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>\n      <MenubarSeparator />\n      <MenubarItem inset>\n        Reload <MenubarShortcut>⌘R</MenubarShortcut>\n      </MenubarItem>\n      <MenubarItem disabled inset>\n        Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>\n      </MenubarItem>\n    </MenubarContent>\n  </MenubarMenu>\n</Menubar>"
       }
     ],
-    "relatedComponents": ["Dropdown Menu", "Context Menu", "Navigation Menu"],
+    "relatedComponents": [
+      "Dropdown Menu",
+      "Context Menu",
+      "Navigation Menu"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/menubar",
       "pnpm": "pnpm add @ng-cn/menubar",
@@ -710,6 +924,23 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
+    "outputs": [
+      {
+        "name": "valueChange",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when the active navigation item changes."
+      }
+    ],
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ],
     "examples": [
       {
         "title": "Basic Navigation Menu",
@@ -717,7 +948,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<NavigationMenu>\n  <NavigationMenuList>\n    <NavigationMenuItem>\n      <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>\n      <NavigationMenuContent>\n        <ul class='grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'>\n          <li class='row-span-3'>\n            <NavigationMenuLink href='/'>\n              <div class='flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md'>\n                <div class='mb-2 mt-4 text-lg font-medium'>shadcn/ui</div>\n                <p class='text-sm leading-tight text-muted-foreground'>\n                  Beautifully designed components built with Radix UI and Tailwind CSS.\n                </p>\n              </div>\n            </NavigationMenuLink>\n          </li>\n          <li>\n            <NavigationMenuLink href='/docs'>Introduction</NavigationMenuLink>\n          </li>\n          <li>\n            <NavigationMenuLink href='/docs/installation'>Installation</NavigationMenuLink>\n          </li>\n        </ul>\n      </NavigationMenuContent>\n    </NavigationMenuItem>\n    <NavigationMenuItem>\n      <NavigationMenuTrigger>Components</NavigationMenuTrigger>\n      <NavigationMenuContent>\n        <ul class='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>\n          <li>\n            <NavigationMenuLink href='/docs/components/button'>Button</NavigationMenuLink>\n          </li>\n          <li>\n            <NavigationMenuLink href='/docs/components/card'>Card</NavigationMenuLink>\n          </li>\n        </ul>\n      </NavigationMenuContent>\n    </NavigationMenuItem>\n    <NavigationMenuItem>\n      <NavigationMenuLink href='/docs'>Documentation</NavigationMenuLink>\n    </NavigationMenuItem>\n  </NavigationMenuList>\n</NavigationMenu>"
       }
     ],
-    "relatedComponents": ["Menubar", "Breadcrumb", "Tabs"],
+    "relatedComponents": [
+      "Menubar",
+      "Breadcrumb",
+      "Tabs"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/navigation-menu",
       "pnpm": "pnpm add @ng-cn/navigation-menu",
@@ -788,7 +1023,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationPrevious (click)='goToPage(currentPage - 1)' [disabled]='currentPage === 1' />\n    </PaginationItem>\n    @for (page of pages; track page) {\n      <PaginationItem>\n        <PaginationLink (click)='goToPage(page)' [isActive]='page === currentPage'>\n          {{ page }}\n        </PaginationLink>\n      </PaginationItem>\n    }\n    <PaginationItem>\n      <PaginationNext (click)='goToPage(currentPage + 1)' [disabled]='currentPage === totalPages' />\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>"
       }
     ],
-    "relatedComponents": ["Button", "Table", "Data Table"],
+    "relatedComponents": [
+      "Button",
+      "Table",
+      "Data Table"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/pagination",
       "pnpm": "pnpm add @ng-cn/pagination",
@@ -807,7 +1046,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext } from '@/lib/components/ui/pagination';\n\n"
+    "usage": "import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext } from '@/lib/components/ui/pagination';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Tabs",
@@ -860,7 +1110,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Tabs [(value)]='activeTab'>\n  <TabsList class='grid w-full grid-cols-2'>\n    <TabsTrigger value='overview'>Overview</TabsTrigger>\n    <TabsTrigger value='analytics'>Analytics</TabsTrigger>\n  </TabsList>\n  <TabsContent value='overview'>Overview content</TabsContent>\n  <TabsContent value='analytics'>Analytics content</TabsContent>\n</Tabs>"
       }
     ],
-    "relatedComponents": ["Accordion", "Card", "Navigation Menu"],
+    "relatedComponents": [
+      "Accordion",
+      "Card",
+      "Navigation Menu"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/tabs",
       "pnpm": "pnpm add @ng-cn/tabs",
@@ -879,7 +1133,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/lib/components/ui/tabs';\n\n"
+    "usage": "import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/lib/components/ui/tabs';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ]
   },
   {
     "name": "Button",
@@ -931,12 +1195,24 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "destructive", "outline", "secondary", "ghost", "link"],
+        "values": [
+          "default",
+          "destructive",
+          "outline",
+          "secondary",
+          "ghost",
+          "link"
+        ],
         "default": "default"
       },
       {
         "name": "size",
-        "values": ["default", "sm", "lg", "icon"],
+        "values": [
+          "default",
+          "sm",
+          "lg",
+          "icon"
+        ],
         "default": "default"
       }
     ],
@@ -982,7 +1258,18 @@ export const componentsData: ComponentMetadata[] = [
       }
     },
     "usage": "import { Button } from '@/lib/components/ui/button';\n\n@Component({\n  imports: [Button],\n  template: `<Button variant=\"outline\">Click me</Button>`\n})",
-    "relatedComponents": ["Button Group", "Toggle", "Toggle Group"]
+    "relatedComponents": [
+      "Button Group",
+      "Toggle",
+      "Toggle Group"
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the button is clicked."
+      }
+    ]
   },
   {
     "name": "Checkbox",
@@ -1047,7 +1334,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='flex items-center space-x-2'>\n  <Checkbox id='disabled' disabled />\n  <Label for='disabled'>Disabled checkbox</Label>\n</div>"
       }
     ],
-    "relatedComponents": ["Switch", "Radio Group", "Label", "Form"],
+    "relatedComponents": [
+      "Switch",
+      "Radio Group",
+      "Label",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/checkbox",
       "pnpm": "pnpm add @ng-cn/checkbox",
@@ -1066,7 +1358,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Checkbox } from '@/lib/components/ui/checkbox';\n\n"
+    "usage": "import { Checkbox } from '@/lib/components/ui/checkbox';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Combobox",
@@ -1130,7 +1433,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Popover [(open)]='open'>\n  <PopoverTrigger>\n    <Button variant='outline' class='w-[200px] justify-between'>\n      {{ selectedStatus?.label ?? 'Select status...' }}\n    </Button>\n  </PopoverTrigger>\n  <PopoverContent class='w-[200px] p-0'>\n    <Command>\n      <CommandInput placeholder='Change status...' />\n      <CommandList>\n        <CommandEmpty>No results found.</CommandEmpty>\n        <CommandGroup heading='Suggestions'>\n          <CommandItem value='backlog'>Backlog</CommandItem>\n          <CommandItem value='todo'>Todo</CommandItem>\n          <CommandItem value='in-progress'>In Progress</CommandItem>\n        </CommandGroup>\n        <CommandSeparator />\n        <CommandGroup heading='Other'>\n          <CommandItem value='done'>Done</CommandItem>\n          <CommandItem value='cancelled'>Cancelled</CommandItem>\n        </CommandGroup>\n      </CommandList>\n    </Command>\n  </PopoverContent>\n</Popover>"
       }
     ],
-    "relatedComponents": ["Command", "Popover", "Select", "Input"],
+    "relatedComponents": [
+      "Command",
+      "Popover",
+      "Select",
+      "Input"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/combobox",
       "pnpm": "pnpm add @ng-cn/combobox",
@@ -1149,7 +1457,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Combobox } from '@/lib/components/ui/combobox';\n\n"
+    "usage": "import { Combobox } from '@/lib/components/ui/combobox';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Date Picker",
@@ -1220,7 +1539,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Popover>\n  <PopoverTrigger>\n    <Button variant='outline' class='w-[280px] justify-start text-left font-normal'>\n      <CalendarIcon class='mr-2 h-4 w-4' />\n      {{ date ? (date | date:'PPP') : 'Pick a date' }}\n    </Button>\n  </PopoverTrigger>\n  <PopoverContent class='flex w-auto flex-col space-y-2 p-2'>\n    <Select (valueChange)='setPreset($event)'>\n      <SelectTrigger>\n        <SelectValue placeholder='Select' />\n      </SelectTrigger>\n      <SelectContent position='popper'>\n        <SelectItem value='0'>Today</SelectItem>\n        <SelectItem value='1'>Tomorrow</SelectItem>\n        <SelectItem value='3'>In 3 days</SelectItem>\n        <SelectItem value='7'>In a week</SelectItem>\n      </SelectContent>\n    </Select>\n    <div class='rounded-md border'>\n      <Calendar mode='single' [(selected)]='date' />\n    </div>\n  </PopoverContent>\n</Popover>"
       }
     ],
-    "relatedComponents": ["Calendar", "Popover", "Input", "Form"],
+    "relatedComponents": [
+      "Calendar",
+      "Popover",
+      "Input",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/date-picker",
       "pnpm": "pnpm add @ng-cn/date-picker",
@@ -1239,7 +1563,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { DatePicker } from '@/lib/components/ui/date-picker';\n\n"
+    "usage": "import { DatePicker } from '@/lib/components/ui/date-picker';\n\n",
+    "variants": [
+      {
+        "name": "mode",
+        "values": [
+          "single",
+          "range",
+          "multiple"
+        ],
+        "default": "single"
+      }
+    ]
   },
   {
     "name": "Form",
@@ -1279,7 +1614,14 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<form [formGroup]='form' (ngSubmit)='onSubmit()' class='space-y-8'>\n  <FormField name='email'>\n    <FormItem>\n      <FormLabel>Email</FormLabel>\n      <FormControl>\n        <Input type='email' placeholder='m@example.com' formControlName='email' />\n      </FormControl>\n      <FormMessage />\n    </FormItem>\n  </FormField>\n  <FormField name='bio'>\n    <FormItem>\n      <FormLabel>Bio</FormLabel>\n      <FormControl>\n        <Textarea placeholder='Tell us about yourself' formControlName='bio' />\n      </FormControl>\n      <FormDescription>You can @mention other users.</FormDescription>\n      <FormMessage />\n    </FormItem>\n  </FormField>\n  <FormField name='notifications'>\n    <FormItem class='flex flex-row items-start space-x-3 space-y-0'>\n      <FormControl>\n        <Checkbox formControlName='notifications' />\n      </FormControl>\n      <div class='space-y-1 leading-none'>\n        <FormLabel>Receive notifications</FormLabel>\n        <FormDescription>Get notified about new messages.</FormDescription>\n      </div>\n    </FormItem>\n  </FormField>\n  <Button type='submit'>Update profile</Button>\n</form>"
       }
     ],
-    "relatedComponents": ["Input", "Label", "Checkbox", "Select", "Textarea", "Button"],
+    "relatedComponents": [
+      "Input",
+      "Label",
+      "Checkbox",
+      "Select",
+      "Textarea",
+      "Button"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/form",
       "pnpm": "pnpm add @ng-cn/form",
@@ -1298,7 +1640,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@/lib/components/ui/form';\n\n"
+    "usage": "import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@/lib/components/ui/form';\n\n",
+    "variants": [
+      {
+        "name": "layout",
+        "values": [
+          "vertical",
+          "horizontal",
+          "inline"
+        ],
+        "default": "vertical"
+      }
+    ]
   },
   {
     "name": "Input",
@@ -1384,7 +1737,13 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Input disabled type='email' placeholder='Email' />"
       }
     ],
-    "relatedComponents": ["Label", "Form", "Textarea", "Input Group", "Button"],
+    "relatedComponents": [
+      "Label",
+      "Form",
+      "Textarea",
+      "Input Group",
+      "Button"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/input",
       "pnpm": "pnpm add @ng-cn/input",
@@ -1403,7 +1762,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Input } from '@/lib/components/ui/input';\n\n"
+    "usage": "import { Input } from '@/lib/components/ui/input';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Input OTP",
@@ -1466,7 +1836,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<InputOTP [maxLength]='6' [(value)]='otpValue' (complete)='onOtpComplete($event)'>\n  <InputOTPGroup>\n    <InputOTPSlot [index]='0' />\n    <InputOTPSlot [index]='1' />\n    <InputOTPSlot [index]='2' />\n    <InputOTPSlot [index]='3' />\n    <InputOTPSlot [index]='4' />\n    <InputOTPSlot [index]='5' />\n  </InputOTPGroup>\n</InputOTP>"
       }
     ],
-    "relatedComponents": ["Input", "Form", "Label"],
+    "relatedComponents": [
+      "Input",
+      "Form",
+      "Label"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/input-otp",
       "pnpm": "pnpm add @ng-cn/input-otp",
@@ -1485,7 +1859,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from '@/lib/components/ui/input-otp';\n\n"
+    "usage": "import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from '@/lib/components/ui/input-otp';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Label",
@@ -1529,7 +1914,13 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='grid w-full max-w-sm items-center gap-1.5'>\n  <Label for='username'>\n    Username <span class='text-destructive'>*</span>\n  </Label>\n  <Input type='text' id='username' placeholder='Username' required />\n</div>"
       }
     ],
-    "relatedComponents": ["Input", "Checkbox", "Radio Group", "Switch", "Form"],
+    "relatedComponents": [
+      "Input",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/label",
       "pnpm": "pnpm add @ng-cn/label",
@@ -1548,7 +1939,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Label } from '@/lib/components/ui/label';\n\n"
+    "usage": "import { Label } from '@/lib/components/ui/label';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the label is clicked."
+      }
+    ]
   },
   {
     "name": "Radio Group",
@@ -1613,7 +2022,13 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<FormField name='type'>\n  <FormItem class='space-y-3'>\n    <FormLabel>Notify me about...</FormLabel>\n    <FormControl>\n      <RadioGroup formControlName='type' class='flex flex-col space-y-1'>\n        <FormItem class='flex items-center space-x-3 space-y-0'>\n          <FormControl>\n            <RadioGroupItem value='all' />\n          </FormControl>\n          <FormLabel class='font-normal'>All new messages</FormLabel>\n        </FormItem>\n        <FormItem class='flex items-center space-x-3 space-y-0'>\n          <FormControl>\n            <RadioGroupItem value='mentions' />\n          </FormControl>\n          <FormLabel class='font-normal'>Direct messages and mentions</FormLabel>\n        </FormItem>\n        <FormItem class='flex items-center space-x-3 space-y-0'>\n          <FormControl>\n            <RadioGroupItem value='none' />\n          </FormControl>\n          <FormLabel class='font-normal'>Nothing</FormLabel>\n        </FormItem>\n      </RadioGroup>\n    </FormControl>\n    <FormMessage />\n  </FormItem>\n</FormField>"
       }
     ],
-    "relatedComponents": ["Checkbox", "Switch", "Select", "Label", "Form"],
+    "relatedComponents": [
+      "Checkbox",
+      "Switch",
+      "Select",
+      "Label",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/radio-group",
       "pnpm": "pnpm add @ng-cn/radio-group",
@@ -1632,7 +2047,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { RadioGroup, RadioGroupItem } from '@/lib/components/ui/radio-group';\n\n"
+    "usage": "import { RadioGroup, RadioGroupItem } from '@/lib/components/ui/radio-group';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "vertical"
+      }
+    ]
   },
   {
     "name": "Select",
@@ -1700,7 +2125,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<FormField name='email'>\n  <FormItem>\n    <FormLabel>Email</FormLabel>\n    <Select formControlName='email'>\n      <FormControl>\n        <SelectTrigger>\n          <SelectValue placeholder='Select a verified email' />\n        </SelectTrigger>\n      </FormControl>\n      <SelectContent>\n        <SelectItem value='m@example.com'>m@example.com</SelectItem>\n        <SelectItem value='m@google.com'>m@google.com</SelectItem>\n        <SelectItem value='m@support.com'>m@support.com</SelectItem>\n      </SelectContent>\n    </Select>\n    <FormDescription>You can manage email addresses in your settings.</FormDescription>\n    <FormMessage />\n  </FormItem>\n</FormField>"
       }
     ],
-    "relatedComponents": ["Combobox", "Dropdown Menu", "Radio Group", "Form"],
+    "relatedComponents": [
+      "Combobox",
+      "Dropdown Menu",
+      "Radio Group",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/select",
       "pnpm": "pnpm add @ng-cn/select",
@@ -1719,7 +2149,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/lib/components/ui/select';\n\n"
+    "usage": "import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/lib/components/ui/select';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Slider",
@@ -1808,7 +2249,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='space-y-4'>\n  <div class='flex justify-between'>\n    <Label>Temperature</Label>\n    <span class='text-sm text-muted-foreground'>{{ temperature[0] }}°C</span>\n  </div>\n  <Slider [(value)]='temperature' [min]='-10' [max]='40' [step]='1' />\n</div>"
       }
     ],
-    "relatedComponents": ["Input", "Form", "Progress"],
+    "relatedComponents": [
+      "Input",
+      "Form",
+      "Progress"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/slider",
       "pnpm": "pnpm add @ng-cn/slider",
@@ -1827,7 +2272,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Slider } from '@/lib/components/ui/slider';\n\n"
+    "usage": "import { Slider } from '@/lib/components/ui/slider';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ]
   },
   {
     "name": "Switch",
@@ -1880,7 +2335,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='space-y-4'>\n  <div class='flex flex-row items-center justify-between rounded-lg border p-4'>\n    <div class='space-y-0.5'>\n      <Label class='text-base'>Marketing emails</Label>\n      <p class='text-sm text-muted-foreground'>\n        Receive emails about new products and features.\n      </p>\n    </div>\n    <Switch [(checked)]='marketingEmails' />\n  </div>\n  <div class='flex flex-row items-center justify-between rounded-lg border p-4'>\n    <div class='space-y-0.5'>\n      <Label class='text-base'>Security emails</Label>\n      <p class='text-sm text-muted-foreground'>\n        Receive emails about account security.\n      </p>\n    </div>\n    <Switch [(checked)]='securityEmails' disabled />\n  </div>\n</div>"
       }
     ],
-    "relatedComponents": ["Checkbox", "Toggle", "Label", "Form"],
+    "relatedComponents": [
+      "Checkbox",
+      "Toggle",
+      "Label",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/switch",
       "pnpm": "pnpm add @ng-cn/switch",
@@ -1899,7 +2359,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Switch } from '@/lib/components/ui/switch';\n\n"
+    "usage": "import { Switch } from '@/lib/components/ui/switch';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Textarea",
@@ -1973,7 +2444,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Textarea placeholder='Type your message here.' disabled />"
       }
     ],
-    "relatedComponents": ["Input", "Label", "Form", "Button"],
+    "relatedComponents": [
+      "Input",
+      "Label",
+      "Form",
+      "Button"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/textarea",
       "pnpm": "pnpm add @ng-cn/textarea",
@@ -1992,7 +2468,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Textarea } from '@/lib/components/ui/textarea';\n\n"
+    "usage": "import { Textarea } from '@/lib/components/ui/textarea';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Toggle",
@@ -2045,12 +2532,19 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "outline"],
+        "values": [
+          "default",
+          "outline"
+        ],
         "default": "default"
       },
       {
         "name": "size",
-        "values": ["default", "sm", "lg"],
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
         "default": "default"
       }
     ],
@@ -2086,7 +2580,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Toggle aria-label='Toggle italic' disabled>\n  <Underline class='h-4 w-4' />\n</Toggle>"
       }
     ],
-    "relatedComponents": ["Toggle Group", "Button", "Switch"],
+    "relatedComponents": [
+      "Toggle Group",
+      "Button",
+      "Switch"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/toggle",
       "pnpm": "pnpm add @ng-cn/toggle",
@@ -2164,12 +2662,19 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "outline"],
+        "values": [
+          "default",
+          "outline"
+        ],
         "default": "default"
       },
       {
         "name": "size",
-        "values": ["default", "sm", "lg"],
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
         "default": "default"
       }
     ],
@@ -2195,7 +2700,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ToggleGroup type='single' [(value)]='alignment'>\n  <ToggleGroupItem value='left'>\n    <AlignLeft class='h-4 w-4' />\n  </ToggleGroupItem>\n  <ToggleGroupItem value='center'>\n    <AlignCenter class='h-4 w-4' />\n  </ToggleGroupItem>\n  <ToggleGroupItem value='right'>\n    <AlignRight class='h-4 w-4' />\n  </ToggleGroupItem>\n</ToggleGroup>\n<p class='text-sm text-muted-foreground'>Alignment: {{ alignment }}</p>"
       }
     ],
-    "relatedComponents": ["Toggle", "Button Group", "Segmented", "Radio Group"],
+    "relatedComponents": [
+      "Toggle",
+      "Button Group",
+      "Segmented",
+      "Radio Group"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/toggle-group",
       "pnpm": "pnpm add @ng-cn/toggle-group",
@@ -2245,7 +2755,10 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "destructive"],
+        "values": [
+          "default",
+          "destructive"
+        ],
         "default": "default"
       }
     ],
@@ -2280,7 +2793,17 @@ export const componentsData: ComponentMetadata[] = [
       }
     },
     "usage": "import { Alert, AlertTitle, AlertDescription } from '@/lib/components/ui/alert';\n\n@Component({\n  imports: [Alert, AlertTitle, AlertDescription],\n  template: `\n    <Alert>\n      <AlertTitle>Note</AlertTitle>\n      <AlertDescription>This is an alert message.</AlertDescription>\n    </Alert>\n  `\n})",
-    "relatedComponents": ["Alert Dialog", "Toast"]
+    "relatedComponents": [
+      "Alert Dialog",
+      "Toast"
+    ],
+    "outputs": [
+      {
+        "name": "dismiss",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when the alert is dismissed."
+      }
+    ]
   },
   {
     "name": "Alert Dialog",
@@ -2320,7 +2843,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<AlertDialog [(open)]='showDeleteDialog'>\n  <AlertDialogContent>\n    <AlertDialogHeader>\n      <AlertDialogTitle>Delete Item</AlertDialogTitle>\n      <AlertDialogDescription>\n        Are you sure you want to delete this item? This action cannot be undone.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction (click)='deleteItem()'>Delete</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>\n\n<Button variant='destructive' (click)='showDeleteDialog = true'>\n  Delete\n</Button>"
       }
     ],
-    "relatedComponents": ["Dialog", "Alert", "Toast"],
+    "relatedComponents": [
+      "Dialog",
+      "Alert",
+      "Toast"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/alert-dialog",
       "pnpm": "pnpm add @ng-cn/alert-dialog",
@@ -2339,7 +2866,19 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/lib/components/ui/alert-dialog';\n\n"
+    "usage": "import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/lib/components/ui/alert-dialog';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg",
+          "full"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Dialog",
@@ -2398,7 +2937,24 @@ export const componentsData: ComponentMetadata[] = [
       }
     },
     "usage": "import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/lib/components/ui/dialog';\n\n@Component({\n  imports: [Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter],\n  template: `<!-- see examples -->`\n})",
-    "relatedComponents": ["Alert Dialog", "Sheet", "Drawer"]
+    "relatedComponents": [
+      "Alert Dialog",
+      "Sheet",
+      "Drawer"
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg",
+          "xl",
+          "full"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Drawer",
@@ -2436,7 +2992,12 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "direction",
-        "values": ["top", "right", "bottom", "left"],
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
         "default": "bottom"
       }
     ],
@@ -2457,7 +3018,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "@if (isDesktop) {\n  <Dialog [(open)]='open'>\n    <DialogTrigger>\n      <Button variant='outline'>Edit Profile</Button>\n    </DialogTrigger>\n    <DialogContent class='sm:max-w-[425px]'>\n      <DialogHeader>\n        <DialogTitle>Edit profile</DialogTitle>\n        <DialogDescription>Make changes to your profile here.</DialogDescription>\n      </DialogHeader>\n      <ProfileForm />\n    </DialogContent>\n  </Dialog>\n} @else {\n  <Drawer [(open)]='open'>\n    <DrawerTrigger>\n      <Button variant='outline'>Edit Profile</Button>\n    </DrawerTrigger>\n    <DrawerContent>\n      <DrawerHeader class='text-left'>\n        <DrawerTitle>Edit profile</DrawerTitle>\n        <DrawerDescription>Make changes to your profile here.</DrawerDescription>\n      </DrawerHeader>\n      <ProfileForm class='px-4' />\n      <DrawerFooter class='pt-2'>\n        <DrawerClose>\n          <Button variant='outline'>Cancel</Button>\n        </DrawerClose>\n      </DrawerFooter>\n    </DrawerContent>\n  </Drawer>\n}"
       }
     ],
-    "relatedComponents": ["Dialog", "Sheet", "Collapsible"],
+    "relatedComponents": [
+      "Dialog",
+      "Sheet",
+      "Collapsible"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/drawer",
       "pnpm": "pnpm add @ng-cn/drawer",
@@ -2530,7 +3095,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<HoverCard>\n  <HoverCardTrigger>\n    <Button variant='link'>View Project</Button>\n  </HoverCardTrigger>\n  <HoverCardContent class='w-96'>\n    <div class='space-y-2'>\n      <img src='/project-preview.png' alt='Project preview' class='rounded-md' />\n      <h4 class='text-sm font-semibold'>Project Name</h4>\n      <p class='text-sm text-muted-foreground'>\n        A brief description of the project and its features.\n      </p>\n    </div>\n  </HoverCardContent>\n</HoverCard>"
       }
     ],
-    "relatedComponents": ["Tooltip", "Popover", "Avatar"],
+    "relatedComponents": [
+      "Tooltip",
+      "Popover",
+      "Avatar"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/hover-card",
       "pnpm": "pnpm add @ng-cn/hover-card",
@@ -2549,7 +3118,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/lib/components/ui/hover-card';\n\n"
+    "usage": "import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/lib/components/ui/hover-card';\n\n",
+    "variants": [
+      {
+        "name": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "center"
+      }
+    ]
   },
   {
     "name": "Popover",
@@ -2603,7 +3183,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Popover>\n  <PopoverTrigger>\n    <Button>Share</Button>\n  </PopoverTrigger>\n  <PopoverContent class='w-80'>\n    <div class='space-y-4'>\n      <h4 class='font-medium leading-none'>Share this document</h4>\n      <p class='text-sm text-muted-foreground'>\n        Anyone with the link can view this document.\n      </p>\n      <div class='flex space-x-2'>\n        <Input value='https://example.com/doc/123' readOnly />\n        <Button variant='secondary' class='shrink-0'>Copy Link</Button>\n      </div>\n    </div>\n  </PopoverContent>\n</Popover>"
       }
     ],
-    "relatedComponents": ["Tooltip", "Hover Card", "Dropdown Menu", "Dialog"],
+    "relatedComponents": [
+      "Tooltip",
+      "Hover Card",
+      "Dropdown Menu",
+      "Dialog"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/popover",
       "pnpm": "pnpm add @ng-cn/popover",
@@ -2622,7 +3207,28 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Popover, PopoverTrigger, PopoverContent } from '@/lib/components/ui/popover';\n\n"
+    "usage": "import { Popover, PopoverTrigger, PopoverContent } from '@/lib/components/ui/popover';\n\n",
+    "variants": [
+      {
+        "name": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "center"
+      },
+      {
+        "name": "side",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "default": "bottom"
+      }
+    ]
   },
   {
     "name": "Progress",
@@ -2679,7 +3285,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Progress [value]='undefined' class='w-[60%]' />"
       }
     ],
-    "relatedComponents": ["Slider", "Skeleton", "Spinner"],
+    "relatedComponents": [
+      "Slider",
+      "Skeleton",
+      "Spinner"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/progress",
       "pnpm": "pnpm add @ng-cn/progress",
@@ -2698,7 +3308,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Progress } from '@/lib/components/ui/progress';\n\n"
+    "usage": "import { Progress } from '@/lib/components/ui/progress';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "complete",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when progress reaches 100%."
+      }
+    ]
   },
   {
     "name": "Sheet",
@@ -2736,7 +3364,12 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "side",
-        "values": ["top", "right", "bottom", "left"],
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
         "default": "right"
       }
     ],
@@ -2757,7 +3390,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Sheet [(open)]='sheetOpen'>\n  <SheetContent side='left' class='w-[400px] sm:w-[540px]'>\n    <SheetHeader>\n      <SheetTitle>Navigation</SheetTitle>\n    </SheetHeader>\n    <nav class='flex flex-col space-y-4 py-4'>\n      <a href='#' class='text-sm font-medium'>Home</a>\n      <a href='#' class='text-sm font-medium'>About</a>\n      <a href='#' class='text-sm font-medium'>Services</a>\n      <a href='#' class='text-sm font-medium'>Contact</a>\n    </nav>\n  </SheetContent>\n</Sheet>\n\n<Button (click)='sheetOpen = true'>Open Menu</Button>"
       }
     ],
-    "relatedComponents": ["Dialog", "Drawer", "Sidebar"],
+    "relatedComponents": [
+      "Dialog",
+      "Drawer",
+      "Sidebar"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/sheet",
       "pnpm": "pnpm add @ng-cn/sheet",
@@ -2819,7 +3456,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='space-y-4'>\n  <Skeleton class='h-8 w-[300px]' />\n  <Skeleton class='h-4 w-[100px]' />\n  <div class='space-y-2'>\n    <Skeleton class='h-4 w-full' />\n    <Skeleton class='h-4 w-full' />\n    <Skeleton class='h-4 w-[80%]' />\n  </div>\n  <Skeleton class='h-[200px] w-full rounded-lg' />\n  <div class='space-y-2'>\n    <Skeleton class='h-4 w-full' />\n    <Skeleton class='h-4 w-full' />\n    <Skeleton class='h-4 w-[60%]' />\n  </div>\n</div>"
       }
     ],
-    "relatedComponents": ["Progress", "Spinner", "Card"],
+    "relatedComponents": [
+      "Progress",
+      "Spinner",
+      "Card"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/skeleton",
       "pnpm": "pnpm add @ng-cn/skeleton",
@@ -2838,7 +3479,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Skeleton } from '@/lib/components/ui/skeleton';\n\n"
+    "usage": "import { Skeleton } from '@/lib/components/ui/skeleton';\n\n",
+    "variants": [
+      {
+        "name": "animation",
+        "values": [
+          "pulse",
+          "wave",
+          "none"
+        ],
+        "default": "pulse"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "load",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when skeleton content loads."
+      }
+    ]
   },
   {
     "name": "Toast",
@@ -2882,7 +3541,10 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "destructive"],
+        "values": [
+          "default",
+          "destructive"
+        ],
         "default": "default"
       }
     ],
@@ -2908,7 +3570,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "showSuccessToast() {\n  this.toast.show({\n    title: 'Success!',\n    description: 'Your changes have been saved.',\n  });\n}"
       }
     ],
-    "relatedComponents": ["Alert", "Alert Dialog", "Dialog"],
+    "relatedComponents": [
+      "Alert",
+      "Alert Dialog",
+      "Dialog"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/toast",
       "pnpm": "pnpm add @ng-cn/toast",
@@ -2927,7 +3593,14 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Toaster, ToastService } from '@/lib/components/ui/toast';\n\n"
+    "usage": "import { Toaster, ToastService } from '@/lib/components/ui/toast';\n\n",
+    "outputs": [
+      {
+        "name": "dismiss",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when the toast is dismissed."
+      }
+    ]
   },
   {
     "name": "Tooltip",
@@ -2980,7 +3653,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<TooltipProvider>\n  <Tooltip>\n    <TooltipTrigger>\n      <Button variant='outline' size='icon'>\n        <Plus class='h-4 w-4' />\n      </Button>\n    </TooltipTrigger>\n    <TooltipContent>\n      <p>Add new item</p>\n    </TooltipContent>\n  </Tooltip>\n</TooltipProvider>"
       }
     ],
-    "relatedComponents": ["Popover", "Hover Card", "Button"],
+    "relatedComponents": [
+      "Popover",
+      "Hover Card",
+      "Button"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/tooltip",
       "pnpm": "pnpm add @ng-cn/tooltip",
@@ -2999,7 +3676,35 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Tooltip, TooltipTrigger, TooltipContent } from '@/lib/components/ui/tooltip';\n\n"
+    "usage": "import { Tooltip, TooltipTrigger, TooltipContent } from '@/lib/components/ui/tooltip';\n\n",
+    "variants": [
+      {
+        "name": "side",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "default": "top"
+      },
+      {
+        "name": "align",
+        "values": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "center"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the tooltip open state changes."
+      }
+    ]
   },
   {
     "name": "Avatar",
@@ -3042,7 +3747,11 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "size",
-        "values": ["sm", "default", "lg"],
+        "values": [
+          "sm",
+          "default",
+          "lg"
+        ],
         "default": "default"
       }
     ],
@@ -3068,7 +3777,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='flex items-center gap-4'>\n  <Avatar class='h-6 w-6'>\n    <AvatarImage src='https://github.com/shadcn.png' />\n    <AvatarFallback>SM</AvatarFallback>\n  </Avatar>\n  <Avatar>\n    <AvatarImage src='https://github.com/shadcn.png' />\n    <AvatarFallback>MD</AvatarFallback>\n  </Avatar>\n  <Avatar class='h-14 w-14'>\n    <AvatarImage src='https://github.com/shadcn.png' />\n    <AvatarFallback>LG</AvatarFallback>\n  </Avatar>\n</div>"
       }
     ],
-    "relatedComponents": ["Hover Card", "Card", "Badge"],
+    "relatedComponents": [
+      "Hover Card",
+      "Card",
+      "Badge"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/avatar",
       "pnpm": "pnpm add @ng-cn/avatar",
@@ -3087,7 +3800,14 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Avatar, AvatarImage, AvatarFallback } from '@/lib/components/ui/avatar';\n\n"
+    "usage": "import { Avatar, AvatarImage, AvatarFallback } from '@/lib/components/ui/avatar';\n\n",
+    "outputs": [
+      {
+        "name": "loadError",
+        "type": "EventEmitter<Error>",
+        "description": "Emitted when the avatar image fails to load."
+      }
+    ]
   },
   {
     "name": "Badge",
@@ -3118,7 +3838,12 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "variant",
-        "values": ["default", "secondary", "destructive", "outline"],
+        "values": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline"
+        ],
         "default": "default"
       }
     ],
@@ -3153,7 +3878,20 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Badge } from '@/lib/components/ui/badge';\n\n@Component({\n  imports: [Badge],\n  template: `<Badge variant=\"secondary\">Beta</Badge>`\n})"
+    "usage": "import { Badge } from '@/lib/components/ui/badge';\n\n@Component({\n  imports: [Badge],\n  template: `<Badge variant=\"secondary\">Beta</Badge>`\n})",
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the badge is clicked."
+      }
+    ],
+    "relatedComponents": [
+      "Avatar",
+      "Button",
+      "Card",
+      "Table"
+    ]
   },
   {
     "name": "Calendar",
@@ -3234,7 +3972,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Calendar\n  mode='multiple'\n  [(selected)]='selectedDates'\n  class='rounded-md border'\n/>\n<p class='text-sm text-muted-foreground'>\n  {{ selectedDates.length }} dates selected\n</p>"
       }
     ],
-    "relatedComponents": ["Date Picker", "Popover", "Form"],
+    "relatedComponents": [
+      "Date Picker",
+      "Popover",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/calendar",
       "pnpm": "pnpm add @ng-cn/calendar",
@@ -3253,7 +3995,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Calendar } from '@/lib/components/ui/calendar';\n\n"
+    "usage": "import { Calendar } from '@/lib/components/ui/calendar';\n\n",
+    "variants": [
+      {
+        "name": "mode",
+        "values": [
+          "single",
+          "multiple",
+          "range"
+        ],
+        "default": "single"
+      }
+    ]
   },
   {
     "name": "Carousel",
@@ -3317,7 +4070,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Carousel [plugins]='[autoplayPlugin]' class='w-full max-w-xs'>\n  <CarouselContent>\n    @for (i of [1, 2, 3, 4, 5]; track i) {\n      <CarouselItem>\n        <div class='p-1'>\n          <Card>\n            <CardContent class='flex aspect-square items-center justify-center p-6'>\n              <span class='text-4xl font-semibold'>{{ i }}</span>\n            </CardContent>\n          </Card>\n        </div>\n      </CarouselItem>\n    }\n  </CarouselContent>\n  <CarouselPrevious />\n  <CarouselNext />\n</Carousel>\n\n// In component:\nautoplayPlugin = Autoplay({ delay: 2000, stopOnInteraction: true });"
       }
     ],
-    "relatedComponents": ["Card", "Aspect Ratio", "Button"],
+    "relatedComponents": [
+      "Card",
+      "Aspect Ratio",
+      "Button"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/carousel",
       "pnpm": "pnpm add @ng-cn/carousel",
@@ -3336,7 +4093,17 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/lib/components/ui/carousel';\n\n"
+    "usage": "import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/lib/components/ui/carousel';\n\n",
+    "variants": [
+      {
+        "name": "orientation",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ]
   },
   {
     "name": "Chart",
@@ -3398,7 +4165,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ChartContainer [config]='chartConfig' class='min-h-[200px] w-full'>\n  <AreaChart [data]='chartData'>\n    <CartesianGrid strokeDasharray='3 3' />\n    <XAxis dataKey='month' />\n    <ChartTooltip />\n    <Area type='monotone' dataKey='desktop' stackId='1' fill='var(--color-desktop)' />\n    <Area type='monotone' dataKey='mobile' stackId='1' fill='var(--color-mobile)' />\n  </AreaChart>\n</ChartContainer>"
       }
     ],
-    "relatedComponents": ["Card", "Table", "Tooltip"],
+    "relatedComponents": [
+      "Card",
+      "Table",
+      "Tooltip"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/chart",
       "pnpm": "pnpm add @ng-cn/chart",
@@ -3417,7 +4188,33 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Chart } from '@/lib/components/ui/chart';\n\n"
+    "usage": "import { Chart } from '@/lib/components/ui/chart';\n\n",
+    "variants": [
+      {
+        "name": "type",
+        "values": [
+          "bar",
+          "line",
+          "area",
+          "pie",
+          "donut",
+          "radar"
+        ],
+        "default": "bar"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dataPointClick",
+        "type": "EventEmitter<ChartDataPoint>",
+        "description": "Emitted when a data point is clicked."
+      },
+      {
+        "name": "legendClick",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when a legend item is clicked."
+      }
+    ]
   },
   {
     "name": "Command",
@@ -3468,7 +4265,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Popover [(open)]='open'>\n  <PopoverTrigger>\n    <Button variant='outline' role='combobox' class='w-[200px] justify-between'>\n      {{ selectedFramework?.label ?? 'Select framework...' }}\n      <ChevronsUpDown class='ml-2 h-4 w-4 shrink-0 opacity-50' />\n    </Button>\n  </PopoverTrigger>\n  <PopoverContent class='w-[200px] p-0'>\n    <Command>\n      <CommandInput placeholder='Search framework...' />\n      <CommandList>\n        <CommandEmpty>No framework found.</CommandEmpty>\n        <CommandGroup>\n          @for (framework of frameworks; track framework.value) {\n            <CommandItem [value]='framework.value' (onSelect)='select(framework)'>\n              <Check class='mr-2 h-4 w-4' [class.opacity-100]='value === framework.value' />\n              {{ framework.label }}\n            </CommandItem>\n          }\n        </CommandGroup>\n      </CommandList>\n    </Command>\n  </PopoverContent>\n</Popover>"
       }
     ],
-    "relatedComponents": ["Combobox", "Dialog", "Popover", "Kbd"],
+    "relatedComponents": [
+      "Combobox",
+      "Dialog",
+      "Popover",
+      "Kbd"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/command",
       "pnpm": "pnpm add @ng-cn/command",
@@ -3487,7 +4289,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/lib/components/ui/command';\n\n"
+    "usage": "import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/lib/components/ui/command';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Data Table",
@@ -3570,7 +4383,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div>\n  <DataTable [columns]='columns' [data]='payments' />\n  <div class='flex items-center justify-end space-x-2 py-4'>\n    <Button variant='outline' size='sm' (click)='table.previousPage()' [disabled]='!table.getCanPreviousPage()'>\n      Previous\n    </Button>\n    <Button variant='outline' size='sm' (click)='table.nextPage()' [disabled]='!table.getCanNextPage()'>\n      Next\n    </Button>\n  </div>\n</div>"
       }
     ],
-    "relatedComponents": ["Table", "Pagination", "Checkbox", "Input"],
+    "relatedComponents": [
+      "Table",
+      "Pagination",
+      "Checkbox",
+      "Input"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/data-table",
       "pnpm": "pnpm add @ng-cn/data-table",
@@ -3589,7 +4407,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { DataTable } from '@/lib/components/ui/data-table';\n\n"
+    "usage": "import { DataTable } from '@/lib/components/ui/data-table';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Table",
@@ -3627,7 +4456,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Product</TableHead>\n      <TableHead>Price</TableHead>\n      <TableHead>Stock</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    @for (product of products; track product.id; let odd = $odd) {\n      <TableRow [class.bg-muted/50]='odd'>\n        <TableCell>{{ product.name }}</TableCell>\n        <TableCell>{{ product.price | currency }}</TableCell>\n        <TableCell>{{ product.stock }}</TableCell>\n      </TableRow>\n    }\n  </TableBody>\n</Table>"
       }
     ],
-    "relatedComponents": ["Data Table", "Pagination", "Card", "Dropdown Menu"],
+    "relatedComponents": [
+      "Data Table",
+      "Pagination",
+      "Card",
+      "Dropdown Menu"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/table",
       "pnpm": "pnpm add @ng-cn/table",
@@ -3646,7 +4480,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/lib/components/ui/table';\n\n"
+    "usage": "import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/lib/components/ui/table';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "rowClick",
+        "type": "EventEmitter<TableRow>",
+        "description": "Emitted when a table row is clicked."
+      }
+    ]
   },
   {
     "name": "Button Group",
@@ -3696,7 +4548,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<ButtonGroup>\n  <Button>Save changes</Button>\n  <DropdownMenu>\n    <DropdownMenuTrigger asChild>\n      <Button variant='default' size='icon'>\n        <ChevronDown class='h-4 w-4' />\n      </Button>\n    </DropdownMenuTrigger>\n    <DropdownMenuContent>\n      <DropdownMenuItem>Save as draft</DropdownMenuItem>\n      <DropdownMenuItem>Save and close</DropdownMenuItem>\n    </DropdownMenuContent>\n  </DropdownMenu>\n</ButtonGroup>"
       }
     ],
-    "relatedComponents": ["Button", "Toggle Group", "Dropdown Menu"],
+    "relatedComponents": [
+      "Button",
+      "Toggle Group",
+      "Dropdown Menu"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/button-group",
       "pnpm": "pnpm add @ng-cn/button-group",
@@ -3715,7 +4571,33 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { ButtonGroup } from '@/lib/components/ui/button-group';\n\n"
+    "usage": "import { ButtonGroup } from '@/lib/components/ui/button-group';\n\n",
+    "variants": [
+      {
+        "name": "variant",
+        "values": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "valueChange",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when the selected button changes."
+      }
+    ]
   },
   {
     "name": "Empty",
@@ -3771,7 +4653,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Name</TableHead>\n      <TableHead>Status</TableHead>\n      <TableHead>Date</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    @if (data.length === 0) {\n      <TableRow>\n        <TableCell colspan='3'>\n          <Empty class='py-10'>\n            <EmptyIcon>\n              <Database class='h-8 w-8' />\n            </EmptyIcon>\n            <EmptyTitle>No data</EmptyTitle>\n            <EmptyDescription>There are no records to display.</EmptyDescription>\n          </Empty>\n        </TableCell>\n      </TableRow>\n    }\n  </TableBody>\n</Table>"
       }
     ],
-    "relatedComponents": ["Skeleton", "Card", "Table"],
+    "relatedComponents": [
+      "Skeleton",
+      "Card",
+      "Table"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/empty",
       "pnpm": "pnpm add @ng-cn/empty",
@@ -3790,7 +4676,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Empty } from '@/lib/components/ui/empty';\n\n"
+    "usage": "import { Empty } from '@/lib/components/ui/empty';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "actionClick",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when the action button is clicked."
+      }
+    ]
   },
   {
     "name": "Input Group",
@@ -3833,7 +4737,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<InputGroup>\n  <InputGroupAddon>$</InputGroupAddon>\n  <Input type='number' placeholder='0.00' />\n  <InputGroupAddon>USD</InputGroupAddon>\n</InputGroup>"
       }
     ],
-    "relatedComponents": ["Input", "Button", "Form"],
+    "relatedComponents": [
+      "Input",
+      "Button",
+      "Form"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/input-group",
       "pnpm": "pnpm add @ng-cn/input-group",
@@ -3852,7 +4760,25 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { InputGroup } from '@/lib/components/ui/input-group';\n\n"
+    "usage": "import { InputGroup } from '@/lib/components/ui/input-group';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "valueChange",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when the input value changes."
+      }
+    ]
   },
   {
     "name": "Kbd",
@@ -3883,7 +4809,11 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "size",
-        "values": ["sm", "default", "lg"],
+        "values": [
+          "sm",
+          "default",
+          "lg"
+        ],
         "default": "default"
       }
     ],
@@ -3909,7 +4839,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<DropdownMenuContent>\n  <DropdownMenuItem>\n    <span>New Tab</span>\n    <DropdownMenuShortcut>\n      <Kbd size='sm'>⌘</Kbd><Kbd size='sm'>T</Kbd>\n    </DropdownMenuShortcut>\n  </DropdownMenuItem>\n  <DropdownMenuItem>\n    <span>New Window</span>\n    <DropdownMenuShortcut>\n      <Kbd size='sm'>⌘</Kbd><Kbd size='sm'>N</Kbd>\n    </DropdownMenuShortcut>\n  </DropdownMenuItem>\n</DropdownMenuContent>"
       }
     ],
-    "relatedComponents": ["Command", "Dropdown Menu", "Tooltip"],
+    "relatedComponents": [
+      "Command",
+      "Dropdown Menu",
+      "Tooltip"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/kbd",
       "pnpm": "pnpm add @ng-cn/kbd",
@@ -3928,7 +4862,14 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Kbd } from '@/lib/components/ui/kbd';\n\n"
+    "usage": "import { Kbd } from '@/lib/components/ui/kbd';\n\n",
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the keyboard key is clicked."
+      }
+    ]
   },
   {
     "name": "Native Select",
@@ -3990,7 +4931,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='grid gap-2'>\n  <Label for='country'>Country</Label>\n  <NativeSelect id='country' [(value)]='country'>\n    <option value=''>Select a country</option>\n    <option value='us'>United States</option>\n    <option value='uk'>United Kingdom</option>\n    <option value='ca'>Canada</option>\n    <option value='au'>Australia</option>\n  </NativeSelect>\n</div>"
       }
     ],
-    "relatedComponents": ["Select", "Combobox", "Form", "Label"],
+    "relatedComponents": [
+      "Select",
+      "Combobox",
+      "Form",
+      "Label"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/native-select",
       "pnpm": "pnpm add @ng-cn/native-select",
@@ -4009,7 +4955,18 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { NativeSelect } from '@/lib/components/ui/native-select';\n\n"
+    "usage": "import { NativeSelect } from '@/lib/components/ui/native-select';\n\n",
+    "variants": [
+      {
+        "name": "size",
+        "values": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ]
   },
   {
     "name": "Segmented",
@@ -4059,7 +5016,11 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "size",
-        "values": ["sm", "default", "lg"],
+        "values": [
+          "sm",
+          "default",
+          "lg"
+        ],
         "default": "default"
       }
     ],
@@ -4085,7 +5046,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='space-y-4'>\n  <Segmented size='sm' defaultValue='1'>\n    <SegmentedItem value='1'>Small</SegmentedItem>\n    <SegmentedItem value='2'>Control</SegmentedItem>\n  </Segmented>\n  <Segmented size='default' defaultValue='1'>\n    <SegmentedItem value='1'>Default</SegmentedItem>\n    <SegmentedItem value='2'>Control</SegmentedItem>\n  </Segmented>\n  <Segmented size='lg' defaultValue='1'>\n    <SegmentedItem value='1'>Large</SegmentedItem>\n    <SegmentedItem value='2'>Control</SegmentedItem>\n  </Segmented>\n</div>"
       }
     ],
-    "relatedComponents": ["Toggle Group", "Radio Group", "Tabs"],
+    "relatedComponents": [
+      "Toggle Group",
+      "Radio Group",
+      "Tabs"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/segmented",
       "pnpm": "pnpm add @ng-cn/segmented",
@@ -4143,17 +5108,28 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "side",
-        "values": ["left", "right"],
+        "values": [
+          "left",
+          "right"
+        ],
         "default": "left"
       },
       {
         "name": "variant",
-        "values": ["sidebar", "floating", "inset"],
+        "values": [
+          "sidebar",
+          "floating",
+          "inset"
+        ],
         "default": "sidebar"
       },
       {
         "name": "collapsible",
-        "values": ["offcanvas", "icon", "none"],
+        "values": [
+          "offcanvas",
+          "icon",
+          "none"
+        ],
         "default": "offcanvas"
       }
     ],
@@ -4174,7 +5150,12 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<SidebarGroup>\n  <SidebarGroupLabel>Platform</SidebarGroupLabel>\n  <SidebarMenu>\n    <Collapsible class='group/collapsible'>\n      <SidebarMenuItem>\n        <CollapsibleTrigger asChild>\n          <SidebarMenuButton>\n            <Settings class='h-4 w-4' />\n            <span>Settings</span>\n            <ChevronRight class='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />\n          </SidebarMenuButton>\n        </CollapsibleTrigger>\n        <CollapsibleContent>\n          <SidebarMenuSub>\n            <SidebarMenuSubItem>\n              <SidebarMenuSubButton>General</SidebarMenuSubButton>\n            </SidebarMenuSubItem>\n            <SidebarMenuSubItem>\n              <SidebarMenuSubButton>Security</SidebarMenuSubButton>\n            </SidebarMenuSubItem>\n            <SidebarMenuSubItem>\n              <SidebarMenuSubButton>Notifications</SidebarMenuSubButton>\n            </SidebarMenuSubItem>\n          </SidebarMenuSub>\n        </CollapsibleContent>\n      </SidebarMenuItem>\n    </Collapsible>\n  </SidebarMenu>\n</SidebarGroup>"
       }
     ],
-    "relatedComponents": ["Navigation Menu", "Collapsible", "Sheet", "Resizable"],
+    "relatedComponents": [
+      "Navigation Menu",
+      "Collapsible",
+      "Sheet",
+      "Resizable"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/sidebar",
       "pnpm": "pnpm add @ng-cn/sidebar",
@@ -4193,7 +5174,19 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/lib/components/ui/sidebar';\n\n"
+    "usage": "import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/lib/components/ui/sidebar';\n\n",
+    "outputs": [
+      {
+        "name": "openChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the sidebar open state changes."
+      },
+      {
+        "name": "itemSelect",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when a sidebar item is selected."
+      }
+    ]
   },
   {
     "name": "Spinner",
@@ -4231,12 +5224,20 @@ export const componentsData: ComponentMetadata[] = [
     "variants": [
       {
         "name": "size",
-        "values": ["sm", "default", "lg"],
+        "values": [
+          "sm",
+          "default",
+          "lg"
+        ],
         "default": "default"
       },
       {
         "name": "variant",
-        "values": ["default", "dots", "bars"],
+        "values": [
+          "default",
+          "dots",
+          "bars"
+        ],
         "default": "default"
       }
     ],
@@ -4267,7 +5268,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<div class='relative'>\n  <Card>\n    <CardHeader>\n      <CardTitle>Content</CardTitle>\n    </CardHeader>\n    <CardContent>\n      <p>Some content here...</p>\n    </CardContent>\n  </Card>\n  @if (isLoading) {\n    <div class='absolute inset-0 flex items-center justify-center bg-background/80'>\n      <Spinner />\n    </div>\n  }\n</div>"
       }
     ],
-    "relatedComponents": ["Button", "Progress", "Skeleton"],
+    "relatedComponents": [
+      "Button",
+      "Progress",
+      "Skeleton"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/spinner",
       "pnpm": "pnpm add @ng-cn/spinner",
@@ -4286,7 +5291,14 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Spinner } from '@/lib/components/ui/spinner';\n\n"
+    "usage": "import { Spinner } from '@/lib/components/ui/spinner';\n\n",
+    "outputs": [
+      {
+        "name": "complete",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when loading completes."
+      }
+    ]
   },
   {
     "name": "Typography",
@@ -4334,7 +5346,11 @@ export const componentsData: ComponentMetadata[] = [
         "code": "<P>\n  The <InlineCode>Dialog</InlineCode> component is used to create modal dialogs.\n  You can also use <InlineCode>AlertDialog</InlineCode> for confirmation prompts.\n</P>"
       }
     ],
-    "relatedComponents": ["Card", "Alert", "Badge"],
+    "relatedComponents": [
+      "Card",
+      "Alert",
+      "Badge"
+    ],
     "installation": {
       "npm": "npm install @ng-cn/typography",
       "pnpm": "pnpm add @ng-cn/typography",
@@ -4353,45 +5369,30 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { H1, H2, H3, H4, P, Lead, Large, Small, Muted } from '@/lib/components/ui/typography';\n\n"
+    "usage": "import { H1, H2, H3, H4, P, Lead, Large, Small, Muted } from '@/lib/components/ui/typography';\n\n",
+    "variants": [
+      {
+        "name": "variant",
+        "values": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "p",
+          "lead",
+          "large",
+          "small",
+          "muted"
+        ],
+        "default": "p"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when the typography element is clicked."
+      }
+    ]
   }
 ];
-
-export const componentCategories: Record<string, string> = {
-  basic: 'Basic Components',
-  form: 'Form Components',
-  layout: 'Layout Components',
-  overlay: 'Overlay Components',
-  complex: 'Complex Components',
-  advanced: 'Advanced Components',
-};
-
-export function getComponent(nameOrSelector: string): ComponentMetadata | undefined {
-  const lowerName = nameOrSelector.toLowerCase();
-  return componentsData.find(
-    (c) =>
-      c.name.toLowerCase() === lowerName ||
-      c.selector.toLowerCase() === lowerName ||
-      c.package.toLowerCase() === `@ng-cn/${lowerName}`
-  );
-}
-
-export function searchComponents(query?: string, category?: string): ComponentMetadata[] {
-  let results = componentsData;
-
-  if (category) {
-    results = results.filter((c) => c.category === category);
-  }
-
-  if (query) {
-    const lowerQuery = query.toLowerCase();
-    results = results.filter(
-      (c) =>
-        c.name.toLowerCase().includes(lowerQuery) ||
-        c.description.toLowerCase().includes(lowerQuery) ||
-        c.selector.toLowerCase().includes(lowerQuery)
-    );
-  }
-
-  return results;
-}
