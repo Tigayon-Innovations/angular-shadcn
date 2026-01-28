@@ -3,6 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ngAdd = ngAdd;
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const jsonc_parser_1 = require("jsonc-parser");
+const core_1 = require("@angular-devkit/core");
+// Registry of all utility files that need to be copied
+const UTILS_FILES_REGISTRY = [
+    // Core utils
+    'cn.ts',
+    'index.ts',
+    // Animation utilities
+    'animation/index.ts',
+    'animation/animation.types.ts',
+    'animation/animation.utils.ts',
+    'animation/animation-tokens.service.ts',
+    'animation/animated.directive.ts',
+    'animation/presence.component.ts',
+    'animation/presence.directive.ts',
+    // Accessibility utilities
+    'accessibility/index.ts',
+    'accessibility/aria-id.service.ts',
+    'accessibility/click-outside.directive.ts',
+    'accessibility/focus-management.service.ts',
+    'accessibility/focus-trap.directive.ts',
+    'accessibility/keyboard-navigation.directive.ts',
+    'accessibility/live-region.directive.ts',
+    'accessibility/touch-target.directive.ts',
+    'accessibility/visually-hidden.component.ts',
+    // Positioning utilities
+    'positioning/index.ts',
+];
 // CSS Variables template for shadcn theming
 const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
 @use "tailwindcss";
@@ -203,18 +230,36 @@ function ngAdd(options) {
         context.logger.info('📁 Project Structure');
         const utilsPath = '/src/app/lib/utils';
         const uiPath = '/src/app/lib/components/ui';
-        // Create cn utility
-        if (!tree.exists(`${utilsPath}/cn.ts`)) {
-            tree.create(`${utilsPath}/cn.ts`, CN_UTILITY_TEMPLATE);
-            context.logger.info(`   + src/app/lib/utils/cn.ts`);
+        // Copy all utility files from the package
+        const sourceUtilsBase = 'node_modules/@ng-cn/core/src/app/lib/utils';
+        let utilsFilesCopied = 0;
+        for (const utilFile of UTILS_FILES_REGISTRY) {
+            const sourcePath = (0, core_1.join)((0, core_1.normalize)(sourceUtilsBase), (0, core_1.normalize)(utilFile));
+            const targetPath = (0, core_1.join)((0, core_1.normalize)(utilsPath), (0, core_1.normalize)(utilFile));
+            const content = tree.read(sourcePath);
+            if (content) {
+                if (tree.exists(targetPath)) {
+                    tree.overwrite(targetPath, content);
+                }
+                else {
+                    tree.create(targetPath, content);
+                }
+                utilsFilesCopied++;
+            }
+        }
+        if (utilsFilesCopied > 0) {
+            context.logger.info(`   + src/app/lib/utils/ (${utilsFilesCopied} files)`);
         }
         else {
-            context.logger.info(`   ✓ utils/cn.ts exists`);
-        }
-        // Create utils index
-        if (!tree.exists(`${utilsPath}/index.ts`)) {
-            tree.create(`${utilsPath}/index.ts`, UTILS_INDEX_TEMPLATE);
-            context.logger.info(`   + src/app/lib/utils/index.ts`);
+            // Fallback to creating basic files if package files not found
+            if (!tree.exists(`${utilsPath}/cn.ts`)) {
+                tree.create(`${utilsPath}/cn.ts`, CN_UTILITY_TEMPLATE);
+                context.logger.info(`   + src/app/lib/utils/cn.ts`);
+            }
+            if (!tree.exists(`${utilsPath}/index.ts`)) {
+                tree.create(`${utilsPath}/index.ts`, UTILS_INDEX_TEMPLATE);
+                context.logger.info(`   + src/app/lib/utils/index.ts`);
+            }
         }
         // Create ui components directory
         if (!tree.exists(`${uiPath}/.gitkeep`)) {
@@ -235,7 +280,7 @@ function ngAdd(options) {
             if (tree.exists(stylesPath)) {
                 const stylesContent = tree.read(stylesPath).toString('utf-8');
                 if (!stylesContent.includes('ng-cn.scss')) {
-                    const newContent = `@import './ng-cn.scss';\n\n${stylesContent}`;
+                    const newContent = `@use './ng-cn.scss';\n\n${stylesContent}`;
                     tree.overwrite(stylesPath, newContent);
                     context.logger.info(`   ✓ Imported in styles.scss`);
                 }
@@ -243,7 +288,7 @@ function ngAdd(options) {
             else if (tree.exists(stylesCssPath)) {
                 const stylesContent = tree.read(stylesCssPath).toString('utf-8');
                 if (!stylesContent.includes('ng-cn.scss')) {
-                    const newContent = `@import './ng-cn.scss';\n\n${stylesContent}`;
+                    const newContent = `@use './ng-cn.scss';\n\n${stylesContent}`;
                     tree.overwrite(stylesCssPath, newContent);
                     context.logger.info(`   ✓ Imported in styles.css`);
                 }
@@ -257,12 +302,16 @@ function ngAdd(options) {
             const tsconfigContent = tree.read(tsconfigPath).toString('utf-8');
             const tsconfig = (0, jsonc_parser_1.parse)(tsconfigContent);
             tsconfig.compilerOptions = tsconfig.compilerOptions || {};
+            // Set baseUrl for path aliases to work
+            if (!tsconfig.compilerOptions.baseUrl) {
+                tsconfig.compilerOptions.baseUrl = '.';
+            }
             tsconfig.compilerOptions.paths = tsconfig.compilerOptions.paths || {};
             const pathAliases = {
-                '@/*': ['src/*'],
-                '@/lib/*': ['src/app/lib/*'],
-                '@/ui/*': ['src/app/lib/components/ui/*'],
-                '@/utils/*': ['src/app/lib/utils/*']
+                '@/*': ['./src/*'],
+                '@/lib/*': ['./src/app/lib/*'],
+                '@/ui/*': ['./src/app/lib/components/ui/*'],
+                '@/utils/*': ['./src/app/lib/utils/*']
             };
             let pathsUpdated = false;
             for (const [alias, paths] of Object.entries(pathAliases)) {
