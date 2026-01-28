@@ -7,66 +7,24 @@ module.exports = {
       exec_mode: 'cluster',
       env: {
         NODE_ENV: 'production',
-        PORT: 4200,
-        HOST: 'localhost'
+        PORT: 4200
       },
-      merge_logs: true,
       autorestart: true,
-      watch: false,
       max_memory_restart: '500M',
       error_file: './logs/angular-error.log',
-      out_file: './logs/angular-out.log',
-      log_file: './logs/angular-combined.log',
-      time_format: 'YYYY-MM-DD HH:mm:ss Z',
-      ignore_watch: [
-        'node_modules',
-        'dist',
-        'logs',
-        '.next',
-        '.git'
-      ],
-      max_restarts: 10,
-      min_uptime: '10s'
+      out_file: './logs/angular-out.log'
     },
     {
       name: 'mcp-server',
       script: './dist/mcp-server/http-server.js',
-      interpreter: 'node',
-      instances: 1,
-      exec_mode: 'fork',
       env: {
         NODE_ENV: 'production',
-        PORT: 3100,
-        HOST: 'localhost',
-        MCP_URL: 'https://shadcn-angular.tigayon.com/mcp'
+        PORT: 4500
       },
-      merge_logs: true,
       autorestart: true,
-      watch: false,
       max_memory_restart: '300M',
       error_file: './logs/mcp-error.log',
-      out_file: './logs/mcp-out.log',
-      log_file: './logs/mcp-combined.log',
-      time_format: 'YYYY-MM-DD HH:mm:ss Z',
-      ignore_watch: [
-        'node_modules',
-        'dist',
-        'logs',
-        '.git'
-      ],
-      max_restarts: 10,
-      min_uptime: '10s'
+      out_file: './logs/mcp-out.log'
     }
-  ],
-
-  deploy: {
-    production: {
-      user: 'www-data',
-      host: 'shadcn-angular.tigayon.com',
-      ref: 'origin/main',
-      repo: 'git@github.com:your-repo/shadcn-angular.git',
-      path: '/var/www/shadcn-angular',
-      'post-deploy': 'npm ci --production && npm run build && pm2 startOrRestart ecosystem.config.js'
-    }
-  }
+  ]
 };

@@ -5396,3 +5396,31 @@ export const componentsData: ComponentMetadata[] = [
     ]
   }
 ];
+
+// Category mapping
+export const componentCategories: Record<string, string> = {
+  basic: 'Basic',
+  form: 'Form',
+  layout: 'Layout',
+  overlay: 'Overlay',
+  complex: 'Complex',
+  advanced: 'Advanced'
+};
+
+// Get component by selector
+export function getComponent(selector: string) {
+  return componentsData.find(c =>
+    c.selector.toLowerCase() === selector.toLowerCase() ||
+    c.name.toLowerCase() === selector.toLowerCase()
+  );
+}
+
+// Search components
+export function searchComponents(query: string) {
+  const lowerQuery = query.toLowerCase();
+  return componentsData.filter(c =>
+    c.name.toLowerCase().includes(lowerQuery) ||
+    c.selector.toLowerCase().includes(lowerQuery) ||
+    c.description.toLowerCase().includes(lowerQuery)
+  );
+}

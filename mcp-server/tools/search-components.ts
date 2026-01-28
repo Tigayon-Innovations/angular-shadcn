@@ -29,7 +29,11 @@ export const searchComponentsTool: Tool = {
 
 export function handleSearchComponents(args: any) {
   const { query = '', category } = args;
-  const results = searchComponents(query, category);
+  let results = searchComponents(query);
+
+  if (category) {
+    results = results.filter(c => c.category === category);
+  }
 
   let text = `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
   text += `  SEARCH RESULTS\n`;
@@ -42,7 +46,7 @@ export function handleSearchComponents(args: any) {
   if (results.length === 0) {
     text += `No components found. Try a different search term.\n`;
   } else {
-    results.forEach((c) => {
+    results.forEach((c: any) => {
       text += `─────────────────────────────────────────────────────────────\n`;
       text += `${c.name}\n`;
       text += `  Selector:  ${c.selector}\n`;
