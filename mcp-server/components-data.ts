@@ -580,13 +580,74 @@ export const componentsData: ComponentMetadata[] = [
     ],
     "inputs": [
       {
+        "name": "variant",
+        "type": "string",
+        "default": "default",
+        "description": "Visual style: default | destructive | outline | secondary | ghost | link",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "default": "default",
+        "description": "Button size: default | sm | lg | icon",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the button is disabled.",
+        "required": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Shows loading spinner when true.",
+        "required": false
+      },
+      {
         "name": "class",
         "type": "string",
         "description": "Additional CSS classes.",
         "required": false
       }
     ],
-    "examples": [],
+    "variants": [
+      {
+        "name": "variant",
+        "values": ["default", "destructive", "outline", "secondary", "ghost", "link"],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "values": ["default", "sm", "lg", "icon"],
+        "default": "default"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Basic Button",
+        "description": "Default button usage",
+        "code": "<Button>Click me</Button>"
+      },
+      {
+        "title": "Button Variants",
+        "description": "Different visual styles",
+        "code": "<Button variant=\"default\">Default</Button>\n<Button variant=\"destructive\">Delete</Button>\n<Button variant=\"outline\">Outline</Button>\n<Button variant=\"secondary\">Secondary</Button>\n<Button variant=\"ghost\">Ghost</Button>\n<Button variant=\"link\">Link</Button>"
+      },
+      {
+        "title": "Button Sizes",
+        "description": "Different sizes",
+        "code": "<Button size=\"sm\">Small</Button>\n<Button size=\"default\">Default</Button>\n<Button size=\"lg\">Large</Button>\n<Button size=\"icon\"><Icon /></Button>"
+      },
+      {
+        "title": "Loading State",
+        "description": "Button with loading spinner",
+        "code": "<Button [loading]=\"isLoading\">Submit</Button>"
+      }
+    ],
     "installation": {
       "npm": "npm install @ng-cn/button",
       "pnpm": "pnpm add @ng-cn/button",
@@ -601,11 +662,13 @@ export const componentsData: ComponentMetadata[] = [
           "Import Button in your component"
         ],
         "files": [
-          "src/app/lib/components/ui/button/button.component.ts"
+          "src/app/lib/components/ui/button/button.component.ts",
+          "src/app/lib/components/ui/button/button-variants.ts"
         ]
       }
     },
-    "usage": "import { Button } from '@/lib/components/ui/button';\n\n"
+    "usage": "import { Button } from '@/lib/components/ui/button';\n\n@Component({\n  imports: [Button],\n  template: `<Button variant=\"outline\">Click me</Button>`\n})",
+    "relatedComponents": ["Button Group", "Toggle", "Toggle Group"]
   },
   {
     "name": "Checkbox",
@@ -1206,8 +1269,40 @@ export const componentsData: ComponentMetadata[] = [
       "clsx",
       "tailwind-merge"
     ],
-    "inputs": [],
-    "examples": [],
+    "inputs": [
+      {
+        "name": "variant",
+        "type": "string",
+        "default": "default",
+        "description": "Visual style: default | destructive",
+        "required": false
+      },
+      {
+        "name": "class",
+        "type": "string",
+        "description": "Additional CSS classes.",
+        "required": false
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "values": ["default", "destructive"],
+        "default": "default"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Basic Alert",
+        "description": "Default alert with title and description",
+        "code": "<Alert>\n  <AlertTitle>Heads up!</AlertTitle>\n  <AlertDescription>You can add components to your app using the cli.</AlertDescription>\n</Alert>"
+      },
+      {
+        "title": "Destructive Alert",
+        "description": "Error or warning alert",
+        "code": "<Alert variant=\"destructive\">\n  <AlertTitle>Error</AlertTitle>\n  <AlertDescription>Your session has expired. Please log in again.</AlertDescription>\n</Alert>"
+      }
+    ],
     "installation": {
       "npm": "npm install @ng-cn/alert",
       "pnpm": "pnpm add @ng-cn/alert",
@@ -1226,7 +1321,8 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Alert, AlertTitle, AlertDescription } from '@/lib/components/ui/alert';\n\n"
+    "usage": "import { Alert, AlertTitle, AlertDescription } from '@/lib/components/ui/alert';\n\n@Component({\n  imports: [Alert, AlertTitle, AlertDescription],\n  template: `\n    <Alert>\n      <AlertTitle>Note</AlertTitle>\n      <AlertDescription>This is an alert message.</AlertDescription>\n    </Alert>\n  `\n})",
+    "relatedComponents": ["Alert Dialog", "Toast"]
   },
   {
     "name": "Alert Dialog",
@@ -1287,7 +1383,25 @@ export const componentsData: ComponentMetadata[] = [
         "required": false
       }
     ],
-    "examples": [],
+    "outputs": [
+      {
+        "name": "openChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when dialog open state changes."
+      }
+    ],
+    "examples": [
+      {
+        "title": "Basic Dialog",
+        "description": "Dialog with trigger, content, header and footer",
+        "code": "<Dialog>\n  <DialogTrigger>\n    <Button>Open Dialog</Button>\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>Are you sure?</DialogTitle>\n      <DialogDescription>This action cannot be undone.</DialogDescription>\n    </DialogHeader>\n    <DialogFooter>\n      <Button variant=\"outline\">Cancel</Button>\n      <Button>Continue</Button>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>"
+      },
+      {
+        "title": "Controlled Dialog",
+        "description": "Dialog controlled with open binding",
+        "code": "<Dialog [(open)]=\"isOpen\">\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>Edit Profile</DialogTitle>\n    </DialogHeader>\n    <!-- form content -->\n  </DialogContent>\n</Dialog>"
+      }
+    ],
     "installation": {
       "npm": "npm install @ng-cn/dialog",
       "pnpm": "pnpm add @ng-cn/dialog",
@@ -1306,7 +1420,8 @@ export const componentsData: ComponentMetadata[] = [
         ]
       }
     },
-    "usage": "import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/lib/components/ui/dialog';\n\n"
+    "usage": "import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/lib/components/ui/dialog';\n\n@Component({\n  imports: [Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter],\n  template: `<!-- see examples -->`\n})",
+    "relatedComponents": ["Alert Dialog", "Sheet", "Drawer"]
   },
   {
     "name": "Drawer",
@@ -1687,8 +1802,40 @@ export const componentsData: ComponentMetadata[] = [
       "clsx",
       "tailwind-merge"
     ],
-    "inputs": [],
-    "examples": [],
+    "inputs": [
+      {
+        "name": "variant",
+        "type": "string",
+        "default": "default",
+        "description": "Visual style: default | secondary | destructive | outline",
+        "required": false
+      },
+      {
+        "name": "class",
+        "type": "string",
+        "description": "Additional CSS classes.",
+        "required": false
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "values": ["default", "secondary", "destructive", "outline"],
+        "default": "default"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Basic Badge",
+        "description": "Default badge usage",
+        "code": "<Badge>New</Badge>"
+      },
+      {
+        "title": "Badge Variants",
+        "description": "Different visual styles",
+        "code": "<Badge variant=\"default\">Default</Badge>\n<Badge variant=\"secondary\">Secondary</Badge>\n<Badge variant=\"destructive\">Error</Badge>\n<Badge variant=\"outline\">Outline</Badge>"
+      }
+    ],
     "installation": {
       "npm": "npm install @ng-cn/badge",
       "pnpm": "pnpm add @ng-cn/badge",
@@ -1703,11 +1850,12 @@ export const componentsData: ComponentMetadata[] = [
           "Import Badge in your component"
         ],
         "files": [
-          "src/app/lib/components/ui/badge/badge.component.ts"
+          "src/app/lib/components/ui/badge/badge.component.ts",
+          "src/app/lib/components/ui/badge/badge-variants.ts"
         ]
       }
     },
-    "usage": "import { Badge } from '@/lib/components/ui/badge';\n\n"
+    "usage": "import { Badge } from '@/lib/components/ui/badge';\n\n@Component({\n  imports: [Badge],\n  template: `<Badge variant=\"secondary\">Beta</Badge>`\n})"
   },
   {
     "name": "Calendar",

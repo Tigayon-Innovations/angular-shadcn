@@ -2,6 +2,7 @@
  * Get Component Tool
  *
  * Gets detailed information about a specific ng-cn component.
+ * Returns human-readable text with step-by-step instructions.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -30,102 +31,95 @@ export const getComponentTool: Tool = {
 };
 
 function formatComponentDetails(component: ComponentMetadata, packageManager: string): string {
-  let details = `# ${component.name}\n\n`;
-  details += `${component.description}\n\n`;
+  let text = '';
 
-  details += `## Basic Information\n\n`;
-  details += `- **Selector**: \`${component.selector}\`\n`;
-  details += `- **Package**: ${component.package}\n`;
-  details += `- **Category**: ${component.category}\n`;
+  // Header
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `  ${component.name.toUpperCase()} COMPONENT\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  text += `${component.description}\n\n`;
 
-  if (component.dependencies.length > 0) {
-    details += `- **Dependencies**: ${component.dependencies.join(', ')}\n`;
-  }
+  // Quick Start
+  text += `📦 QUICK START\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  text += `Step 1: Install the component\n\n`;
+  text += `  ${component.installation.ngAdd}\n\n`;
+  text += `Step 2: Import in your component\n\n`;
+  text += `  ${component.usage.trim()}\n\n`;
 
-  details += `\n`;
+  // Installation Options
+  text += `🔧 INSTALLATION OPTIONS\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  text += `Recommended: Use Angular CLI schematic\n`;
+  text += `  ${component.installation.ngAdd}\n\n`;
+  text += `Alternative: Package managers\n`;
+  text += `  npm:  ${component.installation.npm}\n`;
+  text += `  pnpm: ${component.installation.pnpm}\n`;
+  text += `  yarn: ${component.installation.yarn}\n`;
+  text += `  bun:  ${component.installation.bun}\n\n`;
 
-  // Installation
-  details += `## Installation\n\n`;
-  details += `### Using Package Managers\n\n`;
-  details += `\`\`\`bash\n`;
-  details += `# npm\n${component.installation.npm}\n\n`;
-  details += `# pnpm\n${component.installation.pnpm}\n\n`;
-  details += `# yarn\n${component.installation.yarn}\n\n`;
-  details += `# bun\n${component.installation.bun}\n`;
-  details += `\`\`\`\n\n`;
-
-  details += `### Using Angular CLI\n\n`;
-  details += `\`\`\`bash\n${component.installation.ngAdd}\n\`\`\`\n\n`;
-
-  details += `### Manual Installation\n\n`;
-  details += `${component.installation.manual.description}\n\n`;
-  details += `**Steps:**\n`;
-  component.installation.manual.steps.forEach((step, i) => {
-    details += `${i + 1}. ${step}\n`;
-  });
-  details += `\n**Files:**\n`;
-  component.installation.manual.files.forEach((file) => {
-    details += `- \`${file}\`\n`;
-  });
-  details += `\n`;
-
-  // Usage
-  details += `## Usage\n\n`;
-  details += `\`\`\`typescript\n${component.usage}\n\`\`\`\n\n`;
+  // Component Info
+  text += `📋 COMPONENT INFO\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  text += `  Selector:  ${component.selector}\n`;
+  text += `  Package:   ${component.package}\n`;
+  text += `  Category:  ${component.category}\n\n`;
 
   // Inputs
   if (component.inputs && component.inputs.length > 0) {
-    details += `## Inputs\n\n`;
+    text += `⚡ INPUTS (Properties)\n`;
+    text += `─────────────────────────────────────────────────────────────\n\n`;
     component.inputs.forEach((input) => {
-      details += `### ${input.name}\n`;
-      details += `- **Type**: \`${input.type}\`\n`;
-      details += `- **Description**: ${input.description}\n`;
-      if (input.default) {
-        details += `- **Default**: ${input.default}\n`;
-      }
-      details += `- **Required**: ${input.required ? 'Yes' : 'No'}\n\n`;
+      const required = input.required ? ' (required)' : '';
+      const defaultVal = input.default ? ` = ${input.default}` : '';
+      text += `  [${input.name}]: ${input.type}${defaultVal}${required}\n`;
+      text += `    ${input.description}\n\n`;
     });
   }
 
   // Outputs
   if (component.outputs && component.outputs.length > 0) {
-    details += `## Outputs\n\n`;
+    text += `📤 OUTPUTS (Events)\n`;
+    text += `─────────────────────────────────────────────────────────────\n\n`;
     component.outputs.forEach((output) => {
-      details += `### ${output.name}\n`;
-      details += `- **Type**: \`${output.type}\`\n`;
-      details += `- **Description**: ${output.description}\n\n`;
+      text += `  (${output.name}): ${output.type}\n`;
+      text += `    ${output.description}\n\n`;
     });
   }
 
   // Variants
   if (component.variants && component.variants.length > 0) {
-    details += `## Variants\n\n`;
+    text += `🎨 VARIANTS\n`;
+    text += `─────────────────────────────────────────────────────────────\n\n`;
     component.variants.forEach((variant) => {
-      details += `### ${variant.name}\n`;
-      details += `**Values**: ${variant.values.map((v) => `\`${v}\``).join(', ')}\n`;
-      if (variant.default) {
-        details += `**Default**: \`${variant.default}\`\n`;
-      }
-      details += `\n`;
+      const defaultVal = variant.default ? ` (default: ${variant.default})` : '';
+      text += `  ${variant.name}${defaultVal}\n`;
+      text += `    Options: ${variant.values.join(' | ')}\n\n`;
     });
   }
 
   // Examples
-  details += `## Examples\n\n`;
-  component.examples.forEach((example) => {
-    details += `### ${example.title}\n`;
-    details += `${example.description}\n\n`;
-    details += `\`\`\`html\n${example.code}\n\`\`\`\n\n`;
-  });
+  if (component.examples && component.examples.length > 0) {
+    text += `💡 USAGE EXAMPLES\n`;
+    text += `─────────────────────────────────────────────────────────────\n\n`;
+    component.examples.forEach((example) => {
+      text += `${example.title}\n`;
+      text += `${example.description}\n\n`;
+      text += `${example.code}\n\n`;
+    });
+  }
 
   // Related Components
   if (component.relatedComponents && component.relatedComponents.length > 0) {
-    details += `## Related Components\n\n`;
-    details += component.relatedComponents.map((c) => `- ${c}`).join('\n');
-    details += `\n`;
+    text += `🔗 RELATED COMPONENTS\n`;
+    text += `─────────────────────────────────────────────────────────────\n\n`;
+    text += `  ${component.relatedComponents.join(', ')}\n\n`;
   }
 
-  return details;
+  // Footer
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+
+  return text;
 }
 
 export function handleGetComponent(args: any) {

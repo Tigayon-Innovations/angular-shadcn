@@ -17,14 +17,30 @@ export const listCategoriesTool: Tool = {
 };
 
 export function handleListCategories() {
-  let text = `# Component Categories\n\n`;
+  let text = `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `  COMPONENT CATEGORIES\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  const categoryDescriptions: Record<string, string> = {
+    basic: 'Core UI components like menus, tabs, and navigation',
+    form: 'Form inputs, controls, and validation components',
+    layout: 'Layout and spacing components like cards, separators',
+    overlay: 'Dialogs, popovers, tooltips, and notifications',
+    complex: 'Feature-rich components like calendars, tables',
+    advanced: 'Specialized components for advanced use cases',
+  };
 
   Object.entries(componentCategories).forEach(([key, value]) => {
     const count = componentsData.filter((c) => c.category === key).length;
-    text += `## ${value}\n`;
-    text += `- **Category ID**: \`${key}\`\n`;
-    text += `- **Components**: ${count}\n\n`;
+    text += `📁 ${value}\n`;
+    text += `   ID: ${key}\n`;
+    text += `   Components: ${count}\n`;
+    text += `   ${categoryDescriptions[key] || ''}\n\n`;
   });
+
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `Use search_components with category filter to list components.\n`;
+  text += `Example: search_components({ category: "form" })\n`;
 
   return {
     content: [

@@ -90,35 +90,43 @@ export function handleGetInstallCommand(args: any) {
 
   const pm = PACKAGE_MANAGERS.find((p) => p.name === packageManager) || PACKAGE_MANAGERS[0];
 
-  let text = `# Installation Commands\n\n`;
-  text += `## Using ${pm.name}\n\n`;
-  text += `\`\`\`bash\n`;
-  text += `${pm.addCommand} ${packages.join(' ')}`;
+  let text = `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `  INSTALLATION COMMANDS\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
+  text += `📦 RECOMMENDED: Angular CLI Schematic\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  componentData.forEach((c) => {
+    const kebab = c.selector.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    text += `  ng g @ng-cn/core:c ${kebab}\n`;
+  });
+  text += `\n`;
+
+  text += `📦 ALTERNATIVE: ${pm.name.toUpperCase()}\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  text += `  ${pm.addCommand} ${packages.join(' ')}`;
   if (dependencies.size > 0) {
     text += ` ${Array.from(dependencies).join(' ')}`;
   }
+  text += `\n\n`;
 
-  text += `\n\`\`\`\n\n`;
-
-  text += `## Using Angular CLI (ng add)\n\n`;
-  text += `\`\`\`bash\n`;
-  packages.forEach((pkg) => {
-    text += `${pm.ngAddCommand} ${pkg}\n`;
-  });
-  text += `\`\`\`\n\n`;
-
-  text += `## Components to Install\n\n`;
+  text += `📋 COMPONENTS TO INSTALL (${componentData.length})\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
   componentData.forEach((c) => {
-    text += `- **${c.name}**: ${c.description}\n`;
+    text += `  ✓ ${c.name}\n`;
+    text += `    ${c.description}\n\n`;
   });
 
-  if (dependencies.size > 0) {
-    text += `\n## Required Dependencies\n\n`;
-    Array.from(dependencies).forEach((dep) => {
-      text += `- ${dep}\n`;
-    });
-  }
+  text += `📝 NEXT STEPS\n`;
+  text += `─────────────────────────────────────────────────────────────\n\n`;
+  text += `  1. Run the installation command above\n`;
+  text += `  2. Import the component in your Angular component:\n\n`;
+  componentData.forEach((c) => {
+    text += `     ${c.usage.trim().split('\n')[0]}\n`;
+  });
+  text += `\n  3. Use the selector in your template\n\n`;
+
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
 
   return {
     content: [

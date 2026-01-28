@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ngAdd = ngAdd;
+const core_1 = require("@angular-devkit/core");
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const jsonc_parser_1 = require("jsonc-parser");
-const core_1 = require("@angular-devkit/core");
 // Registry of all utility files that need to be copied
 const UTILS_FILES_REGISTRY = [
     // Core utils
@@ -164,6 +164,14 @@ const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
   @keyframes collapsible-up { from { height: var(--collapsible-content-height); } to { height: 0; } }
 }
 `;
+// PostCSS config template for Tailwind CSS v4
+const POSTCSS_CONFIG_TEMPLATE = `/** @type {import('postcss').Config} */
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+`;
 // cn utility template
 const CN_UTILITY_TEMPLATE = `import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -294,6 +302,25 @@ function ngAdd(options) {
                 }
             }
         }
+        // Create postcss.config.mjs for Tailwind CSS v4
+        context.logger.info('');
+        context.logger.info('🔧 PostCSS Configuration');
+        const postcssConfigPath = '/postcss.config.mjs';
+        if (!tree.exists(postcssConfigPath)) {
+            tree.create(postcssConfigPath, POSTCSS_CONFIG_TEMPLATE);
+            context.logger.info(`   + postcss.config.mjs (Tailwind CSS v4)`);
+        }
+        else {
+            const existingConfig = tree.read(postcssConfigPath).toString('utf-8');
+            if (!existingConfig.includes('@tailwindcss/postcss')) {
+                // Update existing config to use Tailwind CSS v4
+                tree.overwrite(postcssConfigPath, POSTCSS_CONFIG_TEMPLATE);
+                context.logger.info(`   ✓ postcss.config.mjs updated for Tailwind CSS v4`);
+            }
+            else {
+                context.logger.info(`   ✓ postcss.config.mjs already configured`);
+            }
+        }
         // Update tsconfig paths
         context.logger.info('');
         context.logger.info('⚙️  TypeScript Config');
@@ -375,6 +402,8 @@ function ngAdd(options) {
             context.logger.info('');
         }
         context.logger.info('╭──────────────────────────────────────────────────╮');
+        context.logger.info('│  ✅ Tailwind CSS v4 configured automatically!   │');
+        context.logger.info('│                                                  │');
         context.logger.info('│  🚀 Next steps:                                  │');
         context.logger.info('│                                                  │');
         context.logger.info('│  1. Add more components:                         │');

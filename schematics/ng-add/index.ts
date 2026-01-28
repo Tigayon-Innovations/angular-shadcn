@@ -172,6 +172,15 @@ const CSS_VARIABLES_TEMPLATE = `/* ng-cn/core - shadcn-angular styles */
 }
 `;
 
+// PostCSS config template for Tailwind CSS v4
+const POSTCSS_CONFIG_TEMPLATE = `/** @type {import('postcss').Config} */
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+`;
+
 // cn utility template
 const CN_UTILITY_TEMPLATE = `import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -316,6 +325,25 @@ export function ngAdd(options: NgAddOptions): Rule {
       }
     }
 
+    // Create postcss.config.mjs for Tailwind CSS v4
+    context.logger.info('');
+    context.logger.info('🔧 PostCSS Configuration');
+
+    const postcssConfigPath = '/postcss.config.mjs';
+    if (!tree.exists(postcssConfigPath)) {
+      tree.create(postcssConfigPath, POSTCSS_CONFIG_TEMPLATE);
+      context.logger.info(`   + postcss.config.mjs (Tailwind CSS v4)`);
+    } else {
+      const existingConfig = tree.read(postcssConfigPath)!.toString('utf-8');
+      if (!existingConfig.includes('@tailwindcss/postcss')) {
+        // Update existing config to use Tailwind CSS v4
+        tree.overwrite(postcssConfigPath, POSTCSS_CONFIG_TEMPLATE);
+        context.logger.info(`   ✓ postcss.config.mjs updated for Tailwind CSS v4`);
+      } else {
+        context.logger.info(`   ✓ postcss.config.mjs already configured`);
+      }
+    }
+
     // Update tsconfig paths
     context.logger.info('');
     context.logger.info('⚙️  TypeScript Config');
@@ -409,6 +437,8 @@ export function ngAdd(options: NgAddOptions): Rule {
     }
 
     context.logger.info('╭──────────────────────────────────────────────────╮');
+    context.logger.info('│  ✅ Tailwind CSS v4 configured automatically!   │');
+    context.logger.info('│                                                  │');
     context.logger.info('│  🚀 Next steps:                                  │');
     context.logger.info('│                                                  │');
     context.logger.info('│  1. Add more components:                         │');

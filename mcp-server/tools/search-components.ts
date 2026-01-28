@@ -31,17 +31,29 @@ export function handleSearchComponents(args: any) {
   const { query = '', category } = args;
   const results = searchComponents(query, category);
 
-  const text = `# Search Results\n\nFound ${results.length} component(s)\n\n` +
-    results
-      .map(
-        (c) =>
-          `## ${c.name}\n` +
-          `- **Selector**: \`${c.selector}\`\n` +
-          `- **Category**: ${c.category}\n` +
-          `- **Package**: ${c.package}\n` +
-          `- **Description**: ${c.description}\n`
-      )
-      .join('\n');
+  let text = `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `  SEARCH RESULTS\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  if (query) text += `Query: "${query}"\n`;
+  if (category) text += `Category: ${category}\n`;
+  text += `Found: ${results.length} component(s)\n\n`;
+
+  if (results.length === 0) {
+    text += `No components found. Try a different search term.\n`;
+  } else {
+    results.forEach((c) => {
+      text += `─────────────────────────────────────────────────────────────\n`;
+      text += `${c.name}\n`;
+      text += `  Selector:  ${c.selector}\n`;
+      text += `  Category:  ${c.category}\n`;
+      text += `  Install:   ng g @ng-cn/core:c ${c.selector.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
+      text += `  ${c.description}\n\n`;
+    });
+  }
+
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  text += `Use get_component for detailed info about a specific component.\n`;
 
   return {
     content: [
