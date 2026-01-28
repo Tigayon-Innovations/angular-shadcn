@@ -702,32 +702,25 @@ function ngAdd(options) {
                 context.logger.info('   ✓ Path aliases already set');
             }
         }
-        // Install selected components
+        // Copy selected components from @ng-cn/core
         const componentsToInstall = parseComponentsOption(options.components);
         if (componentsToInstall.length > 0) {
             context.logger.info('');
             if (options.components === 'all') {
-                context.logger.info(`🚀 Installing ALL ${componentsToInstall.length} components... (Magic Mode)`);
+                context.logger.info(`🚀 Copying ALL ${componentsToInstall.length} components... (Magic Mode)`);
             }
             else {
                 context.logger.info('📦 Selected Components');
             }
-            const packageJson = JSON.parse(tree.read(packageJsonPath).toString('utf-8'));
+            // For now, just log the components that would be copied
+            // Components will be available via 'ng g @ng-cn/core:component <name>'
             for (const component of componentsToInstall) {
-                const packageName = `@ng-cn/${component}`;
-                if (!packageJson.dependencies?.[packageName]) {
-                    packageJson.dependencies = packageJson.dependencies || {};
-                    packageJson.dependencies[packageName] = 'latest';
-                    context.logger.info(`   + ${packageName}`);
-                }
-                else {
-                    context.logger.info(`   ✓ ${packageName} already installed`);
-                }
+                context.logger.info(`   + ${component} (available via: ng g @ng-cn/core:component ${component})`);
             }
-            tree.overwrite(packageJsonPath, JSON.stringify(packageJson, null, 2));
-            if (!options.skipInstall) {
-                context.addTask(new tasks_1.NodePackageInstallTask());
-            }
+            context.logger.info('');
+            context.logger.info('💡 To copy individual components, use:');
+            context.logger.info(`   ng g @ng-cn/core:component button`);
+            context.logger.info(`   ng g @ng-cn/core:component card`);
         }
         // Success message with ASCII art banner
         context.logger.info('');
