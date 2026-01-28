@@ -1,6 +1,6 @@
 {
   "name": "@ng-cn/core",
-  "version": "1.0.06",
+  "version": "1.0.07",
   "description": "Beautifully designed Angular components built with Tailwind CSS v4 - The official Angular port of shadcn/ui",
   "keywords": [
     "angular",
@@ -25,6 +25,11 @@
   "ng-add": {
     "save": "dependencies"
   },
+  "files": [
+    "schematics",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
