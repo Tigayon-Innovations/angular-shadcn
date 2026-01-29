@@ -16,10 +16,10 @@ module.exports = {
     },
     {
       name: 'mcp-server',
-      script: './dist/mcp-server/http-server.js',
+      script: './dist/mcp-server/streamable-http-server.js',
       env: {
         NODE_ENV: 'production',
-        PORT: 4500
+        MCP_PORT: 3100
       },
       autorestart: true,
       max_memory_restart: '300M',

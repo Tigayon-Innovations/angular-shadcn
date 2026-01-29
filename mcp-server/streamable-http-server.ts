@@ -8,7 +8,7 @@
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamable-http.js';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import {
     CallToolRequestSchema,
     ListToolsRequestSchema,
@@ -37,59 +37,62 @@ app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', server: 'ng-cn-mcp', transport: 'streamable-http' });
 });
 
-// MCP Streamable HTTP endpoint
-app.post('/mcp', async (req: Request, res: Response) => {
-  const transport = new StreamableHTTPServerTransport(req, res);
-  const server = new Server(
-    {
-      name: 'ng-cn',
-      version: '0.1.0',
+// Create the MCP server instance
+const mcpServer = new Server(
+  {
+    name: 'ng-cn',
+    version: '0.1.0',
+  },
+  {
+    capabilities: {
+      tools: {},
     },
-    {
-      capabilities: {
-        tools: {},
-      },
-    }
-  );
+  }
+);
 
-  // Setup tool handlers
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools,
-  }));
+// Setup tool handlers
+mcpServer.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools,
+}));
 
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    const { name, arguments: args } = request.params;
-
-    try {
-      const handler = toolHandlers[name as keyof typeof toolHandlers];
-      if (!handler) {
-        throw new Error(`Unknown tool: ${name}`);
-      }
-      return handler(args);
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: `Error: ${errorMessage}`,
-          },
-        ],
-      };
-    }
-  });
-
-  server.onerror = (error) => {
-    console.error('[MCP Error]', error);
-  };
+mcpServer.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
 
   try {
-    await server.connect(transport);
-    console.log('MCP client connected via Streamable HTTP');
+    const handler = toolHandlers[name as keyof typeof toolHandlers];
+    if (!handler) {
+      throw new Error(`Unknown tool: ${name}`);
+    }
+    return handler(args);
   } catch (error) {
-    console.error('Error connecting MCP server:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `Error: ${errorMessage}`,
+        },
+      ],
+    };
+  }
+});
+
+mcpServer.onerror = (error) => {
+  console.error('[MCP Error]', error);
+};
+
+// Create transport instance
+const transport = new StreamableHTTPServerTransport();
+
+// MCP Streamable HTTP endpoint - handles both GET and POST
+app.all('/mcp', async (req: Request, res: Response) => {
+  try {
+    await transport.handleRequest(req, res, req.body);
+    console.log('MCP request handled via Streamable HTTP');
+  } catch (error) {
+    console.error('Error handling MCP request:', error);
     if (!res.headersSent) {
-      res.status(500).json({ error: 'Failed to establish MCP connection' });
+      res.status(500).json({ error: 'Failed to handle MCP request' });
     }
   }
 });
@@ -112,8 +115,19 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 ng-cn MCP Server running on http://localhost:${PORT}`);
-  console.log(`📡 Streamable HTTP endpoint: http://localhost:${PORT}/mcp`);
-  console.log(`💚 Health check: http://localhost:${PORT}/health\n`);
+// Initialize and start server
+async function start() {
+  // Connect the server to the transport
+  await mcpServer.connect(transport);
+  
+  app.listen(PORT, () => {
+    console.log(`\n🚀 ng-cn MCP Server running on http://localhost:${PORT}`);
+    console.log(`📡 Streamable HTTP endpoint: http://localhost:${PORT}/mcp`);
+    console.log(`💚 Health check: http://localhost:${PORT}/health\n`);
+  });
+}
+
+start().catch(error => {
+  console.error('Failed to start server:', error);
+  process.exit(1);
 });
