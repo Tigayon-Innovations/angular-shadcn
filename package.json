@@ -1,6 +1,6 @@
 {
   "name": "@ng-cn/core",
-  "version": "1.0.06",
+  "version": "1.0.15",
   "description": "Beautifully designed Angular components built with Tailwind CSS v4 - The official Angular port of shadcn/ui",
   "keywords": [
     "angular",
@@ -25,6 +25,12 @@
   "ng-add": {
     "save": "dependencies"
   },
+  "files": [
+    "schematics",
+    "src/app/lib",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -73,12 +79,12 @@
     "shiki": "^3.20.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@angular-devkit/core": "^21.0.4",
+    "@angular-devkit/schematics": "^21.0.4"
   },
   "devDependencies": {
     "@analogjs/vitest-angular": "^2.2.0",
-    "@angular-devkit/core": "^21.0.4",
-    "@angular-devkit/schematics": "^21.0.4",
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.6",

@@ -17,6 +17,65 @@ const ALL_COMPONENTS = [
     'table', 'tabs', 'textarea', 'toast', 'toggle', 'toggle-group', 'tooltip',
     'typography'
 ];
+const COMPONENT_REGISTRY = {
+    accordion: { files: ['accordion.component.ts', 'accordion-content.component.ts', 'accordion-context.ts', 'accordion-item.component.ts', 'accordion-trigger.component.ts', 'index.ts'] },
+    alert: { files: ['alert.component.ts', 'alert-title.component.ts', 'alert-description.component.ts', 'alert-variants.ts', 'index.ts'] },
+    'alert-dialog': { files: ['alert-dialog.component.ts', 'alert-dialog-action.component.ts', 'alert-dialog-cancel.component.ts', 'alert-dialog-content.component.ts', 'alert-dialog-context.ts', 'alert-dialog-description.component.ts', 'alert-dialog-footer.component.ts', 'alert-dialog-header.component.ts', 'alert-dialog-title.component.ts', 'alert-dialog-trigger.component.ts', 'index.ts'] },
+    'aspect-ratio': { files: ['aspect-ratio.component.ts', 'index.ts'] },
+    avatar: { files: ['avatar.component.ts', 'avatar-fallback.component.ts', 'avatar-image.component.ts', 'ui-avatar.component.ts', 'index.ts'] },
+    badge: { files: ['badge.component.ts', 'badge-variants.ts', 'index.ts'] },
+    breadcrumb: { files: ['breadcrumb.component.ts', 'breadcrumb-ellipsis.component.ts', 'breadcrumb-item.component.ts', 'breadcrumb-link.component.ts', 'breadcrumb-list.component.ts', 'breadcrumb-page.component.ts', 'breadcrumb-separator.component.ts', 'index.ts'] },
+    button: { files: ['button.component.ts', 'button-variants.ts', 'index.ts'] },
+    'button-group': { files: ['button-group.component.ts', 'button-group-variants.ts', 'index.ts'] },
+    calendar: { files: ['calendar.component.ts', 'index.ts'] },
+    card: { files: ['card.component.ts', 'card-action.component.ts', 'card-content.component.ts', 'card-description.component.ts', 'card-footer.component.ts', 'card-header.component.ts', 'card-title.component.ts', 'index.ts'] },
+    carousel: { files: ['carousel.component.ts', 'carousel-content.component.ts', 'carousel-context.ts', 'carousel-item.component.ts', 'carousel-next.component.ts', 'carousel-previous.component.ts', 'index.ts'] },
+    chart: { files: ['chart.component.ts', 'chart-container.component.ts', 'chart-context.ts', 'chart-legend.component.ts', 'chart-legend-content.component.ts', 'chart-tooltip.component.ts', 'chart-tooltip-content.component.ts', 'index.ts'] },
+    checkbox: { files: ['checkbox.component.ts', 'index.ts'] },
+    collapsible: { files: ['collapsible.component.ts', 'collapsible-content.component.ts', 'collapsible-context.ts', 'collapsible-trigger.component.ts', 'index.ts'] },
+    combobox: { files: ['combobox.component.ts', 'combobox-content.component.ts', 'combobox-context.ts', 'combobox-empty.component.ts', 'combobox-group.component.ts', 'combobox-input.component.ts', 'combobox-item.component.ts', 'combobox-list.component.ts', 'combobox-trigger.component.ts', 'combobox-value.component.ts', 'index.ts'] },
+    command: { files: ['command.component.ts', 'command-context.ts', 'command-dialog.component.ts', 'command-empty.component.ts', 'command-group.component.ts', 'command-input.component.ts', 'command-item.component.ts', 'command-list.component.ts', 'command-separator.component.ts', 'command-shortcut.component.ts', 'index.ts'] },
+    'context-menu': { files: ['context-menu.component.ts', 'context-menu-checkbox-item.component.ts', 'context-menu-content.component.ts', 'context-menu-context.ts', 'context-menu-item.component.ts', 'context-menu-label.component.ts', 'context-menu-radio-group.component.ts', 'context-menu-radio-item.component.ts', 'context-menu-separator.component.ts', 'context-menu-shortcut.component.ts', 'context-menu-sub.component.ts', 'context-menu-sub-content.component.ts', 'context-menu-sub-trigger.component.ts', 'context-menu-trigger.component.ts', 'index.ts'] },
+    'data-table': { files: ['data-table.component.ts', 'data-table-content.component.ts', 'data-table-context.ts', 'data-table-pagination.component.ts', 'data-table-search.component.ts', 'data-table-toolbar.component.ts', 'data-table-view-options.component.ts', 'index.ts'] },
+    'date-picker': { files: ['date-picker.component.ts', 'index.ts'] },
+    dialog: { files: ['dialog.component.ts', 'dialog-close.component.ts', 'dialog-content.component.ts', 'dialog-context.ts', 'dialog-description.component.ts', 'dialog-footer.component.ts', 'dialog-header.component.ts', 'dialog-title.component.ts', 'dialog-trigger.component.ts', 'index.ts'] },
+    drawer: { files: ['drawer.component.ts', 'drawer-close.component.ts', 'drawer-content.component.ts', 'drawer-context.ts', 'drawer-description.component.ts', 'drawer-footer.component.ts', 'drawer-header.component.ts', 'drawer-title.component.ts', 'drawer-trigger.component.ts', 'index.ts'] },
+    'dropdown-menu': { files: ['dropdown-menu.component.ts', 'dropdown-menu-checkbox-item.component.ts', 'dropdown-menu-content.component.ts', 'dropdown-menu-context.ts', 'dropdown-menu-group.component.ts', 'dropdown-menu-item.component.ts', 'dropdown-menu-label.component.ts', 'dropdown-menu-radio-group.component.ts', 'dropdown-menu-radio-item.component.ts', 'dropdown-menu-separator.component.ts', 'dropdown-menu-shortcut.component.ts', 'dropdown-menu-sub.component.ts', 'dropdown-menu-sub-content.component.ts', 'dropdown-menu-sub-trigger.component.ts', 'dropdown-menu-trigger.component.ts', 'index.ts'] },
+    empty: { files: ['empty.component.ts', 'empty-action.component.ts', 'empty-description.component.ts', 'empty-icon.component.ts', 'empty-title.component.ts', 'index.ts'] },
+    form: { files: ['form.component.ts', 'form-context.ts', 'form-control.component.ts', 'form-description.component.ts', 'form-field.component.ts', 'form-item.component.ts', 'form-label.component.ts', 'form-message.component.ts', 'index.ts'] },
+    'hover-card': { files: ['hover-card.component.ts', 'hover-card-content.component.ts', 'hover-card-context.ts', 'hover-card-trigger.component.ts', 'index.ts'] },
+    input: { files: ['input.component.ts', 'index.ts'] },
+    'input-group': { files: ['input-group.component.ts', 'input-group-addon.component.ts', 'input-group-input.component.ts', 'index.ts'] },
+    'input-otp': { files: ['input-otp.component.ts', 'input-otp-context.ts', 'input-otp-group.component.ts', 'input-otp-separator.component.ts', 'input-otp-slot.component.ts', 'index.ts'] },
+    kbd: { files: ['kbd.component.ts', 'kbd-variants.ts', 'index.ts'] },
+    label: { files: ['label.component.ts', 'index.ts'] },
+    menubar: { files: ['menubar.component.ts', 'menubar-checkbox-item.component.ts', 'menubar-content.component.ts', 'menubar-context.ts', 'menubar-item.component.ts', 'menubar-label.component.ts', 'menubar-menu.component.ts', 'menubar-radio-group.component.ts', 'menubar-radio-item.component.ts', 'menubar-separator.component.ts', 'menubar-shortcut.component.ts', 'menubar-sub.component.ts', 'menubar-sub-content.component.ts', 'menubar-sub-trigger.component.ts', 'menubar-trigger.component.ts', 'index.ts'] },
+    'native-select': { files: ['native-select.component.ts', 'native-select-variants.ts', 'index.ts'] },
+    'navigation-menu': { files: ['navigation-menu.component.ts', 'navigation-menu-content.component.ts', 'navigation-menu-context.ts', 'navigation-menu-indicator.component.ts', 'navigation-menu-item.component.ts', 'navigation-menu-link.component.ts', 'navigation-menu-list.component.ts', 'navigation-menu-trigger.component.ts', 'navigation-menu-trigger-style.ts', 'navigation-menu-viewport.component.ts', 'index.ts'] },
+    pagination: { files: ['pagination.component.ts', 'pagination-content.component.ts', 'pagination-ellipsis.component.ts', 'pagination-item.component.ts', 'pagination-link.component.ts', 'pagination-next.component.ts', 'pagination-previous.component.ts', 'index.ts'] },
+    popover: { files: ['popover.component.ts', 'popover-anchor.component.ts', 'popover-content.component.ts', 'popover-context.ts', 'popover-trigger.component.ts', 'index.ts'] },
+    progress: { files: ['progress.component.ts', 'index.ts'] },
+    'radio-group': { files: ['radio-group.component.ts', 'radio-group-context.ts', 'radio-group-item.component.ts', 'index.ts'] },
+    resizable: { files: ['resizable-panel-group.component.ts', 'resizable-context.ts', 'resizable-handle.component.ts', 'resizable-panel.component.ts', 'index.ts'] },
+    'scroll-area': { files: ['scroll-area.component.ts', 'scroll-bar.component.ts', 'index.ts'] },
+    segmented: { files: ['segmented.component.ts', 'segmented-context.ts', 'segmented-item.component.ts', 'segmented-variants.ts', 'index.ts'] },
+    select: { files: ['select.component.ts', 'select-content.component.ts', 'select-context.ts', 'select-group.component.ts', 'select-item.component.ts', 'select-label.component.ts', 'select-separator.component.ts', 'select-trigger.component.ts', 'select-value.component.ts', 'index.ts'] },
+    separator: { files: ['separator.component.ts', 'index.ts'] },
+    sheet: { files: ['sheet.component.ts', 'sheet-close.component.ts', 'sheet-content.component.ts', 'sheet-context.ts', 'sheet-description.component.ts', 'sheet-footer.component.ts', 'sheet-header.component.ts', 'sheet-title.component.ts', 'sheet-trigger.component.ts', 'sheet-variants.ts', 'index.ts'] },
+    sidebar: { files: ['sidebar.component.ts', 'sidebar-content.component.ts', 'sidebar-context.ts', 'sidebar-footer.component.ts', 'sidebar-group.component.ts', 'sidebar-group-action.component.ts', 'sidebar-group-content.component.ts', 'sidebar-group-label.component.ts', 'sidebar-header.component.ts', 'sidebar-input.component.ts', 'sidebar-inset.component.ts', 'sidebar-menu.component.ts', 'sidebar-menu-action.component.ts', 'sidebar-menu-badge.component.ts', 'sidebar-menu-button.component.ts', 'sidebar-menu-item.component.ts', 'sidebar-menu-skeleton.component.ts', 'sidebar-menu-sub.component.ts', 'sidebar-menu-sub-button.component.ts', 'sidebar-menu-sub-item.component.ts', 'sidebar-provider.component.ts', 'sidebar-rail.component.ts', 'sidebar-route-active.service.ts', 'sidebar-separator.component.ts', 'sidebar-trigger.component.ts', 'index.ts'] },
+    skeleton: { files: ['skeleton.component.ts', 'index.ts'] },
+    slider: { files: ['slider.component.ts', 'index.ts'] },
+    spinner: { files: ['spinner.component.ts', 'spinner-variants.ts', 'index.ts'] },
+    switch: { files: ['switch.component.ts', 'index.ts'] },
+    table: { files: ['table.component.ts', 'table-body.component.ts', 'table-caption.component.ts', 'table-cell.component.ts', 'table-footer.component.ts', 'table-head.component.ts', 'table-header.component.ts', 'table-row.component.ts', 'index.ts'] },
+    tabs: { files: ['tabs.component.ts', 'tabs-content.component.ts', 'tabs-context.ts', 'tabs-list.component.ts', 'tabs-trigger.component.ts', 'index.ts'] },
+    textarea: { files: ['textarea.component.ts', 'index.ts'] },
+    toast: { files: ['toast.component.ts', 'toast-action.component.ts', 'toast-description.component.ts', 'toast-title.component.ts', 'toast-variants.ts', 'toast.service.ts', 'toaster.component.ts', 'index.ts'] },
+    toggle: { files: ['toggle.component.ts', 'toggle-variants.ts', 'index.ts'] },
+    'toggle-group': { files: ['toggle-group.component.ts', 'toggle-group-context.ts', 'toggle-group-item.component.ts', 'index.ts'] },
+    tooltip: { files: ['tooltip.component.ts', 'tooltip-content.component.ts', 'tooltip-context.ts', 'tooltip-provider.component.ts', 'tooltip-trigger.component.ts', 'index.ts'] },
+    typography: { files: ['typography-blockquote.component.ts', 'typography-h1.component.ts', 'typography-h2.component.ts', 'typography-h3.component.ts', 'typography-h4.component.ts', 'typography-inline-code.component.ts', 'typography-large.component.ts', 'typography-lead.component.ts', 'typography-list.component.ts', 'typography-muted.component.ts', 'typography-p.component.ts', 'typography-small.component.ts', 'index.ts'] },
+};
 // Registry of all utility files that need to be copied
 const UTILS_FILES_REGISTRY = [
     // Core utils
@@ -545,12 +604,17 @@ function ngAdd(options) {
         const packageJsonPath = '/package.json';
         if (tree.exists(packageJsonPath)) {
             const packageJson = JSON.parse(tree.read(packageJsonPath).toString('utf-8'));
+            // Detect Angular version to determine CDK version
+            const angularCoreVersion = packageJson.dependencies?.['@angular/core'] || packageJson.devDependencies?.['@angular/core'] || '';
+            const angularMajorVersion = parseInt(angularCoreVersion.replace(/[\^~]/, '').split('.')[0], 10) || 21;
+            // Use compatible CDK version based on Angular version
+            const cdkVersion = angularMajorVersion >= 21 ? '^21.0.5' : angularMajorVersion >= 20 ? '^20.0.0' : '^19.0.0';
             const requiredDependencies = {
                 'lucide-angular': '^0.562.0',
                 'class-variance-authority': '^0.7.1',
                 'clsx': '^2.1.1',
                 'tailwind-merge': '^3.4.0',
-                '@angular/cdk': '^21.0.5',
+                '@angular/cdk': cdkVersion,
                 'tailwindcss': '^4.1.18',
                 '@tailwindcss/postcss': '^4.1.18'
             };
@@ -702,31 +766,64 @@ function ngAdd(options) {
                 context.logger.info('   ✓ Path aliases already set');
             }
         }
-        // Install selected components
+        // Copy selected components from @ng-cn/core
         const componentsToInstall = parseComponentsOption(options.components);
         if (componentsToInstall.length > 0) {
             context.logger.info('');
             if (options.components === 'all') {
-                context.logger.info(`🚀 Installing ALL ${componentsToInstall.length} components... (Magic Mode)`);
+                context.logger.info(`🚀 Copying ALL ${componentsToInstall.length} components... (Magic Mode)`);
             }
             else {
                 context.logger.info('📦 Selected Components');
             }
-            const packageJson = JSON.parse(tree.read(packageJsonPath).toString('utf-8'));
-            for (const component of componentsToInstall) {
-                const packageName = `@ng-cn/${component}`;
-                if (!packageJson.dependencies?.[packageName]) {
-                    packageJson.dependencies = packageJson.dependencies || {};
-                    packageJson.dependencies[packageName] = 'latest';
-                    context.logger.info(`   + ${packageName}`);
+            // Actually copy the component files
+            const componentBasePath = 'node_modules/@ng-cn/core/src/app/lib/components/ui';
+            const fallbackBasePath = 'src/app/lib/components/ui';
+            let totalFilesCopied = 0;
+            for (const componentName of componentsToInstall) {
+                const componentInfo = COMPONENT_REGISTRY[componentName];
+                if (!componentInfo) {
+                    context.logger.warn(`   ⚠ Unknown component: ${componentName}`);
+                    continue;
+                }
+                const targetComponentPath = `/src/app/lib/components/ui/${componentName}`;
+                let filesCopied = 0;
+                for (const file of componentInfo.files) {
+                    // Try package path first, then fallback to local dev path
+                    let sourcePath = `${componentBasePath}/${componentName}/${file}`;
+                    const targetPath = `${targetComponentPath}/${file}`;
+                    let content = tree.read(sourcePath);
+                    if (!content) {
+                        // Fallback to local development path
+                        sourcePath = `${fallbackBasePath}/${componentName}/${file}`;
+                        content = tree.read(sourcePath);
+                    }
+                    if (content) {
+                        if (tree.exists(targetPath)) {
+                            tree.overwrite(targetPath, content);
+                        }
+                        else {
+                            tree.create(targetPath, content);
+                        }
+                        filesCopied++;
+                    }
+                }
+                if (filesCopied > 0) {
+                    context.logger.info(`   ✓ ${componentName} (${filesCopied} files)`);
+                    totalFilesCopied += filesCopied;
                 }
                 else {
-                    context.logger.info(`   ✓ ${packageName} already installed`);
+                    context.logger.warn(`   ⚠ ${componentName} - no files found (use: ng g @ng-cn/core:c ${componentName})`);
                 }
             }
-            tree.overwrite(packageJsonPath, JSON.stringify(packageJson, null, 2));
-            if (!options.skipInstall) {
-                context.addTask(new tasks_1.NodePackageInstallTask());
+            context.logger.info('');
+            if (totalFilesCopied > 0) {
+                context.logger.info(`   📦 ${totalFilesCopied} total files copied`);
+            }
+            else {
+                context.logger.info('💡 To copy components after install, use:');
+                context.logger.info(`   ng g @ng-cn/core:component button`);
+                context.logger.info(`   ng g @ng-cn/core:component card`);
             }
         }
         // Success message with ASCII art banner
