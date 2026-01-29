@@ -1,0 +1,138 @@
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616
+unhandledRejection b [Error]: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616 {
+  code: 205
+}
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:11930
+unhandledRejection b [Error]: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:11930 {
+  code: 205
+}
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616
+unhandledRejection b [Error]: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616 {
+  code: 205
+}
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616
+unhandledRejection b [Error]: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:616 {
+  code: 205
+}
+ERROR ReferenceError: document is not defined
+    at n.unlockBodyScroll (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:2373)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:1007
+    at Object.fn (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:23975)
+    at aa (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:2:4378)
+    at Object.run (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:22967)
+    at Eg (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:66951)
+    at WI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:67629)
+    at au (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:68670)
+    at Cg (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:68502)
+    at YI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:68438)
+ReferenceError: document is not defined
+    at n.unlockBodyScroll (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:2373)
+    at n.ngOnDestroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:1068)
+    at mI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:59529)
+    at Oc (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:58189)
+    at pI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:57887)
+    at ys (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:58094)
+    at Lt.destroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:70749)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:39796
+    at Array.forEach (<anonymous>)
+    at e.ngOnDestroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:39783)
+uncaughtException ReferenceError: document is not defined
+    at n.unlockBodyScroll (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:2373)
+    at n.ngOnDestroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-TPT2MU3V.mjs:2:1068)
+    at mI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:59529)
+    at Oc (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:58189)
+    at pI (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:57887)
+    at ys (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:58094)
+    at Lt.destroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:70749)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:39796
+    at Array.forEach (<anonymous>)
+    at e.ngOnDestroy (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:39783)
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:11930
+unhandledRejection b [Error]: NG0205
+    at mr (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:9170)
+    at Jt.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:7036)
+    at pu.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:6980)
+    at eh (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31345)
+    at th (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:31549)
+    at pn.get (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:5:33214)
+    at Kg.createComponent (file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-F6WMWXA6.mjs:31:17587)
+    at file:///var/www/frontend/tigayon/frontend/production/angular-shadcn/dist/shadcn-angular/server/chunk-FM7XMAOQ.mjs:8:11930 {
+  code: 205
+}
