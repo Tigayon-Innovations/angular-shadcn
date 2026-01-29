@@ -7,6 +7,13 @@
   "bin": {
     "ng-cn-mcp": "./index.js"
   },
+  "scripts": {
+    "start:stdio": "node --loader ts-node/esm index.ts",
+    "start:http": "node --loader ts-node/esm streamable-http-server.ts",
+    "start:sse": "node --loader ts-node/esm http-server.ts",
+    "dev:http": "tsx streamable-http-server.ts",
+    "dev:sse": "tsx http-server.ts"
+  },
   "keywords": [
     "mcp",
     "model-context-protocol",
