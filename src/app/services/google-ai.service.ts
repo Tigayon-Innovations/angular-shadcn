@@ -76,7 +76,11 @@ export class GoogleAiService {
     },
     {
       role: 'model',
-      parts: [{ text: 'I understand. I will generate harmonious CSS theme palettes in OKLCH format following the guidelines provided. Ready to create beautiful themes!' }],
+      parts: [
+        {
+          text: 'I understand. I will generate harmonious CSS theme palettes in OKLCH format following the guidelines provided. Ready to create beautiful themes!',
+        },
+      ],
     },
   ];
 
@@ -92,12 +96,12 @@ export class GoogleAiService {
         body: JSON.stringify({
           contents: [{ parts: [{ text }] }],
           systemInstruction: {
-            parts: [{ text: THEME_GENERATION_PROMPT }]
+            parts: [{ text: THEME_GENERATION_PROMPT }],
           },
           generationConfig: this.generationConfig,
           safetySettings: this.safetySettings,
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -135,12 +139,12 @@ export class GoogleAiService {
         body: JSON.stringify({
           contents: this.chatHistory,
           systemInstruction: {
-            parts: [{ text: THEME_GENERATION_PROMPT }]
+            parts: [{ text: THEME_GENERATION_PROMPT }],
           },
           generationConfig: this.generationConfig,
           safetySettings: this.safetySettings,
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -165,7 +169,7 @@ export class GoogleAiService {
   async chatWithFileAttachments(
     text: string,
     files: { data: string; mimeType: string }[],
-    isJson = false
+    isJson = false,
   ): Promise<string | object> {
     try {
       const fileParts: Part[] = files.map((file) => {
@@ -192,12 +196,12 @@ export class GoogleAiService {
           body: JSON.stringify({
             contents: [{ parts }],
             systemInstruction: {
-              parts: [{ text: THEME_GENERATION_PROMPT }]
+              parts: [{ text: THEME_GENERATION_PROMPT }],
             },
             generationConfig: this.generationConfig,
             safetySettings: this.safetySettings,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -227,7 +231,9 @@ export class GoogleAiService {
   /**
    * Generate a theme from a description
    */
-  async generateTheme(description: string): Promise<Record<string, { light: string; dark: string }>> {
+  async generateTheme(
+    description: string,
+  ): Promise<Record<string, { light: string; dark: string }>> {
     const prompt = `Generate a CSS color theme based on this description: "${description}".
 
 CRITICAL: If the description refers to a specific brand or framework (e.g., "Angular", "React", "Vue", "Tailwind"), you MUST use its official brand colors as the primary palette.
@@ -274,7 +280,11 @@ Ensure good contrast and accessibility.`;
       },
       {
         role: 'model',
-        parts: [{ text: 'I understand. I will generate harmonious CSS theme palettes in OKLCH format following the guidelines provided. Ready to create beautiful themes!' }],
+        parts: [
+          {
+            text: 'I understand. I will generate harmonious CSS theme palettes in OKLCH format following the guidelines provided. Ready to create beautiful themes!',
+          },
+        ],
       },
     ];
   }

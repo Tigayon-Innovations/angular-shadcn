@@ -1,0 +1,35 @@
+<section class="relative py-24 sm:py-32 border-t border-border/50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-muted mb-6">
+        <lucide-icon [img]="sparklesIcon" class="h-6 w-6 text-primary" />
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6">
+        Open source.<br />Built by the community.
+      </h2>
+      <p class="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
+        A community project bringing Radix + shadcn-style components to Angular. Contribute,
+        customize, and ship.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button routerLink="/docs" size="lg" class="h-12 px-8 text-base gap-2 group">
+          Read the docs
+          <lucide-icon
+            [img]="arrowRightIcon"
+            class="h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          class="h-12 px-8 text-base gap-2"
+          (click)="openGitHub()"
+        >
+          <lucide-icon [img]="githubIcon" class="h-4 w-4" />
+          Star on GitHub
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
