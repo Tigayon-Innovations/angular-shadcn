@@ -1,13 +1,13 @@
 import { Button } from '@/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/ui/dialog';
-import { Input } from '@/ui/input';
+
 import { Label } from '@/ui/label';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
   selector: 'DialogDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Button, Input, Label],
+  imports: [Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Button, Label],
   template: `
     <Dialog [(open)]="open">
       <DialogTrigger>

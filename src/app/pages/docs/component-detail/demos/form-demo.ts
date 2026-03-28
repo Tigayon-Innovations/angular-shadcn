@@ -8,7 +8,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/ui/form';
-import { Input } from '@/ui/input';
+
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -25,8 +25,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     FormItem,
     FormLabel,
     FormMessage,
-    Input,
-  ],
+    ],
   template: `
     <Form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full max-w-sm space-y-6">
       <FormField name="username">

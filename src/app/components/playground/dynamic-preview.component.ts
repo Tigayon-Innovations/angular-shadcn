@@ -1,12 +1,4 @@
-
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { DynamicRendererService, RenderableNode } from './dynamic-renderer.service';
 
 // Import all UI components for dynamic rendering
@@ -17,8 +9,16 @@ import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/ui/card';
 import { Checkbox } from '@/ui/checkbox';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/ui/dialog';
-import { Input } from '@/ui/input';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/ui/dialog';
+
 import { Label } from '@/ui/label';
 import { Progress } from '@/ui/progress';
 import { Separator } from '@/ui/separator';
@@ -52,7 +52,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
     CardHeader,
     CardTitle,
     Checkbox,
-    Input,
     Label,
     Tabs,
     TabsContent,
@@ -90,10 +89,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
           />
         }
         @case ('Label') {
-          <Label
-            [htmlFor]="getInput('htmlFor')"
-            [class]="getInput('class')"
-          >
+          <Label [htmlFor]="getInput('htmlFor')" [class]="getInput('class')">
             @for (child of node().children; track child.id) {
               <DynamicNode [node]="child" />
             }
@@ -107,250 +103,277 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/ui/tooltip';
           </div>
         }
         @case ('Button') {
-            <Button [variant]="getInput('variant')" [size]="getInput('size')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Button>
+          <Button
+            [variant]="getInput('variant')"
+            [size]="getInput('size')"
+            [class]="getInput('class')"
+          >
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Button>
         }
         @case ('Card') {
-            <Card [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Card>
+          <Card [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Card>
         }
         @case ('CardHeader') {
-            <CardHeader [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </CardHeader>
+          <CardHeader [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </CardHeader>
         }
         @case ('CardTitle') {
-            <CardTitle [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </CardTitle>
+          <CardTitle [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </CardTitle>
         }
         @case ('CardDescription') {
-            <CardDescription [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </CardDescription>
+          <CardDescription [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </CardDescription>
         }
         @case ('CardContent') {
-            <CardContent [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </CardContent>
+          <CardContent [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </CardContent>
         }
         @case ('CardFooter') {
-            <CardFooter [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </CardFooter>
+          <CardFooter [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </CardFooter>
         }
         @case ('Accordion') {
-            <Accordion [type]="getInput('type')" [collapsible]="getInput('collapsible')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Accordion>
+          <Accordion
+            [type]="getInput('type')"
+            [collapsible]="getInput('collapsible')"
+            [class]="getInput('class')"
+          >
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Accordion>
         }
         @case ('AccordionItem') {
-            <AccordionItem [value]="getInput('value')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AccordionItem>
+          <AccordionItem [value]="getInput('value')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AccordionItem>
         }
         @case ('AccordionTrigger') {
-            <AccordionTrigger [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AccordionTrigger>
+          <AccordionTrigger [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AccordionTrigger>
         }
         @case ('AccordionContent') {
-            <AccordionContent [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AccordionContent>
+          <AccordionContent [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AccordionContent>
         }
         @case ('Badge') {
-            <Badge [variant]="getInput('variant')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Badge>
+          <Badge [variant]="getInput('variant')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Badge>
         }
         @case ('Alert') {
-            <Alert [variant]="getInput('variant')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Alert>
+          <Alert [variant]="getInput('variant')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Alert>
         }
         @case ('AlertTitle') {
-            <AlertTitle [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AlertTitle>
+          <AlertTitle [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AlertTitle>
         }
         @case ('AlertDescription') {
-            <AlertDescription [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AlertDescription>
+          <AlertDescription [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AlertDescription>
         }
         @case ('Tabs') {
-            <Tabs [defaultValue]="getInput('defaultValue')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Tabs>
+          <Tabs [defaultValue]="getInput('defaultValue')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Tabs>
         }
         @case ('TabsList') {
-            <TabsList [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </TabsList>
+          <TabsList [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </TabsList>
         }
         @case ('TabsTrigger') {
-            <TabsTrigger [value]="getInput('value')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </TabsTrigger>
+          <TabsTrigger [value]="getInput('value')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </TabsTrigger>
         }
         @case ('TabsContent') {
-            <TabsContent [value]="getInput('value')" [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </TabsContent>
+          <TabsContent [value]="getInput('value')" [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </TabsContent>
         }
         @case ('Avatar') {
-            <Avatar [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Avatar>
+          <Avatar [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Avatar>
         }
         @case ('AvatarImage') {
-            <img AvatarImage [src]="getInput('src')" [alt]="getInput('alt')" [class]="getInput('class')" />
+          <img
+            AvatarImage
+            [src]="getInput('src')"
+            [alt]="getInput('alt')"
+            [class]="getInput('class')"
+          />
         }
         @case ('AvatarFallback') {
-            <AvatarFallback [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </AvatarFallback>
+          <AvatarFallback [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </AvatarFallback>
         }
         @case ('Input') {
-            <Input [type]="getInput('type')" [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')" />
+          <Input
+            [type]="getInput('type')"
+            [placeholder]="getInput('placeholder')"
+            [class]="getInput('class')"
+            [disabled]="getInput('disabled')"
+          />
         }
         @case ('Checkbox') {
-            <Checkbox [id]="getInput('id')" [checked]="getInput('checked')" [disabled]="getInput('disabled')" [class]="getInput('class')" />
+          <Checkbox
+            [id]="getInput('id')"
+            [checked]="getInput('checked')"
+            [disabled]="getInput('disabled')"
+            [class]="getInput('class')"
+          />
         }
         @case ('Textarea') {
-            <Textarea [placeholder]="getInput('placeholder')" [class]="getInput('class')" [disabled]="getInput('disabled')" ></Textarea>
+          <Textarea
+            [placeholder]="getInput('placeholder')"
+            [class]="getInput('class')"
+            [disabled]="getInput('disabled')"
+          ></Textarea>
         }
         @case ('Separator') {
-            <Separator [orientation]="getInput('orientation')" [class]="getInput('class')" ></Separator>
+          <Separator [orientation]="getInput('orientation')" [class]="getInput('class')" />
         }
         @case ('Skeleton') {
-            <Skeleton [class]="getInput('class')" />
+          <Skeleton [class]="getInput('class')" />
         }
         @case ('Dialog') {
-            <Dialog [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Dialog>
+          <Dialog [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Dialog>
         }
         @case ('DialogTrigger') {
-            <DialogTrigger [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogTrigger>
+          <DialogTrigger [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogTrigger>
         }
         @case ('DialogContent') {
-            <DialogContent [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogContent>
+          <DialogContent [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogContent>
         }
         @case ('DialogHeader') {
-            <DialogHeader [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogHeader>
+          <DialogHeader [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogHeader>
         }
         @case ('DialogTitle') {
-            <DialogTitle [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogTitle>
+          <DialogTitle [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogTitle>
         }
         @case ('DialogDescription') {
-            <DialogDescription [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogDescription>
+          <DialogDescription [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogDescription>
         }
         @case ('DialogFooter') {
-            <DialogFooter [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </DialogFooter>
+          <DialogFooter [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </DialogFooter>
         }
         @case ('Tooltip') {
-            <Tooltip [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </Tooltip>
+          <Tooltip [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </Tooltip>
         }
         @case ('TooltipTrigger') {
-            <TooltipTrigger [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </TooltipTrigger>
+          <TooltipTrigger [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </TooltipTrigger>
         }
         @case ('TooltipContent') {
-            <TooltipContent [class]="getInput('class')">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </TooltipContent>
+          <TooltipContent [class]="getInput('class')">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </TooltipContent>
         }
         @case ('Progress') {
-            <Progress [value]="getInput('value')" [class]="getInput('class')" ></Progress>
+          <Progress [value]="getInput('value')" [class]="getInput('class')"></Progress>
         }
         @default {
-            <!-- Fallback for unknown tags or unhandled components -->
-             <div [class]="getInput('class')" [attr.data-tag]="node().tagName">
-                @for (child of node().children; track child.id) {
-                    <DynamicNode [node]="child" />
-                }
-            </div>
+          <!-- Fallback for unknown tags or unhandled components -->
+          <div [class]="getInput('class')" [attr.data-tag]="node().tagName">
+            @for (child of node().children; track child.id) {
+              <DynamicNode [node]="child" />
+            }
+          </div>
         }
       }
     }
@@ -375,9 +398,7 @@ export class DynamicNode {
 @Component({
   selector: 'DynamicPreview',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    DynamicNode,
-  ],
+  imports: [DynamicNode],
   template: `
     @if (error()) {
       <div class="rounded-md border border-destructive bg-destructive/10 p-4">

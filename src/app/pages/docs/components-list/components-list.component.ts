@@ -2,7 +2,7 @@ import { ComponentRegistry, type ComponentCategory } from '@/services/component-
 import { SeoService } from '@/services/seo.service';
 import { Badge } from '@/ui/badge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/ui/card';
-import { Input } from '@/ui/input';
+
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
@@ -17,7 +17,6 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
-    Input,
     Badge,
     Card,
     CardDescription,

@@ -13,7 +13,7 @@ import { LucideAngularModule } from 'lucide-angular'
     template: ` @if (selectedOption(); as option) {
             <span class="flex items-center gap-2 text-foreground">
                 @if (option.icon && iconPosition() === 'left') {
-                    <lucide-icon [img]="option.icon" class="h-4 w-4 shrink-0"></lucide-icon>
+                    <lucide-icon [img]="option.icon" class="h-4 w-4 shrink-0" />
                 }
 
                 <span class="truncate">{{ option.label }}</span>

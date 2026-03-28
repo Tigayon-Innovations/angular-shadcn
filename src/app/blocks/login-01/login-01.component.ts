@@ -1,13 +1,13 @@
 import { Button } from '@/lib/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/lib/components/ui/card';
-import { Input } from '@/lib/components/ui/input';
+
 import { Label } from '@/lib/components/ui/label';
 import { Separator } from '@/lib/components/ui/separator';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-login-01',
-  imports: [Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Input, Label, Separator],
+  imports: [Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Label, Separator],
   template: `
     <div class="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div class="w-full max-w-sm">

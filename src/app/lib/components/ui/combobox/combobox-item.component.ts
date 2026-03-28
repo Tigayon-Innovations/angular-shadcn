@@ -23,7 +23,7 @@ import { LucideAngularModule } from 'lucide-angular';
   template: `
     <div #itemElement [class]="innerClass()">
           @if (option()?.icon && iconPosition() === 'left') {
-            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink"></lucide-icon>
+            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink" />
           }
 
           <ng-content />
@@ -45,7 +45,7 @@ import { LucideAngularModule } from 'lucide-angular';
           </svg>
 
           @if(option()?.icon && iconPosition() === 'right'){
-            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink ms-auto"></lucide-icon>
+            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink ms-auto" />
           }
     </div>
   `,

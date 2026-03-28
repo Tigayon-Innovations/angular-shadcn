@@ -1,4 +1,4 @@
-import { Input } from '@/ui/input';
+
 import { InputGroup, InputGroupAddon } from '@/ui/input-group';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AtSign, LucideAngularModule, Search } from 'lucide-angular';
@@ -6,7 +6,7 @@ import { AtSign, LucideAngularModule, Search } from 'lucide-angular';
 @Component({
   selector: 'InputGroupDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Input, InputGroup, InputGroupAddon, LucideAngularModule],
+  imports: [InputGroup, InputGroupAddon, LucideAngularModule],
   template: `
     <div class="space-y-4 w-full max-w-sm">
       <InputGroup>

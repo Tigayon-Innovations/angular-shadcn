@@ -1,7 +1,7 @@
 import { Button } from '@/lib/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/lib/components/ui/card';
 import { Checkbox } from '@/lib/components/ui/checkbox';
-import { Input } from '@/lib/components/ui/input';
+
 import { Label } from '@/lib/components/ui/label';
 import { NativeSelect } from '@/lib/components/ui/native-select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/lib/components/ui/tabs';
@@ -17,7 +17,6 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
     CardHeader,
     CardTitle,
     Checkbox,
-    Input,
     Label,
     NativeSelect,
     Tabs,
