@@ -1,0 +1,31 @@
+<section class="relative py-24 sm:py-32 border-t border-border/50">
+  <div class="container mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        Everything you need to build
+      </h2>
+      <p class="text-lg text-muted-foreground">
+        Radix-powered primitives with shadcn-style building blocks - designed for Angular.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+      @for (feat of features; track feat.title) {
+        <div class="feature-card group p-6 rounded-xl border border-transparent">
+          <div class="flex items-center gap-4 mb-4">
+            <div
+              class="h-10 w-10 rounded-lg bg-gradient-to-br flex items-center justify-center"
+              [class]="feat.iconClass"
+            >
+              <lucide-icon [img]="feat.icon" class="h-5 w-5 text-white" />
+            </div>
+            <h3 class="text-lg font-semibold">{{ feat.title }}</h3>
+          </div>
+          <p class="text-muted-foreground text-sm leading-relaxed">
+            {{ feat.description }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

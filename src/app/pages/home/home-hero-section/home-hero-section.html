@@ -1,0 +1,76 @@
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 grid-background"></div>
+
+  <div class="absolute top-1/4 -left-32 w-96 h-96 bg-primary/30 rounded-full gradient-orb"></div>
+  <div
+    class="absolute bottom-1/4 -right-32 w-96 h-96 bg-pink-500/20 rounded-full gradient-orb"
+  ></div>
+
+  <div class="relative z-10 container mx-auto px-4 py-20">
+    <div class="flex flex-col items-center text-center max-w-5xl mx-auto">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-background/50 backdrop-blur-sm mb-8 animate-fade-in-up opacity-0"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        <span class="text-sm text-muted-foreground">
+          Now with <span class="text-foreground font-medium">Angular 21</span> support
+        </span>
+      </div>
+
+      <h1
+        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 animate-fade-in-up opacity-0 animation-delay-100"
+      >
+        <span class="block">Radix + shadcn,</span>
+        <span class="block"
+          >rebuilt for
+          <span
+            class="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 bg-clip-text text-transparent"
+            >Angular</span
+          ></span
+        >
+      </h1>
+
+      <p
+        class="text-lg sm:text-xl text-muted-foreground max-w-2xl mb-10 animate-fade-in-up opacity-0 animation-delay-200"
+      >
+        A modern Angular UI kit that combines
+        <span class="text-foreground font-medium">Radix primitives</span> with the
+        <span class="text-foreground font-medium">shadcn approach</span> - accessible, composable,
+        and ready to ship.
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-in-up opacity-0 animation-delay-300"
+      >
+        <Button routerLink="/docs" size="lg" class="h-12 px-8 text-base gap-2 group">
+          Get Started
+          <lucide-icon
+            [img]="ArrowRightIcon"
+            class="h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
+        </Button>
+        <Button
+          routerLink="/docs/components"
+          variant="outline"
+          size="lg"
+          class="h-12 px-8 text-base"
+        >
+          Explore Components
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <div
+      class="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
+    >
+      <div class="w-1 h-2 bg-muted-foreground/50 rounded-full"></div>
+    </div>
+  </div>
+</section>
