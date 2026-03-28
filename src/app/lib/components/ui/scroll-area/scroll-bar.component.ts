@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 // ============================================================================
 // Types
@@ -57,9 +52,7 @@ export interface ScrollBarProps {
  */
 @Component({
   selector: 'ScrollBar',
-  template: `
-    <div [class]="thumbClass()"></div>
-  `,
+  template: ` <div [class]="thumbClass()"></div> `,
   host: {
     '[class]': 'computedClass()',
     '[attr.data-orientation]': 'orientation()',
@@ -76,18 +69,13 @@ export class ScrollBar {
   protected readonly computedClass = computed(() =>
     cn(
       'flex touch-none select-none transition-colors',
-      this.orientation() === 'vertical' &&
-        'h-full w-2.5 border-l border-l-transparent p-[1px]',
-      this.orientation() === 'horizontal' &&
-        'h-2.5 flex-col border-t border-t-transparent p-[1px]',
-      this.class()
-    )
+      this.orientation() === 'vertical' && 'h-full w-2.5 border-l border-l-transparent p-[1px]',
+      this.orientation() === 'horizontal' && 'h-2.5 flex-col border-t border-t-transparent p-[1px]',
+      this.class(),
+    ),
   );
 
   protected readonly thumbClass = computed(() =>
-    cn(
-      'relative rounded-full bg-border',
-      this.orientation() === 'vertical' && 'flex-1'
-    )
+    cn('relative rounded-full bg-border', this.orientation() === 'vertical' && 'flex-1'),
   );
 }

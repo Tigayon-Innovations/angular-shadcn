@@ -1,14 +1,14 @@
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    inject,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { SHEET_CONTEXT, type SheetContextValue } from './sheet-context';
 
@@ -82,7 +82,7 @@ export class Sheet implements SheetContextValue {
       if (this.defaultOpen() && this.controlledOpen() === undefined) {
         this._internalOpen.set(true);
       }
-    }, { allowSignalWrites: true });
+    });
   }
 
   setOpen(open: boolean): void {

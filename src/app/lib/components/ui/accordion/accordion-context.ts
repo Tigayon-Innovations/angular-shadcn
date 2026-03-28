@@ -30,4 +30,6 @@ export interface AccordionItemContext {
 // ============================================================================
 
 export const ACCORDION_CONTEXT = new InjectionToken<AccordionContext>('AccordionContext');
-export const ACCORDION_ITEM_CONTEXT = new InjectionToken<AccordionItemContext>('AccordionItemContext');
+export const ACCORDION_ITEM_CONTEXT = new InjectionToken<AccordionItemContext>(
+  'AccordionItemContext',
+);

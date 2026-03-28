@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography Lead component - larger intro text
@@ -26,6 +21,6 @@ import {
 export class TypographyLead {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn('text-xl text-muted-foreground', this.class())
+    cn('text-xl text-muted-foreground', this.class()),
   );
 }

@@ -1,14 +1,9 @@
-import { Separator } from "@/app/lib";
 import { SearchDialog } from '@/components/search-dialog';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/ui/button';
 import { Kbd } from '@/ui/kbd';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Separator } from '@/ui/separator';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide-angular';
 
@@ -18,20 +13,14 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 @Component({
   selector: 'SiteHeader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    RouterLink,
-    Button,
-    ThemeToggle,
-    LucideAngularModule,
-    SearchDialog,
-    Kbd,
-    Separator
-],
+  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd, Separator],
   host: {
     '(document:keydown)': 'onKeydown($event)',
   },
   template: `
-    <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    >
       <div class="md:px-6 flex h-14 items-center px-4">
         <!-- Mobile Menu Toggle -->
         <Button
@@ -62,22 +51,40 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
         <!-- Main Nav -->
         <nav class="hidden md:flex flex-1 items-center gap-6 text-sm">
-          <a routerLink="/docs" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/docs"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Docs
           </a>
-          <a routerLink="/docs/components" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/docs/components"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Components
           </a>
-          <a routerLink="/blocks" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/blocks"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Blocks
           </a>
-          <a routerLink="/charts" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/charts"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Charts
           </a>
-          <a routerLink="/playground" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/playground"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Playground
           </a>
-          <a routerLink="/theme-editor" class="text-foreground/60 transition-colors hover:text-foreground/80">
+          <a
+            routerLink="/theme-editor"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
             Theme Editor
           </a>
           <a
@@ -93,12 +100,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
         <!-- Right side actions -->
         <div class="flex items-center justify-end gap-2">
           <!-- Search Button - Icon only on mobile -->
-          <Button
-            variant="ghost"
-            size="icon"
-            class="h-9 w-9 md:hidden"
-            (click)="openSearch()"
-          >
+          <Button variant="ghost" size="icon" class="h-9 w-9 md:hidden" (click)="openSearch()">
             <lucide-icon [img]="icons.Search" class="h-4 w-4" />
             <span class="sr-only">Search</span>
           </Button>
@@ -112,7 +114,9 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
             <lucide-icon [img]="icons.Search" class="mr-2 h-4 w-4" />
             <span class="hidden lg:inline-flex">Search documentation...</span>
             <span class="inline-flex lg:hidden">Search...</span>
-            <span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+            <span
+              class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1"
+            >
               <Kbd size="sm">⌘</Kbd>
               <Kbd size="sm">K</Kbd>
             </span>
@@ -154,10 +158,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
     <!-- Mobile Menu Overlay -->
     @if (mobileMenuOpen()) {
-      <div
-        class="fixed inset-0 z-[100] bg-black/80 md:hidden"
-        (click)="closeMobileMenu()"
-      ></div>
+      <div class="fixed inset-0 z-[100] bg-black/80 md:hidden" (click)="closeMobileMenu()"></div>
     }
 
     <!-- Mobile Menu Sidebar -->
@@ -249,10 +250,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
     </aside>
 
     <!-- Search Dialog -->
-    <SearchDialog
-      [open]="searchOpen()"
-      (openChange)="searchOpen.set($event)"
-    />
+    <SearchDialog [open]="searchOpen()" (openChange)="searchOpen.set($event)" />
   `,
 })
 export class SiteHeader implements OnInit {
@@ -270,7 +268,7 @@ export class SiteHeader implements OnInit {
   }
 
   protected toggleMobileMenu(): void {
-    this.mobileMenuOpen.update(v => !v);
+    this.mobileMenuOpen.update((v) => !v);
   }
 
   protected closeMobileMenu(): void {

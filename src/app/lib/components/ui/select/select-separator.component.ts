@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SelectSeparator component - visual separator between select items.
@@ -17,7 +12,7 @@ import {
   template: ``,
   host: {
     '[class]': 'computedClass()',
-    'role': 'separator',
+    role: 'separator',
     'aria-orientation': 'horizontal',
     'data-slot': 'select-separator',
   },
@@ -29,6 +24,6 @@ export class SelectSeparator {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('bg-muted pointer-events-none -mx-1 my-1 h-px', this.class())
+    cn('bg-muted pointer-events-none -mx-1 my-1 h-px', this.class()),
   );
 }

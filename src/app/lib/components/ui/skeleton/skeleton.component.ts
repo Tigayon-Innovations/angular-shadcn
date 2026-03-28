@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Skeleton component that creates a loading placeholder.
@@ -33,7 +28,7 @@ import {
     '[class]': 'computedClass()',
     'aria-busy': 'true',
     '[attr.aria-label]': 'ariaLabel()',
-    'role': 'status',
+    role: 'status',
     'data-slot': 'skeleton',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +42,6 @@ export class Skeleton {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('bg-accent animate-pulse rounded-md', this.class())
+    cn('bg-accent animate-pulse rounded-md', this.class()),
   );
 }

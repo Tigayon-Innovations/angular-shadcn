@@ -18,6 +18,6 @@ export class DropdownMenuShortcut {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('ml-auto text-xs tracking-widest opacity-60', this.class())
+    cn('ml-auto text-xs tracking-widest opacity-60', this.class()),
   );
 }

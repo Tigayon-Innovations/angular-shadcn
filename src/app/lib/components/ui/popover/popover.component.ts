@@ -1,10 +1,10 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
 
@@ -106,7 +106,7 @@ export interface PopoverProps {
   selector: 'Popover',
   template: `<ng-content />`,
   host: {
-    class: 'relative inline-block',
+    class: 'relative',
   },
   providers: [
     {

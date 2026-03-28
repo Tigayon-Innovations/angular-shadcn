@@ -52,10 +52,7 @@ export class FocusManagementService {
    * @param options - Focus options
    * @returns The element that was focused, or null if none found
    */
-  focusFirstFocusable(
-    container: HTMLElement,
-    options: FocusOptions = {}
-  ): HTMLElement | null {
+  focusFirstFocusable(container: HTMLElement, options: FocusOptions = {}): HTMLElement | null {
     const focusable = this.getFocusableElements(container);
     if (focusable.length > 0) {
       const target = focusable[0];
@@ -71,10 +68,7 @@ export class FocusManagementService {
    * @param options - Focus options
    * @returns The element that was focused, or null if none found
    */
-  focusLastFocusable(
-    container: HTMLElement,
-    options: FocusOptions = {}
-  ): HTMLElement | null {
+  focusLastFocusable(container: HTMLElement, options: FocusOptions = {}): HTMLElement | null {
     const focusable = this.getFocusableElements(container);
     if (focusable.length > 0) {
       const target = focusable[focusable.length - 1];
@@ -124,9 +118,7 @@ export class FocusManagementService {
       'details > summary:first-of-type',
     ].join(', ');
 
-    const elements = Array.from(
-      container.querySelectorAll<HTMLElement>(selector)
-    );
+    const elements = Array.from(container.querySelectorAll<HTMLElement>(selector));
 
     return elements.filter((el) => this.isElementVisible(el));
   }
@@ -195,10 +187,7 @@ export class FocusManagementService {
     let parent = element.parentElement;
     while (parent) {
       const parentStyle = getComputedStyle(parent);
-      if (
-        parentStyle.display === 'none' ||
-        parentStyle.visibility === 'hidden'
-      ) {
+      if (parentStyle.display === 'none' || parentStyle.visibility === 'hidden') {
         return false;
       }
       if (parent.hasAttribute('hidden')) return false;

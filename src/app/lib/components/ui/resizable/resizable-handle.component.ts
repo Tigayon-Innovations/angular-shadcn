@@ -1,12 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-    signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { RESIZABLE_CONTEXT } from './resizable-context';
 
 let handleIdCounter = 0;
@@ -102,8 +95,8 @@ export class ResizableHandle {
         'h-px w-full after:left-0 after:h-1 after:w-full after:-translate-y-1/2 after:translate-x-0',
       '[&[data-panel-group-direction=vertical]>div]:rotate-90',
       this.isFocused() && 'ring-2 ring-ring',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   onFocus(): void {
@@ -213,7 +206,8 @@ export class ResizableHandle {
       if (!this.isDragging()) return;
 
       const currentTouch = e.touches[0];
-      const currentPosition = this.context.direction() === 'horizontal' ? currentTouch.clientX : currentTouch.clientY;
+      const currentPosition =
+        this.context.direction() === 'horizontal' ? currentTouch.clientX : currentTouch.clientY;
       const delta = ((currentPosition - this.startPosition) / window.innerWidth) * 100;
       this.context.onResize(delta);
       this.startPosition = currentPosition;

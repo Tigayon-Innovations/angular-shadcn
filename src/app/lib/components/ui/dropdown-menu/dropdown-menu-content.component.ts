@@ -8,7 +8,8 @@ import {
     ElementRef,
     inject,
     input,
-    OnDestroy
+    OnDestroy,
+    signal,
 } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
 
@@ -25,6 +26,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
     <Presence [present]="context.open()">
       <div
         [class]="computedClass()"
+        [style]="fixedStyle()"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="null"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
@@ -62,11 +64,23 @@ export class DropdownMenuContent implements OnDestroy {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Positioning strategy: 'absolute' stays within parent, 'fixed' escapes overflow containers */
+  readonly strategy = input<'absolute' | 'fixed'>('absolute');
+
   private menuItems: HTMLElement[] = [];
   private typeaheadBuffer = '';
   private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
+  protected readonly fixedPos = signal<{ top: number; left: number } | null>(null);
+
+  protected readonly fixedStyle = computed(() => {
+    const pos = this.fixedPos();
+    if (this.strategy() !== 'fixed' || !pos) return '';
+    return `top: ${pos.top}px; left: ${pos.left}px;`;
+  });
 
   protected readonly computedClass = computed(() => {
+    const isFixed = this.strategy() === 'fixed';
+
     const sideClasses = {
       top: 'bottom-full mb-1',
       bottom: 'top-full mt-1',
@@ -81,18 +95,39 @@ export class DropdownMenuContent implements OnDestroy {
     };
 
     return cn(
-      'absolute z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
+      isFixed ? 'fixed' : 'absolute',
+      'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      sideClasses[this.side()],
-      alignClasses[this.align()],
-      this.class()
+      !isFixed && sideClasses[this.side()],
+      !isFixed && alignClasses[this.align()],
+      this.class(),
     );
   });
 
   constructor() {
-    // Focus first item when menu opens
+    // Focus first item when menu opens; compute fixed position if needed
     effect(() => {
       if (this.context.open()) {
+        if (this.strategy() === 'fixed') {
+          const trigger = this.context.triggerElement();
+          if (trigger) {
+            const rect = trigger.getBoundingClientRect();
+            const side = this.side();
+            const offset = this.sideOffset();
+            let top = rect.top;
+            let left = rect.left;
+
+            if (side === 'bottom') { top = rect.bottom + offset; left = rect.left; }
+            else if (side === 'top') { top = rect.top - offset; left = rect.left; }
+            else if (side === 'right') { top = rect.top; left = rect.right + offset; }
+            else if (side === 'left') { top = rect.top; left = rect.left - offset; }
+
+            this.fixedPos.set({ top, left });
+          }
+        } else {
+          this.fixedPos.set(null);
+        }
+
         setTimeout(() => {
           this.updateMenuItems();
           const focusedIdx = this.context.focusedIndex();
@@ -122,7 +157,9 @@ export class DropdownMenuContent implements OnDestroy {
     const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
-        content.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])')
+        content.querySelectorAll(
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+        ),
       );
     }
   }
@@ -200,7 +237,7 @@ export class DropdownMenuContent implements OnDestroy {
 
     // Find first matching item
     const matchIndex = this.menuItems.findIndex((item) =>
-      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer)
+      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer),
     );
 
     if (matchIndex >= 0) {

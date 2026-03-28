@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Table component - base table wrapper.
@@ -43,10 +38,10 @@ export class Table {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('relative w-full overflow-auto', this.class())
+    cn('relative w-full overflow-auto', this.class()),
   );
 
   protected readonly tableClass = computed(() =>
-    cn('w-full caption-bottom text-sm border-collapse')
+    cn('w-full caption-bottom text-sm border-collapse'),
   );
 }

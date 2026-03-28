@@ -1,21 +1,21 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import {
-    ColumnVisibilityState,
-    DATA_TABLE_CONTEXT,
-    DataTableContext,
-    RowSelectionState,
-    SortingState,
-    type ColumnDef,
+  ColumnVisibilityState,
+  DATA_TABLE_CONTEXT,
+  DataTableContext,
+  RowSelectionState,
+  SortingState,
+  type ColumnDef,
 } from './data-table-context';
 
 /**
@@ -37,7 +37,7 @@ import {
   host: {
     '[class]': 'computedClass()',
     'data-slot': 'data-table',
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   providers: [
     {
@@ -125,7 +125,5 @@ export class DataTable<T = unknown> {
     });
   }
 
-  protected readonly computedClass = computed(() =>
-    cn('w-full space-y-4', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('w-full space-y-4', this.class()));
 }

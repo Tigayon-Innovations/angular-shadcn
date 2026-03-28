@@ -1,47 +1,41 @@
-import { cn, Presence } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     computed,
+    DestroyRef,
     effect,
-    ElementRef,
     HostListener,
     inject,
     input,
-    OnDestroy,
-    viewChild,
 } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
 
 /**
  * DialogContent component - the content of the dialog.
  * Matches shadcn/ui React DialogContent exactly.
- * Includes focus trapping, focus restoration, proper ARIA relationships,
- * and Radix-compatible exit animations via Presence component.
  */
 @Component({
   selector: 'DialogContent',
-  imports: [FocusTrapDirective, Presence],
+  imports: [FocusTrapDirective],
   template: `
-    <Presence [present]="context.isOpen()">
+    @if (context.isOpen()) {
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
+        class="fixed inset-0 z-50 bg-black/80"
         (click)="onOverlayClick($event)"
         aria-hidden="true"
       ></div>
       <!-- Content -->
       <div
-        #dialogContent
         hlmFocusTrap
         [trapFocus]="context.isOpen()"
         [autoFocus]="true"
-        [restoreFocus]="false"
+        [restoreFocus]="true"
         [initialFocus]="initialFocus()"
         [class]="computedClass()"
-        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="context.titleId"
         [attr.aria-describedby]="context.descriptionId"
@@ -53,9 +47,9 @@ import { DIALOG_CONTEXT } from './dialog-context';
         @if (showClose()) {
           <button
             type="button"
-            class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+            class="absolute right-4 top-4 rounded-md opacity-70 ring-offset-background transition-all hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none hover:bg-zinc-800 text-zinc-400 hover:text-white h-8 w-8 flex items-center justify-center p-0"
             (click)="onClose()"
-            aria-label="Close dialog"
+            [attr.aria-label]="ariaCloselabel()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,26 +67,30 @@ import { DIALOG_CONTEXT } from './dialog-context';
               <path d="M18 6 6 18" />
               <path d="m6 6 12 12" />
             </svg>
-            <span class="sr-only">Close</span>
+            <span class="sr-only">{{ ariaCloselabel() }}</span>
           </button>
         }
       </div>
-    </Presence>
+    }
   `,
   host: {
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogContent implements OnDestroy {
+export class DialogContent {
   readonly context = inject(DIALOG_CONTEXT);
-  private readonly dialogContent = viewChild<ElementRef<HTMLElement>>('dialogContent');
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   /** Whether to show close button */
   readonly showClose = input<boolean>(true);
+
+  /** Aria label for close button */
+  readonly ariaCloselabel = input<string>('Close dialog');
 
   /** Selector for initial focus element */
   readonly initialFocus = input<string | undefined>(undefined);
@@ -109,19 +107,30 @@ export class DialogContent implements OnDestroy {
       'data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
       'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
       'sm:rounded-lg',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {
     // Handle body scroll lock based on open state
     effect(() => {
       const isOpen = this.context.isOpen();
+
+      // Force change detection since context.isOpen() might update outside of this component's hierarchy
+      // and we are using OnPush
+      this.cdr.markForCheck();
+
       if (isOpen) {
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
       }
+    });
+
+    // Cleanup on destroy
+    this.destroyRef.onDestroy(() => {
+      this.unlockBodyScroll();
+      this.restoreFocus();
     });
   }
 
@@ -136,13 +145,6 @@ export class DialogContent implements OnDestroy {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = this.previousBodyOverflow;
     }
-  }
-
-  ngOnDestroy(): void {
-    // Restore body scroll
-    this.unlockBodyScroll();
-    // Restore focus to trigger element
-    this.restoreFocus();
   }
 
   @HostListener('document:keydown.escape')
@@ -167,7 +169,7 @@ export class DialogContent implements OnDestroy {
   }
 
   private restoreFocus(): void {
-    const triggerEl = this.context.triggerElement();
+    const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {
       setTimeout(() => {
         triggerEl.focus();

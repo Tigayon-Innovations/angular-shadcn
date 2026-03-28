@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * InputGroup component - wrapper for input with prefix/suffix addons.
@@ -46,8 +41,8 @@ export class InputGroup {
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
-      'flex items-center rounded-md border border-input bg-background shadow-xs ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 [&>input]:border-0 [&>input]:shadow-none [&>input]:focus-visible:ring-0 [&>input]:focus-visible:ring-offset-0',
-      this.class()
-    )
+      'flex items-center gap-3 rounded-md border border-input bg-background shadow-xs ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 [&>input]:border-0 [&>input]:shadow-none [&>input]:focus-visible:ring-0 [&>input]:focus-visible:ring-offset-0',
+      this.class(),
+    ),
   );
 }

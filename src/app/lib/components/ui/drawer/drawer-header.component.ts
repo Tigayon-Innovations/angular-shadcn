@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * DrawerHeader component - header area of the drawer.
@@ -23,6 +18,6 @@ export class DrawerHeader {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('grid gap-1.5 p-4 text-center sm:text-left', this.class())
+    cn('grid gap-1.5 p-4 text-center sm:text-left', this.class()),
   );
 }

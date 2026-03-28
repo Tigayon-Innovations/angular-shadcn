@@ -1,5 +1,13 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core';
 import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
 
 /**
@@ -40,8 +48,8 @@ export class MenubarTrigger {
   protected readonly computedClass = computed(() =>
     cn(
       'flex cursor-default select-none items-center rounded-sm px-3 py-1 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {
@@ -54,7 +62,7 @@ export class MenubarTrigger {
   }
 
   protected toggle(): void {
-    this.menuContext.open.update(v => !v);
+    this.menuContext.open.update((v) => !v);
     if (this.menuContext.open()) {
       this.context.activeMenu.set(this.menuContext.menuId);
       this.menuContext.focusedItemIndex.set(0);

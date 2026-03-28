@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Card description element.
@@ -26,6 +21,6 @@ export class CardDescription {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-muted-foreground text-sm', this.class())
+    cn('text-muted-foreground text-sm', this.class()),
   );
 }

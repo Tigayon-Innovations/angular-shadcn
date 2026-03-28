@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
 
 /**
@@ -27,7 +21,7 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',
     '[attr.tabindex]': 'collapsible.disabled() ? -1 : 0',
-    'role': 'button',
+    role: 'button',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,11 +32,7 @@ export class CollapsibleTrigger {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'cursor-pointer',
-      'disabled:pointer-events-none disabled:opacity-50',
-      this.class()
-    )
+    cn('cursor-pointer', 'disabled:pointer-events-none disabled:opacity-50', this.class()),
   );
 
   protected onClick(): void {

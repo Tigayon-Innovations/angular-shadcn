@@ -1,13 +1,13 @@
 import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    inject,
-    input,
-    OnDestroy
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { SHEET_CONTEXT } from './sheet-context';
 import { sheetVariants, type SheetVariants } from './sheet-variants';
@@ -93,7 +93,7 @@ export class SheetContent implements OnDestroy {
   private previousBodyOverflow = '';
 
   protected readonly computedClass = computed(() =>
-    cn(sheetVariants({ side: this.side() }), this.class())
+    cn(sheetVariants({ side: this.side() }), this.class()),
   );
 
   constructor() {

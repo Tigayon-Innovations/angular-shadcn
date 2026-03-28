@@ -17,7 +17,7 @@ export const nativeSelectVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 
 export type NativeSelectVariants = VariantProps<typeof nativeSelectVariants>;

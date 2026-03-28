@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography Small component
@@ -23,6 +18,6 @@ import {
 export class TypographySmall {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn('text-sm font-medium leading-none', this.class())
+    cn('text-sm font-medium leading-none', this.class()),
   );
 }

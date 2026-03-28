@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * DialogFooter component - footer area of the dialog.
@@ -23,6 +18,6 @@ export class DialogFooter {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this.class())
+    cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this.class()),
   );
 }

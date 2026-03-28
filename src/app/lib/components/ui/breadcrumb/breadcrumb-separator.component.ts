@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * BreadcrumbSeparator component - visual separator.
@@ -42,6 +37,6 @@ export class BreadcrumbSeparator {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('[&>svg]:h-3.5 [&>svg]:w-3.5', this.class())
+    cn('[&>svg]:h-3.5 [&>svg]:w-3.5', this.class()),
   );
 }

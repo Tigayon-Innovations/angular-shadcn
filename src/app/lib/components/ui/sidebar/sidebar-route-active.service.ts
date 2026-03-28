@@ -28,10 +28,10 @@ export class SidebarRouteActiveService {
     // Subscribe to route changes
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map((event: NavigationEnd) => event.urlAfterRedirects || event.url)
+        filter((event) => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.urlAfterRedirects || event.url),
       )
-      .subscribe(url => {
+      .subscribe((url) => {
         this.currentRoute.set(url);
       });
   }
@@ -73,7 +73,7 @@ export class SidebarRouteActiveService {
    * isAnyRouteActive(['dashboard', 'analytics'])
    */
   isAnyRouteActive(routes: string[], exact: boolean = false): boolean {
-    return routes.some(route => this.isRouteActive(route, exact));
+    return routes.some((route) => this.isRouteActive(route, exact));
   }
 
   /**
@@ -86,7 +86,9 @@ export class SidebarRouteActiveService {
    * getMainRoute() // returns '/dashboard'
    */
   getMainRoute(): string {
-    const parts = this.currentRoute().split('/').filter(p => p);
+    const parts = this.currentRoute()
+      .split('/')
+      .filter((p) => p);
     return parts.length > 0 ? `/${parts[0]}` : '';
   }
 
@@ -100,7 +102,9 @@ export class SidebarRouteActiveService {
    * getRouteLevel() // returns 2
    */
   getRouteLevel(): number {
-    return this.currentRoute().split('/').filter(p => p).length;
+    return this.currentRoute()
+      .split('/')
+      .filter((p) => p).length;
   }
 
   /**

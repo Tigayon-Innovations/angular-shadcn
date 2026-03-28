@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
 
 /**
@@ -29,6 +23,6 @@ export class DialogTitle {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-lg font-semibold leading-none tracking-tight', this.class())
+    cn('text-lg font-semibold leading-none tracking-tight', this.class()),
   );
 }

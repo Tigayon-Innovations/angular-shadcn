@@ -8,4 +8,3 @@ export { CommandList } from './command-list.component';
 export { CommandSeparator } from './command-separator.component';
 export { CommandShortcut } from './command-shortcut.component';
 export { Command } from './command.component';
-

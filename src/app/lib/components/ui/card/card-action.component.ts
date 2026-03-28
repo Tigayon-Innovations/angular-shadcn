@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Card action element.
@@ -31,9 +26,6 @@ export class CardAction {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'col-start-2 row-span-2 row-start-1 self-start justify-self-end',
-      this.class()
-    )
+    cn('col-start-2 row-span-2 row-start-1 self-start justify-self-end', this.class()),
   );
 }

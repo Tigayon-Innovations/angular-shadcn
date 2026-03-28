@@ -18,6 +18,6 @@ export class MenubarShortcut {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class())
+    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
   );
 }

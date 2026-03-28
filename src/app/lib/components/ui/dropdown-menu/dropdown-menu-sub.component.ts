@@ -1,11 +1,17 @@
-import { ChangeDetectionStrategy, Component, InjectionToken, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InjectionToken,
+  signal,
+  type WritableSignal,
+} from '@angular/core';
 
 export interface DropdownMenuSubContext {
   open: WritableSignal<boolean>;
 }
 
 export const DROPDOWN_MENU_SUB_CONTEXT = new InjectionToken<DropdownMenuSubContext>(
-  'DROPDOWN_MENU_SUB_CONTEXT'
+  'DROPDOWN_MENU_SUB_CONTEXT',
 );
 
 /**

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Avatar image component.
@@ -25,7 +20,5 @@ import {
 export class AvatarImage {
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('aspect-square size-full', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('aspect-square size-full', this.class()));
 }

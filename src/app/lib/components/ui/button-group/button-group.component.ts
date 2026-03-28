@@ -1,14 +1,6 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
-import {
-    buttonGroupVariants,
-    type ButtonGroupVariants,
-} from './button-group-variants';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { buttonGroupVariants, type ButtonGroupVariants } from './button-group-variants';
 
 /**
  * ButtonGroup component - groups buttons together with shared styling.
@@ -39,8 +31,7 @@ import {
 })
 export class ButtonGroup {
   /** The orientation of the button group */
-  readonly orientation =
-    input<ButtonGroupVariants['orientation']>('horizontal');
+  readonly orientation = input<ButtonGroupVariants['orientation']>('horizontal');
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -51,7 +42,7 @@ export class ButtonGroup {
       buttonGroupVariants({
         orientation: this.orientation(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

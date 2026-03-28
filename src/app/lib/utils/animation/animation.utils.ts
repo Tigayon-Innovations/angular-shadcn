@@ -38,7 +38,7 @@ export const ANIMATION_PRESETS = {
  * Manages the 4-state animation lifecycle
  */
 export function createAnimationState(
-  initialState: AnimationState = 'closed'
+  initialState: AnimationState = 'closed',
 ): Signal<AnimationState> {
   return signal<AnimationState>(initialState);
 }
@@ -49,7 +49,7 @@ export function createAnimationState(
 export function getAnimationClasses(
   state: AnimationState,
   direction?: AnimationSide,
-  animate: boolean = true
+  animate: boolean = true,
 ): string {
   if (!animate) return '';
 
@@ -76,10 +76,7 @@ export function getAnimationClasses(
 /**
  * Get slide animation classes based on direction
  */
-export function getSlideAnimationClasses(
-  state: AnimationState,
-  direction: AnimationSide
-): string {
+export function getSlideAnimationClasses(state: AnimationState, direction: AnimationSide): string {
   const baseClasses = ['duration-200'];
 
   const directionMap: Record<AnimationState, Record<AnimationSide, string>> = {
@@ -118,7 +115,7 @@ export function getSlideAnimationClasses(
 export function buildAnimationAttributes(
   state: AnimationState,
   side?: AnimationSide,
-  align?: AnimationAlign
+  align?: AnimationAlign,
 ): Record<string, string | undefined> {
   return {
     'data-state': state,

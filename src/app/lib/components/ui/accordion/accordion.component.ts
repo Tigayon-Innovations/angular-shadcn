@@ -1,19 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    booleanAttribute,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    input,
-    signal,
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  signal,
 } from '@angular/core';
-import {
-    ACCORDION_CONTEXT,
-    AccordionContext,
-    AccordionType,
-} from './accordion-context';
+import { ACCORDION_CONTEXT, AccordionContext, AccordionType } from './accordion-context';
 
 /**
  * Accordion component - root container for accordion items.
@@ -153,8 +149,13 @@ export class Accordion implements AccordionContext {
 
     // Find current index by looking at the accordion item
     const accordionItem = currentTrigger.closest('AccordionItem');
-    const itemValue = accordionItem?.getAttribute('data-value') ||
-                     values.find(v => document.querySelector(`AccordionItem[data-state][data-value="${v}"]`)?.contains(currentTrigger));
+    const itemValue =
+      accordionItem?.getAttribute('data-value') ||
+      values.find((v) =>
+        document
+          .querySelector(`AccordionItem[data-state][data-value="${v}"]`)
+          ?.contains(currentTrigger),
+      );
 
     if (!itemValue) return;
     const currentIndex = values.indexOf(itemValue);
@@ -187,7 +188,7 @@ export class Accordion implements AccordionContext {
       // Focus the trigger of the new item
       const newValue = values[newIndex];
       const newTrigger = document.querySelector(
-        `AccordionItem[data-value="${newValue}"] AccordionTrigger, [data-accordion-trigger="${newValue}"]`
+        `AccordionItem[data-value="${newValue}"] AccordionTrigger, [data-accordion-trigger="${newValue}"]`,
       ) as HTMLElement;
       newTrigger?.focus();
     }

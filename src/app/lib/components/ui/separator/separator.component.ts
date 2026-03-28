@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 // ============================================================================
 // Types
@@ -99,9 +94,7 @@ export class Separator {
   readonly class = input<string>('');
 
   /** Computed role - none for decorative, separator otherwise */
-  protected readonly role = computed(() =>
-    this.decorative() ? 'none' : 'separator'
-  );
+  protected readonly role = computed(() => (this.decorative() ? 'none' : 'separator'));
 
   /**
    * aria-orientation is only needed for non-decorative separators.
@@ -122,7 +115,7 @@ export class Separator {
       // Orientation-specific styles
       this.orientation() === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
       // Custom classes
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * InputGroupAddon component - prefix or suffix addon for InputGroup.
@@ -34,10 +29,8 @@ export class InputGroupAddon {
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-9 items-center justify-center bg-muted px-3 text-sm text-muted-foreground',
-      this.position() === 'start'
-        ? 'rounded-l-md border-r'
-        : 'rounded-r-md border-l',
-      this.class()
-    )
+      this.position() === 'start' ? 'rounded-l-md border-r' : 'rounded-r-md border-l',
+      this.class(),
+    ),
   );
 }

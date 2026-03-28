@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * TableCell component - td wrapper.
@@ -25,7 +20,7 @@ export class TableCell {
   protected readonly computedClass = computed(() =>
     cn(
       'p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

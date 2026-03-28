@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { buttonVariants } from '../button/button-variants';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
@@ -32,9 +26,7 @@ export class AlertDialogAction {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn(buttonVariants(), this.class())
-  );
+  protected readonly computedClass = computed(() => cn(buttonVariants(), this.class()));
 
   onClick(event: Event): void {
     // Allow the click to propagate for custom handlers

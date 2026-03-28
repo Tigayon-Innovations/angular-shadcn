@@ -62,9 +62,7 @@ export class FormField {
   };
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('space-y-2', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('space-y-2', this.class()));
 
   ngOnInit() {
     this.fieldContext.name.set(this.name());

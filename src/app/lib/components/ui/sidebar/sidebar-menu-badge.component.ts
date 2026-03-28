@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarMenuBadge component - badge in menu item.
@@ -36,7 +31,7 @@ export class SidebarMenuBadge {
       'peer-data-[size=lg]/menu-button:top-2.5',
       // Hide in collapsed icon mode
       'group-data-[collapsible=icon]/sidebar-wrapper:hidden',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

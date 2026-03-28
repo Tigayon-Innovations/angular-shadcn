@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    input,
-    signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { AvatarFallback } from './avatar-fallback.component';
 import { Avatar } from './avatar.component';
 
@@ -25,12 +20,7 @@ import { Avatar } from './avatar.component';
   template: `
     <Avatar [class]="class()">
       @if (src() && !imageError()) {
-        <img
-          AvatarImage
-          [src]="src()"
-          [alt]="alt()"
-          (error)="onImageError()"
-        />
+        <img AvatarImage [src]="src()" [alt]="alt()" (error)="onImageError()" />
       }
       @if (!src() || imageError()) {
         <AvatarFallback>{{ fallback() }}</AvatarFallback>

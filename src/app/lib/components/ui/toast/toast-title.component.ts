@@ -47,6 +47,6 @@ export class ToastTitle {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-sm font-semibold [&+div]:text-xs', this.class())
+    cn('text-sm font-semibold [&+div]:text-xs', this.class()),
   );
 }

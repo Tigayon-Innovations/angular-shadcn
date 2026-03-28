@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * EmptyAction component - container for action buttons in empty state.
@@ -22,7 +17,5 @@ export class EmptyAction {
   readonly class = input<string>('');
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('mt-2', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('mt-2', this.class()));
 }

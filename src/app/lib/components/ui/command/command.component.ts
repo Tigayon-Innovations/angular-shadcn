@@ -1,13 +1,28 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
-import { COMMAND_CONTEXT, type CommandContextValue, type CommandFilterFunction } from './command-context';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    forwardRef,
+    input,
+    signal,
+} from '@angular/core';
+import {
+    COMMAND_CONTEXT,
+    type CommandContextValue,
+    type CommandFilterFunction,
+} from './command-context';
 
 let commandIdCounter = 0;
 
 /**
  * Default filter function for command items.
  */
-const defaultFilterFn: CommandFilterFunction = (value: string, search: string, keywords?: string[]): number => {
+const defaultFilterFn: CommandFilterFunction = (
+  value: string,
+  search: string,
+  keywords?: string[],
+): number => {
   if (!search.trim()) return 1;
 
   const extendedValue = keywords ? `${value} ${keywords.join(' ')}` : value;
@@ -65,7 +80,7 @@ export class Command implements CommandContextValue {
 
   readonly search = signal('');
   readonly selectedValue = signal('');
-  readonly focusedIndex = signal(-1);
+  readonly focusedIndex = signal(0);
   readonly itemCount = signal(0);
   readonly visibleItemCount = signal(0);
   readonly listId = `command-list-${this._id}`;
@@ -99,7 +114,7 @@ export class Command implements CommandContextValue {
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

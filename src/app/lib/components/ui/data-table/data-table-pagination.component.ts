@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-angular';
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  LucideAngularModule,
+} from 'lucide-angular';
 import { DATA_TABLE_CONTEXT } from './data-table-context';
 
 /**
@@ -91,7 +91,8 @@ export class DataTablePagination {
   protected readonly totalCount = computed(() => this.context.data().length);
 
   protected readonly selectedCount = computed(
-    () => Object.keys(this.context.rowSelection()).filter((k) => this.context.rowSelection()[k]).length
+    () =>
+      Object.keys(this.context.rowSelection()).filter((k) => this.context.rowSelection()[k]).length,
   );
 
   protected readonly pageCount = computed(() => {
@@ -100,16 +101,12 @@ export class DataTablePagination {
     return Math.ceil(total / pageSize);
   });
 
-  protected readonly canPreviousPage = computed(
-    () => this.context.pageIndex() > 0
-  );
+  protected readonly canPreviousPage = computed(() => this.context.pageIndex() > 0);
 
-  protected readonly canNextPage = computed(
-    () => this.context.pageIndex() < this.pageCount() - 1
-  );
+  protected readonly canNextPage = computed(() => this.context.pageIndex() < this.pageCount() - 1);
 
   protected readonly computedClass = computed(() =>
-    cn('flex items-center justify-end space-x-2 py-4', this.class())
+    cn('flex items-center justify-end space-x-2 py-4', this.class()),
   );
 
   protected onPageSizeChange(event: Event): void {

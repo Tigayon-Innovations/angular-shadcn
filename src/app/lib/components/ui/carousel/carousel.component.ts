@@ -1,17 +1,10 @@
 import { cn } from '@/lib/utils';
 import { LiveAnnouncerService } from '@/lib/utils/accessibility';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-    signal,
-} from '@angular/core';
-import {
-    CAROUSEL_CONTEXT,
-    type CarouselContextValue,
-    type CarouselOrientation,
+  CAROUSEL_CONTEXT,
+  type CarouselContextValue,
+  type CarouselOrientation,
 } from './carousel-context';
 
 /**
@@ -85,7 +78,7 @@ import {
   ],
   host: {
     '[class]': 'computedClass()',
-    'role': 'region',
+    role: 'region',
     '[attr.aria-label]': 'ariaLabel()',
     'aria-roledescription': 'carousel',
     '(keydown.arrowleft)': 'onKeyDown($event, "left")',
@@ -108,9 +101,7 @@ export class Carousel {
   /** Current slide announcement for screen readers */
   readonly slideAnnouncement = signal<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('relative', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative', this.class()));
 
   protected onKeyDown(_event: Event, _direction: 'left' | 'right'): void {
     // Keyboard navigation is handled by the carousel API

@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    inject,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { TABS_CONTEXT, TabsActivationMode, TabsContext, TabsOrientation } from './tabs-context';
 
@@ -197,7 +197,5 @@ export class Tabs implements TabsContext {
     this.valueChange.emit(newValue);
   };
 
-  protected readonly computedClass = computed(() =>
-    cn('flex flex-col gap-2', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('flex flex-col gap-2', this.class()));
 }

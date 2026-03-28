@@ -21,10 +21,6 @@ export class DropdownMenuLabel {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'px-3 py-2 text-sm font-semibold',
-      this.inset() && 'pl-8',
-      this.class()
-    )
+    cn('px-3 py-2 text-sm font-semibold', this.inset() && 'pl-8', this.class()),
   );
 }

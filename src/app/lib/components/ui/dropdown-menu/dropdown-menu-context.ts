@@ -11,5 +11,5 @@ export interface DropdownMenuContextValue {
 }
 
 export const DROPDOWN_MENU_CONTEXT = new InjectionToken<DropdownMenuContextValue>(
-  'DROPDOWN_MENU_CONTEXT'
+  'DROPDOWN_MENU_CONTEXT',
 );

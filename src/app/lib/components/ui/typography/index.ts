@@ -10,4 +10,3 @@ export { TypographyList } from './typography-list.component';
 export { TypographyMuted } from './typography-muted.component';
 export { TypographyP } from './typography-p.component';
 export { TypographySmall } from './typography-small.component';
-

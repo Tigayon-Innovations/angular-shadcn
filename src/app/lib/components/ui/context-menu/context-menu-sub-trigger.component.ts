@@ -36,8 +36,8 @@ export class ContextMenuSubTrigger {
     cn(
       'flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent [&>svg]:size-4 [&>svg]:shrink-0',
       this.inset() && 'pl-8',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected onMouseEnter(): void {

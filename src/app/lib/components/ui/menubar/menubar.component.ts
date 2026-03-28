@@ -117,10 +117,10 @@ export interface MenubarProps {
           menuIds,
           focusedMenuIndex,
           registerMenu: (menuId: string) => {
-            menuIds.update(ids => [...ids, menuId]);
+            menuIds.update((ids) => [...ids, menuId]);
           },
           unregisterMenu: (menuId: string) => {
-            menuIds.update(ids => ids.filter(id => id !== menuId));
+            menuIds.update((ids) => ids.filter((id) => id !== menuId));
           },
           focusNextMenu: () => {
             const ids = menuIds();
@@ -140,7 +140,7 @@ export interface MenubarProps {
   ],
   host: {
     '[class]': 'computedClass()',
-    'role': 'menubar',
+    role: 'menubar',
     'aria-orientation': 'horizontal',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -152,7 +152,7 @@ export class Menubar {
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-9 items-center space-x-1 rounded-md border bg-background p-1 shadow-sm',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

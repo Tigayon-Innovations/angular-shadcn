@@ -17,7 +17,5 @@ export class InputOTPGroup {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('flex items-center', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('flex items-center', this.class()));
 }

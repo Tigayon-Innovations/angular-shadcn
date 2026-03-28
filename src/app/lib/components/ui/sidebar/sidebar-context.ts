@@ -16,9 +16,7 @@ export interface SidebarContext {
   toggleSidebar: () => void;
 }
 
-export const SIDEBAR_CONTEXT = new InjectionToken<SidebarContext>(
-  'SidebarContext'
-);
+export const SIDEBAR_CONTEXT = new InjectionToken<SidebarContext>('SidebarContext');
 
 export const SIDEBAR_MENU_CONTEXT = new InjectionToken<{
   isActive: WritableSignal<boolean>;

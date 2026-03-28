@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    forwardRef,
-    input,
-    model,
-    output,
-    signal,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  input,
+  model,
+  output,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -152,12 +152,7 @@ export type SliderProps = {
       (blur)="onBlur()"
     ></span>
     @if (name()) {
-      <input
-        type="hidden"
-        [attr.name]="name()"
-        [value]="value()"
-        [disabled]="isDisabled()"
-      />
+      <input type="hidden" [attr.name]="name()" [value]="value()" [disabled]="isDisabled()" />
     }
   `,
   host: {
@@ -209,9 +204,7 @@ export class Slider implements ControlValueAccessor {
   readonly name = input<string>();
 
   /** Function to get value label for accessibility */
-  readonly getAriaValueText = input<((value: number) => string) | undefined>(
-    undefined
-  );
+  readonly getAriaValueText = input<((value: number) => string) | undefined>(undefined);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -229,9 +222,7 @@ export class Slider implements ControlValueAccessor {
   readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
 
   /** Whether the slider is horizontal */
-  protected readonly isHorizontal = computed(
-    () => this.orientation() === 'horizontal'
-  );
+  protected readonly isHorizontal = computed(() => this.orientation() === 'horizontal');
 
   /** ControlValueAccessor callbacks */
   private onChange: (value: number) => void = () => {};
@@ -258,24 +249,21 @@ export class Slider implements ControlValueAccessor {
       'relative flex touch-none select-none items-center',
       this.isHorizontal() ? 'w-full' : 'flex-col h-full',
       this.isDisabled() && 'opacity-50 pointer-events-none',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   /** Track class */
   protected readonly trackClass = computed(() =>
     cn(
       'bg-primary/20 relative overflow-hidden rounded-full',
-      this.isHorizontal() ? 'h-1.5 w-full grow' : 'w-1.5 h-full grow'
-    )
+      this.isHorizontal() ? 'h-1.5 w-full grow' : 'w-1.5 h-full grow',
+    ),
   );
 
   /** Range class */
   protected readonly rangeClass = computed(() =>
-    cn(
-      'bg-primary absolute',
-      this.isHorizontal() ? 'h-full' : 'w-full bottom-0'
-    )
+    cn('bg-primary absolute', this.isHorizontal() ? 'h-full' : 'w-full bottom-0'),
   );
 
   /** Thumb class */
@@ -288,8 +276,8 @@ export class Slider implements ControlValueAccessor {
       'absolute cursor-grab active:cursor-grabbing',
       this.isHorizontal()
         ? 'size-4 top-1/2 -translate-x-1/2 -translate-y-1/2'
-        : 'size-4 left-1/2 -translate-x-1/2 translate-y-1/2'
-    )
+        : 'size-4 left-1/2 -translate-x-1/2 translate-y-1/2',
+    ),
   );
 
   // ControlValueAccessor implementation
@@ -322,11 +310,7 @@ export class Slider implements ControlValueAccessor {
   }
 
   /** Update value from position */
-  private updateValueFromPosition(
-    clientPos: number,
-    rect: DOMRect,
-    isVertical: boolean
-  ): void {
+  private updateValueFromPosition(clientPos: number, rect: DOMRect, isVertical: boolean): void {
     if (this.isDisabled()) return;
 
     let percentage: number;
@@ -361,21 +345,13 @@ export class Slider implements ControlValueAccessor {
     const rect = target.getBoundingClientRect();
     const isVertical = !this.isHorizontal();
 
-    this.updateValueFromPosition(
-      isVertical ? event.clientY : event.clientX,
-      rect,
-      isVertical
-    );
+    this.updateValueFromPosition(isVertical ? event.clientY : event.clientX, rect, isVertical);
 
     // Focus the thumb
     this.thumb()?.nativeElement.focus();
 
     const onMouseMove = (e: MouseEvent) => {
-      this.updateValueFromPosition(
-        isVertical ? e.clientY : e.clientX,
-        rect,
-        isVertical
-      );
+      this.updateValueFromPosition(isVertical ? e.clientY : e.clientX, rect, isVertical);
     };
 
     const onMouseUp = () => {
@@ -398,19 +374,11 @@ export class Slider implements ControlValueAccessor {
     const touch = event.touches[0];
     const isVertical = !this.isHorizontal();
 
-    this.updateValueFromPosition(
-      isVertical ? touch.clientY : touch.clientX,
-      rect,
-      isVertical
-    );
+    this.updateValueFromPosition(isVertical ? touch.clientY : touch.clientX, rect, isVertical);
 
     const onTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
-      this.updateValueFromPosition(
-        isVertical ? touch.clientY : touch.clientX,
-        rect,
-        isVertical
-      );
+      this.updateValueFromPosition(isVertical ? touch.clientY : touch.clientX, rect, isVertical);
     };
 
     const onTouchEnd = () => {

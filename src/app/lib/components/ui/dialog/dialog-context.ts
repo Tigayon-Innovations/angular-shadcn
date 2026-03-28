@@ -1,15 +1,17 @@
-import { InjectionToken, Signal, WritableSignal } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export interface DialogContextValue {
-  open: WritableSignal<boolean>;
-  setOpen: (open: boolean) => void;
-  isOpen: Signal<boolean>;
+  /** Get the current open state */
+  isOpen(): boolean;
+  /** Set the open state */
+  setOpen(open: boolean): void;
   /** Unique IDs for ARIA relationships */
   titleId: string;
   descriptionId: string;
   contentId: string;
   /** Trigger element reference for focus restoration */
-  triggerElement: WritableSignal<HTMLElement | null>;
+  setTriggerElement(element: HTMLElement | null): void;
+  getTriggerElement(): HTMLElement | null;
 }
 
 export const DIALOG_CONTEXT = new InjectionToken<DialogContextValue>('DIALOG_CONTEXT');

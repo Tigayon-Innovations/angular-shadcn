@@ -17,7 +17,7 @@ export const segmentedVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 
 export const segmentedItemVariants = cva(
@@ -33,7 +33,7 @@ export const segmentedItemVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 
 export type SegmentedVariants = VariantProps<typeof segmentedVariants>;

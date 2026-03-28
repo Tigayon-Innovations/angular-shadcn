@@ -60,4 +60,6 @@ export interface MenubarMenuContextValue {
   focusedItemIndex: WritableSignal<number>;
 }
 
-export const MENUBAR_MENU_CONTEXT = new InjectionToken<MenubarMenuContextValue>('MENUBAR_MENU_CONTEXT');
+export const MENUBAR_MENU_CONTEXT = new InjectionToken<MenubarMenuContextValue>(
+  'MENUBAR_MENU_CONTEXT',
+);

@@ -1,5 +1,12 @@
 import { cn, Presence } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core';
 import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigation-menu-context';
 
 /**
@@ -11,10 +18,7 @@ import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigat
   imports: [Presence],
   template: `
     <Presence [present]="itemContext.open()">
-      <div
-        [class]="computedClass()"
-        [attr.data-state]="itemContext.open() ? 'open' : 'closed'"
-      >
+      <div [class]="computedClass()" [attr.data-state]="itemContext.open() ? 'open' : 'closed'">
         <ng-content />
       </div>
     </Presence>
@@ -44,8 +48,8 @@ export class NavigationMenuContent {
       'data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52',
       'data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52',
       'md:absolute md:w-auto',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected onDocumentClick(event: MouseEvent): void {

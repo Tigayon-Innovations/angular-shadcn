@@ -18,7 +18,5 @@ export class MenubarSeparator {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('-mx-1 my-1 h-px bg-muted', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('-mx-1 my-1 h-px bg-muted', this.class()));
 }

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * TableFooter component - tfoot wrapper.
@@ -12,7 +7,9 @@ import {
  */
 @Component({
   selector: 'TableFooter',
-  template: `<tfoot [class]="computedClass()"><ng-content /></tfoot>`,
+  template: `<tfoot [class]="computedClass()">
+    <ng-content />
+  </tfoot>`,
   host: {
     class: 'contents',
   },
@@ -23,6 +20,6 @@ export class TableFooter {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', this.class())
+    cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', this.class()),
   );
 }

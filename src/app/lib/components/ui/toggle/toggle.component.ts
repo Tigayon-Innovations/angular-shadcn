@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    input,
-    model,
-    output,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { toggleVariants, type ToggleVariants } from './toggle-variants';
@@ -146,9 +146,7 @@ export class Toggle implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   /** Current state for data attribute */
-  protected readonly state = computed((): ToggleState =>
-    this.pressed() ? 'on' : 'off'
-  );
+  protected readonly state = computed((): ToggleState => (this.pressed() ? 'on' : 'off'));
 
   constructor() {
     // Initialize from defaultPressed if provided
@@ -193,7 +191,7 @@ export class Toggle implements ControlValueAccessor {
         variant: this.variant(),
         size: this.size(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

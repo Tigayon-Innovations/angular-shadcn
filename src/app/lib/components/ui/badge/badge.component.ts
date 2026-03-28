@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { badgeVariants, type BadgeVariants } from './badge-variants';
 
 /**
@@ -44,7 +39,7 @@ export class Badge {
       badgeVariants({
         variant: this.variant(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

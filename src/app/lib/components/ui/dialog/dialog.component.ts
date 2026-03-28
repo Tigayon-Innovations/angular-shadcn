@@ -1,13 +1,11 @@
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    inject,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  inject,
+  input,
+  model,
 } from '@angular/core';
 import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
 
@@ -16,7 +14,7 @@ import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
  * Matches shadcn/ui React Dialog exactly.
  *
  * @example
- * <Dialog>
+ * <Dialog [(open)]="isOpen">
  *   <DialogTrigger>
  *     <Button variant="outline">Open Dialog</Button>
  *   </DialogTrigger>
@@ -40,6 +38,9 @@ import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
       useExisting: forwardRef(() => Dialog),
     },
   ],
+  host: {
+    style: 'display: contents',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dialog implements DialogContextValue {
@@ -48,16 +49,11 @@ export class Dialog implements DialogContextValue {
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
-  /** Controlled open state */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
+  /** Controlled open state - uses model for proper two-way binding */
+  readonly open = model<boolean>(false);
 
   /** Modal mode - prevents interaction with outside elements */
   readonly modal = input<boolean>(true);
-
-  /** Open change event */
-  readonly openChange = output<boolean>();
-
-  readonly open = signal(false);
 
   /** ARIA IDs for accessibility relationships */
   private readonly ariaIds = this.ariaIdService.generateDialogIds('dialog');
@@ -66,22 +62,25 @@ export class Dialog implements DialogContextValue {
   readonly contentId = this.ariaIds.contentId;
 
   /** Reference to trigger element for focus restoration */
-  readonly triggerElement = signal<HTMLElement | null>(null);
+  private triggerEl: HTMLElement | null = null;
 
-  constructor() {
-    if (this.defaultOpen()) {
-      this.open.set(true);
-    }
+  /** Check if dialog is open - directly reads from model */
+  isOpen(): boolean {
+    return this.open();
   }
 
+  /** Set the open state */
   setOpen(open: boolean): void {
-    if (this.controlledOpen() === undefined) {
-      this.open.set(open);
-    }
-    this.openChange.emit(open);
+    this.open.set(open);
   }
 
-  readonly isOpen = computed(() =>
-    this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open()
-  );
+  /** Set trigger element for focus restoration */
+  setTriggerElement(element: HTMLElement | null): void {
+    this.triggerEl = element;
+  }
+
+  /** Get trigger element for focus restoration */
+  getTriggerElement(): HTMLElement | null {
+    return this.triggerEl;
+  }
 }

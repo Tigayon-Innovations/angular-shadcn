@@ -87,7 +87,9 @@ export class KeyboardNavigationDirective implements OnInit, OnDestroy {
   readonly moveFocus = input<boolean>(true);
 
   /** CSS selector for navigable items */
-  readonly itemSelector = input<string>('[role="menuitem"], [role="option"], [role="tab"], [role="treeitem"], li, button');
+  readonly itemSelector = input<string>(
+    '[role="menuitem"], [role="option"], [role="tab"], [role="treeitem"], li, button',
+  );
 
   /** Enable typeahead search */
   readonly typeahead = input<boolean>(true);
@@ -127,7 +129,7 @@ export class KeyboardNavigationDirective implements OnInit, OnDestroy {
     const selector = this.itemSelector();
     const elements = Array.from(container.querySelectorAll(selector)) as HTMLElement[];
     return elements.filter(
-      (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-disabled') !== 'true'
+      (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-disabled') !== 'true',
     );
   }
 
@@ -383,12 +385,7 @@ export class KeyboardNavigationDirective implements OnInit, OnDestroy {
    */
   private isTypeaheadKey(event: KeyboardEvent): boolean {
     // Single printable character
-    return (
-      event.key.length === 1 &&
-      !event.ctrlKey &&
-      !event.metaKey &&
-      !event.altKey
-    );
+    return event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
   }
 
   /**

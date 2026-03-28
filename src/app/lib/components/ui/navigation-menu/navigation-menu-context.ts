@@ -33,7 +33,7 @@ export interface NavigationMenuContextValue {
 }
 
 export const NAVIGATION_MENU_CONTEXT = new InjectionToken<NavigationMenuContextValue>(
-  'NAVIGATION_MENU_CONTEXT'
+  'NAVIGATION_MENU_CONTEXT',
 );
 
 /**
@@ -51,5 +51,5 @@ export interface NavigationMenuItemContextValue {
 }
 
 export const NAVIGATION_MENU_ITEM_CONTEXT = new InjectionToken<NavigationMenuItemContextValue>(
-  'NAVIGATION_MENU_ITEM_CONTEXT'
+  'NAVIGATION_MENU_ITEM_CONTEXT',
 );

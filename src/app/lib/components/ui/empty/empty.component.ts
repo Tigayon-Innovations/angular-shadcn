@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Empty component - empty state placeholder for when there's no content.
@@ -47,7 +42,7 @@ export class Empty {
   protected readonly computedClass = computed(() =>
     cn(
       'flex min-h-[400px] flex-col items-center justify-center rounded-md border border-dashed p-8 text-center animate-in fade-in-50',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

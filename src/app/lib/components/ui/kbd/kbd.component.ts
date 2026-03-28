@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { kbdVariants, type KbdVariants } from './kbd-variants';
 
 /**
@@ -44,7 +39,7 @@ export class Kbd {
       kbdVariants({
         size: this.size(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

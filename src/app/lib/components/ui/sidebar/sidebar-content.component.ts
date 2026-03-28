@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarContent component - main content area of sidebar.
@@ -25,7 +20,7 @@ export class SidebarContent {
   protected readonly computedClass = computed(() =>
     cn(
       'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]/sidebar-wrapper:overflow-hidden',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

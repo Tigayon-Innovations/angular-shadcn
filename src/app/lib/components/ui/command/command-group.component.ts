@@ -1,5 +1,13 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core';
 
 /**
  * CommandGroup component - a group of command items.
@@ -40,8 +48,8 @@ export class CommandGroup {
   protected readonly computedClass = computed(() =>
     cn(
       'overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {

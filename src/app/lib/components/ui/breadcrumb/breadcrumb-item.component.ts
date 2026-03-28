@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * BreadcrumbItem component - li container.
@@ -23,6 +18,6 @@ export class BreadcrumbItem {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('inline-flex items-center gap-1.5', this.class())
+    cn('inline-flex items-center gap-1.5', this.class()),
   );
 }

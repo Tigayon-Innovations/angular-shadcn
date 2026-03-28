@@ -1,10 +1,10 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 

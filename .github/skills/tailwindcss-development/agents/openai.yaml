@@ -1,0 +1,4 @@
+interface:
+  display_name: "TailwindCSS Development"
+  short_description: "Style UI with Tailwind CSS v4 patterns."
+  default_prompt: "Use $tailwindcss-development to style or restyle this Angular UI with Tailwind v4 utilities, responsive behavior, and dark mode parity."

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * PaginationContent component - ul container.
@@ -23,6 +18,6 @@ export class PaginationContent {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-row items-center gap-1', this.class())
+    cn('flex flex-row items-center gap-1', this.class()),
   );
 }

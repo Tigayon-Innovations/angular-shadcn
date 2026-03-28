@@ -1,11 +1,5 @@
 import { cn, Presence } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TOOLTIP_CONTEXT, TooltipAlign, TooltipSide } from './tooltip-context';
 
 // ============================================================================
@@ -129,7 +123,7 @@ export class TooltipContent {
 
   /** Current state: open or closed */
   protected readonly state = computed<TooltipContentState>(() =>
-    this.context.open() ? 'open' : 'closed'
+    this.context.open() ? 'open' : 'closed',
   );
 
   protected readonly computedClass = computed(() => {
@@ -148,7 +142,7 @@ export class TooltipContent {
       'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
       'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
       sideClasses[this.side()],
-      this.class()
+      this.class(),
     );
   });
 }

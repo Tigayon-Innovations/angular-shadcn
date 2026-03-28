@@ -1,10 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    input,
-    signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
 import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 
 let tooltipIdCounter = 0;

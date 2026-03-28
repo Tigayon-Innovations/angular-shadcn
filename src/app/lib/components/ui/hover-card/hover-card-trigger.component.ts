@@ -1,10 +1,10 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT } from './hover-card-context';
 
@@ -72,8 +72,8 @@ export interface HoverCardTriggerProps {
   selector: 'HoverCardTrigger',
   template: `<ng-content />`,
   host: {
-    'tabindex': '0',
-    'role': 'button',
+    tabindex: '0',
+    role: 'button',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
     '(focus)': 'onFocus()',
@@ -124,7 +124,9 @@ export class HoverCardTrigger implements OnDestroy {
   onBlur(event: FocusEvent): void {
     // Check if focus moved to the hover card content
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    const hoverCardContent = this.elementRef.nativeElement.parentElement?.querySelector('[data-slot="hover-card-content"]');
+    const hoverCardContent = this.elementRef.nativeElement.parentElement?.querySelector(
+      '[data-slot="hover-card-content"]',
+    );
 
     if (relatedTarget && hoverCardContent?.contains(relatedTarget)) {
       // Focus moved to content, don't close

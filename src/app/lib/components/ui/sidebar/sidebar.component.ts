@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import {
   SIDEBAR_CONTEXT,
   type SidebarCollapsible,
@@ -32,11 +26,7 @@ import {
           (click)="context.setOpenMobile(false)"
           aria-hidden="true"
         ></div>
-        <aside
-          [class]="computedMobileClass()"
-          role="complementary"
-          [attr.aria-label]="ariaLabel()"
-        >
+        <aside [class]="computedMobileClass()" role="complementary" [attr.aria-label]="ariaLabel()">
           <nav [attr.aria-label]="navLabel()">
             <ng-content />
           </nav>
@@ -51,7 +41,11 @@ import {
         [attr.aria-label]="ariaLabel()"
         [attr.aria-hidden]="context.state() === 'collapsed' && collapsible() === 'offcanvas'"
       >
-        <nav [attr.aria-label]="navLabel()" [attr.data-sidebar]="'sidebar'" [class]="computedInnerClass()">
+        <nav
+          [attr.aria-label]="navLabel()"
+          [attr.data-sidebar]="'sidebar'"
+          [class]="computedInnerClass()"
+        >
           <ng-content />
         </nav>
       </aside>
@@ -59,11 +53,10 @@ import {
   `,
   host: {
     '[attr.data-state]': 'context.state()',
-    '[attr.data-collapsible]':
-      'context.state() === "collapsed" ? collapsible() : ""',
+    '[attr.data-collapsible]': 'context.state() === "collapsed" ? collapsible() : ""',
     '[attr.data-variant]': 'variant()',
     '[attr.data-side]': 'side()',
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -95,8 +88,8 @@ export class Sidebar {
       'group-data-[side=right]/sidebar-wrapper:rotate-180',
       this.variant() === 'floating' || this.variant() === 'inset'
         ? 'group-data-[collapsible=icon]/sidebar-wrapper:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'
-        : 'group-data-[collapsible=icon]/sidebar-wrapper:w-[--sidebar-width-icon]'
-    )
+        : 'group-data-[collapsible=icon]/sidebar-wrapper:w-[--sidebar-width-icon]',
+    ),
   );
 
   protected readonly computedClass = computed(() =>
@@ -108,14 +101,14 @@ export class Sidebar {
       this.variant() === 'floating' || this.variant() === 'inset'
         ? 'p-2 group-data-[collapsible=icon]/sidebar-wrapper:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
         : 'group-data-[collapsible=icon]/sidebar-wrapper:w-[--sidebar-width-icon] group-data-[side=left]/sidebar-wrapper:border-r group-data-[side=right]/sidebar-wrapper:border-l',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected readonly computedInnerClass = computed(() =>
     cn(
-      'flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]/sidebar-wrapper:rounded-lg group-data-[variant=floating]/sidebar-wrapper:border group-data-[variant=floating]/sidebar-wrapper:border-sidebar-border group-data-[variant=floating]/sidebar-wrapper:shadow'
-    )
+      'flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]/sidebar-wrapper:rounded-lg group-data-[variant=floating]/sidebar-wrapper:border group-data-[variant=floating]/sidebar-wrapper:border-sidebar-border group-data-[variant=floating]/sidebar-wrapper:shadow',
+    ),
   );
 
   protected readonly computedMobileClass = computed(() =>
@@ -124,7 +117,7 @@ export class Sidebar {
       this.side() === 'left'
         ? 'left-0 animate-in slide-in-from-left'
         : 'right-0 animate-in slide-in-from-right',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

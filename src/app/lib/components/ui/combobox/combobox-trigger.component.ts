@@ -1,11 +1,6 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChevronDown, LucideAngularModule } from 'lucide-angular';
 import { COMBOBOX_CONTEXT } from './combobox-context';
 
 /**
@@ -14,7 +9,17 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
  */
 @Component({
   selector: 'ComboboxTrigger',
-  template: `<ng-content />`,
+  template: `
+    <ng-content />
+
+    @if (showIcon()) {
+      <lucide-icon
+        [img]="ChevronDownIcon"
+        class="ms-auto w-4 h-4 shrink-0 opacity-50 text-gray-500 dark:text-neutral-400"
+      />
+    }
+  `,
+  imports: [LucideAngularModule],
   host: {
     '[class]': 'computedClass()',
     role: 'combobox',
@@ -30,16 +35,20 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxTrigger {
+  protected readonly ChevronDownIcon = ChevronDown;
   protected readonly context = inject(COMBOBOX_CONTEXT);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Whether to show the dropdown chevron icon */
+  readonly showIcon = input<boolean>(false);
+
   protected readonly computedClass = computed(() =>
     cn(
-      'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
-      this.class()
-    )
+      'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate',
+      this.class(),
+    ),
   );
 
   protected onClick(): void {

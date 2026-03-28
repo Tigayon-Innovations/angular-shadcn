@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import {
-    NAVIGATION_MENU_CONTEXT,
-    type NavigationMenuContextValue,
-    type NavigationMenuOrientation,
+  NAVIGATION_MENU_CONTEXT,
+  type NavigationMenuContextValue,
+  type NavigationMenuOrientation,
 } from './navigation-menu-context';
 import { NavigationMenuViewport } from './navigation-menu-viewport.component';
 
@@ -141,9 +141,6 @@ export class NavigationMenu {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'relative z-10 flex max-w-max flex-1 items-center justify-center gap-1',
-      this.class()
-    )
+    cn('relative z-10 flex max-w-max flex-1 items-center justify-center gap-1', this.class()),
   );
 }

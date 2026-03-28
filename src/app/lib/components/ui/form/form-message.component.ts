@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { FORM_FIELD_CONTEXT } from './form-context';
 
 /**
@@ -96,8 +90,8 @@ export class FormMessage {
     cn(
       'text-destructive text-[0.8rem] font-medium',
       !this.hasError() && !this.hasContent && 'hidden',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   ngAfterContentInit() {

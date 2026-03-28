@@ -11,7 +11,7 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    'role': 'group',
+    role: 'group',
     'aria-roledescription': 'slide',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,7 +26,7 @@ export class CarouselItem {
     cn(
       'min-w-0 shrink-0 grow-0 basis-full',
       this.context.orientation() === 'horizontal' ? 'pl-4' : 'pt-4',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

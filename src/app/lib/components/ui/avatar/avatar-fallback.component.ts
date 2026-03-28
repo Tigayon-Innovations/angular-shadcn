@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Avatar fallback component.
@@ -26,9 +21,6 @@ export class AvatarFallback {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'bg-muted flex size-full items-center justify-center rounded-full text-xs',
-      this.class()
-    )
+    cn('bg-muted flex size-full items-center justify-center rounded-full text-xs', this.class()),
   );
 }

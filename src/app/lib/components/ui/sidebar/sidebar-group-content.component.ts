@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarGroupContent component - content wrapper for sidebar group.
@@ -22,7 +17,5 @@ export class SidebarGroupContent {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('w-full text-sm', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('w-full text-sm', this.class()));
 }

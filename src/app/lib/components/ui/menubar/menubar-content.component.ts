@@ -1,14 +1,14 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
 
@@ -75,7 +75,7 @@ export class MenubarContent implements OnDestroy {
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
       alignClasses[this.align()],
-      this.class()
+      this.class(),
     );
   });
 
@@ -112,7 +112,9 @@ export class MenubarContent implements OnDestroy {
     const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
-        content.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])')
+        content.querySelectorAll(
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+        ),
       );
     }
   }
@@ -206,7 +208,7 @@ export class MenubarContent implements OnDestroy {
 
     // Find first matching item
     const matchIndex = this.menuItems.findIndex((item) =>
-      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer)
+      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer),
     );
 
     if (matchIndex >= 0) {

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * EmptyTitle component - title for the empty state.
@@ -22,7 +17,5 @@ export class EmptyTitle {
   readonly class = input<string>('');
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('mt-4 text-lg font-semibold', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('mt-4 text-lg font-semibold', this.class()));
 }

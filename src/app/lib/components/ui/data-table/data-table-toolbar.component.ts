@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * DataTableToolbar component - toolbar with search and options.
@@ -22,6 +17,6 @@ export class DataTableToolbar {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex items-center justify-between', this.class())
+    cn('flex items-center justify-between', this.class()),
   );
 }

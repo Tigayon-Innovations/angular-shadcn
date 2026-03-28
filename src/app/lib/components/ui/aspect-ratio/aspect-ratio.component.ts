@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * AspectRatio component that maintains a fixed aspect ratio for its content.
@@ -57,7 +52,5 @@ export class AspectRatio {
   });
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('relative block w-full', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative block w-full', this.class()));
 }

@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { CHART_COLORS, CHART_CONTEXT } from './chart-context';
 
 /**
@@ -16,10 +10,7 @@ import { CHART_COLORS, CHART_CONTEXT } from './chart-context';
   template: `
     @for (item of items(); track item.label) {
       <div class="flex items-center gap-2">
-        <div
-          class="h-2 w-2 rounded-full"
-          [style.backgroundColor]="item.color"
-        ></div>
+        <div class="h-2 w-2 rounded-full" [style.backgroundColor]="item.color"></div>
         <span class="text-sm text-muted-foreground">{{ item.label }}</span>
       </div>
     }
@@ -46,6 +37,6 @@ export class ChartLegendContent {
   });
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-wrap items-center justify-center gap-4', this.class())
+    cn('flex flex-wrap items-center justify-center gap-4', this.class()),
   );
 }

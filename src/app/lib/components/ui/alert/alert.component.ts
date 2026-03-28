@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { alertVariants, type AlertVariants } from './alert-variants';
 
 /**
@@ -42,9 +37,6 @@ export class Alert {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      alertVariants({ variant: this.variant() }),
-      this.class()
-    )
+    cn(alertVariants({ variant: this.variant() }), this.class()),
   );
 }

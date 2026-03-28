@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SIDEBAR_CONTEXT } from './sidebar-context';
 
 /**
@@ -37,8 +31,8 @@ export class SidebarRail {
       'group-data-[collapsible=offcanvas]/sidebar-wrapper:translate-x-0 group-data-[collapsible=offcanvas]/sidebar-wrapper:after:left-full group-data-[collapsible=offcanvas]/sidebar-wrapper:hover:bg-sidebar',
       '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',
       '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected onClick(): void {

@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
 
 /**
@@ -29,16 +23,18 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',
     '[attr.aria-hidden]': '!collapsible.isOpen()',
   },
-  styles: [`
-    :host {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 200ms ease-out;
-    }
-    :host[data-state="open"] {
-      grid-template-rows: 1fr;
-    }
-  `],
+  styles: [
+    `
+      :host {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 200ms ease-out;
+      }
+      :host[data-state='open'] {
+        grid-template-rows: 1fr;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollapsibleContent {
@@ -47,12 +43,7 @@ export class CollapsibleContent {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn(
-      'overflow-hidden',
-      this.class()
-    )
-  );
+  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
 
   protected readonly innerClass = computed(() => 'min-h-0');
 }

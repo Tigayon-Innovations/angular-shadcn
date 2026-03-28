@@ -19,7 +19,7 @@ import {
   effect,
   input,
   OnDestroy,
-  signal
+  signal,
 } from '@angular/core';
 
 /**

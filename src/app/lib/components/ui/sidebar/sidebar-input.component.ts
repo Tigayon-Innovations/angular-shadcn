@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarInput component - input field for sidebar.
@@ -25,7 +20,7 @@ export class SidebarInput {
   protected readonly computedClass = computed(() =>
     cn(
       'h-8 w-full bg-background shadow-none focus-visible:ring-2 focus-visible:ring-sidebar-ring',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

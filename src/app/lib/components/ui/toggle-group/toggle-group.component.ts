@@ -1,22 +1,22 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    forwardRef,
-    inject,
-    input,
-    model,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import type { ToggleVariants } from '../toggle/toggle-variants';
 import {
-    TOGGLE_GROUP_CONTEXT,
-    type ToggleGroupContext,
-    type ToggleGroupOrientation,
-    type ToggleGroupType,
+  TOGGLE_GROUP_CONTEXT,
+  type ToggleGroupContext,
+  type ToggleGroupOrientation,
+  type ToggleGroupType,
 } from './toggle-group-context';
 
 // ============================================================================
@@ -224,8 +224,7 @@ export class ToggleGroup {
     focusNext: (currentValue: string) => this.focusItem(currentValue, 1),
     focusPrevious: (currentValue: string) => this.focusItem(currentValue, -1),
     focusFirst: () => this.focusItemByIndex(0),
-    focusLast: () =>
-      this.focusItemByIndex(this.context.itemValues().length - 1),
+    focusLast: () => this.focusItemByIndex(this.context.itemValues().length - 1),
   };
 
   /** Computed class combining base styles and custom classes */
@@ -233,8 +232,8 @@ export class ToggleGroup {
     cn(
       'flex items-center justify-center gap-1',
       this.orientation() === 'vertical' && 'flex-col',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   ngOnChanges(): void {
@@ -278,7 +277,7 @@ export class ToggleGroup {
     this.context.focusedValue.set(value);
 
     const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="toggle-group-item"][data-value="${value}"]`
+      `[data-slot="toggle-group-item"][data-value="${value}"]`,
     ) as HTMLElement;
 
     if (item) {

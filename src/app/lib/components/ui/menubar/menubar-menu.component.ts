@@ -1,5 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT, type MenubarMenuContextValue } from './menubar-context';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
+import {
+  MENUBAR_CONTEXT,
+  MENUBAR_MENU_CONTEXT,
+  type MenubarMenuContextValue,
+} from './menubar-context';
 
 let menuIdCounter = 0;
 

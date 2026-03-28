@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarMenuSub component - submenu container.
@@ -26,7 +21,7 @@ export class SidebarMenuSub {
     cn(
       'mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-sidebar-border px-2.5 py-0.5',
       'group-data-[collapsible=icon]/sidebar-wrapper:hidden',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

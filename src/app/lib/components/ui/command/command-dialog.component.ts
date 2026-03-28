@@ -16,11 +16,10 @@ import { Command } from './command.component';
         [attr.data-state]="open() ? 'open' : 'closed'"
         (click)="closeDialog()"
       ></div>
-      <div
-        [class]="computedDialogClass()"
-        [attr.data-state]="open() ? 'open' : 'closed'"
-      >
-        <Command [class]="'[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5'">
+      <div [class]="computedDialogClass()" [attr.data-state]="open() ? 'open' : 'closed'">
+        <Command
+          [class]="'[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5'"
+        >
           <ng-content />
         </Command>
       </div>
@@ -53,8 +52,8 @@ export class CommandDialog {
       'data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
       'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
       'duration-200',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected closeDialog(): void {

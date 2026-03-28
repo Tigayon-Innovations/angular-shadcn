@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import type { AriaCurrentValue } from './sidebar-context';
 
 /**
@@ -57,8 +52,7 @@ export class SidebarMenuButton {
       'group-data-[collapsible=icon]/sidebar-wrapper:!size-8 group-data-[collapsible=icon]/sidebar-wrapper:!p-2',
       this.size() === 'sm' && 'text-xs px-2 py-1.5',
       this.size() === 'lg' && 'text-sm group-data-[collapsible=icon]/sidebar-wrapper:!p-0',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }
-

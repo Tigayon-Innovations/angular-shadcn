@@ -1,14 +1,14 @@
-import { cn, Presence } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    HostListener,
-    inject,
-    input,
-    OnDestroy,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  HostListener,
+  inject,
+  input,
 } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
@@ -21,39 +21,22 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
  * - Overlay/backdrop click does NOT close the dialog
  * - Focus is trapped within the dialog
  * - User must explicitly click Cancel or Action to close
- *
- * @example
- * <AlertDialogContent>
- *   <AlertDialogHeader>
- *     <AlertDialogTitle>Delete Account</AlertDialogTitle>
- *     <AlertDialogDescription>Are you sure?</AlertDialogDescription>
- *   </AlertDialogHeader>
- *   <AlertDialogFooter>
- *     <AlertDialogCancel>Cancel</AlertDialogCancel>
- *     <AlertDialogAction>Delete</AlertDialogAction>
- *   </AlertDialogFooter>
- * </AlertDialogContent>
  */
 @Component({
   selector: 'AlertDialogContent',
-  imports: [FocusTrapDirective, Presence],
+  imports: [FocusTrapDirective],
   template: `
-    <Presence [present]="context.open()">
+    @if (context.isOpen()) {
       <!-- Overlay - does NOT close on click -->
-      <div
-        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-        [attr.data-state]="context.open() ? 'open' : 'closed'"
-        aria-hidden="true"
-      ></div>
+      <div class="fixed inset-0 z-50 bg-black/80" aria-hidden="true"></div>
       <!-- Content Dialog -->
       <div
         hlmFocusTrap
-        [trapFocus]="context.open()"
+        [trapFocus]="context.isOpen()"
         [autoFocus]="true"
         [restoreFocus]="false"
         [initialFocus]="'[data-slot=alert-dialog-cancel]'"
         [class]="computedClass()"
-        [attr.data-state]="context.open() ? 'open' : 'closed'"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="context.titleId"
         [attr.aria-describedby]="context.descriptionId"
@@ -62,15 +45,16 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
       >
         <ng-content />
       </div>
-    </Presence>
+    }
   `,
   host: {
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertDialogContent implements OnDestroy {
+export class AlertDialogContent {
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
+  private readonly destroyRef = inject(DestroyRef);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
@@ -87,19 +71,25 @@ export class AlertDialogContent implements OnDestroy {
       'data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
       'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
       'sm:rounded-lg',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {
     // Handle body scroll lock based on open state
     effect(() => {
-      const isOpen = this.context.open();
+      const isOpen = this.context.isOpen();
       if (isOpen) {
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
       }
+    });
+
+    // Cleanup on destroy
+    this.destroyRef.onDestroy(() => {
+      this.unlockBodyScroll();
+      this.restoreFocus();
     });
   }
 
@@ -116,16 +106,9 @@ export class AlertDialogContent implements OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    // Restore body scroll
-    this.unlockBodyScroll();
-    // Restore focus to trigger element
-    this.restoreFocus();
-  }
-
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
-    if (this.context.open()) {
+    if (this.context.isOpen()) {
       this.close();
     }
   }
@@ -136,7 +119,7 @@ export class AlertDialogContent implements OnDestroy {
   }
 
   private restoreFocus(): void {
-    const triggerEl = this.context.triggerElement();
+    const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {
       setTimeout(() => {
         triggerEl.focus();

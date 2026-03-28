@@ -1,6 +1,13 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { AlertCircle, AlertTriangle, CheckCircle, Info, LucideAngularModule, X } from 'lucide-angular';
+import {
+  AlertCircle,
+  AlertTriangle,
+  CheckCircle,
+  Info,
+  LucideAngularModule,
+  X,
+} from 'lucide-angular';
 import { toastVariants, type ToastVariants } from './toast-variants';
 import type { ToastType } from './toast.service';
 
@@ -169,9 +176,6 @@ export class Toast {
       info: 'info',
     };
 
-    return cn(
-      toastVariants({ variant: variantMap[this.variant()] }),
-      this.class()
-    );
+    return cn(toastVariants({ variant: variantMap[this.variant()] }), this.class());
   });
 }

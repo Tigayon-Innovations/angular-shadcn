@@ -6,6 +6,4 @@ export interface SegmentedContext {
   onValueChange: (value: string) => void;
 }
 
-export const SEGMENTED_CONTEXT = new InjectionToken<SegmentedContext>(
-  'SegmentedContext'
-);
+export const SEGMENTED_CONTEXT = new InjectionToken<SegmentedContext>('SegmentedContext');

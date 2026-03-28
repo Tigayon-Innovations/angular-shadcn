@@ -7,4 +7,3 @@ export { DialogHeader } from './dialog-header.component';
 export { DialogTitle } from './dialog-title.component';
 export { DialogTrigger } from './dialog-trigger.component';
 export { Dialog } from './dialog.component';
-

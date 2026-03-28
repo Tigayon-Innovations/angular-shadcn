@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import {
   CHART_COLORS,
   CHART_CONTEXT,
@@ -151,9 +145,7 @@ export class Chart {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly viewBox = computed(
-    () => `0 0 ${this.width()} ${this.height()}`
-  );
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
 
   protected readonly primaryColor = computed(() => {
     const config = this.context?.config() || {};
@@ -197,7 +189,10 @@ export class Chart {
     if (points.length === 0) return '';
     return (
       `M ${points[0].x} ${points[0].y}` +
-      points.slice(1).map((p) => ` L ${p.x} ${p.y}`).join('')
+      points
+        .slice(1)
+        .map((p) => ` L ${p.x} ${p.y}`)
+        .join('')
     );
   });
 
@@ -302,7 +297,5 @@ export class Chart {
     }));
   });
 
-  protected readonly computedClass = computed(() =>
-    cn('w-full h-full', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('w-full h-full', this.class()));
 }

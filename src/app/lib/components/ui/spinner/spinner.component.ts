@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { spinnerVariants, type SpinnerVariants } from './spinner-variants';
 
 /**
@@ -71,7 +66,7 @@ export class Spinner {
         variant: this.variant(),
         size: this.size(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

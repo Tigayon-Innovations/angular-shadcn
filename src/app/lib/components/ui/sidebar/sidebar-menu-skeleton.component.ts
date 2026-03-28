@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarMenuSkeleton component - loading skeleton for menu items.
@@ -34,6 +29,6 @@ export class SidebarMenuSkeleton {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('rounded-md h-8 flex gap-2 px-2 items-center', this.class())
+    cn('rounded-md h-8 flex gap-2 px-2 items-center', this.class()),
   );
 }

@@ -21,10 +21,6 @@ export class ContextMenuLabel {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'px-2 py-1.5 text-sm font-semibold text-foreground',
-      this.inset() && 'pl-8',
-      this.class()
-    )
+    cn('px-2 py-1.5 text-sm font-semibold text-foreground', this.inset() && 'pl-8', this.class()),
   );
 }

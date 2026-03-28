@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, InjectionToken, model, output, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InjectionToken,
+  model,
+  output,
+  signal,
+  type WritableSignal,
+} from '@angular/core';
 
 export interface DropdownMenuRadioGroupContext {
   value: WritableSignal<string>;
@@ -6,7 +14,7 @@ export interface DropdownMenuRadioGroupContext {
 }
 
 export const DROPDOWN_MENU_RADIO_GROUP_CONTEXT = new InjectionToken<DropdownMenuRadioGroupContext>(
-  'DROPDOWN_MENU_RADIO_GROUP_CONTEXT'
+  'DROPDOWN_MENU_RADIO_GROUP_CONTEXT',
 );
 
 /**

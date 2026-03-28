@@ -18,9 +18,6 @@ export class NavigationMenuList {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'group flex flex-1 list-none items-center justify-center space-x-1',
-      this.class()
-    )
+    cn('group flex flex-1 list-none items-center justify-center space-x-1', this.class()),
   );
 }

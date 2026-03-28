@@ -1,11 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    OnDestroy,
-    afterNextRender,
-    inject,
-    output,
-} from '@angular/core';
+import { Directive, ElementRef, OnDestroy, afterNextRender, inject, output } from '@angular/core';
 
 /**
  * Directive that detects clicks outside the host element.

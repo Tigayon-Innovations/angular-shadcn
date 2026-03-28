@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * DrawerFooter component - footer area of the drawer.
@@ -23,6 +18,6 @@ export class DrawerFooter {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('mt-auto flex flex-col gap-2 p-4', this.class())
+    cn('mt-auto flex flex-col gap-2 p-4', this.class()),
   );
 }

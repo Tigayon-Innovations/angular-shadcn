@@ -1,10 +1,10 @@
 // Context and types
 export {
-    SELECT_CONTEXT,
-    SELECT_GROUP_CONTEXT,
-    type SelectContext,
-    type SelectGroupContext,
-    type SelectPosition
+  SELECT_CONTEXT,
+  SELECT_GROUP_CONTEXT,
+  type SelectContext,
+  type SelectGroupContext,
+  type SelectPosition,
 } from './select-context';
 
 // Components and their types
@@ -16,4 +16,3 @@ export { SelectSeparator } from './select-separator.component';
 export { SelectTrigger } from './select-trigger.component';
 export { SelectValue } from './select-value.component';
 export { Select, type SelectProps, type SelectState } from './select.component';
-

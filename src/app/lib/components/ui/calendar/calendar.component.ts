@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 import { LiveAnnouncerService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-    model,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import { ChevronLeft, ChevronRight, LucideAngularModule } from 'lucide-angular';
 import { buttonVariants } from '../button';
@@ -29,10 +29,10 @@ import { buttonVariants } from '../button';
   template: `
     <div [class]="computedClass()" role="application" [attr.aria-label]="ariaLabel()">
       <!-- Header with navigation -->
-      <div class="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-        <div class="space-y-4">
+      <div class="w-full">
+        <div class="w-full space-y-4">
           <!-- Month navigation -->
-          <div class="flex justify-center pt-1 relative items-center">
+          <div class="relative flex items-center justify-center pt-1">
             <div
               class="text-sm font-medium"
               aria-live="polite"
@@ -63,13 +63,17 @@ import { buttonVariants } from '../button';
           </div>
 
           <!-- Calendar grid -->
-          <table class="w-full border-collapse space-y-1" role="grid" [attr.aria-label]="monthYear()">
+          <table
+            class="w-full border-collapse space-y-1"
+            role="grid"
+            [attr.aria-label]="monthYear()"
+          >
             <thead>
               <tr class="flex" role="row">
                 @for (day of weekDays; track day; let i = $index) {
                   <th
                     scope="col"
-                    class="text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]"
+                    class="text-muted-foreground w-full rounded-md font-normal text-[0.8rem]"
                     [attr.aria-label]="fullWeekDays[i]"
                   >
                     {{ day }}
@@ -83,7 +87,7 @@ import { buttonVariants } from '../button';
                   @for (day of week; track day.date.toISOString()) {
                     <td
                       role="gridcell"
-                      class="relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md"
+                      class="relative w-full p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-gray-100 dark:[&:has([aria-selected])]:bg-neutral-800 [&:has([aria-selected].day-outside)]:bg-gray-100/50 dark:[&:has([aria-selected].day-outside)]:bg-neutral-800/50 [&:has([aria-selected].day-range-end)]:rounded-r-md"
                       [class.first:rounded-l-md]="true"
                       [class.last:rounded-r-md]="true"
                     >
@@ -91,9 +95,9 @@ import { buttonVariants } from '../button';
                         type="button"
                         [class]="getDayClass(day)"
                         [attr.aria-label]="getDateLabel(day.date)"
-                        [attr.aria-selected]="isSelected(day.date)"
+                        [attr.aria-selected]="isSelected(day.date) ? 'true' : null"
                         [attr.aria-current]="isToday(day.date) ? 'date' : null"
-                        [attr.aria-disabled]="day.disabled"
+                        [attr.aria-disabled]="day.disabled ? 'true' : null"
                         [disabled]="day.disabled"
                         [tabindex]="getDayTabIndex(day)"
                         (click)="selectDate(day.date)"
@@ -146,19 +150,25 @@ export class Calendar {
   readonly onMonthChange = output<Date>();
 
   protected readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-  protected readonly fullWeekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  protected readonly fullWeekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
 
   protected readonly currentMonth = signal(new Date());
 
-  protected readonly computedClass = computed(() =>
-    cn('p-3', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('w-full p-3', this.class()));
 
   protected readonly navButtonClass = computed(() =>
     cn(
       buttonVariants({ variant: 'outline' }),
-      'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
-    )
+      'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-neutral-800',
+    ),
   );
 
   protected readonly monthYear = computed(() => {
@@ -172,7 +182,7 @@ export class Calendar {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     };
     const label = date.toLocaleDateString('en-US', options);
 
@@ -255,7 +265,9 @@ export class Calendar {
       }
       // Focus the new date after DOM update
       setTimeout(() => {
-        const button = document.querySelector(`[aria-label*="${newDate!.getDate()},"]`) as HTMLElement;
+        const button = document.querySelector(
+          `[aria-label*="${newDate!.getDate()},"]`,
+        ) as HTMLElement;
         button?.focus();
       }, 0);
     }
@@ -310,23 +322,19 @@ export class Calendar {
     return weeks;
   });
 
-  protected getDayClass(day: {
-    date: Date;
-    isOutside: boolean;
-    disabled: boolean;
-  }): string {
+  protected getDayClass(day: { date: Date; isOutside: boolean; disabled: boolean }): string {
     const todayCheck = this.isSameDay(day.date, new Date());
     const selected = this.isSelected(day.date);
 
     return cn(
       buttonVariants({ variant: 'ghost' }),
-      'h-8 w-8 p-0 font-normal aria-selected:opacity-100',
-      todayCheck && 'bg-accent text-accent-foreground',
+      'h-9 w-full p-0 font-normal aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-100',
+      todayCheck && 'bg-gray-100 text-gray-900 dark:bg-neutral-800 dark:text-neutral-100',
       selected &&
         'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
       day.isOutside &&
-        'day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground',
-      day.disabled && 'text-muted-foreground opacity-50'
+        'day-outside text-muted-foreground aria-selected:bg-gray-100/50 aria-selected:text-muted-foreground dark:aria-selected:bg-neutral-800/50',
+      day.disabled && 'text-muted-foreground opacity-50',
     );
   }
 

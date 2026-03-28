@@ -1,18 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Directive,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, inject, input, output } from '@angular/core';
 import { FocusManagementService } from './focus-management.service';
 
 /**
  * Directive to trap focus within a container element.
  * Essential for modals, dialogs, and other overlay components.
+ * Uses simplified Tab key handling without focus sentinels to prevent infinite loops.
  *
  * @example
  * ```html
@@ -24,8 +17,9 @@ import { FocusManagementService } from './focus-management.service';
  */
 @Directive({
   selector: '[hlmFocusTrap]',
+  standalone: true,
   host: {
-    '(keydown)': 'handleKeydown($event)',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class FocusTrapDirective implements OnInit, OnDestroy {
@@ -49,15 +43,11 @@ export class FocusTrapDirective implements OnInit, OnDestroy {
   readonly focusEscaped = output<void>();
 
   private previouslyFocused: HTMLElement | null = null;
-  private focusSentinelStart: HTMLElement | null = null;
-  private focusSentinelEnd: HTMLElement | null = null;
 
   ngOnInit(): void {
     if (this.restoreFocus()) {
       this.previouslyFocused = this.focusManager.saveFocus();
     }
-
-    this.createFocusSentinels();
 
     if (this.autoFocus() && this.trapFocus()) {
       // Delay to ensure DOM is ready
@@ -66,64 +56,61 @@ export class FocusTrapDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.removeFocusSentinels();
-
-    if (this.restoreFocus()) {
+    if (this.restoreFocus() && this.previouslyFocused) {
       this.focusManager.restoreFocus();
     }
   }
 
   /**
-   * Handles keydown events to manage Tab navigation within the trap.
+   * Handles keydown events and filters for Tab key
    */
-  handleKeydown(event: KeyboardEvent): void {
-    if (!this.trapFocus() || event.key !== 'Tab') return;
+  onKeydown(event: Event): void {
+    const keyEvent = event as KeyboardEvent;
+    if (keyEvent.key === 'Tab') {
+      this.handleTabKey(keyEvent);
+    }
+  }
+
+  /**
+   * Handles Tab key press to manage focus within the trap.
+   * Simplified approach without sentinels to prevent infinite focus loops.
+   */
+  private handleTabKey(event: KeyboardEvent): void {
+    if (!this.trapFocus()) return;
 
     const container = this.elementRef.nativeElement;
     const focusable = this.focusManager.getTabbableElements(container);
 
+    // No focusable elements - nothing to trap
     if (focusable.length === 0) {
-      // No focusable elements, prevent tab
       event.preventDefault();
       return;
     }
 
+    const activeElement = this.document.activeElement as HTMLElement;
     const firstFocusable = focusable[0];
     const lastFocusable = focusable[focusable.length - 1];
-    const activeElement = this.document.activeElement as HTMLElement;
+
+    // Check if active element is within the container
+    const isInContainer = container.contains(activeElement);
 
     if (event.shiftKey) {
-      // Shift+Tab: going backward
-      if (activeElement === firstFocusable || !container.contains(activeElement)) {
+      // Shift+Tab: moving backward
+      if (!isInContainer || activeElement === firstFocusable) {
         event.preventDefault();
-        lastFocusable.focus();
+        lastFocusable.focus({ preventScroll: true });
       }
     } else {
-      // Tab: going forward
-      if (activeElement === lastFocusable || !container.contains(activeElement)) {
+      // Tab: moving forward
+      if (!isInContainer || activeElement === lastFocusable) {
         event.preventDefault();
-        firstFocusable.focus();
+        firstFocusable.focus({ preventScroll: true });
       }
     }
   }
 
   /**
-   * Manually focuses the first or specified initial element.
-   */
-  focusFirst(): void {
-    this.setInitialFocus();
-  }
-
-  /**
-   * Manually focuses the last focusable element.
-   */
-  focusLast(): void {
-    const container = this.elementRef.nativeElement;
-    this.focusManager.focusLastFocusable(container);
-  }
-
-  /**
-   * Sets the initial focus based on configuration.
+   * Sets initial focus based on configuration
    */
   private setInitialFocus(): void {
     const container = this.elementRef.nativeElement;
@@ -132,72 +119,11 @@ export class FocusTrapDirective implements OnInit, OnDestroy {
     if (selector) {
       const target = container.querySelector(selector) as HTMLElement | null;
       if (target && this.focusManager.isElementFocusable(target)) {
-        target.focus();
+        target.focus({ preventScroll: true });
         return;
       }
     }
 
     this.focusManager.focusFirstFocusable(container);
-  }
-
-  /**
-   * Creates invisible sentinel elements at the start and end of the container.
-   * These catch focus when tabbing out of the trap.
-   */
-  private createFocusSentinels(): void {
-    const container = this.elementRef.nativeElement;
-
-    // Create start sentinel
-    this.focusSentinelStart = this.createSentinel('start');
-    container.insertBefore(this.focusSentinelStart, container.firstChild);
-
-    // Create end sentinel
-    this.focusSentinelEnd = this.createSentinel('end');
-    container.appendChild(this.focusSentinelEnd);
-
-    // Add focus listeners to sentinels
-    this.focusSentinelStart.addEventListener('focus', () => {
-      if (this.trapFocus()) {
-        this.focusManager.focusLastFocusable(container);
-      }
-    });
-
-    this.focusSentinelEnd.addEventListener('focus', () => {
-      if (this.trapFocus()) {
-        this.focusManager.focusFirstFocusable(container);
-      }
-    });
-  }
-
-  /**
-   * Creates a focus sentinel element.
-   */
-  private createSentinel(position: 'start' | 'end'): HTMLElement {
-    const sentinel = this.document.createElement('span');
-    sentinel.setAttribute('tabindex', '0');
-    sentinel.setAttribute('aria-hidden', 'true');
-    sentinel.setAttribute('data-focus-sentinel', position);
-    sentinel.style.cssText = `
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    `;
-    return sentinel;
-  }
-
-  /**
-   * Removes focus sentinel elements.
-   */
-  private removeFocusSentinels(): void {
-    this.focusSentinelStart?.remove();
-    this.focusSentinelEnd?.remove();
-    this.focusSentinelStart = null;
-    this.focusSentinelEnd = null;
   }
 }

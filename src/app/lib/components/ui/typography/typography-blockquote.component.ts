@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography Blockquote component
@@ -26,6 +21,6 @@ import {
 export class TypographyBlockquote {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn('mt-6 border-l-2 pl-6 italic', this.class())
+    cn('mt-6 border-l-2 pl-6 italic', this.class()),
   );
 }

@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
 // ============================================================================
@@ -86,7 +80,7 @@ export interface TabsContentProps {
     '[attr.aria-labelledby]': 'tabId()',
     '[attr.hidden]': '!isActive() ? true : null',
     '[attr.tabindex]': 'isActive() ? 0 : -1',
-    'role': 'tabpanel',
+    role: 'tabpanel',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -107,13 +101,11 @@ export class TabsContent {
 
   /** Current state: active or inactive */
   protected readonly state = computed<TabsContentState>(() =>
-    this.isActive() ? 'active' : 'inactive'
+    this.isActive() ? 'active' : 'inactive',
   );
 
   /** Whether content should be rendered (force mount or active) */
-  protected readonly shouldRender = computed(() =>
-    this.forceMount() || this.isActive()
-  );
+  protected readonly shouldRender = computed(() => this.forceMount() || this.isActive());
 
   /** Generate panel ID */
   protected readonly panelId = computed(() => this.tabs.getPanelId(this.value()));
@@ -126,7 +118,7 @@ export class TabsContent {
       'flex-1 outline-none',
       'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       'mt-2',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

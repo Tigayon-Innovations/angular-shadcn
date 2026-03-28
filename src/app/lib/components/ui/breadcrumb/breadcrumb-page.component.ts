@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * BreadcrumbPage component - current page span.
@@ -26,6 +21,6 @@ export class BreadcrumbPage {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('font-normal text-foreground', this.class())
+    cn('font-normal text-foreground', this.class()),
   );
 }

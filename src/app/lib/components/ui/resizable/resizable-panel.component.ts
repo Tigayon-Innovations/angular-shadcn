@@ -1,12 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  inject,
-  input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RESIZABLE_CONTEXT } from './resizable-context';
 
 let panelIdCounter = 0;
@@ -62,16 +55,9 @@ export class ResizablePanel {
 
   constructor() {
     effect(() => {
-      this.context.registerPanel(
-        this.panelId,
-        this.minSize(),
-        this.maxSize(),
-        this.defaultSize()
-      );
+      this.context.registerPanel(this.panelId, this.minSize(), this.maxSize(), this.defaultSize());
     });
   }
 
-  protected readonly computedClass = computed(() =>
-    cn('flex-shrink-0 flex-grow-0', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('flex-shrink-0 flex-grow-0', this.class()));
 }

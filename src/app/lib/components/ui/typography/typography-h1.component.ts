@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography H1 component
@@ -24,9 +19,6 @@ import {
 export class TypographyH1 {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn(
-      'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
-      this.class()
-    )
+    cn('scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl', this.class()),
   );
 }

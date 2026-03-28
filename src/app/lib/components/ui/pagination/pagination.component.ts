@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Pagination component - root container.
@@ -43,6 +38,6 @@ export class Pagination {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('mx-auto flex w-full justify-center', this.class())
+    cn('mx-auto flex w-full justify-center', this.class()),
   );
 }

@@ -25,14 +25,9 @@ export class CarouselContent {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('overflow-hidden', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
 
   protected readonly innerClass = computed(() =>
-    cn(
-      'flex',
-      this.context.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col'
-    )
+    cn('flex', this.context.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col'),
   );
 }

@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    viewChild
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
 } from '@angular/core';
 import { FORM_FIELD_CONTEXT } from './form-context';
 
@@ -19,12 +19,14 @@ import { FORM_FIELD_CONTEXT } from './form-context';
  */
 @Component({
   selector: 'FormLabel',
-  template: `<label #labelElement [attr.for]="fieldContext?.id()" [class]="computedClass()"><ng-content /></label>`,
+  template: `<label #labelElement [attr.for]="fieldContext?.id()" [class]="computedClass()"
+    ><ng-content
+  /></label>`,
   host: {
     '[attr.data-error]': 'hasError() ? "" : null',
     '[attr.data-disabled]': 'isDisabled() ? "" : null',
     'data-slot': 'form-label',
-    'class': 'contents',
+    class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -52,7 +54,7 @@ export class FormLabel {
     cn(
       'flex items-center gap-2 text-sm font-medium leading-none select-none cursor-pointer group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       this.hasError() && 'text-destructive',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

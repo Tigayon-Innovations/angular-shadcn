@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Card footer section.
@@ -29,6 +24,6 @@ export class CardFooter {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex items-center px-6 [.border-t]:pt-6', this.class())
+    cn('flex items-center px-6 [.border-t]:pt-6', this.class()),
   );
 }

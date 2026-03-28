@@ -1,11 +1,11 @@
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { POPOVER_CONTEXT } from './popover-context';
 
@@ -84,7 +84,13 @@ export class PopoverTrigger implements OnDestroy {
   constructor() {
     // Register this element as the trigger reference (browser-only)
     afterNextRender(() => {
-      this.context.setTriggerRef?.(this.elementRef.nativeElement);
+      const hostElement = this.elementRef.nativeElement as HTMLElement;
+      const triggerElement =
+        hostElement.firstElementChild instanceof HTMLElement
+          ? hostElement.firstElementChild
+          : hostElement;
+
+      this.context.setTriggerRef?.(triggerElement);
     });
   }
 

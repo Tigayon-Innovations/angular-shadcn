@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
 /**
@@ -31,7 +25,5 @@ export class AlertDialogTitle {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('text-lg font-semibold', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('text-lg font-semibold', this.class()));
 }

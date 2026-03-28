@@ -6,4 +6,3 @@ export { TableHead } from './table-head.component';
 export { TableHeader } from './table-header.component';
 export { TableRow } from './table-row.component';
 export { Table } from './table.component';
-

@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    forwardRef,
-    input,
-    model,
-    signal,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  input,
+  model,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -58,10 +58,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       [attr.data-disabled]="isDisabled() ? '' : null"
       aria-hidden="true"
     >
-      <span
-        data-slot="checkbox-indicator"
-        class="flex items-center justify-center text-current"
-      >
+      <span data-slot="checkbox-indicator" class="flex items-center justify-center text-current">
         @if (checked() === true) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -176,10 +173,8 @@ export class Checkbox implements ControlValueAccessor {
   protected readonly checkIconClass = computed(() =>
     cn(
       'size-3.5 transition-all duration-200 ease-in-out',
-      this.checked()
-        ? 'opacity-100 scale-100'
-        : 'opacity-0 scale-0'
-    )
+      this.checked() ? 'opacity-100 scale-100' : 'opacity-0 scale-0',
+    ),
   );
 
   /** Computed class for the visual checkbox box */
@@ -189,15 +184,10 @@ export class Checkbox implements ControlValueAccessor {
       'border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary',
       'size-4 shrink-0 rounded-[4px] border shadow-xs transition-all duration-200 outline-none',
       'inline-flex items-center justify-center cursor-pointer',
-      this.isDisabled() && 'cursor-not-allowed opacity-50'
-    )
+      this.isDisabled() && 'cursor-not-allowed opacity-50',
+    ),
   );
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn(
-      'relative inline-flex',
-      this.class()
-    )
-  );
+  protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()));
 }

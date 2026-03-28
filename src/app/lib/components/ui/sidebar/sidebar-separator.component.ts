@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarSeparator component - separator line in sidebar.
@@ -23,6 +18,6 @@ export class SidebarSeparator {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('mx-2 w-auto bg-sidebar-border', this.class())
+    cn('mx-2 w-auto bg-sidebar-border', this.class()),
   );
 }

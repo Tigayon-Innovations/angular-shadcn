@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { COMBOBOX_CONTEXT } from './combobox-context';
 
 /**
@@ -29,7 +23,5 @@ export class ComboboxEmpty {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('py-6 text-center text-sm', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('py-6 text-center text-sm', this.class()));
 }

@@ -46,7 +46,5 @@ export class ToastDescription {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('text-sm opacity-90', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('text-sm opacity-90', this.class()));
 }

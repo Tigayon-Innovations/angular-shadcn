@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    booleanAttribute,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    input,
-    model,
-    output,
-    signal,
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import { COLLAPSIBLE_CONTEXT, CollapsibleContext } from './collapsible-context';
 
@@ -96,7 +96,5 @@ export class Collapsible implements CollapsibleContext {
     this.openChange.emit(newState);
   };
 
-  protected readonly computedClass = computed(() =>
-    cn('', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('', this.class()));
 }

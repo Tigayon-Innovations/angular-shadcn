@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SHEET_CONTEXT } from './sheet-context';
 
 /**
@@ -29,6 +23,6 @@ export class SheetTitle {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-lg font-semibold text-foreground', this.class())
+    cn('text-lg font-semibold text-foreground', this.class()),
   );
 }

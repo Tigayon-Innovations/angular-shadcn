@@ -43,6 +43,4 @@ export interface ToggleGroupContext {
   focusLast: () => void;
 }
 
-export const TOGGLE_GROUP_CONTEXT = new InjectionToken<ToggleGroupContext>(
-  'ToggleGroupContext'
-);
+export const TOGGLE_GROUP_CONTEXT = new InjectionToken<ToggleGroupContext>('ToggleGroupContext');

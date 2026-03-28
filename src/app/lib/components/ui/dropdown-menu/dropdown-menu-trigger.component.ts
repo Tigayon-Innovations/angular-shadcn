@@ -24,7 +24,7 @@ export class DropdownMenuTrigger {
 
   toggle(): void {
     this.context.triggerElement.set(this.elementRef.nativeElement);
-    this.context.open.update(v => !v);
+    this.context.open.update((v) => !v);
   }
 
   onKeyDown(event: KeyboardEvent): void {

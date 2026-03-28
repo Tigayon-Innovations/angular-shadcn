@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SelectLabel component - label for a select group.
@@ -27,6 +22,6 @@ export class SelectLabel {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('text-muted-foreground px-2 py-1.5 text-xs', this.class())
+    cn('text-muted-foreground px-2 py-1.5 text-xs', this.class()),
   );
 }

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * ChartLegend component - legend for chart series.
@@ -23,6 +18,6 @@ export class ChartLegend {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-wrap items-center justify-center gap-4', this.class())
+    cn('flex flex-wrap items-center justify-center gap-4', this.class()),
   );
 }

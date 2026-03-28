@@ -146,7 +146,7 @@ export class ToastService {
     const id = this.generateId();
     const newToast: Toast = { ...toast, id };
 
-    this._toasts.update(toasts => [...toasts, newToast]);
+    this._toasts.update((toasts) => [...toasts, newToast]);
 
     const duration = toast.duration ?? 4000;
     if (duration > 0) {
@@ -183,16 +183,16 @@ export class ToastService {
 
   /** Dismiss a specific toast by ID */
   dismiss(id: string): void {
-    const toast = this._toasts().find(t => t.id === id);
+    const toast = this._toasts().find((t) => t.id === id);
     if (toast?.onDismiss) {
       toast.onDismiss();
     }
-    this._toasts.update(toasts => toasts.filter(t => t.id !== id));
+    this._toasts.update((toasts) => toasts.filter((t) => t.id !== id));
   }
 
   /** Dismiss all active toasts */
   dismissAll(): void {
-    this._toasts().forEach(toast => {
+    this._toasts().forEach((toast) => {
       if (toast.onDismiss) {
         toast.onDismiss();
       }

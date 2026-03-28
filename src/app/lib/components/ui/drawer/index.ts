@@ -7,4 +7,3 @@ export { DrawerHeader } from './drawer-header.component';
 export { DrawerTitle } from './drawer-title.component';
 export { DrawerTrigger } from './drawer-trigger.component';
 export { Drawer } from './drawer.component';
-

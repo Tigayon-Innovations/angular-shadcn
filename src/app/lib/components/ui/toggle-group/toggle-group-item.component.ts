@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-    OnDestroy,
-    OnInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { toggleVariants, type ToggleVariants } from '../toggle/toggle-variants';
 import { TOGGLE_GROUP_CONTEXT } from './toggle-group-context';
@@ -172,9 +172,7 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Unregister this item from the group
-    this.context?.itemValues.update((values) =>
-      values.filter((v) => v !== this.value())
-    );
+    this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
   }
 
   /** Toggle this item */
@@ -235,7 +233,7 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
         variant: this.effectiveVariant(),
         size: this.effectiveSize(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

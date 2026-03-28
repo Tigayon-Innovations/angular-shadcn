@@ -24,7 +24,7 @@ import { SELECT_GROUP_CONTEXT, type SelectGroupContext } from './select-context'
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    'role': 'group',
+    role: 'group',
     '[attr.aria-labelledby]': 'labelId()',
     'data-slot': 'select-group',
   },
@@ -51,6 +51,6 @@ export class SelectGroup {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('overflow-hidden p-1 text-foreground', this.class())
+    cn('overflow-hidden p-1 text-foreground', this.class()),
   );
 }

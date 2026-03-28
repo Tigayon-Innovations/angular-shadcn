@@ -8,4 +8,3 @@ export { SheetTitle } from './sheet-title.component';
 export { SheetTrigger } from './sheet-trigger.component';
 export { sheetVariants, type SheetVariants } from './sheet-variants';
 export { Sheet } from './sheet.component';
-

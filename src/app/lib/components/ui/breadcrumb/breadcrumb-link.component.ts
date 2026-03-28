@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * BreadcrumbLink component - anchor link.
@@ -27,6 +22,6 @@ export class BreadcrumbLink {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('transition-colors hover:text-foreground', this.class())
+    cn('transition-colors hover:text-foreground', this.class()),
   );
 }

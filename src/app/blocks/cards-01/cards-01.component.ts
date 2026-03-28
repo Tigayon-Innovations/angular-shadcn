@@ -1,19 +1,40 @@
-import {
-  Badge,
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Progress,
-  Separator,
-  Switch,
-  UiAvatar,
-} from '@/lib/components/ui';
+import { UiAvatar } from '@/ui/avatar';
+import { Badge } from '@/ui/badge';
+import { Button } from '@/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/ui/card';
+import { Progress } from '@/ui/progress';
+import { Separator } from '@/ui/separator';
+import { Switch } from '@/ui/switch';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Download, ExternalLink, Eye, Heart, Lock, LucideAngularModule, Mail, MapPin, MessageSquare, MoreHorizontal, Plus, Settings, Share2, Shield, Sparkles, Star, ThumbsUp, TrendingUp, User, Zap } from 'lucide-angular';
+import {
+  ArrowRight,
+  Bell,
+  Bookmark,
+  Calendar,
+  Check,
+  Clock,
+  CreditCard,
+  Download,
+  ExternalLink,
+  Eye,
+  Heart,
+  Lock,
+  LucideAngularModule,
+  Mail,
+  MapPin,
+  MessageSquare,
+  MoreHorizontal,
+  Plus,
+  Settings,
+  Share2,
+  Shield,
+  Sparkles,
+  Star,
+  ThumbsUp,
+  TrendingUp,
+  User,
+  Zap,
+} from 'lucide-angular';
 
 @Component({
   selector: 'app-cards-01',
@@ -43,8 +64,8 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            This is a simple card demonstrating the basic card component structure with
-            header, content, and footer sections.
+            This is a simple card demonstrating the basic card component structure with header,
+            content, and footer sections.
           </p>
         </CardContent>
         <CardFooter>
@@ -71,11 +92,7 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
       <!-- User Profile Card -->
       <Card>
         <CardHeader class="flex flex-row items-center gap-4">
-          <ui-avatar
-            src="https://github.com/shadcn.png"
-            alt="User"
-            fallback="JD"
-          />
+          <ui-avatar src="https://github.com/shadcn.png" alt="User" fallback="JD" />
           <div class="flex flex-col">
             <CardTitle class="text-base">John Doe</CardTitle>
             <CardDescription>Software Engineer</CardDescription>
@@ -142,7 +159,7 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
                 <span>{{ task.name }}</span>
                 <span class="text-muted-foreground">{{ task.progress }}%</span>
               </div>
-              <Progress [value]="task.progress" ></Progress>
+              <Progress [value]="task.progress"></Progress>
             </div>
           }
         </CardContent>
@@ -225,13 +242,13 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
       <Card>
         <CardContent class="pt-6">
           <div class="flex gap-1 mb-4">
-            @for (star of [1,2,3,4,5]; track star) {
+            @for (star of [1, 2, 3, 4, 5]; track star) {
               <lucide-icon [img]="icons.Star" class="h-4 w-4 fill-yellow-400 text-yellow-400" />
             }
           </div>
           <blockquote class="text-sm mb-4">
-            "This product has completely transformed how our team works. The intuitive
-            interface and powerful features make it indispensable."
+            "This product has completely transformed how our team works. The intuitive interface and
+            powerful features make it indispensable."
           </blockquote>
           <div class="flex items-center gap-3">
             <ui-avatar
@@ -316,15 +333,21 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
             Just shipped a major update! 🚀 Check out the new features we've been working on.
           </p>
           <div class="flex items-center gap-4 pt-2">
-            <button class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+            <button
+              class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+            >
               <lucide-icon [img]="icons.ThumbsUp" class="h-4 w-4" />
               <span>248</span>
             </button>
-            <button class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+            <button
+              class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+            >
               <lucide-icon [img]="icons.MessageSquare" class="h-4 w-4" />
               <span>32</span>
             </button>
-            <button class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+            <button
+              class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+            >
               <lucide-icon [img]="icons.Share2" class="h-4 w-4" />
               <span>Share</span>
             </button>
@@ -406,7 +429,9 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
       <!-- Upgrade Card -->
       <Card class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
         <CardHeader>
-          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20"
+          >
             <lucide-icon [img]="icons.Sparkles" class="h-5 w-5" />
           </div>
           <CardTitle class="mt-4 text-primary-foreground">Upgrade to Pro</CardTitle>
@@ -431,9 +456,7 @@ import { ArrowRight, Bell, Bookmark, Calendar, Check, Clock, CreditCard, Downloa
           </ul>
         </CardContent>
         <CardFooter>
-          <Button variant="secondary" class="w-full">
-            Upgrade Now
-          </Button>
+          <Button variant="secondary" class="w-full"> Upgrade Now </Button>
         </CardFooter>
       </Card>
     </div>
@@ -470,7 +493,12 @@ export class Cards01Component {
   };
 
   protected readonly notifications = [
-    { icon: Mail, title: 'New message', description: 'You have a new message from Alex', time: '2m' },
+    {
+      icon: Mail,
+      title: 'New message',
+      description: 'You have a new message from Alex',
+      time: '2m',
+    },
     { icon: Bell, title: 'Reminder', description: 'Meeting in 30 minutes', time: '30m' },
     { icon: Heart, title: 'New follower', description: 'Sarah started following you', time: '1h' },
   ];
@@ -496,15 +524,43 @@ export class Cards01Component {
   ];
 
   protected readonly settings = [
-    { icon: Bell, label: 'Push Notifications', description: 'Receive push notifications', enabled: true },
+    {
+      icon: Bell,
+      label: 'Push Notifications',
+      description: 'Receive push notifications',
+      enabled: true,
+    },
     { icon: Mail, label: 'Email Updates', description: 'Get email notifications', enabled: false },
-    { icon: Lock, label: 'Private Profile', description: 'Hide your profile from public', enabled: true },
+    {
+      icon: Lock,
+      label: 'Private Profile',
+      description: 'Hide your profile from public',
+      enabled: true,
+    },
   ];
 
   protected readonly activities = [
-    { avatar: 'https://i.pravatar.cc/100?img=1', user: 'Alice', initials: 'AL', action: 'commented on your post', time: '5 min ago' },
-    { avatar: 'https://i.pravatar.cc/100?img=2', user: 'Bob', initials: 'BO', action: 'liked your photo', time: '1 hour ago' },
-    { avatar: 'https://i.pravatar.cc/100?img=3', user: 'Carol', initials: 'CA', action: 'started following you', time: '2 hours ago' },
+    {
+      avatar: 'https://i.pravatar.cc/100?img=1',
+      user: 'Alice',
+      initials: 'AL',
+      action: 'commented on your post',
+      time: '5 min ago',
+    },
+    {
+      avatar: 'https://i.pravatar.cc/100?img=2',
+      user: 'Bob',
+      initials: 'BO',
+      action: 'liked your photo',
+      time: '1 hour ago',
+    },
+    {
+      avatar: 'https://i.pravatar.cc/100?img=3',
+      user: 'Carol',
+      initials: 'CA',
+      action: 'started following you',
+      time: '2 hours ago',
+    },
   ];
 
   protected readonly quickActions = [

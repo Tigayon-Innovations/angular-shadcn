@@ -52,16 +52,9 @@ const oppositeSide: Record<Side, Side> = {
 export function computePosition(
   triggerRect: DOMRect,
   overlayRect: { width: number; height: number },
-  config: PositionConfig
+  config: PositionConfig,
 ): ComputedPosition {
-  const {
-    side,
-    align,
-    sideOffset,
-    alignOffset,
-    avoidCollisions,
-    collisionPadding,
-  } = config;
+  const { side, align, sideOffset, alignOffset, avoidCollisions, collisionPadding } = config;
 
   const viewport = {
     width: window.innerWidth,
@@ -86,9 +79,14 @@ export function computePosition(
         flippedSide,
         align,
         sideOffset,
-        alignOffset
+        alignOffset,
       );
-      const flippedCollisions = detectCollisions(flippedPosition, overlayRect, viewport, collisionPadding);
+      const flippedCollisions = detectCollisions(
+        flippedPosition,
+        overlayRect,
+        viewport,
+        collisionPadding,
+      );
 
       // Use flipped position if it has fewer collisions
       if (!flippedCollisions[flippedSide]) {
@@ -134,7 +132,7 @@ function calculatePosition(
   side: Side,
   align: Align,
   sideOffset: number,
-  alignOffset: number
+  alignOffset: number,
 ): { top: number; left: number } {
   let top = 0;
   let left = 0;
@@ -143,19 +141,43 @@ function calculatePosition(
   switch (side) {
     case 'top':
       top = triggerRect.top - overlayRect.height - sideOffset;
-      left = calculateAlignPosition(triggerRect.left, triggerRect.width, overlayRect.width, align, alignOffset);
+      left = calculateAlignPosition(
+        triggerRect.left,
+        triggerRect.width,
+        overlayRect.width,
+        align,
+        alignOffset,
+      );
       break;
     case 'bottom':
       top = triggerRect.bottom + sideOffset;
-      left = calculateAlignPosition(triggerRect.left, triggerRect.width, overlayRect.width, align, alignOffset);
+      left = calculateAlignPosition(
+        triggerRect.left,
+        triggerRect.width,
+        overlayRect.width,
+        align,
+        alignOffset,
+      );
       break;
     case 'left':
       left = triggerRect.left - overlayRect.width - sideOffset;
-      top = calculateAlignPosition(triggerRect.top, triggerRect.height, overlayRect.height, align, alignOffset);
+      top = calculateAlignPosition(
+        triggerRect.top,
+        triggerRect.height,
+        overlayRect.height,
+        align,
+        alignOffset,
+      );
       break;
     case 'right':
       left = triggerRect.right + sideOffset;
-      top = calculateAlignPosition(triggerRect.top, triggerRect.height, overlayRect.height, align, alignOffset);
+      top = calculateAlignPosition(
+        triggerRect.top,
+        triggerRect.height,
+        overlayRect.height,
+        align,
+        alignOffset,
+      );
       break;
   }
 
@@ -167,7 +189,7 @@ function calculateAlignPosition(
   triggerSize: number,
   overlaySize: number,
   align: Align,
-  alignOffset: number
+  alignOffset: number,
 ): number {
   switch (align) {
     case 'start':
@@ -183,7 +205,7 @@ function detectCollisions(
   position: { top: number; left: number },
   overlayRect: { width: number; height: number },
   viewport: { width: number; height: number },
-  padding: number
+  padding: number,
 ): Record<Side, boolean> {
   return {
     top: position.top < padding,

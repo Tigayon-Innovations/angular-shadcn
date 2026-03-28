@@ -1,12 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  model,
-  output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, model, output, viewChild } from '@angular/core';
 import { CalendarIcon, LucideAngularModule } from 'lucide-angular';
 import { buttonVariants } from '../button';
 import { Calendar } from '../calendar';
@@ -20,26 +13,24 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
   selector: 'DatePicker',
   imports: [LucideAngularModule, Popover, PopoverTrigger, PopoverContent, Calendar],
   template: `
-    <Popover>
-      <PopoverTrigger>
-        <button
-          type="button"
-          [class]="computedButtonClass()"
-        >
-          <lucide-icon [img]="CalendarIconRef" class="mr-2 h-4 w-4" />
+    <Popover class="block w-full">
+      <PopoverTrigger class="block w-full">
+        <button type="button" [class]="computedButtonClass()">
+          <lucide-icon [img]="CalendarIconRef" class="h-4 w-4 shrink-0" />
           @if (date()) {
-            {{ formatDate(date()!) }}
+            <span class="flex-1 truncate text-left">{{ formatDate(date()!) }}</span>
           } @else {
-            <span>{{ placeholder() }}</span>
+            <span class="flex-1 truncate text-left">{{ placeholder() }}</span>
           }
         </button>
       </PopoverTrigger>
-      <PopoverContent class="w-auto p-0" align="start">
+      <PopoverContent class="p-0" align="start" [matchTriggerWidth]="true">
         <Calendar
           [mode]="'single'"
           [selected]="date()"
           (onSelect)="onDateSelect($event)"
           [disabled]="disabledDates()"
+          class="w-full"
         />
       </PopoverContent>
     </Popover>
@@ -51,6 +42,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 })
 export class DatePicker {
   protected readonly CalendarIconRef = CalendarIcon;
+  private readonly popover = viewChild(Popover);
 
   /** Selected date */
   readonly date = model<Date | undefined>(undefined);
@@ -73,10 +65,12 @@ export class DatePicker {
   protected readonly computedButtonClass = computed(() =>
     cn(
       buttonVariants({ variant: 'outline' }),
-      'w-[280px] justify-start text-left font-normal',
+      'h-10 w-full justify-start gap-3 px-4 py-6 text-left font-normal hover:bg-gray-100 dark:hover:bg-neutral-800',
+      this.popover()?.isOpen() &&
+        'border-primary/30 ring-primary/20 ring-2 dark:border-white/30 dark:ring-white/20',
       !this.date() && 'text-muted-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected formatDate(date: Date): string {
@@ -90,5 +84,6 @@ export class DatePicker {
   protected onDateSelect(date: Date | undefined): void {
     this.date.set(date);
     this.onSelect.emit(date);
+    this.popover()?.setOpen(false);
   }
 }

@@ -26,6 +26,6 @@ export class InputOTPSeparator {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex items-center justify-center', this.class())
+    cn('flex items-center justify-center', this.class()),
   );
 }

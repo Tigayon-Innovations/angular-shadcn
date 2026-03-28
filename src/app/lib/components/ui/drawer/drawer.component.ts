@@ -1,12 +1,12 @@
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    inject,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  inject,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { DRAWER_CONTEXT, type DrawerContextValue } from './drawer-context';
 

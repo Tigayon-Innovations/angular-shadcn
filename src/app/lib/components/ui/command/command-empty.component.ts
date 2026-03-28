@@ -17,7 +17,5 @@ export class CommandEmpty {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('py-6 text-center text-sm', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('py-6 text-center text-sm', this.class()));
 }

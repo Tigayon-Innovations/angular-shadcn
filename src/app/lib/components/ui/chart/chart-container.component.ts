@@ -1,18 +1,14 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    input,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  signal,
 } from '@angular/core';
-import {
-    CHART_CONTEXT,
-    type ChartConfig,
-    type ChartContext,
-} from './chart-context';
+import { CHART_CONTEXT, type ChartConfig, type ChartContext } from './chart-context';
 
 /**
  * ChartContainer component - wrapper that provides chart context and styling.
@@ -75,7 +71,7 @@ export class ChartContainer {
   protected readonly computedClass = computed(() =>
     cn(
       'flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_]:stroke-border [&_.recharts-sector]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

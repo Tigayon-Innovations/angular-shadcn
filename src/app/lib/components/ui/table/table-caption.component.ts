@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * TableCaption component - caption wrapper.
@@ -12,7 +7,9 @@ import {
  */
 @Component({
   selector: 'TableCaption',
-  template: `<caption [class]="computedClass()"><ng-content /></caption>`,
+  template: `<caption [class]="computedClass()">
+    <ng-content />
+  </caption>`,
   host: {
     class: 'contents',
   },
@@ -23,6 +20,6 @@ export class TableCaption {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('mt-4 text-sm text-muted-foreground', this.class())
+    cn('mt-4 text-sm text-muted-foreground', this.class()),
   );
 }

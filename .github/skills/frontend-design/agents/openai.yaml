@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Design"
+  short_description: "Build minimalist Angular dashboards with premium polish."
+  default_prompt: "Use $frontend-design to create or refactor this Angular dashboard/page with a minimalist Vercel/Apple-like UI, disciplined hierarchy, restrained motion, and production-grade states."

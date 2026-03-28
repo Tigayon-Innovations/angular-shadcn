@@ -1,18 +1,12 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ArrowDown, ArrowUp, ArrowUpDown, LucideAngularModule } from 'lucide-angular';
 import {
-    DATA_TABLE_CONTEXT,
-    DataTableContext,
-    SortDirection,
-    SortingState,
-    type ColumnDef,
+  DATA_TABLE_CONTEXT,
+  DataTableContext,
+  SortDirection,
+  SortingState,
+  type ColumnDef,
 } from './data-table-context';
 
 /**
@@ -31,7 +25,10 @@ import {
     <div class="rounded-md border">
       <table class="w-full caption-bottom text-sm" role="grid" aria-label="Data table">
         <thead class="[&_tr]:border-b">
-          <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" role="row">
+          <tr
+            class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+            role="row"
+          >
             @for (column of visibleColumns(); track column.id) {
               <th
                 scope="col"
@@ -52,7 +49,11 @@ import {
                     } @else if (getSortDirection(column.id) === 'desc') {
                       <lucide-icon [img]="icons.ArrowDown" class="size-4" aria-hidden="true" />
                     } @else {
-                      <lucide-icon [img]="icons.ArrowUpDown" class="size-4 opacity-50" aria-hidden="true" />
+                      <lucide-icon
+                        [img]="icons.ArrowUpDown"
+                        class="size-4 opacity-50"
+                        aria-hidden="true"
+                      />
                     }
                   </button>
                 } @else {
@@ -96,7 +97,7 @@ import {
   `,
   host: {
     '[class]': 'computedClass()',
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -126,7 +127,7 @@ export class DataTableContent<T = unknown> {
       columns.some((col) => {
         const value = this.getCellValue(row, col);
         return String(value).toLowerCase().includes(filter);
-      })
+      }),
     );
   });
 

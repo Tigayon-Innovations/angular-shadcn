@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarMenu component - menu container in sidebar.
@@ -26,6 +21,6 @@ export class SidebarMenu {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex w-full min-w-0 flex-col gap-1', this.class())
+    cn('flex w-full min-w-0 flex-col gap-1', this.class()),
   );
 }

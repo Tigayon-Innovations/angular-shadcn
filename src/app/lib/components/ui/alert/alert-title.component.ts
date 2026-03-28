@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Alert title component.
@@ -25,6 +20,6 @@ export class AlertTitle {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', this.class())
+    cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', this.class()),
   );
 }

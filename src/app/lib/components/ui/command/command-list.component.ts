@@ -13,7 +13,7 @@ import { COMMAND_CONTEXT } from './command-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.id]': 'context.listId',
-    'role': 'listbox',
+    role: 'listbox',
     '[attr.aria-label]': '"Command suggestions"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +25,6 @@ export class CommandList {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('max-h-[300px] overflow-y-auto overflow-x-hidden', this.class())
+    cn('max-h-[300px] overflow-y-auto overflow-x-hidden', this.class()),
   );
 }

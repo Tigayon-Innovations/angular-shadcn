@@ -27,8 +27,6 @@ export interface FormContext {
 // Injection Tokens
 // ============================================================================
 
-export const FORM_FIELD_CONTEXT = new InjectionToken<FormFieldContext>(
-  'FormFieldContext'
-);
+export const FORM_FIELD_CONTEXT = new InjectionToken<FormFieldContext>('FormFieldContext');
 
 export const FORM_CONTEXT = new InjectionToken<FormContext>('FormContext');

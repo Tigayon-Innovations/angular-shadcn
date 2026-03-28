@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
 } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
@@ -34,7 +34,7 @@ import { SELECT_CONTEXT } from './select-context';
       [attr.data-disabled]="context?.disabled() ? '' : null"
       [attr.data-placeholder]="!context?.value() ? '' : null"
       [disabled]="context?.disabled()"
-      (click)="toggleOpen()"
+      (click)="onTriggerClick($event)"
       (keydown)="onKeyDown($event)"
     >
       <ng-content />
@@ -56,7 +56,7 @@ import { SELECT_CONTEXT } from './select-context';
     </button>
   `,
   host: {
-    'class': 'contents',
+    class: 'contents',
     'data-slot': 'select-trigger',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -77,12 +77,17 @@ export class SelectTrigger {
         this.context?.triggerElement.set(button);
       }
       const newState = !this.context?.open();
-      this.context?.open.set(newState);
+      this.context?.setOpen(newState);
       if (newState) {
         // Focus first item when opening
         setTimeout(() => this.context?.focusItem(0));
       }
     }
+  }
+
+  onTriggerClick(event: MouseEvent): void {
+    event.stopPropagation();
+    this.toggleOpen();
   }
 
   /** Close the select */
@@ -108,7 +113,7 @@ export class SelectTrigger {
           if (button) {
             this.context.triggerElement.set(button);
           }
-          this.context.open.set(true);
+          this.context.setOpen(true);
           setTimeout(() => this.context?.focusItem(0));
         } else {
           // Move to next item
@@ -125,7 +130,7 @@ export class SelectTrigger {
           if (button) {
             this.context.triggerElement.set(button);
           }
-          this.context.open.set(true);
+          this.context.setOpen(true);
           const lastIndex = this.context.itemValues().length - 1;
           setTimeout(() => this.context?.focusItem(lastIndex));
         } else {
@@ -158,7 +163,7 @@ export class SelectTrigger {
   protected readonly computedClass = computed(() =>
     cn(
       "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

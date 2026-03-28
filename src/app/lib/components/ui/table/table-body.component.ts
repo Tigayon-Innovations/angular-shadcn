@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * TableBody component - tbody wrapper.
@@ -12,7 +7,9 @@ import {
  */
 @Component({
   selector: 'TableBody',
-  template: `<tbody [class]="computedClass()"><ng-content /></tbody>`,
+  template: `<tbody [class]="computedClass()">
+    <ng-content />
+  </tbody>`,
   host: {
     class: 'contents',
   },
@@ -22,7 +19,5 @@ export class TableBody {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('[&_tr:last-child]:border-0', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('[&_tr:last-child]:border-0', this.class()));
 }

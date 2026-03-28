@@ -1,14 +1,6 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
-import {
-    nativeSelectVariants,
-    type NativeSelectVariants,
-} from './native-select-variants';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { nativeSelectVariants, type NativeSelectVariants } from './native-select-variants';
 
 /**
  * NativeSelect component - styled HTML native select element.
@@ -46,6 +38,7 @@ import {
 @Component({
   // Use attribute selector to apply to native select elements
   selector: 'select[NativeSelect], NativeSelect',
+  standalone: true,
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
@@ -66,9 +59,15 @@ export class NativeSelect {
       nativeSelectVariants({
         size: this.size(),
       }),
-      // Custom background for the dropdown arrow
-      'bg-[url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'m6 9 6 6 6-6\'/%3E%3C/svg%3E")] bg-[length:1rem] bg-[right_0.5rem_center] bg-no-repeat pr-8',
-      this.class()
-    )
+      // Chevron arrow — light mode (gray-700 stroke, visible on light backgrounds)
+      "bg-[image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")]",
+      // Chevron arrow — dark mode (neutral-400 stroke, visible on dark backgrounds)
+      "dark:bg-[image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")]",
+      "bg-[size:16px_16px]",
+      "bg-[position:right_0.5rem_center]",
+      "bg-no-repeat",
+      "pr-8",
+      this.class(),
+    ),
   );
 }

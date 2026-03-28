@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, InjectionToken, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InjectionToken,
+  signal,
+  type WritableSignal,
+} from '@angular/core';
 
 export interface MenubarRadioGroupContext {
   value: WritableSignal<string>;
@@ -6,7 +12,7 @@ export interface MenubarRadioGroupContext {
 }
 
 export const MENUBAR_RADIO_GROUP_CONTEXT = new InjectionToken<MenubarRadioGroupContext>(
-  'MENUBAR_RADIO_GROUP_CONTEXT'
+  'MENUBAR_RADIO_GROUP_CONTEXT',
 );
 
 /**

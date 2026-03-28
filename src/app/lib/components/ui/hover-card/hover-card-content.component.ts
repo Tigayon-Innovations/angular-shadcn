@@ -1,12 +1,12 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, HoverCardAlign, HoverCardSide } from './hover-card-context';
 
@@ -125,7 +125,7 @@ export class HoverCardContent implements OnDestroy {
 
   /** Current state: open or closed */
   protected readonly state = computed<HoverCardContentState>(() =>
-    this.context.open() ? 'open' : 'closed'
+    this.context.open() ? 'open' : 'closed',
   );
 
   protected readonly computedClass = computed(() => {
@@ -151,7 +151,7 @@ export class HoverCardContent implements OnDestroy {
       'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
       sideClasses[this.side()],
       this.side() === 'top' || this.side() === 'bottom' ? alignClasses[this.align()] : '',
-      this.class()
+      this.class(),
     );
   });
 
@@ -190,7 +190,9 @@ export class HoverCardContent implements OnDestroy {
   onEscape(): void {
     this.context.setOpen(false);
     // Return focus to trigger
-    const trigger = this.elementRef.nativeElement.parentElement?.querySelector('[data-state]') as HTMLElement;
+    const trigger = this.elementRef.nativeElement.parentElement?.querySelector(
+      '[data-state]',
+    ) as HTMLElement;
     trigger?.focus();
   }
 

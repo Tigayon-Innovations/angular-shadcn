@@ -33,7 +33,9 @@ export class CarouselNext {
   protected readonly ArrowRightIcon = ArrowRight;
 
   /** Button variant */
-  readonly variant = input<'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive'>('outline');
+  readonly variant = input<'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive'>(
+    'outline',
+  );
 
   /** Button size */
   readonly size = input<'default' | 'sm' | 'lg' | 'icon'>('icon');
@@ -48,7 +50,7 @@ export class CarouselNext {
       this.context.orientation() === 'horizontal'
         ? '-right-12 top-1/2 -translate-y-1/2'
         : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

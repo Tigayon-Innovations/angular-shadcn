@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Alert description component.
@@ -27,7 +22,7 @@ export class AlertDescription {
   protected readonly computedClass = computed(() =>
     cn(
       'text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

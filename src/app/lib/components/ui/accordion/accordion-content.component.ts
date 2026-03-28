@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
 /**
@@ -27,7 +21,7 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
     }
   `,
   host: {
-    'role': 'region',
+    role: 'region',
     '[class]': 'computedClass()',
     '[attr.id]': 'item.contentId',
     '[attr.data-state]': 'item.isOpen() ? "open" : "closed"',
@@ -45,9 +39,11 @@ export class AccordionContent {
   protected readonly computedClass = computed(() =>
     cn(
       'overflow-hidden text-sm',
-      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-    )
+      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+    ),
   );
 
-  protected readonly innerClass = computed(() => cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed', this.class()));
+  protected readonly innerClass = computed(() =>
+    cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed', this.class()),
+  );
 }

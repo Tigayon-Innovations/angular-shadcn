@@ -5,4 +5,3 @@ export { CardFooter } from './card-footer.component';
 export { CardHeader } from './card-header.component';
 export { CardTitle } from './card-title.component';
 export { Card } from './card.component';
-

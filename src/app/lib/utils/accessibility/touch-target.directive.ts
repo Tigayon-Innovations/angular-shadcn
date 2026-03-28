@@ -1,11 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    OnInit,
-    Renderer2,
-    inject,
-    input,
-} from '@angular/core';
+import { Directive, ElementRef, OnInit, Renderer2, inject, input } from '@angular/core';
 
 /**
  * TouchTarget directive - expands the clickable/tappable area of an element

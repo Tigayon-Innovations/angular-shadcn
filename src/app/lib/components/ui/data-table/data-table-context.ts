@@ -44,6 +44,4 @@ export interface DataTableContext<T = unknown> {
   onPaginationChange: (pageIndex: number, pageSize: number) => void;
 }
 
-export const DATA_TABLE_CONTEXT = new InjectionToken<DataTableContext>(
-  'DataTableContext'
-);
+export const DATA_TABLE_CONTEXT = new InjectionToken<DataTableContext>('DataTableContext');

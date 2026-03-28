@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * FormItem component - container for form field elements.
@@ -33,10 +28,5 @@ export class FormItem {
   readonly class = input<string>('');
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn(
-      'flex flex-col gap-2',
-      this.class()
-    )
-  );
+  protected readonly computedClass = computed(() => cn('flex flex-col gap-2', this.class()));
 }

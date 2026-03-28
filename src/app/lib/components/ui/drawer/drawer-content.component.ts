@@ -1,17 +1,17 @@
 import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    Injector,
-    input,
-    OnDestroy,
-    viewChild,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  Injector,
+  input,
+  OnDestroy,
+  viewChild,
 } from '@angular/core';
 import { DRAWER_CONTEXT } from './drawer-context';
 
@@ -73,9 +73,12 @@ export class DrawerContent implements OnDestroy {
       if (this.context.open()) {
         this.lockBodyScroll();
         // Focus first element when opened (browser-only, deferred)
-        afterNextRender(() => {
-          this.focusFirstElement();
-        }, { injector: this.injector });
+        afterNextRender(
+          () => {
+            this.focusFirstElement();
+          },
+          { injector: this.injector },
+        );
       } else {
         this.unlockBodyScroll();
         this.restoreFocus();
@@ -90,9 +93,11 @@ export class DrawerContent implements OnDestroy {
   protected readonly computedClass = computed(() => {
     const directionClasses = {
       top: 'inset-x-0 top-0 mb-24 rounded-b-[10px] border-b data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top',
-      bottom: 'inset-x-0 bottom-0 mt-24 rounded-t-[10px] border-t data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom',
+      bottom:
+        'inset-x-0 bottom-0 mt-24 rounded-t-[10px] border-t data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom',
       left: 'inset-y-0 left-0 mr-24 w-auto rounded-r-[10px] border-r data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left',
-      right: 'inset-y-0 right-0 ml-24 w-auto rounded-l-[10px] border-l data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right',
+      right:
+        'inset-y-0 right-0 ml-24 w-auto rounded-l-[10px] border-l data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right',
     };
 
     return cn(
@@ -100,7 +105,7 @@ export class DrawerContent implements OnDestroy {
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=open]:duration-500 data-[state=closed]:duration-300',
       directionClasses[this.context.direction],
-      this.class()
+      this.class(),
     );
   });
 
@@ -118,7 +123,7 @@ export class DrawerContent implements OnDestroy {
       const content = this.contentEl()?.nativeElement;
       if (content) {
         const focusable = content.querySelector(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         ) as HTMLElement;
         focusable?.focus();
       }

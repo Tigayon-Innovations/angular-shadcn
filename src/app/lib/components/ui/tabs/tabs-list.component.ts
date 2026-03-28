@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    Injector,
-    input,
-    signal,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  Injector,
+  input,
+  signal,
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
@@ -95,7 +95,7 @@ export interface TabsListProps {
   `,
   host: {
     '[class]': 'computedClass()',
-    'role': 'tablist',
+    role: 'tablist',
     '[attr.id]': 'tabs.tablistId',
     '[attr.aria-orientation]': 'tabs.orientation()',
     '(keydown)': 'onKeydown($event)',
@@ -122,15 +122,15 @@ export class TabsList {
   protected readonly computedClass = computed(() =>
     cn(
       'text-muted-foreground inline-flex h-9 w-fit items-center justify-center gap-1 rounded-lg bg-transparent p-1',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected readonly computedIndicatorClass = computed(() =>
     cn(
       'absolute inset-y-1 bg-background rounded-md shadow-sm transition-all duration-200',
-      this.indicatorClass()
-    )
+      this.indicatorClass(),
+    ),
   );
 
   constructor() {
@@ -138,9 +138,12 @@ export class TabsList {
     effect(() => {
       const _ = this.tabs.value(); // Subscribe to value changes
       // Schedule browser-only DOM update
-      afterNextRender(() => {
-        this.updateIndicator();
-      }, { injector: this.injector });
+      afterNextRender(
+        () => {
+          this.updateIndicator();
+        },
+        { injector: this.injector },
+      );
     });
   }
 

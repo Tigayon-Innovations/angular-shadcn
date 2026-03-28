@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
 /**
@@ -45,7 +39,7 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',
     '[attr.tabindex]': '0',
-    'role': 'button',
+    role: 'button',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -58,8 +52,8 @@ export class AccordionTrigger {
   protected readonly computedClass = computed(() =>
     cn(
       'flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 cursor-pointer w-full',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected onClick(): void {

@@ -1,17 +1,17 @@
 import { cn } from '@/lib/utils';
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    forwardRef,
-    inject,
-    input,
-    model,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import { SELECT_CONTEXT, type SelectContext } from './select-context';
 
@@ -196,6 +196,11 @@ export class Select {
   readonly context: SelectContext = {
     value: this._value,
     open: this._open,
+    setOpen: (open: boolean) => {
+      this._open.set(open);
+      this.open.set(open);
+      this.openChange.emit(open);
+    },
     disabled: this._disabled,
     placeholder: signal(''),
     selectedLabel: signal(''),
@@ -212,9 +217,7 @@ export class Select {
       if (label) {
         this.context.selectedLabel.set(label);
       }
-      this._open.set(false);
-      this.open.set(false);
-      this.openChange.emit(false);
+      this.context.setOpen(false);
       // Restore focus to trigger
       const trigger = this.context.triggerElement();
       if (trigger) {
@@ -225,9 +228,7 @@ export class Select {
   };
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('relative inline-block', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative block w-full', this.class()));
 
   constructor() {
     // Sync value input to internal signal
@@ -254,7 +255,7 @@ export class Select {
     this.context.focusedIndex.set(index);
     const value = values[index];
     const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="select-item"][data-value="${value}"]`
+      `[data-slot="select-item"][data-value="${value}"]`,
     ) as HTMLElement;
     if (item) {
       item.focus();

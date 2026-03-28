@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography P (paragraph) component
@@ -24,6 +19,6 @@ import {
 export class TypographyP {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn('leading-7 [&:not(:first-child)]:mt-6', this.class())
+    cn('leading-7 [&:not(:first-child)]:mt-6', this.class()),
   );
 }

@@ -16,7 +16,7 @@ import {
   ViewContainerRef,
   WritableSignal,
   inject,
-  signal
+  signal,
 } from '@angular/core';
 
 /**
@@ -47,7 +47,7 @@ export class PresenceService {
         signal<PresenceState>({
           isPresent: initialState,
           isAnimating: false,
-        })
+        }),
       );
     }
     return this.presenceMap.get(id)!;

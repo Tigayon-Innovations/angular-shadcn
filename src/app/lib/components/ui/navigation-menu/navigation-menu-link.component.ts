@@ -29,15 +29,9 @@ export class NavigationMenuLink {
   readonly class = input<string>('');
 
   /** Calculate aria-current value */
-  protected readonly ariaCurrent = computed(() =>
-    this.active() ? this.currentType() : null
-  );
+  protected readonly ariaCurrent = computed(() => (this.active() ? this.currentType() : null));
 
   protected readonly computedClass = computed(() =>
-    cn(
-      navigationMenuTriggerStyle(),
-      this.active() && 'bg-accent/50 font-medium',
-      this.class()
-    )
+    cn(navigationMenuTriggerStyle(), this.active() && 'bg-accent/50 font-medium', this.class()),
   );
 }

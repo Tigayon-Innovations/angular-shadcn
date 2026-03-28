@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { FORM_FIELD_CONTEXT } from './form-context';
 
 /**
@@ -32,6 +26,6 @@ export class FormDescription {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('text-muted-foreground text-[0.8rem]', this.class())
+    cn('text-muted-foreground text-[0.8rem]', this.class()),
   );
 }

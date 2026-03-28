@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
-    OnInit,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  viewChild,
 } from '@angular/core';
 import { RADIO_GROUP_CONTEXT } from './radio-group-context';
 
@@ -91,10 +91,7 @@ export type RadioGroupItemProps = {
       (keydown)="onKeyDown($event)"
     >
       @if (isChecked()) {
-        <span
-          data-slot="radio-group-indicator"
-          class="flex items-center justify-center"
-        >
+        <span data-slot="radio-group-indicator" class="flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -131,8 +128,7 @@ export type RadioGroupItemProps = {
 })
 export class RadioGroupItem implements OnInit, OnDestroy {
   protected readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
-  private readonly buttonElement =
-    viewChild<ElementRef<HTMLButtonElement>>('buttonElement');
+  private readonly buttonElement = viewChild<ElementRef<HTMLButtonElement>>('buttonElement');
 
   /** The id for the radio button - used for label association */
   readonly id = input<string>();
@@ -155,9 +151,7 @@ export class RadioGroupItem implements OnInit, OnDestroy {
   });
 
   /** State for data attribute */
-  protected readonly state = computed(() =>
-    this.isChecked() ? 'checked' : 'unchecked'
-  );
+  protected readonly state = computed(() => (this.isChecked() ? 'checked' : 'unchecked'));
 
   /** Whether this item is disabled */
   protected readonly isDisabled = computed(() => {
@@ -185,11 +179,7 @@ export class RadioGroupItem implements OnInit, OnDestroy {
     if (currentValue === this.value()) return 0;
 
     // If no item is checked and this is the first item, it's tabbable
-    if (
-      !currentValue &&
-      itemValues.length > 0 &&
-      itemValues[0] === this.value()
-    ) {
+    if (!currentValue && itemValues.length > 0 && itemValues[0] === this.value()) {
       return 0;
     }
 
@@ -208,9 +198,7 @@ export class RadioGroupItem implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Unregister this item from the group
-    this.context?.itemValues.update((values) =>
-      values.filter((v) => v !== this.value())
-    );
+    this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
   }
 
   /** Select this radio option */
@@ -275,9 +263,7 @@ export class RadioGroupItem implements OnInit, OnDestroy {
   }
 
   /** Computed class for wrapper */
-  protected readonly computedClass = computed(() =>
-    cn('relative inline-flex', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()));
 
   /** Computed radio visual class */
   protected readonly radioClass = computed(() =>
@@ -292,7 +278,7 @@ export class RadioGroupItem implements OnInit, OnDestroy {
       'border-input text-primary',
       'data-[state=checked]:border-primary',
       // Disabled styles
-      'disabled:cursor-not-allowed disabled:opacity-50'
-    )
+      'disabled:cursor-not-allowed disabled:opacity-50',
+    ),
   );
 }

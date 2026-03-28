@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography Large component
@@ -22,7 +17,5 @@ import {
 })
 export class TypographyLarge {
   readonly class = input<string>('');
-  protected readonly computedClass = computed(() =>
-    cn('text-lg font-semibold', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('text-lg font-semibold', this.class()));
 }

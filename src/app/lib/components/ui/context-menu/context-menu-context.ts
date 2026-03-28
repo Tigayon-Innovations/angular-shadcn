@@ -13,5 +13,5 @@ export interface ContextMenuContextValue {
 }
 
 export const CONTEXT_MENU_CONTEXT = new InjectionToken<ContextMenuContextValue>(
-  'CONTEXT_MENU_CONTEXT'
+  'CONTEXT_MENU_CONTEXT',
 );

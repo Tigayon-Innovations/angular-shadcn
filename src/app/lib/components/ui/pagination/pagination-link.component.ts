@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { buttonVariants } from '../button/button-variants';
 
 /**
@@ -40,7 +35,7 @@ export class PaginationLink {
         variant: this.isActive() ? 'outline' : 'ghost',
         size: this.size(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

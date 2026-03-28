@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SIDEBAR_CONTEXT } from './sidebar-context';
 
 /**
@@ -47,8 +41,8 @@ export class SidebarTrigger {
   protected readonly computedClass = computed(() =>
     cn(
       'inline-flex h-7 w-7 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected onClick(): void {

@@ -1,10 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
 /**
@@ -23,7 +17,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   host: {
     '(click)': 'onClick($event)',
     '[attr.aria-haspopup]': '"dialog"',
-    '[attr.aria-expanded]': 'context.open()',
+    '[attr.aria-expanded]': 'context.isOpen()',
     '[attr.aria-controls]': 'context.contentId',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +32,7 @@ export class AlertDialogTrigger {
   onClick(event: Event): void {
     event.stopPropagation();
     // Save trigger element for focus restoration when dialog closes
-    this.context.triggerElement.set(this.elementRef.nativeElement);
+    this.context.setTriggerElement(this.elementRef.nativeElement);
     this.context.setOpen(true);
   }
 }

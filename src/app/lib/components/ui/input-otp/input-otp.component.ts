@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    forwardRef,
-    input,
-    model,
-    output,
-    signal,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  input,
+  model,
+  output,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-context';
@@ -171,10 +171,7 @@ export class InputOTP {
   readonly activeIndex = signal(-1);
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'relative flex items-center gap-2 has-[:disabled]:opacity-50',
-      this.class()
-    )
+    cn('relative flex items-center gap-2 has-[:disabled]:opacity-50', this.class()),
   );
 
   protected onInput(event: Event): void {

@@ -36,11 +36,11 @@ export class NavigationMenuTrigger {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(navigationMenuTriggerStyle(), 'group', this.class())
+    cn(navigationMenuTriggerStyle(), 'group', this.class()),
   );
 
   protected toggle(): void {
-    this.itemContext.open.update(v => !v);
+    this.itemContext.open.update((v) => !v);
     if (this.itemContext.open()) {
       this.context.activeItem.set(this.itemContext.itemId);
     } else {

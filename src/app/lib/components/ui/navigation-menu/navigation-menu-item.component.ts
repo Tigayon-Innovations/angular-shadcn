@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT, type NavigationMenuItemContextValue } from './navigation-menu-context';
+import {
+  NAVIGATION_MENU_CONTEXT,
+  NAVIGATION_MENU_ITEM_CONTEXT,
+  type NavigationMenuItemContextValue,
+} from './navigation-menu-context';
 
 let itemIdCounter = 0;
 

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarMenuAction component - action button in menu item.
@@ -50,7 +45,7 @@ export class SidebarMenuAction {
       // Show on hover behavior
       this.showOnHover() &&
         'group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

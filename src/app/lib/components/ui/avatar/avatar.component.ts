@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Avatar container component.
@@ -29,9 +24,6 @@ export class Avatar {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'relative flex size-8 shrink-0 overflow-hidden rounded-full',
-      this.class()
-    )
+    cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.class()),
   );
 }

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarHeader component - header section of sidebar.
@@ -22,7 +17,5 @@ export class SidebarHeader {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('flex flex-col gap-2 p-2', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('flex flex-col gap-2 p-2', this.class()));
 }

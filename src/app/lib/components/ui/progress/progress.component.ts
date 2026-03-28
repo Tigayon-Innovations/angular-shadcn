@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 // ============================================================================
 // Types
@@ -142,9 +137,7 @@ export class Progress {
    * Function to get value label for accessibility.
    * Receives current value and returns descriptive text.
    */
-  readonly getValueLabel = input<
-    ((value: number, max: number) => string) | undefined
-  >(undefined);
+  readonly getValueLabel = input<((value: number, max: number) => string) | undefined>(undefined);
 
   /** Additional CSS classes to apply to the root */
   readonly class = input<string>('');
@@ -194,8 +187,8 @@ export class Progress {
       // Base styles
       'bg-primary/20 relative h-2 w-full overflow-hidden rounded-full',
       // Custom classes
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   /** Computed indicator class */
@@ -206,7 +199,7 @@ export class Progress {
       // Indeterminate animation
       this.state() === 'indeterminate' && 'animate-pulse',
       // Custom classes
-      this.indicatorClass()
-    )
+      this.indicatorClass(),
+    ),
   );
 }

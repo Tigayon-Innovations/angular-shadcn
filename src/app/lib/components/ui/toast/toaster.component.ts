@@ -75,10 +75,7 @@ export interface ToasterProps {
       aria-relevant="additions"
     >
       @for (toast of toastService.toasts(); track toast.id) {
-        <Toast
-          [variant]="toast.type"
-          (onClose)="toastService.dismiss(toast.id)"
-        >
+        <Toast [variant]="toast.type" (onClose)="toastService.dismiss(toast.id)">
           @if (toast.title) {
             <ToastTitle>{{ toast.title }}</ToastTitle>
           }
@@ -96,7 +93,7 @@ export interface ToasterProps {
   `,
   host: {
     class: 'contents',
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -122,7 +119,7 @@ export class Toaster {
     return cn(
       'fixed z-[100] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:flex-col md:max-w-[420px]',
       positionClasses[this.position()],
-      this.class()
+      this.class(),
     );
   });
 }

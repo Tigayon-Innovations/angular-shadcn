@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * AlertDialogHeader component - header area of the alert dialog.
@@ -30,6 +25,6 @@ export class AlertDialogHeader {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-col space-y-2 text-center sm:text-left', this.class())
+    cn('flex flex-col space-y-2 text-center sm:text-left', this.class()),
   );
 }

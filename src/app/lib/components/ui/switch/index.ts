@@ -1,6 +1,1 @@
-export {
-    Switch,
-    type SwitchProps,
-    type SwitchState
-} from './switch.component';
-
+export { Switch, type SwitchProps, type SwitchState } from './switch.component';

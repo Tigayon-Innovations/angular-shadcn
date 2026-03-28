@@ -9,14 +9,8 @@ import {
   model,
   signal,
 } from '@angular/core';
-import {
-  SEGMENTED_CONTEXT,
-  type SegmentedContext,
-} from './segmented-context';
-import {
-  segmentedVariants,
-  type SegmentedVariants,
-} from './segmented-variants';
+import { SEGMENTED_CONTEXT, type SegmentedContext } from './segmented-context';
+import { segmentedVariants, type SegmentedVariants } from './segmented-variants';
 
 /**
  * Segmented component - iOS-style segmented control buttons.
@@ -93,7 +87,7 @@ export class Segmented {
       segmentedVariants({
         size: this.size(),
       }),
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

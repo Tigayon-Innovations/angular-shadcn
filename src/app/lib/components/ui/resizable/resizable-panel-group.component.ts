@@ -66,16 +66,13 @@ export class ResizablePanelGroup implements ResizableContextValue {
   private panelOrderCounter = 0;
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'flex h-full w-full data-[panel-group-direction=vertical]:flex-col',
-      this.class()
-    )
+    cn('flex h-full w-full data-[panel-group-direction=vertical]:flex-col', this.class()),
   );
 
   registerPanel(id: string, minSize = 0, maxSize = 100, defaultSize?: number): void {
     this.panels.set(id, { minSize, maxSize, order: this.panelOrderCounter++ });
     if (defaultSize !== undefined) {
-      this.panelSizes.update(sizes => {
+      this.panelSizes.update((sizes) => {
         const newSizes = new Map(sizes);
         newSizes.set(id, defaultSize);
         return newSizes;
@@ -91,7 +88,7 @@ export class ResizablePanelGroup implements ResizableContextValue {
     const panel = this.panels.get(id);
     if (panel) {
       const clampedSize = Math.max(panel.minSize, Math.min(panel.maxSize, size));
-      this.panelSizes.update(sizes => {
+      this.panelSizes.update((sizes) => {
         const newSizes = new Map(sizes);
         newSizes.set(id, clampedSize);
         return newSizes;
@@ -123,8 +120,14 @@ export class ResizablePanelGroup implements ResizableContextValue {
       const leftPanel = this.panels.get(leftPanelId)!;
       const rightPanel = this.panels.get(rightPanelId)!;
 
-      const newLeftSize = Math.max(leftPanel.minSize, Math.min(leftPanel.maxSize, leftSize + delta));
-      const newRightSize = Math.max(rightPanel.minSize, Math.min(rightPanel.maxSize, rightSize - delta));
+      const newLeftSize = Math.max(
+        leftPanel.minSize,
+        Math.min(leftPanel.maxSize, leftSize + delta),
+      );
+      const newRightSize = Math.max(
+        rightPanel.minSize,
+        Math.min(rightPanel.maxSize, rightSize - delta),
+      );
 
       // Only update if both constraints are satisfied
       if (newLeftSize + newRightSize === leftSize + rightSize) {

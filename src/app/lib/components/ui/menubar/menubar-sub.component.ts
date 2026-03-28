@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, InjectionToken, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InjectionToken,
+  signal,
+  type WritableSignal,
+} from '@angular/core';
 
 export interface MenubarSubContext {
   open: WritableSignal<boolean>;

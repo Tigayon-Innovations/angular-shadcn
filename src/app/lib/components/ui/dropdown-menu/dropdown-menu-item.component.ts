@@ -38,11 +38,11 @@ export class DropdownMenuItem {
 
   protected readonly computedClass = computed(() =>
     cn(
-      "relative flex cursor-default select-none items-center gap-3 rounded-md px-3 py-2.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 [&>lucide-icon]:size-4 [&>lucide-icon]:shrink-0 [&>lucide-icon]:text-muted-foreground",
+      'relative flex cursor-default select-none items-center gap-3 rounded-md px-3 py-2.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 [&>lucide-icon]:size-4 [&>lucide-icon]:shrink-0 [&>lucide-icon]:text-muted-foreground',
       this.inset() && 'pl-8',
       !this.disabled() && 'cursor-pointer hover:bg-accent hover:text-accent-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected handleClick(event: Event): void {

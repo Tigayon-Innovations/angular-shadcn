@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Breadcrumb component - root container.
@@ -37,7 +32,5 @@ export class Breadcrumb {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn(this.class())
-  );
+  protected readonly computedClass = computed(() => cn(this.class()));
 }

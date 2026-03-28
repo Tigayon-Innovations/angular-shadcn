@@ -5,4 +5,3 @@ export { PaginationLink } from './pagination-link.component';
 export { PaginationNext } from './pagination-next.component';
 export { PaginationPrevious } from './pagination-previous.component';
 export { Pagination } from './pagination.component';
-

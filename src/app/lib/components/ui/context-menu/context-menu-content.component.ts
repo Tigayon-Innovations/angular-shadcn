@@ -1,14 +1,14 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
 } from '@angular/core';
 import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
 
@@ -62,8 +62,8 @@ export class ContextMenuContent implements OnDestroy {
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {
@@ -99,7 +99,9 @@ export class ContextMenuContent implements OnDestroy {
     const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
-        content.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])')
+        content.querySelectorAll(
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+        ),
       );
     }
   }
@@ -181,7 +183,7 @@ export class ContextMenuContent implements OnDestroy {
 
     // Find first matching item
     const matchIndex = this.menuItems.findIndex((item) =>
-      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer)
+      item.textContent?.toLowerCase().trim().startsWith(this.typeaheadBuffer),
     );
 
     if (matchIndex >= 0) {

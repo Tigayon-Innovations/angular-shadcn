@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
-    OnInit,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  viewChild,
 } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
@@ -22,9 +22,7 @@ import { SELECT_CONTEXT } from './select-context';
 @Component({
   selector: 'SelectItem',
   template: `
-    <span
-      class="absolute left-2 flex size-3.5 items-center justify-center"
-    >
+    <span class="absolute left-2 flex size-3.5 items-center justify-center">
       @if (isSelected()) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +46,7 @@ import { SELECT_CONTEXT } from './select-context';
   `,
   host: {
     '[class]': 'computedClass()',
-    'role': 'option',
+    role: 'option',
     '[attr.aria-selected]': 'isSelected()',
     '[attr.data-state]': 'isSelected() ? "checked" : "unchecked"',
     '[attr.data-disabled]': 'disabled() ? "" : null',
@@ -90,7 +88,7 @@ export class SelectItem implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Register this item
-    this.context?.itemValues.update(values => {
+    this.context?.itemValues.update((values) => {
       if (!values.includes(this.value())) {
         return [...values, this.value()];
       }
@@ -100,9 +98,7 @@ export class SelectItem implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Unregister this item
-    this.context?.itemValues.update(values =>
-      values.filter(v => v !== this.value())
-    );
+    this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
   }
 
   /** Select this option */
@@ -146,7 +142,7 @@ export class SelectItem implements OnInit, OnDestroy {
         break;
       case 'Escape':
         event.preventDefault();
-        this.context.open.set(false);
+        this.context.setOpen(false);
         break;
     }
   }
@@ -157,7 +153,7 @@ export class SelectItem implements OnInit, OnDestroy {
       "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
       'hover:bg-accent hover:text-accent-foreground cursor-pointer',
       this.disabled() && 'pointer-events-none opacity-50',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

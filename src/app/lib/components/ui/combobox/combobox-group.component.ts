@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * ComboboxGroup component - groups combobox items with proper accessibility.
@@ -27,6 +22,6 @@ export class ComboboxGroup {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('overflow-hidden p-1 overflow-y-auto', this.class())
+    cn('overflow-hidden p-1 overflow-y-auto', this.class()),
   );
 }

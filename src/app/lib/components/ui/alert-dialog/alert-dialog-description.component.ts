@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
 
 /**
@@ -32,6 +26,6 @@ export class AlertDialogDescription {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-sm text-muted-foreground', this.class())
+    cn('text-sm text-muted-foreground', this.class()),
   );
 }

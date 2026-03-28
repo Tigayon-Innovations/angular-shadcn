@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ContentChild,
-    DestroyRef,
-    Directive,
-    ElementRef,
-    inject,
-    input,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  contentChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FORM_FIELD_CONTEXT } from './form-context';
@@ -47,7 +47,7 @@ export class FormControl implements AfterContentInit {
   protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
   private readonly destroyRef = inject(DestroyRef);
 
-  @ContentChild(FormControlInput, { static: false }) inputDirective?: FormControlInput;
+  readonly inputDirective = contentChild(FormControlInput);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -74,18 +74,17 @@ export class FormControl implements AfterContentInit {
   });
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('relative', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative', this.class()));
 
   ngAfterContentInit(): void {
     this.applyAccessibilityAttributes();
   }
 
   private applyAccessibilityAttributes(): void {
-    if (!this.inputDirective || !this.fieldContext) return;
+    const inputDirective = this.inputDirective();
+    if (!inputDirective || !this.fieldContext) return;
 
-    const element = this.inputDirective.elementRef.nativeElement;
+    const element = inputDirective.elementRef.nativeElement;
 
     // Set the id to match the label's 'for' attribute
     const id = this.fieldContext.id();
@@ -114,8 +113,9 @@ export class FormControl implements AfterContentInit {
   }
 
   private updateAriaInvalid(): void {
-    if (!this.inputDirective) return;
-    const element = this.inputDirective.elementRef.nativeElement;
+    const inputDirective = this.inputDirective();
+    if (!inputDirective) return;
+    const element = inputDirective.elementRef.nativeElement;
 
     if (this.hasError()) {
       element.setAttribute('aria-invalid', 'true');

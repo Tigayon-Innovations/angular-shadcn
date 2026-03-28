@@ -1,19 +1,19 @@
 import { cn } from '@/lib/utils';
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    inject,
-    input,
-    OnDestroy,
-    OnInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import {
-    ACCORDION_CONTEXT,
-    ACCORDION_ITEM_CONTEXT,
-    AccordionItemContext,
+  ACCORDION_CONTEXT,
+  ACCORDION_ITEM_CONTEXT,
+  AccordionItemContext,
 } from './accordion-context';
 
 /**
@@ -67,7 +67,7 @@ export class AccordionItem implements AccordionItemContext, OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Register this item's value for keyboard navigation
-    this.accordion.itemValues.update(values => {
+    this.accordion.itemValues.update((values) => {
       if (!values.includes(this.value())) {
         return [...values, this.value()];
       }
@@ -77,9 +77,7 @@ export class AccordionItem implements AccordionItemContext, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Unregister this item's value
-    this.accordion.itemValues.update(values =>
-      values.filter(v => v !== this.value())
-    );
+    this.accordion.itemValues.update((values) => values.filter((v) => v !== this.value()));
   }
 
   protected readonly computedClass = computed(() => cn('border-b w-full', this.class()));

@@ -1,11 +1,6 @@
 import { cn } from '@/lib/utils';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 // ============================================================================
 // Types
@@ -108,9 +103,7 @@ export class ScrollArea {
   /** Describes the nature of scrollbar visibility */
   readonly type = input<ScrollAreaType>('hover');
 
-  protected readonly computedClass = computed(() =>
-    cn('relative overflow-hidden', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('relative overflow-hidden', this.class()));
 
   protected readonly viewportClass = computed(() =>
     cn(
@@ -120,7 +113,7 @@ export class ScrollArea {
       '[&::-webkit-scrollbar]:hidden',
       '[-ms-overflow-style:none]',
       '[scrollbar-width:none]',
-      'overflow-auto'
-    )
+      'overflow-auto',
+    ),
   );
 }

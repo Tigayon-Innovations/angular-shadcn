@@ -1,10 +1,6 @@
 import { InjectionToken, type Signal, type WritableSignal } from '@angular/core';
 
-export type CommandFilterFunction = (
-  value: string,
-  search: string,
-  keywords?: string[]
-) => number; // 0 = hidden, 1 = shown, between 0-1 for ranking
+export type CommandFilterFunction = (value: string, search: string, keywords?: string[]) => number; // 0 = hidden, 1 = shown, between 0-1 for ranking
 
 export interface CommandContextValue {
   search: WritableSignal<string>;

@@ -33,6 +33,4 @@ export interface RadioGroupContext {
   focusLast: () => void;
 }
 
-export const RADIO_GROUP_CONTEXT = new InjectionToken<RadioGroupContext>(
-  'RadioGroupContext'
-);
+export const RADIO_GROUP_CONTEXT = new InjectionToken<RadioGroupContext>('RadioGroupContext');

@@ -17,7 +17,7 @@ export const kbdVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 
 export type KbdVariants = VariantProps<typeof kbdVariants>;

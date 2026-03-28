@@ -1,12 +1,11 @@
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    inject,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  inject,
+  input,
+  model,
 } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dialog-context';
 
@@ -19,7 +18,7 @@ import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dial
  * - User can explicitly click Cancel or Action to close
  *
  * @example
- * <AlertDialog>
+ * <AlertDialog [(open)]="isOpen">
  *   <AlertDialogTrigger>
  *     <Button variant="destructive">Delete Account</Button>
  *   </AlertDialogTrigger>
@@ -52,14 +51,8 @@ export class AlertDialog implements AlertDialogContextValue {
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
-  /** Controlled open state */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** Open change event emitted when dialog state changes */
-  readonly openChange = output<boolean>();
-
-  /** Internal open state signal */
-  readonly open = signal(false);
+  /** Controlled open state - uses model for proper two-way binding */
+  readonly open = model<boolean>(false);
 
   /** ARIA IDs for accessibility relationships */
   private readonly ariaIds = this.ariaIdService.generateDialogIds('alertdialog');
@@ -68,24 +61,25 @@ export class AlertDialog implements AlertDialogContextValue {
   readonly contentId = this.ariaIds.contentId;
 
   /** Reference to trigger element for focus restoration */
-  readonly triggerElement = signal<HTMLElement | null>(null);
+  private triggerEl: HTMLElement | null = null;
 
-  constructor() {
-    if (this.defaultOpen()) {
-      this.open.set(true);
-    }
-  }
-
-  /** Set the open state and emit change event */
-  setOpen(open: boolean): void {
-    if (this.controlledOpen() === undefined) {
-      this.open.set(open);
-    }
-    this.openChange.emit(open);
-  }
-
-  /** Get current open state */
+  /** Check if dialog is open - directly reads from model */
   isOpen(): boolean {
-    return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
+    return this.open();
+  }
+
+  /** Set the open state */
+  setOpen(open: boolean): void {
+    this.open.set(open);
+  }
+
+  /** Set trigger element for focus restoration */
+  setTriggerElement(element: HTMLElement | null): void {
+    this.triggerEl = element;
+  }
+
+  /** Get trigger element for focus restoration */
+  getTriggerElement(): HTMLElement | null {
+    return this.triggerEl;
   }
 }

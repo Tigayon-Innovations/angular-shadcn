@@ -11,6 +11,8 @@ export interface SelectContext {
   value: WritableSignal<string>;
   /** Whether the select is open */
   open: WritableSignal<boolean>;
+  /** Set the open state and emit related events */
+  setOpen: (open: boolean) => void;
   /** Whether the select is disabled */
   disabled: WritableSignal<boolean>;
   /** Placeholder text when no value is selected */
@@ -44,10 +46,6 @@ export interface SelectGroupContext {
 // Injection Tokens
 // ============================================================================
 
-export const SELECT_CONTEXT = new InjectionToken<SelectContext>(
-  'SelectContext'
-);
+export const SELECT_CONTEXT = new InjectionToken<SelectContext>('SelectContext');
 
-export const SELECT_GROUP_CONTEXT = new InjectionToken<SelectGroupContext>(
-  'SelectGroupContext'
-);
+export const SELECT_GROUP_CONTEXT = new InjectionToken<SelectGroupContext>('SelectGroupContext');

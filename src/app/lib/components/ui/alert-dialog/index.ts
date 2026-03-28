@@ -8,4 +8,3 @@ export { AlertDialogHeader } from './alert-dialog-header.component';
 export { AlertDialogTitle } from './alert-dialog-title.component';
 export { AlertDialogTrigger } from './alert-dialog-trigger.component';
 export { AlertDialog } from './alert-dialog.component';
-

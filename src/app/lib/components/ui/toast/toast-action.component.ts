@@ -47,11 +47,7 @@ export interface ToastActionProps {
 @Component({
   selector: 'ToastAction',
   template: `
-    <button
-      type="button"
-      [class]="computedClass()"
-      (click)="onClick.emit()"
-    >
+    <button type="button" [class]="computedClass()" (click)="onClick.emit()">
       <ng-content />
     </button>
   `,
@@ -71,7 +67,7 @@ export class ToastAction {
     cn(
       buttonVariants({ variant: 'outline', size: 'sm' }),
       'shrink-0 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

@@ -1,25 +1,25 @@
 import { cn } from '@/lib/utils';
 import {
-    afterNextRender,
-    booleanAttribute,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    forwardRef,
-    HostListener,
-    input,
-    model,
-    output,
-    signal,
+  afterNextRender,
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  HostListener,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import {
-    SIDEBAR_CONTEXT,
-    SIDEBAR_KEYBOARD_SHORTCUT,
-    SIDEBAR_WIDTH,
-    SIDEBAR_WIDTH_ICON,
-    type SidebarContext,
-    type SidebarState,
+  SIDEBAR_CONTEXT,
+  SIDEBAR_KEYBOARD_SHORTCUT,
+  SIDEBAR_WIDTH,
+  SIDEBAR_WIDTH_ICON,
+  type SidebarContext,
+  type SidebarState,
 } from './sidebar-context';
 
 /**
@@ -118,10 +118,7 @@ export class SidebarProvider {
 
   @HostListener('document:keydown', ['$event'])
   protected onKeydown(event: KeyboardEvent): void {
-    if (
-      event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
-      (event.metaKey || event.ctrlKey)
-    ) {
+    if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
       event.preventDefault();
       this.context.toggleSidebar();
     }
@@ -135,7 +132,7 @@ export class SidebarProvider {
   protected readonly computedClass = computed(() =>
     cn(
       'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

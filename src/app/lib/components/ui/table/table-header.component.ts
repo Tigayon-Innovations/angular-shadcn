@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * TableHeader component - thead wrapper.
@@ -12,7 +7,9 @@ import {
  */
 @Component({
   selector: 'TableHeader',
-  template: `<thead [class]="computedClass()"><ng-content /></thead>`,
+  template: `<thead [class]="computedClass()">
+    <ng-content />
+  </thead>`,
   host: {
     class: 'contents',
   },
@@ -22,7 +19,5 @@ export class TableHeader {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('[&_tr]:border-b', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('[&_tr]:border-b', this.class()));
 }

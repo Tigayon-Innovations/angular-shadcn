@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-    OnDestroy,
-    OnInit
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
@@ -94,7 +94,7 @@ export interface TabsTriggerProps {
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',
-    'role': 'tab',
+    role: 'tab',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -115,7 +115,7 @@ export class TabsTrigger implements OnInit, OnDestroy {
 
   /** Current state: active or inactive */
   protected readonly state = computed<TabsTriggerState>(() =>
-    this.isActive() ? 'active' : 'inactive'
+    this.isActive() ? 'active' : 'inactive',
   );
 
   /** Generate tab ID */
@@ -133,13 +133,13 @@ export class TabsTrigger implements OnInit, OnDestroy {
       'data-[state=inactive]:hover:text-foreground',
       'cursor-pointer',
       this.disabled() && 'pointer-events-none opacity-50',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   ngOnInit(): void {
     // Register this tab's value for keyboard navigation
-    this.tabs.tabValues.update(values => {
+    this.tabs.tabValues.update((values) => {
       if (!values.includes(this.value())) {
         return [...values, this.value()];
       }
@@ -149,9 +149,7 @@ export class TabsTrigger implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Unregister this tab's value
-    this.tabs.tabValues.update(values =>
-      values.filter(v => v !== this.value())
-    );
+    this.tabs.tabValues.update((values) => values.filter((v) => v !== this.value()));
   }
 
   protected onClick(): void {

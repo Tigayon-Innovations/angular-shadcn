@@ -18,7 +18,5 @@ export class DropdownMenuSeparator {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() =>
-    cn('-mx-2 my-2 h-px bg-border', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('-mx-2 my-2 h-px bg-border', this.class()));
 }

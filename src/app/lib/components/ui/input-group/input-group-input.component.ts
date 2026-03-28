@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * InputGroupInput component - styled input for InputGroup without border.
@@ -27,7 +22,7 @@ export class InputGroupInput {
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-9 w-full bg-transparent px-3 py-1 text-base placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

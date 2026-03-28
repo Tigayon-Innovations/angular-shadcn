@@ -1,10 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
 
 /**
@@ -32,7 +26,7 @@ export class DialogTrigger {
   onClick(event: Event): void {
     event.stopPropagation();
     // Save trigger element for focus restoration
-    this.context.triggerElement.set(this.elementRef.nativeElement);
+    this.context.setTriggerElement(this.elementRef.nativeElement);
     this.context.setOpen(true);
   }
 }

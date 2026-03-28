@@ -1,21 +1,21 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    forwardRef,
-    inject,
-    input,
-    model,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-    RADIO_GROUP_CONTEXT,
-    type RadioGroupContext,
-    type RadioGroupOrientation,
+  RADIO_GROUP_CONTEXT,
+  type RadioGroupContext,
+  type RadioGroupOrientation,
 } from './radio-group-context';
 
 // ============================================================================
@@ -150,9 +150,7 @@ export class RadioGroup implements ControlValueAccessor {
   readonly loop = input<boolean>(true);
 
   /** The name attribute for the radio inputs */
-  readonly name = input<string>(
-    `radio-group-${Math.random().toString(36).substring(7)}`
-  );
+  readonly name = input<string>(`radio-group-${Math.random().toString(36).substring(7)}`);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
@@ -164,9 +162,7 @@ export class RadioGroup implements ControlValueAccessor {
   private readonly formsDisabled = signal<boolean>(false);
 
   /** Whether the group is disabled */
-  readonly isDisabled = computed(
-    () => this.disabled() || this.formsDisabled()
-  );
+  readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
 
   /** ControlValueAccessor callbacks */
   private onChange: (value: string) => void = () => {};
@@ -193,17 +189,12 @@ export class RadioGroup implements ControlValueAccessor {
     focusNext: (currentValue: string) => this.focusItem(currentValue, 1),
     focusPrevious: (currentValue: string) => this.focusItem(currentValue, -1),
     focusFirst: () => this.focusItemByIndex(0),
-    focusLast: () =>
-      this.focusItemByIndex(this.context.itemValues().length - 1),
+    focusLast: () => this.focusItemByIndex(this.context.itemValues().length - 1),
   };
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn(
-      'grid gap-3',
-      this.orientation() === 'horizontal' && 'flex flex-row',
-      this.class()
-    )
+    cn('grid gap-3', this.orientation() === 'horizontal' && 'flex flex-row', this.class()),
   );
 
   ngOnChanges(): void {
@@ -263,7 +254,7 @@ export class RadioGroup implements ControlValueAccessor {
 
     const value = values[index];
     const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="radio-group-item"][data-value="${value}"]`
+      `[data-slot="radio-group-item"][data-value="${value}"]`,
     ) as HTMLElement;
 
     if (item) {

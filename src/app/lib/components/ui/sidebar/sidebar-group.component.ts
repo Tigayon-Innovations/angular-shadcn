@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * SidebarGroup component - groups sidebar items.
@@ -23,6 +18,6 @@ export class SidebarGroup {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('relative flex w-full min-w-0 flex-col p-2', this.class())
+    cn('relative flex w-full min-w-0 flex-col p-2', this.class()),
   );
 }

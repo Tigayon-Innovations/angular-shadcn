@@ -1,13 +1,13 @@
 import { DOCUMENT } from '@angular/common';
 import {
-    Directive,
-    ElementRef,
-    Injectable,
-    OnDestroy,
-    OnInit,
-    inject,
-    input,
-    signal,
+  Directive,
+  ElementRef,
+  Injectable,
+  OnDestroy,
+  OnInit,
+  inject,
+  input,
+  signal,
 } from '@angular/core';
 
 /**
@@ -47,7 +47,7 @@ export class LiveAnnouncerService implements OnDestroy {
   announce(
     message: string,
     priority: AnnouncementPriority = 'polite',
-    clearAfter: number = 1000
+    clearAfter: number = 1000,
   ): void {
     this.ensureLiveRegions();
 
@@ -67,10 +67,7 @@ export class LiveAnnouncerService implements OnDestroy {
       region.textContent = message;
 
       // Track announcement
-      this.announcements.update((list) => [
-        ...list,
-        { message, priority, timestamp: Date.now() },
-      ]);
+      this.announcements.update((list) => [...list, { message, priority, timestamp: Date.now() }]);
 
       // Clear after delay
       this.clearTimeoutId = setTimeout(() => {

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography Muted component
@@ -23,6 +18,6 @@ import {
 export class TypographyMuted {
   readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
-    cn('text-sm text-muted-foreground', this.class())
+    cn('text-sm text-muted-foreground', this.class()),
   );
 }

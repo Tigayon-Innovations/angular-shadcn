@@ -1,11 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { DRAWER_CONTEXT } from './drawer-context';
 
 /**
@@ -28,6 +22,6 @@ export class DrawerDescription {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('text-sm text-muted-foreground', this.class())
+    cn('text-sm text-muted-foreground', this.class()),
   );
 }

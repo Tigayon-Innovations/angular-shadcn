@@ -1,9 +1,12 @@
 import { InjectionToken, Signal, WritableSignal } from '@angular/core';
+import { LucideIconData } from 'lucide-angular';
+
 
 export interface ComboboxOption {
   value: string;
   label: string;
   disabled?: boolean;
+  icon?: LucideIconData;
 }
 
 export interface ComboboxContext {
@@ -25,6 +28,8 @@ export interface ComboboxContext {
   listboxId: string;
   /** ID of the currently highlighted option */
   activeDescendantId: Signal<string | null>;
+  /** Optional icon position for items with icons */
+  iconPosition: Signal<'left' | 'right'>;
   /** Select an option */
   onSelect: (value: string) => void;
   /** Toggle or set open state */
@@ -43,7 +48,4 @@ export interface ComboboxContext {
   getOptionId: (index: number) => string;
 }
 
-export const COMBOBOX_CONTEXT = new InjectionToken<ComboboxContext>(
-  'ComboboxContext'
-);
-
+export const COMBOBOX_CONTEXT = new InjectionToken<ComboboxContext>('ComboboxContext');

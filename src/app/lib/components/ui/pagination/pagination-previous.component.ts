@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { buttonVariants } from '../button/button-variants';
 
 /**
@@ -45,10 +40,6 @@ export class PaginationPrevious {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      buttonVariants({ variant: 'ghost', size: 'default' }),
-      'gap-1 pl-2.5',
-      this.class()
-    )
+    cn(buttonVariants({ variant: 'ghost', size: 'default' }), 'gap-1 pl-2.5', this.class()),
   );
 }

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * Typography InlineCode component
@@ -25,7 +20,7 @@ export class TypographyInlineCode {
   protected readonly computedClass = computed(() =>
     cn(
       'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

@@ -1,16 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
-    OnInit,
-    output,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  output,
 } from '@angular/core';
 import { COMMAND_CONTEXT } from './command-context';
 
@@ -72,9 +72,7 @@ export class CommandItem implements OnInit, OnDestroy {
 
     const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
     if (parent) {
-      const visibleItems = Array.from(
-        parent.querySelectorAll('CommandItem:not([hidden])')
-      );
+      const visibleItems = Array.from(parent.querySelectorAll('CommandItem:not([hidden])'));
       return visibleItems.indexOf(this.elementRef.nativeElement);
     }
     return this.localIndex;
@@ -89,10 +87,10 @@ export class CommandItem implements OnInit, OnDestroy {
 
   protected readonly computedClass = computed(() =>
     cn(
-      "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0",
+      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
       !this.disabled() && 'cursor-pointer hover:bg-accent hover:text-accent-foreground',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   constructor() {
@@ -106,7 +104,7 @@ export class CommandItem implements OnInit, OnDestroy {
     // Update local index after render (browser-only)
     afterNextRender(() => {
       this.updateLocalIndex();
-      this.context.itemCount.update(c => c + 1);
+      this.context.itemCount.update((c) => c + 1);
     });
   }
 
@@ -116,7 +114,7 @@ export class CommandItem implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.context.unregisterItem(this.value());
-    this.context.itemCount.update(c => Math.max(0, c - 1));
+    this.context.itemCount.update((c) => Math.max(0, c - 1));
   }
 
   private updateLocalIndex(): void {
@@ -132,9 +130,7 @@ export class CommandItem implements OnInit, OnDestroy {
     // Dynamically compute index based on visible DOM position
     const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
     if (parent) {
-      const visibleItems = Array.from(
-        parent.querySelectorAll('CommandItem:not([hidden])')
-      );
+      const visibleItems = Array.from(parent.querySelectorAll('CommandItem:not([hidden])'));
       return visibleItems.indexOf(this.elementRef.nativeElement);
     }
     return this.localIndex;

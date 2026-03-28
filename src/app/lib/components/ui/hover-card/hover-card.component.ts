@@ -1,10 +1,10 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    input,
-    output,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, type HoverCardContextValue } from './hover-card-context';
 

@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * BreadcrumbEllipsis component - shows more items indicator.
@@ -43,6 +38,6 @@ export class BreadcrumbEllipsis {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex h-9 w-9 items-center justify-center', this.class())
+    cn('flex h-9 w-9 items-center justify-center', this.class()),
   );
 }

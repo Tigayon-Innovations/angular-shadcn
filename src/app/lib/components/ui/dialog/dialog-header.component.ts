@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * DialogHeader component - header area of the dialog.
@@ -23,6 +18,6 @@ export class DialogHeader {
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-col space-y-1.5 text-center sm:text-left', this.class())
+    cn('flex flex-col space-y-1.5 text-center sm:text-left', this.class()),
   );
 }

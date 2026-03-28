@@ -76,11 +76,7 @@ export type LabelProps = {
 @Component({
   selector: 'Label',
   template: `
-    <label
-      [attr.for]="forId()"
-      [class]="computedClass()"
-      (mousedown)="onMouseDown($event)"
-    >
+    <label [attr.for]="forId()" [class]="computedClass()" (mousedown)="onMouseDown($event)">
       <ng-content />
     </label>
   `,
@@ -112,12 +108,14 @@ export class Label {
       'flex items-center gap-2 text-sm font-medium leading-none',
       // Cursor
       'cursor-pointer select-none',
+      // Margin
+      'mb-2',
       // Disabled states - peer for sibling inputs, group for parent containers
       'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       'group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
       // Custom classes
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   /**

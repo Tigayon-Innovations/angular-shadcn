@@ -1,15 +1,15 @@
 import { Align, cn, computePosition, getTransformOrigin, Presence, Side } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    Injector,
-    input,
-    signal,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  Injector,
+  input,
+  signal,
 } from '@angular/core';
 import { POPOVER_CONTEXT, PopoverAlign, PopoverSide } from './popover-context';
 
@@ -43,6 +43,8 @@ export interface PopoverContentProps {
   collisionPadding?: number;
   /** Additional CSS classes */
   class?: string;
+  /** Whether the content should match the trigger width. */
+  matchTriggerWidth?: boolean;
 }
 
 // ============================================================================
@@ -104,7 +106,7 @@ export interface PopoverContentProps {
         [attr.data-state]="state()"
         [attr.data-side]="computedSide()"
         [attr.data-align]="computedAlign()"
-        [style]="positionStyles()"
+        [style]="mergedStyles()"
         role="dialog"
         [attr.aria-modal]="context.modal() || null"
       >
@@ -123,6 +125,8 @@ export class PopoverContent {
   protected readonly context = inject(POPOVER_CONTEXT);
   private readonly elementRef = inject(ElementRef);
   private readonly injector = inject(Injector);
+  private positionFrameId: number | null = null;
+  protected readonly isPositioned = signal(false);
 
   /** The preferred side of the anchor to render against */
   readonly side = input<Side>('bottom');
@@ -145,40 +149,89 @@ export class PopoverContent {
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  /** Whether the content should match the trigger width */
+  readonly matchTriggerWidth = input<boolean>(false);
+
   /** Current state: open or closed */
   protected readonly state = computed<PopoverContentState>(() =>
-    this.context.open() ? 'open' : 'closed'
+    this.context.open() ? 'open' : 'closed',
   );
 
   /** Computed position after collision detection */
   protected readonly computedSide = signal<Side>('bottom');
   protected readonly computedAlign = signal<Align>('center');
-  protected readonly positionStyles = signal<Record<string, string>>({});
+  protected readonly matchedWidth = signal<number | null>(null);
+  protected readonly positionStyles = signal<Record<string, string>>({
+    position: 'fixed',
+    top: '-9999px',
+    left: '-9999px',
+  });
 
   constructor() {
     // Recalculate position when open state changes (browser-only via afterNextRender)
     effect(() => {
       const isOpen = this.context.open();
       if (isOpen) {
-        afterNextRender(() => {
-          this.updatePosition();
-        }, { injector: this.injector });
+        this.isPositioned.set(false);
+        afterNextRender(
+          () => {
+            this.schedulePositionUpdate();
+          },
+          { injector: this.injector },
+        );
+      } else {
+        this.cancelScheduledPositionUpdate();
+        this.isPositioned.set(false);
+        this.positionStyles.set({
+          position: 'fixed',
+          top: '-9999px',
+          left: '-9999px',
+        });
+        this.matchedWidth.set(null);
       }
     });
   }
 
+  private schedulePositionUpdate(): void {
+    this.cancelScheduledPositionUpdate();
+
+    this.positionFrameId = requestAnimationFrame(() => {
+      this.updatePosition();
+
+      this.positionFrameId = requestAnimationFrame(() => {
+        this.updatePosition();
+        this.positionFrameId = null;
+      });
+    });
+  }
+
+  private cancelScheduledPositionUpdate(): void {
+    if (this.positionFrameId !== null) {
+      cancelAnimationFrame(this.positionFrameId);
+      this.positionFrameId = null;
+    }
+  }
+
   private updatePosition(): void {
     const triggerElement = this.context.triggerRef?.();
-    const contentElement = this.elementRef.nativeElement.querySelector('[role="dialog"]') as HTMLElement;
+    const contentElement = this.elementRef.nativeElement.querySelector(
+      '[role="dialog"]',
+    ) as HTMLElement;
 
     if (!triggerElement || !contentElement) return;
 
     const triggerRect = triggerElement.getBoundingClientRect();
     const contentRect = contentElement.getBoundingClientRect();
+    const overlayWidth = this.matchTriggerWidth()
+      ? Math.round(triggerRect.width)
+      : Math.round(contentRect.width || 288);
+    const overlayHeight = Math.round(contentRect.height || 100);
+
+    this.matchedWidth.set(this.matchTriggerWidth() ? overlayWidth : null);
 
     const result = computePosition(
       triggerRect,
-      { width: contentRect.width || 288, height: contentRect.height || 100 },
+      { width: overlayWidth, height: overlayHeight },
       {
         side: this.side(),
         align: this.align(),
@@ -186,7 +239,7 @@ export class PopoverContent {
         alignOffset: this.alignOffset(),
         avoidCollisions: this.avoidCollisions(),
         collisionPadding: this.collisionPadding(),
-      }
+      },
     );
 
     this.computedSide.set(result.side);
@@ -200,19 +253,33 @@ export class PopoverContent {
       left: result.styles.left || '',
       '--radix-popover-content-transform-origin': transformOrigin,
     });
+    this.isPositioned.set(true);
   }
 
   protected readonly computedClass = computed(() =>
     cn(
-      'z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none',
+      'z-50 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none',
+      this.matchTriggerWidth() ? 'w-full' : 'w-72',
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
       'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
       'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      this.class()
-    )
+      !this.isPositioned() && 'pointer-events-none opacity-0',
+      this.class(),
+    ),
   );
+
+  protected readonly mergedStyles = computed<Record<string, string>>(() => ({
+    ...this.positionStyles(),
+    ...(this.matchedWidth() !== null
+      ? {
+          width: `${this.matchedWidth()}px`,
+          minWidth: `${this.matchedWidth()}px`,
+          maxWidth: `${this.matchedWidth()}px`,
+        }
+      : {}),
+  }));
 
   onDocumentClick(event: Event): void {
     const target = event.target as HTMLElement;

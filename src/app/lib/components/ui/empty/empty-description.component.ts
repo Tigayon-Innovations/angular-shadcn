@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
  * EmptyDescription component - description for the empty state.
@@ -23,9 +18,6 @@ export class EmptyDescription {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn(
-      'mb-4 mt-2 text-sm text-muted-foreground max-w-sm mx-auto',
-      this.class()
-    )
+    cn('mb-4 mt-2 text-sm text-muted-foreground max-w-sm mx-auto', this.class()),
   );
 }

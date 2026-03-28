@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { buttonVariants, type ButtonVariants } from './button-variants';
 
 /**
@@ -97,7 +92,7 @@ export class Button {
         size: this.size(),
       }),
       this.loading() && 'relative cursor-wait',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "JobsGlobal Brand Voice"
+  short_description: "Apply JobsGlobal tone and compliant messaging."
+  default_prompt: "Use the brand-voice skill to rewrite this content in an Apple-inspired, minimal, premium voice. Keep homepage copy polished and customer-led, keep authenticated/admin copy highly functional and minimal, and preserve accuracy plus compliance guardrails."

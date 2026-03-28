@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    input,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  input,
+  signal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FORM_CONTEXT, type FormContext } from './form-context';
@@ -113,9 +113,7 @@ export class Form {
   };
 
   /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('space-y-6', this.class())
-  );
+  protected readonly computedClass = computed(() => cn('space-y-6', this.class()));
 
   ngOnChanges() {
     this.context.form.set(this.formGroup());

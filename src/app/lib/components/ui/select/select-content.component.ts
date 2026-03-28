@@ -1,48 +1,32 @@
-import { cn, Presence } from '@/lib/utils';
-import { ClickOutsideDirective } from '@/lib/utils/accessibility';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    inject,
-    input,
-} from '@angular/core';
+import { cn } from '@/lib/utils';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
 /**
  * SelectContent component - the dropdown content container.
- * Implements proper ARIA listbox pattern.
- *
- * @example
- * <SelectContent>
- *   <SelectItem value="option1">Option 1</SelectItem>
- *   <SelectItem value="option2">Option 2</SelectItem>
- * </SelectContent>
+ * Uses simple absolute positioning inside the Select root for reliable
+ * full-width dropdown rendering in forms.
  */
 @Component({
   selector: 'SelectContent',
-  imports: [ClickOutsideDirective, Presence],
   template: `
-    <Presence [present]="context?.open() ?? false">
-      <div
-        [class]="dropdownClass()"
-        [attr.id]="context?.contentId"
-        [attr.data-state]="context?.open() ? 'open' : 'closed'"
-        [attr.data-side]="side()"
-        [attr.data-align]="align()"
-        role="listbox"
-        aria-label="Options"
-        (clickOutside)="onClickOutside()"
-        (keydown.escape)="onEscape()"
-      >
-        <div [class]="viewportClass()">
-          <ng-content />
-        </div>
+    <div
+      [class]="dropdownClass()"
+      [attr.id]="context?.contentId"
+      [attr.data-state]="context?.open() ? 'open' : 'closed'"
+      [attr.data-side]="side()"
+      [attr.data-align]="align()"
+      role="listbox"
+      aria-label="Options"
+      (keydown.escape)="onEscape()"
+    >
+      <div [class]="viewportClass()">
+        <ng-content />
       </div>
-    </Presence>
+    </div>
   `,
   host: {
-    'class': 'contents',
+    class: 'contents',
     'data-slot': 'select-content',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,13 +46,8 @@ export class SelectContent {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  protected onClickOutside(): void {
-    this.context?.open.set(false);
-  }
-
   protected onEscape(): void {
-    this.context?.open.set(false);
-    // Restore focus to trigger
+    this.context?.setOpen(false);
     const trigger = this.context?.triggerElement();
     if (trigger) {
       setTimeout(() => trigger.focus());
@@ -78,20 +57,13 @@ export class SelectContent {
   /** Computed class combining base styles and custom classes */
   protected readonly dropdownClass = computed(() =>
     cn(
-      'bg-popover text-popover-foreground absolute z-50 mt-1 max-h-60 min-w-[8rem] overflow-hidden rounded-md border shadow-md',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-      'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2',
-      this.position() === 'popper' &&
-        'data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1',
-      this.class()
-    )
+      'bg-popover text-popover-foreground absolute left-0 top-full z-50 mt-1 w-full overflow-hidden rounded-md border shadow-md',
+      'animate-in fade-in-0 zoom-in-95',
+      !this.context?.open() && 'pointer-events-none invisible opacity-0',
+      this.class(),
+    ),
   );
 
   /** Viewport class */
-  protected readonly viewportClass = computed(() =>
-    cn(
-      'p-1 overflow-y-auto max-h-60',
-      this.position() === 'popper' && 'w-full min-w-[var(--radix-select-trigger-width)]'
-    )
-  );
+  protected readonly viewportClass = computed(() => cn('max-h-60 overflow-y-auto p-1'));
 }
