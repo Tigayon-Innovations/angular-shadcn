@@ -60,8 +60,6 @@ import { SELECT_CONTEXT } from './select-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectItem implements OnInit, OnDestroy {
-  private readonly context = inject(SELECT_CONTEXT, { optional: true });
-
   private readonly textContent = viewChild<ElementRef>('textContent');
 
   /** The value of this option */
@@ -69,84 +67,15 @@ export class SelectItem implements OnInit, OnDestroy {
 
   /** Whether this option is disabled */
   readonly disabled = input<boolean>(false);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  private readonly _context = inject(SELECT_CONTEXT, { optional: true });
+
   /** Whether this item is selected */
   protected readonly isSelected = computed(() => {
-    return this.context?.value() === this.value();
+    return this._context?.value() === this.value();
   });
-
-  /** Whether this item is focused */
-  protected readonly isFocused = computed(() => {
-    if (!this.context) return false;
-    const values = this.context.itemValues();
-    const focusedIndex = this.context.focusedIndex();
-    return values[focusedIndex] === this.value();
-  });
-
-  ngOnInit(): void {
-    // Register this item
-    this.context?.itemValues.update((values) => {
-      if (!values.includes(this.value())) {
-        return [...values, this.value()];
-      }
-      return values;
-    });
-  }
-
-  ngOnDestroy(): void {
-    // Unregister this item
-    this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
-  }
-
-  /** Select this option */
-  select() {
-    if (!this.disabled()) {
-      const textEl = this.textContent()?.nativeElement;
-      const label = textEl?.textContent?.trim() || this.value();
-      this.context?.setValue(this.value(), label);
-    }
-  }
-
-  /** Handle keyboard navigation */
-  onKeyDown(event: KeyboardEvent): void {
-    if (!this.context || this.disabled()) return;
-
-    switch (event.key) {
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        this.select();
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        const currentIndex = this.context.focusedIndex();
-        const itemCount = this.context.itemValues().length;
-        this.context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        const idx = this.context.focusedIndex();
-        this.context.focusItem(Math.max(idx - 1, 0));
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.context.focusItem(0);
-        break;
-      case 'End':
-        event.preventDefault();
-        const lastIndex = this.context.itemValues().length - 1;
-        this.context.focusItem(lastIndex);
-        break;
-      case 'Escape':
-        event.preventDefault();
-        this.context.setOpen(false);
-        break;
-    }
-  }
-
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
@@ -156,4 +85,70 @@ export class SelectItem implements OnInit, OnDestroy {
       this.class(),
     ),
   );
+  /** Whether this item is focused */
+  protected readonly isFocused = computed(() => {
+    if (!this._context) return false;
+    const values = this._context.itemValues();
+    const focusedIndex = this._context.focusedIndex();
+    return values[focusedIndex] === this.value();
+  });
+
+  ngOnInit(): void {
+    // Register this item
+    this._context?.itemValues.update((values) => {
+      if (!values.includes(this.value())) {
+        return [...values, this.value()];
+      }
+      return values;
+    });
+  }
+  ngOnDestroy(): void {
+    // Unregister this item
+    this._context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
+  }
+
+  /** Handle keyboard navigation */
+  onKeyDown(event: KeyboardEvent): void {
+    if (!this._context || this.disabled()) return;
+
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.select();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        const currentIndex = this._context.focusedIndex();
+        const itemCount = this._context.itemValues().length;
+        this._context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        const idx = this._context.focusedIndex();
+        this._context.focusItem(Math.max(idx - 1, 0));
+        break;
+      case 'Home':
+        event.preventDefault();
+        this._context.focusItem(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        const lastIndex = this._context.itemValues().length - 1;
+        this._context.focusItem(lastIndex);
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this._context.setOpen(false);
+        break;
+    }
+  }
+  /** Select this option */
+  select(): void {
+    if (!this.disabled()) {
+      const textEl = this.textContent()?.nativeElement;
+      const label = textEl?.textContent?.trim() || this.value();
+      this._context?.setValue(this.value(), label);
+    }
+  }
 }

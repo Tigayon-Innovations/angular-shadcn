@@ -44,23 +44,21 @@ import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dialog implements DialogContextValue {
-  private readonly ariaIdService = inject(AriaIdService);
-
-  /** Default open state */
-  readonly defaultOpen = input<boolean>(false);
-
   /** Controlled open state - uses model for proper two-way binding */
   readonly open = model<boolean>(false);
 
+  /** Default open state */
+  readonly defaultOpen = input<boolean>(false);
   /** Modal mode - prevents interaction with outside elements */
   readonly modal = input<boolean>(true);
 
+  private readonly _ariaIdService = inject(AriaIdService);
+
   /** ARIA IDs for accessibility relationships */
-  private readonly ariaIds = this.ariaIdService.generateDialogIds('dialog');
+  private readonly ariaIds = this._ariaIdService.generateDialogIds('dialog');
   readonly titleId = this.ariaIds.titleId;
   readonly descriptionId = this.ariaIds.descriptionId;
   readonly contentId = this.ariaIds.contentId;
-
   /** Reference to trigger element for focus restoration */
   private triggerEl: HTMLElement | null = null;
 
@@ -68,17 +66,14 @@ export class Dialog implements DialogContextValue {
   isOpen(): boolean {
     return this.open();
   }
-
   /** Set the open state */
   setOpen(open: boolean): void {
     this.open.set(open);
   }
-
   /** Set trigger element for focus restoration */
   setTriggerElement(element: HTMLElement | null): void {
     this.triggerEl = element;
   }
-
   /** Get trigger element for focus restoration */
   getTriggerElement(): HTMLElement | null {
     return this.triggerEl;

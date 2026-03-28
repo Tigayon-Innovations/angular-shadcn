@@ -19,10 +19,10 @@ import { FORM_FIELD_CONTEXT } from './form-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDescription {
-  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>

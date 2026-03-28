@@ -42,30 +42,24 @@ import { SHEET_CONTEXT, type SheetContextValue } from './sheet-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sheet implements SheetContextValue {
-  private readonly ariaIdService = inject(AriaIdService);
-
-  /** Default open state */
-  readonly defaultOpen = input<boolean>(false);
-
-  /** Controlled open state */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** Side from which the sheet appears */
-  readonly side: 'top' | 'right' | 'bottom' | 'left' = 'right';
+  constructor() {
+    // Sync defaultOpen on init
+    effect(() => {
+      if (this.defaultOpen() && this.controlledOpen() === undefined) {
+        this._internalOpen.set(true);
+      }
+    });
+  }
 
   /** Open change event */
   readonly openChange = output<boolean>();
 
-  private readonly _internalOpen = signal(false);
+  /** Default open state */
+  readonly defaultOpen = input<boolean>(false);
+  /** Controlled open state */
+  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
 
-  /** ARIA IDs for accessibility relationships */
-  private readonly ariaIds = this.ariaIdService.generateDialogIds('sheet');
-  readonly titleId = this.ariaIds.titleId;
-  readonly descriptionId = this.ariaIds.descriptionId;
-  readonly contentId = this.ariaIds.contentId;
-
-  /** Reference to trigger element for focus restoration */
-  readonly triggerElement = signal<HTMLElement | null>(null);
+  private readonly _ariaIdService = inject(AriaIdService);
 
   /** Computed open state - uses controlled value if provided, otherwise internal state */
   readonly open = computed(() => {
@@ -76,21 +70,23 @@ export class Sheet implements SheetContextValue {
     return this._internalOpen();
   });
 
-  constructor() {
-    // Sync defaultOpen on init
-    effect(() => {
-      if (this.defaultOpen() && this.controlledOpen() === undefined) {
-        this._internalOpen.set(true);
-      }
-    });
-  }
+  private readonly _internalOpen = signal(false);
+  /** Reference to trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
+
+  /** Side from which the sheet appears */
+  readonly side: 'top' | 'right' | 'bottom' | 'left' = 'right';
+  /** ARIA IDs for accessibility relationships */
+  private readonly ariaIds = this._ariaIdService.generateDialogIds('sheet');
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
 
   setOpen(open: boolean): void {
     // Always update internal state for uncontrolled mode
     this._internalOpen.set(open);
     this.openChange.emit(open);
   }
-
   isOpen(): boolean {
     return this.open();
   }

@@ -38,22 +38,16 @@ import { CHART_CONTEXT, type ChartConfig, type ChartContext } from './chart-cont
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartContainer {
-  /** Chart configuration with colors and labels */
-  readonly config = input<ChartConfig>({});
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Context for child components */
-  readonly context: ChartContext = {
-    config: signal(this.config()),
-  };
-
   constructor() {
     effect(() => {
       this.context.config.set(this.config());
     });
   }
+
+  /** Chart configuration with colors and labels */
+  readonly config = input<ChartConfig>({});
+  /** Additional CSS classes */
+  readonly class = input<string>('');
 
   protected readonly chartStyles = computed(() => {
     const config = this.config();
@@ -67,11 +61,15 @@ export class ChartContainer {
 
     return styles;
   });
-
   protected readonly computedClass = computed(() =>
     cn(
       'flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_]:stroke-border [&_.recharts-sector]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none',
       this.class(),
     ),
   );
+
+  /** Context for child components */
+  readonly context: ChartContext = {
+    config: signal(this.config()),
+  };
 }

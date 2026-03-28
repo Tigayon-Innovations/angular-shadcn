@@ -31,24 +31,22 @@ import { FORM_FIELD_CONTEXT } from './form-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormLabel {
-  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
-
   private readonly labelElement = viewChild<ElementRef<HTMLLabelElement>>('labelElement');
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
 
   /** Check if field has error */
   protected readonly hasError = computed(() => {
     const control = this.fieldContext?.control();
     return control?.invalid && (control?.dirty || control?.touched);
   });
-
   /** Check if field is disabled */
   protected readonly isDisabled = computed(() => {
     return this.fieldContext?.control()?.disabled;
   });
-
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(

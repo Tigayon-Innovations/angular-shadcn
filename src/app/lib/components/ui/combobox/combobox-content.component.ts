@@ -31,13 +31,12 @@ import { COMBOBOX_CONTEXT } from './combobox-context'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxContent {
-    protected readonly context = inject(COMBOBOX_CONTEXT)
-
     /** Additional CSS classes */
     readonly class = input<string>('')
 
-    protected readonly computedClass = computed(() => cn('contents'))
+    protected readonly context = inject(COMBOBOX_CONTEXT)
 
+    protected readonly computedClass = computed(() => cn('contents'))
     protected readonly dropdownClass = computed(() =>
         cn(
             'absolute z-50 mt-1 max-h-72 w-full min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md',

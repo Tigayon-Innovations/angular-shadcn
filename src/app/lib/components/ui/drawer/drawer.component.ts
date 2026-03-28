@@ -46,39 +46,35 @@ import { DRAWER_CONTEXT, type DrawerContextValue } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Drawer implements DrawerContextValue {
-  private readonly ariaIdService = inject(AriaIdService);
-  private readonly ariaIds = this.ariaIdService.generateDialogIds('drawer');
-
-  /** Default open state */
-  readonly defaultOpen = input<boolean>(false);
-
-  /** Controlled open state */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** Direction the drawer appears from */
-  readonly direction: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
-
-  /** Whether to show the handle bar */
-  readonly shouldScaleBackground = input<boolean>(true);
-
-  /** Open change event */
-  readonly openChange = output<boolean>();
-
-  readonly open = signal(false);
-
-  /** ARIA IDs for accessibility */
-  readonly titleId = this.ariaIds.titleId;
-  readonly descriptionId = this.ariaIds.descriptionId;
-  readonly contentId = this.ariaIds.contentId;
-
-  /** Reference to the trigger element for focus restoration */
-  readonly triggerElement = signal<HTMLElement | null>(null);
-
   constructor() {
     if (this.defaultOpen()) {
       this.open.set(true);
     }
   }
+
+  /** Open change event */
+  readonly openChange = output<boolean>();
+
+  /** Default open state */
+  readonly defaultOpen = input<boolean>(false);
+  /** Controlled open state */
+  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
+  /** Whether to show the handle bar */
+  readonly shouldScaleBackground = input<boolean>(true);
+
+  private readonly _ariaIdService = inject(AriaIdService);
+
+  readonly open = signal(false);
+  /** Reference to the trigger element for focus restoration */
+  readonly triggerElement = signal<HTMLElement | null>(null);
+
+  private readonly ariaIds = this._ariaIdService.generateDialogIds('drawer');
+  /** Direction the drawer appears from */
+  readonly direction: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
+  /** ARIA IDs for accessibility */
+  readonly titleId = this.ariaIds.titleId;
+  readonly descriptionId = this.ariaIds.descriptionId;
+  readonly contentId = this.ariaIds.contentId;
 
   setOpen(open: boolean): void {
     if (this.controlledOpen() === undefined) {
@@ -86,7 +82,6 @@ export class Drawer implements DrawerContextValue {
     }
     this.openChange.emit(open);
   }
-
   isOpen(): boolean {
     return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
   }

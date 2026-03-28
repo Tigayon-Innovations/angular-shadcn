@@ -17,10 +17,10 @@ import { DIALOG_CONTEXT } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogTitle {
-  protected readonly context = inject(DIALOG_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(DIALOG_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn('text-lg font-semibold leading-none tracking-tight', this.class()),

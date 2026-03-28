@@ -53,14 +53,30 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogContent {
-  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
-  private readonly destroyRef = inject(DestroyRef);
+  constructor() {
+    // Handle body scroll lock based on open state
+    effect(() => {
+      const isOpen = this.context.isOpen();
+      if (isOpen) {
+        this.lockBodyScroll();
+      } else {
+        this.unlockBodyScroll();
+      }
+    });
+
+    // Cleanup on destroy
+    this._destroyRef.onDestroy(() => {
+      this.unlockBodyScroll();
+      this.restoreFocus();
+    });
+  }
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Previous body overflow for restoration */
-  private previousBodyOverflow = '';
+  private readonly _destroyRef = inject(DestroyRef);
+
+  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -75,36 +91,8 @@ export class AlertDialogContent {
     ),
   );
 
-  constructor() {
-    // Handle body scroll lock based on open state
-    effect(() => {
-      const isOpen = this.context.isOpen();
-      if (isOpen) {
-        this.lockBodyScroll();
-      } else {
-        this.unlockBodyScroll();
-      }
-    });
-
-    // Cleanup on destroy
-    this.destroyRef.onDestroy(() => {
-      this.unlockBodyScroll();
-      this.restoreFocus();
-    });
-  }
-
-  private lockBodyScroll(): void {
-    if (typeof document !== 'undefined') {
-      this.previousBodyOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  private unlockBodyScroll(): void {
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = this.previousBodyOverflow;
-    }
-  }
+  /** Previous body overflow for restoration */
+  private previousBodyOverflow = '';
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
@@ -113,11 +101,21 @@ export class AlertDialogContent {
     }
   }
 
+  private lockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      this.previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  private unlockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.previousBodyOverflow;
+    }
+  }
   private close(): void {
     this.restoreFocus();
     this.context.setOpen(false);
   }
-
   private restoreFocus(): void {
     const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {

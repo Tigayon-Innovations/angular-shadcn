@@ -1,10 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the ToastDescription component
  */
@@ -12,10 +8,6 @@ export interface ToastDescriptionProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component ToastDescription

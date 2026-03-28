@@ -110,65 +110,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class Checkbox implements ControlValueAccessor {
   private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-  /** The id for the checkbox input - used for label association */
-  readonly id = input<string>();
-
   /** Whether the checkbox is checked (boolean) or indeterminate ('indeterminate') */
   readonly checked = model<boolean | 'indeterminate'>(false);
 
+  /** The id for the checkbox input - used for label association */
+  readonly id = input<string>();
+  /** Additional CSS classes to apply */
+  readonly class = input<string>('');
   /** Whether the checkbox is disabled via input */
   readonly disabled = input<boolean>(false);
 
-  /** Whether the checkbox is disabled via forms */
-  private readonly formsDisabled = signal<boolean>(false);
-
   /** Whether the checkbox is disabled (either via input or forms) */
-  readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
-
-  /** Additional CSS classes to apply */
-  readonly class = input<string>('');
-
-  /** ControlValueAccessor callbacks */
-  private onChange: (value: boolean | 'indeterminate') => void = () => {};
-  private onTouched: () => void = () => {};
-
-  /** Get the data-state attribute value */
-  getDataState(): string {
-    const state = this.checked();
-    if (state === true) return 'checked';
-    if (state === 'indeterminate') return 'indeterminate';
-    return 'unchecked';
-  }
-
-  /** Toggle the checkbox state */
-  toggle() {
-    if (!this.isDisabled()) {
-      const current = this.checked();
-      // Cycle through: unchecked -> checked -> unchecked
-      const next = current === true ? false : true;
-      this.checked.set(next);
-      this.onChange(next);
-      this.onTouched();
-    }
-  }
-
-  // ControlValueAccessor implementation
-  writeValue(value: boolean | 'indeterminate'): void {
-    this.checked.set(value ?? false);
-  }
-
-  registerOnChange(fn: (value: boolean | 'indeterminate') => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formsDisabled.set(isDisabled);
-  }
-
+  readonly isDisabled = computed(() => this.disabled() || this.isFormsDisabled());
   /** Computed class for the check icon with animation */
   protected readonly checkIconClass = computed(() =>
     cn(
@@ -176,7 +129,6 @@ export class Checkbox implements ControlValueAccessor {
       this.checked() ? 'opacity-100 scale-100' : 'opacity-0 scale-0',
     ),
   );
-
   /** Computed class for the visual checkbox box */
   protected readonly boxClass = computed(() =>
     cn(
@@ -187,7 +139,46 @@ export class Checkbox implements ControlValueAccessor {
       this.isDisabled() && 'cursor-not-allowed opacity-50',
     ),
   );
-
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()));
+
+  /** Whether the checkbox is disabled via forms */
+  private readonly isFormsDisabled = signal<boolean>(false);
+
+  /** ControlValueAccessor callbacks */
+  private onChange: (value: boolean | 'indeterminate') => void = () => {};
+  private onTouched: () => void = () => {};
+
+  // ControlValueAccessor implementation
+  writeValue(value: boolean | 'indeterminate'): void {
+    this.checked.set(value ?? false);
+  }
+  registerOnChange(fn: (value: boolean | 'indeterminate') => void): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+  setDisabledState(isDisabled: boolean): void {
+    this.isFormsDisabled.set(isDisabled);
+  }
+
+  /** Toggle the checkbox state */
+  toggle(): void {
+    if (!this.isDisabled()) {
+      const current = this.checked();
+      // Cycle through: unchecked -> checked -> unchecked
+      const next = current === true ? false : true;
+      this.checked.set(next);
+      this.onChange(next);
+      this.onTouched();
+    }
+  }
+  /** Get the data-state attribute value */
+  getDataState(): string {
+    const state = this.checked();
+    if (state === true) return 'checked';
+    if (state === 'indeterminate') return 'indeterminate';
+    return 'unchecked';
+  }
 }

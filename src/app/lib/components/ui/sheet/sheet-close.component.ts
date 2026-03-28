@@ -15,10 +15,10 @@ import { SHEET_CONTEXT } from './sheet-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SheetClose {
-  protected readonly context = inject(SHEET_CONTEXT);
-
   /** Render as child */
   readonly asChild = input<boolean>(false);
+
+  protected readonly context = inject(SHEET_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();

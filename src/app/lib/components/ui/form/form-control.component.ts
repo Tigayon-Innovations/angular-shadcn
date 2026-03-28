@@ -4,12 +4,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   DestroyRef,
   Directive,
   ElementRef,
   inject,
   input,
-  contentChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FORM_FIELD_CONTEXT } from './form-context';
@@ -44,13 +44,13 @@ export class FormControlInput {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormControl implements AfterContentInit {
-  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
-  private readonly destroyRef = inject(DestroyRef);
-
   readonly inputDirective = contentChild(FormControlInput);
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  private readonly _destroyRef = inject(DestroyRef);
+  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
 
   /** Check if field has error */
   protected readonly hasError = computed(() => {
@@ -106,7 +106,7 @@ export class FormControl implements AfterContentInit {
     // Update attributes when control state changes
     const control = this.fieldContext.control();
     if (control?.statusChanges) {
-      control.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      control.statusChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
         this.updateAriaInvalid();
       });
     }

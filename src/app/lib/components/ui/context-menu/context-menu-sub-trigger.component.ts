@@ -23,14 +23,13 @@ import { CONTEXT_MENU_SUB_CONTEXT } from './context-menu-sub.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuSubTrigger {
-  protected readonly subContext = inject(CONTEXT_MENU_SUB_CONTEXT);
-  protected readonly ChevronRightIcon = ChevronRight;
-
   /** Whether the trigger is inset (extra padding) */
   readonly inset = input<boolean>(false);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly subContext = inject(CONTEXT_MENU_SUB_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -40,10 +39,11 @@ export class ContextMenuSubTrigger {
     ),
   );
 
+  protected readonly ChevronRightIcon = ChevronRight;
+
   protected onMouseEnter(): void {
     this.subContext.open.set(true);
   }
-
   protected onMouseLeave(): void {
     // Keep open to allow mouse movement to subcontent
   }

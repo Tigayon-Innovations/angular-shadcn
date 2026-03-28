@@ -1,9 +1,5 @@
 import { InjectionToken, type WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type InputOTPRenderFn = (props: { slots: InputOTPSlotProps[] }) => unknown;
 
 export interface InputOTPSlotProps {
@@ -23,9 +19,5 @@ export interface InputOTPContextValue {
   /** Index of the currently active/focused slot */
   activeIndex: WritableSignal<number>;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const INPUT_OTP_CONTEXT = new InjectionToken<InputOTPContextValue>('INPUT_OTP_CONTEXT');

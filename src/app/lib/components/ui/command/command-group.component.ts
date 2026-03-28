@@ -29,29 +29,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandGroup {
-  private readonly elementRef = inject(ElementRef);
-
-  /** Group heading */
-  readonly heading = input<string>('');
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Check if group has any visible items */
-  protected readonly hasVisibleItems = computed(() => {
-    // This will be re-evaluated whenever DOM changes
-    const element = this.elementRef.nativeElement;
-    const visibleItems = element.querySelectorAll('CommandItem:not([hidden])');
-    return visibleItems.length > 0;
-  });
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground',
-      this.class(),
-    ),
-  );
-
   constructor() {
     // Trigger re-evaluation of hasVisibleItems when children change
     effect(() => {
@@ -61,7 +38,7 @@ export class CommandGroup {
         this.hasVisibleItems();
       });
 
-      const element = this.elementRef.nativeElement;
+      const element = this._elementRef.nativeElement;
       observer.observe(element, {
         attributes: true,
         attributeFilter: ['hidden'],
@@ -71,4 +48,25 @@ export class CommandGroup {
       return () => observer.disconnect();
     });
   }
+
+  /** Group heading */
+  readonly heading = input<string>('');
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  /** Check if group has any visible items */
+  protected readonly hasVisibleItems = computed(() => {
+    // This will be re-evaluated whenever DOM changes
+    const element = this._elementRef.nativeElement;
+    const visibleItems = element.querySelectorAll('CommandItem:not([hidden])');
+    return visibleItems.length > 0;
+  });
+  protected readonly computedClass = computed(() =>
+    cn(
+      'overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground',
+      this.class(),
+    ),
+  );
 }

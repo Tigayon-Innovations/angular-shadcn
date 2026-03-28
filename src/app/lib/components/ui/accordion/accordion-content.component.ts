@@ -31,10 +31,10 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionContent {
-  protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -42,7 +42,6 @@ export class AccordionContent {
       'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
     ),
   );
-
   protected readonly innerClass = computed(() =>
     cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed', this.class()),
   );

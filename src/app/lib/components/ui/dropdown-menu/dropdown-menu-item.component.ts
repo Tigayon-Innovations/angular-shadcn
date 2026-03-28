@@ -22,19 +22,17 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuItem {
-  private readonly context = inject(DROPDOWN_MENU_CONTEXT);
-
-  /** Whether the item is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Whether the item is inset (extra padding) */
-  readonly inset = input<boolean>(false);
+  /** Select event emitted when item is clicked */
+  readonly onSelect = output<void>();
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+  /** Whether the item is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Whether the item is inset (extra padding) */
+  readonly inset = input<boolean>(false);
 
-  /** Select event emitted when item is clicked */
-  readonly onSelect = output<void>();
+  private readonly _context = inject(DROPDOWN_MENU_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -51,6 +49,6 @@ export class DropdownMenuItem {
       return;
     }
     this.onSelect.emit();
-    this.context.open.set(false);
+    this._context.open.set(false);
   }
 }

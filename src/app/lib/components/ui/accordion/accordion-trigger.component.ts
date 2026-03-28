@@ -44,10 +44,10 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionTrigger {
-  protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -59,7 +59,6 @@ export class AccordionTrigger {
   protected onClick(): void {
     this.item.toggle();
   }
-
   protected onSpace(event: Event): void {
     event.preventDefault();
     this.item.toggle();

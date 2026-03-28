@@ -3,10 +3,6 @@ import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 
 let tooltipIdCounter = 0;
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the TooltipProvider component
  */
@@ -21,10 +17,6 @@ export interface TooltipProviderProps {
    * @default false */
   disableHoverableContent?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TooltipProvider
@@ -69,19 +61,17 @@ export interface TooltipProviderProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipProvider implements TooltipContextValue {
-  /** The duration from when the pointer enters the trigger until the tooltip opens */
-  readonly delayDuration = 700;
-
-  /** How much time a user has to enter another trigger without incurring a delay again */
-  readonly skipDelayDuration = 300;
-
-  /** Unique ID for aria-describedby relationship */
-  readonly tooltipId = `tooltip-provider-${++tooltipIdCounter}`;
-
   /** When true, trying to hover the content will result in the tooltip closing */
   readonly disableHoverableContent = input<boolean>(false);
 
   readonly open = signal(false);
+
+  /** Unique ID for aria-describedby relationship */
+  readonly tooltipId = `tooltip-provider-${++tooltipIdCounter}`;
+  /** The duration from when the pointer enters the trigger until the tooltip opens */
+  readonly delayDuration = 700;
+  /** How much time a user has to enter another trigger without incurring a delay again */
+  readonly skipDelayDuration = 300;
 
   setOpen(open: boolean): void {
     this.open.set(open);

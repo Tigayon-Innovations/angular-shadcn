@@ -47,24 +47,6 @@ import { COLLAPSIBLE_CONTEXT, CollapsibleContext } from './collapsible-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Collapsible implements CollapsibleContext {
-  /** Whether the collapsible is open by default */
-  readonly defaultOpen = input<boolean, unknown>(false, { transform: booleanAttribute });
-
-  /** Controlled open state - two-way binding supported */
-  readonly open = model<boolean | undefined>(undefined);
-
-  /** Whether the collapsible is disabled */
-  readonly disabled = input<boolean, unknown>(false, { transform: booleanAttribute });
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Event emitted when open state changes */
-  readonly openChange = output<boolean>();
-
-  /** Internal state for open/closed */
-  private readonly _isOpen = signal<boolean>(false);
-
   constructor() {
     // Initialize with defaultOpen
     effect(() => {
@@ -79,9 +61,26 @@ export class Collapsible implements CollapsibleContext {
     });
   }
 
+  /** Event emitted when open state changes */
+  readonly openChange = output<boolean>();
+
+  /** Controlled open state - two-way binding supported */
+  readonly open = model<boolean | undefined>(undefined);
+
+  /** Whether the collapsible is open by default */
+  readonly defaultOpen = input<boolean, unknown>(false, { transform: booleanAttribute });
+  /** Whether the collapsible is disabled */
+  readonly disabled = input<boolean, unknown>(false, { transform: booleanAttribute });
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  protected readonly computedClass = computed(() => cn('', this.class()));
+
+  /** Internal state for open/closed */
+  private readonly _isOpen = signal<boolean>(false);
+
   /** Get the current open state */
   isOpen = () => this.open() ?? this._isOpen();
-
   /** Toggle the open state */
   toggle = () => {
     if (this.disabled()) return;
@@ -95,6 +94,4 @@ export class Collapsible implements CollapsibleContext {
     this.open.set(newState);
     this.openChange.emit(newState);
   };
-
-  protected readonly computedClass = computed(() => cn('', this.class()));
 }

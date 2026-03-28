@@ -13,10 +13,6 @@ import {
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the TabsList component
  */
@@ -29,10 +25,6 @@ export interface TabsListProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TabsList
@@ -103,36 +95,6 @@ export interface TabsListProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsList {
-  protected readonly tabs = inject(TABS_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-  private readonly injector = inject(Injector);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Whether to show the animated indicator */
-  readonly showIndicator = input<boolean>(false);
-
-  /** Additional indicator CSS classes */
-  readonly indicatorClass = input<string>('');
-
-  /** Indicator position and size */
-  protected readonly indicatorStyle = signal({ width: 0, left: 0 });
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'text-muted-foreground inline-flex h-9 w-fit items-center justify-center gap-1 rounded-lg bg-transparent p-1',
-      this.class(),
-    ),
-  );
-
-  protected readonly computedIndicatorClass = computed(() =>
-    cn(
-      'absolute inset-y-1 bg-background rounded-md shadow-sm transition-all duration-200',
-      this.indicatorClass(),
-    ),
-  );
-
   constructor() {
     // Update indicator when value changes (browser-only via afterNextRender)
     effect(() => {
@@ -142,29 +104,38 @@ export class TabsList {
         () => {
           this.updateIndicator();
         },
-        { injector: this.injector },
+        { injector: this._injector },
       );
     });
   }
 
-  private updateIndicator(): void {
-    const activeValue = this.tabs.value();
-    if (!activeValue) return;
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+  /** Whether to show the animated indicator */
+  readonly showIndicator = input<boolean>(false);
+  /** Additional indicator CSS classes */
+  readonly indicatorClass = input<string>('');
 
-    const tabId = this.tabs.getTabId(activeValue);
-    const tabElement = document.getElementById(tabId);
-    const listElement = this.elementRef.nativeElement;
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _injector = inject(Injector);
 
-    if (tabElement && listElement) {
-      const tabRect = tabElement.getBoundingClientRect();
-      const listRect = listElement.getBoundingClientRect();
+  protected readonly tabs = inject(TABS_CONTEXT);
 
-      this.indicatorStyle.set({
-        width: tabRect.width,
-        left: tabRect.left - listRect.left,
-      });
-    }
-  }
+  protected readonly computedClass = computed(() =>
+    cn(
+      'text-muted-foreground inline-flex h-9 w-fit items-center justify-center gap-1 rounded-lg bg-transparent p-1',
+      this.class(),
+    ),
+  );
+  protected readonly computedIndicatorClass = computed(() =>
+    cn(
+      'absolute inset-y-1 bg-background rounded-md shadow-sm transition-all duration-200',
+      this.indicatorClass(),
+    ),
+  );
+
+  /** Indicator position and size */
+  protected readonly indicatorStyle = signal({ width: 0, left: 0 });
 
   onKeydown(event: KeyboardEvent): void {
     const tabValues = this.tabs.tabValues();
@@ -226,6 +197,25 @@ export class TabsList {
       const tabId = this.tabs.getTabId(newValue);
       const tabElement = document.getElementById(tabId);
       tabElement?.focus();
+    }
+  }
+
+  private updateIndicator(): void {
+    const activeValue = this.tabs.value();
+    if (!activeValue) return;
+
+    const tabId = this.tabs.getTabId(activeValue);
+    const tabElement = document.getElementById(tabId);
+    const listElement = this._elementRef.nativeElement;
+
+    if (tabElement && listElement) {
+      const tabRect = tabElement.getBoundingClientRect();
+      const listRect = listElement.getBoundingClientRect();
+
+      this.indicatorStyle.set({
+        width: tabRect.width,
+        left: tabRect.left - listRect.left,
+      });
     }
   }
 }

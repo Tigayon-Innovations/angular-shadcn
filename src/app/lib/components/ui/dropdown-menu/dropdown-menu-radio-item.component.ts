@@ -34,24 +34,21 @@ import { DROPDOWN_MENU_RADIO_GROUP_CONTEXT } from './dropdown-menu-radio-group.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuRadioItem {
-  private readonly context = inject(DROPDOWN_MENU_CONTEXT);
-  private readonly radioGroupContext = inject(DROPDOWN_MENU_RADIO_GROUP_CONTEXT);
-  protected readonly CircleIcon = Circle;
+  /** Select event emitted when item is clicked */
+  readonly onSelect = output<void>();
 
   /** The value of this radio item */
   readonly value = input.required<string>();
 
+  /** Additional CSS classes */
+  readonly class = input<string>('');
   /** Whether the item is disabled */
   readonly disabled = input<boolean>(false);
 
-  /** Additional CSS classes */
-  readonly class = input<string>('');
+  private readonly _context = inject(DROPDOWN_MENU_CONTEXT);
+  private readonly _radioGroupContext = inject(DROPDOWN_MENU_RADIO_GROUP_CONTEXT);
 
-  /** Select event emitted when item is clicked */
-  readonly onSelect = output<void>();
-
-  protected readonly isSelected = computed(() => this.radioGroupContext.value() === this.value());
-
+  protected readonly isSelected = computed(() => this._radioGroupContext.value() === this.value());
   protected readonly computedClass = computed(() =>
     cn(
       'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -60,12 +57,14 @@ export class DropdownMenuRadioItem {
     ),
   );
 
+  protected readonly CircleIcon = Circle;
+
   protected handleClick(event: Event): void {
     if (this.disabled()) {
       event.preventDefault();
       return;
     }
-    this.radioGroupContext.setValue(this.value());
+    this._radioGroupContext.setValue(this.value());
     this.onSelect.emit();
   }
 }

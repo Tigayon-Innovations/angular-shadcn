@@ -9,10 +9,6 @@ import {
 } from '@angular/core';
 import { POPOVER_CONTEXT } from './popover-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the PopoverTrigger component
  */
@@ -21,10 +17,6 @@ export interface PopoverTriggerProps {
    * @default false */
   asChild?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component PopoverTrigger
@@ -75,16 +67,10 @@ export interface PopoverTriggerProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverTrigger implements OnDestroy {
-  protected readonly context = inject(POPOVER_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
-  /** Change the default rendered element for the one passed as a child */
-  readonly asChild = input<boolean>(false);
-
   constructor() {
     // Register this element as the trigger reference (browser-only)
     afterNextRender(() => {
-      const hostElement = this.elementRef.nativeElement as HTMLElement;
+      const hostElement = this._elementRef.nativeElement as HTMLElement;
       const triggerElement =
         hostElement.firstElementChild instanceof HTMLElement
           ? hostElement.firstElementChild
@@ -93,6 +79,13 @@ export class PopoverTrigger implements OnDestroy {
       this.context.setTriggerRef?.(triggerElement);
     });
   }
+
+  /** Change the default rendered element for the one passed as a child */
+  readonly asChild = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(POPOVER_CONTEXT);
 
   ngOnDestroy(): void {
     // Clean up trigger reference

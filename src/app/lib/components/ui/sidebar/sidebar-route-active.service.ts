@@ -16,17 +16,12 @@ import { filter, map } from 'rxjs';
   providedIn: 'root',
 })
 export class SidebarRouteActiveService {
-  private readonly router = inject(Router);
-
-  /** Current active route */
-  readonly currentRoute = signal<string>('');
-
   constructor() {
     // Initialize with current route
     this.updateCurrentRoute();
 
     // Subscribe to route changes
-    this.router.events
+    this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         map((event: NavigationEnd) => event.urlAfterRedirects || event.url),
@@ -35,6 +30,11 @@ export class SidebarRouteActiveService {
         this.currentRoute.set(url);
       });
   }
+
+  private readonly _router = inject(Router);
+
+  /** Current active route */
+  readonly currentRoute = signal<string>('');
 
   /**
    * Check if a route is currently active.
@@ -61,7 +61,6 @@ export class SidebarRouteActiveService {
 
     return normalizedCurrent.startsWith(normalizedRoute);
   }
-
   /**
    * Check if any of the provided routes is active.
    *
@@ -75,7 +74,6 @@ export class SidebarRouteActiveService {
   isAnyRouteActive(routes: string[], exact: boolean = false): boolean {
     return routes.some((route) => this.isRouteActive(route, exact));
   }
-
   /**
    * Get the current route segment (the main route without parameters).
    *
@@ -91,7 +89,6 @@ export class SidebarRouteActiveService {
       .filter((p) => p);
     return parts.length > 0 ? `/${parts[0]}` : '';
   }
-
   /**
    * Get the current route level.
    *
@@ -116,13 +113,12 @@ export class SidebarRouteActiveService {
   private normalize(route: string): string {
     return `/${route}`.replace(/\/$/, '').toLowerCase();
   }
-
   /**
    * Update the current route based on the router's current URL.
    *
    * @private
    */
   private updateCurrentRoute(): void {
-    this.currentRoute.set(this.router.url);
+    this.currentRoute.set(this._router.url);
   }
 }

@@ -52,31 +52,30 @@ let comboboxIdCounter = 0
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Combobox {
-    private readonly uniqueId = `combobox-${++comboboxIdCounter}`
+    constructor() {
+        // Sync options from input to internal signal
+        effect(() => {
+            this._options.set(this.options())
+        })
 
-    readonly iconPosition = input<'left' | 'right'>('left')
-
-    /** Available options */
-    readonly options = input<ComboboxOption[]>([])
-
-    /** Currently selected value */
-    readonly value = input<string>('')
+        // Sync value from input to internal signal
+        effect(() => {
+            this._value.set(this.value())
+        })
+    }
 
     /** Value change event */
     readonly valueChange = output<string>()
-
     /** Open state change event */
     readonly openChange = output<boolean>()
 
+    readonly iconPosition = input<'left' | 'right'>('left')
+    /** Available options */
+    readonly options = input<ComboboxOption[]>([])
+    /** Currently selected value */
+    readonly value = input<string>('')
     /** Additional CSS classes */
     readonly class = input<string>('')
-
-    /** Internal signals */
-    private readonly _options = signal<ComboboxOption[]>([])
-    private readonly _value = signal<string>('')
-    private readonly _open = signal<boolean>(false)
-    private readonly _search = signal<string>('')
-    private readonly _highlightedIndex = signal<number>(-1)
 
     /** Computed filtered options */
     private readonly _filteredOptions = computed(() => {
@@ -110,7 +109,6 @@ export class Combobox {
 
         return [...exact, ...fuzzy]
     })
-
     /** Computed active descendant ID */
     private readonly _activeDescendantId = computed(() => {
         const index = this._highlightedIndex()
@@ -120,11 +118,20 @@ export class Combobox {
         }
         return null
     })
+    protected readonly computedClass = computed(() => cn('relative inline-block', this.class()))
 
+    /** Internal signals */
+    private readonly _options = signal<ComboboxOption[]>([])
+    private readonly _value = signal<string>('')
+    private readonly _isOpen = signal<boolean>(false)
+    private readonly _search = signal<string>('')
+    private readonly _highlightedIndex = signal<number>(-1)
+
+    private readonly uniqueId = `combobox-${++comboboxIdCounter}`
     /** Context for child components */
     readonly context: ComboboxContext = {
         id: this.uniqueId,
-        open: this._open,
+        open: this._isOpen,
         value: this._value,
         search: this._search,
         options: this._options,
@@ -136,14 +143,14 @@ export class Combobox {
 
         onSelect: (value: string) => {
             this._value.set(value)
-            this._open.set(false)
+            this._isOpen.set(false)
             this._search.set('')
             this._highlightedIndex.set(-1)
             this.valueChange.emit(value)
         },
 
         onOpenChange: (open: boolean) => {
-            this._open.set(open)
+            this._isOpen.set(open)
             if (!open) {
                 this._search.set('')
                 this._highlightedIndex.set(-1)
@@ -227,8 +234,8 @@ export class Combobox {
 
         getOptionId: (index: number) => `${this.uniqueId}-option-${index}`,
     }
-
-    protected readonly computedClass = computed(() => cn('relative inline-block', this.class()))
+    /** Expose filtered options for template-level custom item rendering */
+    readonly filteredOptions = this._filteredOptions
 
     private _isFuzzyMatch(text: string, query: string): boolean {
         let qi = 0
@@ -237,24 +244,8 @@ export class Combobox {
         }
         return qi === query.length
     }
-
-    /** Expose filtered options for template-level custom item rendering */
-    readonly filteredOptions = this._filteredOptions
-
-    constructor() {
-        // Sync options from input to internal signal
-        effect(() => {
-            this._options.set(this.options())
-        })
-
-        // Sync value from input to internal signal
-        effect(() => {
-            this._value.set(this.value())
-        })
-    }
-
     private handleKeyDown(event: KeyboardEvent): void {
-        const open = this._open()
+        const open = this._isOpen()
 
         switch (event.key) {
             case 'ArrowDown':

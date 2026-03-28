@@ -18,10 +18,6 @@ import {
   type RadioGroupOrientation,
 } from './radio-group-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type RadioGroupProps = {
   /** Current selected value */
   value?: string;
@@ -40,10 +36,6 @@ export type RadioGroupProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// RadioGroup Component
-// ============================================================================
 
 /**
  * RadioGroup component for single selection from multiple options.
@@ -129,44 +121,38 @@ export type RadioGroupProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroup implements ControlValueAccessor {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  /** Emitted when value changes */
+  readonly valueChange = output<string>();
 
   /** The current selected value */
   readonly value = model<string>('');
 
   /** Default value for uncontrolled mode */
   readonly defaultValue = input<string>('');
-
   /** Whether the radio group is disabled via input */
   readonly disabled = input<boolean>(false);
-
   /** Whether the radio group is required */
   readonly required = input<boolean>(false);
-
   /** The orientation of the radio group */
   readonly orientation = input<RadioGroupOrientation>('vertical');
-
   /** Whether to loop focus at boundaries */
   readonly loop = input<boolean>(true);
-
   /** The name attribute for the radio inputs */
   readonly name = input<string>(`radio-group-${Math.random().toString(36).substring(7)}`);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  /** Emitted when value changes */
-  readonly valueChange = output<string>();
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  /** Computed class combining base styles and custom classes */
+  protected readonly computedClass = computed(() =>
+    cn('grid gap-3', this.orientation() === 'horizontal' && 'flex flex-row', this.class()),
+  );
+  /** Whether the group is disabled */
+  readonly isDisabled = computed(() => this.disabled() || this.isFormsDisabled());
 
   /** Whether disabled via forms */
-  private readonly formsDisabled = signal<boolean>(false);
-
-  /** Whether the group is disabled */
-  readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
-
-  /** ControlValueAccessor callbacks */
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private readonly isFormsDisabled = signal<boolean>(false);
 
   /** Context for child RadioGroupItem components */
   readonly context: RadioGroupContext = {
@@ -191,11 +177,9 @@ export class RadioGroup implements ControlValueAccessor {
     focusFirst: () => this.focusItemByIndex(0),
     focusLast: () => this.focusItemByIndex(this.context.itemValues().length - 1),
   };
-
-  /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn('grid gap-3', this.orientation() === 'horizontal' && 'flex flex-row', this.class()),
-  );
+  /** ControlValueAccessor callbacks */
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
   ngOnChanges(): void {
     this.context.value.set(this.value());
@@ -208,21 +192,18 @@ export class RadioGroup implements ControlValueAccessor {
 
   // ControlValueAccessor implementation
   writeValue(value: string): void {
-    const val = value ?? this.defaultValue();
-    this.value.set(val);
-    this.context.value.set(val);
+    const resolvedValue = value ?? this.defaultValue();
+    this.value.set(resolvedValue);
+    this.context.value.set(resolvedValue);
   }
-
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-
   setDisabledState(isDisabled: boolean): void {
-    this.formsDisabled.set(isDisabled);
+    this.isFormsDisabled.set(isDisabled);
     this.context.disabled.set(this.isDisabled());
   }
 
@@ -246,21 +227,20 @@ export class RadioGroup implements ControlValueAccessor {
 
     this.focusItemByIndex(nextIndex);
   }
-
   /** Focus a radio item by index and select it */
   private focusItemByIndex(index: number): void {
     const values = this.context.itemValues();
     if (index < 0 || index >= values.length) return;
 
-    const value = values[index];
-    const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="radio-group-item"][data-value="${value}"]`,
+    const targetValue = values[index];
+    const radioElement = this._elementRef.nativeElement.querySelector(
+      `[data-slot="radio-group-item"][data-value="${targetValue}"]`,
     ) as HTMLElement;
 
-    if (item) {
-      item.focus();
+    if (radioElement) {
+      radioElement.focus();
       // Also select the item on focus (per ARIA spec for radio groups)
-      this.context.setValue(value);
+      this.context.setValue(targetValue);
     }
   }
 }

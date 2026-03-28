@@ -23,14 +23,13 @@ import { MENUBAR_SUB_CONTEXT } from './menubar-sub.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarSubTrigger {
-  protected readonly subContext = inject(MENUBAR_SUB_CONTEXT);
-  protected readonly ChevronRightIcon = ChevronRight;
-
   /** Whether the trigger is inset */
   readonly inset = input<boolean>(false);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly subContext = inject(MENUBAR_SUB_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -40,10 +39,11 @@ export class MenubarSubTrigger {
     ),
   );
 
+  protected readonly ChevronRightIcon = ChevronRight;
+
   protected onMouseEnter(): void {
     this.subContext.open.set(true);
   }
-
   protected onMouseLeave(): void {
     // Keep open for mouse to move to sub-content
   }

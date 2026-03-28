@@ -1,9 +1,5 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type RadioGroupOrientation = 'horizontal' | 'vertical';
 
 export interface RadioGroupContext {

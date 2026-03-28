@@ -18,11 +18,6 @@ import { SELECT_CONTEXT } from './select-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectValue {
-  protected readonly context = inject(SELECT_CONTEXT, { optional: true });
-
-  /** Placeholder text when no value is selected */
-  readonly placeholder = input<string>('');
-
   constructor() {
     // Update context placeholder on init and changes
     effect(() => {
@@ -31,6 +26,11 @@ export class SelectValue {
       }
     });
   }
+
+  /** Placeholder text when no value is selected */
+  readonly placeholder = input<string>('');
+
+  protected readonly context = inject(SELECT_CONTEXT, { optional: true });
 
   /** Computed display value */
   protected readonly displayValue = computed(() => {

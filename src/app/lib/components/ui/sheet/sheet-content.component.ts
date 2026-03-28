@@ -81,21 +81,6 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SheetContent implements OnDestroy {
-  protected readonly context = inject(SHEET_CONTEXT);
-
-  /** Side from which the sheet appears */
-  readonly side = input<SheetVariants['side']>('right');
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Previous body overflow for restoration */
-  private previousBodyOverflow = '';
-
-  protected readonly computedClass = computed(() =>
-    cn(sheetVariants({ side: this.side() }), this.class()),
-  );
-
   constructor() {
     // Handle body scroll lock based on open state (browser-only via effect + afterNextRender)
     effect(() => {
@@ -108,18 +93,19 @@ export class SheetContent implements OnDestroy {
     });
   }
 
-  private lockBodyScroll(): void {
-    if (typeof document !== 'undefined') {
-      this.previousBodyOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-    }
-  }
+  /** Side from which the sheet appears */
+  readonly side = input<SheetVariants['side']>('right');
+  /** Additional CSS classes */
+  readonly class = input<string>('');
 
-  private unlockBodyScroll(): void {
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = this.previousBodyOverflow;
-    }
-  }
+  protected readonly context = inject(SHEET_CONTEXT);
+
+  protected readonly computedClass = computed(() =>
+    cn(sheetVariants({ side: this.side() }), this.class()),
+  );
+
+  /** Previous body overflow for restoration */
+  private previousBodyOverflow = '';
 
   ngOnDestroy(): void {
     // Restore body scroll
@@ -132,20 +118,28 @@ export class SheetContent implements OnDestroy {
     event.stopPropagation();
     this.close();
   }
-
   onEscapeKey(): void {
     this.close();
   }
-
   onClose(): void {
     this.close();
   }
 
+  private lockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      this.previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  private unlockBodyScroll(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.previousBodyOverflow;
+    }
+  }
   private close(): void {
     this.restoreFocus();
     this.context.setOpen(false);
   }
-
   private restoreFocus(): void {
     const triggerEl = this.context.triggerElement();
     if (triggerEl) {

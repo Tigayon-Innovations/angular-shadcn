@@ -74,47 +74,42 @@ export class Command implements CommandContextValue {
   /** Custom filter function for search */
   readonly filter = input<CommandFilterFunction | undefined>(undefined);
 
-  // CommandContextValue implementation
-  private readonly _id = commandIdCounter++;
-  private readonly _items: string[] = [];
-
-  readonly search = signal('');
-  readonly selectedValue = signal('');
-  readonly focusedIndex = signal(0);
-  readonly itemCount = signal(0);
-  readonly visibleItemCount = signal(0);
-  readonly listId = `command-list-${this._id}`;
-  readonly inputId = `command-input-${this._id}`;
-
   readonly filterFunction = computed(() => {
     return this.filter() ?? defaultFilterFn;
   });
-
-  registerItem = (value: string) => {
-    if (!this._items.includes(value)) {
-      this._items.push(value);
-    }
-  };
-
-  unregisterItem = (value: string) => {
-    const index = this._items.indexOf(value);
-    if (index > -1) {
-      this._items.splice(index, 1);
-    }
-  };
-
-  getItems = () => this._items;
-
-  shouldShowItem = (value: string, keywords?: string[]): boolean => {
-    const searchValue = this.search();
-    if (!searchValue) return true;
-    return this.filterFunction()(value, searchValue, keywords) > 0;
-  };
-
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
       this.class(),
     ),
   );
+
+  readonly search = signal('');
+  readonly selectedValue = signal('');
+  readonly focusedIndex = signal(0);
+  readonly itemCount = signal(0);
+  readonly visibleItemCount = signal(0);
+
+  // CommandContextValue implementation
+  private readonly _id = commandIdCounter++;
+  private readonly _items: string[] = [];
+  readonly listId = `command-list-${this._id}`;
+  readonly inputId = `command-input-${this._id}`;
+  registerItem = (value: string) => {
+    if (!this._items.includes(value)) {
+      this._items.push(value);
+    }
+  };
+  unregisterItem = (value: string) => {
+    const index = this._items.indexOf(value);
+    if (index > -1) {
+      this._items.splice(index, 1);
+    }
+  };
+  getItems = () => this._items;
+  shouldShowItem = (value: string, keywords?: string[]): boolean => {
+    const searchValue = this.search();
+    if (!searchValue) return true;
+    return this.filterFunction()(value, searchValue, keywords) > 0;
+  };
 }

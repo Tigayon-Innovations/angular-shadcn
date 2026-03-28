@@ -28,10 +28,10 @@ import { DROPDOWN_MENU_SUB_CONTEXT } from './dropdown-menu-sub.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuSubContent {
-  protected readonly subContext = inject(DROPDOWN_MENU_SUB_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly subContext = inject(DROPDOWN_MENU_SUB_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -44,7 +44,6 @@ export class DropdownMenuSubContent {
   protected onMouseEnter(): void {
     this.subContext.open.set(true);
   }
-
   protected onMouseLeave(): void {
     this.subContext.open.set(false);
   }

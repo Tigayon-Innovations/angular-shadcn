@@ -32,27 +32,18 @@ import { SELECT_CONTEXT } from './select-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectContent {
-  protected readonly context = inject(SELECT_CONTEXT, { optional: true });
-
   /** The side of the trigger to show the content */
   readonly side = input<'top' | 'bottom'>('bottom');
 
   /** The alignment of the content */
   readonly align = input<'start' | 'center' | 'end'>('start');
-
   /** Position strategy */
   readonly position = input<'popper' | 'item-aligned'>('popper');
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  protected onEscape(): void {
-    this.context?.setOpen(false);
-    const trigger = this.context?.triggerElement();
-    if (trigger) {
-      setTimeout(() => trigger.focus());
-    }
-  }
+  protected readonly context = inject(SELECT_CONTEXT, { optional: true });
 
   /** Computed class combining base styles and custom classes */
   protected readonly dropdownClass = computed(() =>
@@ -66,4 +57,12 @@ export class SelectContent {
 
   /** Viewport class */
   protected readonly viewportClass = computed(() => cn('max-h-60 overflow-y-auto p-1'));
+
+  protected onEscape(): void {
+    this.context?.setOpen(false);
+    const trigger = this.context?.triggerElement();
+    if (trigger) {
+      setTimeout(() => trigger.focus());
+    }
+  }
 }

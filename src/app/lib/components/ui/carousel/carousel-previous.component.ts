@@ -29,19 +29,16 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselPrevious {
-  protected readonly context = inject(CAROUSEL_CONTEXT);
-  protected readonly ArrowLeftIcon = ArrowLeft;
-
   /** Button variant */
   readonly variant = input<'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive'>(
     'outline',
   );
-
   /** Button size */
   readonly size = input<'default' | 'sm' | 'lg' | 'icon'>('icon');
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(CAROUSEL_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -53,4 +50,6 @@ export class CarouselPrevious {
       this.class(),
     ),
   );
+
+  protected readonly ArrowLeftIcon = ArrowLeft;
 }

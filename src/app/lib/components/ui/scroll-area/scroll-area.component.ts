@@ -2,10 +2,6 @@ import { cn } from '@/lib/utils';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ScrollAreaType = 'auto' | 'always' | 'scroll' | 'hover';
 export type ScrollAreaScrollbarVisibility = 'always' | 'scroll' | 'auto' | 'hover';
 
@@ -23,10 +19,6 @@ export interface ScrollAreaProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component ScrollArea

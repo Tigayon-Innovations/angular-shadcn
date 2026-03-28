@@ -42,43 +42,6 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarContent implements OnDestroy {
-  protected readonly context = inject(MENUBAR_CONTEXT);
-  protected readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
-  /** Alignment */
-  readonly align = input<'start' | 'center' | 'end'>('start');
-
-  /** Side offset */
-  readonly sideOffset = input<number>(8);
-
-  /** Align offset */
-  readonly alignOffset = input<number>(-4);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  private menuItems: HTMLElement[] = [];
-  private typeaheadBuffer = '';
-  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  protected readonly computedClass = computed(() => {
-    const alignClasses = {
-      start: 'left-0',
-      center: 'left-1/2 -translate-x-1/2',
-      end: 'right-0',
-    };
-
-    return cn(
-      'absolute top-full z-50 min-w-[12rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out',
-      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-      alignClasses[this.align()],
-      this.class(),
-    );
-  });
-
   constructor() {
     // Focus first item when menu opens
     effect(() => {
@@ -102,6 +65,43 @@ export class MenubarContent implements OnDestroy {
     });
   }
 
+  /** Alignment */
+  readonly align = input<'start' | 'center' | 'end'>('start');
+
+  /** Side offset */
+  readonly sideOffset = input<number>(8);
+  /** Align offset */
+  readonly alignOffset = input<number>(-4);
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(MENUBAR_CONTEXT);
+  protected readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
+
+  protected readonly computedClass = computed(() => {
+    const alignClasses = {
+      start: 'left-0',
+      center: 'left-1/2 -translate-x-1/2',
+      end: 'right-0',
+    };
+
+    return cn(
+      'absolute top-full z-50 min-w-[12rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      alignClasses[this.align()],
+      this.class(),
+    );
+  });
+
+  private menuItems: HTMLElement[] = [];
+  private typeaheadBuffer = '';
+  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
+
   ngOnDestroy(): void {
     if (this.typeaheadTimeout) {
       clearTimeout(this.typeaheadTimeout);
@@ -109,7 +109,7 @@ export class MenubarContent implements OnDestroy {
   }
 
   private updateMenuItems(): void {
-    const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
+    const content = this._elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
@@ -118,7 +118,6 @@ export class MenubarContent implements OnDestroy {
       );
     }
   }
-
   protected onKeydown(event: KeyboardEvent): void {
     this.updateMenuItems();
 
@@ -163,27 +162,22 @@ export class MenubarContent implements OnDestroy {
         break;
     }
   }
-
   private focusNext(): void {
     const currentIndex = this.menuContext.focusedItemIndex();
     const nextIndex = currentIndex < this.menuItems.length - 1 ? currentIndex + 1 : 0;
     this.focusItem(nextIndex);
   }
-
   private focusPrevious(): void {
     const currentIndex = this.menuContext.focusedItemIndex();
     const prevIndex = currentIndex > 0 ? currentIndex - 1 : this.menuItems.length - 1;
     this.focusItem(prevIndex);
   }
-
   private focusFirst(): void {
     this.focusItem(0);
   }
-
   private focusLast(): void {
     this.focusItem(this.menuItems.length - 1);
   }
-
   private focusItem(index: number): void {
     if (index >= 0 && index < this.menuItems.length) {
       // Update roving tabindex
@@ -194,7 +188,6 @@ export class MenubarContent implements OnDestroy {
       this.menuContext.focusedItemIndex.set(index);
     }
   }
-
   private handleTypeahead(key: string): void {
     this.typeaheadBuffer += key.toLowerCase();
 
@@ -215,23 +208,20 @@ export class MenubarContent implements OnDestroy {
       this.focusItem(matchIndex);
     }
   }
-
   private close(): void {
     this.menuContext.open.set(false);
     this.context.activeMenu.set(null);
     this.menuContext.focusedItemIndex.set(-1);
   }
-
   protected onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const hostElement = this.elementRef.nativeElement;
+    const hostElement = this._elementRef.nativeElement;
     const parent = hostElement.closest('MenubarMenu');
 
     if (parent && !parent.contains(target)) {
       this.close();
     }
   }
-
   protected onEscapeKey(): void {
     this.close();
   }

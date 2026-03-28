@@ -1,9 +1,5 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type AccordionType = 'single' | 'multiple';
 
 export interface AccordionContext {
@@ -24,10 +20,6 @@ export interface AccordionItemContext {
   triggerId: string;
   contentId: string;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const ACCORDION_CONTEXT = new InjectionToken<AccordionContext>('AccordionContext');
 export const ACCORDION_ITEM_CONTEXT = new InjectionToken<AccordionItemContext>(

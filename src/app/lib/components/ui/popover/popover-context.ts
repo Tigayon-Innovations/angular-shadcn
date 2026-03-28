@@ -1,9 +1,5 @@
 import { InjectionToken, Signal, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
 export type PopoverAlign = 'start' | 'center' | 'end';
 
@@ -21,9 +17,5 @@ export interface PopoverContextValue {
   /** Set the trigger element reference */
   setTriggerRef?: (element: HTMLElement | null) => void;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const POPOVER_CONTEXT = new InjectionToken<PopoverContextValue>('POPOVER_CONTEXT');

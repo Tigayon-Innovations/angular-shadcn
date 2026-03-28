@@ -1,9 +1,5 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type HoverCardSide = 'top' | 'right' | 'bottom' | 'left';
 export type HoverCardAlign = 'start' | 'center' | 'end';
 
@@ -17,9 +13,5 @@ export interface HoverCardContextValue {
   /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
   closeDelay: number;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const HOVER_CARD_CONTEXT = new InjectionToken<HoverCardContextValue>('HOVER_CARD_CONTEXT');

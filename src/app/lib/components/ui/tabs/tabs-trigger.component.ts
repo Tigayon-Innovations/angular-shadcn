@@ -10,10 +10,6 @@ import {
 } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type TabsTriggerState = 'active' | 'inactive';
 
 /**
@@ -28,10 +24,6 @@ export interface TabsTriggerProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TabsTrigger
@@ -99,31 +91,22 @@ export interface TabsTriggerProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsTrigger implements OnInit, OnDestroy {
-  protected readonly tabs = inject(TABS_CONTEXT);
-
   /** A unique value that associates the trigger with a content */
   readonly value = input.required<string>();
 
   /** When true, prevents the user from interacting with the tab */
   readonly disabled = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  protected readonly tabs = inject(TABS_CONTEXT);
+
   /** Check if this tab is currently active */
   protected readonly isActive = computed(() => this.tabs.value() === this.value());
-
-  /** Current state: active or inactive */
-  protected readonly state = computed<TabsTriggerState>(() =>
-    this.isActive() ? 'active' : 'inactive',
-  );
-
   /** Generate tab ID */
   protected readonly tabId = computed(() => this.tabs.getTabId(this.value()));
-
   /** Generate panel ID for aria-controls */
   protected readonly panelId = computed(() => this.tabs.getPanelId(this.value()));
-
   protected readonly computedClass = computed(() =>
     cn(
       'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all',
@@ -137,6 +120,11 @@ export class TabsTrigger implements OnInit, OnDestroy {
     ),
   );
 
+  /** Current state: active or inactive */
+  protected readonly state = computed<TabsTriggerState>(() =>
+    this.isActive() ? 'active' : 'inactive',
+  );
+
   ngOnInit(): void {
     // Register this tab's value for keyboard navigation
     this.tabs.tabValues.update((values) => {
@@ -146,7 +134,6 @@ export class TabsTrigger implements OnInit, OnDestroy {
       return values;
     });
   }
-
   ngOnDestroy(): void {
     // Unregister this tab's value
     this.tabs.tabValues.update((values) => values.filter((v) => v !== this.value()));
@@ -157,7 +144,6 @@ export class TabsTrigger implements OnInit, OnDestroy {
       this.tabs.onValueChange(this.value());
     }
   }
-
   protected onSpace(event: Event): void {
     event.preventDefault();
     this.onClick();

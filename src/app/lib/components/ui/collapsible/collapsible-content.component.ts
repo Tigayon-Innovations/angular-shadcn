@@ -38,12 +38,11 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollapsibleContent {
-  protected readonly collapsible = inject(COLLAPSIBLE_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
+  protected readonly collapsible = inject(COLLAPSIBLE_CONTEXT);
 
+  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
   protected readonly innerClass = computed(() => 'min-h-0');
 }

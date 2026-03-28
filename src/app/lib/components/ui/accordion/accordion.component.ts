@@ -41,30 +41,6 @@ import { ACCORDION_CONTEXT, AccordionContext, AccordionType } from './accordion-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Accordion implements AccordionContext {
-  /** Type of accordion: 'single' allows one item open, 'multiple' allows many */
-  readonly type = input<AccordionType>('single');
-
-  /** Whether the accordion can be fully collapsed (only for single type) */
-  readonly collapsible = input<boolean, unknown>(false, { transform: booleanAttribute });
-
-  /** Default value(s) to be open initially */
-  readonly defaultValue = input<string | string[] | undefined>(undefined);
-
-  /** Controlled value - external control of open state */
-  readonly controlledValue = input<string | string[] | undefined>(undefined, { alias: 'value' });
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Internal state for open items */
-  private readonly openItems = signal<Set<string>>(new Set());
-
-  /** Registry of item values for keyboard navigation */
-  readonly itemValues = signal<string[]>([]);
-
-  /** Flag to track if initialized */
-  private initialized = false;
-
   constructor() {
     // Initialize with default value
     effect(() => {
@@ -82,6 +58,18 @@ export class Accordion implements AccordionContext {
     });
   }
 
+  /** Type of accordion: 'single' allows one item open, 'multiple' allows many */
+  readonly type = input<AccordionType>('single');
+  /** Whether the accordion can be fully collapsed (only for single type) */
+  readonly collapsible = input<boolean, unknown>(false, { transform: booleanAttribute });
+  /** Default value(s) to be open initially */
+  readonly defaultValue = input<string | string[] | undefined>(undefined);
+  /** Controlled value - external control of open state */
+  readonly controlledValue = input<string | string[] | undefined>(undefined, { alias: 'value' });
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  protected readonly computedClass = computed(() => cn('w-full', this.class()));
   /** Get current value(s) */
   readonly value = computed(() => {
     const controlled = this.controlledValue();
@@ -94,6 +82,14 @@ export class Accordion implements AccordionContext {
     }
     return Array.from(items);
   });
+
+  /** Internal state for open items */
+  private readonly openItems = signal<Set<string>>(new Set());
+  /** Registry of item values for keyboard navigation */
+  readonly itemValues = signal<string[]>([]);
+
+  /** Flag to track if initialized */
+  private initialized = false;
 
   /** Handle value change from accordion items */
   onValueChange(itemValue: string): void {
@@ -124,7 +120,6 @@ export class Accordion implements AccordionContext {
       return newSet;
     });
   }
-
   /** Check if an item is open */
   isItemOpen(itemValue: string): boolean {
     const controlled = this.controlledValue();
@@ -136,7 +131,6 @@ export class Accordion implements AccordionContext {
     }
     return this.openItems().has(itemValue);
   }
-
   /** Handle keyboard navigation */
   onKeydown(event: KeyboardEvent): void {
     const values = this.itemValues();
@@ -193,6 +187,4 @@ export class Accordion implements AccordionContext {
       newTrigger?.focus();
     }
   }
-
-  protected readonly computedClass = computed(() => cn('w-full', this.class()));
 }

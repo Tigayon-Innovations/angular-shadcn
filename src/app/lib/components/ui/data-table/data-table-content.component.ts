@@ -102,11 +102,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableContent<T = unknown> {
-  protected readonly context = inject(DATA_TABLE_CONTEXT) as DataTableContext<T>;
-  protected readonly icons = { ArrowUp, ArrowDown, ArrowUpDown };
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(DATA_TABLE_CONTEXT) as DataTableContext<T>;
 
   /** Visible columns based on visibility state */
   protected readonly visibleColumns = computed(() => {
@@ -114,7 +113,6 @@ export class DataTableContent<T = unknown> {
     const visibility = this.context.columnVisibility();
     return columns.filter((col) => visibility[col.id] !== false);
   });
-
   /** Filtered data based on global filter */
   protected readonly filteredData = computed(() => {
     const data = this.context.data();
@@ -130,7 +128,6 @@ export class DataTableContent<T = unknown> {
       }),
     );
   });
-
   /** Sorted data */
   protected readonly sortedData = computed(() => {
     const data = [...this.filteredData()];
@@ -154,7 +151,6 @@ export class DataTableContent<T = unknown> {
       return 0;
     });
   });
-
   /** Paginated data */
   protected readonly paginatedData = computed(() => {
     const data = this.sortedData();
@@ -163,8 +159,9 @@ export class DataTableContent<T = unknown> {
     const start = pageIndex * pageSize;
     return data.slice(start, start + pageSize);
   });
-
   protected readonly computedClass = computed(() => cn(this.class()));
+
+  protected readonly icons = { ArrowUp, ArrowDown, ArrowUpDown };
 
   protected getCellValue(row: T, column: ColumnDef<T>): unknown {
     if (column.accessorFn) {
@@ -175,14 +172,12 @@ export class DataTableContent<T = unknown> {
     }
     return '';
   }
-
   protected getSortDirection(columnId: string): SortDirection {
     const sorting = this.context.sorting();
     const sort = sorting.find((s) => s.id === columnId);
     if (!sort) return null;
     return sort.desc ? 'desc' : 'asc';
   }
-
   /** Get ARIA sort value for accessibility */
   protected getAriaSortValue(columnId: string): 'ascending' | 'descending' | 'none' | null {
     const direction = this.getSortDirection(columnId);
@@ -190,7 +185,6 @@ export class DataTableContent<T = unknown> {
     if (direction === 'desc') return 'descending';
     return 'none';
   }
-
   /** Get accessible label for sort button */
   protected getSortButtonLabel(column: ColumnDef<T>): string {
     const direction = this.getSortDirection(column.id);
@@ -203,7 +197,6 @@ export class DataTableContent<T = unknown> {
     }
     return `${header}. Click to sort ascending.`;
   }
-
   protected toggleSort(columnId: string): void {
     const sorting = this.context.sorting();
     const existingSort = sorting.find((s) => s.id === columnId);
@@ -219,7 +212,6 @@ export class DataTableContent<T = unknown> {
 
     this.context.onSortingChange(newSorting);
   }
-
   protected isRowSelected(index: number): boolean {
     const selection = this.context.rowSelection();
     return selection[String(index)] === true;

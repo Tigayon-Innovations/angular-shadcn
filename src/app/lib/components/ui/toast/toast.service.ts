@@ -1,9 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Toast variant types for different notification styles
  */
@@ -68,10 +64,6 @@ export interface ToastOptions {
   onDismiss?: () => void;
 }
 
-// ============================================================================
-// Service
-// ============================================================================
-
 /**
  * @service ToastService
  *
@@ -96,7 +88,7 @@ export interface ToastOptions {
  * @example Basic usage
  * ```typescript
  * export class MyComponent {
- *   private toast = inject(ToastService);
+ *   private readonly _toast = inject(ToastService);
  *
  *   showNotification() {
  *     this.toast.success({
@@ -133,15 +125,52 @@ export interface ToastOptions {
  */
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-  private readonly _toasts = signal<Toast[]>([]);
-
   /** Reactive list of active toasts */
   readonly toasts = computed(() => this._toasts());
+
+  private readonly _toasts = signal<Toast[]>([]);
+
+  /** Show a default toast */
+  toast(options: ToastOptions): string {
+    return this.addToast({ ...options, type: 'default' });
+  }
+  /** Show a success toast */
+  success(options: ToastOptions): string {
+    return this.addToast({ ...options, type: 'success' });
+  }
+  /** Show an error toast */
+  error(options: ToastOptions): string {
+    return this.addToast({ ...options, type: 'error' });
+  }
+  /** Show a warning toast */
+  warning(options: ToastOptions): string {
+    return this.addToast({ ...options, type: 'warning' });
+  }
+  /** Show an info toast */
+  info(options: ToastOptions): string {
+    return this.addToast({ ...options, type: 'info' });
+  }
+  /** Dismiss a specific toast by ID */
+  dismiss(id: string): void {
+    const toast = this._toasts().find((t) => t.id === id);
+    if (toast?.onDismiss) {
+      toast.onDismiss();
+    }
+    this._toasts.update((toasts) => toasts.filter((t) => t.id !== id));
+  }
+  /** Dismiss all active toasts */
+  dismissAll(): void {
+    this._toasts().forEach((toast) => {
+      if (toast.onDismiss) {
+        toast.onDismiss();
+      }
+    });
+    this._toasts.set([]);
+  }
 
   private generateId(): string {
     return Math.random().toString(36).substring(2, 9);
   }
-
   private addToast(toast: Omit<Toast, 'id'>): string {
     const id = this.generateId();
     const newToast: Toast = { ...toast, id };
@@ -154,49 +183,5 @@ export class ToastService {
     }
 
     return id;
-  }
-
-  /** Show a default toast */
-  toast(options: ToastOptions): string {
-    return this.addToast({ ...options, type: 'default' });
-  }
-
-  /** Show a success toast */
-  success(options: ToastOptions): string {
-    return this.addToast({ ...options, type: 'success' });
-  }
-
-  /** Show an error toast */
-  error(options: ToastOptions): string {
-    return this.addToast({ ...options, type: 'error' });
-  }
-
-  /** Show a warning toast */
-  warning(options: ToastOptions): string {
-    return this.addToast({ ...options, type: 'warning' });
-  }
-
-  /** Show an info toast */
-  info(options: ToastOptions): string {
-    return this.addToast({ ...options, type: 'info' });
-  }
-
-  /** Dismiss a specific toast by ID */
-  dismiss(id: string): void {
-    const toast = this._toasts().find((t) => t.id === id);
-    if (toast?.onDismiss) {
-      toast.onDismiss();
-    }
-    this._toasts.update((toasts) => toasts.filter((t) => t.id !== id));
-  }
-
-  /** Dismiss all active toasts */
-  dismissAll(): void {
-    this._toasts().forEach((toast) => {
-      if (toast.onDismiss) {
-        toast.onDismiss();
-      }
-    });
-    this._toasts.set([]);
   }
 }

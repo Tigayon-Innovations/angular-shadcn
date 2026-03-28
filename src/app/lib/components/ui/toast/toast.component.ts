@@ -11,10 +11,6 @@ import {
 import { toastVariants, type ToastVariants } from './toast-variants';
 import type { ToastType } from './toast.service';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Toast visual state for animations
  */
@@ -41,10 +37,6 @@ export interface ToastProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Toast
@@ -146,26 +138,17 @@ export interface ToastProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Toast {
-  protected readonly XIcon = X;
-  protected readonly CheckCircleIcon = CheckCircle;
-  protected readonly AlertCircleIcon = AlertCircle;
-  protected readonly AlertTriangleIcon = AlertTriangle;
-  protected readonly InfoIcon = Info;
+  /** Event emitted when close button is clicked */
+  readonly onClose = output<void>();
 
   /** Visual variant of the toast */
   readonly variant = input<ToastType>('default');
-
   /** Whether to display the variant icon */
   readonly showIcon = input<boolean>(true);
-
   /** Whether the toast is visible (controls animation state) */
   readonly isVisible = input<boolean>(true);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
-
-  /** Event emitted when close button is clicked */
-  readonly onClose = output<void>();
 
   protected readonly computedClass = computed(() => {
     const variantMap: Record<ToastType, ToastVariants['variant']> = {
@@ -178,4 +161,10 @@ export class Toast {
 
     return cn(toastVariants({ variant: variantMap[this.variant()] }), this.class());
   });
+
+  protected readonly XIcon = X;
+  protected readonly CheckCircleIcon = CheckCircle;
+  protected readonly AlertCircleIcon = AlertCircle;
+  protected readonly AlertTriangleIcon = AlertTriangle;
+  protected readonly InfoIcon = Info;
 }

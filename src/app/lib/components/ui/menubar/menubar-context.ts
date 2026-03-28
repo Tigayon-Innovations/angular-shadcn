@@ -1,9 +1,5 @@
 import { InjectionToken, type WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Direction for menubar layout
  */
@@ -13,10 +9,6 @@ export type MenubarDirection = 'ltr' | 'rtl';
  * Keyboard navigation direction
  */
 export type MenubarNavigationDirection = 'horizontal' | 'vertical';
-
-// ============================================================================
-// Context Interfaces
-// ============================================================================
 
 /**
  * Context value for the Menubar component

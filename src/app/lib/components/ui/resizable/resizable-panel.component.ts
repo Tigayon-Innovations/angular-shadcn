@@ -25,39 +25,33 @@ let panelIdCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResizablePanel {
-  private readonly context = inject(RESIZABLE_CONTEXT);
-
-  /** Default size as percentage */
-  readonly defaultSize = input<number>(50);
-
-  /** Minimum size as percentage */
-  readonly minSize = input<number>(0);
-
-  /** Maximum size as percentage */
-  readonly maxSize = input<number>(100);
-
-  /** Collapsible */
-  readonly collapsible = input<boolean>(false);
-
-  /** Collapsed size when collapsible */
-  readonly collapsedSize = input<number>(0);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Unique panel ID */
-  readonly panelId = `panel-${panelIdCounter++}`;
-
-  /** Current panel size */
-  readonly currentSize = computed(() => {
-    return this.context.getPanelSize(this.panelId);
-  });
-
   constructor() {
     effect(() => {
-      this.context.registerPanel(this.panelId, this.minSize(), this.maxSize(), this.defaultSize());
+      this._context.registerPanel(this.panelId, this.minSize(), this.maxSize(), this.defaultSize());
     });
   }
 
+  /** Default size as percentage */
+  readonly defaultSize = input<number>(50);
+  /** Minimum size as percentage */
+  readonly minSize = input<number>(0);
+  /** Maximum size as percentage */
+  readonly maxSize = input<number>(100);
+  /** Collapsible */
+  readonly collapsible = input<boolean>(false);
+  /** Collapsed size when collapsible */
+  readonly collapsedSize = input<number>(0);
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _context = inject(RESIZABLE_CONTEXT);
+
+  /** Current panel size */
+  readonly currentSize = computed(() => {
+    return this._context.getPanelSize(this.panelId);
+  });
   protected readonly computedClass = computed(() => cn('flex-shrink-0 flex-grow-0', this.class()));
+
+  /** Unique panel ID */
+  readonly panelId = `panel-${panelIdCounter++}`;
 }

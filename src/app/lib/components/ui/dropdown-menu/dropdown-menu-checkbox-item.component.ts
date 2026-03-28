@@ -41,20 +41,18 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuCheckboxItem {
-  private readonly context = inject(DROPDOWN_MENU_CONTEXT);
-  protected readonly CheckIcon = Check;
+  /** Select event emitted when item is clicked */
+  readonly onCheckedChange = output<boolean>();
 
   /** Whether the checkbox is checked */
   readonly checked = model<boolean>(false);
 
+  /** Additional CSS classes */
+  readonly class = input<string>('');
   /** Whether the item is disabled */
   readonly disabled = input<boolean>(false);
 
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Select event emitted when item is clicked */
-  readonly onCheckedChange = output<boolean>();
+  private readonly _context = inject(DROPDOWN_MENU_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -63,6 +61,8 @@ export class DropdownMenuCheckboxItem {
       this.class(),
     ),
   );
+
+  protected readonly CheckIcon = Check;
 
   protected handleClick(event: Event): void {
     if (this.disabled()) {

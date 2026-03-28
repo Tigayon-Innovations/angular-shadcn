@@ -11,10 +11,6 @@ import {
 import { toggleVariants, type ToggleVariants } from '../toggle/toggle-variants';
 import { TOGGLE_GROUP_CONTEXT } from './toggle-group-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ToggleGroupItemProps = {
   /** The unique value for this toggle item */
   value: string;
@@ -27,10 +23,6 @@ export type ToggleGroupItemProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// ToggleGroupItem Component
-// ============================================================================
 
 /**
  * ToggleGroupItem component - individual toggle button within a group.
@@ -92,36 +84,30 @@ export type ToggleGroupItemProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleGroupItem implements OnInit, OnDestroy {
-  private readonly context = inject(TOGGLE_GROUP_CONTEXT, { optional: true });
-
   /** The value of this toggle item */
   readonly value = input.required<string>();
 
   /** Override the variant from the group */
   readonly variant = input<ToggleVariants['variant']>();
-
   /** Override the size from the group */
   readonly size = input<ToggleVariants['size']>();
-
   /** Whether this toggle item is disabled */
   readonly disabled = input<boolean>(false);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  private readonly _context = inject(TOGGLE_GROUP_CONTEXT, { optional: true });
+
   /** Whether this item is pressed */
   protected readonly isPressed = computed(() => {
-    return this.context?.isPressed(this.value()) ?? false;
+    return this._context?.isPressed(this.value()) ?? false;
   });
-
   /** State for data attribute */
   protected readonly state = computed(() => (this.isPressed() ? 'on' : 'off'));
-
   /** Whether this item is disabled */
   protected readonly isDisabled = computed(() => {
-    return this.disabled() || this.context?.disabled() || false;
+    return this.disabled() || this._context?.disabled() || false;
   });
-
   /**
    * Roving tabindex pattern:
    * - If roving focus is enabled: first item or focused item is tabbable
@@ -129,13 +115,13 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
    */
   protected readonly tabIndex = computed(() => {
     if (this.isDisabled()) return -1;
-    if (!this.context) return 0;
+    if (!this._context) return 0;
 
-    const rovingFocus = this.context.rovingFocus();
+    const rovingFocus = this._context.rovingFocus();
     if (!rovingFocus) return 0;
 
-    const itemValues = this.context.itemValues();
-    const focusedValue = this.context.focusedValue();
+    const itemValues = this._context.itemValues();
+    const focusedValue = this._context.focusedValue();
 
     // If an item is explicitly focused, only that item is tabbable
     if (focusedValue !== null) {
@@ -149,83 +135,14 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
 
     return -1;
   });
-
   /** Get the effective variant */
   protected readonly effectiveVariant = computed(() => {
-    return this.variant() ?? this.context?.variant() ?? 'default';
+    return this.variant() ?? this._context?.variant() ?? 'default';
   });
-
   /** Get the effective size */
   protected readonly effectiveSize = computed(() => {
-    return this.size() ?? this.context?.size() ?? 'default';
+    return this.size() ?? this._context?.size() ?? 'default';
   });
-
-  ngOnInit(): void {
-    // Register this item with the group
-    this.context?.itemValues.update((values) => {
-      if (!values.includes(this.value())) {
-        return [...values, this.value()];
-      }
-      return values;
-    });
-  }
-
-  ngOnDestroy(): void {
-    // Unregister this item from the group
-    this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
-  }
-
-  /** Toggle this item */
-  toggle(): void {
-    if (!this.isDisabled()) {
-      this.context?.toggle(this.value());
-    }
-  }
-
-  /** Handle keyboard navigation */
-  onKeyDown(event: KeyboardEvent): void {
-    if (this.isDisabled() || !this.context) return;
-
-    const orientation = this.context.orientation();
-    const isVertical = orientation === 'vertical';
-    const isHorizontal = orientation === 'horizontal';
-
-    switch (event.key) {
-      case 'ArrowDown':
-        if (isVertical) {
-          event.preventDefault();
-          this.context.focusNext(this.value());
-        }
-        break;
-      case 'ArrowUp':
-        if (isVertical) {
-          event.preventDefault();
-          this.context.focusPrevious(this.value());
-        }
-        break;
-      case 'ArrowRight':
-        if (isHorizontal) {
-          event.preventDefault();
-          this.context.focusNext(this.value());
-        }
-        break;
-      case 'ArrowLeft':
-        if (isHorizontal) {
-          event.preventDefault();
-          this.context.focusPrevious(this.value());
-        }
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.context.focusFirst();
-        break;
-      case 'End':
-        event.preventDefault();
-        this.context.focusLast();
-        break;
-    }
-  }
-
   /** Computed class combining variants and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
@@ -236,4 +153,68 @@ export class ToggleGroupItem implements OnInit, OnDestroy {
       this.class(),
     ),
   );
+
+  ngOnInit(): void {
+    // Register this item with the group
+    this._context?.itemValues.update((values) => {
+      if (!values.includes(this.value())) {
+        return [...values, this.value()];
+      }
+      return values;
+    });
+  }
+  ngOnDestroy(): void {
+    // Unregister this item from the group
+    this._context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
+  }
+
+  /** Toggle this item */
+  toggle(): void {
+    if (!this.isDisabled()) {
+      this._context?.toggle(this.value());
+    }
+  }
+  /** Handle keyboard navigation */
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.isDisabled() || !this._context) return;
+
+    const orientation = this._context.orientation();
+    const isVertical = orientation === 'vertical';
+    const isHorizontal = orientation === 'horizontal';
+
+    switch (event.key) {
+      case 'ArrowDown':
+        if (isVertical) {
+          event.preventDefault();
+          this._context.focusNext(this.value());
+        }
+        break;
+      case 'ArrowUp':
+        if (isVertical) {
+          event.preventDefault();
+          this._context.focusPrevious(this.value());
+        }
+        break;
+      case 'ArrowRight':
+        if (isHorizontal) {
+          event.preventDefault();
+          this._context.focusNext(this.value());
+        }
+        break;
+      case 'ArrowLeft':
+        if (isHorizontal) {
+          event.preventDefault();
+          this._context.focusPrevious(this.value());
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        this._context.focusFirst();
+        break;
+      case 'End':
+        event.preventDefault();
+        this._context.focusLast();
+        break;
+    }
+  }
 }

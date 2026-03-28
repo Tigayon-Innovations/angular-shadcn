@@ -30,20 +30,16 @@ import { FORM_FIELD_CONTEXT } from './form-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormMessage {
-  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  /** Whether component has projected content */
-  hasContent = false;
+  protected readonly fieldContext = inject(FORM_FIELD_CONTEXT, { optional: true });
 
   /** Check if field has error */
   protected readonly hasError = computed(() => {
     const control = this.fieldContext?.control();
     return control?.invalid && (control?.dirty || control?.touched);
   });
-
   /** Get first error message */
   protected readonly errorMessage = computed(() => {
     const control = this.fieldContext?.control();
@@ -84,7 +80,6 @@ export class FormMessage {
         return 'Invalid value';
     }
   });
-
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
@@ -93,6 +88,9 @@ export class FormMessage {
       this.class(),
     ),
   );
+
+  /** Whether component has projected content */
+  hasContent = false;
 
   ngAfterContentInit() {
     // Check if there's projected content

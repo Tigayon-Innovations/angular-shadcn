@@ -36,7 +36,7 @@ export class UiAvatar {
 
   protected readonly imageError = signal(false);
 
-  protected onImageError() {
+  protected onImageError(): void {
     this.imageError.set(true);
   }
 }

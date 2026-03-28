@@ -19,10 +19,10 @@ import { COMMAND_CONTEXT } from './command-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandList {
-  protected readonly context = inject(COMMAND_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(COMMAND_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn('max-h-[300px] overflow-y-auto overflow-x-hidden', this.class()),

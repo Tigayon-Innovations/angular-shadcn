@@ -8,10 +8,6 @@ import {
 } from '@angular/core';
 import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type PopoverState = 'open' | 'closed';
 
 /**
@@ -30,10 +26,6 @@ export interface PopoverProps {
    * @default false */
   modal?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Popover
@@ -117,23 +109,6 @@ export interface PopoverProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Popover implements PopoverContextValue {
-  /** The open state of the popover when initially rendered */
-  readonly defaultOpen = input<boolean>(false);
-
-  /** The controlled open state of the popover */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** The modality of the popover */
-  readonly modal = input<boolean>(false);
-
-  /** Event handler called when the open state changes */
-  readonly openChange = output<boolean>();
-
-  readonly open = signal(false);
-
-  /** Reference to the trigger element for positioning */
-  readonly triggerRef = signal<HTMLElement | null>(null);
-
   constructor() {
     // Initialize from defaultOpen
     if (this.defaultOpen()) {
@@ -141,22 +116,33 @@ export class Popover implements PopoverContextValue {
     }
   }
 
+  /** Event handler called when the open state changes */
+  readonly openChange = output<boolean>();
+
+  /** The modality of the popover */
+  readonly modal = input<boolean>(false);
+  /** The open state of the popover when initially rendered */
+  readonly defaultOpen = input<boolean>(false);
+  /** The controlled open state of the popover */
+  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
+
+  readonly open = signal(false);
+  /** Reference to the trigger element for positioning */
+  readonly triggerRef = signal<HTMLElement | null>(null);
+
   setOpen(open: boolean): void {
     if (this.controlledOpen() === undefined) {
       this.open.set(open);
     }
     this.openChange.emit(open);
   }
-
   toggle(): void {
     this.setOpen(!this.open());
   }
-
   /** Set the trigger element reference */
   setTriggerRef(element: HTMLElement | null): void {
     this.triggerRef.set(element);
   }
-
   isOpen(): boolean {
     return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
   }

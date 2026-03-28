@@ -17,10 +17,10 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselItem {
-  protected readonly context = inject(CAROUSEL_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(CAROUSEL_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(

@@ -46,20 +46,19 @@ import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dial
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialog implements AlertDialogContextValue {
-  private readonly ariaIdService = inject(AriaIdService);
+  /** Controlled open state - uses model for proper two-way binding */
+  readonly open = model<boolean>(false);
 
   /** Default open state */
   readonly defaultOpen = input<boolean>(false);
 
-  /** Controlled open state - uses model for proper two-way binding */
-  readonly open = model<boolean>(false);
+  private readonly _ariaIdService = inject(AriaIdService);
 
   /** ARIA IDs for accessibility relationships */
-  private readonly ariaIds = this.ariaIdService.generateDialogIds('alertdialog');
+  private readonly ariaIds = this._ariaIdService.generateDialogIds('alertdialog');
   readonly titleId = this.ariaIds.titleId;
   readonly descriptionId = this.ariaIds.descriptionId;
   readonly contentId = this.ariaIds.contentId;
-
   /** Reference to trigger element for focus restoration */
   private triggerEl: HTMLElement | null = null;
 
@@ -67,17 +66,14 @@ export class AlertDialog implements AlertDialogContextValue {
   isOpen(): boolean {
     return this.open();
   }
-
   /** Set the open state */
   setOpen(open: boolean): void {
     this.open.set(open);
   }
-
   /** Set trigger element for focus restoration */
   setTriggerElement(element: HTMLElement | null): void {
     this.triggerEl = element;
   }
-
   /** Get trigger element for focus restoration */
   getTriggerElement(): HTMLElement | null {
     return this.triggerEl;

@@ -7,10 +7,6 @@ import {
 } from './navigation-menu-context';
 import { NavigationMenuViewport } from './navigation-menu-viewport.component';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the NavigationMenu component
  */
@@ -31,10 +27,6 @@ export interface NavigationMenuProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component NavigationMenu

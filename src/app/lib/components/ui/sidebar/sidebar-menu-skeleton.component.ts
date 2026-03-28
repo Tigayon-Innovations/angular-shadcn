@@ -19,16 +19,15 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarMenuSkeleton {
-  /** Width of the skeleton */
-  readonly width = Math.floor(Math.random() * 40) + 50;
-
   /** Whether to show icon skeleton */
   readonly showIcon = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
     cn('rounded-md h-8 flex gap-2 px-2 items-center', this.class()),
   );
+
+  /** Width of the skeleton */
+  readonly width = Math.floor(Math.random() * 40) + 50;
 }

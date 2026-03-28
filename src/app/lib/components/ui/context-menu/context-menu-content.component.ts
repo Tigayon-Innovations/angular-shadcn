@@ -46,26 +46,6 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuContent implements OnDestroy {
-  protected readonly context = inject(CONTEXT_MENU_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  private menuItems: HTMLElement[] = [];
-  private typeaheadBuffer = '';
-  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out',
-      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-      this.class(),
-    ),
-  );
-
   constructor() {
     // Focus first item when menu opens
     effect(() => {
@@ -89,6 +69,27 @@ export class ContextMenuContent implements OnDestroy {
     });
   }
 
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(CONTEXT_MENU_CONTEXT);
+
+  protected readonly computedClass = computed(() =>
+    cn(
+      'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      this.class(),
+    ),
+  );
+
+  private menuItems: HTMLElement[] = [];
+  private typeaheadBuffer = '';
+  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
+
   ngOnDestroy(): void {
     if (this.typeaheadTimeout) {
       clearTimeout(this.typeaheadTimeout);
@@ -96,7 +97,7 @@ export class ContextMenuContent implements OnDestroy {
   }
 
   private updateMenuItems(): void {
-    const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
+    const content = this._elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
@@ -105,7 +106,6 @@ export class ContextMenuContent implements OnDestroy {
       );
     }
   }
-
   protected onKeydown(event: KeyboardEvent): void {
     this.updateMenuItems();
 
@@ -138,27 +138,22 @@ export class ContextMenuContent implements OnDestroy {
         break;
     }
   }
-
   private focusNext(): void {
     const currentIndex = this.context.focusedIndex();
     const nextIndex = currentIndex < this.menuItems.length - 1 ? currentIndex + 1 : 0;
     this.focusItem(nextIndex);
   }
-
   private focusPrevious(): void {
     const currentIndex = this.context.focusedIndex();
     const prevIndex = currentIndex > 0 ? currentIndex - 1 : this.menuItems.length - 1;
     this.focusItem(prevIndex);
   }
-
   private focusFirst(): void {
     this.focusItem(0);
   }
-
   private focusLast(): void {
     this.focusItem(this.menuItems.length - 1);
   }
-
   private focusItem(index: number): void {
     if (index >= 0 && index < this.menuItems.length) {
       // Update roving tabindex
@@ -169,7 +164,6 @@ export class ContextMenuContent implements OnDestroy {
       this.context.focusedIndex.set(index);
     }
   }
-
   private handleTypeahead(key: string): void {
     this.typeaheadBuffer += key.toLowerCase();
 
@@ -190,7 +184,6 @@ export class ContextMenuContent implements OnDestroy {
       this.focusItem(matchIndex);
     }
   }
-
   private close(): void {
     this.context.open.set(false);
     this.context.focusedIndex.set(-1);
@@ -200,15 +193,12 @@ export class ContextMenuContent implements OnDestroy {
       triggerEl.focus();
     }
   }
-
   protected onDocumentClick(): void {
     this.close();
   }
-
   protected onEscapeKey(): void {
     this.close();
   }
-
   protected onAnotherContextMenu(): void {
     // Will be handled by new context menu trigger
   }

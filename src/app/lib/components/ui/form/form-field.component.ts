@@ -41,13 +41,16 @@ import { FORM_CONTEXT, FORM_FIELD_CONTEXT, type FormFieldContext } from './form-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormField {
-  private readonly formContext = inject(FORM_CONTEXT, { optional: true });
-
   /** The name of the form control */
   readonly name = input.required<string>();
 
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  private readonly _formContext = inject(FORM_CONTEXT, { optional: true });
+
+  /** Computed class combining base styles and custom classes */
+  protected readonly computedClass = computed(() => cn('space-y-2', this.class()));
 
   /** Generate unique IDs */
   private readonly uniqueId = `form-field-${Math.random().toString(36).substring(7)}`;
@@ -61,20 +64,16 @@ export class FormField {
     formMessageId: signal(`${this.uniqueId}-message`),
   };
 
-  /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() => cn('space-y-2', this.class()));
-
   ngOnInit() {
     this.fieldContext.name.set(this.name());
-    const form = this.formContext?.form();
+    const form = this._formContext?.form();
     if (form) {
       this.fieldContext.control.set(form.get(this.name()));
     }
   }
-
   ngOnChanges() {
     this.fieldContext.name.set(this.name());
-    const form = this.formContext?.form();
+    const form = this._formContext?.form();
     if (form) {
       this.fieldContext.control.set(form.get(this.name()));
     }

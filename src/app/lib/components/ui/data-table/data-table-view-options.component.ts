@@ -48,35 +48,32 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableViewOptions {
-  protected readonly context = inject(DATA_TABLE_CONTEXT);
-  protected readonly icons = { Settings2, Check };
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly isOpen = signal(false);
+  protected readonly context = inject(DATA_TABLE_CONTEXT);
 
   protected readonly toggleableColumns = computed(() =>
     this.context.columns().filter((col) => col.enableHiding !== false),
   );
-
   protected readonly computedClass = computed(() => cn('ml-auto', this.class()));
+
+  protected readonly isOpen = signal(false);
+
+  protected readonly icons = { Settings2, Check };
 
   protected toggleDropdown(): void {
     this.isOpen.update((v) => !v);
   }
-
   protected onDocumentClick(event: Event): void {
     const target = event.target as HTMLElement;
     if (!target.closest('[data-slot="data-table"]')) {
       this.isOpen.set(false);
     }
   }
-
   protected isColumnVisible(columnId: string): boolean {
     return this.context.columnVisibility()[columnId] !== false;
   }
-
   protected toggleColumn(columnId: string): void {
     const visibility = { ...this.context.columnVisibility() };
     visibility[columnId] = !visibility[columnId];

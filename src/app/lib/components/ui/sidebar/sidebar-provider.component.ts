@@ -56,23 +56,42 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarProvider {
-  /** Default open state */
-  readonly defaultOpen = input<boolean, unknown>(true, {
-    transform: booleanAttribute,
-  });
+  constructor() {
+    // Check for mobile on init (browser-only)
+    afterNextRender(() => {
+      this.checkMobile();
+    });
 
-  /** Controlled open state */
-  readonly open = model<boolean>(true);
+    // Sync open state
+    effect(() => {
+      const openValue = this.open();
+      this.context.open.set(openValue);
+      this.context.state.set(openValue ? 'expanded' : 'collapsed');
+    });
+  }
 
   /** Open state change event */
   readonly openChange = output<boolean>();
 
+  /** Controlled open state */
+  readonly open = model<boolean>(true);
+
+  /** Default open state */
+  readonly defaultOpen = input<boolean, unknown>(true, {
+    transform: booleanAttribute,
+  });
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  protected readonly computedClass = computed(() =>
+    cn(
+      'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
+      this.class(),
+    ),
+  );
+
   protected readonly SIDEBAR_WIDTH_ICON = SIDEBAR_WIDTH_ICON;
   protected readonly sidebarWidth = SIDEBAR_WIDTH;
-
   /** Context for child components */
   readonly context: SidebarContext = {
     state: signal<SidebarState>('expanded'),
@@ -97,25 +116,10 @@ export class SidebarProvider {
     },
   };
 
-  constructor() {
-    // Check for mobile on init (browser-only)
-    afterNextRender(() => {
-      this.checkMobile();
-    });
-
-    // Sync open state
-    effect(() => {
-      const openValue = this.open();
-      this.context.open.set(openValue);
-      this.context.state.set(openValue ? 'expanded' : 'collapsed');
-    });
-  }
-
   @HostListener('window:resize')
   protected onResize(): void {
     this.checkMobile();
   }
-
   @HostListener('document:keydown', ['$event'])
   protected onKeydown(event: KeyboardEvent): void {
     if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
@@ -123,16 +127,8 @@ export class SidebarProvider {
       this.context.toggleSidebar();
     }
   }
-
   private checkMobile(): void {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     this.context.isMobile.set(isMobile);
   }
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
-      this.class(),
-    ),
-  );
 }

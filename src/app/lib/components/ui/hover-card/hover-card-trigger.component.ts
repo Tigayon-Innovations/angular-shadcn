@@ -8,10 +8,6 @@ import {
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT } from './hover-card-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the HoverCardTrigger component
  */
@@ -20,10 +16,6 @@ export interface HoverCardTriggerProps {
    * @default false */
   asChild?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component HoverCardTrigger
@@ -88,11 +80,12 @@ export interface HoverCardTriggerProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HoverCardTrigger implements OnDestroy {
-  protected readonly context = inject(HOVER_CARD_CONTEXT);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** Change the default rendered element for the one passed as a child */
   readonly asChild = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  protected readonly context = inject(HOVER_CARD_CONTEXT);
 
   private openTimeout: ReturnType<typeof setTimeout> | null = null;
   private closeTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -107,24 +100,21 @@ export class HoverCardTrigger implements OnDestroy {
       this.context.setOpen(true);
     }, this.context.openDelay);
   }
-
   onMouseLeave(): void {
     this.clearTimeouts();
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
     }, this.context.closeDelay);
   }
-
   onFocus(): void {
     this.clearTimeouts();
     // Open immediately on focus for keyboard users
     this.context.setOpen(true);
   }
-
   onBlur(event: FocusEvent): void {
     // Check if focus moved to the hover card content
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    const hoverCardContent = this.elementRef.nativeElement.parentElement?.querySelector(
+    const hoverCardContent = this._elementRef.nativeElement.parentElement?.querySelector(
       '[data-slot="hover-card-content"]',
     );
 
@@ -138,15 +128,13 @@ export class HoverCardTrigger implements OnDestroy {
       this.context.setOpen(false);
     }, this.context.closeDelay);
   }
-
   onKeyDown(event: Event): void {
     event.preventDefault();
     this.context.setOpen(!this.context.open());
   }
-
   onEscape(): void {
     this.context.setOpen(false);
-    this.elementRef.nativeElement.focus();
+    this._elementRef.nativeElement.focus();
   }
 
   private clearTimeouts(): void {

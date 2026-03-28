@@ -49,17 +49,6 @@ import { COMMAND_CONTEXT } from './command-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandInput {
-  protected readonly context = inject(COMMAND_CONTEXT);
-  protected readonly SearchIcon = Search;
-
-  private readonly inputEl = viewChild<ElementRef<HTMLInputElement>>('inputEl');
-
-  /** Placeholder text */
-  readonly placeholder = input<string>('Search...');
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
   constructor() {
     // Auto-focus input when rendered (browser-only)
     afterNextRender(() => {
@@ -70,13 +59,22 @@ export class CommandInput {
     });
   }
 
+  private readonly inputEl = viewChild<ElementRef<HTMLInputElement>>('inputEl');
+
+  /** Placeholder text */
+  readonly placeholder = input<string>('Search...');
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  protected readonly context = inject(COMMAND_CONTEXT);
+
   protected readonly computedClass = computed(() =>
     cn(
       'flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
       this.class(),
     ),
   );
-
   protected readonly activeDescendant = computed(() => {
     const index = this.context.focusedIndex();
     if (index >= 0) {
@@ -85,13 +83,14 @@ export class CommandInput {
     return null;
   });
 
+  protected readonly SearchIcon = Search;
+
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.context.search.set(target.value);
     // Reset focus to first visible item when searching
     this.context.focusedIndex.set(0);
   }
-
   protected onKeydown(event: KeyboardEvent): void {
     const currentIndex = this.context.focusedIndex();
     const listEl = document.getElementById(this.context.listId);

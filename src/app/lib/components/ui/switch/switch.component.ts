@@ -13,10 +13,6 @@ import {
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type SwitchState = 'checked' | 'unchecked'
 
 export type SwitchProps = {
@@ -37,10 +33,6 @@ export type SwitchProps = {
 	/** Additional CSS classes */
 	class?: string
 }
-
-// ============================================================================
-// Switch Component
-// ============================================================================
 
 /**
  * Switch component for toggling between on/off states.
@@ -149,59 +141,6 @@ export type SwitchProps = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Switch implements ControlValueAccessor {
-	private readonly buttonElement = viewChild<ElementRef<HTMLButtonElement>>('buttonElement')
-
-	/** The id for the switch button - used for label association */
-	readonly id = input<string>()
-
-	/** Whether the switch is checked/on */
-	readonly checked = model<boolean>(false)
-
-	/** Whether the switch starts checked (uncontrolled mode) */
-	readonly defaultChecked = input<boolean>(false)
-
-	/** Whether the switch is disabled via input */
-	readonly disabled = input<boolean>(false)
-
-	/** Whether the switch is required */
-	readonly required = input<boolean>(false)
-
-	/** The name for the hidden input (form submission) */
-	readonly name = input<string>()
-
-	/** The value for the hidden input (form submission) */
-	readonly value = input<string>('on')
-
-	/** Additional CSS classes to apply */
-	readonly class = input<string>('')
-
-	/** Additional CSS classes to apply to the inner track button */
-	readonly buttonClass = input<string>('')
-
-	/** Background color for checked state (hex, rgb, or CSS color name) */
-	readonly checkedBgColor = input<string>('rgb(59, 130, 246)')
-
-	/** Emitted when checked state changes */
-	readonly checkedChange = output<boolean>()
-
-	/** Whether the switch is disabled via forms */
-	private readonly formsDisabled = signal<boolean>(false)
-
-	/** Whether the switch is disabled (either via input or forms) */
-	readonly isDisabled = computed(() => this.disabled() || this.formsDisabled())
-
-	/** ControlValueAccessor callbacks */
-	private onChange: (value: boolean) => void = () => {}
-	private onTouched: () => void = () => {}
-
-	/** Current state for data attribute */
-	protected readonly state = computed(
-		(): SwitchState => (this.checked() ? 'checked' : 'unchecked'),
-	)
-
-	/** Input value for form submission */
-	protected readonly inputValue = computed(() => (this.checked() ? this.value() : undefined))
-
 	constructor() {
 		// Initialize from defaultChecked if provided
 		if (this.defaultChecked()) {
@@ -209,6 +148,97 @@ export class Switch implements ControlValueAccessor {
 		}
 	}
 
+	private readonly buttonElement = viewChild<ElementRef<HTMLButtonElement>>('buttonElement')
+
+	/** Emitted when checked state changes */
+	readonly checkedChange = output<boolean>()
+
+	/** Whether the switch is checked/on */
+	readonly checked = model<boolean>(false)
+
+	/** The id for the switch button - used for label association */
+	readonly id = input<string>()
+	/** Whether the switch starts checked (uncontrolled mode) */
+	readonly defaultChecked = input<boolean>(false)
+	/** Whether the switch is disabled via input */
+	readonly disabled = input<boolean>(false)
+	/** Whether the switch is required */
+	readonly required = input<boolean>(false)
+	/** The name for the hidden input (form submission) */
+	readonly name = input<string>()
+	/** The value for the hidden input (form submission) */
+	readonly value = input<string>('on')
+	/** Additional CSS classes to apply */
+	readonly class = input<string>('')
+	/** Additional CSS classes to apply to the inner track button */
+	readonly buttonClass = input<string>('')
+	/** Background color for checked state (hex, rgb, or CSS color name) */
+	readonly checkedBgColor = input<string>('rgb(59, 130, 246)')
+
+	/** Current state for data attribute */
+	protected readonly state = computed(
+		(): SwitchState => (this.checked() ? 'checked' : 'unchecked'),
+	)
+	/** Input value for form submission */
+	protected readonly inputValue = computed(() => (this.checked() ? this.value() : undefined))
+	/** Computed class combining base styles and custom classes */
+	protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()))
+	/** Computed track class */
+	protected readonly trackClass = computed(() =>
+		cn(
+			// Custom overrides first (higher specificity)
+			this.buttonClass(),
+			// Base styles
+			'inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent',
+			'shadow-xs transition-colors duration-200',
+			// Focus styles
+			'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+			// State styles
+			'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+			'dark:data-[state=unchecked]:bg-input/80',
+			// Disabled styles
+			'disabled:cursor-not-allowed disabled:opacity-50',
+		),
+	)
+	/** Computed thumb class */
+	protected readonly thumbClass = computed(() =>
+		cn(
+			// Base styles
+			'pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0',
+			// Transition
+			'transition-transform duration-200',
+			// Position based on state
+			'data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0',
+		),
+	)
+	/** Whether the switch is disabled (either via input or forms) */
+	readonly isDisabled = computed(() => this.disabled() || this.isFormsDisabled())
+
+	/** Whether the switch is disabled via forms */
+	private readonly isFormsDisabled = signal<boolean>(false)
+
+	/** ControlValueAccessor callbacks */
+	private onChange: (value: boolean) => void = () => {}
+	private onTouched: () => void = () => {}
+
+	// ControlValueAccessor implementation
+	writeValue(value: boolean): void {
+		this.checked.set(value ?? false)
+	}
+	registerOnChange(fn: (value: boolean) => void): void {
+		this.onChange = fn
+	}
+	registerOnTouched(fn: () => void): void {
+		this.onTouched = fn
+	}
+	setDisabledState(isDisabled: boolean): void {
+		this.isFormsDisabled.set(isDisabled)
+	}
+
+	/** Focus the switch button */
+	focus(): void {
+		this.buttonElement()?.nativeElement.focus()
+	}
 	/** Toggle the switch state */
 	toggle(): void {
 		if (!this.isDisabled()) {
@@ -228,59 +258,4 @@ export class Switch implements ControlValueAccessor {
 			return
 		}
 	}
-
-	/** Focus the switch button */
-	focus(): void {
-		this.buttonElement()?.nativeElement.focus()
-	}
-
-	// ControlValueAccessor implementation
-	writeValue(value: boolean): void {
-		this.checked.set(value ?? false)
-	}
-
-	registerOnChange(fn: (value: boolean) => void): void {
-		this.onChange = fn
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn
-	}
-
-	setDisabledState(isDisabled: boolean): void {
-		this.formsDisabled.set(isDisabled)
-	}
-
-	/** Computed class combining base styles and custom classes */
-	protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()))
-
-	/** Computed track class */
-	protected readonly trackClass = computed(() =>
-		cn(
-			// Custom overrides first (higher specificity)
-			this.buttonClass(),
-			// Base styles
-			'inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent',
-			'shadow-xs transition-colors duration-200',
-			// Focus styles
-			'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-			// State styles
-			'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
-			'dark:data-[state=unchecked]:bg-input/80',
-			// Disabled styles
-			'disabled:cursor-not-allowed disabled:opacity-50',
-		),
-	)
-
-	/** Computed thumb class */
-	protected readonly thumbClass = computed(() =>
-		cn(
-			// Base styles
-			'pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0',
-			// Transition
-			'transition-transform duration-200',
-			// Position based on state
-			'data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0',
-		),
-	)
 }

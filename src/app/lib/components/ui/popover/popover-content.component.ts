@@ -13,10 +13,6 @@ import {
 } from '@angular/core';
 import { POPOVER_CONTEXT, PopoverAlign, PopoverSide } from './popover-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type PopoverContentState = 'open' | 'closed';
 
 /**
@@ -46,10 +42,6 @@ export interface PopoverContentProps {
   /** Whether the content should match the trigger width. */
   matchTriggerWidth?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component PopoverContent
@@ -122,51 +114,6 @@ export interface PopoverContentProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverContent {
-  protected readonly context = inject(POPOVER_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-  private readonly injector = inject(Injector);
-  private positionFrameId: number | null = null;
-  protected readonly isPositioned = signal(false);
-
-  /** The preferred side of the anchor to render against */
-  readonly side = input<Side>('bottom');
-
-  /** The distance in pixels from the anchor */
-  readonly sideOffset = input<number>(4);
-
-  /** The preferred alignment against the anchor */
-  readonly align = input<Align>('center');
-
-  /** An offset in pixels from the alignment options */
-  readonly alignOffset = input<number>(0);
-
-  /** Whether to avoid collisions with viewport boundaries */
-  readonly avoidCollisions = input<boolean>(true);
-
-  /** The padding in pixels between the boundary edges and content */
-  readonly collisionPadding = input<number>(8);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Whether the content should match the trigger width */
-  readonly matchTriggerWidth = input<boolean>(false);
-
-  /** Current state: open or closed */
-  protected readonly state = computed<PopoverContentState>(() =>
-    this.context.open() ? 'open' : 'closed',
-  );
-
-  /** Computed position after collision detection */
-  protected readonly computedSide = signal<Side>('bottom');
-  protected readonly computedAlign = signal<Align>('center');
-  protected readonly matchedWidth = signal<number | null>(null);
-  protected readonly positionStyles = signal<Record<string, string>>({
-    position: 'fixed',
-    top: '-9999px',
-    left: '-9999px',
-  });
-
   constructor() {
     // Recalculate position when open state changes (browser-only via afterNextRender)
     effect(() => {
@@ -177,7 +124,7 @@ export class PopoverContent {
           () => {
             this.schedulePositionUpdate();
           },
-          { injector: this.injector },
+          { injector: this._injector },
         );
       } else {
         this.cancelScheduledPositionUpdate();
@@ -192,6 +139,83 @@ export class PopoverContent {
     });
   }
 
+  /** The preferred side of the anchor to render against */
+  readonly side = input<Side>('bottom');
+  /** The distance in pixels from the anchor */
+  readonly sideOffset = input<number>(4);
+  /** The preferred alignment against the anchor */
+  readonly align = input<Align>('center');
+  /** An offset in pixels from the alignment options */
+  readonly alignOffset = input<number>(0);
+  /** Whether to avoid collisions with viewport boundaries */
+  readonly avoidCollisions = input<boolean>(true);
+  /** The padding in pixels between the boundary edges and content */
+  readonly collisionPadding = input<number>(8);
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+  /** Whether the content should match the trigger width */
+  readonly matchTriggerWidth = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _injector = inject(Injector);
+
+  protected readonly context = inject(POPOVER_CONTEXT);
+
+  protected readonly computedClass = computed(() =>
+    cn(
+      'z-50 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none',
+      this.matchTriggerWidth() ? 'w-full' : 'w-72',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out',
+      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
+      'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      !this.isPositioned() && 'pointer-events-none opacity-0',
+      this.class(),
+    ),
+  );
+  protected readonly mergedStyles = computed<Record<string, string>>(() => ({
+    ...this.positionStyles(),
+    ...(this.matchedWidth() !== null
+      ? {
+          width: `${this.matchedWidth()}px`,
+          minWidth: `${this.matchedWidth()}px`,
+          maxWidth: `${this.matchedWidth()}px`,
+        }
+      : {}),
+  }));
+  /** Current state: open or closed */
+  protected readonly state = computed<PopoverContentState>(() =>
+    this.context.open() ? 'open' : 'closed',
+  );
+
+  protected readonly isPositioned = signal(false);
+  /** Computed position after collision detection */
+  protected readonly computedSide = signal<Side>('bottom');
+  protected readonly computedAlign = signal<Align>('center');
+  protected readonly matchedWidth = signal<number | null>(null);
+  protected readonly positionStyles = signal<Record<string, string>>({
+    position: 'fixed',
+    top: '-9999px',
+    left: '-9999px',
+  });
+
+  private positionFrameId: number | null = null;
+
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!this._elementRef.nativeElement.contains(target)) {
+      // Check if click is outside the popover
+      const popoverContent = this._elementRef.nativeElement.querySelector('[role="dialog"]');
+      if (popoverContent && !popoverContent.contains(target)) {
+        this.context.setOpen(false);
+      }
+    }
+  }
+  onEscapeKey(): void {
+    this.context.setOpen(false);
+  }
+
   private schedulePositionUpdate(): void {
     this.cancelScheduledPositionUpdate();
 
@@ -204,17 +228,15 @@ export class PopoverContent {
       });
     });
   }
-
   private cancelScheduledPositionUpdate(): void {
     if (this.positionFrameId !== null) {
       cancelAnimationFrame(this.positionFrameId);
       this.positionFrameId = null;
     }
   }
-
   private updatePosition(): void {
     const triggerElement = this.context.triggerRef?.();
-    const contentElement = this.elementRef.nativeElement.querySelector(
+    const contentElement = this._elementRef.nativeElement.querySelector(
       '[role="dialog"]',
     ) as HTMLElement;
 
@@ -254,45 +276,5 @@ export class PopoverContent {
       '--radix-popover-content-transform-origin': transformOrigin,
     });
     this.isPositioned.set(true);
-  }
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'z-50 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none',
-      this.matchTriggerWidth() ? 'w-full' : 'w-72',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out',
-      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-      'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
-      'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      !this.isPositioned() && 'pointer-events-none opacity-0',
-      this.class(),
-    ),
-  );
-
-  protected readonly mergedStyles = computed<Record<string, string>>(() => ({
-    ...this.positionStyles(),
-    ...(this.matchedWidth() !== null
-      ? {
-          width: `${this.matchedWidth()}px`,
-          minWidth: `${this.matchedWidth()}px`,
-          maxWidth: `${this.matchedWidth()}px`,
-        }
-      : {}),
-  }));
-
-  onDocumentClick(event: Event): void {
-    const target = event.target as HTMLElement;
-    if (!this.elementRef.nativeElement.contains(target)) {
-      // Check if click is outside the popover
-      const popoverContent = this.elementRef.nativeElement.querySelector('[role="dialog"]');
-      if (popoverContent && !popoverContent.contains(target)) {
-        this.context.setOpen(false);
-      }
-    }
-  }
-
-  onEscapeKey(): void {
-    this.context.setOpen(false);
   }
 }

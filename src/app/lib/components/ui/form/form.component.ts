@@ -10,10 +10,6 @@ import {
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FORM_CONTEXT, type FormContext } from './form-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the Form component
  */
@@ -23,10 +19,6 @@ export interface FormProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Form
@@ -103,17 +95,16 @@ export interface FormProps {
 export class Form {
   /** The reactive form group */
   readonly formGroup = input<FormGroup | null>(null);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Computed class combining base styles and custom classes */
+  protected readonly computedClass = computed(() => cn('space-y-6', this.class()));
 
   /** Context for child components */
   readonly context: FormContext = {
     form: signal(this.formGroup()),
   };
-
-  /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() => cn('space-y-6', this.class()));
 
   ngOnChanges() {
     this.context.form.set(this.formGroup());

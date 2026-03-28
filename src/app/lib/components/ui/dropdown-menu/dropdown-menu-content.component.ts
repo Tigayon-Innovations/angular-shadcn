@@ -49,61 +49,6 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuContent implements OnDestroy {
-  protected readonly context = inject(DROPDOWN_MENU_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
-  /** Side of the trigger to place content */
-  readonly side = input<'top' | 'right' | 'bottom' | 'left'>('bottom');
-
-  /** Alignment of the content */
-  readonly align = input<'start' | 'center' | 'end'>('start');
-
-  /** Side offset */
-  readonly sideOffset = input<number>(4);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Positioning strategy: 'absolute' stays within parent, 'fixed' escapes overflow containers */
-  readonly strategy = input<'absolute' | 'fixed'>('absolute');
-
-  private menuItems: HTMLElement[] = [];
-  private typeaheadBuffer = '';
-  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
-  protected readonly fixedPos = signal<{ top: number; left: number } | null>(null);
-
-  protected readonly fixedStyle = computed(() => {
-    const pos = this.fixedPos();
-    if (this.strategy() !== 'fixed' || !pos) return '';
-    return `top: ${pos.top}px; left: ${pos.left}px;`;
-  });
-
-  protected readonly computedClass = computed(() => {
-    const isFixed = this.strategy() === 'fixed';
-
-    const sideClasses = {
-      top: 'bottom-full mb-1',
-      bottom: 'top-full mt-1',
-      left: 'right-full mr-1',
-      right: 'left-full ml-1',
-    };
-
-    const alignClasses = {
-      start: 'left-0',
-      center: 'left-1/2 -translate-x-1/2',
-      end: 'right-0',
-    };
-
-    return cn(
-      isFixed ? 'fixed' : 'absolute',
-      'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      !isFixed && sideClasses[this.side()],
-      !isFixed && alignClasses[this.align()],
-      this.class(),
-    );
-  });
-
   constructor() {
     // Focus first item when menu opens; compute fixed position if needed
     effect(() => {
@@ -147,20 +92,61 @@ export class DropdownMenuContent implements OnDestroy {
     });
   }
 
+  /** Side of the trigger to place content */
+  readonly side = input<'top' | 'right' | 'bottom' | 'left'>('bottom');
+  /** Alignment of the content */
+  readonly align = input<'start' | 'center' | 'end'>('start');
+  /** Side offset */
+  readonly sideOffset = input<number>(4);
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+  /** Positioning strategy: 'absolute' stays within parent, 'fixed' escapes overflow containers */
+  readonly strategy = input<'absolute' | 'fixed'>('absolute');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(DROPDOWN_MENU_CONTEXT);
+
+  protected readonly fixedStyle = computed(() => {
+    const pos = this.fixedPos();
+    if (this.strategy() !== 'fixed' || !pos) return '';
+    return `top: ${pos.top}px; left: ${pos.left}px;`;
+  });
+  protected readonly computedClass = computed(() => {
+    const isFixed = this.strategy() === 'fixed';
+
+    const sideClasses = {
+      top: 'bottom-full mb-1',
+      bottom: 'top-full mt-1',
+      left: 'right-full mr-1',
+      right: 'left-full ml-1',
+    };
+
+    const alignClasses = {
+      start: 'left-0',
+      center: 'left-1/2 -translate-x-1/2',
+      end: 'right-0',
+    };
+
+    return cn(
+      isFixed ? 'fixed' : 'absolute',
+      'z-50 min-w-[12rem] overflow-hidden rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      !isFixed && sideClasses[this.side()],
+      !isFixed && alignClasses[this.align()],
+      this.class(),
+    );
+  });
+
+  protected readonly fixedPos = signal<{ top: number; left: number } | null>(null);
+
+  private menuItems: HTMLElement[] = [];
+  private typeaheadBuffer = '';
+  private typeaheadTimeout: ReturnType<typeof setTimeout> | null = null;
+
   ngOnDestroy(): void {
     if (this.typeaheadTimeout) {
       clearTimeout(this.typeaheadTimeout);
-    }
-  }
-
-  private updateMenuItems(): void {
-    const content = this.elementRef.nativeElement.querySelector('[role="menu"]');
-    if (content) {
-      this.menuItems = Array.from(
-        content.querySelectorAll(
-          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
-        ),
-      );
     }
   }
 
@@ -197,33 +183,38 @@ export class DropdownMenuContent implements OnDestroy {
     }
   }
 
+  private updateMenuItems(): void {
+    const content = this._elementRef.nativeElement.querySelector('[role="menu"]');
+    if (content) {
+      this.menuItems = Array.from(
+        content.querySelectorAll(
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+        ),
+      );
+    }
+  }
   private focusNext(): void {
     const currentIndex = this.context.focusedIndex();
     const nextIndex = currentIndex < this.menuItems.length - 1 ? currentIndex + 1 : 0;
     this.focusItem(nextIndex);
   }
-
   private focusPrevious(): void {
     const currentIndex = this.context.focusedIndex();
     const prevIndex = currentIndex > 0 ? currentIndex - 1 : this.menuItems.length - 1;
     this.focusItem(prevIndex);
   }
-
   private focusFirst(): void {
     this.focusItem(0);
   }
-
   private focusLast(): void {
     this.focusItem(this.menuItems.length - 1);
   }
-
   private focusItem(index: number): void {
     if (index >= 0 && index < this.menuItems.length) {
       this.menuItems[index].focus();
       this.context.focusedIndex.set(index);
     }
   }
-
   private handleTypeahead(key: string): void {
     this.typeaheadBuffer += key.toLowerCase();
 
@@ -244,21 +235,18 @@ export class DropdownMenuContent implements OnDestroy {
       this.focusItem(matchIndex);
     }
   }
-
   protected onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const hostElement = this.elementRef.nativeElement;
+    const hostElement = this._elementRef.nativeElement;
     const parent = hostElement.closest('DropdownMenu');
 
     if (parent && !parent.contains(target)) {
       this.close();
     }
   }
-
   protected onEscapeKey(): void {
     this.close();
   }
-
   private close(): void {
     this.context.open.set(false);
     this.context.focusedIndex.set(-1);

@@ -2,10 +2,6 @@ import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { buttonVariants } from '../button';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the ToastAction component
  */
@@ -16,10 +12,6 @@ export interface ToastActionProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component ToastAction
@@ -57,11 +49,11 @@ export interface ToastActionProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastAction {
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
   /** Event emitted when the action button is clicked */
   readonly onClick = output<void>();
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
     cn(

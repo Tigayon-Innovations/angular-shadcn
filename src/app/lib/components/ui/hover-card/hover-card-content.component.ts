@@ -10,10 +10,6 @@ import {
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, HoverCardAlign, HoverCardSide } from './hover-card-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type HoverCardContentState = 'open' | 'closed';
 
 /**
@@ -32,10 +28,6 @@ export interface HoverCardContentProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component HoverCardContent
@@ -106,27 +98,18 @@ export interface HoverCardContentProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HoverCardContent implements OnDestroy {
-  protected readonly context = inject(HOVER_CARD_CONTEXT);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** The preferred side of the trigger to render against */
   readonly side = input<HoverCardSide>('bottom');
-
   /** The distance in pixels from the trigger */
   readonly sideOffset = input<number>(4);
-
   /** The preferred alignment against the trigger */
   readonly align = input<HoverCardAlign>('center');
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  private closeTimeout: ReturnType<typeof setTimeout> | null = null;
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
 
-  /** Current state: open or closed */
-  protected readonly state = computed<HoverCardContentState>(() =>
-    this.context.open() ? 'open' : 'closed',
-  );
+  protected readonly context = inject(HOVER_CARD_CONTEXT);
 
   protected readonly computedClass = computed(() => {
     const sideClasses = {
@@ -155,6 +138,12 @@ export class HoverCardContent implements OnDestroy {
     );
   });
 
+  private closeTimeout: ReturnType<typeof setTimeout> | null = null;
+  /** Current state: open or closed */
+  protected readonly state = computed<HoverCardContentState>(() =>
+    this.context.open() ? 'open' : 'closed',
+  );
+
   ngOnDestroy(): void {
     this.clearTimeout();
   }
@@ -162,20 +151,17 @@ export class HoverCardContent implements OnDestroy {
   onMouseEnter(): void {
     this.clearTimeout();
   }
-
   onMouseLeave(): void {
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
     }, this.context.closeDelay);
   }
-
   onFocusIn(): void {
     this.clearTimeout();
   }
-
   onFocusOut(event: FocusEvent): void {
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    const trigger = this.elementRef.nativeElement.parentElement?.querySelector('[data-state]');
+    const trigger = this._elementRef.nativeElement.parentElement?.querySelector('[data-state]');
 
     // Check if focus moved to trigger or stayed within content
     if (relatedTarget && (trigger === relatedTarget || trigger?.contains(relatedTarget))) {
@@ -186,11 +172,10 @@ export class HoverCardContent implements OnDestroy {
       this.context.setOpen(false);
     }, this.context.closeDelay);
   }
-
   onEscape(): void {
     this.context.setOpen(false);
     // Return focus to trigger
-    const trigger = this.elementRef.nativeElement.parentElement?.querySelector(
+    const trigger = this._elementRef.nativeElement.parentElement?.querySelector(
       '[data-state]',
     ) as HTMLElement;
     trigger?.focus();

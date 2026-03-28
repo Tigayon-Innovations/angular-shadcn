@@ -20,13 +20,12 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselContent {
-  protected readonly context = inject(CAROUSEL_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
+  protected readonly context = inject(CAROUSEL_CONTEXT);
 
+  protected readonly computedClass = computed(() => cn('overflow-hidden', this.class()));
   protected readonly innerClass = computed(() =>
     cn('flex', this.context.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col'),
   );

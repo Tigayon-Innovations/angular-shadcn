@@ -1,10 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ProgressState = 'indeterminate' | 'loading' | 'complete';
 
 export type ProgressProps = {
@@ -26,10 +22,6 @@ export type ProgressProps = {
    */
   getValueLabel?: (value: number, max: number) => string;
 };
-
-// ============================================================================
-// Progress Component
-// ============================================================================
 
 /**
  * Progress component displays progress feedback for tasks and operations.
@@ -147,17 +139,17 @@ export class Progress {
 
   /** Calculate percentage (0-100) */
   protected readonly percentage = computed(() => {
-    const val = this.value();
+    const currentValue = this.value();
     const maxVal = this.max();
-    if (val === null || maxVal === 0) return 0;
-    return Math.min(100, Math.max(0, (val / maxVal) * 100));
+    if (currentValue === null || maxVal === 0) return 0;
+    return Math.min(100, Math.max(0, (currentValue / maxVal) * 100));
   });
 
   /** Calculate state for data attribute */
   protected readonly state = computed((): ProgressState => {
-    const val = this.value();
-    if (val === null) return 'indeterminate';
-    return val >= this.max() ? 'complete' : 'loading';
+    const currentValue = this.value();
+    if (currentValue === null) return 'indeterminate';
+    return currentValue >= this.max() ? 'complete' : 'loading';
   });
 
   /** Compute aria-valuetext */
@@ -165,12 +157,12 @@ export class Progress {
     const customText = this.ariaValueText();
     if (customText) return customText;
 
-    const val = this.value();
-    if (val === null) return 'Loading';
+    const currentValue = this.value();
+    if (currentValue === null) return 'Loading';
 
     const getLabel = this.getValueLabel();
     if (getLabel) {
-      return getLabel(val, this.max());
+      return getLabel(currentValue, this.max());
     }
 
     return `${this.percentage().toFixed(0)}% complete`;

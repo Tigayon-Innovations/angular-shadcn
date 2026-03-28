@@ -1,9 +1,5 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type TabsOrientation = 'horizontal' | 'vertical';
 export type TabsActivationMode = 'automatic' | 'manual';
 
@@ -25,9 +21,5 @@ export interface TabsContext {
   /** Registry of tab values for keyboard navigation */
   tabValues: WritableSignal<string[]>;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const TABS_CONTEXT = new InjectionToken<TabsContext>('TabsContext');

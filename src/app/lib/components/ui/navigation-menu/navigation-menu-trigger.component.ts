@@ -28,16 +28,17 @@ import { navigationMenuTriggerStyle } from './navigation-menu-trigger-style';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationMenuTrigger {
-  protected readonly context = inject(NAVIGATION_MENU_CONTEXT);
-  protected readonly itemContext = inject(NAVIGATION_MENU_ITEM_CONTEXT);
-  protected readonly ChevronDownIcon = ChevronDown;
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(NAVIGATION_MENU_CONTEXT);
+  protected readonly itemContext = inject(NAVIGATION_MENU_ITEM_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(navigationMenuTriggerStyle(), 'group', this.class()),
   );
+
+  protected readonly ChevronDownIcon = ChevronDown;
 
   protected toggle(): void {
     this.itemContext.open.update((v) => !v);
@@ -47,7 +48,6 @@ export class NavigationMenuTrigger {
       this.context.activeItem.set(null);
     }
   }
-
   protected onMouseEnter(): void {
     const activeItem = this.context.activeItem();
     if (activeItem && activeItem !== this.itemContext.itemId) {

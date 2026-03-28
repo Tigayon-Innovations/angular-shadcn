@@ -2,10 +2,6 @@ import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TABS_CONTEXT } from './tabs-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type TabsContentState = 'active' | 'inactive';
 
 /**
@@ -21,10 +17,6 @@ export interface TabsContentProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TabsContent
@@ -85,34 +77,28 @@ export interface TabsContentProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsContent {
-  protected readonly tabs = inject(TABS_CONTEXT);
-
   /** A unique value that associates the content with a trigger */
   readonly value = input.required<string>();
 
   /** Used to force mounting when more control is needed */
   readonly forceMount = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  protected readonly tabs = inject(TABS_CONTEXT);
+
   /** Check if this content should be visible */
   protected readonly isActive = computed(() => this.tabs.value() === this.value());
-
   /** Current state: active or inactive */
   protected readonly state = computed<TabsContentState>(() =>
     this.isActive() ? 'active' : 'inactive',
   );
-
   /** Whether content should be rendered (force mount or active) */
   protected readonly shouldRender = computed(() => this.forceMount() || this.isActive());
-
   /** Generate panel ID */
   protected readonly panelId = computed(() => this.tabs.getPanelId(this.value()));
-
   /** Generate tab ID for aria-labelledby */
   protected readonly tabId = computed(() => this.tabs.getTabId(this.value()));
-
   protected readonly computedClass = computed(() =>
     cn(
       'flex-1 outline-none',

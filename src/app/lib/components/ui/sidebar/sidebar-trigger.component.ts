@@ -33,10 +33,10 @@ import { SIDEBAR_CONTEXT } from './sidebar-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarTrigger {
-  protected readonly context = inject(SIDEBAR_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(SIDEBAR_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(

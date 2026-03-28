@@ -14,10 +14,10 @@ import { DRAWER_CONTEXT } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerClose {
-  protected readonly context = inject(DRAWER_CONTEXT);
-
   /** Render as child */
   readonly asChild = input<boolean>(false);
+
+  protected readonly context = inject(DRAWER_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();

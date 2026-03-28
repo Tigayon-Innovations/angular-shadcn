@@ -41,26 +41,22 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePicker {
-  protected readonly CalendarIconRef = CalendarIcon;
   private readonly popover = viewChild(Popover);
+
+  /** Date select event */
+  readonly onSelect = output<Date | undefined>();
 
   /** Selected date */
   readonly date = model<Date | undefined>(undefined);
 
-  /** Placeholder text */
-  readonly placeholder = input<string>('Pick a date');
-
-  /** Date format */
-  readonly dateFormat = input<string>('PPP');
-
-  /** Disabled dates function */
-  readonly disabledDates = input<((date: Date) => boolean) | undefined>(undefined);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
-
-  /** Date select event */
-  readonly onSelect = output<Date | undefined>();
+  /** Placeholder text */
+  readonly placeholder = input<string>('Pick a date');
+  /** Date format */
+  readonly dateFormat = input<string>('PPP');
+  /** Disabled dates function */
+  readonly disabledDates = input<((date: Date) => boolean) | undefined>(undefined);
 
   protected readonly computedButtonClass = computed(() =>
     cn(
@@ -73,6 +69,8 @@ export class DatePicker {
     ),
   );
 
+  protected readonly CalendarIconRef = CalendarIcon;
+
   protected formatDate(date: Date): string {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -80,7 +78,6 @@ export class DatePicker {
       day: 'numeric',
     });
   }
-
   protected onDateSelect(date: Date | undefined): void {
     this.date.set(date);
     this.onSelect.emit(date);

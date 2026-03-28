@@ -19,10 +19,6 @@ import {
   type ToggleGroupType,
 } from './toggle-group-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ToggleGroupProps = {
   /** Selection type: single or multiple */
   type?: ToggleGroupType;
@@ -45,10 +41,6 @@ export type ToggleGroupProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// ToggleGroup Component
-// ============================================================================
 
 /**
  * ToggleGroup component - a set of toggle buttons where one or more can be pressed.
@@ -146,40 +138,41 @@ export type ToggleGroupProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleGroup {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  /** Emitted when value changes */
+  readonly valueChange = output<string | string[]>();
 
   /** The current selected value(s) */
   readonly value = model<string | string[]>('');
 
   /** Default value for uncontrolled mode */
   readonly defaultValue = input<string | string[]>('');
-
   /** Selection type: single or multiple */
   readonly type = input<ToggleGroupType>('single');
-
   /** The visual style variant of the toggle items */
   readonly variant = input<ToggleVariants['variant']>('default');
-
   /** The size of the toggle items */
   readonly size = input<ToggleVariants['size']>('default');
-
   /** Whether the toggle group is disabled */
   readonly disabled = input<boolean>(false);
-
   /** The orientation of the toggle group */
   readonly orientation = input<ToggleGroupOrientation>('horizontal');
-
   /** Whether to loop focus at boundaries */
   readonly loop = input<boolean>(true);
-
   /** Whether focus should follow selection in single mode */
   readonly rovingFocus = input<boolean>(true);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  /** Emitted when value changes */
-  readonly valueChange = output<string | string[]>();
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  /** Computed class combining base styles and custom classes */
+  protected readonly computedClass = computed(() =>
+    cn(
+      'flex items-center justify-center gap-1',
+      this.orientation() === 'vertical' && 'flex-col',
+      this.class(),
+    ),
+  );
 
   /** Context for child ToggleGroupItem components */
   readonly context: ToggleGroupContext = {
@@ -227,15 +220,6 @@ export class ToggleGroup {
     focusLast: () => this.focusItemByIndex(this.context.itemValues().length - 1),
   };
 
-  /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn(
-      'flex items-center justify-center gap-1',
-      this.orientation() === 'vertical' && 'flex-col',
-      this.class(),
-    ),
-  );
-
   ngOnChanges(): void {
     this.context.value.set(this.value());
     this.context.type.set(this.type());
@@ -267,21 +251,20 @@ export class ToggleGroup {
 
     this.focusItemByIndex(nextIndex);
   }
-
   /** Focus a toggle item by index */
   private focusItemByIndex(index: number): void {
     const values = this.context.itemValues();
     if (index < 0 || index >= values.length) return;
 
-    const value = values[index];
-    this.context.focusedValue.set(value);
+    const targetValue = values[index];
+    this.context.focusedValue.set(targetValue);
 
-    const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="toggle-group-item"][data-value="${value}"]`,
+    const toggleItem = this._elementRef.nativeElement.querySelector(
+      `[data-slot="toggle-group-item"][data-value="${targetValue}"]`,
     ) as HTMLElement;
 
-    if (item) {
-      item.focus();
+    if (toggleItem) {
+      toggleItem.focus();
     }
   }
 }

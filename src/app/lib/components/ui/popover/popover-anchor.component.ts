@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the PopoverAnchor component
  */
@@ -12,10 +8,6 @@ export interface PopoverAnchorProps {
    * @default false */
   asChild?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component PopoverAnchor

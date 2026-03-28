@@ -31,12 +31,13 @@ import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigat
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationMenuContent {
-  protected readonly context = inject(NAVIGATION_MENU_CONTEXT);
-  protected readonly itemContext = inject(NAVIGATION_MENU_ITEM_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(NAVIGATION_MENU_CONTEXT);
+  protected readonly itemContext = inject(NAVIGATION_MENU_ITEM_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -54,7 +55,7 @@ export class NavigationMenuContent {
 
   protected onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const hostElement = this.elementRef.nativeElement;
+    const hostElement = this._elementRef.nativeElement;
     const parent = hostElement.closest('NavigationMenuItem');
 
     if (parent && !parent.contains(target)) {
@@ -62,7 +63,6 @@ export class NavigationMenuContent {
       this.context.activeItem.set(null);
     }
   }
-
   protected onEscapeKey(): void {
     this.itemContext.open.set(false);
     this.context.activeItem.set(null);

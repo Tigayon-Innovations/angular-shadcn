@@ -1,10 +1,6 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export interface FormFieldContext {
   /** The name of the form field */
   name: WritableSignal<string>;
@@ -22,10 +18,6 @@ export interface FormContext {
   /** The reactive form group */
   form: WritableSignal<FormGroup | null>;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const FORM_FIELD_CONTEXT = new InjectionToken<FormFieldContext>('FormFieldContext');
 

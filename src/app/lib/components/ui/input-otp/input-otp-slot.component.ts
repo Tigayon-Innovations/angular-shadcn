@@ -26,29 +26,27 @@ import { INPUT_OTP_CONTEXT } from './input-otp-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOTPSlot {
-  private readonly context = inject(INPUT_OTP_CONTEXT, { optional: true });
-
   /** Index of this slot */
   readonly index = input.required<number>();
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  private readonly _context = inject(INPUT_OTP_CONTEXT, { optional: true });
+
   /** Character to display - reads from context value at this index */
   protected readonly char = computed(() => {
-    const value = this.context?.value() ?? '';
+    const value = this._context?.value() ?? '';
     return value[this.index()] ?? '';
   });
-
   /** Whether this slot is active - based on context activeIndex */
   protected readonly isActive = computed(() => {
-    const activeIndex = this.context?.activeIndex() ?? -1;
+    const activeIndex = this._context?.activeIndex() ?? -1;
     return activeIndex === this.index();
   });
-
   /** ARIA label for the slot */
   protected readonly ariaLabel = computed(() => {
-    const maxLength = this.context?.maxLength() ?? 6;
+    const maxLength = this._context?.maxLength() ?? 6;
     const position = this.index() + 1;
     const char = this.char();
     if (char) {
@@ -56,7 +54,6 @@ export class InputOTPSlot {
     }
     return `Digit ${position} of ${maxLength}: empty`;
   });
-
   protected readonly computedClass = computed(() =>
     cn(
       'relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',

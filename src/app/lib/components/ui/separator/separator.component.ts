@@ -1,10 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type SeparatorOrientation = 'horizontal' | 'vertical';
 
 export type SeparatorProps = {
@@ -19,10 +15,6 @@ export type SeparatorProps = {
   /** Additional CSS classes to apply */
   class?: string;
 };
-
-// ============================================================================
-// Separator Component
-// ============================================================================
 
 /**
  * Separator component creates a visual divider between content.

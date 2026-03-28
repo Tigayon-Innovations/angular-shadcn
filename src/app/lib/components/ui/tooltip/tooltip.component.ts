@@ -10,10 +10,6 @@ import { TOOLTIP_CONTEXT, type TooltipContextValue } from './tooltip-context';
 
 let tooltipIdCounter = 0;
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type TooltipState = 'open' | 'closed';
 
 /**
@@ -37,10 +33,6 @@ export interface TooltipProps {
    * @default false */
   disableHoverableContent?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Tooltip
@@ -115,35 +107,31 @@ export interface TooltipProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Tooltip implements TooltipContextValue {
-  /** The open state of the tooltip when initially rendered */
-  readonly defaultOpen = input<boolean>(false);
-
-  /** The controlled open state of the tooltip */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** The duration from when the pointer enters the trigger until the tooltip opens */
-  readonly delayDuration = 700;
-
-  /** How much time a user has to enter another trigger without incurring a delay again */
-  readonly skipDelayDuration = 300;
-
-  /** When true, trying to hover the content will result in the tooltip closing */
-  readonly disableHoverableContent = input<boolean>(false);
-
-  /** Event handler called when the open state changes */
-  readonly openChange = output<boolean>();
-
-  /** Unique ID for aria-describedby relationship */
-  readonly tooltipId = `tooltip-${++tooltipIdCounter}`;
-
-  readonly open = signal(false);
-
   constructor() {
     // Initialize from defaultOpen
     if (this.defaultOpen()) {
       this.open.set(true);
     }
   }
+
+  /** Event handler called when the open state changes */
+  readonly openChange = output<boolean>();
+
+  /** The open state of the tooltip when initially rendered */
+  readonly defaultOpen = input<boolean>(false);
+  /** The controlled open state of the tooltip */
+  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
+  /** When true, trying to hover the content will result in the tooltip closing */
+  readonly disableHoverableContent = input<boolean>(false);
+
+  readonly open = signal(false);
+
+  /** The duration from when the pointer enters the trigger until the tooltip opens */
+  readonly delayDuration = 700;
+  /** How much time a user has to enter another trigger without incurring a delay again */
+  readonly skipDelayDuration = 300;
+  /** Unique ID for aria-describedby relationship */
+  readonly tooltipId = `tooltip-${++tooltipIdCounter}`;
 
   setOpen(open: boolean): void {
     const controlled = this.controlledOpen();
@@ -152,7 +140,6 @@ export class Tooltip implements TooltipContextValue {
     }
     this.openChange.emit(open);
   }
-
   isOpen(): boolean {
     return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
   }

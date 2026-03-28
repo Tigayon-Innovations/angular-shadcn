@@ -23,16 +23,17 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogTrigger {
-  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** Render as child (for custom trigger elements) */
   readonly asChild = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();
     // Save trigger element for focus restoration when dialog closes
-    this.context.setTriggerElement(this.elementRef.nativeElement);
+    this.context.setTriggerElement(this._elementRef.nativeElement);
     this.context.setOpen(true);
   }
 }

@@ -11,10 +11,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { toggleVariants, type ToggleVariants } from './toggle-variants';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ToggleState = 'on' | 'off';
 
 export type ToggleProps = {
@@ -31,10 +27,6 @@ export type ToggleProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// Toggle Component
-// ============================================================================
 
 /**
  * Toggle component - a two-state button that can be on or off.
@@ -120,39 +112,49 @@ export type ToggleProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Toggle implements ControlValueAccessor {
-  /** Whether the toggle is pressed/on */
-  readonly pressed = model<boolean>(false);
-
-  /** Whether the toggle starts pressed (uncontrolled mode) */
-  readonly defaultPressed = input<boolean>(false);
-
-  /** The visual style variant of the toggle */
-  readonly variant = input<ToggleVariants['variant']>('default');
-
-  /** The size of the toggle */
-  readonly size = input<ToggleVariants['size']>('default');
-
-  /** Whether the toggle is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Additional CSS classes to apply */
-  readonly class = input<string>('');
-
-  /** Emitted when pressed state changes */
-  readonly pressedChange = output<boolean>();
-
-  /** ControlValueAccessor callbacks */
-  private onChange: (value: boolean) => void = () => {};
-  private onTouched: () => void = () => {};
-
-  /** Current state for data attribute */
-  protected readonly state = computed((): ToggleState => (this.pressed() ? 'on' : 'off'));
-
   constructor() {
     // Initialize from defaultPressed if provided
     if (this.defaultPressed()) {
       this.pressed.set(true);
     }
+  }
+
+  /** Emitted when pressed state changes */
+  readonly pressedChange = output<boolean>();
+
+  /** Whether the toggle is pressed/on */
+  readonly pressed = model<boolean>(false);
+
+  /** Whether the toggle starts pressed (uncontrolled mode) */
+  readonly defaultPressed = input<boolean>(false);
+  /** The visual style variant of the toggle */
+  readonly variant = input<ToggleVariants['variant']>('default');
+  /** The size of the toggle */
+  readonly size = input<ToggleVariants['size']>('default');
+  /** Whether the toggle is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Additional CSS classes to apply */
+  readonly class = input<string>('');
+
+  /** Current state for data attribute */
+  protected readonly state = computed((): ToggleState => (this.pressed() ? 'on' : 'off'));
+  /** Computed class combining variants and custom classes */
+  protected readonly computedClass = computed(() =>
+    cn(
+      toggleVariants({
+        variant: this.variant(),
+        size: this.size(),
+      }),
+      this.class(),
+    ),
+  );
+
+  /** ControlValueAccessor callbacks */
+  private onChange: (value: boolean) => void = () => {};
+  private onTouched: () => void = () => {};
+  setDisabledState?(isDisabled: boolean): void {
+    // Disabled state is managed by the disabled input
+    // Angular forms will call this but we use the input binding
   }
 
   /** Toggle the pressed state */
@@ -165,33 +167,14 @@ export class Toggle implements ControlValueAccessor {
       this.pressedChange.emit(newValue);
     }
   }
-
   // ControlValueAccessor implementation
   writeValue(value: boolean): void {
     this.pressed.set(value ?? false);
   }
-
   registerOnChange(fn: (value: boolean) => void): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-
-  setDisabledState?(isDisabled: boolean): void {
-    // Disabled state is managed by the disabled input
-    // Angular forms will call this but we use the input binding
-  }
-
-  /** Computed class combining variants and custom classes */
-  protected readonly computedClass = computed(() =>
-    cn(
-      toggleVariants({
-        variant: this.variant(),
-        size: this.size(),
-      }),
-      this.class(),
-    ),
-  );
 }

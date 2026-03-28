@@ -35,14 +35,13 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxTrigger {
-  protected readonly ChevronDownIcon = ChevronDown;
-  protected readonly context = inject(COMBOBOX_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   /** Whether to show the dropdown chevron icon */
   readonly showIcon = input<boolean>(false);
+
+  protected readonly context = inject(COMBOBOX_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -51,10 +50,11 @@ export class ComboboxTrigger {
     ),
   );
 
+  protected readonly ChevronDownIcon = ChevronDown;
+
   protected onClick(): void {
     this.context.onOpenChange(!this.context.open());
   }
-
   protected onKeyDown(event: KeyboardEvent): void {
     // Let the main combobox handle most keyboard events
     this.context.onKeyDown(event);

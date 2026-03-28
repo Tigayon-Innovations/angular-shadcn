@@ -32,34 +32,34 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarTrigger {
-  protected readonly context = inject(MENUBAR_CONTEXT);
-  protected readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
+  constructor() {
+    // Focus this trigger when it becomes the focused menu
+    effect(() => {
+      if (this.isFocused()) {
+        this._elementRef.nativeElement.focus();
+      }
+    });
+  }
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(MENUBAR_CONTEXT);
+  protected readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
 
   protected readonly isFocused = computed(() => {
     const menuIds = this.context.menuIds();
     const focusedIdx = this.context.focusedMenuIndex();
     return menuIds[focusedIdx] === this.menuContext.menuId;
   });
-
   protected readonly computedClass = computed(() =>
     cn(
       'flex cursor-default select-none items-center rounded-sm px-3 py-1 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
       this.class(),
     ),
   );
-
-  constructor() {
-    // Focus this trigger when it becomes the focused menu
-    effect(() => {
-      if (this.isFocused()) {
-        this.elementRef.nativeElement.focus();
-      }
-    });
-  }
 
   protected toggle(): void {
     this.menuContext.open.update((v) => !v);
@@ -71,7 +71,6 @@ export class MenubarTrigger {
       this.menuContext.focusedItemIndex.set(-1);
     }
   }
-
   protected onMouseEnter(): void {
     // If another menu is already open, open this one on hover
     const activeMenu = this.context.activeMenu();
@@ -81,7 +80,6 @@ export class MenubarTrigger {
       this.menuContext.focusedItemIndex.set(0);
     }
   }
-
   protected onKeydown(event: KeyboardEvent): void {
     switch (event.key) {
       case 'ArrowRight':
@@ -122,13 +120,11 @@ export class MenubarTrigger {
         break;
     }
   }
-
   private closeCurrentMenu(): void {
     // Close current menu by finding it through activeMenu
     this.menuContext.open.set(false);
     this.menuContext.focusedItemIndex.set(-1);
   }
-
   private openFocusedMenu(): void {
     const menuIds = this.context.menuIds();
     const focusedIdx = this.context.focusedMenuIndex();

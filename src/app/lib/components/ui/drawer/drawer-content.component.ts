@@ -57,16 +57,6 @@ import { DRAWER_CONTEXT } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerContent implements OnDestroy {
-  protected readonly context = inject(DRAWER_CONTEXT);
-  private readonly contentEl = viewChild<ElementRef<HTMLElement>>('contentEl');
-  private readonly injector = inject(Injector);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Previous body overflow style for restoration */
-  private previousBodyOverflow = '';
-
   constructor() {
     // Handle body scroll lock and focus restoration
     effect(() => {
@@ -77,7 +67,7 @@ export class DrawerContent implements OnDestroy {
           () => {
             this.focusFirstElement();
           },
-          { injector: this.injector },
+          { injector: this._injector },
         );
       } else {
         this.unlockBodyScroll();
@@ -86,9 +76,14 @@ export class DrawerContent implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.unlockBodyScroll();
-  }
+  private readonly contentEl = viewChild<ElementRef<HTMLElement>>('contentEl');
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _injector = inject(Injector);
+
+  protected readonly context = inject(DRAWER_CONTEXT);
 
   protected readonly computedClass = computed(() => {
     const directionClasses = {
@@ -109,11 +104,17 @@ export class DrawerContent implements OnDestroy {
     );
   });
 
+  /** Previous body overflow style for restoration */
+  private previousBodyOverflow = '';
+
+  ngOnDestroy(): void {
+    this.unlockBodyScroll();
+  }
+
   onOverlayClick(event: Event): void {
     event.stopPropagation();
     this.context.setOpen(false);
   }
-
   onEscapeKey(): void {
     this.context.setOpen(false);
   }
@@ -129,19 +130,16 @@ export class DrawerContent implements OnDestroy {
       }
     });
   }
-
   private restoreFocus(): void {
     const trigger = this.context.triggerElement();
     if (trigger) {
       setTimeout(() => trigger.focus());
     }
   }
-
   private lockBodyScroll(): void {
     this.previousBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
   }
-
   private unlockBodyScroll(): void {
     document.body.style.overflow = this.previousBodyOverflow;
   }

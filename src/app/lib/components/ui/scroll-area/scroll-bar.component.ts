@@ -1,10 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ScrollBarOrientation = 'vertical' | 'horizontal';
 
 /**
@@ -17,10 +13,6 @@ export interface ScrollBarProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component ScrollBar

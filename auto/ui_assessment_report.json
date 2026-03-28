@@ -1,0 +1,196 @@
+{
+  "summary": {
+    "total_files": 313,
+    "files_with_classes": 274,
+    "files_with_issues": 10,
+    "total_issues": 21,
+    "by_severity": {
+      "critical": 0,
+      "warning": 3,
+      "suggestion": 18
+    },
+    "by_category": {
+      "naming": 18,
+      "return_type": 1,
+      "ordering": 2
+    }
+  },
+  "files": [
+    {
+      "path": "app/lib/components/ui/chart/chart.component.ts",
+      "issues": [
+        {
+          "line": 152,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 169,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 205,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 233,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 266,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 276,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/collapsible/collapsible.component.ts",
+      "issues": [
+        {
+          "line": 80,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Boolean signal `_isOpen` should use is/has/can/should prefix"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/combobox/combobox-value.component.ts",
+      "issues": [
+        {
+          "line": 45,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `value` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/combobox/combobox.component.ts",
+      "issues": [
+        {
+          "line": 126,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Boolean signal `_isOpen` should use is/has/can/should prefix"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/data-table/data-table-content.component.ts",
+      "issues": [
+        {
+          "line": 182,
+          "category": "return_type",
+          "severity": "warning",
+          "message": "Method `getAriaSortValue()` missing explicit return type"
+        },
+        {
+          "line": 118,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 126,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `value` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 133,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        },
+        {
+          "line": 156,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `data` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/form/form-control.component.ts",
+      "issues": [
+        {
+          "line": 50,
+          "category": "ordering",
+          "severity": "warning",
+          "message": "`input` (order 6) appears after higher-order member (order 8). Expected canonical position."
+        },
+        {
+          "line": 52,
+          "category": "ordering",
+          "severity": "warning",
+          "message": "`private_inject` (order 7) appears after higher-order member (order 8). Expected canonical position."
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/input-otp/input-otp-slot.component.ts",
+      "issues": [
+        {
+          "line": 39,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `value` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/popover/popover-content.component.ts",
+      "issues": [
+        {
+          "line": 254,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `result` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/select/select-value.component.ts",
+      "issues": [
+        {
+          "line": 38,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Generic variable name `value` \u2014 use a more descriptive name"
+        }
+      ]
+    },
+    {
+      "path": "app/lib/components/ui/select/select.component.ts",
+      "issues": [
+        {
+          "line": 198,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Boolean signal `_isOpen` should use is/has/can/should prefix"
+        },
+        {
+          "line": 199,
+          "category": "naming",
+          "severity": "suggestion",
+          "message": "Boolean signal `_isDisabled` should use is/has/can/should prefix"
+        }
+      ]
+    }
+  ]
+}

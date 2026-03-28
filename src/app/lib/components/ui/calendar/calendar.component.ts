@@ -118,161 +118,40 @@ import { buttonVariants } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Calendar {
-  protected readonly ChevronLeftIcon = ChevronLeft;
-  protected readonly ChevronRightIcon = ChevronRight;
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
+  /** Date select event */
+  readonly onSelect = output<Date | undefined>();
+  /** Month change event */
+  readonly onMonthChange = output<Date>();
 
   /** Selected date */
   readonly selected = model<Date | undefined>(undefined);
 
   /** Mode - single, multiple, or range */
   readonly mode = input<'single' | 'multiple' | 'range'>('single');
-
   /** Number of months to display */
   readonly numberOfMonths = input<number>(1);
-
   /** Whether to show days outside current month */
   readonly showOutsideDays = input<boolean>(true);
-
   /** Disabled dates function */
   readonly disabled = input<((date: Date) => boolean) | undefined>(undefined);
-
   /** Accessible label for the calendar */
   readonly ariaLabel = input<string>('Calendar');
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Date select event */
-  readonly onSelect = output<Date | undefined>();
-
-  /** Month change event */
-  readonly onMonthChange = output<Date>();
-
-  protected readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-  protected readonly fullWeekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-
-  protected readonly currentMonth = signal(new Date());
+  private readonly _liveAnnouncer = inject(LiveAnnouncerService);
 
   protected readonly computedClass = computed(() => cn('w-full p-3', this.class()));
-
   protected readonly navButtonClass = computed(() =>
     cn(
       buttonVariants({ variant: 'outline' }),
       'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-neutral-800',
     ),
   );
-
   protected readonly monthYear = computed(() => {
     const date = this.currentMonth();
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   });
-
-  /** Get accessible label for a date */
-  protected getDateLabel(date: Date): string {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    };
-    const label = date.toLocaleDateString('en-US', options);
-
-    if (this.isToday(date)) {
-      return `${label}, today`;
-    }
-    if (this.isSelected(date)) {
-      return `${label}, selected`;
-    }
-    return label;
-  }
-
-  /** Check if date is today */
-  protected isToday(date: Date): boolean {
-    return this.isSameDay(date, new Date());
-  }
-
-  /** Get label for previous month button */
-  protected getPreviousMonthLabel(): string {
-    const current = this.currentMonth();
-    const prev = new Date(current.getFullYear(), current.getMonth() - 1, 1);
-    return prev.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  }
-
-  /** Get label for next month button */
-  protected getNextMonthLabel(): string {
-    const current = this.currentMonth();
-    const next = new Date(current.getFullYear(), current.getMonth() + 1, 1);
-    return next.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  }
-
-  /** Get tabindex for day button (roving tabindex) */
-  protected getDayTabIndex(day: { date: Date; isOutside: boolean; disabled: boolean }): number {
-    if (day.disabled || day.isOutside) return -1;
-    const selected = this.selected();
-    if (selected && this.isSameDay(day.date, selected)) return 0;
-    if (this.isToday(day.date)) return 0;
-    return -1;
-  }
-
-  /** Handle keyboard navigation within the calendar */
-  protected onDayKeydown(event: KeyboardEvent, currentDate: Date): void {
-    let newDate: Date | null = null;
-
-    switch (event.key) {
-      case 'ArrowLeft':
-        event.preventDefault();
-        newDate = new Date(currentDate);
-        newDate.setDate(newDate.getDate() - 1);
-        break;
-      case 'ArrowRight':
-        event.preventDefault();
-        newDate = new Date(currentDate);
-        newDate.setDate(newDate.getDate() + 1);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        newDate = new Date(currentDate);
-        newDate.setDate(newDate.getDate() - 7);
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        newDate = new Date(currentDate);
-        newDate.setDate(newDate.getDate() + 7);
-        break;
-      case 'Home':
-        event.preventDefault();
-        newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        break;
-      case 'End':
-        event.preventDefault();
-        newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        break;
-    }
-
-    if (newDate) {
-      // Check if we need to change months
-      if (newDate.getMonth() !== this.currentMonth().getMonth()) {
-        this.currentMonth.set(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
-      }
-      // Focus the new date after DOM update
-      setTimeout(() => {
-        const button = document.querySelector(
-          `[aria-label*="${newDate!.getDate()},"]`,
-        ) as HTMLElement;
-        button?.focus();
-      }, 0);
-    }
-  }
-
   protected readonly calendarWeeks = computed(() => {
     const date = this.currentMonth();
     const year = date.getFullYear();
@@ -322,6 +201,112 @@ export class Calendar {
     return weeks;
   });
 
+  protected readonly currentMonth = signal(new Date());
+
+  protected readonly ChevronLeftIcon = ChevronLeft;
+  protected readonly ChevronRightIcon = ChevronRight;
+  protected readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  protected readonly fullWeekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  /** Get accessible label for a date */
+  protected getDateLabel(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    };
+    const label = date.toLocaleDateString('en-US', options);
+
+    if (this.isToday(date)) {
+      return `${label}, today`;
+    }
+    if (this.isSelected(date)) {
+      return `${label}, selected`;
+    }
+    return label;
+  }
+  /** Check if date is today */
+  protected isToday(date: Date): boolean {
+    return this.isSameDay(date, new Date());
+  }
+  /** Get label for previous month button */
+  protected getPreviousMonthLabel(): string {
+    const current = this.currentMonth();
+    const prev = new Date(current.getFullYear(), current.getMonth() - 1, 1);
+    return prev.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  }
+  /** Get label for next month button */
+  protected getNextMonthLabel(): string {
+    const current = this.currentMonth();
+    const next = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+    return next.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  }
+  /** Get tabindex for day button (roving tabindex) */
+  protected getDayTabIndex(day: { date: Date; isOutside: boolean; disabled: boolean }): number {
+    if (day.disabled || day.isOutside) return -1;
+    const selected = this.selected();
+    if (selected && this.isSameDay(day.date, selected)) return 0;
+    if (this.isToday(day.date)) return 0;
+    return -1;
+  }
+  /** Handle keyboard navigation within the calendar */
+  protected onDayKeydown(event: KeyboardEvent, currentDate: Date): void {
+    let newDate: Date | null = null;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault();
+        newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() - 1);
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + 1);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() - 7);
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + 7);
+        break;
+      case 'Home':
+        event.preventDefault();
+        newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        break;
+      case 'End':
+        event.preventDefault();
+        newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        break;
+    }
+
+    if (newDate) {
+      // Check if we need to change months
+      if (newDate.getMonth() !== this.currentMonth().getMonth()) {
+        this.currentMonth.set(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
+      }
+      // Focus the new date after DOM update
+      setTimeout(() => {
+        const button = document.querySelector(
+          `[aria-label*="${newDate!.getDate()},"]`,
+        ) as HTMLElement;
+        button?.focus();
+      }, 0);
+    }
+  }
   protected getDayClass(day: { date: Date; isOutside: boolean; disabled: boolean }): string {
     const todayCheck = this.isSameDay(day.date, new Date());
     const selected = this.isSelected(day.date);
@@ -337,35 +322,30 @@ export class Calendar {
       day.disabled && 'text-muted-foreground opacity-50',
     );
   }
-
   protected isSelected(date: Date): boolean {
     const selected = this.selected();
     if (!selected) return false;
     return this.isSameDay(date, selected);
   }
-
   protected selectDate(date: Date): void {
     this.selected.set(date);
     this.onSelect.emit(date);
-    this.liveAnnouncer.announce(`Selected ${this.getDateLabel(date)}`, 'polite');
+    this._liveAnnouncer.announce(`Selected ${this.getDateLabel(date)}`, 'polite');
   }
-
   protected previousMonth(): void {
     const current = this.currentMonth();
     const newDate = new Date(current.getFullYear(), current.getMonth() - 1, 1);
     this.currentMonth.set(newDate);
     this.onMonthChange.emit(newDate);
-    this.liveAnnouncer.announce(this.getPreviousMonthLabel(), 'polite');
+    this._liveAnnouncer.announce(this.getPreviousMonthLabel(), 'polite');
   }
-
   protected nextMonth(): void {
     const current = this.currentMonth();
     const newDate = new Date(current.getFullYear(), current.getMonth() + 1, 1);
     this.currentMonth.set(newDate);
     this.onMonthChange.emit(newDate);
-    this.liveAnnouncer.announce(this.getNextMonthLabel(), 'polite');
+    this._liveAnnouncer.announce(this.getNextMonthLabel(), 'polite');
   }
-
   private isSameDay(date1: Date, date2: Date): boolean {
     return (
       date1.getFullYear() === date2.getFullYear() &&

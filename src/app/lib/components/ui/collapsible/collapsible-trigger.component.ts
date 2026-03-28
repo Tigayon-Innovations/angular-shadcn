@@ -26,10 +26,10 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollapsibleTrigger {
-  protected readonly collapsible = inject(COLLAPSIBLE_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly collapsible = inject(COLLAPSIBLE_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn('cursor-pointer', 'disabled:pointer-events-none disabled:opacity-50', this.class()),
@@ -38,7 +38,6 @@ export class CollapsibleTrigger {
   protected onClick(): void {
     this.collapsible.toggle();
   }
-
   protected onSpace(event: Event): void {
     event.preventDefault();
     this.onClick();

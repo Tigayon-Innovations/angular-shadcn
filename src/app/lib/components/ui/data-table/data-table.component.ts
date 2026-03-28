@@ -49,32 +49,46 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable<T = unknown> {
+  constructor() {
+    // Sync data
+    effect(() => {
+      this.context.data.set(this.data());
+    });
+
+    // Sync columns
+    effect(() => {
+      this.context.columns.set(this.columns());
+      // Initialize column visibility
+      const visibility: ColumnVisibilityState = {};
+      this.columns().forEach((col) => {
+        visibility[col.id] = true;
+      });
+      this.context.columnVisibility.set(visibility);
+    });
+  }
+
+  /** Sorting change event */
+  readonly sortingChange = output<SortingState[]>();
+  /** Row selection change event */
+  readonly rowSelectionChange = output<RowSelectionState>();
+
   /** The data to display */
   readonly data = input.required<T[]>();
-
   /** Column definitions */
   readonly columns = input.required<ColumnDef<T>[]>();
 
   /** Page size options */
   readonly pageSizeOptions = input<number[]>([10, 20, 30, 40, 50]);
-
   /** Initial page size */
   readonly initialPageSize = input<number>(10);
-
   /** Enable row selection */
   readonly enableRowSelection = input<boolean>(false);
-
   /** Enable multi-row selection */
   readonly enableMultiRowSelection = input<boolean>(true);
-
-  /** Sorting change event */
-  readonly sortingChange = output<SortingState[]>();
-
-  /** Row selection change event */
-  readonly rowSelectionChange = output<RowSelectionState>();
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly computedClass = computed(() => cn('w-full space-y-4', this.class()));
 
   /** Context for child components */
   readonly context: DataTableContext<T> = {
@@ -106,24 +120,4 @@ export class DataTable<T = unknown> {
       this.context.pageSize.set(pageSize);
     },
   };
-
-  constructor() {
-    // Sync data
-    effect(() => {
-      this.context.data.set(this.data());
-    });
-
-    // Sync columns
-    effect(() => {
-      this.context.columns.set(this.columns());
-      // Initialize column visibility
-      const visibility: ColumnVisibilityState = {};
-      this.columns().forEach((col) => {
-        visibility[col.id] = true;
-      });
-      this.context.columnVisibility.set(visibility);
-    });
-  }
-
-  protected readonly computedClass = computed(() => cn('w-full space-y-4', this.class()));
 }

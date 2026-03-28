@@ -1,9 +1,5 @@
 import { InjectionToken, type WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Orientation of the navigation menu
  */
@@ -13,10 +9,6 @@ export type NavigationMenuOrientation = 'horizontal' | 'vertical';
  * Direction for RTL support
  */
 export type NavigationMenuDirection = 'ltr' | 'rtl';
-
-// ============================================================================
-// Context Interfaces
-// ============================================================================
 
 /**
  * Context value for the NavigationMenu component

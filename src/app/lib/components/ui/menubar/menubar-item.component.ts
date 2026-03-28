@@ -23,20 +23,18 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarItem {
-  private readonly context = inject(MENUBAR_CONTEXT);
-  private readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
-
-  /** Whether the item is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Whether the item is inset (extra padding) */
-  readonly inset = input<boolean>(false);
+  /** Select event */
+  readonly onSelect = output<void>();
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+  /** Whether the item is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Whether the item is inset (extra padding) */
+  readonly inset = input<boolean>(false);
 
-  /** Select event */
-  readonly onSelect = output<void>();
+  private readonly _context = inject(MENUBAR_CONTEXT);
+  private readonly _menuContext = inject(MENUBAR_MENU_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -53,8 +51,8 @@ export class MenubarItem {
       return;
     }
     this.onSelect.emit();
-    this.menuContext.open.set(false);
-    this.context.activeMenu.set(null);
-    this.menuContext.focusedItemIndex.set(-1);
+    this._menuContext.open.set(false);
+    this._context.activeMenu.set(null);
+    this._menuContext.focusedItemIndex.set(-1);
   }
 }

@@ -6,10 +6,6 @@ import { ToastTitle } from './toast-title.component';
 import { Toast } from './toast.component';
 import { ToastService, type ToastPosition } from './toast.service';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the Toaster component
  */
@@ -20,10 +16,6 @@ export interface ToasterProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Toaster
@@ -98,13 +90,13 @@ export interface ToasterProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Toaster {
-  protected readonly toastService = inject(ToastService);
-
   /** Position of the toast container */
   readonly position = input<ToastPosition>('bottom-right');
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly toastService = inject(ToastService);
 
   protected readonly computedClass = computed(() => {
     const positionClasses: Record<ToastPosition, string> = {

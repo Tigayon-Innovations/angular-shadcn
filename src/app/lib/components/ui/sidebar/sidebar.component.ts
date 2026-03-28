@@ -61,25 +61,23 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
-  protected readonly context = inject(SIDEBAR_CONTEXT);
-
   /** Side of the screen */
   readonly side = input<SidebarSide>('left');
 
   /** Variant style */
   readonly variant = input<SidebarVariant>('sidebar');
-
   /** Collapsible behavior */
   readonly collapsible = input<SidebarCollapsible>('offcanvas');
 
   /** Accessible label for the sidebar landmark */
   readonly ariaLabel = input<string>('Sidebar');
-
   /** Accessible label for the navigation within */
   readonly navLabel = input<string>('Main navigation');
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(SIDEBAR_CONTEXT);
 
   protected readonly computedGapClass = computed(() =>
     cn(
@@ -91,7 +89,6 @@ export class Sidebar {
         : 'group-data-[collapsible=icon]/sidebar-wrapper:w-[--sidebar-width-icon]',
     ),
   );
-
   protected readonly computedClass = computed(() =>
     cn(
       'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',
@@ -104,13 +101,11 @@ export class Sidebar {
       this.class(),
     ),
   );
-
   protected readonly computedInnerClass = computed(() =>
     cn(
       'flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]/sidebar-wrapper:rounded-lg group-data-[variant=floating]/sidebar-wrapper:border group-data-[variant=floating]/sidebar-wrapper:border-sidebar-border group-data-[variant=floating]/sidebar-wrapper:shadow',
     ),
   );
-
   protected readonly computedMobileClass = computed(() =>
     cn(
       'fixed inset-y-0 z-50 flex h-full w-[--sidebar-width] flex-col bg-sidebar p-0 text-sidebar-foreground',

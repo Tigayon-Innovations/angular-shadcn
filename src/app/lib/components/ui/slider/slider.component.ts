@@ -13,10 +13,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type SliderOrientation = 'horizontal' | 'vertical';
 
 export type SliderProps = {
@@ -43,10 +39,6 @@ export type SliderProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// Slider Component
-// ============================================================================
 
 /**
  * Slider component for range selection.
@@ -176,73 +168,52 @@ export class Slider implements ControlValueAccessor {
   private readonly thumb = viewChild<ElementRef<HTMLElement>>('thumb');
   private readonly elementRef = viewChild<ElementRef<HTMLElement>>('slider');
 
+  /** Emitted when value changes */
+  readonly valueChange = output<number>();
+  /** Emitted when value change is committed (on release) */
+  readonly valueCommit = output<number>();
+
   /** The current slider value */
   readonly value = model<number>(0);
 
   /** The default value for uncontrolled mode */
   readonly defaultValue = input<number>(0);
-
   /** The minimum value */
   readonly min = input<number>(0);
-
   /** The maximum value */
   readonly max = input<number>(100);
-
   /** The step increment */
   readonly step = input<number>(1);
-
   /** Whether the slider is disabled via input */
   readonly disabled = input<boolean>(false);
-
   /** The orientation of the slider */
   readonly orientation = input<SliderOrientation>('horizontal');
-
   /** Whether the direction is inverted */
   readonly inverted = input<boolean>(false);
-
   /** The name for form submission */
   readonly name = input<string>();
-
   /** Function to get value label for accessibility */
   readonly getAriaValueText = input<((value: number) => string) | undefined>(undefined);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
-  /** Emitted when value changes */
-  readonly valueChange = output<number>();
-
-  /** Emitted when value change is committed (on release) */
-  readonly valueCommit = output<number>();
-
-  /** Whether the slider is disabled via forms */
-  private readonly formsDisabled = signal<boolean>(false);
-
   /** Whether the slider is disabled (either via input or forms) */
-  readonly isDisabled = computed(() => this.disabled() || this.formsDisabled());
-
+  readonly isDisabled = computed(() => this.disabled() || this.isFormsDisabled());
   /** Whether the slider is horizontal */
   protected readonly isHorizontal = computed(() => this.orientation() === 'horizontal');
-
-  /** ControlValueAccessor callbacks */
-  private onChange: (value: number) => void = () => {};
-  private onTouched: () => void = () => {};
-
   /** Calculate percentage position */
   protected readonly percentage = computed(() => {
-    const val = this.value();
+    const currentValue = this.value();
     const minVal = this.min();
     const maxVal = this.max();
-    const percent = ((val - minVal) / (maxVal - minVal)) * 100;
+    const percent = ((currentValue - minVal) / (maxVal - minVal)) * 100;
     return this.inverted() ? 100 - percent : percent;
   });
-
   /** Generate aria-valuetext */
   protected readonly computedAriaValueText = computed(() => {
     const fn = this.getAriaValueText();
     return fn ? fn(this.value()) : undefined;
   });
-
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
@@ -252,7 +223,6 @@ export class Slider implements ControlValueAccessor {
       this.class(),
     ),
   );
-
   /** Track class */
   protected readonly trackClass = computed(() =>
     cn(
@@ -260,12 +230,10 @@ export class Slider implements ControlValueAccessor {
       this.isHorizontal() ? 'h-1.5 w-full grow' : 'w-1.5 h-full grow',
     ),
   );
-
   /** Range class */
   protected readonly rangeClass = computed(() =>
     cn('bg-primary absolute', this.isHorizontal() ? 'h-full' : 'w-full bottom-0'),
   );
-
   /** Thumb class */
   protected readonly thumbClass = computed(() =>
     cn(
@@ -280,62 +248,30 @@ export class Slider implements ControlValueAccessor {
     ),
   );
 
+  /** Whether the slider is disabled via forms */
+  private readonly isFormsDisabled = signal<boolean>(false);
+
+  /** ControlValueAccessor callbacks */
+  private onChange: (value: number) => void = () => {};
+  private onTouched: () => void = () => {};
+
   // ControlValueAccessor implementation
   writeValue(value: number): void {
     this.value.set(value ?? this.defaultValue());
   }
-
   registerOnChange(fn: (value: number) => void): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-
   setDisabledState(isDisabled: boolean): void {
-    this.formsDisabled.set(isDisabled);
+    this.isFormsDisabled.set(isDisabled);
   }
-
   /** Handle blur for forms touched state */
   onBlur(): void {
     this.onTouched();
   }
-
-  /** Clamp and step a value */
-  private clampValue(rawValue: number): number {
-    const stepValue = this.step();
-    const steppedValue = Math.round(rawValue / stepValue) * stepValue;
-    return Math.max(this.min(), Math.min(this.max(), steppedValue));
-  }
-
-  /** Update value from position */
-  private updateValueFromPosition(clientPos: number, rect: DOMRect, isVertical: boolean): void {
-    if (this.isDisabled()) return;
-
-    let percentage: number;
-    if (isVertical) {
-      percentage = 1 - (clientPos - rect.top) / rect.height;
-    } else {
-      percentage = (clientPos - rect.left) / rect.width;
-    }
-
-    if (this.inverted()) {
-      percentage = 1 - percentage;
-    }
-
-    percentage = Math.max(0, Math.min(1, percentage));
-    const range = this.max() - this.min();
-    const rawValue = this.min() + percentage * range;
-    const newValue = this.clampValue(rawValue);
-
-    if (newValue !== this.value()) {
-      this.value.set(newValue);
-      this.onChange(newValue);
-      this.valueChange.emit(newValue);
-    }
-  }
-
   /** Handle mouse down */
   onMouseDown(event: MouseEvent): void {
     if (this.isDisabled() || event.button !== 0) return;
@@ -364,7 +300,6 @@ export class Slider implements ControlValueAccessor {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   }
-
   /** Handle touch start */
   onTouchStart(event: TouchEvent): void {
     if (this.isDisabled()) return;
@@ -391,7 +326,6 @@ export class Slider implements ControlValueAccessor {
     document.addEventListener('touchmove', onTouchMove);
     document.addEventListener('touchend', onTouchEnd);
   }
-
   /** Handle keyboard navigation */
   onKeyDown(event: KeyboardEvent): void {
     if (this.isDisabled()) return;
@@ -435,6 +369,39 @@ export class Slider implements ControlValueAccessor {
 
     event.preventDefault();
     newValue = this.clampValue(newValue);
+
+    if (newValue !== this.value()) {
+      this.value.set(newValue);
+      this.onChange(newValue);
+      this.valueChange.emit(newValue);
+    }
+  }
+
+  /** Clamp and step a value */
+  private clampValue(rawValue: number): number {
+    const stepValue = this.step();
+    const steppedValue = Math.round(rawValue / stepValue) * stepValue;
+    return Math.max(this.min(), Math.min(this.max(), steppedValue));
+  }
+  /** Update value from position */
+  private updateValueFromPosition(clientPos: number, rect: DOMRect, isVertical: boolean): void {
+    if (this.isDisabled()) return;
+
+    let percentage: number;
+    if (isVertical) {
+      percentage = 1 - (clientPos - rect.top) / rect.height;
+    } else {
+      percentage = (clientPos - rect.left) / rect.width;
+    }
+
+    if (this.inverted()) {
+      percentage = 1 - percentage;
+    }
+
+    percentage = Math.max(0, Math.min(1, percentage));
+    const range = this.max() - this.min();
+    const rawValue = this.min() + percentage * range;
+    const newValue = this.clampValue(rawValue);
 
     if (newValue !== this.value()) {
       this.value.set(newValue);

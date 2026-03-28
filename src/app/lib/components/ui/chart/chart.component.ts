@@ -119,43 +119,38 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Chart {
-  private readonly context = inject(CHART_CONTEXT, { optional: true });
-
   /** Chart type */
   readonly type = input<ChartType>('bar');
 
   /** Data points for the chart */
   readonly data = input<ChartDataPoint[]>([]);
-
   /** Series data for multi-series charts */
   readonly series = input<ChartSeries[]>([]);
 
   /** Chart width */
   readonly width = input<number>(400);
-
   /** Chart height */
   readonly height = input<number>(300);
 
   /** Show X axis */
   readonly showXAxis = input<boolean>(true);
-
   /** Show Y axis */
   readonly showYAxis = input<boolean>(true);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
+  private readonly _context = inject(CHART_CONTEXT, { optional: true });
 
+  protected readonly viewBox = computed(() => `0 0 ${this.width()} ${this.height()}`);
   protected readonly primaryColor = computed(() => {
-    const config = this.context?.config() || {};
+    const config = this._context?.config() || {};
     const firstKey = Object.keys(config)[0];
     return config[firstKey]?.color || CHART_COLORS.chart1;
   });
-
   protected readonly barData = computed(() => {
     const data = this.data();
-    const config = this.context?.config() || {};
+    const config = this._context?.config() || {};
     const w = this.width();
     const h = this.height();
     const padding = 40;
@@ -170,7 +165,6 @@ export class Chart {
       color: d.color || config[d.label]?.color || CHART_COLORS.chart1,
     }));
   });
-
   protected readonly linePoints = computed(() => {
     const data = this.data();
     const w = this.width();
@@ -183,7 +177,6 @@ export class Chart {
       y: padding + (h - padding * 2) * (1 - d.value / maxValue),
     }));
   });
-
   protected readonly linePath = computed(() => {
     const points = this.linePoints();
     if (points.length === 0) return '';
@@ -195,7 +188,6 @@ export class Chart {
         .join('')
     );
   });
-
   protected readonly areaPath = computed(() => {
     const points = this.linePoints();
     const h = this.height();
@@ -209,10 +201,9 @@ export class Chart {
 
     return `${linePath} L ${lastX} ${bottomY} L ${firstX} ${bottomY} Z`;
   });
-
   protected readonly pieSlices = computed(() => {
     const data = this.data();
-    const config = this.context?.config() || {};
+    const config = this._context?.config() || {};
     const total = data.reduce((sum, d) => sum + d.value, 0);
     const cx = this.width() / 2;
     const cy = this.height() / 2;
@@ -238,10 +229,9 @@ export class Chart {
       };
     });
   });
-
   protected readonly donutSlices = computed(() => {
     const data = this.data();
-    const config = this.context?.config() || {};
+    const config = this._context?.config() || {};
     const total = data.reduce((sum, d) => sum + d.value, 0);
     const cx = this.width() / 2;
     const cy = this.height() / 2;
@@ -272,7 +262,6 @@ export class Chart {
       };
     });
   });
-
   protected readonly xAxisLabels = computed(() => {
     const data = this.data();
     const w = this.width();
@@ -283,7 +272,6 @@ export class Chart {
       text: d.label,
     }));
   });
-
   protected readonly yAxisLabels = computed(() => {
     const data = this.data();
     const h = this.height();
@@ -296,6 +284,5 @@ export class Chart {
       text: String(Math.round(maxValue * (1 - i / steps))),
     }));
   });
-
   protected readonly computedClass = computed(() => cn('w-full h-full', this.class()));
 }

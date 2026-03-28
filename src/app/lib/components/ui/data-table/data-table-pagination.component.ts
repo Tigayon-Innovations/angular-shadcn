@@ -79,56 +79,48 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTablePagination {
-  protected readonly context = inject(DATA_TABLE_CONTEXT);
-  protected readonly icons = { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight };
-
   /** Page size options */
   readonly pageSizeOptions = input<number[]>([10, 20, 30, 40, 50]);
 
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  protected readonly totalCount = computed(() => this.context.data().length);
+  protected readonly context = inject(DATA_TABLE_CONTEXT);
 
+  protected readonly totalCount = computed(() => this.context.data().length);
   protected readonly selectedCount = computed(
     () =>
       Object.keys(this.context.rowSelection()).filter((k) => this.context.rowSelection()[k]).length,
   );
-
   protected readonly pageCount = computed(() => {
     const total = this.totalCount();
     const pageSize = this.context.pageSize();
     return Math.ceil(total / pageSize);
   });
-
   protected readonly canPreviousPage = computed(() => this.context.pageIndex() > 0);
-
   protected readonly canNextPage = computed(() => this.context.pageIndex() < this.pageCount() - 1);
-
   protected readonly computedClass = computed(() =>
     cn('flex items-center justify-end space-x-2 py-4', this.class()),
   );
+
+  protected readonly icons = { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight };
 
   protected onPageSizeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const pageSize = parseInt(target.value, 10);
     this.context.onPaginationChange(0, pageSize);
   }
-
   protected firstPage(): void {
     this.context.onPaginationChange(0, this.context.pageSize());
   }
-
   protected previousPage(): void {
     const newIndex = Math.max(0, this.context.pageIndex() - 1);
     this.context.onPaginationChange(newIndex, this.context.pageSize());
   }
-
   protected nextPage(): void {
     const newIndex = Math.min(this.pageCount() - 1, this.context.pageIndex() + 1);
     this.context.onPaginationChange(newIndex, this.context.pageSize());
   }
-
   protected lastPage(): void {
     this.context.onPaginationChange(this.pageCount() - 1, this.context.pageSize());
   }

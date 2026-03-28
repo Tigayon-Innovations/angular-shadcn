@@ -27,36 +27,24 @@ import { segmentedItemVariants } from './segmented-variants'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SegmentedItem {
-    private readonly context = inject(SEGMENTED_CONTEXT, { optional: true })
-
     /** The value of this item */
     readonly value = input.required<string>()
 
     /** Whether this item is disabled */
     readonly disabled = input<boolean>(false)
-
     /** ARIA role to apply on the segmented item */
     readonly role = input<'tab' | 'button'>('tab')
-
     /** Additional CSS classes to apply */
     readonly class = input<string>('')
 
-    /** Whether this item is selected */
-    protected readonly isSelected = computed(() => this.context?.value() === this.value())
+    private readonly _context = inject(SEGMENTED_CONTEXT, { optional: true })
 
+    /** Whether this item is selected */
+    protected readonly isSelected = computed(() => this._context?.value() === this.value())
     /** Effective ARIA role for this item */
     protected readonly itemRole = computed(() => this.role())
-
     /** Whether this item is disabled */
-    protected readonly isDisabled = computed(() => this.disabled() || this.context?.disabled())
-
-    /** Handle click */
-    protected onClick(): void {
-        if (!this.isDisabled()) {
-            this.context?.onValueChange(this.value())
-        }
-    }
-
+    protected readonly isDisabled = computed(() => this.disabled() || this._context?.disabled())
     /** Computed class combining variants and custom classes */
     protected readonly computedClass = computed(() =>
         cn(
@@ -66,4 +54,11 @@ export class SegmentedItem {
             this.class(),
         ),
     )
+
+    /** Handle click */
+    protected onClick(): void {
+        if (!this.isDisabled()) {
+            this._context?.onValueChange(this.value())
+        }
+    }
 }

@@ -38,21 +38,19 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarCheckboxItem {
-  private readonly context = inject(MENUBAR_CONTEXT);
-  private readonly menuContext = inject(MENUBAR_MENU_CONTEXT);
-  protected readonly CheckIcon = Check;
+  /** Checked change event */
+  readonly onCheckedChange = output<boolean>();
 
   /** Whether the checkbox is checked */
   readonly checked = model<boolean>(false);
 
+  /** Additional CSS classes */
+  readonly class = input<string>('');
   /** Whether the item is disabled */
   readonly disabled = input<boolean>(false);
 
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Checked change event */
-  readonly onCheckedChange = output<boolean>();
+  private readonly _context = inject(MENUBAR_CONTEXT);
+  private readonly _menuContext = inject(MENUBAR_MENU_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -61,6 +59,8 @@ export class MenubarCheckboxItem {
       this.class(),
     ),
   );
+
+  protected readonly CheckIcon = Check;
 
   protected handleClick(event: Event): void {
     if (this.disabled()) {

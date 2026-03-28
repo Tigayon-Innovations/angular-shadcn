@@ -12,10 +12,6 @@ import {
 } from '@angular/core';
 import { RADIO_GROUP_CONTEXT } from './radio-group-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type RadioGroupItemProps = {
   /** The unique value for this radio item */
   value: string;
@@ -28,10 +24,6 @@ export type RadioGroupItemProps = {
   /** Additional CSS classes */
   class?: string;
 };
-
-// ============================================================================
-// RadioGroupItem Component
-// ============================================================================
 
 /**
  * RadioGroupItem component - individual radio option within a group.
@@ -127,44 +119,38 @@ export type RadioGroupItemProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroupItem implements OnInit, OnDestroy {
-  protected readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
   private readonly buttonElement = viewChild<ElementRef<HTMLButtonElement>>('buttonElement');
-
-  /** The id for the radio button - used for label association */
-  readonly id = input<string>();
 
   /** The value of this radio option */
   readonly value = input.required<string>();
 
+  /** The id for the radio button - used for label association */
+  readonly id = input<string>();
   /** Whether this radio is disabled */
   readonly disabled = input<boolean>(false);
-
   /** Whether this radio is required (inherited from group if not set) */
   readonly required = input<boolean | undefined>(undefined);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  protected readonly context = inject(RADIO_GROUP_CONTEXT, { optional: true });
 
   /** Whether this item is checked */
   protected readonly isChecked = computed(() => {
     return this.context?.value() === this.value();
   });
-
   /** State for data attribute */
   protected readonly state = computed(() => (this.isChecked() ? 'checked' : 'unchecked'));
-
   /** Whether this item is disabled */
   protected readonly isDisabled = computed(() => {
     return this.disabled() || this.context?.disabled() || false;
   });
-
   /** Whether this item is required */
   protected readonly isRequired = computed(() => {
     const explicitRequired = this.required();
     if (explicitRequired !== undefined) return explicitRequired;
     return this.context?.required() || false;
   });
-
   /**
    * Roving tabindex: only the checked item (or first item if none checked) is tabbable.
    */
@@ -185,6 +171,24 @@ export class RadioGroupItem implements OnInit, OnDestroy {
 
     return -1;
   });
+  /** Computed class for wrapper */
+  protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()));
+  /** Computed radio visual class */
+  protected readonly radioClass = computed(() =>
+    cn(
+      // Base styles
+      'aspect-square size-4 shrink-0 rounded-full border shadow-xs',
+      'inline-flex items-center justify-center cursor-pointer',
+      'transition-[color,box-shadow] outline-none',
+      // Focus styles
+      'focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:border-ring',
+      // State styles
+      'border-input text-primary',
+      'data-[state=checked]:border-primary',
+      // Disabled styles
+      'disabled:cursor-not-allowed disabled:opacity-50',
+    ),
+  );
 
   ngOnInit(): void {
     // Register this item with the group
@@ -195,7 +199,6 @@ export class RadioGroupItem implements OnInit, OnDestroy {
       return values;
     });
   }
-
   ngOnDestroy(): void {
     // Unregister this item from the group
     this.context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
@@ -207,12 +210,10 @@ export class RadioGroupItem implements OnInit, OnDestroy {
       this.context?.setValue(this.value());
     }
   }
-
   /** Focus the button element */
   focus(): void {
     this.buttonElement()?.nativeElement.focus();
   }
-
   /** Handle keyboard navigation */
   onKeyDown(event: KeyboardEvent): void {
     if (this.isDisabled() || !this.context) return;
@@ -261,24 +262,4 @@ export class RadioGroupItem implements OnInit, OnDestroy {
         break;
     }
   }
-
-  /** Computed class for wrapper */
-  protected readonly computedClass = computed(() => cn('relative inline-flex', this.class()));
-
-  /** Computed radio visual class */
-  protected readonly radioClass = computed(() =>
-    cn(
-      // Base styles
-      'aspect-square size-4 shrink-0 rounded-full border shadow-xs',
-      'inline-flex items-center justify-center cursor-pointer',
-      'transition-[color,box-shadow] outline-none',
-      // Focus styles
-      'focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:border-ring',
-      // State styles
-      'border-input text-primary',
-      'data-[state=checked]:border-primary',
-      // Disabled styles
-      'disabled:cursor-not-allowed disabled:opacity-50',
-    ),
-  );
 }

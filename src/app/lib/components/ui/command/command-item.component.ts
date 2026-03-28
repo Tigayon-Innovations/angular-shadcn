@@ -40,64 +40,11 @@ let itemIndexCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandItem implements OnInit, OnDestroy {
-  protected readonly context = inject(COMMAND_CONTEXT);
-  private readonly elementRef = inject(ElementRef);
-
-  readonly itemIndex = itemIndexCounter++;
-  readonly itemId = `command-item-${this.itemIndex}`;
-
-  /** Unique value for this item */
-  readonly value = input<string>('');
-
-  /** Keywords for search filtering */
-  readonly keywords = input<string[]>([]);
-
-  /** Whether the item is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Select event emitted when item is clicked */
-  readonly onSelect = output<string>();
-
-  /** Whether item matches current search filter */
-  protected readonly isVisible = computed(() => {
-    return this.context.shouldShowItem(this.value(), this.keywords());
-  });
-
-  /** Get visible index among shown items */
-  protected readonly visibleIndex = computed(() => {
-    if (!this.isVisible()) return -1;
-
-    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
-    if (parent) {
-      const visibleItems = Array.from(parent.querySelectorAll('CommandItem:not([hidden])'));
-      return visibleItems.indexOf(this.elementRef.nativeElement);
-    }
-    return this.localIndex;
-  });
-
-  protected readonly isFocused = computed(() => {
-    const focusedIdx = this.context.focusedIndex();
-    return this.isVisible() && this.getLocalIndex() === focusedIdx;
-  });
-
-  private localIndex = -1;
-
-  protected readonly computedClass = computed(() =>
-    cn(
-      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
-      !this.disabled() && 'cursor-pointer hover:bg-accent hover:text-accent-foreground',
-      this.class(),
-    ),
-  );
-
   constructor() {
     // Scroll into view when focused
     effect(() => {
       if (this.isFocused()) {
-        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
+        this._elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
       }
     });
 
@@ -108,10 +55,56 @@ export class CommandItem implements OnInit, OnDestroy {
     });
   }
 
+  /** Select event emitted when item is clicked */
+  readonly onSelect = output<string>();
+
+  /** Unique value for this item */
+  readonly value = input<string>('');
+  /** Keywords for search filtering */
+  readonly keywords = input<string[]>([]);
+  /** Whether the item is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _elementRef = inject(ElementRef);
+
+  protected readonly context = inject(COMMAND_CONTEXT);
+
+  /** Whether item matches current search filter */
+  protected readonly isVisible = computed(() => {
+    return this.context.shouldShowItem(this.value(), this.keywords());
+  });
+  /** Get visible index among shown items */
+  protected readonly visibleIndex = computed(() => {
+    if (!this.isVisible()) return -1;
+
+    const parent = this._elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    if (parent) {
+      const visibleItems = Array.from(parent.querySelectorAll('CommandItem:not([hidden])'));
+      return visibleItems.indexOf(this._elementRef.nativeElement);
+    }
+    return this.localIndex;
+  });
+  protected readonly isFocused = computed(() => {
+    const focusedIdx = this.context.focusedIndex();
+    return this.isVisible() && this.getLocalIndex() === focusedIdx;
+  });
+  protected readonly computedClass = computed(() =>
+    cn(
+      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
+      !this.disabled() && 'cursor-pointer hover:bg-accent hover:text-accent-foreground',
+      this.class(),
+    ),
+  );
+
+  readonly itemIndex = itemIndexCounter++;
+  readonly itemId = `command-item-${this.itemIndex}`;
+  private localIndex = -1;
+
   ngOnInit(): void {
     this.context.registerItem(this.value());
   }
-
   ngOnDestroy(): void {
     this.context.unregisterItem(this.value());
     this.context.itemCount.update((c) => Math.max(0, c - 1));
@@ -119,23 +112,21 @@ export class CommandItem implements OnInit, OnDestroy {
 
   private updateLocalIndex(): void {
     // Find our position among sibling command items
-    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    const parent = this._elementRef.nativeElement.closest('CommandList, [role="listbox"]');
     if (parent) {
       const items = Array.from(parent.querySelectorAll('CommandItem'));
-      this.localIndex = items.indexOf(this.elementRef.nativeElement);
+      this.localIndex = items.indexOf(this._elementRef.nativeElement);
     }
   }
-
   private getLocalIndex(): number {
     // Dynamically compute index based on visible DOM position
-    const parent = this.elementRef.nativeElement.closest('CommandList, [role="listbox"]');
+    const parent = this._elementRef.nativeElement.closest('CommandList, [role="listbox"]');
     if (parent) {
       const visibleItems = Array.from(parent.querySelectorAll('CommandItem:not([hidden])'));
-      return visibleItems.indexOf(this.elementRef.nativeElement);
+      return visibleItems.indexOf(this._elementRef.nativeElement);
     }
     return this.localIndex;
   }
-
   protected handleClick(): void {
     if (this.disabled() || !this.isVisible()) return;
     this.context.selectedValue.set(this.value());

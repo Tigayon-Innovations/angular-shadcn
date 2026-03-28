@@ -15,10 +15,6 @@ import {
 } from '@angular/core';
 import { SELECT_CONTEXT, type SelectContext } from './select-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type SelectState = 'open' | 'closed';
 
 /**
@@ -45,10 +41,6 @@ export interface SelectProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Select
@@ -159,49 +151,64 @@ export interface SelectProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly ariaIdService = inject(AriaIdService);
-  private readonly ariaIds = this.ariaIdService.generateMenuIds('select');
+  constructor() {
+    // Sync value input to internal signal
+    effect(() => {
+      this._value.set(this.value());
+    });
+
+    // Sync open input to internal signal
+    effect(() => {
+      this._isOpen.set(this.open());
+    });
+
+    // Sync disabled input to internal signal
+    effect(() => {
+      this._isDisabled.set(this.disabled());
+    });
+  }
+
+  /** Event handler called when the value changes */
+  readonly valueChange = output<string>();
+  /** Event handler called when the open state changes */
+  readonly openChange = output<boolean>();
 
   /** The controlled value of the select */
   readonly value = model<string>('');
-
   /** The controlled open state of the select */
   readonly open = model<boolean>(false);
 
   /** When true, prevents the user from interacting with select */
   readonly disabled = input<boolean>(false);
-
   /** The name of the select for form submission */
   readonly name = input<string>('');
-
   /** When true, indicates that the user must select a value */
   readonly required = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Event handler called when the value changes */
-  readonly valueChange = output<string>();
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+  private readonly _ariaIdService = inject(AriaIdService);
 
-  /** Event handler called when the open state changes */
-  readonly openChange = output<boolean>();
+  /** Computed class combining base styles and custom classes */
+  protected readonly computedClass = computed(() => cn('relative block w-full', this.class()));
 
   /** Internal signals for context */
   private readonly _value = signal<string>('');
-  private readonly _open = signal<boolean>(false);
-  private readonly _disabled = signal<boolean>(false);
+  private readonly _isOpen = signal<boolean>(false);
+  private readonly _isDisabled = signal<boolean>(false);
 
+  private readonly ariaIds = this._ariaIdService.generateMenuIds('select');
   /** Context for child components */
   readonly context: SelectContext = {
     value: this._value,
-    open: this._open,
+    open: this._isOpen,
     setOpen: (open: boolean) => {
-      this._open.set(open);
+      this._isOpen.set(open);
       this.open.set(open);
       this.openChange.emit(open);
     },
-    disabled: this._disabled,
+    disabled: this._isDisabled,
     placeholder: signal(''),
     selectedLabel: signal(''),
     contentId: this.ariaIds.contentId,
@@ -227,38 +234,18 @@ export class Select {
     focusItem: (index: number) => this.focusItemByIndex(index),
   };
 
-  /** Computed class combining base styles and custom classes */
-  protected readonly computedClass = computed(() => cn('relative block w-full', this.class()));
-
-  constructor() {
-    // Sync value input to internal signal
-    effect(() => {
-      this._value.set(this.value());
-    });
-
-    // Sync open input to internal signal
-    effect(() => {
-      this._open.set(this.open());
-    });
-
-    // Sync disabled input to internal signal
-    effect(() => {
-      this._disabled.set(this.disabled());
-    });
-  }
-
   /** Focus an item by index */
   private focusItemByIndex(index: number): void {
     const values = this.context.itemValues();
     if (index < 0 || index >= values.length) return;
 
     this.context.focusedIndex.set(index);
-    const value = values[index];
-    const item = this.elementRef.nativeElement.querySelector(
-      `[data-slot="select-item"][data-value="${value}"]`,
+    const targetValue = values[index];
+    const selectItem = this._elementRef.nativeElement.querySelector(
+      `[data-slot="select-item"][data-value="${targetValue}"]`,
     ) as HTMLElement;
-    if (item) {
-      item.focus();
+    if (selectItem) {
+      selectItem.focus();
     }
   }
 }

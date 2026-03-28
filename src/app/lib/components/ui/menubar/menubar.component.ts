@@ -2,10 +2,6 @@ import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { MENUBAR_CONTEXT, type MenubarContextValue } from './menubar-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the Menubar component
  */
@@ -16,10 +12,6 @@ export interface MenubarProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Menubar

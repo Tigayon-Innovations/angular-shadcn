@@ -1,9 +1,5 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type SelectPosition = 'popper' | 'item-aligned';
 
 export interface SelectContext {
@@ -41,10 +37,6 @@ export interface SelectGroupContext {
   /** The label for this group */
   label: WritableSignal<string>;
 }
-
-// ============================================================================
-// Injection Tokens
-// ============================================================================
 
 export const SELECT_CONTEXT = new InjectionToken<SelectContext>('SelectContext');
 

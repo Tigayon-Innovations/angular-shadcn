@@ -45,27 +45,6 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxInput {
-  protected readonly context = inject(COMBOBOX_CONTEXT);
-  protected readonly SearchIcon = Search;
-
-  private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
-
-  /** Placeholder text */
-  readonly placeholder = input<string>('Search...');
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  protected readonly computedClass = computed(() =>
-    cn('flex items-center border-b px-3', this.class()),
-  );
-
-  protected readonly inputClass = computed(() =>
-    cn(
-      'flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-    ),
-  );
-
   constructor() {
     // Auto-focus input when combobox opens
     effect(() => {
@@ -77,11 +56,31 @@ export class ComboboxInput {
     });
   }
 
+  private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+
+  /** Placeholder text */
+  readonly placeholder = input<string>('Search...');
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  protected readonly context = inject(COMBOBOX_CONTEXT);
+
+  protected readonly computedClass = computed(() =>
+    cn('flex items-center border-b px-3', this.class()),
+  );
+  protected readonly inputClass = computed(() =>
+    cn(
+      'flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+    ),
+  );
+
+  protected readonly SearchIcon = Search;
+
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.context.onSearch(target.value);
   }
-
   protected onKeyDown(event: KeyboardEvent): void {
     // Pass keyboard events to the main handler for navigation
     this.context.onKeyDown(event);

@@ -16,10 +16,10 @@ import { DRAWER_CONTEXT } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerTitle {
-  protected readonly context = inject(DRAWER_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(DRAWER_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn('text-lg font-semibold leading-none tracking-tight', this.class()),

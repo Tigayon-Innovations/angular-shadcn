@@ -79,24 +79,42 @@ import { DIALOG_CONTEXT } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContent {
-  readonly context = inject(DIALOG_CONTEXT);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly cdr = inject(ChangeDetectorRef);
+  constructor() {
+    // Handle body scroll lock based on open state
+    effect(() => {
+      const isOpen = this.context.isOpen();
+
+      // Force change detection since context.isOpen() might update outside of this component's hierarchy
+      // and we are using OnPush
+      this._cdr.markForCheck();
+
+      if (isOpen) {
+        this.lockBodyScroll();
+      } else {
+        this.unlockBodyScroll();
+      }
+    });
+
+    // Cleanup on destroy
+    this._destroyRef.onDestroy(() => {
+      this.unlockBodyScroll();
+      this.restoreFocus();
+    });
+  }
 
   /** Additional CSS classes */
   readonly class = input<string>('');
-
   /** Whether to show close button */
   readonly showClose = input<boolean>(true);
-
   /** Aria label for close button */
   readonly ariaCloselabel = input<string>('Close dialog');
-
   /** Selector for initial focus element */
   readonly initialFocus = input<string | undefined>(undefined);
 
-  /** Previous body overflow for restoration */
-  private previousBodyOverflow = '';
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
+  readonly context = inject(DIALOG_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -111,27 +129,21 @@ export class DialogContent {
     ),
   );
 
-  constructor() {
-    // Handle body scroll lock based on open state
-    effect(() => {
-      const isOpen = this.context.isOpen();
+  /** Previous body overflow for restoration */
+  private previousBodyOverflow = '';
 
-      // Force change detection since context.isOpen() might update outside of this component's hierarchy
-      // and we are using OnPush
-      this.cdr.markForCheck();
-
-      if (isOpen) {
-        this.lockBodyScroll();
-      } else {
-        this.unlockBodyScroll();
-      }
-    });
-
-    // Cleanup on destroy
-    this.destroyRef.onDestroy(() => {
-      this.unlockBodyScroll();
-      this.restoreFocus();
-    });
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.context.isOpen()) {
+      this.close();
+    }
+  }
+  onOverlayClick(event: Event): void {
+    event.stopPropagation();
+    this.close();
+  }
+  onClose(): void {
+    this.close();
   }
 
   private lockBodyScroll(): void {
@@ -140,34 +152,15 @@ export class DialogContent {
       document.body.style.overflow = 'hidden';
     }
   }
-
   private unlockBodyScroll(): void {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = this.previousBodyOverflow;
     }
   }
-
-  @HostListener('document:keydown.escape')
-  onEscapeKey(): void {
-    if (this.context.isOpen()) {
-      this.close();
-    }
-  }
-
-  onOverlayClick(event: Event): void {
-    event.stopPropagation();
-    this.close();
-  }
-
-  onClose(): void {
-    this.close();
-  }
-
   private close(): void {
     this.restoreFocus();
     this.context.setOpen(false);
   }
-
   private restoreFocus(): void {
     const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {

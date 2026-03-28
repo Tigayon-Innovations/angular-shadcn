@@ -32,16 +32,13 @@ import { Command } from './command.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandDialog {
-  /** Whether the dialog is open */
-  readonly open = input<boolean>(false);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
   /** Close event */
   readonly openChange = output<boolean>();
 
-  private readonly internalOpen = signal(false);
+  /** Whether the dialog is open */
+  readonly open = input<boolean>(false);
+  /** Additional CSS classes */
+  readonly class = input<string>('');
 
   protected readonly computedDialogClass = computed(() =>
     cn(
@@ -56,10 +53,11 @@ export class CommandDialog {
     ),
   );
 
+  private readonly internalOpen = signal(false);
+
   protected closeDialog(): void {
     this.openChange.emit(false);
   }
-
   protected onEscapeKey(): void {
     if (this.open()) {
       this.closeDialog();

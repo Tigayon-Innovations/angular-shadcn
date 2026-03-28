@@ -17,16 +17,17 @@ import { DIALOG_CONTEXT } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogTrigger {
-  protected readonly context = inject(DIALOG_CONTEXT);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** Render as child */
   readonly asChild = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  protected readonly context = inject(DIALOG_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();
     // Save trigger element for focus restoration
-    this.context.setTriggerElement(this.elementRef.nativeElement);
+    this.context.setTriggerElement(this._elementRef.nativeElement);
     this.context.setOpen(true);
   }
 }

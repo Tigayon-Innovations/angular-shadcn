@@ -46,28 +46,26 @@ export class ResizablePanelGroup implements ResizableContextValue {
 
   /** Additional CSS classes */
   readonly class = input<string>('');
-
   /** Whether keyboard resize is disabled */
   readonly keyboardResizeBy = input<number>(10);
 
   /** Auto-save ID for persisting layout */
   readonly autoSaveId = input<string | null>(null);
 
+  protected readonly computedClass = computed(() =>
+    cn('flex h-full w-full data-[panel-group-direction=vertical]:flex-col', this.class()),
+  );
+
   /** Panel sizes state */
   readonly panelSizes = signal<Map<string, number>>(new Map());
 
   /** Currently active resize handle */
   private activeHandleId: string | null = null;
-
   /** Panels metadata */
   private panels = new Map<string, { minSize: number; maxSize: number; order: number }>();
 
   /** Panel order counter */
   private panelOrderCounter = 0;
-
-  protected readonly computedClass = computed(() =>
-    cn('flex h-full w-full data-[panel-group-direction=vertical]:flex-col', this.class()),
-  );
 
   registerPanel(id: string, minSize = 0, maxSize = 100, defaultSize?: number): void {
     this.panels.set(id, { minSize, maxSize, order: this.panelOrderCounter++ });
@@ -79,11 +77,9 @@ export class ResizablePanelGroup implements ResizableContextValue {
       });
     }
   }
-
   getPanelSize(id: string): number {
     return this.panelSizes().get(id) ?? 50;
   }
-
   setPanelSize(id: string, size: number): void {
     const panel = this.panels.get(id);
     if (panel) {
@@ -95,11 +91,9 @@ export class ResizablePanelGroup implements ResizableContextValue {
       });
     }
   }
-
   startResize(handleId: string): void {
     this.activeHandleId = handleId;
   }
-
   onResize(delta: number): void {
     if (!this.activeHandleId) return;
 
@@ -136,7 +130,6 @@ export class ResizablePanelGroup implements ResizableContextValue {
       }
     }
   }
-
   endResize(): void {
     this.activeHandleId = null;
   }

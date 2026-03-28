@@ -40,17 +40,16 @@ import { SELECT_GROUP_CONTEXT, type SelectGroupContext } from './select-context'
 export class SelectGroup {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
-
   /** Label ID for accessibility */
   readonly labelId = input<string>();
-
-  /** Context for child components */
-  readonly context: SelectGroupContext = {
-    label: signal(''),
-  };
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn('overflow-hidden p-1 text-foreground', this.class()),
   );
+
+  /** Context for child components */
+  readonly context: SelectGroupContext = {
+    label: signal(''),
+  };
 }

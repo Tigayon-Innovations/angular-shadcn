@@ -21,13 +21,13 @@ import { CHART_COLORS, CHART_CONTEXT } from './chart-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartLegendContent {
-  private readonly context = inject(CHART_CONTEXT, { optional: true });
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
+  private readonly _context = inject(CHART_CONTEXT, { optional: true });
+
   protected readonly items = computed(() => {
-    const config = this.context?.config() || {};
+    const config = this._context?.config() || {};
     const colors = Object.values(CHART_COLORS);
 
     return Object.entries(config).map(([key, value], i) => ({
@@ -35,7 +35,6 @@ export class ChartLegendContent {
       color: value.color || colors[i % colors.length],
     }));
   });
-
   protected readonly computedClass = computed(() =>
     cn('flex flex-wrap items-center justify-center gap-4', this.class()),
   );

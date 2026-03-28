@@ -23,10 +23,10 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogCancel {
-  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
+
+  protected readonly context = inject(ALERT_DIALOG_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(buttonVariants({ variant: 'outline' }), 'mt-2 sm:mt-0', this.class()),

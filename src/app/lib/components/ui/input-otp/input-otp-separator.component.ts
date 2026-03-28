@@ -20,12 +20,12 @@ import { LucideAngularModule, Minus } from 'lucide-angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOTPSeparator {
-  protected readonly icons = { Minus };
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
     cn('flex items-center justify-center', this.class()),
   );
+
+  protected readonly icons = { Minus };
 }

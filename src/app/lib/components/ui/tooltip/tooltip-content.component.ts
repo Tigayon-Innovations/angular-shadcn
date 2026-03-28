@@ -2,10 +2,6 @@ import { cn, Presence } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TOOLTIP_CONTEXT, TooltipAlign, TooltipSide } from './tooltip-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type TooltipContentState = 'open' | 'closed';
 
 /**
@@ -30,10 +26,6 @@ export interface TooltipContentProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TooltipContent
@@ -104,28 +96,23 @@ export interface TooltipContentProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipContent {
-  protected readonly context = inject(TOOLTIP_CONTEXT);
-
   /** The preferred side of the trigger to render against */
   readonly side = input<TooltipSide>('top');
-
   /** The distance in pixels from the trigger */
   readonly sideOffset = input<number>(4);
-
   /** The preferred alignment against the trigger */
   readonly align = input<TooltipAlign>('center');
-
   /** An offset in pixels from the alignment options */
   readonly alignOffset = input<number>(0);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(TOOLTIP_CONTEXT);
 
   /** Current state: open or closed */
   protected readonly state = computed<TooltipContentState>(() =>
     this.context.open() ? 'open' : 'closed',
   );
-
   protected readonly computedClass = computed(() => {
     const sideClasses = {
       top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',

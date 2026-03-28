@@ -17,10 +17,10 @@ import { SHEET_CONTEXT } from './sheet-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SheetDescription {
-  protected readonly context = inject(SHEET_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(SHEET_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn('text-sm text-muted-foreground', this.class()),

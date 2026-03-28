@@ -62,31 +62,14 @@ let handleIdCounter = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResizableHandle {
-  protected readonly context = inject(RESIZABLE_CONTEXT);
-
   /** Show a visible handle grip */
   readonly withHandle = input<boolean>(false);
-
   /** Whether the handle is disabled */
   readonly disabled = input<boolean>(false);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Unique handle ID */
-  readonly handleId = `handle-${handleIdCounter++}`;
-
-  /** Whether dragging */
-  private isDragging = signal(false);
-
-  /** Whether focused for keyboard interaction */
-  private isFocused = signal(false);
-
-  /** Starting position */
-  private startPosition = 0;
-
-  /** ARIA value (approximate percentage) */
-  protected readonly ariaValueNow = signal(50);
+  protected readonly context = inject(RESIZABLE_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -99,14 +82,24 @@ export class ResizableHandle {
     ),
   );
 
+  /** Whether dragging */
+  private isDragging = signal(false);
+  /** Whether focused for keyboard interaction */
+  private isFocused = signal(false);
+  /** ARIA value (approximate percentage) */
+  protected readonly ariaValueNow = signal(50);
+
+  /** Starting position */
+  private startPosition = 0;
+  /** Unique handle ID */
+  readonly handleId = `handle-${handleIdCounter++}`;
+
   onFocus(): void {
     this.isFocused.set(true);
   }
-
   onBlur(): void {
     this.isFocused.set(false);
   }
-
   onKeyDown(event: KeyboardEvent): void {
     if (this.disabled()) return;
 
@@ -159,13 +152,6 @@ export class ResizableHandle {
       this.updateAriaValue(delta);
     }
   }
-
-  private updateAriaValue(delta: number): void {
-    const current = this.ariaValueNow();
-    const newValue = Math.max(0, Math.min(100, current + delta));
-    this.ariaValueNow.set(newValue);
-  }
-
   onMouseDown(event: MouseEvent): void {
     if (this.disabled()) return;
 
@@ -193,7 +179,6 @@ export class ResizableHandle {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   }
-
   onTouchStart(event: TouchEvent): void {
     if (this.disabled()) return;
 
@@ -222,5 +207,11 @@ export class ResizableHandle {
 
     document.addEventListener('touchmove', onTouchMove);
     document.addEventListener('touchend', onTouchEnd);
+  }
+
+  private updateAriaValue(delta: number): void {
+    const current = this.ariaValueNow();
+    const newValue = Math.max(0, Math.min(100, current + delta));
+    this.ariaValueNow.set(newValue);
   }
 }

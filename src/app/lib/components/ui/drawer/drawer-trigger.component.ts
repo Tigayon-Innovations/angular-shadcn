@@ -17,16 +17,17 @@ import { DRAWER_CONTEXT } from './drawer-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerTrigger {
-  protected readonly context = inject(DRAWER_CONTEXT);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** Render as child */
   readonly asChild = input<boolean>(false);
+
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  protected readonly context = inject(DRAWER_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();
     // Save trigger element for focus restoration
-    this.context.triggerElement.set(this.elementRef.nativeElement);
+    this.context.triggerElement.set(this._elementRef.nativeElement);
     this.context.setOpen(true);
   }
 }

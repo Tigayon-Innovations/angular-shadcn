@@ -13,10 +13,6 @@ import {
 } from '@angular/core';
 import { TABS_CONTEXT, TabsActivationMode, TabsContext, TabsOrientation } from './tabs-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the Tabs component
  */
@@ -37,10 +33,6 @@ export interface TabsProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component Tabs
@@ -136,42 +128,6 @@ export interface TabsProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Tabs implements TabsContext {
-  private readonly ariaIdService = inject(AriaIdService);
-  private readonly ariaIds = this.ariaIdService.generateTabIds('tabs');
-
-  /** The value of the tab that should be active when initially rendered */
-  readonly defaultValue = input<string>('');
-
-  /** The controlled value of the tab to activate */
-  readonly controlledValue = input<string | undefined>(undefined, { alias: 'value' });
-
-  /** The orientation of the component */
-  readonly orientation = input<TabsOrientation>('horizontal');
-
-  /** When automatic, tabs are activated upon focus. When manual, upon click. */
-  readonly activationMode = input<TabsActivationMode>('automatic');
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
-  /** Event called when the value changes */
-  readonly valueChange = output<string>();
-
-  /** Internal state for the active tab value */
-  private readonly _value = signal<string>('');
-
-  /** ARIA IDs */
-  readonly tablistId = this.ariaIds.tablistId;
-
-  /** Registry of tab values for keyboard navigation */
-  readonly tabValues = signal<string[]>([]);
-
-  /** Generate tab ID for a specific value */
-  getTabId = (value: string): string => `${this.tablistId}-tab-${value}`;
-
-  /** Generate panel ID for a specific value */
-  getPanelId = (value: string): string => `${this.tablistId}-panel-${value}`;
-
   constructor() {
     // Initialize with defaultValue, controlled value takes precedence
     effect(() => {
@@ -186,9 +142,39 @@ export class Tabs implements TabsContext {
     });
   }
 
+  /** Event called when the value changes */
+  readonly valueChange = output<string>();
+
+  /** The value of the tab that should be active when initially rendered */
+  readonly defaultValue = input<string>('');
+  /** The controlled value of the tab to activate */
+  readonly controlledValue = input<string | undefined>(undefined, { alias: 'value' });
+  /** The orientation of the component */
+  readonly orientation = input<TabsOrientation>('horizontal');
+  /** When automatic, tabs are activated upon focus. When manual, upon click. */
+  readonly activationMode = input<TabsActivationMode>('automatic');
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+
+  private readonly _ariaIdService = inject(AriaIdService);
+
+  protected readonly computedClass = computed(() => cn('flex flex-col gap-2', this.class()));
+
+  /** Internal state for the active tab value */
+  private readonly _value = signal<string>('');
+  /** Registry of tab values for keyboard navigation */
+  readonly tabValues = signal<string[]>([]);
+
+  private readonly ariaIds = this._ariaIdService.generateTabIds('tabs');
+  /** ARIA IDs */
+  readonly tablistId = this.ariaIds.tablistId;
+
+  /** Generate tab ID for a specific value */
+  getTabId = (value: string): string => `${this.tablistId}-tab-${value}`;
+  /** Generate panel ID for a specific value */
+  getPanelId = (value: string): string => `${this.tablistId}-panel-${value}`;
   /** Get the current active tab value */
   value = () => this.controlledValue() ?? this._value();
-
   /** Handle tab change */
   onValueChange = (newValue: string) => {
     if (this.controlledValue() === undefined) {
@@ -196,6 +182,4 @@ export class Tabs implements TabsContext {
     }
     this.valueChange.emit(newValue);
   };
-
-  protected readonly computedClass = computed(() => cn('flex flex-col gap-2', this.class()));
 }

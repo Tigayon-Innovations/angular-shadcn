@@ -23,19 +23,17 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuItem {
-  private readonly context = inject(CONTEXT_MENU_CONTEXT);
-
-  /** Whether the item is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Whether the item is inset (extra padding) */
-  readonly inset = input<boolean>(false);
+  /** Select event emitted when item is clicked */
+  readonly onSelect = output<void>();
 
   /** Additional CSS classes */
   readonly class = input<string>('');
+  /** Whether the item is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Whether the item is inset (extra padding) */
+  readonly inset = input<boolean>(false);
 
-  /** Select event emitted when item is clicked */
-  readonly onSelect = output<void>();
+  private readonly _context = inject(CONTEXT_MENU_CONTEXT);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -52,10 +50,10 @@ export class ContextMenuItem {
       return;
     }
     this.onSelect.emit();
-    this.context.open.set(false);
-    this.context.focusedIndex.set(-1);
+    this._context.open.set(false);
+    this._context.focusedIndex.set(-1);
     // Restore focus to trigger element
-    const triggerEl = this.context.triggerElement();
+    const triggerEl = this._context.triggerElement();
     if (triggerEl) {
       triggerEl.focus();
     }

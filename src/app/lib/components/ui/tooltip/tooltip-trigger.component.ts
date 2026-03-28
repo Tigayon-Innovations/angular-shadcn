@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnDestroy } from '@angular/core';
 import { TOOLTIP_CONTEXT } from './tooltip-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the TooltipTrigger component
  */
@@ -13,10 +9,6 @@ export interface TooltipTriggerProps {
    * @default false */
   asChild?: boolean;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component TooltipTrigger
@@ -73,10 +65,10 @@ export interface TooltipTriggerProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipTrigger implements OnDestroy {
-  protected readonly context = inject(TOOLTIP_CONTEXT);
-
   /** Change the default rendered element for the one passed as a child */
   readonly asChild = input<boolean>(false);
+
+  protected readonly context = inject(TOOLTIP_CONTEXT);
 
   private showTimeout: ReturnType<typeof setTimeout> | null = null;
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -91,7 +83,6 @@ export class TooltipTrigger implements OnDestroy {
       this.context.setOpen(true);
     }, this.context.delayDuration);
   }
-
   onMouseLeave(): void {
     this.clearTimeouts();
     // Small delay to allow moving to tooltip content
@@ -99,16 +90,13 @@ export class TooltipTrigger implements OnDestroy {
       this.context.setOpen(false);
     }, 100);
   }
-
   onFocus(): void {
     // Show immediately on focus for keyboard users
     this.context.setOpen(true);
   }
-
   onBlur(): void {
     this.context.setOpen(false);
   }
-
   /**
    * Escape key handler for WCAG 1.4.13 compliance.
    * Content on hover/focus must be dismissible via Escape.

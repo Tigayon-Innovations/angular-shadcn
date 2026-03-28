@@ -14,10 +14,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { INPUT_OTP_CONTEXT, type InputOTPContextValue } from './input-otp-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 /**
  * Props for the InputOTP component
  */
@@ -38,10 +34,6 @@ export interface InputOTPProps {
   /** Additional CSS classes */
   class?: string;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component InputOTP
@@ -146,33 +138,34 @@ export interface InputOTPProps {
 export class InputOTP {
   private readonly hiddenInput = viewChild<ElementRef<HTMLInputElement>>('hiddenInput');
 
-  /** The controlled value of the input */
-  readonly value = model<string>('');
-
-  /** Internal value signal for context sharing */
-  readonly internalValue = signal<string>('');
-
-  /** Maximum number of characters */
-  readonly maxLength = input<number>(6);
-
-  /** Whether the input is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Additional CSS classes */
-  readonly class = input<string>('');
-
   /** Event handler called when the value changes */
   readonly onChange = output<string>();
-
   /** Event handler called when all slots are filled */
   readonly onComplete = output<string>();
 
-  protected readonly isFocused = signal(false);
-  readonly activeIndex = signal(-1);
+  /** The controlled value of the input */
+  readonly value = model<string>('');
+
+  /** Additional CSS classes */
+  readonly class = input<string>('');
+  /** Maximum number of characters */
+  readonly maxLength = input<number>(6);
+  /** Whether the input is disabled */
+  readonly disabled = input<boolean>(false);
 
   protected readonly computedClass = computed(() =>
     cn('relative flex items-center gap-2 has-[:disabled]:opacity-50', this.class()),
   );
+
+  /** Internal value signal for context sharing */
+  readonly internalValue = signal<string>('');
+  protected readonly isFocused = signal(false);
+  readonly activeIndex = signal(-1);
+
+  /** Programmatically focus the input */
+  focus(): void {
+    this.hiddenInput()?.nativeElement.focus();
+  }
 
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -187,7 +180,6 @@ export class InputOTP {
       this.onComplete.emit(newValue);
     }
   }
-
   protected onKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Backspace') {
       const currentValue = this.value();
@@ -200,7 +192,6 @@ export class InputOTP {
       }
     }
   }
-
   protected onPaste(event: ClipboardEvent): void {
     event.preventDefault();
     const pastedData = event.clipboardData?.getData('text') ?? '';
@@ -219,19 +210,12 @@ export class InputOTP {
       }
     }
   }
-
   protected onFocus(): void {
     this.isFocused.set(true);
     this.activeIndex.set(this.value().length);
   }
-
   protected onBlur(): void {
     this.isFocused.set(false);
     this.activeIndex.set(-1);
-  }
-
-  /** Programmatically focus the input */
-  focus(): void {
-    this.hiddenInput()?.nativeElement.focus();
   }
 }

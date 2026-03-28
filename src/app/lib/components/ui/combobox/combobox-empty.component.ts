@@ -18,10 +18,10 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxEmpty {
-  protected readonly context = inject(COMBOBOX_CONTEXT);
-
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  protected readonly context = inject(COMBOBOX_CONTEXT);
 
   protected readonly computedClass = computed(() => cn('py-6 text-center text-sm', this.class()));
 }

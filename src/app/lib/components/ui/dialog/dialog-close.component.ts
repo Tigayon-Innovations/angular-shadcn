@@ -14,10 +14,10 @@ import { DIALOG_CONTEXT } from './dialog-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogClose {
-  protected readonly context = inject(DIALOG_CONTEXT);
-
   /** Render as child */
   readonly asChild = input<boolean>(false);
+
+  protected readonly context = inject(DIALOG_CONTEXT);
 
   onClick(event: Event): void {
     event.stopPropagation();

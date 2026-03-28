@@ -8,10 +8,6 @@ import {
     input,
 } from '@angular/core';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type LabelProps = {
   /** ID of the form element this label is for */
   for?: string;
@@ -20,10 +16,6 @@ export type LabelProps = {
   /** Additional CSS classes to apply */
   class?: string;
 };
-
-// ============================================================================
-// Label Component
-// ============================================================================
 
 /**
  * Label component renders an accessible label associated with form controls.
@@ -87,20 +79,17 @@ export type LabelProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Label {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   /** ID of the form element this label is for */
   readonly for = input<string>();
-
   /** Alternative binding for 'for' attribute (React-style) */
   readonly htmlFor = input<string>();
-
-  /** Computed ID - prefers 'for' over 'htmlFor' */
-  protected readonly forId = computed(() => this.for() || this.htmlFor());
-
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+
+  /** Computed ID - prefers 'for' over 'htmlFor' */
+  protected readonly forId = computed(() => this.for() || this.htmlFor());
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
     cn(

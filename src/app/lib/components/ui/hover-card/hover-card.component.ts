@@ -8,10 +8,6 @@ import {
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, type HoverCardContextValue } from './hover-card-context';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type HoverCardState = 'open' | 'closed';
 
 /**
@@ -32,10 +28,6 @@ export interface HoverCardProps {
    * @default 300 */
   closeDelay?: number;
 }
-
-// ============================================================================
-// Component
-// ============================================================================
 
 /**
  * @component HoverCard
@@ -111,28 +103,26 @@ export interface HoverCardProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HoverCard implements HoverCardContextValue {
-  /** The open state of the hover card when initially rendered */
-  readonly defaultOpen = input<boolean>(false);
-
-  /** The controlled open state of the hover card */
-  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
-
-  /** The duration from when the pointer enters the trigger until the hover card opens (ms) */
-  readonly openDelay = 700;
-
-  /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
-  readonly closeDelay = 300;
-
-  /** Event handler called when the open state changes */
-  readonly openChange = output<boolean>();
-
-  readonly open = signal(false);
-
   constructor() {
     if (this.defaultOpen()) {
       this.open.set(true);
     }
   }
+
+  /** Event handler called when the open state changes */
+  readonly openChange = output<boolean>();
+
+  /** The open state of the hover card when initially rendered */
+  readonly defaultOpen = input<boolean>(false);
+  /** The controlled open state of the hover card */
+  readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
+
+  readonly open = signal(false);
+
+  /** The duration from when the pointer enters the trigger until the hover card opens (ms) */
+  readonly openDelay = 700;
+  /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
+  readonly closeDelay = 300;
 
   setOpen(open: boolean): void {
     if (this.controlledOpen() === undefined) {
@@ -140,7 +130,6 @@ export class HoverCard implements HoverCardContextValue {
     }
     this.openChange.emit(open);
   }
-
   isOpen(): boolean {
     return this.controlledOpen() !== undefined ? this.controlledOpen()! : this.open();
   }

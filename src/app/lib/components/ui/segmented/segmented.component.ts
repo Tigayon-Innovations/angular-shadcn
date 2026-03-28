@@ -47,28 +47,6 @@ import { segmentedVariants, type SegmentedVariants } from './segmented-variants'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Segmented {
-  /** The current selected value */
-  readonly value = model<string>('');
-
-  /** The size of the segmented control */
-  readonly size = input<SegmentedVariants['size']>('default');
-
-  /** Whether the segmented control is disabled */
-  readonly disabled = input<boolean>(false);
-
-  /** Additional CSS classes to apply */
-  readonly class = input<string>('');
-
-  /** Context for child SegmentedItem components */
-  readonly context: SegmentedContext = {
-    value: signal(this.value()),
-    disabled: signal(this.disabled()),
-    onValueChange: (newValue: string) => {
-      this.value.set(newValue);
-      this.context.value.set(newValue);
-    },
-  };
-
   constructor() {
     // Sync value changes to context
     effect(() => {
@@ -81,6 +59,16 @@ export class Segmented {
     });
   }
 
+  /** The current selected value */
+  readonly value = model<string>('');
+
+  /** The size of the segmented control */
+  readonly size = input<SegmentedVariants['size']>('default');
+  /** Whether the segmented control is disabled */
+  readonly disabled = input<boolean>(false);
+  /** Additional CSS classes to apply */
+  readonly class = input<string>('');
+
   /** Computed class combining variants and custom classes */
   protected readonly computedClass = computed(() =>
     cn(
@@ -90,4 +78,14 @@ export class Segmented {
       this.class(),
     ),
   );
+
+  /** Context for child SegmentedItem components */
+  readonly context: SegmentedContext = {
+    value: signal(this.value()),
+    disabled: signal(this.disabled()),
+    onValueChange: (newValue: string) => {
+      this.value.set(newValue);
+      this.context.value.set(newValue);
+    },
+  };
 }

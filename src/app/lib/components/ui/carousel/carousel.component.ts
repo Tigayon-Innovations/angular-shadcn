@@ -87,30 +87,28 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Carousel {
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
-
   /** Carousel orientation */
   readonly orientation = input<CarouselOrientation>('horizontal');
-
   /** Accessible label for the carousel */
   readonly ariaLabel = input<string>('Carousel');
-
   /** Additional CSS classes */
   readonly class = input<string>('');
 
-  /** Current slide announcement for screen readers */
-  readonly slideAnnouncement = signal<string>('');
+  private readonly _liveAnnouncer = inject(LiveAnnouncerService);
 
   protected readonly computedClass = computed(() => cn('relative', this.class()));
 
-  protected onKeyDown(_event: Event, _direction: 'left' | 'right'): void {
-    // Keyboard navigation is handled by the carousel API
-  }
+  /** Current slide announcement for screen readers */
+  readonly slideAnnouncement = signal<string>('');
 
   /** Announce slide change to screen readers */
   announceSlideChange(index: number, total: number): void {
     const message = `Slide ${index + 1} of ${total}`;
     this.slideAnnouncement.set(message);
-    this.liveAnnouncer.announce(message, 'polite');
+    this._liveAnnouncer.announce(message, 'polite');
+  }
+
+  protected onKeyDown(_event: Event, _direction: 'left' | 'right'): void {
+    // Keyboard navigation is handled by the carousel API
   }
 }

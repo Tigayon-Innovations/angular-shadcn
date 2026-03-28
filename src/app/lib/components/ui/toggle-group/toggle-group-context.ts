@@ -1,10 +1,6 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import type { ToggleVariants } from '../toggle/toggle-variants';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export type ToggleGroupType = 'single' | 'multiple';
 export type ToggleGroupOrientation = 'horizontal' | 'vertical';
 

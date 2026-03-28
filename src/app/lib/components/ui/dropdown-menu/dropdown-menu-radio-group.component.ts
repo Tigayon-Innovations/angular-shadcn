@@ -42,9 +42,9 @@ export const DROPDOWN_MENU_RADIO_GROUP_CONTEXT = new InjectionToken<DropdownMenu
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuRadioGroup {
-  /** The current value */
-  readonly value = model<string>('');
-
   /** Value change event */
   readonly onValueChange = output<string>();
+
+  /** The current value */
+  readonly value = model<string>('');
 }
