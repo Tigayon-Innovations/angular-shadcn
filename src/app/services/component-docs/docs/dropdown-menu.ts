@@ -16,7 +16,10 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
     { text: 'Can be controlled or uncontrolled.', highlight: true },
     { text: 'Supports submenus with configurable reading direction.', highlight: true },
     { text: 'Supports items, labels, groups of items.' },
-    { text: 'Supports checkable items (single or multiple) with optional indeterminate state.', highlight: true },
+    {
+      text: 'Supports checkable items (single or multiple) with optional indeterminate state.',
+      highlight: true,
+    },
     { text: 'Supports modal and non-modal modes.' },
     { text: 'Customize side, alignment, offsets, collision handling.' },
     { text: 'Optionally render a pointing arrow.' },
@@ -91,8 +94,7 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
         {
           name: 'open',
           type: 'boolean',
-          description:
-            'The controlled open state of the dropdown menu. Use with (openChange).',
+          description: 'The controlled open state of the dropdown menu. Use with (openChange).',
         },
         {
           name: 'defaultOpen',
@@ -115,9 +117,7 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
             'The reading direction of the dropdown menu when its content overflows. Defaults to inheriting from the document.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Trigger',
@@ -189,7 +189,8 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
           name: 'align',
           type: "'start' | 'center' | 'end'",
           default: "'start'",
-          description: 'The preferred alignment against the trigger. May change when collisions occur.',
+          description:
+            'The preferred alignment against the trigger. May change when collisions occur.',
         },
         {
           name: 'alignOffset',
@@ -201,7 +202,8 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
           name: 'avoidCollisions',
           type: 'boolean',
           default: 'true',
-          description: 'When true, overrides the side and align preferences to avoid collisions with boundary edges.',
+          description:
+            'When true, overrides the side and align preferences to avoid collisions with boundary edges.',
         },
         {
           name: 'collisionBoundary',
@@ -214,7 +216,8 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
           name: 'collisionPadding',
           type: 'number | Partial<Record<Side, number>>',
           default: '0',
-          description: 'The distance in pixels from the boundary edges where collision detection should occur.',
+          description:
+            'The distance in pixels from the boundary edges where collision detection should occur.',
         },
         {
           name: 'arrowPadding',
@@ -227,7 +230,8 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
           name: 'sticky',
           type: "'partial' | 'always'",
           default: "'partial'",
-          description: 'The sticky behavior of the content. "partial" will keep the content in the viewport as the user scrolls.',
+          description:
+            'The sticky behavior of the content. "partial" will keep the content in the viewport as the user scrolls.',
         },
         {
           name: 'hideWhenDetached',
@@ -255,7 +259,8 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
       cssVariables: [
         {
           name: '--radix-dropdown-menu-content-transform-origin',
-          description: 'The transform-origin computed from the content and arrow positions/offsets.',
+          description:
+            'The transform-origin computed from the content and arrow positions/offsets.',
         },
         {
           name: '--radix-dropdown-menu-content-available-width',
@@ -330,7 +335,7 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
     {
       name: 'Label',
       description:
-        'Used to render a label. It won\'t be focusable using arrow keys. Can be used to describe a group of items.',
+        "Used to render a label. It won't be focusable using arrow keys. Can be used to describe a group of items.",
       props: [
         {
           name: 'asChild',
@@ -589,14 +594,14 @@ export const DROPDOWN_MENU_DOCUMENTATION: ComponentDocumentation = {
           name: 'collisionPadding',
           type: 'number | Partial<Record<Side, number>>',
           default: '0',
-          description: 'The distance in pixels from the boundary edges where collision detection should occur.',
+          description:
+            'The distance in pixels from the boundary edges where collision detection should occur.',
         },
         {
           name: 'arrowPadding',
           type: 'number',
           default: '0',
-          description:
-            'The padding between the arrow and the edges of the content.',
+          description: 'The padding between the arrow and the edges of the content.',
         },
         {
           name: 'sticky',
@@ -1010,8 +1015,7 @@ export const tailwindConfig = {
       },
       {
         key: 'Esc',
-        description:
-          'Closes the dropdown menu and moves focus to DropdownMenuTrigger.',
+        description: 'Closes the dropdown menu and moves focus to DropdownMenuTrigger.',
       },
       {
         key: 'Tab',

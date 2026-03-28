@@ -9,7 +9,15 @@ import {
   CommandShortcut,
 } from '@/ui/command';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Calculator, Calendar, CreditCard, LucideAngularModule, Settings, Smile, User } from 'lucide-angular';
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  LucideAngularModule,
+  Settings,
+  Smile,
+  User,
+} from 'lucide-angular';
 
 @Component({
   selector: 'CommandDemo',

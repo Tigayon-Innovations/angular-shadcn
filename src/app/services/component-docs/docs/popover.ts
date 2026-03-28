@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const POPOVER_DOCUMENTATION: ComponentDocumentation = {
   name: 'Popover',
   slug: 'popover',
-  description:
-    'Displays rich content in a portal, triggered by a button.',
+  description: 'Displays rich content in a portal, triggered by a button.',
 
   features: [
     { text: 'Can be controlled or uncontrolled.', highlight: true },
@@ -84,8 +83,7 @@ export const POPOVER_DOCUMENTATION: ComponentDocumentation = {
           name: 'asChild',
           type: 'boolean',
           default: 'false',
-          description:
-            'Change the component to render as the child element.',
+          description: 'Change the component to render as the child element.',
         },
         {
           name: 'class',
@@ -93,9 +91,7 @@ export const POPOVER_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Anchor',
@@ -118,8 +114,7 @@ export const POPOVER_DOCUMENTATION: ComponentDocumentation = {
           name: 'side',
           type: "'top' | 'right' | 'bottom' | 'left'",
           default: "'bottom'",
-          description:
-            'The preferred side of the anchor to render against when open.',
+          description: 'The preferred side of the anchor to render against when open.',
         },
         {
           name: 'sideOffset',
@@ -143,8 +138,7 @@ export const POPOVER_DOCUMENTATION: ComponentDocumentation = {
           name: 'avoidCollisions',
           type: 'boolean',
           default: 'true',
-          description:
-            'When true, overrides the side and align preferences to prevent collisions.',
+          description: 'When true, overrides the side and align preferences to prevent collisions.',
         },
         {
           name: 'class',

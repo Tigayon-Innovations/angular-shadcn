@@ -9,7 +9,8 @@ import { componentCategories, componentsData } from '../components-data.js';
 
 export const getAllComponentsTool: Tool = {
   name: 'get_all_components',
-  description: 'Get a complete list of all available ng-cn components with their basic information.',
+  description:
+    'Get a complete list of all available ng-cn components with their basic information.',
   inputSchema: {
     type: 'object',
     properties: {},
@@ -36,7 +37,10 @@ export function handleGetAllComponents() {
       categoryComponents.forEach((c) => {
         text += `  ${c.name}\n`;
         text += `    Selector: ${c.selector}\n`;
-        text += `    Install:  ng g @ng-cn/core:c ${c.selector.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
+        text += `    Install:  ng g @ng-cn/core:c ${c.selector
+          .toLowerCase()
+          .replace(/([a-z])([A-Z])/g, '$1-$2')
+          .toLowerCase()}\n`;
         text += `    ${c.description}\n\n`;
       });
     }

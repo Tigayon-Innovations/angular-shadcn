@@ -1,32 +1,26 @@
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
 import { isPlatformBrowser } from '@angular/common';
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    Inject,
-    PLATFORM_ID,
-    signal,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  PLATFORM_ID,
+  signal,
 } from '@angular/core';
 import {
-    AreaChart,
-    BarChart3,
-    Code,
-    Copy,
-    LineChart,
-    LucideAngularModule,
-    MessageSquare,
-    PieChart,
-    Radar,
-    Target,
+  AreaChart,
+  BarChart3,
+  Code,
+  Copy,
+  LineChart,
+  LucideAngularModule,
+  MessageSquare,
+  PieChart,
+  Radar,
+  Target,
 } from 'lucide-angular';
 
 type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
@@ -46,8 +40,8 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
     SelectItem,
     SelectTrigger,
     SelectValue,
-    LucideAngularModule
-],
+    LucideAngularModule,
+  ],
   template: `
     <div class="min-h-screen bg-background">
       <section class="container mx-auto px-4 py-16 text-center">
@@ -61,8 +55,8 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
           Beautiful Charts & Graphs
         </h1>
         <p class="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
-          A collection of ready-to-use chart components built with ApexCharts.
-          From basic charts to rich data displays, copy and paste into your apps.
+          A collection of ready-to-use chart components built with ApexCharts. From basic charts to
+          rich data displays, copy and paste into your apps.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <Button variant="default">Browse Charts</Button>
@@ -124,7 +118,9 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
                   <div class="flex items-center justify-between">
                     <div>
                       <CardTitle>Area Chart - Interactive</CardTitle>
-                      <CardDescription>Showing total visitors for the last 3 months</CardDescription>
+                      <CardDescription
+                        >Showing total visitors for the last 3 months</CardDescription
+                      >
                     </div>
                     <Select>
                       <SelectTrigger class="w-40">
@@ -155,7 +151,9 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
                 </CardHeader>
                 <CardContent>
                   <CardTitle class="mb-1">Area Chart - Stacked</CardTitle>
-                  <CardDescription class="mb-4">Showing total visitors for the last 6 months</CardDescription>
+                  <CardDescription class="mb-4"
+                    >Showing total visitors for the last 6 months</CardDescription
+                  >
                   <div id="stacked-area-chart" class="h-[250px] w-full"></div>
                   <div class="mt-4 flex items-center justify-center gap-6 text-sm">
                     <div class="flex items-center gap-2">
@@ -182,7 +180,9 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
                 </CardHeader>
                 <CardContent>
                   <CardTitle class="mb-1">Area Chart - Gradient</CardTitle>
-                  <CardDescription class="mb-4">Showing total visitors for the last 6 months</CardDescription>
+                  <CardDescription class="mb-4"
+                    >Showing total visitors for the last 6 months</CardDescription
+                  >
                   <div id="gradient-area-chart" class="h-[250px] w-full"></div>
                 </CardContent>
               </Card>
@@ -462,7 +462,17 @@ type ChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial';
   `,
 })
 export class ChartsPage implements AfterViewInit {
-  protected readonly icons = { AreaChart, BarChart3, Code, Copy, LineChart, MessageSquare, PieChart, Radar, Target };
+  protected readonly icons = {
+    AreaChart,
+    BarChart3,
+    Code,
+    Copy,
+    LineChart,
+    MessageSquare,
+    PieChart,
+    Radar,
+    Target,
+  };
   protected readonly activeTab = signal<ChartType | 'tooltips'>('area');
   private isBrowser: boolean;
   private chartColors: string[] = [];
@@ -517,13 +527,37 @@ export class ChartsPage implements AfterViewInit {
     const ApexCharts = (await import('apexcharts')).default;
 
     const chartConfigs: Record<string, () => void> = {
-      area: () => { this.renderArea(ApexCharts); this.renderStacked(ApexCharts); this.renderGradient(ApexCharts); },
-      bar: () => { this.renderVerticalBar(ApexCharts); this.renderHorizontalBar(ApexCharts); },
-      line: () => { this.renderLine(ApexCharts); this.renderMultiLine(ApexCharts); },
-      pie: () => { this.renderPie(ApexCharts); this.renderDonut(ApexCharts); this.renderPieLabel(ApexCharts); },
-      radar: () => { this.renderRadar(ApexCharts); this.renderRadarMulti(ApexCharts); },
-      radial: () => { this.renderRadial(ApexCharts); this.renderRadialMulti(ApexCharts); this.renderSemi(ApexCharts); },
-      tooltips: () => { this.renderTooltip(ApexCharts); this.renderSharedTooltip(ApexCharts); },
+      area: () => {
+        this.renderArea(ApexCharts);
+        this.renderStacked(ApexCharts);
+        this.renderGradient(ApexCharts);
+      },
+      bar: () => {
+        this.renderVerticalBar(ApexCharts);
+        this.renderHorizontalBar(ApexCharts);
+      },
+      line: () => {
+        this.renderLine(ApexCharts);
+        this.renderMultiLine(ApexCharts);
+      },
+      pie: () => {
+        this.renderPie(ApexCharts);
+        this.renderDonut(ApexCharts);
+        this.renderPieLabel(ApexCharts);
+      },
+      radar: () => {
+        this.renderRadar(ApexCharts);
+        this.renderRadarMulti(ApexCharts);
+      },
+      radial: () => {
+        this.renderRadial(ApexCharts);
+        this.renderRadialMulti(ApexCharts);
+        this.renderSemi(ApexCharts);
+      },
+      tooltips: () => {
+        this.renderTooltip(ApexCharts);
+        this.renderSharedTooltip(ApexCharts);
+      },
     };
     chartConfigs[tab]?.();
   }
@@ -536,14 +570,29 @@ export class ChartsPage implements AfterViewInit {
   }
 
   private renderArea(A: any): void {
-    const data = Array.from({ length: 90 }, () => ({ d: Math.floor(Math.random() * 300) + 100, m: Math.floor(Math.random() * 200) + 50 }));
+    const data = Array.from({ length: 90 }, () => ({
+      d: Math.floor(Math.random() * 300) + 100,
+      m: Math.floor(Math.random() * 200) + 50,
+    }));
     this.renderChart('#interactive-area-chart', A, {
-      series: [{ name: 'Desktop', data: data.map(x => x.d) }, { name: 'Mobile', data: data.map(x => x.m) }],
-      chart: { type: 'area', height: 350, background: 'transparent', toolbar: { show: false }, zoom: { enabled: false } },
+      series: [
+        { name: 'Desktop', data: data.map((x) => x.d) },
+        { name: 'Mobile', data: data.map((x) => x.m) },
+      ],
+      chart: {
+        type: 'area',
+        height: 350,
+        background: 'transparent',
+        toolbar: { show: false },
+        zoom: { enabled: false },
+      },
       colors: [this.getColor(0), this.getColor(1)],
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth', width: 2 },
-      fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1, stops: [0, 100] } },
+      fill: {
+        type: 'gradient',
+        gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1, stops: [0, 100] },
+      },
       xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
       yaxis: { show: false },
       grid: { show: true, borderColor: 'var(--border)', strokeDashArray: 4 },
@@ -554,13 +603,26 @@ export class ChartsPage implements AfterViewInit {
 
   private renderStacked(A: any): void {
     this.renderChart('#stacked-area-chart', A, {
-      series: [{ name: 'Desktop', data: [186, 305, 237, 73, 209, 214] }, { name: 'Mobile', data: [80, 200, 120, 190, 130, 140] }],
-      chart: { type: 'area', height: 250, stacked: true, background: 'transparent', toolbar: { show: false } },
+      series: [
+        { name: 'Desktop', data: [186, 305, 237, 73, 209, 214] },
+        { name: 'Mobile', data: [80, 200, 120, 190, 130, 140] },
+      ],
+      chart: {
+        type: 'area',
+        height: 250,
+        stacked: true,
+        background: 'transparent',
+        toolbar: { show: false },
+      },
       colors: [this.getColor(0), this.getColor(1)],
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth', width: 2 },
       fill: { type: 'gradient', gradient: { opacityFrom: 0.5, opacityTo: 0.1 } },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { show: false },
       tooltip: { theme: 'dark' },
@@ -570,13 +632,20 @@ export class ChartsPage implements AfterViewInit {
 
   private renderGradient(A: any): void {
     this.renderChart('#gradient-area-chart', A, {
-      series: [{ name: 'Desktop', data: [186, 305, 237, 73, 209, 214] }, { name: 'Mobile', data: [80, 200, 120, 190, 130, 140] }],
+      series: [
+        { name: 'Desktop', data: [186, 305, 237, 73, 209, 214] },
+        { name: 'Mobile', data: [80, 200, 120, 190, 130, 140] },
+      ],
       chart: { type: 'area', height: 250, background: 'transparent', toolbar: { show: false } },
       colors: [this.getColor(2), this.getColor(3)],
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth', width: 2 },
       fill: { type: 'gradient', gradient: { type: 'vertical', opacityFrom: 0.7, opacityTo: 0 } },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { show: false },
       tooltip: { theme: 'dark' },
@@ -591,7 +660,11 @@ export class ChartsPage implements AfterViewInit {
       colors: [this.getColor(0)],
       plotOptions: { bar: { borderRadius: 4, columnWidth: '60%' } },
       dataLabels: { enabled: false },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { show: false },
       tooltip: { theme: 'dark' },
@@ -605,7 +678,12 @@ export class ChartsPage implements AfterViewInit {
       colors: [this.getColor(1)],
       plotOptions: { bar: { borderRadius: 4, horizontal: true, barHeight: '60%' } },
       dataLabels: { enabled: false },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        labels: { show: false },
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       grid: { show: false },
       tooltip: { theme: 'dark' },
     });
@@ -619,7 +697,11 @@ export class ChartsPage implements AfterViewInit {
       stroke: { curve: 'smooth', width: 3 },
       markers: { size: 4 },
       dataLabels: { enabled: false },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { borderColor: 'var(--border)', strokeDashArray: 4 },
       tooltip: { theme: 'dark' },
@@ -628,13 +710,20 @@ export class ChartsPage implements AfterViewInit {
 
   private renderMultiLine(A: any): void {
     this.renderChart('#multi-line-chart', A, {
-      series: [{ name: 'Page Views', data: [186, 305, 237, 73, 209, 214] }, { name: 'Sessions', data: [80, 200, 120, 190, 130, 140] }],
+      series: [
+        { name: 'Page Views', data: [186, 305, 237, 73, 209, 214] },
+        { name: 'Sessions', data: [80, 200, 120, 190, 130, 140] },
+      ],
       chart: { type: 'line', height: 250, background: 'transparent', toolbar: { show: false } },
       colors: [this.getColor(0), this.getColor(1)],
       stroke: { curve: 'smooth', width: 3 },
       markers: { size: 4 },
       dataLabels: { enabled: false },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { borderColor: 'var(--border)', strokeDashArray: 4 },
       tooltip: { theme: 'dark' },
@@ -646,7 +735,13 @@ export class ChartsPage implements AfterViewInit {
     this.renderChart('#pie-chart', A, {
       series: [275, 200, 187, 173, 90],
       chart: { type: 'pie', height: 250, background: 'transparent' },
-      colors: [this.getColor(0), this.getColor(1), this.getColor(2), this.getColor(3), this.getColor(4)],
+      colors: [
+        this.getColor(0),
+        this.getColor(1),
+        this.getColor(2),
+        this.getColor(3),
+        this.getColor(4),
+      ],
       labels: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Other'],
       legend: { position: 'bottom' },
       dataLabels: { enabled: false },
@@ -658,11 +753,21 @@ export class ChartsPage implements AfterViewInit {
     this.renderChart('#donut-chart', A, {
       series: [275, 200, 187, 173, 90],
       chart: { type: 'donut', height: 250, background: 'transparent' },
-      colors: [this.getColor(0), this.getColor(1), this.getColor(2), this.getColor(3), this.getColor(4)],
+      colors: [
+        this.getColor(0),
+        this.getColor(1),
+        this.getColor(2),
+        this.getColor(3),
+        this.getColor(4),
+      ],
       labels: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Other'],
       legend: { position: 'bottom' },
       dataLabels: { enabled: false },
-      plotOptions: { pie: { donut: { size: '60%', labels: { show: true, total: { show: true, label: 'Total' } } } } },
+      plotOptions: {
+        pie: {
+          donut: { size: '60%', labels: { show: true, total: { show: true, label: 'Total' } } },
+        },
+      },
       tooltip: { theme: 'dark' },
     });
   }
@@ -671,10 +776,20 @@ export class ChartsPage implements AfterViewInit {
     this.renderChart('#pie-label-chart', A, {
       series: [275, 200, 187, 173, 90],
       chart: { type: 'pie', height: 250, background: 'transparent' },
-      colors: [this.getColor(0), this.getColor(1), this.getColor(2), this.getColor(3), this.getColor(4)],
+      colors: [
+        this.getColor(0),
+        this.getColor(1),
+        this.getColor(2),
+        this.getColor(3),
+        this.getColor(4),
+      ],
       labels: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Other'],
       legend: { show: false },
-      dataLabels: { enabled: true, formatter: (val: number) => `${val.toFixed(1)}%`, style: { colors: ['#fff'] } },
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number) => `${val.toFixed(1)}%`,
+        style: { colors: ['#fff'] },
+      },
       tooltip: { theme: 'dark' },
     });
   }
@@ -695,7 +810,10 @@ export class ChartsPage implements AfterViewInit {
 
   private renderRadarMulti(A: any): void {
     this.renderChart('#radar-multi-chart', A, {
-      series: [{ name: 'Team A', data: [80, 90, 70, 85, 60, 75] }, { name: 'Team B', data: [65, 75, 90, 70, 80, 85] }],
+      series: [
+        { name: 'Team A', data: [80, 90, 70, 85, 60, 75] },
+        { name: 'Team B', data: [65, 75, 90, 70, 80, 85] },
+      ],
       chart: { type: 'radar', height: 300, background: 'transparent', toolbar: { show: false } },
       colors: [this.getColor(0), this.getColor(1)],
       xaxis: { categories: ['JavaScript', 'TypeScript', 'Angular', 'React', 'Node.js', 'Python'] },
@@ -713,7 +831,15 @@ export class ChartsPage implements AfterViewInit {
       series: [75],
       chart: { type: 'radialBar', height: 250, background: 'transparent' },
       colors: [this.getColor(0)],
-      plotOptions: { radialBar: { hollow: { size: '60%' }, dataLabels: { name: { show: true }, value: { show: true, fontSize: '24px', fontWeight: 'bold' } } } },
+      plotOptions: {
+        radialBar: {
+          hollow: { size: '60%' },
+          dataLabels: {
+            name: { show: true },
+            value: { show: true, fontSize: '24px', fontWeight: 'bold' },
+          },
+        },
+      },
       labels: ['Progress'],
       tooltip: { theme: 'dark' },
     });
@@ -724,7 +850,15 @@ export class ChartsPage implements AfterViewInit {
       series: [75, 60, 45],
       chart: { type: 'radialBar', height: 250, background: 'transparent' },
       colors: [this.getColor(0), this.getColor(1), this.getColor(2)],
-      plotOptions: { radialBar: { dataLabels: { name: { fontSize: '12px' }, value: { fontSize: '14px' }, total: { show: true, label: 'Total' } } } },
+      plotOptions: {
+        radialBar: {
+          dataLabels: {
+            name: { fontSize: '12px' },
+            value: { fontSize: '14px' },
+            total: { show: true, label: 'Total' },
+          },
+        },
+      },
       labels: ['Desktop', 'Mobile', 'Tablet'],
       tooltip: { theme: 'dark' },
     });
@@ -735,7 +869,18 @@ export class ChartsPage implements AfterViewInit {
       series: [76],
       chart: { type: 'radialBar', height: 250, background: 'transparent', offsetY: -20 },
       colors: [this.getColor(0)],
-      plotOptions: { radialBar: { startAngle: -90, endAngle: 90, hollow: { size: '60%' }, track: { background: 'var(--muted)', strokeWidth: '100%' }, dataLabels: { name: { show: true, offsetY: 30 }, value: { show: true, offsetY: -10, fontSize: '24px', fontWeight: 'bold' } } } },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          hollow: { size: '60%' },
+          track: { background: 'var(--muted)', strokeWidth: '100%' },
+          dataLabels: {
+            name: { show: true, offsetY: 30 },
+            value: { show: true, offsetY: -10, fontSize: '24px', fontWeight: 'bold' },
+          },
+        },
+      },
       labels: ['Goal Progress'],
       tooltip: { theme: 'dark' },
     });
@@ -749,7 +894,11 @@ export class ChartsPage implements AfterViewInit {
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth', width: 2 },
       fill: { type: 'gradient', gradient: { opacityFrom: 0.4, opacityTo: 0.1 } },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { show: false },
       tooltip: { theme: 'dark', y: { formatter: (val: number) => `$${val.toLocaleString()}` } },
@@ -758,16 +907,27 @@ export class ChartsPage implements AfterViewInit {
 
   private renderSharedTooltip(A: any): void {
     this.renderChart('#shared-tooltip-chart', A, {
-      series: [{ name: 'Revenue', data: [4500, 5200, 4800, 5800, 6200, 7100] }, { name: 'Expenses', data: [2500, 2800, 3100, 2900, 3200, 3500] }],
+      series: [
+        { name: 'Revenue', data: [4500, 5200, 4800, 5800, 6200, 7100] },
+        { name: 'Expenses', data: [2500, 2800, 3100, 2900, 3200, 3500] },
+      ],
       chart: { type: 'line', height: 250, background: 'transparent', toolbar: { show: false } },
       colors: [this.getColor(0), this.getColor(4)],
       stroke: { curve: 'smooth', width: 3 },
       markers: { size: 4 },
       dataLabels: { enabled: false },
-      xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], axisBorder: { show: false }, axisTicks: { show: false } },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+      },
       yaxis: { show: false },
       grid: { borderColor: 'var(--border)', strokeDashArray: 4 },
-      tooltip: { theme: 'dark', shared: true, y: { formatter: (val: number) => `$${val.toLocaleString()}` } },
+      tooltip: {
+        theme: 'dark',
+        shared: true,
+        y: { formatter: (val: number) => `$${val.toLocaleString()}` },
+      },
       legend: { show: false },
     });
   }

@@ -32,7 +32,7 @@ export function handleSearchComponents(args: any) {
   let results = searchComponents(query);
 
   if (category) {
-    results = results.filter(c => c.category === category);
+    results = results.filter((c) => c.category === category);
   }
 
   let text = `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
@@ -51,7 +51,10 @@ export function handleSearchComponents(args: any) {
       text += `${c.name}\n`;
       text += `  Selector:  ${c.selector}\n`;
       text += `  Category:  ${c.category}\n`;
-      text += `  Install:   ng g @ng-cn/core:c ${c.selector.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
+      text += `  Install:   ng g @ng-cn/core:c ${c.selector
+        .toLowerCase()
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .toLowerCase()}\n`;
       text += `  ${c.description}\n\n`;
     });
   }

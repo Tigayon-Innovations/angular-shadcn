@@ -1,5 +1,13 @@
 import { Button } from '@/ui/button';
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxList, ComboboxTrigger } from '@/ui/combobox';
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxTrigger,
+} from '@/ui/combobox';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { Check, ChevronsUpDown, LucideAngularModule } from 'lucide-angular';
 

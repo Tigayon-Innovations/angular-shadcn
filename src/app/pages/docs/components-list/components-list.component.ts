@@ -34,9 +34,7 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
       <!-- Header -->
       <div class="space-y-4 pb-8 pt-6 md:pb-10">
         <div class="space-y-2">
-          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-            Components
-          </h1>
+          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">Components</h1>
           <p class="text-xl text-muted-foreground leading-7">
             Beautifully designed components built with Angular and Tailwind CSS.
           </p>
@@ -47,7 +45,10 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
 
       <!-- Search -->
       <div class="relative max-w-2xl mb-10">
-        <lucide-icon [img]="icons.Search" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <lucide-icon
+          [img]="icons.Search"
+          class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
+        />
         <Input
           type="search"
           placeholder="Search components..."
@@ -66,7 +67,11 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
               <Badge variant="secondary" class="ml-1">{{ allComponents().length }}</Badge>
             </TabsTrigger>
             @for (category of categories(); track category.category) {
-              <TabsTrigger [value]="category.category" (click)="setCategory(category.category)" class="gap-2">
+              <TabsTrigger
+                [value]="category.category"
+                (click)="setCategory(category.category)"
+                class="gap-2"
+              >
                 {{ category.label }}
                 <Badge variant="secondary" class="ml-1">{{ category.components.length }}</Badge>
               </TabsTrigger>
@@ -78,7 +83,9 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @for (component of filteredComponents(); track component.slug) {
               <a [routerLink]="['/docs/components', component.slug]" class="block group">
-                <Card class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50">
+                <Card
+                  class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50"
+                >
                   <CardHeader class="space-y-3">
                     <CardTitle class="flex items-center justify-between text-xl">
                       <span>{{ component.name }}</span>
@@ -87,7 +94,9 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
                         class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
                       />
                     </CardTitle>
-                    <CardDescription class="leading-relaxed">{{ component.description }}</CardDescription>
+                    <CardDescription class="leading-relaxed">{{
+                      component.description
+                    }}</CardDescription>
                   </CardHeader>
                 </Card>
               </a>
@@ -114,7 +123,9 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               @for (component of getCategoryComponents(category.category); track component.slug) {
                 <a [routerLink]="['/docs/components', component.slug]" class="block group">
-                  <Card class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50">
+                  <Card
+                    class="h-full transition-all hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 hover:border-primary/50"
+                  >
                     <CardHeader class="space-y-3">
                       <CardTitle class="flex items-center justify-between text-xl">
                         <span>{{ component.name }}</span>
@@ -123,7 +134,9 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
                           class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
                         />
                       </CardTitle>
-                      <CardDescription class="leading-relaxed">{{ component.description }}</CardDescription>
+                      <CardDescription class="leading-relaxed">{{
+                        component.description
+                      }}</CardDescription>
                     </CardHeader>
                   </Card>
                 </a>
@@ -198,9 +211,7 @@ export class ComponentsListPage {
 
     if (query) {
       components = components.filter(
-        (c) =>
-          c.name.toLowerCase().includes(query) ||
-          c.description.toLowerCase().includes(query)
+        (c) => c.name.toLowerCase().includes(query) || c.description.toLowerCase().includes(query),
       );
     }
 
@@ -222,9 +233,7 @@ export class ComponentsListPage {
 
     if (query) {
       components = components.filter(
-        (c) =>
-          c.name.toLowerCase().includes(query) ||
-          c.description.toLowerCase().includes(query)
+        (c) => c.name.toLowerCase().includes(query) || c.description.toLowerCase().includes(query),
       );
     }
 

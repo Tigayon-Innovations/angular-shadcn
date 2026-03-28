@@ -54,8 +54,7 @@ export const TABS_DOCUMENTATION: ComponentDocumentation = {
         {
           name: 'value',
           type: 'string',
-          description:
-            'The controlled value of the tab to activate. Use with (valueChange).',
+          description: 'The controlled value of the tab to activate. Use with (valueChange).',
         },
         {
           name: 'defaultValue',

@@ -75,7 +75,7 @@ export class ComponentRegistry {
       (c) =>
         c.name.toLowerCase().includes(lowerQuery) ||
         c.description.toLowerCase().includes(lowerQuery) ||
-        c.slug.toLowerCase().includes(lowerQuery)
+        c.slug.toLowerCase().includes(lowerQuery),
     );
   }
 

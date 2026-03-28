@@ -6,7 +6,15 @@ import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkles, Terminal } from 'lucide-angular';
+import {
+  AlertCircle,
+  CheckCircle2,
+  Globe,
+  LucideAngularModule,
+  Package,
+  Sparkles,
+  Terminal,
+} from 'lucide-angular';
 
 /**
  * MCP Setup documentation page.
@@ -65,7 +73,8 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
                 </p>
                 <CodeBlock code="https://shadcn-angular.tigayon.com/mcp" language="text" />
                 <p class="text-sm text-muted-foreground">
-                  That's it! No build steps, no local server, no dependencies. Works instantly with Claude Desktop, Zed, Cline, and any MCP-compatible client. 🎉
+                  That's it! No build steps, no local server, no dependencies. Works instantly with
+                  Claude Desktop, Zed, Cline, and any MCP-compatible client. 🎉
                 </p>
               </div>
             </div>
@@ -78,9 +87,13 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
               How It Works
             </h2>
             <p class="text-muted-foreground leading-7">
-              The shadcn-angular MCP server is hosted at <code class="px-1.5 py-0.5 rounded bg-muted text-foreground">shadcn-angular.tigayon.com</code>
-              and serves component information via HTTP endpoints. Your AI assistant connects directly to this service - no local installation,
-              no build steps, no dependencies. Just add the URL to your IDE config and you're ready to go!
+              The shadcn-angular MCP server is hosted at
+              <code class="px-1.5 py-0.5 rounded bg-muted text-foreground"
+                >shadcn-angular.tigayon.com</code
+              >
+              and serves component information via HTTP endpoints. Your AI assistant connects
+              directly to this service - no local installation, no build steps, no dependencies.
+              Just add the URL to your IDE config and you're ready to go!
             </p>
           </div>
 
@@ -127,7 +140,8 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <li>Internet connection to access the MCP service</li>
           </ul>
           <p class="text-sm text-muted-foreground">
-            That's it! No Node.js, no build tools, no local server needed. The MCP service is hosted and ready to use.
+            That's it! No Node.js, no build tools, no local server needed. The MCP service is hosted
+            and ready to use.
           </p>
         </section>
 
@@ -184,10 +198,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
 
                 <div class="space-y-3">
                   <h4 class="text-base font-medium">2. Add the configuration</h4>
-                  <CodeBlock
-                    [code]="claudeConfigCode"
-                    language="json"
-                  />
+                  <CodeBlock [code]="claudeConfigCode" language="json" />
                 </div>
 
                 <div class="space-y-3">
@@ -202,9 +213,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <TabsContent value="zed" class="mt-6 space-y-6">
               <div class="space-y-4">
                 <h3 class="text-lg font-medium">Zed Editor Configuration</h3>
-                <p class="text-muted-foreground">
-                  Configure the MCP server in your Zed settings:
-                </p>
+                <p class="text-muted-foreground">Configure the MCP server in your Zed settings:</p>
 
                 <div class="space-y-3">
                   <h4 class="text-base font-medium">1. Open Zed settings</h4>
@@ -220,10 +229,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
 
                 <div class="space-y-3">
                   <h4 class="text-base font-medium">3. Add the context server</h4>
-                  <CodeBlock
-                    [code]="zedConfigCode"
-                    language="json"
-                  />
+                  <CodeBlock [code]="zedConfigCode" language="json" />
                 </div>
 
                 <div class="space-y-3">
@@ -238,9 +244,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <TabsContent value="cline" class="mt-6 space-y-6">
               <div class="space-y-4">
                 <h3 class="text-lg font-medium">Cline (VS Code) Configuration</h3>
-                <p class="text-muted-foreground">
-                  Configure the MCP server in VS Code settings:
-                </p>
+                <p class="text-muted-foreground">Configure the MCP server in VS Code settings:</p>
 
                 <div class="space-y-3">
                   <h4 class="text-base font-medium">1. Install Cline extension</h4>
@@ -263,10 +267,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
 
                 <div class="space-y-3">
                   <h4 class="text-base font-medium">4. Add the server configuration</h4>
-                  <CodeBlock
-                    [code]="clineConfigCode"
-                    language="json"
-                  />
+                  <CodeBlock [code]="clineConfigCode" language="json" />
                 </div>
 
                 <div class="space-y-3">
@@ -298,11 +299,15 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
               <li>Claude should respond with component information from the MCP server</li>
             </ol>
             <div class="rounded-lg border border-green-500/50 bg-green-500/10 p-4 flex gap-3">
-              <lucide-icon [img]="icons.CheckCircle2" class="h-5 w-5 text-green-600 dark:text-green-500 shrink-0 mt-0.5" />
+              <lucide-icon
+                [img]="icons.CheckCircle2"
+                class="h-5 w-5 text-green-600 dark:text-green-500 shrink-0 mt-0.5"
+              />
               <div>
                 <p class="text-sm font-medium text-green-900 dark:text-green-200">Success</p>
                 <p class="text-sm text-green-800 dark:text-green-300 mt-1">
-                  If Claude provides detailed component information, the MCP server is working correctly!
+                  If Claude provides detailed component information, the MCP server is working
+                  correctly!
                 </p>
               </div>
             </div>
@@ -315,9 +320,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <h2 class="scroll-m-20 text-3xl font-semibold tracking-tight border-b pb-2">
               Available Tools
             </h2>
-            <p class="text-muted-foreground">
-              Once configured, Claude can access these MCP tools:
-            </p>
+            <p class="text-muted-foreground">Once configured, Claude can access these MCP tools:</p>
           </div>
           <div class="grid gap-4">
             <Card>
@@ -328,10 +331,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <CodeBlock
-                  code='Ask Claude: "Search for button components"'
-                  language="text"
-                />
+                <CodeBlock code='Ask Claude: "Search for button components"' language="text" />
               </CardContent>
             </Card>
             <Card>
@@ -356,10 +356,7 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <CodeBlock
-                  code='Ask Claude: "List all form components"'
-                  language="text"
-                />
+                <CodeBlock code='Ask Claude: "List all form components"' language="text" />
               </CardContent>
             </Card>
           </div>
@@ -376,7 +373,12 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <div class="space-y-2">
               <h3 class="text-xl font-semibold">MCP server not connecting</h3>
               <ul class="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-                <li>Verify the URL is correct: <code class="px-1.5 py-0.5 rounded bg-muted text-foreground">https://shadcn-angular.tigayon.com/mcp</code></li>
+                <li>
+                  Verify the URL is correct:
+                  <code class="px-1.5 py-0.5 rounded bg-muted text-foreground"
+                    >https://shadcn-angular.tigayon.com/mcp</code
+                  >
+                </li>
                 <li>Ensure you have a stable internet connection</li>
                 <li>Check your IDE's config file format (JSON must be valid)</li>
                 <li>Completely restart your IDE after configuration changes</li>
@@ -385,13 +387,15 @@ import { AlertCircle, CheckCircle2, Globe, LucideAngularModule, Package, Sparkle
             <div class="space-y-2">
               <h3 class="text-xl font-semibold">Service unavailable</h3>
               <p class="text-muted-foreground">
-                If you get a service unavailable error, the MCP service might be temporarily down. Try again in a few moments.
+                If you get a service unavailable error, the MCP service might be temporarily down.
+                Try again in a few moments.
               </p>
             </div>
             <div class="space-y-2">
               <h3 class="text-xl font-semibold">Tools not showing up</h3>
               <p class="text-muted-foreground">
-                After adding the configuration, you should see MCP tools available in your IDE. If not:
+                After adding the configuration, you should see MCP tools available in your IDE. If
+                not:
               </p>
               <ul class="list-disc list-inside space-y-2 text-muted-foreground ml-4">
                 <li>Check your IDE's MCP settings or logs</li>

@@ -14,9 +14,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           class="h-full w-full object-cover"
         />
       </AspectRatio>
-      <p class="text-sm text-muted-foreground mt-2 text-center">
-        16:9 Aspect Ratio
-      </p>
+      <p class="text-sm text-muted-foreground mt-2 text-center">16:9 Aspect Ratio</p>
     </div>
   `,
 })

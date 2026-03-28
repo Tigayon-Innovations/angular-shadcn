@@ -13,7 +13,7 @@ import { SELECT_CONTEXT } from './select-context';
   host: {
     '[attr.data-placeholder]': '!context?.value() ? "" : null',
     'data-slot': 'select-value',
-    'class': 'flex-1 truncate text-left',
+    class: 'flex-1 truncate text-left',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

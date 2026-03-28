@@ -5,14 +5,7 @@ import {
   DropdownMenuTrigger,
 } from '@/lib/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Check, Clipboard, FileCode, LucideAngularModule, MoreVertical } from 'lucide-angular';
 import { codeToHtml } from 'shiki';
@@ -24,7 +17,13 @@ import { codeToHtml } from 'shiki';
 @Component({
   selector: 'CodeBlock',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LucideAngularModule, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger],
+  imports: [
+    LucideAngularModule,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+  ],
   styles: `
     :host {
       display: block;
@@ -38,10 +37,12 @@ import { codeToHtml } from 'shiki';
         overflow-x: auto;
         font-family: 'Fira Code', 'Geist Mono', 'JetBrains Mono', Consolas, Monaco, monospace;
         font-size: 13px;
-        line-height: .5;
+        line-height: 0.5;
         tab-size: 2;
         background: transparent !important;
-        font-feature-settings: 'calt' 1, 'liga' 1;
+        font-feature-settings:
+          'calt' 1,
+          'liga' 1;
       }
 
       code {
@@ -77,8 +78,8 @@ import { codeToHtml } from 'shiki';
 
       /* Transparency for special characters like brackets, punctuation */
       .punctuation,
-      [style*="color:#9ECBFF"] + span[style*="color:#E1E4E8"],
-      span[style*="color:#E1E4E8"]:has(+ span) {
+      [style*='color:#9ECBFF'] + span[style*='color:#E1E4E8'],
+      span[style*='color:#E1E4E8']:has(+ span) {
         opacity: 0.6;
       }
     }
@@ -94,7 +95,9 @@ import { codeToHtml } from 'shiki';
   template: `
     <div [class]="computedClass()">
       <!-- Header bar with title and actions -->
-      <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50">
+      <div
+        class="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50"
+      >
         <div class="flex items-center gap-2 text-zinc-400">
           <lucide-icon [img]="icons.FileCode" class="size-4" />
           <span class="text-sm font-medium">{{ displayTitle() }}</span>
@@ -128,13 +131,21 @@ import { codeToHtml } from 'shiki';
               <DropdownMenuItem (click)="toggleDarkTheme()">
                 <div class="flex items-center justify-between w-full">
                   <span>Use dark theme</span>
-                  <input type="checkbox" [checked]="useDarkTheme()" class="h-4 w-4 rounded border-input" />
+                  <input
+                    type="checkbox"
+                    [checked]="useDarkTheme()"
+                    class="h-4 w-4 rounded border-input"
+                  />
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem (click)="toggleWrapLines()">
                 <div class="flex items-center justify-between w-full">
                   <span>Wrap long lines</span>
-                  <input type="checkbox" [checked]="wrapLines()" class="h-4 w-4 rounded border-input" />
+                  <input
+                    type="checkbox"
+                    [checked]="wrapLines()"
+                    class="h-4 w-4 rounded border-input"
+                  />
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -199,8 +210,8 @@ export class CodeBlock {
   protected readonly computedClass = computed(() =>
     cn(
       'relative rounded-lg border border-zinc-800 bg-zinc-950 overflow-hidden font-mono',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected toggleDarkTheme(): void {
@@ -229,18 +240,22 @@ export class CodeBlock {
       const html = await codeToHtml(code, {
         lang: mappedLang,
         theme: 'github-dark',
-        transformers: showLineNumbers ? [{
-          line(node, line) {
-            // Add line numbers
-            const lineNumber = {
-              type: 'element' as const,
-              tagName: 'span',
-              properties: { class: 'line-number' },
-              children: [{ type: 'text' as const, value: String(line) }],
-            };
-            node.children.unshift(lineNumber as any);
-          },
-        }] : [],
+        transformers: showLineNumbers
+          ? [
+              {
+                line(node, line) {
+                  // Add line numbers
+                  const lineNumber = {
+                    type: 'element' as const,
+                    tagName: 'span',
+                    properties: { class: 'line-number' },
+                    children: [{ type: 'text' as const, value: String(line) }],
+                  };
+                  node.children.unshift(lineNumber as any);
+                },
+              },
+            ]
+          : [],
       });
 
       this.highlightedHtml.set(this.sanitizer.bypassSecurityTrustHtml(html));

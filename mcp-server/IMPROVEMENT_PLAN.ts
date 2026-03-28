@@ -122,7 +122,7 @@ export const exampleTemplates = {
   <CardContent>
     <p>Card content goes here.</p>
   </CardContent>
-</Card>`
+</Card>`,
       },
       {
         title: 'Card with Footer',
@@ -138,9 +138,9 @@ export const exampleTemplates = {
     <Button variant="outline">Cancel</Button>
     <Button>Confirm</Button>
   </CardFooter>
-</Card>`
-      }
-    ]
+</Card>`,
+      },
+    ],
   },
 
   // Form input component
@@ -149,7 +149,7 @@ export const exampleTemplates = {
       {
         title: 'Basic Input',
         description: 'Simple text input',
-        code: `<Input type="text" placeholder="Enter text..." />`
+        code: `<Input type="text" placeholder="Enter text..." />`,
       },
       {
         title: 'Input with Label',
@@ -157,14 +157,14 @@ export const exampleTemplates = {
         code: `<div class="grid gap-2">
   <Label htmlFor="email">Email</Label>
   <Input id="email" type="email" placeholder="m@example.com" />
-</div>`
+</div>`,
       },
       {
         title: 'Disabled Input',
         description: 'Disabled input state',
-        code: `<Input disabled placeholder="Disabled input" />`
-      }
-    ]
+        code: `<Input disabled placeholder="Disabled input" />`,
+      },
+    ],
   },
 
   // Interactive overlay component
@@ -180,7 +180,7 @@ export const exampleTemplates = {
   <TooltipContent>
     <p>Tooltip content</p>
   </TooltipContent>
-</Tooltip>`
+</Tooltip>`,
       },
       {
         title: 'Tooltip with Custom Position',
@@ -192,10 +192,10 @@ export const exampleTemplates = {
   <TooltipContent side="top">
     <p>This appears on top</p>
   </TooltipContent>
-</Tooltip>`
-      }
-    ]
-  }
+</Tooltip>`,
+      },
+    ],
+  },
 };
 
 /**

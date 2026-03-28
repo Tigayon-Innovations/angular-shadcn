@@ -44,7 +44,17 @@ export interface SeoConfig {
  * Default SEO configuration for the site
  */
 const DEFAULT_SEO_CONFIG: Required<
-  Pick<SeoConfig, 'title' | 'description' | 'keywords' | 'ogType' | 'ogImage' | 'ogImageAlt' | 'twitterCard' | 'robots'>
+  Pick<
+    SeoConfig,
+    | 'title'
+    | 'description'
+    | 'keywords'
+    | 'ogType'
+    | 'ogImage'
+    | 'ogImageAlt'
+    | 'twitterCard'
+    | 'robots'
+  >
 > = {
   title: 'shadcn-angular',
   description:

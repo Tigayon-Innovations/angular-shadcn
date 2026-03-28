@@ -22,31 +22,31 @@ import { LucideAngularModule } from 'lucide-angular';
   imports: [LucideAngularModule],
   template: `
     <div #itemElement [class]="innerClass()">
-          @if (option()?.icon && iconPosition() === 'left') {
-            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink" />
-          }
+      @if (option()?.icon && iconPosition() === 'left') {
+        <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink" />
+      }
 
-          <ng-content />
+      <ng-content />
 
-          <svg
-            [class]="checkClass()"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+      <svg
+        [class]="checkClass()"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
 
-          @if(option()?.icon && iconPosition() === 'right'){
-            <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink ms-auto" />
-          }
+      @if (option()?.icon && iconPosition() === 'right') {
+        <lucide-icon [img]="option()?.icon" class="h-4 w-4 shrink ms-auto" />
+      }
     </div>
   `,
   host: {
@@ -95,7 +95,9 @@ export class ComboboxItem {
 
   // readonly iconPosition = this.context.iconPosition();
   readonly iconPosition = computed(() => this.context.iconPosition());
-  protected readonly option = computed(() => this.context.options().find((o) => o.value === this.value()))
+  protected readonly option = computed(() =>
+    this.context.options().find((o) => o.value === this.value()),
+  );
   protected readonly optionId = computed(() => this.context.getOptionId(this.index()));
   protected readonly isSelected = computed(() => this.context.value() === this.value());
   protected readonly isHighlighted = computed(

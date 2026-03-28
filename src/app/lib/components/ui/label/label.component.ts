@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
 } from '@angular/core';
 
 export type LabelProps = {

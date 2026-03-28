@@ -10,7 +10,9 @@ import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
   imports: [LucideAngularModule],
   template: `
     <footer class="border-t border-border/40 py-6 md:py-0">
-      <div class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:h-16 md:flex-row">
+      <div
+        class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:h-16 md:flex-row"
+      >
         <p class="text-center text-sm leading-loose text-muted-foreground md:text-left">
           Built with
           <lucide-icon [img]="icons.Heart" class="inline h-4 w-4 mx-1 text-red-500" />

@@ -9,17 +9,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <div class="rounded-lg border bg-card p-6 shadow-lg">
           <div class="mb-6 text-center">
             <h1 class="mb-2 text-2xl font-bold">Enter verification code</h1>
-            <p class="text-sm text-muted-foreground">
-              We sent a 6-digit code to your email.
-            </p>
+            <p class="text-sm text-muted-foreground">We sent a 6-digit code to your email.</p>
           </div>
 
           <form class="space-y-6">
             <!-- Verification Code Label -->
             <div>
-              <label class="mb-3 block text-sm font-medium">
-                Verification code
-              </label>
+              <label class="mb-3 block text-sm font-medium"> Verification code </label>
 
               <!-- OTP Input Boxes -->
               <div class="flex justify-between gap-2">
@@ -49,10 +45,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             <!-- Resend Link -->
             <div class="text-center text-sm">
               <span class="text-muted-foreground">Didn't receive the code?</span>
-              <button
-                type="button"
-                class="ml-1 text-primary underline-offset-4 hover:underline"
-              >
+              <button type="button" class="ml-1 text-primary underline-offset-4 hover:underline">
                 Resend
               </button>
             </div>

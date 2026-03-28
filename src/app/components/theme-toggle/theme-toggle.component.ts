@@ -1,16 +1,12 @@
 import { ThemeService, type Theme } from '@/services/theme.service';
 import { Button } from '@/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '@/ui/dropdown-menu';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LucideAngularModule, Monitor, Moon, Sun } from 'lucide-angular';
 
 /**

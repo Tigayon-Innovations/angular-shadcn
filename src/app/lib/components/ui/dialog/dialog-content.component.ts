@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    computed,
-    DestroyRef,
-    effect,
-    HostListener,
-    inject,
-    input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  HostListener,
+  inject,
+  input,
 } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
 

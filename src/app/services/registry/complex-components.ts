@@ -61,7 +61,12 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'variant', type: "'default' | 'secondary' | 'outline' | 'destructive'", default: "'default'", description: 'The visual style of the badge.' },
+      {
+        name: 'variant',
+        type: "'default' | 'secondary' | 'outline' | 'destructive'",
+        default: "'default'",
+        description: 'The visual style of the badge.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -85,7 +90,12 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     ],
     props: [
       { name: 'selected', type: 'Date', description: 'The selected date.' },
-      { name: 'mode', type: "'single' | 'multiple' | 'range'", default: "'single'", description: 'The selection mode.' },
+      {
+        name: 'mode',
+        type: "'single' | 'multiple' | 'range'",
+        default: "'single'",
+        description: 'The selection mode.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -119,7 +129,12 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'The orientation of the carousel.' },
+      {
+        name: 'orientation',
+        type: "'horizontal' | 'vertical'",
+        default: "'horizontal'",
+        description: 'The orientation of the carousel.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -148,7 +163,16 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     description: 'Fast, composable, unstyled command menu.',
     category: 'complex',
     package: '@ng-cn/command',
-    imports: ['Command', 'CommandInput', 'CommandList', 'CommandEmpty', 'CommandGroup', 'CommandItem', 'CommandSeparator', 'CommandShortcut'],
+    imports: [
+      'Command',
+      'CommandInput',
+      'CommandList',
+      'CommandEmpty',
+      'CommandGroup',
+      'CommandItem',
+      'CommandSeparator',
+      'CommandShortcut',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -187,9 +211,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
 </Command>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
   {
     name: 'Progress',
@@ -238,9 +260,7 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
 </div>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
   {
     name: 'Spinner',
@@ -264,7 +284,12 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'The size of the spinner.' },
+      {
+        name: 'size',
+        type: "'sm' | 'md' | 'lg'",
+        default: "'md'",
+        description: 'The size of the spinner.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -274,7 +299,16 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     description: 'A responsive table component.',
     category: 'complex',
     package: '@ng-cn/table',
-    imports: ['Table', 'TableHeader', 'TableBody', 'TableFooter', 'TableHead', 'TableRow', 'TableCell', 'TableCaption'],
+    imports: [
+      'Table',
+      'TableHeader',
+      'TableBody',
+      'TableFooter',
+      'TableHead',
+      'TableRow',
+      'TableCell',
+      'TableCaption',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -305,8 +339,6 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
 </Table>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
 ];

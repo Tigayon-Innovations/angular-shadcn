@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const NAVIGATION_MENU_DOCUMENTATION: ComponentDocumentation = {
   name: 'Navigation Menu',
   slug: 'navigation-menu',
-  description:
-    'A collection of links for navigating websites.',
+  description: 'A collection of links for navigating websites.',
 
   features: [
     { text: 'Can be controlled or uncontrolled.', highlight: true },
@@ -103,9 +102,7 @@ export const NAVIGATION_MENU_DOCUMENTATION: ComponentDocumentation = {
           description: 'Event handler called when the value changes.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-orientation]', values: '"horizontal" | "vertical"' },
-      ],
+      dataAttributes: [{ name: '[data-orientation]', values: '"horizontal" | "vertical"' }],
     },
     {
       name: 'List',
@@ -117,9 +114,7 @@ export const NAVIGATION_MENU_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-orientation]', values: '"horizontal" | "vertical"' },
-      ],
+      dataAttributes: [{ name: '[data-orientation]', values: '"horizontal" | "vertical"' }],
     },
     {
       name: 'Item',
@@ -183,9 +178,7 @@ export const NAVIGATION_MENU_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-active]', values: 'Present when active' },
-      ],
+      dataAttributes: [{ name: '[data-active]', values: 'Present when active' }],
     },
     {
       name: 'Indicator',
@@ -351,7 +344,8 @@ export const NAVIGATION_MENU_DOCUMENTATION: ComponentDocumentation = {
       },
       {
         key: 'Enter',
-        description: 'When focus is on trigger, opens/closes the content. When on link, follows the link.',
+        description:
+          'When focus is on trigger, opens/closes the content. When on link, follows the link.',
       },
       {
         key: 'Tab',

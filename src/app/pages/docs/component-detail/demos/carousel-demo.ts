@@ -1,10 +1,10 @@
 import { Card, CardContent } from '@/ui/card';
 import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/ui/carousel';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 

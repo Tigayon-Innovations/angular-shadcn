@@ -5,7 +5,18 @@ import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ArrowLeft, ArrowRight, Check, Copy, Globe, LucideAngularModule, Moon, Palette, Sparkles, Sun } from 'lucide-angular';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Copy,
+  Globe,
+  LucideAngularModule,
+  Moon,
+  Palette,
+  Sparkles,
+  Sun,
+} from 'lucide-angular';
 
 interface ThemePalette {
   name: string;
@@ -43,7 +54,22 @@ interface ThemeColors {
 @Component({
   selector: 'ThemingPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, Separator, CodeBlock, LucideAngularModule, Card, CardContent, CardDescription, CardHeader, CardTitle, Tabs, TabsContent, TabsList, TabsTrigger],
+  imports: [
+    RouterLink,
+    Button,
+    Separator,
+    CodeBlock,
+    LucideAngularModule,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+  ],
   template: `
     <div class="space-y-6">
       <!-- Header -->
@@ -63,9 +89,9 @@ interface ThemeColors {
             CSS Variables
           </h2>
           <p class="leading-7">
-            Themes are just CSS variables. Update them once, and components stay in sync
-            across your app. This system uses <strong>OKLCH color space</strong> for better
-            perceptual uniformity and wider color gamut support.
+            Themes are just CSS variables. Update them once, and components stay in sync across your
+            app. This system uses <strong>OKLCH color space</strong> for better perceptual
+            uniformity and wider color gamut support.
           </p>
         </section>
 
@@ -73,13 +99,8 @@ interface ThemeColors {
           <h2 class="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">
             Default Theme
           </h2>
-          <p class="leading-7">
-            Start here. These are the defaults that come with ng-cn:
-          </p>
-          <CodeBlock
-            [code]="defaultThemeCode"
-            language="css"
-          />
+          <p class="leading-7">Start here. These are the defaults that come with ng-cn:</p>
+          <CodeBlock [code]="defaultThemeCode" language="css" />
         </section>
 
         <section class="space-y-4">
@@ -87,10 +108,11 @@ interface ThemeColors {
             Color Convention
           </h2>
           <p class="leading-7">
-            We use a simple <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code>
-            and <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code> convention
-            for colors. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code>
-            sets the surface. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code>
+            We use a simple
+            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code> and
+            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code> convention for
+            colors. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">background</code> sets the
+            surface. <code class="bg-muted px-1.5 py-0.5 rounded text-sm">foreground</code>
             sets the text.
           </p>
           <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-6">
@@ -166,8 +188,8 @@ interface ThemeColors {
           </h2>
           <p class="leading-7">
             To create a custom theme, you'll need to modify the CSS variables in your
-            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">ng-cn.scss</code> file.
-            The file structure includes three main parts:
+            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">ng-cn.scss</code> file. The file
+            structure includes three main parts:
           </p>
 
           <div class="grid gap-4 my-6">
@@ -180,10 +202,7 @@ interface ThemeColors {
                 <p class="text-sm text-muted-foreground mb-4">
                   Set your colors using OKLCH format for perceptual uniformity:
                 </p>
-                <CodeBlock
-                  [code]="customThemeVariablesCode"
-                  language="css"
-                />
+                <CodeBlock [code]="customThemeVariablesCode" language="css" />
               </CardContent>
             </Card>
 
@@ -196,10 +215,7 @@ interface ThemeColors {
                 <p class="text-sm text-muted-foreground mb-4">
                   This block connects your CSS variables to Tailwind utility classes:
                 </p>
-                <CodeBlock
-                  [code]="tailwindThemeMappingCode"
-                  language="css"
-                />
+                <CodeBlock [code]="tailwindThemeMappingCode" language="css" />
               </CardContent>
             </Card>
 
@@ -212,10 +228,7 @@ interface ThemeColors {
                 <p class="text-sm text-muted-foreground mb-4">
                   Set up base styles that apply theme colors globally:
                 </p>
-                <CodeBlock
-                  [code]="baseLayerCode"
-                  language="css"
-                />
+                <CodeBlock [code]="baseLayerCode" language="css" />
               </CardContent>
             </Card>
           </div>
@@ -225,16 +238,12 @@ interface ThemeColors {
           <h2 class="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">
             Adding New Colors
           </h2>
-          <p class="leading-7">
-            Add a variable in CSS, then map it into Tailwind's theme block:
-          </p>
-          <CodeBlock
-            [code]="addColorCode"
-            language="css"
-          />
+          <p class="leading-7">Add a variable in CSS, then map it into Tailwind's theme block:</p>
+          <CodeBlock [code]="addColorCode" language="css" />
           <p class="leading-7 mt-4">
             Now you can use <code class="bg-muted px-1.5 py-0.5 rounded text-sm">bg-warning</code>,
-            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">text-warning-foreground</code>, etc.
+            <code class="bg-muted px-1.5 py-0.5 rounded text-sm">text-warning-foreground</code>,
+            etc.
           </p>
         </section>
 
@@ -243,13 +252,10 @@ interface ThemeColors {
             Understanding OKLCH
           </h2>
           <p class="leading-7">
-            OKLCH is a perceptually uniform color space that makes it easier to create
-            harmonious color palettes. The format is:
+            OKLCH is a perceptually uniform color space that makes it easier to create harmonious
+            color palettes. The format is:
           </p>
-          <CodeBlock
-            [code]="oklchExplanationCode"
-            language="css"
-          />
+          <CodeBlock [code]="oklchExplanationCode" language="css" />
           <div class="grid gap-4 md:grid-cols-3 my-6">
             <div class="rounded-lg border p-4 space-y-2">
               <h4 class="font-semibold">Lightness (L)</h4>
@@ -277,13 +283,9 @@ interface ThemeColors {
             Other Color Formats
           </h2>
           <p class="leading-7">
-            OKLCH is the default for consistent, modern color. Prefer HSL or RGB? That's
-            fine too:
+            OKLCH is the default for consistent, modern color. Prefer HSL or RGB? That's fine too:
           </p>
-          <CodeBlock
-            [code]="otherFormatsCode"
-            language="css"
-          />
+          <CodeBlock [code]="otherFormatsCode" language="css" />
         </section>
 
         <!-- Popular Palettes Section -->
@@ -295,14 +297,17 @@ interface ThemeColors {
             </h2>
           </div>
           <p class="leading-7">
-            Get started quickly with color palettes inspired by popular websites and apps.
-            Click on a palette to copy the CSS variables to your clipboard.
+            Get started quickly with color palettes inspired by popular websites and apps. Click on
+            a palette to copy the CSS variables to your clipboard.
           </p>
 
           <Tabs defaultValue="shadcn" class="w-full">
             <TabsList class="grid w-full grid-cols-3 md:grid-cols-4 lg:grid-cols-7 h-auto">
               @for (palette of palettes; track palette.name) {
-                <TabsTrigger [value]="palette.name.toLowerCase().replace(' ', '-')" class="text-xs px-2 py-2">
+                <TabsTrigger
+                  [value]="palette.name.toLowerCase().replace(' ', '-')"
+                  class="text-xs px-2 py-2"
+                >
                   {{ palette.name }}
                 </TabsTrigger>
               }
@@ -351,25 +356,38 @@ interface ThemeColors {
                             [style.background]="palette.light.card"
                             [style.border]="'1px solid ' + palette.light.border"
                           >
-                            <p class="text-sm font-medium" [style.color]="palette.light.cardForeground">Card Title</p>
-                            <p class="text-xs" [style.color]="palette.light.mutedForeground">Card description text</p>
+                            <p
+                              class="text-sm font-medium"
+                              [style.color]="palette.light.cardForeground"
+                            >
+                              Card Title
+                            </p>
+                            <p class="text-xs" [style.color]="palette.light.mutedForeground">
+                              Card description text
+                            </p>
                           </div>
                           <div class="flex gap-2">
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.light.primary"
                               [style.color]="palette.light.primaryForeground"
-                            >Primary</div>
+                            >
+                              Primary
+                            </div>
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.light.secondary"
                               [style.color]="palette.light.secondaryForeground"
-                            >Secondary</div>
+                            >
+                              Secondary
+                            </div>
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.light.destructive"
                               [style.color]="palette.light.destructiveForeground"
-                            >Destructive</div>
+                            >
+                              Destructive
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -388,25 +406,38 @@ interface ThemeColors {
                             [style.background]="palette.dark.card"
                             [style.border]="'1px solid ' + palette.dark.border"
                           >
-                            <p class="text-sm font-medium" [style.color]="palette.dark.cardForeground">Card Title</p>
-                            <p class="text-xs" [style.color]="palette.dark.mutedForeground">Card description text</p>
+                            <p
+                              class="text-sm font-medium"
+                              [style.color]="palette.dark.cardForeground"
+                            >
+                              Card Title
+                            </p>
+                            <p class="text-xs" [style.color]="palette.dark.mutedForeground">
+                              Card description text
+                            </p>
                           </div>
                           <div class="flex gap-2">
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.dark.primary"
                               [style.color]="palette.dark.primaryForeground"
-                            >Primary</div>
+                            >
+                              Primary
+                            </div>
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.dark.secondary"
                               [style.color]="palette.dark.secondaryForeground"
-                            >Secondary</div>
+                            >
+                              Secondary
+                            </div>
                             <div
                               class="px-3 py-1.5 rounded-md text-xs font-medium"
                               [style.background]="palette.dark.destructive"
                               [style.color]="palette.dark.destructiveForeground"
-                            >Destructive</div>
+                            >
+                              Destructive
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -417,11 +448,18 @@ interface ThemeColors {
                       <h4 class="text-sm font-medium">Color Swatches</h4>
                       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-2">
                         <div class="space-y-1">
-                          <div class="h-8 rounded" [style.background]="palette.light.background" [style.border]="'1px solid ' + palette.light.border"></div>
+                          <div
+                            class="h-8 rounded"
+                            [style.background]="palette.light.background"
+                            [style.border]="'1px solid ' + palette.light.border"
+                          ></div>
                           <p class="text-[10px] text-muted-foreground text-center">Background</p>
                         </div>
                         <div class="space-y-1">
-                          <div class="h-8 rounded" [style.background]="palette.light.foreground"></div>
+                          <div
+                            class="h-8 rounded"
+                            [style.background]="palette.light.foreground"
+                          ></div>
                           <p class="text-[10px] text-muted-foreground text-center">Foreground</p>
                         </div>
                         <div class="space-y-1">
@@ -429,7 +467,10 @@ interface ThemeColors {
                           <p class="text-[10px] text-muted-foreground text-center">Primary</p>
                         </div>
                         <div class="space-y-1">
-                          <div class="h-8 rounded" [style.background]="palette.light.secondary"></div>
+                          <div
+                            class="h-8 rounded"
+                            [style.background]="palette.light.secondary"
+                          ></div>
                           <p class="text-[10px] text-muted-foreground text-center">Secondary</p>
                         </div>
                         <div class="space-y-1">
@@ -441,7 +482,10 @@ interface ThemeColors {
                           <p class="text-[10px] text-muted-foreground text-center">Accent</p>
                         </div>
                         <div class="space-y-1">
-                          <div class="h-8 rounded" [style.background]="palette.light.destructive"></div>
+                          <div
+                            class="h-8 rounded"
+                            [style.background]="palette.light.destructive"
+                          ></div>
                           <p class="text-[10px] text-muted-foreground text-center">Destructive</p>
                         </div>
                         <div class="space-y-1">
@@ -458,10 +502,7 @@ interface ThemeColors {
                     <!-- CSS Code -->
                     <div class="space-y-2">
                       <h4 class="text-sm font-medium">CSS Variables</h4>
-                      <CodeBlock
-                        [code]="generatePaletteCSS(palette)"
-                        language="css"
-                      />
+                      <CodeBlock [code]="generatePaletteCSS(palette)" language="css" />
                     </div>
                   </CardContent>
                 </Card>
@@ -484,8 +525,8 @@ interface ThemeColors {
               </CardHeader>
               <CardContent>
                 <p class="text-sm text-muted-foreground">
-                  Always ensure sufficient contrast between background and foreground colors.
-                  Use tools like WebAIM's contrast checker to verify accessibility.
+                  Always ensure sufficient contrast between background and foreground colors. Use
+                  tools like WebAIM's contrast checker to verify accessibility.
                 </p>
               </CardContent>
             </Card>
@@ -498,8 +539,8 @@ interface ThemeColors {
               </CardHeader>
               <CardContent>
                 <p class="text-sm text-muted-foreground">
-                  Always define colors for both light and dark modes. Test your theme
-                  thoroughly in both modes to ensure consistency.
+                  Always define colors for both light and dark modes. Test your theme thoroughly in
+                  both modes to ensure consistency.
                 </p>
               </CardContent>
             </Card>
@@ -512,8 +553,8 @@ interface ThemeColors {
               </CardHeader>
               <CardContent>
                 <p class="text-sm text-muted-foreground">
-                  OKLCH provides perceptually uniform colors. Adjusting lightness
-                  values will give predictable results across all hues.
+                  OKLCH provides perceptually uniform colors. Adjusting lightness values will give
+                  predictable results across all hues.
                 </p>
               </CardContent>
             </Card>
@@ -526,8 +567,8 @@ interface ThemeColors {
               </CardHeader>
               <CardContent>
                 <p class="text-sm text-muted-foreground">
-                  Use semantic names like "primary" and "destructive" instead of
-                  color names like "blue" and "red" for better maintainability.
+                  Use semantic names like "primary" and "destructive" instead of color names like
+                  "blue" and "red" for better maintainability.
                 </p>
               </CardContent>
             </Card>
@@ -550,7 +591,17 @@ interface ThemeColors {
   `,
 })
 export class ThemingPage {
-  protected readonly icons = { ArrowRight, ArrowLeft, Check, Copy, Palette, Sun, Moon, Globe, Sparkles };
+  protected readonly icons = {
+    ArrowRight,
+    ArrowLeft,
+    Check,
+    Copy,
+    Palette,
+    Sun,
+    Moon,
+    Globe,
+    Sparkles,
+  };
 
   protected copiedPalette = signal<string | null>(null);
 
@@ -604,7 +655,7 @@ export class ThemingPage {
     },
     {
       name: 'GitHub',
-      description: 'Inspired by GitHub\'s clean developer-focused design',
+      description: "Inspired by GitHub's clean developer-focused design",
       icon: 'github',
       light: {
         background: 'oklch(1 0 0)',
@@ -651,7 +702,7 @@ export class ThemingPage {
     },
     {
       name: 'Vercel',
-      description: 'Vercel\'s bold black and white design aesthetic',
+      description: "Vercel's bold black and white design aesthetic",
       icon: 'vercel',
       light: {
         background: 'oklch(1 0 0)',
@@ -698,7 +749,7 @@ export class ThemingPage {
     },
     {
       name: 'Apple',
-      description: 'Apple\'s elegant, sophisticated design language',
+      description: "Apple's elegant, sophisticated design language",
       icon: 'apple',
       light: {
         background: 'oklch(1 0 0)',
@@ -745,7 +796,7 @@ export class ThemingPage {
     },
     {
       name: 'OpenAI',
-      description: 'OpenAI\'s modern, tech-forward aesthetic',
+      description: "OpenAI's modern, tech-forward aesthetic",
       icon: 'openai',
       light: {
         background: 'oklch(1 0 0)',
@@ -792,7 +843,7 @@ export class ThemingPage {
     },
     {
       name: 'ClickUp',
-      description: 'ClickUp\'s vibrant, colorful productivity aesthetic',
+      description: "ClickUp's vibrant, colorful productivity aesthetic",
       icon: 'clickup',
       light: {
         background: 'oklch(1 0 0)',
@@ -839,7 +890,7 @@ export class ThemingPage {
     },
     {
       name: 'Linear',
-      description: 'Linear\'s sleek, issue tracking inspired design',
+      description: "Linear's sleek, issue tracking inspired design",
       icon: 'linear',
       light: {
         background: 'oklch(0.985 0.003 250)',

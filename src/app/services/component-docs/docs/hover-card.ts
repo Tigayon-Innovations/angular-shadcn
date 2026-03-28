@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const HOVER_CARD_DOCUMENTATION: ComponentDocumentation = {
   name: 'Hover Card',
   slug: 'hover-card',
-  description:
-    'For sighted users to preview content available behind a link.',
+  description: 'For sighted users to preview content available behind a link.',
 
   features: [
     { text: 'Can be controlled or uncontrolled.', highlight: true },
@@ -55,20 +54,21 @@ export const HOVER_CARD_DOCUMENTATION: ComponentDocumentation = {
           name: 'defaultOpen',
           type: 'boolean',
           default: 'false',
-          description:
-            'The open state of the hover card when initially rendered.',
+          description: 'The open state of the hover card when initially rendered.',
         },
         {
           name: 'openDelay',
           type: 'number',
           default: '700',
-          description: 'The duration from when the mouse enters the trigger until the hover card opens.',
+          description:
+            'The duration from when the mouse enters the trigger until the hover card opens.',
         },
         {
           name: 'closeDelay',
           type: 'number',
           default: '300',
-          description: 'The duration from when the mouse leaves the trigger until the hover card closes.',
+          description:
+            'The duration from when the mouse leaves the trigger until the hover card closes.',
         },
       ],
       events: [
@@ -87,8 +87,7 @@ export const HOVER_CARD_DOCUMENTATION: ComponentDocumentation = {
           name: 'asChild',
           type: 'boolean',
           default: 'false',
-          description:
-            'Change the component to render as the child element.',
+          description: 'Change the component to render as the child element.',
         },
         {
           name: 'class',
@@ -96,9 +95,7 @@ export const HOVER_CARD_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Content',
@@ -108,8 +105,7 @@ export const HOVER_CARD_DOCUMENTATION: ComponentDocumentation = {
           name: 'side',
           type: "'top' | 'right' | 'bottom' | 'left'",
           default: "'bottom'",
-          description:
-            'The preferred side of the trigger to render against when open.',
+          description: 'The preferred side of the trigger to render against when open.',
         },
         {
           name: 'sideOffset',

@@ -9,12 +9,7 @@ import { HomeCommunitySection } from './home-community-section/home-community-se
 @Component({
   selector: 'HomePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    HomeHeroSection,
-    HomeFeaturesSection,
-    HomePerformanceSection,
-    HomeCommunitySection,
-  ],
+  imports: [HomeHeroSection, HomeFeaturesSection, HomePerformanceSection, HomeCommunitySection],
   styleUrl: './home.style.css',
   templateUrl: './home.component.html',
 })

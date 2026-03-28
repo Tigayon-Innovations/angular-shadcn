@@ -13,11 +13,7 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
   imports: [LucideAngularModule],
   template: `
     <div class="flex items-center gap-1 rounded-lg border bg-muted/50 p-1">
-      <button
-        type="button"
-        [class]="getTabClass('colors')"
-        (click)="tabChange.emit('colors')"
-      >
+      <button type="button" [class]="getTabClass('colors')" (click)="tabChange.emit('colors')">
         <div class="flex items-center justify-center gap-2">
           <lucide-icon [img]="icons.Palette" class="h-4 w-4" />
           <span>Colors</span>
@@ -30,21 +26,19 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
       >
         Typography
       </button>
-      <button
-        type="button"
-        [class]="getTabClass('other')"
-        (click)="tabChange.emit('other')"
-      >
+      <button type="button" [class]="getTabClass('other')" (click)="tabChange.emit('other')">
         Other
       </button>
       <button
         type="button"
-        [class]="cn(
-          'rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
-          activeTab() === 'generate'
-            ? 'bg-background text-foreground shadow-sm'
-            : 'text-muted-foreground hover:text-foreground'
-        )"
+        [class]="
+          cn(
+            'rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
+            activeTab() === 'generate'
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          )
+        "
         (click)="tabChange.emit('generate')"
       >
         <lucide-icon [img]="icons.Shuffle" class="h-4 w-4" />
@@ -64,7 +58,7 @@ export class ThemeTabs {
       'flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
       this.activeTab() === tab
         ? 'bg-background text-foreground shadow-sm'
-        : 'text-muted-foreground hover:text-foreground'
+        : 'text-muted-foreground hover:text-foreground',
     );
   }
 }

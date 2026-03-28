@@ -7,5 +7,3 @@ export { Pricing01Component } from './pricing-01';
 export { Settings01Component } from './settings-01';
 export { Sidebar01Component } from './sidebar-01';
 export { Signup01Component } from './signup-01';
-
-

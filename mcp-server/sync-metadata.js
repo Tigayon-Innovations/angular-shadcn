@@ -1,7 +1,9 @@
 import fs from 'fs';
 
-const registryPath = '/Users/jameleidyassin/Desktop/Tigayon/shadcn-angular/src/app/services/component-registry.service.ts';
-const outputPath = '/Users/jameleidyassin/Desktop/Tigayon/shadcn-angular/mcp-server/components-data.ts';
+const registryPath =
+  '/Users/jameleidyassin/Desktop/Tigayon/shadcn-angular/src/app/services/component-registry.service.ts';
+const outputPath =
+  '/Users/jameleidyassin/Desktop/Tigayon/shadcn-angular/mcp-server/components-data.ts';
 
 const content = fs.readFileSync(registryPath, 'utf-8');
 
@@ -77,14 +79,12 @@ function parseComponent(objStr) {
         steps: [
           `Create src/app/lib/components/ui/${slug} directory`,
           `Copy component files from the library`,
-          `Import ${imports[0] || name} in your component`
+          `Import ${imports[0] || name} in your component`,
         ],
-        files: [
-          `src/app/lib/components/ui/${slug}/${slug}.component.ts`
-        ]
-      }
+        files: [`src/app/lib/components/ui/${slug}/${slug}.component.ts`],
+      },
     },
-    usage: `import { ${(imports.length > 0 ? imports : [name.replace(/\s+/g, '')]).join(', ')} } from '@/lib/components/ui/${slug}';\n\n${examples[0]?.code || ''}`
+    usage: `import { ${(imports.length > 0 ? imports : [name.replace(/\s+/g, '')]).join(', ')} } from '@/lib/components/ui/${slug}';\n\n${examples[0]?.code || ''}`,
   });
 }
 
@@ -98,7 +98,7 @@ function matchArray(str, field) {
   const regex = new RegExp(`${field}:\\s+\\[([^\\]]+)\\]`);
   const match = str.match(regex);
   if (!match) return [];
-  return match[1].split(',').map(i => i.trim().replace(/'/g, ''));
+  return match[1].split(',').map((i) => i.trim().replace(/'/g, ''));
 }
 
 function parseExamples(str) {
@@ -107,13 +107,14 @@ function parseExamples(str) {
   if (!exampleBlockMatch) return [];
 
   const block = exampleBlockMatch[1];
-  const exampleRegex = /\{\s+title:\s+'([^']+)',(?:\s+description:\s+'([^']+)',)?\s+code:\s+`([\s\S]*?)`\s+\}/g;
+  const exampleRegex =
+    /\{\s+title:\s+'([^']+)',(?:\s+description:\s+'([^']+)',)?\s+code:\s+`([\s\S]*?)`\s+\}/g;
   let match;
   while ((match = exampleRegex.exec(block)) !== null) {
     examples.push({
       title: match[1],
       description: match[2] || '',
-      code: match[3].trim()
+      code: match[3].trim(),
     });
   }
   return examples;
@@ -125,7 +126,8 @@ function parseProps(str) {
   if (!propsBlockMatch) return [];
 
   const block = propsBlockMatch[1];
-  const propRegex = /\{\s+name:\s+'([^']+)',\s+type:\s+'([^']+)',(?:\s+default:\s+'([^']+)',)?\s+description:\s+'([^']+)'\s+\}/g;
+  const propRegex =
+    /\{\s+name:\s+'([^']+)',\s+type:\s+'([^']+)',(?:\s+default:\s+'([^']+)',)?\s+description:\s+'([^']+)'\s+\}/g;
   let match;
   while ((match = propRegex.exec(block)) !== null) {
     props.push({
@@ -133,7 +135,7 @@ function parseProps(str) {
       type: match[2],
       default: match[3] || undefined,
       description: match[4],
-      required: false
+      required: false,
     });
   }
   return props;

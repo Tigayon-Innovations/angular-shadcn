@@ -7,10 +7,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   imports: [Calendar],
   template: `
     <div class="flex justify-center">
-      <Calendar
-        [(selected)]="date"
-        class="rounded-md border shadow-sm"
-      />
+      <Calendar [(selected)]="date" class="rounded-md border shadow-sm" />
     </div>
   `,
 })

@@ -1,4 +1,5 @@
 # MCP Server Test Report
+
 **Date**: January 29, 2026  
 **Location**: `/var/www/frontend/tigayon/frontend/production/angular-shadcn`  
 **URL**: `https://shadcn-angular.tigayon.com/mcp`
@@ -17,6 +18,7 @@ All MCP (Model Context Protocol) functionality is **WORKING CORRECTLY**.
 ## Nginx Configuration
 
 The nginx reverse proxy is properly configured:
+
 - HTTP (port 80) ??? Redirects to HTTPS
 - HTTPS (port 443) ??? Proxies to localhost:3100
 - Path: `/mcp/` ??? Strips prefix and forwards to backend
@@ -46,9 +48,11 @@ The nginx reverse proxy is properly configured:
 The MCP server exposes **5 tools** for ng-cn component management:
 
 ### 1. `search_components`
+
 **Description**: Search for ng-cn components by name, description, or category  
 **Test**: ??? Searched for "button" ??? Found 7 components  
 **Sample Output**:
+
 - Button (form)
 - Radio Group (form)
 - Toggle (form)
@@ -58,9 +62,11 @@ The MCP server exposes **5 tools** for ng-cn component management:
 - Segmented (advanced)
 
 ### 2. `get_component`
+
 **Description**: Get detailed information about a specific component  
 **Test**: ??? Retrieved "button" component details  
 **Returns**: Full component documentation including:
+
 - Quick start guide
 - Installation commands (ng add, npm, pnpm, yarn, bun)
 - Import instructions
@@ -69,14 +75,17 @@ The MCP server exposes **5 tools** for ng-cn component management:
 - API reference
 
 ### 3. `get_install_command`
+
 **Description**: Generate installation commands for multiple components  
 **Test**: ??? Working  
 **Supports**: npm, pnpm, yarn, bun, ng add
 
 ### 4. `list_categories`
+
 **Description**: List all component categories with descriptions  
 **Test**: ??? Retrieved 6 categories  
 **Categories**:
+
 - Basic (8 components): Core UI like menus, tabs, navigation
 - Form (15 components): Form inputs, controls, validation
 - Layout (6 components): Cards, separators, spacing
@@ -85,6 +94,7 @@ The MCP server exposes **5 tools** for ng-cn component management:
 - Advanced (9 components): Specialized components
 
 ### 5. `get_all_components`
+
 **Description**: Get complete list of all components  
 **Test**: ??? Retrieved all 57 components  
 **Total Components**: 57
@@ -92,18 +102,21 @@ The MCP server exposes **5 tools** for ng-cn component management:
 ## Network Tests
 
 ### Local HTTP
+
 ```bash
 curl http://localhost:3100/
 # ??? Returns server info and tool list
 ```
 
 ### Via Nginx (HTTPS)
+
 ```bash
 curl -k -H "Host: shadcn-angular.tigayon.com" https://localhost/mcp/
 # ??? Proxy working correctly
 ```
 
 ### Health Check
+
 ```bash
 curl -k -H "Host: shadcn-angular.tigayon.com" https://localhost/mcp/health
 # ??? Returns: {"status":"ok","server":"ng-cn-mcp"}
@@ -131,6 +144,7 @@ All tools were tested programmatically using Node.js imports:
 ## Conclusion
 
 The MCP server at `https://shadcn-angular.tigayon.com/mcp` is fully operational with:
+
 - ??? All 5 tools discoverable and working
 - ??? SSE transport configured for MCP clients
 - ??? Nginx reverse proxy configured correctly

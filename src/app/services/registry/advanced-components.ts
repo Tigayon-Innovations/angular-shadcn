@@ -28,7 +28,12 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'The orientation of the button group.' },
+      {
+        name: 'orientation',
+        type: "'horizontal' | 'vertical'",
+        default: "'horizontal'",
+        description: 'The orientation of the button group.',
+      },
     ],
   },
   {
@@ -52,9 +57,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
 </Empty>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
   {
     name: 'Input Group',
@@ -88,9 +91,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
 </div>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
   {
     name: 'Kbd',
@@ -122,9 +123,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
 </div>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
   {
     name: 'Native Select',
@@ -148,9 +147,7 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
 </div>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
   {
     name: 'Segmented',
@@ -181,7 +178,18 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     description: 'A composable, themeable and customizable sidebar component.',
     category: 'advanced',
     package: '@ng-cn/sidebar',
-    imports: ['SidebarProvider', 'Sidebar', 'SidebarHeader', 'SidebarContent', 'SidebarFooter', 'SidebarGroup', 'SidebarMenu', 'SidebarMenuItem', 'SidebarMenuButton', 'SidebarTrigger'],
+    imports: [
+      'SidebarProvider',
+      'Sidebar',
+      'SidebarHeader',
+      'SidebarContent',
+      'SidebarFooter',
+      'SidebarGroup',
+      'SidebarMenu',
+      'SidebarMenuItem',
+      'SidebarMenuButton',
+      'SidebarTrigger',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -230,8 +238,18 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'side', type: "'left' | 'right'", default: "'left'", description: 'The side the sidebar appears on.' },
-      { name: 'collapsible', type: "'offcanvas' | 'icon' | 'none'", default: "'offcanvas'", description: 'The collapsible behavior.' },
+      {
+        name: 'side',
+        type: "'left' | 'right'",
+        default: "'left'",
+        description: 'The side the sidebar appears on.',
+      },
+      {
+        name: 'collapsible',
+        type: "'offcanvas' | 'icon' | 'none'",
+        default: "'offcanvas'",
+        description: 'The collapsible behavior.',
+      },
     ],
   },
   {
@@ -259,7 +277,12 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'size', type: "'sm' | 'default' | 'lg'", default: "'default'", description: 'The size of the spinner.' },
+      {
+        name: 'size',
+        type: "'sm' | 'default' | 'lg'",
+        default: "'default'",
+        description: 'The size of the spinner.',
+      },
     ],
   },
   {
@@ -268,7 +291,19 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     description: 'Text styling components.',
     category: 'advanced',
     package: '@ng-cn/typography',
-    imports: ['TypographyH1', 'TypographyH2', 'TypographyH3', 'TypographyH4', 'TypographyP', 'TypographyLead', 'TypographyLarge', 'TypographySmall', 'TypographyMuted', 'TypographyBlockquote', 'TypographyInlineCode'],
+    imports: [
+      'TypographyH1',
+      'TypographyH2',
+      'TypographyH3',
+      'TypographyH4',
+      'TypographyP',
+      'TypographyLead',
+      'TypographyLarge',
+      'TypographySmall',
+      'TypographyMuted',
+      'TypographyBlockquote',
+      'TypographyInlineCode',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -291,8 +326,6 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
 </div>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
 ];

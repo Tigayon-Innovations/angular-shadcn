@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const TOAST_DOCUMENTATION: ComponentDocumentation = {
   name: 'Toast',
   slug: 'toast',
-  description:
-    'A succinct message that is displayed temporarily.',
+  description: 'A succinct message that is displayed temporarily.',
 
   features: [
     { text: 'Multiple variants (default, success, error, warning, info).', highlight: true },

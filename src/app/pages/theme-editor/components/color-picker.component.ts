@@ -1,4 +1,9 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/lib/components/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/lib/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { Grid, List, LucideAngularModule, Palette } from 'lucide-angular';
@@ -10,7 +15,13 @@ import { TailwindColor } from '../data';
 @Component({
   selector: 'ColorPicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, LucideAngularModule],
+  imports: [
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+    LucideAngularModule,
+  ],
   template: `
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -54,7 +65,9 @@ import { TailwindColor } from '../data';
           @if (view() === 'list') {
             @for (color of filteredColors(); track color.name) {
               <div class="border-t first:border-t-0">
-                <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground sticky top-0 bg-popover">
+                <div
+                  class="px-3 py-1.5 text-xs font-semibold text-muted-foreground sticky top-0 bg-popover"
+                >
                   {{ color.name }}
                 </div>
                 @for (shade of color.shades; track shade.label) {
@@ -117,13 +130,13 @@ export class ColorPicker {
     if (!search) return allColors;
 
     return allColors
-      .map(color => ({
+      .map((color) => ({
         ...color,
-        shades: color.shades.filter(shade =>
-          shade.label.toLowerCase().includes(search) ||
-          shade.hex.toLowerCase().includes(search)
+        shades: color.shades.filter(
+          (shade) =>
+            shade.label.toLowerCase().includes(search) || shade.hex.toLowerCase().includes(search),
         ),
       }))
-      .filter(color => color.shades.length > 0);
+      .filter((color) => color.shades.length > 0);
   });
 }

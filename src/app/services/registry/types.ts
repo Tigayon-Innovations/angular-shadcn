@@ -6,13 +6,7 @@ import type { ApiProperty } from '@/components/api-reference';
  */
 export const PACKAGE_SCOPE = '@ng-cn';
 
-export type ComponentCategory =
-  | 'basic'
-  | 'form'
-  | 'layout'
-  | 'overlay'
-  | 'complex'
-  | 'advanced';
+export type ComponentCategory = 'basic' | 'form' | 'layout' | 'overlay' | 'complex' | 'advanced';
 
 export interface ComponentInfo {
   name: string;

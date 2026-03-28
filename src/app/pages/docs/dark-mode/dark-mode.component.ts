@@ -16,7 +16,7 @@ import {
   Palette,
   Settings,
   Sun,
-  Zap
+  Zap,
 } from 'lucide-angular';
 
 /**
@@ -25,7 +25,19 @@ import {
 @Component({
   selector: 'DarkModePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, Badge, Separator, CodeBlock, Card, CardContent, CardDescription, CardHeader, CardTitle, LucideAngularModule],
+  imports: [
+    RouterLink,
+    Button,
+    Badge,
+    Separator,
+    CodeBlock,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    LucideAngularModule,
+  ],
   template: `
     <div class="space-y-10">
       <!-- Header Section -->
@@ -36,9 +48,7 @@ import {
             Theming
           </Badge>
         </div>
-        <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-          Dark Mode
-        </h1>
+        <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">Dark Mode</h1>
         <p class="text-xl text-muted-foreground max-w-3xl">
           Dark mode that feels native — light, dark, or follow the system.
         </p>
@@ -59,9 +69,7 @@ import {
               </div>
             </CardHeader>
             <CardContent>
-              <CardDescription>
-                CSS variables switch themes instantly.
-              </CardDescription>
+              <CardDescription> CSS variables switch themes instantly. </CardDescription>
             </CardContent>
           </Card>
 
@@ -75,9 +83,7 @@ import {
               </div>
             </CardHeader>
             <CardContent>
-              <CardDescription>
-                Tracks your OS setting and updates in real time.
-              </CardDescription>
+              <CardDescription> Tracks your OS setting and updates in real time. </CardDescription>
             </CardContent>
           </Card>
 
@@ -91,9 +97,7 @@ import {
               </div>
             </CardHeader>
             <CardContent>
-              <CardDescription>
-                Remembers your choice across sessions.
-              </CardDescription>
+              <CardDescription> Remembers your choice across sessions. </CardDescription>
             </CardContent>
           </Card>
         </div>
@@ -102,20 +106,22 @@ import {
       <!-- How it Works -->
       <section class="space-y-6">
         <div class="space-y-2">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
-            How it Works
-          </h2>
-          <p class="text-muted-foreground">
-            A quick look under the hood.
-          </p>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">How it Works</h2>
+          <p class="text-muted-foreground">A quick look under the hood.</p>
         </div>
 
         <div class="rounded-xl border bg-card p-6 space-y-4">
           <p class="leading-7">
             Dark mode is implemented using a
-            <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">.dark</code>
+            <code
+              class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+              >.dark</code
+            >
             class on the
-            <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">&lt;html&gt;</code>
+            <code
+              class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+              >&lt;html&gt;</code
+            >
             element. When this class is present, Tailwind's dark mode variants become active,
             applying the dark theme variables.
           </p>
@@ -125,8 +131,7 @@ import {
             <div class="space-y-1">
               <p class="font-medium text-sm">No Flash of Unstyled Content</p>
               <p class="text-sm text-muted-foreground">
-                The theme is set before first paint by reading localStorage in a head
-                script.
+                The theme is set before first paint by reading localStorage in a head script.
               </p>
             </div>
           </div>
@@ -136,68 +141,63 @@ import {
       <!-- Step 1: Tailwind Configuration -->
       <section class="space-y-6">
         <div class="flex items-center gap-4">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">1</span>
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+            >1</span
+          >
           <div>
             <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
               Tailwind Configuration
             </h2>
-            <p class="text-muted-foreground">
-              Enable dark mode variants.
-            </p>
+            <p class="text-muted-foreground">Enable dark mode variants.</p>
           </div>
         </div>
 
         <div class="space-y-4">
           <p class="leading-7">
             Add the dark mode variant to your
-            <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">styles.scss</code>:
+            <code
+              class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+              >styles.scss</code
+            >:
           </p>
-          <CodeBlock
-            [code]="tailwindConfigCode"
-            language="css"
-            filename="styles.scss"
-          />
+          <CodeBlock [code]="tailwindConfigCode" language="css" filename="styles.scss" />
         </div>
       </section>
 
       <!-- Step 2: Theme Service -->
       <section class="space-y-6">
         <div class="flex items-center gap-4">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">2</span>
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+            >2</span
+          >
           <div>
-            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Theme Service
-            </h2>
-            <p class="text-muted-foreground">
-              Manage theme state with signals.
-            </p>
+            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">Theme Service</h2>
+            <p class="text-muted-foreground">Manage theme state with signals.</p>
           </div>
         </div>
 
         <div class="space-y-4">
           <p class="leading-7">
-            A small service that applies the theme and stays in sync with system
-            preferences:
+            A small service that applies the theme and stays in sync with system preferences:
           </p>
-          <CodeBlock
-            [code]="themeServiceCode"
-            language="typescript"
-            filename="theme.service.ts"
-          />
+          <CodeBlock [code]="themeServiceCode" language="typescript" filename="theme.service.ts" />
         </div>
       </section>
 
       <!-- Step 3: Theme Toggle Component -->
       <section class="space-y-6">
         <div class="flex items-center gap-4">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">3</span>
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+            >3</span
+          >
           <div>
             <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
               Theme Toggle Component
             </h2>
-            <p class="text-muted-foreground">
-              Let users choose a theme.
-            </p>
+            <p class="text-muted-foreground">Let users choose a theme.</p>
           </div>
         </div>
 
@@ -213,23 +213,18 @@ import {
       <!-- Step 4: Usage -->
       <section class="space-y-6">
         <div class="flex items-center gap-4">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">4</span>
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+            >4</span
+          >
           <div>
-            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Usage
-            </h2>
-            <p class="text-muted-foreground">
-              Drop it into your app.
-            </p>
+            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">Usage</h2>
+            <p class="text-muted-foreground">Drop it into your app.</p>
           </div>
         </div>
 
         <div class="space-y-4">
-          <CodeBlock
-            [code]="usageCode"
-            language="html"
-            filename="header.component.html"
-          />
+          <CodeBlock [code]="usageCode" language="html" filename="header.component.html" />
 
           <!-- Live Preview -->
           <div class="rounded-xl border bg-card overflow-hidden">
@@ -280,7 +275,9 @@ import {
               </div>
               <p class="text-center text-sm text-muted-foreground mt-4">
                 Current theme:
-                <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">
+                <code
+                  class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+                >
                   {{ themeService.theme() }}
                 </code>
               </p>
@@ -295,17 +292,20 @@ import {
           <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight">
             System Preference Detection
           </h2>
-          <p class="text-muted-foreground">
-            Automatically follows your OS setting.
-          </p>
+          <p class="text-muted-foreground">Automatically follows your OS setting.</p>
         </div>
 
         <div class="rounded-xl border bg-card p-6 space-y-4">
           <p class="leading-7">
             When the theme is set to
-            <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">"system"</code>,
-            the service listens to the
-            <code class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold">prefers-color-scheme</code>
+            <code
+              class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+              >"system"</code
+            >, the service listens to the
+            <code
+              class="relative rounded bg-muted px-[0.4rem] py-[0.2rem] font-mono text-sm font-semibold"
+              >prefers-color-scheme</code
+            >
             media query and updates when the user changes their system preference.
           </p>
 
@@ -314,18 +314,14 @@ import {
               <lucide-icon [img]="icons.Sun" class="h-5 w-5 text-yellow-500 mt-0.5 shrink-0" />
               <div>
                 <p class="font-medium text-sm">Light Mode</p>
-                <p class="text-sm text-muted-foreground">
-                  Used when the system is set to light
-                </p>
+                <p class="text-sm text-muted-foreground">Used when the system is set to light</p>
               </div>
             </div>
             <div class="flex items-start gap-3 rounded-lg border border-border/50 bg-muted/30 p-4">
               <lucide-icon [img]="icons.Moon" class="h-5 w-5 text-blue-500 mt-0.5 shrink-0" />
               <div>
                 <p class="font-medium text-sm">Dark Mode</p>
-                <p class="text-sm text-muted-foreground">
-                  Used when the system is set to dark
-                </p>
+                <p class="text-sm text-muted-foreground">Used when the system is set to dark</p>
               </div>
             </div>
           </div>
@@ -348,7 +344,17 @@ import {
 })
 export class DarkModePage {
   protected readonly themeService = inject(ThemeService);
-  protected readonly icons = { ArrowRight, ArrowLeft, Sun, Moon, Monitor, Palette, Zap, Settings, Check };
+  protected readonly icons = {
+    ArrowRight,
+    ArrowLeft,
+    Sun,
+    Moon,
+    Monitor,
+    Palette,
+    Zap,
+    Settings,
+    Check,
+  };
 
   protected readonly tailwindConfigCode = `@import "tailwindcss";
 

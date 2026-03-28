@@ -22,7 +22,7 @@ export interface ComponentApiSection {
   selector: 'ApiReference',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   styles: `
     /* Syntax highlighting for default values */
@@ -51,7 +51,9 @@ export interface ComponentApiSection {
         <div class="mb-8">
           <!-- Component Section Header -->
           <div class="flex items-center gap-2 mb-4 pb-2 border-b border-border/50">
-            <code class="relative rounded-md bg-primary/10 px-2 py-1 font-mono text-sm font-semibold text-primary">
+            <code
+              class="relative rounded-md bg-primary/10 px-2 py-1 font-mono text-sm font-semibold text-primary"
+            >
               {{ section.component }}
             </code>
           </div>
@@ -61,13 +63,19 @@ export interface ComponentApiSection {
             <table class="w-full caption-bottom text-sm">
               <thead class="[&_tr]:border-b">
                 <tr class="border-b transition-colors">
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[150px]">
+                  <th
+                    class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[150px]"
+                  >
                     Prop
                   </th>
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[200px]">
+                  <th
+                    class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[200px]"
+                  >
                     Type
                   </th>
-                  <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">
+                  <th
+                    class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]"
+                  >
                     Default
                   </th>
                   <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
@@ -79,12 +87,16 @@ export interface ComponentApiSection {
                 @for (prop of section.props; track prop.name) {
                   <tr class="border-b transition-colors hover:bg-muted/50">
                     <td class="p-4 align-middle">
-                      <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                      <code
+                        class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
+                      >
                         {{ prop.name }}
                       </code>
                     </td>
                     <td class="p-4 align-middle">
-                      <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm text-muted-foreground">
+                      <code
+                        class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm text-muted-foreground"
+                      >
                         {{ prop.type }}
                       </code>
                     </td>

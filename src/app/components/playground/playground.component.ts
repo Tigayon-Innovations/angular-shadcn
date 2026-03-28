@@ -3,17 +3,17 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/ui/button';
 import { isPlatformBrowser } from '@angular/common';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    output,
-    PLATFORM_ID,
-    signal,
-    viewChild,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  PLATFORM_ID,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { Code, Copy, Eye, LucideAngularModule, Play, RotateCcw, Sparkles } from 'lucide-angular';
 import { DynamicPreview } from './dynamic-preview.component';
@@ -29,12 +29,7 @@ import { DynamicPreview } from './dynamic-preview.component';
 @Component({
   selector: 'Playground',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CodeBlock,
-    Button,
-    LucideAngularModule,
-    DynamicPreview,
-  ],
+  imports: [CodeBlock, Button, LucideAngularModule, DynamicPreview],
   template: `
     <div [class]="computedClass()">
       <!-- Header -->
@@ -44,21 +39,11 @@ import { DynamicPreview } from './dynamic-preview.component';
           <h3 class="font-semibold">{{ title() }}</h3>
         </div>
         <div class="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            class="h-8 gap-2"
-            (click)="resetCode()"
-          >
+          <Button variant="ghost" size="sm" class="h-8 gap-2" (click)="resetCode()">
             <lucide-icon [img]="icons.RotateCcw" class="size-3.5" />
             Reset
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            class="h-8 gap-2"
-            (click)="copyCode()"
-          >
+          <Button variant="ghost" size="sm" class="h-8 gap-2" (click)="copyCode()">
             <lucide-icon [img]="icons.Copy" class="size-3.5" />
             {{ copied() ? 'Copied!' : 'Copy' }}
           </Button>
@@ -96,7 +81,9 @@ import { DynamicPreview } from './dynamic-preview.component';
                 <DynamicPreview [template]="currentCode()" />
               </div>
             } @else {
-              <div class="flex items-center justify-center h-full min-h-[350px] text-muted-foreground">
+              <div
+                class="flex items-center justify-center h-full min-h-[350px] text-muted-foreground"
+              >
                 <div class="text-center space-y-2">
                   <lucide-icon [img]="icons.Play" class="size-12 mx-auto opacity-20" />
                   <p class="text-sm">Paste your code to see the preview</p>
@@ -110,11 +97,7 @@ import { DynamicPreview } from './dynamic-preview.component';
       <!-- Code Block Preview (collapsible) -->
       @if (showHighlightedCode() && currentCode().trim()) {
         <div class="border-t">
-          <CodeBlock
-            [code]="currentCode()"
-            [language]="language()"
-            [title]="'Highlighted Code'"
-          />
+          <CodeBlock [code]="currentCode()" [language]="language()" [title]="'Highlighted Code'" />
         </div>
       }
     </div>
@@ -152,7 +135,9 @@ export class Playground {
   readonly initialCode = input<string>('');
 
   /** Placeholder text for the code input */
-  readonly placeholder = input<string>('Paste your shadcn-angular code here...\n\nExample:\n<div class="flex flex-wrap items-center gap-4">\n  <Button size="default">Default</Button>\n  <Button size="sm">Small</Button>\n</div>');
+  readonly placeholder = input<string>(
+    'Paste your shadcn-angular code here...\n\nExample:\n<div class="flex flex-wrap items-center gap-4">\n  <Button size="default">Default</Button>\n  <Button size="sm">Small</Button>\n</div>',
+  );
 
   /** Language for syntax highlighting */
   readonly language = input<string>('html');
@@ -173,10 +158,7 @@ export class Playground {
   private readonly codeInput = viewChild<ElementRef<HTMLTextAreaElement>>('codeInput');
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'rounded-lg border bg-card overflow-hidden',
-      this.class()
-    )
+    cn('rounded-lg border bg-card overflow-hidden', this.class()),
   );
 
   constructor() {

@@ -1,10 +1,10 @@
 ---
 name: file-rewrite-strategy
 description: >-
-    Safely rewrite or wholesale-replace Angular template and TypeScript files that
-    resist incremental edits. Use when replace_string_in_file or heredoc approaches
-    fail due to tab/space mismatches, shell-hostile characters, or large multi-section
-    rewrites where incremental edits are impractical.
+  Safely rewrite or wholesale-replace Angular template and TypeScript files that
+  resist incremental edits. Use when replace_string_in_file or heredoc approaches
+  fail due to tab/space mismatches, shell-hostile characters, or large multi-section
+  rewrites where incremental edits are impractical.
 ---
 
 # File Rewrite Strategy

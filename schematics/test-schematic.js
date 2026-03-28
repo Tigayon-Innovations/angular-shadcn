@@ -82,7 +82,7 @@ async function runTests() {
       '/src/app/lib/utils/cn.ts',
       '/src/app/lib/utils/index.ts',
       '/src/app/lib/components/ui/.gitkeep',
-      '/src/ng-cn.scss'
+      '/src/ng-cn.scss',
     ];
 
     console.log('📄 Checking created files:');
@@ -132,7 +132,6 @@ async function runTests() {
     }
 
     console.log('\n✨ All tests passed!\n');
-
   } catch (error) {
     console.error('\n❌ Schematic failed with error:');
     console.error(error);

@@ -11,7 +11,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <div class="p-5">
         <h4 class="mb-4 text-base font-semibold leading-none">Tags</h4>
         @for (tag of tags; track tag; let last = $last) {
-          <div class="text-sm py-2 px-1 hover:bg-accent/50 rounded-md transition-colors cursor-pointer">
+          <div
+            class="text-sm py-2 px-1 hover:bg-accent/50 rounded-md transition-colors cursor-pointer"
+          >
             {{ tag }}
           </div>
           @if (!last) {

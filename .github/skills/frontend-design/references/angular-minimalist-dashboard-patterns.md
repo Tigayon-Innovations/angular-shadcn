@@ -52,14 +52,14 @@ For new Angular UI in this repository, default to a tokenized neutral system:
 
 ```html
 <section
-	class="min-h-full bg-[#f5f5f2] text-slate-900 dark:bg-neutral-950 dark:text-neutral-100"
->
+  class="min-h-full bg-[#f5f5f2] text-slate-900 dark:bg-neutral-950 dark:text-neutral-100"
+></section>
 ```
 
 ```html
 <div
-	class="rounded-[28px] border border-black/5 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:border-neutral-800 dark:bg-neutral-900"
->
+  class="rounded-[28px] border border-black/5 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:border-neutral-800 dark:bg-neutral-900"
+></div>
 ```
 
 If the feature already uses component SCSS heavily, keep the HTML readable and move repeated visual values into local CSS variables.
@@ -70,13 +70,13 @@ Use feature-local variables when the design needs repeated visual consistency:
 
 ```css
 :host {
-	--fd-bg: #f5f5f2;
-	--fd-surface: rgba(255, 255, 255, 0.92);
-	--fd-border: rgba(15, 23, 42, 0.08);
-	--fd-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-	--fd-text: #0f172a;
-	--fd-muted: #64748b;
-	--fd-accent: #111827;
+  --fd-bg: #f5f5f2;
+  --fd-surface: rgba(255, 255, 255, 0.92);
+  --fd-border: rgba(15, 23, 42, 0.08);
+  --fd-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  --fd-text: #0f172a;
+  --fd-muted: #64748b;
+  --fd-accent: #111827;
 }
 ```
 

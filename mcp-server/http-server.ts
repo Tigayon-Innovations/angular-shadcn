@@ -7,10 +7,7 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
-import {
-    CallToolRequestSchema,
-    ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import express, { Request, Response } from 'express';
 import { toolHandlers, tools } from './tools/index.js';
 
@@ -47,7 +44,7 @@ app.get('/sse', async (req: Request, res: Response) => {
       capabilities: {
         tools: {},
       },
-    }
+    },
   );
 
   // Setup tool handlers

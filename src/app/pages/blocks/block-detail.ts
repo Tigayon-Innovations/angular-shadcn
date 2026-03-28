@@ -70,11 +70,7 @@ import { RouterLink } from '@angular/router';
                     <div #componentContainer></div>
                   } @else if (block()?.image) {
                     <div class="p-8">
-                      <img
-                        [src]="block()!.image"
-                        [alt]="block()!.name"
-                        class="w-full rounded-lg"
-                      />
+                      <img [src]="block()!.image" [alt]="block()!.name" class="w-full rounded-lg" />
                     </div>
                   } @else {
                     <div class="flex h-[400px] items-center justify-center p-8">
@@ -89,11 +85,7 @@ import { RouterLink } from '@angular/router';
                 </div>
               </div>
             } @else {
-              <CodeBlock
-                [code]="exampleCode()"
-                language="typescript"
-                [showLineNumbers]="true"
-              />
+              <CodeBlock [code]="exampleCode()" language="typescript" [showLineNumbers]="true" />
             }
           </section>
 
@@ -105,10 +97,7 @@ import { RouterLink } from '@angular/router';
                 <p class="mb-2 text-sm text-muted-foreground">
                   Copy and paste the following code into your project.
                 </p>
-                <CodeBlock
-                  [code]="installationCode()"
-                  language="bash"
-                />
+                <CodeBlock [code]="installationCode()" language="bash" />
               </div>
             </div>
           </section>
@@ -116,19 +105,12 @@ import { RouterLink } from '@angular/router';
           <!-- Usage -->
           <section>
             <h2 class="mb-4 text-xl font-semibold">Usage</h2>
-            <CodeBlock
-              [code]="usageCode()"
-              language="typescript"
-              [showLineNumbers]="true"
-            />
+            <CodeBlock [code]="usageCode()" language="typescript" [showLineNumbers]="true" />
           </section>
         } @else {
           <div class="rounded-lg border border-dashed p-12 text-center">
             <p class="text-muted-foreground">Block not found.</p>
-            <a
-              routerLink="/blocks"
-              class="mt-4 inline-block text-sm text-primary hover:underline"
-            >
+            <a routerLink="/blocks" class="mt-4 inline-block text-sm text-primary hover:underline">
               Browse all blocks
             </a>
           </div>
@@ -162,11 +144,9 @@ export class BlockDetailPage {
         container.clear();
 
         try {
-          const componentModule = await import(
-            /* @vite-ignore */ block.componentPath
-          );
+          const componentModule = await import(/* @vite-ignore */ block.componentPath);
           const componentClass = Object.values(componentModule).find(
-            (exp: any) => exp?.prototype?.constructor
+            (exp: any) => exp?.prototype?.constructor,
           ) as Type<any>;
 
           if (componentClass) {

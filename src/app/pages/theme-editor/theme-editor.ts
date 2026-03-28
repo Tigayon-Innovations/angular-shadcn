@@ -2,9 +2,34 @@ import { Playground } from '@/components/playground';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/lib/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID, signal } from '@angular/core';
-import { Code, Download, LucideAngularModule, Moon, Redo, RotateCcw, Sun, Undo, Upload } from 'lucide-angular';
-import { Cards01Component, Dashboard01Component, Login01Component, Pricing01Component, Settings01Component, Sidebar01Component } from 'src/app/blocks';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import {
+  Code,
+  Download,
+  LucideAngularModule,
+  Moon,
+  Redo,
+  RotateCcw,
+  Sun,
+  Undo,
+  Upload,
+} from 'lucide-angular';
+import {
+  Cards01Component,
+  Dashboard01Component,
+  Login01Component,
+  Pricing01Component,
+  Settings01Component,
+  Sidebar01Component,
+} from 'src/app/blocks';
 import { ThemeService } from 'src/app/services';
 import { AIGenerate, ColorSection, ThemeCodeModal, ThemeTabs } from './components';
 import { TAILWIND_COLORS } from './data';
@@ -66,12 +91,14 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
             @for (preset of presets; track preset) {
               <button
                 type="button"
-                [class]="cn(
-                  'h-6 w-6 rounded-full border-2 transition-all',
-                  selectedPreset() === preset
-                    ? 'border-foreground ring-2 ring-offset-2 ring-offset-background ring-foreground/20'
-                    : 'border-border hover:border-foreground/50'
-                )"
+                [class]="
+                  cn(
+                    'h-6 w-6 rounded-full border-2 transition-all',
+                    selectedPreset() === preset
+                      ? 'border-foreground ring-2 ring-offset-2 ring-offset-background ring-foreground/20'
+                      : 'border-border hover:border-foreground/50'
+                  )
+                "
                 [style.background-color]="preset"
                 (click)="selectedPreset.set(preset)"
               ></button>
@@ -213,7 +240,9 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
                 </TabsContent>
 
                 <TabsContent value="login">
-                  <div class="flex items-center justify-center rounded-xl border bg-muted/30 shadow-sm min-h-[600px] p-8">
+                  <div
+                    class="flex items-center justify-center rounded-xl border bg-muted/30 shadow-sm min-h-[600px] p-8"
+                  >
                     <app-login-01 />
                   </div>
                 </TabsContent>
@@ -258,7 +287,11 @@ type TabType = 'colors' | 'typography' | 'other' | 'generate';
       </div>
 
       <!-- Theme Code Modal -->
-      <ThemeCodeModal [colors]="colors()" [open]="showCodeModal()" (openChange)="showCodeModal.set($event)" />
+      <ThemeCodeModal
+        [colors]="colors()"
+        [open]="showCodeModal()"
+        (openChange)="showCodeModal.set($event)"
+      />
     </div>
   `,
 })
@@ -409,8 +442,8 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
     const updatedColors = {
       ...this.colors(),
       [event.key]: {
-        light: isDark ? (currentColor?.light || value) : value,
-        dark: isDark ? value : (currentColor?.dark || value),
+        light: isDark ? currentColor?.light || value : value,
+        dark: isDark ? value : currentColor?.dark || value,
       },
     };
     this.colors.set(updatedColors as ThemeColors);
@@ -428,14 +461,16 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
     const updatedColors = {
       ...this.colors(),
       [event.key]: {
-        light: isDark ? (currentColor?.light || oklchValue) : oklchValue,
-        dark: isDark ? oklchValue : (currentColor?.dark || oklchValue),
+        light: isDark ? currentColor?.light || oklchValue : oklchValue,
+        dark: isDark ? oklchValue : currentColor?.dark || oklchValue,
       },
     };
     this.colors.set(updatedColors as ThemeColors);
   }
 
-  protected onThemeGenerated(generatedColors: Record<string, { light: string; dark: string }>): void {
+  protected onThemeGenerated(
+    generatedColors: Record<string, { light: string; dark: string }>,
+  ): void {
     this.saveToHistory();
     this.colors.set(generatedColors as unknown as ThemeColors);
   }
@@ -479,13 +514,13 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
 
     // Convert linear RGB to XYZ (D65)
     const x = 0.4124564 * lr + 0.3575761 * lg + 0.1804375 * lb;
-    const y = 0.2126729 * lr + 0.7151522 * lg + 0.0721750 * lb;
-    const z = 0.0193339 * lr + 0.1191920 * lg + 0.9503041 * lb;
+    const y = 0.2126729 * lr + 0.7151522 * lg + 0.072175 * lb;
+    const z = 0.0193339 * lr + 0.119192 * lg + 0.9503041 * lb;
 
     // Convert XYZ to LMS
     const l = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
     const m = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
-    const s = 0.0482003018 * x + 0.2643662691 * y + 0.6338517070 * z;
+    const s = 0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z;
 
     // Apply cube root
     const lp = Math.cbrt(l);
@@ -493,9 +528,9 @@ ${entries.map(([key, value]) => `    --${key}: ${value.dark};`).join('\n')}
     const sp = Math.cbrt(s);
 
     // Convert to OKLab
-    const L = 0.2104542553 * lp + 0.7936177850 * mp - 0.0040720468 * sp;
-    const a = 1.9779984951 * lp - 2.4285922050 * mp + 0.4505937099 * sp;
-    const bLab = 0.0259040371 * lp + 0.7827717662 * mp - 0.8086757660 * sp;
+    const L = 0.2104542553 * lp + 0.793617785 * mp - 0.0040720468 * sp;
+    const a = 1.9779984951 * lp - 2.428592205 * mp + 0.4505937099 * sp;
+    const bLab = 0.0259040371 * lp + 0.7827717662 * mp - 0.808675766 * sp;
 
     // Convert OKLab to OKLCH
     const C = Math.sqrt(a * a + bLab * bLab);

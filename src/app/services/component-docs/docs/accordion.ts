@@ -53,14 +53,12 @@ export const ACCORDION_DOCUMENTATION: ComponentDocumentation = {
           name: 'type',
           type: "'single' | 'multiple'",
           default: "'single'",
-          description:
-            "Determines whether one or multiple items can be opened at the same time.",
+          description: 'Determines whether one or multiple items can be opened at the same time.',
         },
         {
           name: 'value',
           type: 'string | string[]',
-          description:
-            'The controlled value of the item(s) to expand. Use with (valueChange).',
+          description: 'The controlled value of the item(s) to expand. Use with (valueChange).',
         },
         {
           name: 'defaultValue',
@@ -333,23 +331,19 @@ keyframes: {
       },
       {
         key: 'ArrowDown',
-        description:
-          'Moves focus to the next AccordionTrigger when orientation is vertical.',
+        description: 'Moves focus to the next AccordionTrigger when orientation is vertical.',
       },
       {
         key: 'ArrowUp',
-        description:
-          'Moves focus to the previous AccordionTrigger when orientation is vertical.',
+        description: 'Moves focus to the previous AccordionTrigger when orientation is vertical.',
       },
       {
         key: 'ArrowRight',
-        description:
-          'Moves focus to the next AccordionTrigger when orientation is horizontal.',
+        description: 'Moves focus to the next AccordionTrigger when orientation is horizontal.',
       },
       {
         key: 'ArrowLeft',
-        description:
-          'Moves focus to the previous AccordionTrigger when orientation is horizontal.',
+        description: 'Moves focus to the previous AccordionTrigger when orientation is horizontal.',
       },
       {
         key: 'Home',

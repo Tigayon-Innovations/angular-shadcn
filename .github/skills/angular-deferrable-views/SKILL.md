@@ -9,13 +9,13 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ## When to Defer (Mandatory)
 
-| Scenario | Trigger to Use |
-|---|---|
-| Component is below the viewport fold | `on viewport` |
-| Heavy component that is not immediately visible | `on viewport` or `on idle` |
-| Modal content rendered conditionally | `when condition` |
-| Tabs/sections the user must click to reveal | `on interaction` |
-| Non-critical widgets (charts, maps, embeds) | `on idle` or `on viewport` |
+| Scenario                                           | Trigger to Use                                                       |
+| -------------------------------------------------- | -------------------------------------------------------------------- |
+| Component is below the viewport fold               | `on viewport`                                                        |
+| Heavy component that is not immediately visible    | `on viewport` or `on idle`                                           |
+| Modal content rendered conditionally               | `when condition`                                                     |
+| Tabs/sections the user must click to reveal        | `on interaction`                                                     |
+| Non-critical widgets (charts, maps, embeds)        | `on idle` or `on viewport`                                           |
 | SSR-rendered content needing incremental hydration | `hydrate on idle` / `hydrate on viewport` / `hydrate on interaction` |
 
 ## When NOT to Defer
@@ -30,7 +30,7 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ```html
 @defer {
-  <heavy-component />
+<heavy-component />
 }
 ```
 
@@ -38,15 +38,15 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ```html
 @defer (on viewport) {
-  <analytics-chart />
+<analytics-chart />
 } @placeholder {
-  <div class="h-64 animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
+<div class="h-64 animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
 } @loading (after 100ms; minimum 500ms) {
-  <div class="flex items-center justify-center h-64">
-    <span class="text-sm text-gray-500">Loading chart...</span>
-  </div>
+<div class="flex items-center justify-center h-64">
+  <span class="text-sm text-gray-500">Loading chart...</span>
+</div>
 } @error {
-  <p class="text-sm text-red-500">Failed to load chart.</p>
+<p class="text-sm text-red-500">Failed to load chart.</p>
 }
 ```
 
@@ -54,9 +54,9 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ```html
 @defer (on interaction; prefetch on idle) {
-  <large-form />
+<large-form />
 } @placeholder {
-  <button class="btn">Click to load form</button>
+<button class="btn">Click to load form</button>
 }
 ```
 
@@ -64,9 +64,9 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ```html
 @defer (when isTabActive()) {
-  <tab-content />
+<tab-content />
 } @placeholder {
-  <tab-skeleton />
+<tab-skeleton />
 }
 ```
 
@@ -74,38 +74,38 @@ Defer every component that is not needed for the initial above-fold render. Defe
 
 ```html
 @defer (hydrate on viewport) {
-  <below-fold-section />
+<below-fold-section />
 } @placeholder {
-  <div class="h-96 bg-gray-50 dark:bg-neutral-900"></div>
+<div class="h-96 bg-gray-50 dark:bg-neutral-900"></div>
 }
 ```
 
 ## Available Triggers
 
-| Trigger | Behavior |
-|---|---|
-| `on idle` | Loads when browser is idle (default) |
-| `on viewport` | Loads when placeholder enters viewport (IntersectionObserver) |
-| `on interaction` | Loads on click/keydown on placeholder |
-| `on hover` | Loads on mouseover/focusin |
-| `on immediate` | Loads right after non-deferred content renders |
-| `on timer(500ms)` | Loads after specified delay |
-| `when condition` | Loads when expression becomes truthy |
-| `prefetch on idle` | Prefetches JS on idle, renders on main trigger |
-| `prefetch on viewport` | Prefetches JS when entering viewport |
+| Trigger                | Behavior                                                      |
+| ---------------------- | ------------------------------------------------------------- |
+| `on idle`              | Loads when browser is idle (default)                          |
+| `on viewport`          | Loads when placeholder enters viewport (IntersectionObserver) |
+| `on interaction`       | Loads on click/keydown on placeholder                         |
+| `on hover`             | Loads on mouseover/focusin                                    |
+| `on immediate`         | Loads right after non-deferred content renders                |
+| `on timer(500ms)`      | Loads after specified delay                                   |
+| `when condition`       | Loads when expression becomes truthy                          |
+| `prefetch on idle`     | Prefetches JS on idle, renders on main trigger                |
+| `prefetch on viewport` | Prefetches JS when entering viewport                          |
 
 ## Hydration Triggers (SSR + Incremental Hydration)
 
-| Trigger | Behavior |
-|---|---|
-| `hydrate on idle` | Hydrates when browser is idle |
-| `hydrate on viewport` | Hydrates when entering viewport |
-| `hydrate on interaction` | Hydrates on user interaction |
-| `hydrate on hover` | Hydrates on hover |
-| `hydrate on immediate` | Hydrates immediately after other content |
-| `hydrate on timer(ms)` | Hydrates after delay |
-| `hydrate when condition` | Hydrates when condition is truthy |
-| `hydrate never` | Stays dehydrated (static content) |
+| Trigger                  | Behavior                                 |
+| ------------------------ | ---------------------------------------- |
+| `hydrate on idle`        | Hydrates when browser is idle            |
+| `hydrate on viewport`    | Hydrates when entering viewport          |
+| `hydrate on interaction` | Hydrates on user interaction             |
+| `hydrate on hover`       | Hydrates on hover                        |
+| `hydrate on immediate`   | Hydrates immediately after other content |
+| `hydrate on timer(ms)`   | Hydrates after delay                     |
+| `hydrate when condition` | Hydrates when condition is truthy        |
+| `hydrate never`          | Stays dehydrated (static content)        |
 
 ## Rules for This Repository
 
@@ -116,9 +116,9 @@ Every component rendered below the viewport fold MUST be wrapped in `@defer (on 
 ```html
 <!-- Good: below-fold section deferred -->
 @defer (on viewport) {
-  <team-members-section />
+<team-members-section />
 } @placeholder {
-  <div class="h-64 animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
+<div class="h-64 animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
 }
 
 <!-- Bad: below-fold component eagerly loaded -->
@@ -131,9 +131,9 @@ When a project skeleton component exists (e.g., `table-skeleton`), use it as the
 
 ```html
 @defer (on viewport) {
-  <issue-list [issueSignalStore]="store" />
+<issue-list [issueSignalStore]="store" />
 } @placeholder {
-  <table-skeleton />
+<table-skeleton />
 }
 ```
 
@@ -143,9 +143,9 @@ For components that appear on user interaction (modals, expanded sections), use 
 
 ```html
 @defer (on interaction; prefetch on idle) {
-  <advanced-filters />
+<advanced-filters />
 } @placeholder {
-  <button>Show Filters</button>
+<button>Show Filters</button>
 }
 ```
 
@@ -160,19 +160,17 @@ When nesting `@defer` blocks, use different triggers to avoid simultaneous casca
 ```html
 <!-- Good: different triggers -->
 @defer (on viewport) {
-  <parent-section />
-  @defer (on interaction) {
-    <child-detail />
-  }
-}
+<parent-section />
+@defer (on interaction) {
+<child-detail />
+} }
 
 <!-- Bad: same trigger causes cascade -->
 @defer (on viewport) {
-  <parent-section />
-  @defer (on viewport) {
-    <child-detail />
-  }
-}
+<parent-section />
+@defer (on viewport) {
+<child-detail />
+} }
 ```
 
 ### Rule 6: Placeholder Dimensions Must Match
@@ -181,9 +179,9 @@ Always size `@placeholder` content to match the expected rendered dimensions of 
 
 ```html
 @defer (on viewport) {
-  <chart-card class="h-80" />
+<chart-card class="h-80" />
 } @placeholder {
-  <div class="h-80 animate-pulse rounded-xl bg-gray-100 dark:bg-neutral-800"></div>
+<div class="h-80 animate-pulse rounded-xl bg-gray-100 dark:bg-neutral-800"></div>
 }
 ```
 
@@ -194,9 +192,9 @@ When deferred content replaces placeholder in a way that screen readers should a
 ```html
 <div aria-live="polite" aria-atomic="true">
   @defer (on viewport) {
-    <status-panel />
+  <status-panel />
   } @placeholder {
-    <p>Loading status...</p>
+  <p>Loading status...</p>
   }
 </div>
 ```

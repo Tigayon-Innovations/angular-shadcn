@@ -35,9 +35,10 @@ PYEOF
 ```
 
 **Key points:**
+
 - `r"""..."""` disables Python escape processing — tabs, quotes, `@`, `$`, `()`, `[]`, `{}` all pass through literally.
-- The heredoc `<< 'PYEOF'` feeds Python source to the interpreter — the *shell* doesn't parse the HTML at all.
-- Use `\t` for tabs only if you *want* Python to interpret them; in raw strings `\t` is literal backslash-t. For actual tabs, include real tab characters in the content.
+- The heredoc `<< 'PYEOF'` feeds Python source to the interpreter — the _shell_ doesn't parse the HTML at all.
+- Use `\t` for tabs only if you _want_ Python to interpret them; in raw strings `\t` is literal backslash-t. For actual tabs, include real tab characters in the content.
 
 ---
 

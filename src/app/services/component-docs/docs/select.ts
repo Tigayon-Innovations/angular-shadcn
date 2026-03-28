@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const SELECT_DOCUMENTATION: ComponentDocumentation = {
   name: 'Select',
   slug: 'select',
-  description:
-    'Displays a list of options for the user to pick from—triggered by a button.',
+  description: 'Displays a list of options for the user to pick from—triggered by a button.',
 
   features: [
     { text: 'Can be controlled or uncontrolled.', highlight: true },
@@ -90,13 +89,15 @@ export const SELECT_DOCUMENTATION: ComponentDocumentation = {
         {
           name: 'name',
           type: 'string',
-          description: 'The name of the select. Submitted with its owning form as part of a name/value pair.',
+          description:
+            'The name of the select. Submitted with its owning form as part of a name/value pair.',
         },
         {
           name: 'required',
           type: 'boolean',
           default: 'false',
-          description: 'When true, indicates that the user must select a value before the owning form can be submitted.',
+          description:
+            'When true, indicates that the user must select a value before the owning form can be submitted.',
         },
       ],
       events: [
@@ -328,11 +329,13 @@ selectedFruit = signal('');
       },
       {
         key: 'Enter',
-        description: 'When focus is on trigger, opens the select. When focus is on item, selects it.',
+        description:
+          'When focus is on trigger, opens the select. When focus is on item, selects it.',
       },
       {
         key: 'ArrowDown',
-        description: 'When focus is on trigger, opens the select. When open, moves focus to next item.',
+        description:
+          'When focus is on trigger, opens the select. When open, moves focus to next item.',
       },
       {
         key: 'ArrowUp',

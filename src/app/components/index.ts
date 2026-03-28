@@ -8,4 +8,3 @@ export { SearchDialog } from './search-dialog';
 export { SiteFooter } from './site-footer';
 export { SiteHeader } from './site-header';
 export { ThemeToggle } from './theme-toggle';
-

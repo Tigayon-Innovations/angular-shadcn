@@ -5,7 +5,15 @@ import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/ui/card';
 import { Checkbox } from '@/ui/checkbox';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/ui/dialog';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
 import { Progress } from '@/ui/progress';
@@ -200,7 +208,9 @@ export class DynamicRendererService {
     let normalizedTagName = tagName;
 
     if (!component) {
-      const key = Array.from(this.componentMap.keys()).find(k => k.toLowerCase() === tagName.toLowerCase());
+      const key = Array.from(this.componentMap.keys()).find(
+        (k) => k.toLowerCase() === tagName.toLowerCase(),
+      );
       if (key) {
         component = this.componentMap.get(key) ?? null;
         normalizedTagName = key;

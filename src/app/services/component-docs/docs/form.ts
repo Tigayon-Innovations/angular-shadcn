@@ -111,9 +111,7 @@ export const FORM_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-invalid]', values: 'Present when field has errors' },
-      ],
+      dataAttributes: [{ name: '[data-invalid]', values: 'Present when field has errors' }],
     },
     {
       name: 'FormControl',
@@ -145,9 +143,7 @@ export const FORM_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"error" | "valid"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"error" | "valid"' }],
     },
   ],
 

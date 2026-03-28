@@ -29,9 +29,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
             <!-- Password Field -->
             <div class="space-y-2">
-              <label for="password" class="text-sm font-medium">
-                Password
-              </label>
+              <label for="password" class="text-sm font-medium"> Password </label>
               <input
                 id="password"
                 type="password"
@@ -42,9 +40,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
             <!-- Confirm Password Field -->
             <div class="space-y-2">
-              <label for="confirm-password" class="text-sm font-medium">
-                Confirm Password
-              </label>
+              <label for="confirm-password" class="text-sm font-medium"> Confirm Password </label>
               <input
                 id="confirm-password"
                 type="password"
@@ -67,9 +63,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 <div class="w-full border-t"></div>
               </div>
               <div class="relative flex justify-center text-xs uppercase">
-                <span class="bg-card px-2 text-muted-foreground">
-                  Or continue with
-                </span>
+                <span class="bg-card px-2 text-muted-foreground"> Or continue with </span>
               </div>
             </div>
 
@@ -89,21 +83,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
               Terms of Service
             </a>
             and
-            <a href="#" class="underline underline-offset-4 hover:text-primary">
-              Privacy Policy
-            </a>
+            <a href="#" class="underline underline-offset-4 hover:text-primary"> Privacy Policy </a>
             .
           </p>
 
           <!-- Sign In Link -->
           <div class="mt-4 text-center text-sm">
             <span class="text-muted-foreground">Already have an account?</span>
-            <a
-              href="#"
-              class="ml-1 text-primary underline-offset-4 hover:underline"
-            >
-              Sign in
-            </a>
+            <a href="#" class="ml-1 text-primary underline-offset-4 hover:underline"> Sign in </a>
           </div>
         </div>
       </div>

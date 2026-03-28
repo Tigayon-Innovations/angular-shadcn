@@ -7,10 +7,7 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
-import {
-    CallToolRequestSchema,
-    ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import { Request, Response } from 'express';
 import { toolHandlers, tools } from './tools/index.js';
 
@@ -33,7 +30,7 @@ export async function handleMcpSse(req: Request, res: Response): Promise<void> {
       capabilities: {
         tools: {},
       },
-    }
+    },
   );
 
   // Setup tool handlers

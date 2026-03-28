@@ -1,12 +1,12 @@
 import { Button } from '@/ui/button';
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/ui/form';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -25,7 +25,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     FormItem,
     FormLabel,
     FormMessage,
-    ],
+  ],
   template: `
     <Form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full max-w-sm space-y-6">
       <FormField name="username">
@@ -34,9 +34,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
           <FormControl>
             <Input placeholder="shadcn" formControlName="username" />
           </FormControl>
-          <FormDescription>
-            This is your public display name.
-          </FormDescription>
+          <FormDescription> This is your public display name. </FormDescription>
           <FormMessage />
         </FormItem>
       </FormField>
@@ -46,9 +44,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
           <FormControl>
             <Input type="email" placeholder="example@email.com" formControlName="email" />
           </FormControl>
-          <FormDescription>
-            We'll never share your email.
-          </FormDescription>
+          <FormDescription> We'll never share your email. </FormDescription>
           <FormMessage />
         </FormItem>
       </FormField>

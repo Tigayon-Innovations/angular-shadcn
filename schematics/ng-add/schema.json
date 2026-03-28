@@ -20,8 +20,14 @@
         "message": "Which theme variant would you like to use?",
         "type": "list",
         "items": [
-          { "value": "shadcn", "label": "shadcn - The default clean, minimal, and professional theme" },
-          { "value": "github", "label": "GitHub - Inspired by GitHub's clean developer-focused design" },
+          {
+            "value": "shadcn",
+            "label": "shadcn - The default clean, minimal, and professional theme"
+          },
+          {
+            "value": "github",
+            "label": "GitHub - Inspired by GitHub's clean developer-focused design"
+          },
           { "value": "vercel", "label": "Vercel - Bold black and white design aesthetic" },
           { "value": "apple", "label": "Apple - Elegant, sophisticated design language" },
           { "value": "openai", "label": "OpenAI - Modern, tech-forward aesthetic" },

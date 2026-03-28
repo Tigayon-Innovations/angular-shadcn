@@ -8,11 +8,13 @@ import type { ComponentDocumentation } from '../types';
 export const SCROLL_AREA_DOCUMENTATION: ComponentDocumentation = {
   name: 'Scroll Area',
   slug: 'scroll-area',
-  description:
-    'Augments native scroll functionality for custom, cross-browser styling.',
+  description: 'Augments native scroll functionality for custom, cross-browser styling.',
 
   features: [
-    { text: 'Scrollbar sits on top of the scrollable content, taking up no space.', highlight: true },
+    {
+      text: 'Scrollbar sits on top of the scrollable content, taking up no space.',
+      highlight: true,
+    },
     { text: 'Scrolling is native; no underlying position movements via CSS transformations.' },
     { text: 'Shims pointer behaviors only when interacting with the controls.', highlight: true },
     { text: 'Supports Right to Left direction.' },
@@ -76,9 +78,7 @@ export const SCROLL_AREA_DOCUMENTATION: ComponentDocumentation = {
       name: 'Viewport',
       description: 'The viewport area of the scroll area.',
       props: [],
-      notes: [
-        'Automatically added within ScrollArea component.',
-      ],
+      notes: ['Automatically added within ScrollArea component.'],
     },
     {
       name: 'Scrollbar',
@@ -116,17 +116,13 @@ export const SCROLL_AREA_DOCUMENTATION: ComponentDocumentation = {
       name: 'Thumb',
       description: 'The thumb to be used in the scrollbar.',
       props: [],
-      notes: [
-        'Automatically added within ScrollBar component.',
-      ],
+      notes: ['Automatically added within ScrollBar component.'],
     },
     {
       name: 'Corner',
       description: 'The corner where both scrollbars meet.',
       props: [],
-      notes: [
-        'Automatically added when both scrollbars are present.',
-      ],
+      notes: ['Automatically added when both scrollbars are present.'],
     },
   ],
 

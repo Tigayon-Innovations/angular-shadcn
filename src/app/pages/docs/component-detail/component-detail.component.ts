@@ -18,10 +18,18 @@ import {
   signal,
   Type,
   viewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } from 'lucide-angular';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Code2,
+  Copy,
+  Eye,
+  LucideAngularModule,
+} from 'lucide-angular';
 
 /**
  * Component detail page showing documentation for a specific component.
@@ -30,7 +38,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
   selector: 'ComponentDetailPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   imports: [
     RouterLink,
@@ -110,10 +118,7 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
                   Add the {{ comp.name }} component to your project.
                 </p>
               </div>
-              <CodeBlock
-                [code]="'ng g @ng-cn/core:c ' + slug()"
-                language="bash"
-              />
+              <CodeBlock [code]="'ng g @ng-cn/core:c ' + slug()" language="bash" />
             </div>
           </section>
 
@@ -131,23 +136,16 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
 
               <!-- Segmented Tabs for TypeScript/Template -->
               <Tabs [value]="usageTab()" (valueChange)="usageTab.set($event)" class="w-full">
-                <TabsList class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-auto">
-                  <TabsTrigger value="template">
-                    Template
-                  </TabsTrigger>
+                <TabsList
+                  class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-auto"
+                >
+                  <TabsTrigger value="template"> Template </TabsTrigger>
 
-                  <TabsTrigger value="typescript">
-                    TypeScript
-                  </TabsTrigger>
-
+                  <TabsTrigger value="typescript"> TypeScript </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="typescript" class="mt-4">
-                  <CodeBlock
-                    [code]="usageCode()"
-                    language="typescript"
-                    filename="component.ts"
-                  />
+                  <CodeBlock [code]="usageCode()" language="typescript" filename="component.ts" />
                 </TabsContent>
 
                 <TabsContent value="template" class="mt-4">
@@ -239,12 +237,8 @@ import { ArrowLeft, ArrowRight, Check, Code2, Copy, Eye, LucideAngularModule } f
     } @else {
       <div class="text-center py-12">
         <h1 class="text-2xl font-bold mb-2">Component Not Found</h1>
-        <p class="text-muted-foreground mb-4">
-          The component "{{ slug() }}" doesn't exist.
-        </p>
-        <Button routerLink="/docs/components" variant="outline">
-          View All Components
-        </Button>
+        <p class="text-muted-foreground mb-4">The component "{{ slug() }}" doesn't exist.</p>
+        <Button routerLink="/docs/components" variant="outline"> View All Components </Button>
       </div>
     }
   `,

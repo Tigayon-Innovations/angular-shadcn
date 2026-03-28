@@ -20,6 +20,7 @@
 ## Vocabulary Rules
 
 Prefer:
+
 - "clear"
 - "focused"
 - "supported"
@@ -31,6 +32,7 @@ Prefer:
 - "direct"
 
 Avoid:
+
 - "revolutionary"
 - "unbeatable"
 - "guaranteed"
@@ -71,6 +73,7 @@ After:
 ## Final Quality Gate
 
 Ship only when copy is:
+
 - Easy to understand on first read.
 - Free of legal-risk claims.
 - Consistent with elegant, human, trustworthy tone.

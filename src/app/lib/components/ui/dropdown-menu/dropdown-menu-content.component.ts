@@ -1,15 +1,15 @@
 import { cn, Presence } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    effect,
-    ElementRef,
-    inject,
-    input,
-    OnDestroy,
-    signal,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnDestroy,
+  signal,
 } from '@angular/core';
 import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
 
@@ -62,10 +62,19 @@ export class DropdownMenuContent implements OnDestroy {
             let top = rect.top;
             let left = rect.left;
 
-            if (side === 'bottom') { top = rect.bottom + offset; left = rect.left; }
-            else if (side === 'top') { top = rect.top - offset; left = rect.left; }
-            else if (side === 'right') { top = rect.top; left = rect.right + offset; }
-            else if (side === 'left') { top = rect.top; left = rect.left - offset; }
+            if (side === 'bottom') {
+              top = rect.bottom + offset;
+              left = rect.left;
+            } else if (side === 'top') {
+              top = rect.top - offset;
+              left = rect.left;
+            } else if (side === 'right') {
+              top = rect.top;
+              left = rect.right + offset;
+            } else if (side === 'left') {
+              top = rect.top;
+              left = rect.left - offset;
+            }
 
             this.fixedPos.set({ top, left });
           }

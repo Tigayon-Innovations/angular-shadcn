@@ -1,10 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 import { Button } from '@/ui/button';
-import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-} from '@/ui/hover-card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/ui/hover-card';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CalendarDays, LucideAngularModule } from 'lucide-angular';
 
@@ -34,14 +30,10 @@ import { CalendarDays, LucideAngularModule } from 'lucide-angular';
           </Avatar>
           <div class="space-y-1">
             <h4 class="text-sm font-semibold">&#64;nextjs</h4>
-            <p class="text-sm">
-              The React Framework – created and maintained by &#64;vercel.
-            </p>
+            <p class="text-sm">The React Framework – created and maintained by &#64;vercel.</p>
             <div class="flex items-center pt-2">
               <lucide-icon [img]="CalendarDays" class="mr-2 h-4 w-4 opacity-70" />
-              <span class="text-xs text-muted-foreground">
-                Joined December 2021
-              </span>
+              <span class="text-xs text-muted-foreground"> Joined December 2021 </span>
             </div>
           </div>
         </div>

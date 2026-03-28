@@ -1,11 +1,11 @@
 import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
 } from '@/ui/menubar';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
@@ -26,29 +26,19 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
-            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            New Window <MenubarShortcut>⌘N</MenubarShortcut>
-          </MenubarItem>
+          <MenubarItem> New Tab <MenubarShortcut>⌘T</MenubarShortcut> </MenubarItem>
+          <MenubarItem> New Window <MenubarShortcut>⌘N</MenubarShortcut> </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>Share</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            Print... <MenubarShortcut>⌘P</MenubarShortcut>
-          </MenubarItem>
+          <MenubarItem> Print... <MenubarShortcut>⌘P</MenubarShortcut> </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Edit</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
-            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-          </MenubarItem>
+          <MenubarItem> Undo <MenubarShortcut>⌘Z</MenubarShortcut> </MenubarItem>
+          <MenubarItem> Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut> </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>Cut</MenubarItem>
           <MenubarItem>Copy</MenubarItem>
@@ -61,9 +51,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           <MenubarItem>Zoom In</MenubarItem>
           <MenubarItem>Zoom Out</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            Toggle Fullscreen
-          </MenubarItem>
+          <MenubarItem> Toggle Fullscreen </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

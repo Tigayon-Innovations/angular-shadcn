@@ -1,5 +1,13 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, input, model, output, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  model,
+  output,
+  viewChild,
+} from '@angular/core';
 import { CalendarIcon, LucideAngularModule } from 'lucide-angular';
 import { buttonVariants } from '../button';
 import { Calendar } from '../calendar';

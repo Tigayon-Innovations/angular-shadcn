@@ -11,9 +11,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
       <Checkbox id="terms" [(checked)]="checked" />
       <Label htmlFor="terms">Accept terms and conditions</Label>
     </div>
-    <p class="text-sm text-muted-foreground mt-2">
-      Checked: {{ checked() }}
-    </p>
+    <p class="text-sm text-muted-foreground mt-2">Checked: {{ checked() }}</p>
   `,
 })
 export class CheckboxDemo {

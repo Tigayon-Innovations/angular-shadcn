@@ -1,16 +1,16 @@
 import { cn } from '@/lib/utils';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    forwardRef,
-    input,
-    signal,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  input,
+  signal,
 } from '@angular/core';
 import {
-    COMMAND_CONTEXT,
-    type CommandContextValue,
-    type CommandFilterFunction,
+  COMMAND_CONTEXT,
+  type CommandContextValue,
+  type CommandFilterFunction,
 } from './command-context';
 
 let commandIdCounter = 0;

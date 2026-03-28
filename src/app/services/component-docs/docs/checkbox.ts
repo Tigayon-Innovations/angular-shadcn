@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const CHECKBOX_DOCUMENTATION: ComponentDocumentation = {
   name: 'Checkbox',
   slug: 'checkbox',
-  description:
-    'A control that allows the user to toggle between checked and not checked.',
+  description: 'A control that allows the user to toggle between checked and not checked.',
 
   features: [
     { text: 'Supports indeterminate state.', highlight: true },
@@ -37,7 +36,8 @@ export const CHECKBOX_DOCUMENTATION: ComponentDocumentation = {
   apiReference: [
     {
       name: 'Checkbox',
-      description: 'The main checkbox component. Implements ControlValueAccessor for Angular Forms.',
+      description:
+        'The main checkbox component. Implements ControlValueAccessor for Angular Forms.',
       props: [
         {
           name: 'id',
@@ -55,8 +55,7 @@ export const CHECKBOX_DOCUMENTATION: ComponentDocumentation = {
           name: 'disabled',
           type: 'boolean',
           default: 'false',
-          description:
-            'When true, prevents the user from interacting with the checkbox.',
+          description: 'When true, prevents the user from interacting with the checkbox.',
         },
         {
           name: 'class',

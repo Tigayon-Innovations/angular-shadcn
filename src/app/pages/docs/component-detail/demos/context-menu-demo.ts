@@ -1,10 +1,10 @@
 import {
-    ContextMenu,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuSeparator,
-    ContextMenuShortcut,
-    ContextMenuTrigger,
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
 } from '@/ui/context-menu';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
@@ -21,7 +21,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   ],
   template: `
     <ContextMenu>
-      <ContextMenuTrigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+      <ContextMenuTrigger
+        class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
+      >
         Right click here
       </ContextMenuTrigger>
       <ContextMenuContent class="w-64">

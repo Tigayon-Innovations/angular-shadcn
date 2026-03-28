@@ -1,4 +1,3 @@
-
 import { InputGroup, InputGroupAddon } from '@/ui/input-group';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AtSign, LucideAngularModule, Search } from 'lucide-angular';

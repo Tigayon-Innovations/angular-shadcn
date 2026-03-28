@@ -1,6 +1,12 @@
 import { Badge } from '@/lib/components/ui/badge';
 import { Button } from '@/lib/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/lib/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/lib/components/ui/card';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Check, LucideAngularModule, X } from 'lucide-angular';
 
@@ -16,16 +22,23 @@ interface PricingPlan {
 
 @Component({
   selector: 'app-pricing-01',
-  imports: [Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, LucideAngularModule],
+  imports: [
+    Badge,
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    LucideAngularModule,
+  ],
   template: `
     <div class="container py-12">
       <div class="mx-auto max-w-6xl">
         <!-- Header -->
         <div class="mb-12 text-center">
           <h2 class="mb-4 text-4xl font-bold tracking-tight">Simple, transparent pricing</h2>
-          <p class="text-lg text-muted-foreground">
-            Choose the plan that's right for you
-          </p>
+          <p class="text-lg text-muted-foreground">Choose the plan that's right for you</p>
         </div>
 
         <!-- Pricing Cards -->
@@ -49,15 +62,15 @@ interface PricingPlan {
               </CardHeader>
 
               <CardContent>
-                <Button
-                  [variant]="plan.featured ? 'default' : 'outline'"
-                  class="w-full mb-6"
-                >
+                <Button [variant]="plan.featured ? 'default' : 'outline'" class="w-full mb-6">
                   {{ plan.buttonText }}
                 </Button>
                 <ul class="space-y-3 text-sm">
                   @for (feature of plan.features; track feature.text) {
-                    <li class="flex items-center gap-2" [class.text-muted-foreground]="!feature.included">
+                    <li
+                      class="flex items-center gap-2"
+                      [class.text-muted-foreground]="!feature.included"
+                    >
                       @if (feature.included) {
                         <lucide-icon [img]="icons.Check" class="h-4 w-4 text-primary" />
                       } @else {

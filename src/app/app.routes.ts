@@ -45,32 +45,27 @@ export const routes: Routes = [
       },
       {
         path: 'introduction',
-        loadComponent: () =>
-          import('@/pages/docs/introduction').then((m) => m.IntroductionPage),
+        loadComponent: () => import('@/pages/docs/introduction').then((m) => m.IntroductionPage),
         title: 'Introduction - shadcn-angular',
       },
       {
         path: 'installation',
-        loadComponent: () =>
-          import('@/pages/docs/installation').then((m) => m.InstallationPage),
+        loadComponent: () => import('@/pages/docs/installation').then((m) => m.InstallationPage),
         title: 'Installation - shadcn-angular',
       },
       {
         path: 'theming',
-        loadComponent: () =>
-          import('@/pages/docs/theming').then((m) => m.ThemingPage),
+        loadComponent: () => import('@/pages/docs/theming').then((m) => m.ThemingPage),
         title: 'Theming - shadcn-angular',
       },
       {
         path: 'dark-mode',
-        loadComponent: () =>
-          import('@/pages/docs/dark-mode').then((m) => m.DarkModePage),
+        loadComponent: () => import('@/pages/docs/dark-mode').then((m) => m.DarkModePage),
         title: 'Dark Mode - shadcn-angular',
       },
       {
         path: 'mcp-setup',
-        loadComponent: () =>
-          import('@/pages/docs/mcp-setup').then((m) => m.McpSetupPage),
+        loadComponent: () => import('@/pages/docs/mcp-setup').then((m) => m.McpSetupPage),
         title: 'MCP Setup - shadcn-angular',
       },
       {
@@ -89,20 +84,17 @@ export const routes: Routes = [
   },
   {
     path: 'theme-editor',
-    loadComponent: () =>
-      import('@/pages/theme-editor').then((m) => m.ThemeEditorPage),
+    loadComponent: () => import('@/pages/theme-editor').then((m) => m.ThemeEditorPage),
     title: 'Theme Editor - shadcn-angular',
   },
   {
     path: 'playground',
-    loadComponent: () =>
-      import('@/pages/playground').then((m) => m.PlaygroundPage),
+    loadComponent: () => import('@/pages/playground').then((m) => m.PlaygroundPage),
     title: 'Playground - shadcn-angular',
   },
   {
     path: 'charts',
-    loadComponent: () =>
-      import('@/pages/charts').then((m) => m.ChartsPage),
+    loadComponent: () => import('@/pages/charts').then((m) => m.ChartsPage),
     title: 'Charts - shadcn-angular',
   },
   {
@@ -112,20 +104,17 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () =>
-          import('@/pages/blocks').then((m) => m.BlocksListPage),
+        loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksListPage),
         title: 'Blocks - shadcn-angular',
       },
       {
         path: ':category',
-        loadComponent: () =>
-          import('@/pages/blocks').then((m) => m.BlocksCategoryPage),
+        loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksCategoryPage),
         title: blockCategoryTitleResolver,
       },
       {
         path: ':category/:slug',
-        loadComponent: () =>
-          import('@/pages/blocks').then((m) => m.BlockDetailPage),
+        loadComponent: () => import('@/pages/blocks').then((m) => m.BlockDetailPage),
         title: blockTitleResolver,
       },
     ],

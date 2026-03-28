@@ -9,10 +9,7 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import {
-    CallToolRequestSchema,
-    ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 import express, { Request, Response } from 'express';
 import { toolHandlers, tools } from './tools/index.js';
 
@@ -47,7 +44,7 @@ const mcpServer = new Server(
     capabilities: {
       tools: {},
     },
-  }
+  },
 );
 
 // Setup tool handlers
@@ -119,7 +116,7 @@ app.get('/', (req: Request, res: Response) => {
 async function start() {
   // Connect the server to the transport
   await mcpServer.connect(transport);
-  
+
   app.listen(PORT, () => {
     console.log(`\n🚀 ng-cn MCP Server running on http://localhost:${PORT}`);
     console.log(`📡 Streamable HTTP endpoint: http://localhost:${PORT}/mcp`);
@@ -127,7 +124,7 @@ async function start() {
   });
 }
 
-start().catch(error => {
+start().catch((error) => {
   console.error('Failed to start server:', error);
   process.exit(1);
 });

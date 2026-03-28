@@ -1,22 +1,16 @@
 import { Button } from '@/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
 } from '@/ui/dropdown-menu';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-    CreditCard,
-    LogOut,
-    LucideAngularModule,
-    Settings,
-    User
-} from 'lucide-angular';
+import { CreditCard, LogOut, LucideAngularModule, Settings, User } from 'lucide-angular';
 
 @Component({
   selector: 'DropdownMenuDemo',

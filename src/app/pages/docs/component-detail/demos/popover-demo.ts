@@ -1,23 +1,13 @@
 import { Button } from '@/ui/button';
 
 import { Label } from '@/ui/label';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'PopoverDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    Button,
-    Label,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-  ],
+  imports: [Button, Label, Popover, PopoverContent, PopoverTrigger],
   template: `
     <Popover>
       <PopoverTrigger>
@@ -27,9 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <div class="grid gap-4">
           <div class="space-y-2">
             <h4 class="font-medium leading-none">Dimensions</h4>
-            <p class="text-sm text-muted-foreground">
-              Set the dimensions for the layer.
-            </p>
+            <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
           </div>
           <div class="grid gap-2">
             <div class="grid grid-cols-3 items-center gap-4">

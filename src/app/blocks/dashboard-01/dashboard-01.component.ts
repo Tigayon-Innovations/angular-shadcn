@@ -1,8 +1,22 @@
 import { Badge } from '@/lib/components/ui/badge';
 import { Button } from '@/lib/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/lib/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/lib/components/ui/card';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BarChart3, ClipboardList, FolderOpen, LucideAngularModule, TrendingDown, TrendingUp, Users } from 'lucide-angular';
+import {
+  BarChart3,
+  ClipboardList,
+  FolderOpen,
+  LucideAngularModule,
+  TrendingDown,
+  TrendingUp,
+  Users,
+} from 'lucide-angular';
 
 interface StatCard {
   title: string;
@@ -15,7 +29,16 @@ interface StatCard {
 
 @Component({
   selector: 'app-dashboard-01',
-  imports: [Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, LucideAngularModule],
+  imports: [
+    Badge,
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    LucideAngularModule,
+  ],
   template: `
     <div class="flex h-screen w-full">
       <!-- Sidebar -->
@@ -27,9 +50,11 @@ interface StatCard {
           @for (item of navItems; track item.label) {
             <a
               href="#"
-              [class]="item.active
-                ? 'flex items-center gap-3 rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground'
-                : 'flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground'"
+              [class]="
+                item.active
+                  ? 'flex items-center gap-3 rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground'
+                  : 'flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground'
+              "
             >
               <lucide-icon [img]="item.icon" class="h-5 w-5" />
               <span>{{ item.label }}</span>
@@ -57,7 +82,10 @@ interface StatCard {
                 <CardHeader class="pb-2">
                   <div class="flex items-center justify-between">
                     <CardDescription>{{ stat.title }}</CardDescription>
-                    <Badge [variant]="stat.trend === 'up' ? 'default' : 'destructive'" class="text-xs">
+                    <Badge
+                      [variant]="stat.trend === 'up' ? 'default' : 'destructive'"
+                      class="text-xs"
+                    >
                       @if (stat.trend === 'up') {
                         <lucide-icon [img]="icons.TrendingUp" class="h-3 w-3 mr-1" />
                       } @else {
@@ -106,7 +134,9 @@ interface StatCard {
                   Key Personnel
                   <Badge variant="secondary" class="ml-1">2</Badge>
                 </Button>
-                <Button variant="link" class="text-muted-foreground p-0 h-auto">Focus Documents</Button>
+                <Button variant="link" class="text-muted-foreground p-0 h-auto"
+                  >Focus Documents</Button
+                >
               </div>
             </CardContent>
           </Card>
@@ -117,7 +147,14 @@ interface StatCard {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard01Component {
-  protected readonly icons = { BarChart3, ClipboardList, TrendingUp, TrendingDown, FolderOpen, Users };
+  protected readonly icons = {
+    BarChart3,
+    ClipboardList,
+    TrendingUp,
+    TrendingDown,
+    FolderOpen,
+    Users,
+  };
 
   protected readonly navItems = [
     { icon: BarChart3, label: 'Dashboard', active: true },

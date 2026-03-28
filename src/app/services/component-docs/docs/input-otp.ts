@@ -8,8 +8,7 @@ import type { ComponentDocumentation } from '../types';
 export const INPUT_OTP_DOCUMENTATION: ComponentDocumentation = {
   name: 'Input OTP',
   slug: 'input-otp',
-  description:
-    'Accessible one-time password component with copy paste functionality.',
+  description: 'Accessible one-time password component with copy paste functionality.',
 
   features: [
     { text: 'Copy/paste support.', highlight: true },
@@ -103,9 +102,7 @@ export const INPUT_OTP_DOCUMENTATION: ComponentDocumentation = {
           description: 'Event handler called when all slots are filled.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-disabled]', values: 'Present when disabled' },
-      ],
+      dataAttributes: [{ name: '[data-disabled]', values: 'Present when disabled' }],
     },
     {
       name: 'Group',

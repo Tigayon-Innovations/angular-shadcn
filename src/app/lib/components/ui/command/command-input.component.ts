@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils';
 import {
-    afterNextRender,
-    ChangeDetectionStrategy,
-    Component,
-    computed,
-    ElementRef,
-    inject,
-    input,
-    viewChild,
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
 } from '@angular/core';
 import { LucideAngularModule, Search } from 'lucide-angular';
 import { COMMAND_CONTEXT } from './command-context';

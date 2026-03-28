@@ -2,13 +2,7 @@ import { CodeBlock } from '@/components/code-block';
 import { cn } from '@/lib/utils';
 import { Button } from '@/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  signal
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import {
   Code2,
   Copy,
@@ -18,7 +12,7 @@ import {
   Maximize2,
   Monitor,
   Smartphone,
-  Tablet
+  Tablet,
 } from 'lucide-angular';
 
 type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
@@ -35,7 +29,9 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
     <div [class]="computedClass()">
       <Tabs defaultValue="preview" class="relative w-full">
         <!-- Header with centered tabs -->
-        <div class="relative flex items-center justify-center border-b border-border bg-muted/30 px-4 py-2">
+        <div
+          class="relative flex items-center justify-center border-b border-border bg-muted/30 px-4 py-2"
+        >
           <!-- Center: Tabs (absolutely positioned to stay centered) -->
           <TabsList class="h-9 rounded-lg bg-muted p-1">
             <TabsTrigger value="preview" class="gap-2 text-xs px-3">
@@ -104,7 +100,9 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
             <!-- Viewport wrapper for responsive preview -->
             <div [class]="viewportWrapperClass()">
               <!-- Subtle dot pattern background -->
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:16px_16px] opacity-30"></div>
+              <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:16px_16px] opacity-30"
+              ></div>
 
               <!-- Component content -->
               <div [class]="previewContentClass()">
@@ -115,9 +113,13 @@ type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
             <!-- Interactive badge -->
             @if (interactive()) {
               <div class="absolute bottom-3 right-3">
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary ring-1 ring-primary/20">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary ring-1 ring-primary/20"
+                >
                   <span class="relative flex h-1.5 w-1.5">
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                    <span
+                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"
+                    ></span>
                     <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"></span>
                   </span>
                   Interactive
@@ -169,15 +171,15 @@ export class ComponentPreview {
     cn(
       'relative overflow-hidden rounded-xl border border-border bg-background shadow-sm',
       this.expanded() && 'fixed inset-4 z-50',
-      this.class()
-    )
+      this.class(),
+    ),
   );
 
   protected readonly previewContainerClass = computed(() =>
     cn(
       'relative overflow-hidden bg-background',
-      this.expanded() ? 'h-[calc(100vh-12rem)]' : 'min-h-[350px]'
-    )
+      this.expanded() ? 'h-[calc(100vh-12rem)]' : 'min-h-[350px]',
+    ),
   );
 
   protected readonly viewportWrapperClass = computed(() => {
@@ -187,15 +189,15 @@ export class ComponentPreview {
       vp === 'mobile' && 'max-w-[375px]',
       vp === 'tablet' && 'max-w-[768px]',
       vp === 'desktop' && 'max-w-[1024px]',
-      vp === 'full' && 'max-w-full'
+      vp === 'full' && 'max-w-full',
     );
   });
 
   protected readonly previewContentClass = computed(() =>
     cn(
       'relative flex min-h-[350px] w-full items-center justify-center p-10',
-      this.expanded() && 'min-h-full'
-    )
+      this.expanded() && 'min-h-full',
+    ),
   );
 
   protected setViewport(size: ViewportSize): void {

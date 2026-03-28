@@ -1,4 +1,4 @@
 interface:
-  display_name: "JobsGlobal Clean Code"
-  short_description: "Write clean, self-documenting TypeScript/Angular code."
-  default_prompt: "Use $jobsglobal-clean-code to enforce proper return types, descriptive naming, and no comment clutter."
+  display_name: 'JobsGlobal Clean Code'
+  short_description: 'Write clean, self-documenting TypeScript/Angular code.'
+  default_prompt: 'Use $jobsglobal-clean-code to enforce proper return types, descriptive naming, and no comment clutter.'

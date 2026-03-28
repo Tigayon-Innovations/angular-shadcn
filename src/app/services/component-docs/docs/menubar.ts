@@ -84,9 +84,7 @@ export const MENUBAR_DOCUMENTATION: ComponentDocumentation = {
       name: 'Menu',
       description: 'A top-level menu item, contains a trigger and content.',
       props: [],
-      notes: [
-        'Automatically registers with parent menubar for keyboard navigation.',
-      ],
+      notes: ['Automatically registers with parent menubar for keyboard navigation.'],
     },
     {
       name: 'Trigger',
@@ -131,9 +129,7 @@ export const MENUBAR_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Item',
@@ -285,9 +281,7 @@ export const MENUBAR_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Separator',

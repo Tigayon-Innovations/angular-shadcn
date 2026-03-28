@@ -1,5 +1,11 @@
 import { Button } from '@/lib/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/lib/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/lib/components/ui/card';
 import { Checkbox } from '@/lib/components/ui/checkbox';
 
 import { Label } from '@/lib/components/ui/label';
@@ -29,9 +35,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
       <!-- Header -->
       <div class="mb-8">
         <h1 class="mb-2 text-3xl font-bold tracking-tight">Settings</h1>
-        <p class="text-muted-foreground">
-          Manage your account settings and preferences
-        </p>
+        <p class="text-muted-foreground">Manage your account settings and preferences</p>
       </div>
 
       <!-- Tabs -->
@@ -85,9 +89,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                 <div class="flex items-center justify-between">
                   <div>
                     <Label>Language</Label>
-                    <p class="text-sm text-muted-foreground">
-                      Select your preferred language
-                    </p>
+                    <p class="text-sm text-muted-foreground">Select your preferred language</p>
                   </div>
                   <NativeSelect class="w-40">
                     <option>English</option>
@@ -98,9 +100,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                 <div class="flex items-center justify-between">
                   <div>
                     <Label>Timezone</Label>
-                    <p class="text-sm text-muted-foreground">
-                      Your current timezone
-                    </p>
+                    <p class="text-sm text-muted-foreground">Your current timezone</p>
                   </div>
                   <NativeSelect class="w-40">
                     <option>UTC-8 (Pacific)</option>
@@ -151,9 +151,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">Enable 2FA</p>
-                    <p class="text-sm text-muted-foreground">
-                      Protect your account with 2FA
-                    </p>
+                    <p class="text-sm text-muted-foreground">Protect your account with 2FA</p>
                   </div>
                   <Button variant="outline">Enable</Button>
                 </div>
@@ -178,27 +176,21 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">Marketing emails</p>
-                    <p class="text-sm text-muted-foreground">
-                      Receive updates about new features
-                    </p>
+                    <p class="text-sm text-muted-foreground">Receive updates about new features</p>
                   </div>
                   <Checkbox />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">Security alerts</p>
-                    <p class="text-sm text-muted-foreground">
-                      Important security updates
-                    </p>
+                    <p class="text-sm text-muted-foreground">Important security updates</p>
                   </div>
                   <Checkbox [checked]="true" />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">Product updates</p>
-                    <p class="text-sm text-muted-foreground">
-                      News about product changes
-                    </p>
+                    <p class="text-sm text-muted-foreground">News about product changes</p>
                   </div>
                   <Checkbox />
                 </div>
@@ -214,18 +206,14 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">New messages</p>
-                    <p class="text-sm text-muted-foreground">
-                      Get notified about new messages
-                    </p>
+                    <p class="text-sm text-muted-foreground">Get notified about new messages</p>
                   </div>
                   <Checkbox [checked]="true" />
                 </div>
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="font-medium">Project updates</p>
-                    <p class="text-sm text-muted-foreground">
-                      Updates on your projects
-                    </p>
+                    <p class="text-sm text-muted-foreground">Updates on your projects</p>
                   </div>
                   <Checkbox [checked]="true" />
                 </div>

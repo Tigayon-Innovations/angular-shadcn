@@ -45,10 +45,19 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
   {
     name: 'Card',
     slug: 'card',
-    description: 'Displays a card with header, content, and footer. Perfect for displaying grouped information, forms, or media.',
+    description:
+      'Displays a card with header, content, and footer. Perfect for displaying grouped information, forms, or media.',
     category: 'layout',
     package: '@ng-cn/card',
-    imports: ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter', 'CardAction'],
+    imports: [
+      'Card',
+      'CardHeader',
+      'CardTitle',
+      'CardDescription',
+      'CardContent',
+      'CardFooter',
+      'CardAction',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -189,11 +198,36 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
     ],
     props: [
       { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'Card' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardHeader' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardTitle' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardDescription' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardContent' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'CardFooter' },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'CardHeader',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'CardTitle',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'CardDescription',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'CardContent',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'CardFooter',
+      },
     ],
   },
   {
@@ -225,7 +259,12 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'open', type: 'boolean', default: 'false', description: 'Whether the collapsible is open.' },
+      {
+        name: 'open',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the collapsible is open.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -265,9 +304,23 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'direction', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'The direction of the panels.' },
-      { name: 'defaultSize', type: 'number', description: 'The default size of the panel as a percentage.' },
-      { name: 'withHandle', type: 'boolean', default: 'false', description: 'Whether to show a drag handle.' },
+      {
+        name: 'direction',
+        type: "'horizontal' | 'vertical'",
+        default: "'horizontal'",
+        description: 'The direction of the panels.',
+      },
+      {
+        name: 'defaultSize',
+        type: 'number',
+        description: 'The default size of the panel as a percentage.',
+      },
+      {
+        name: 'withHandle',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether to show a drag handle.',
+      },
     ],
   },
   {
@@ -310,14 +363,20 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'vertical'", description: 'The orientation of the scroll area.' },
+      {
+        name: 'orientation',
+        type: "'horizontal' | 'vertical'",
+        default: "'vertical'",
+        description: 'The orientation of the scroll area.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
   {
     name: 'Separator',
     slug: 'separator',
-    description: 'Visually or semantically separates content. Renders as an hr element with proper accessibility.',
+    description:
+      'Visually or semantically separates content. Renders as an hr element with proper accessibility.',
     category: 'layout',
     package: '@ng-cn/separator',
     imports: ['Separator'],
@@ -400,8 +459,18 @@ export const LAYOUT_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'The orientation of the separator.' },
-      { name: 'decorative', type: 'boolean', default: 'true', description: 'Whether the separator is decorative (aria-hidden).' },
+      {
+        name: 'orientation',
+        type: "'horizontal' | 'vertical'",
+        default: "'horizontal'",
+        description: 'The orientation of the separator.',
+      },
+      {
+        name: 'decorative',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether the separator is decorative (aria-hidden).',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes.' },
     ],
   },

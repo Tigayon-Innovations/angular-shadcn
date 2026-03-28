@@ -50,7 +50,7 @@ import {
   selector: 'ComponentDocPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'ngSkipHydration': 'true',
+    ngSkipHydration: 'true',
   },
   imports: [
     RouterLink,
@@ -103,9 +103,7 @@ import {
 
         <!-- Features Section -->
         <section class="scroll-mt-20 mb-16" id="features">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">
-            Features
-          </h2>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">Features</h2>
           <ul class="grid gap-3">
             @for (feature of doc.features; track feature.text) {
               <li class="flex items-start gap-3">
@@ -121,12 +119,8 @@ import {
 
         <!-- Installation Section -->
         <section class="scroll-mt-20 mb-16" id="installation">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">
-            Installation
-          </h2>
-          <p class="text-muted-foreground mb-4">
-            Install the component from your command line.
-          </p>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">Installation</h2>
+          <p class="text-muted-foreground mb-4">Install the component from your command line.</p>
           <Tabs [value]="installTab()" (valueChange)="installTab.set($event)" class="w-full">
             <TabsList class="mb-4">
               @if (doc.installation.ngAdd) {
@@ -159,12 +153,8 @@ import {
 
         <!-- Anatomy Section -->
         <section class="scroll-mt-20 mb-16" id="anatomy">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">
-            Anatomy
-          </h2>
-          <p class="text-muted-foreground mb-4">
-            Import all parts and piece them together.
-          </p>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">Anatomy</h2>
+          <p class="text-muted-foreground mb-4">Import all parts and piece them together.</p>
           <div class="space-y-4">
             <CodeBlock [code]="doc.anatomy.importStatement" language="typescript" />
             <CodeBlock [code]="doc.anatomy.structure" language="html" />
@@ -173,9 +163,7 @@ import {
 
         <!-- API Reference Section -->
         <section class="scroll-mt-20 mb-16" id="api">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-8">
-            API Reference
-          </h2>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-8">API Reference</h2>
           <div class="space-y-12">
             @for (api of doc.apiReference; track api.name) {
               <div class="space-y-6">
@@ -205,7 +193,9 @@ import {
                               }
                             </TableCell>
                             <TableCell>
-                              <code class="text-xs bg-muted px-1.5 py-0.5 rounded">{{ prop.type }}</code>
+                              <code class="text-xs bg-muted px-1.5 py-0.5 rounded">{{
+                                prop.type
+                              }}</code>
                             </TableCell>
                             <TableCell class="text-muted-foreground">
                               {{ prop.default || '—' }}
@@ -239,7 +229,9 @@ import {
                             <TableRow>
                               <TableCell class="font-mono text-sm">{{ attr.name }}</TableCell>
                               <TableCell>
-                                <code class="text-xs bg-muted px-1.5 py-0.5 rounded">{{ attr.values }}</code>
+                                <code class="text-xs bg-muted px-1.5 py-0.5 rounded">{{
+                                  attr.values
+                                }}</code>
                               </TableCell>
                             </TableRow>
                           }
@@ -265,7 +257,9 @@ import {
                           @for (cssVar of api.cssVariables; track cssVar.name) {
                             <TableRow>
                               <TableCell class="font-mono text-sm">{{ cssVar.name }}</TableCell>
-                              <TableCell class="text-muted-foreground">{{ cssVar.description }}</TableCell>
+                              <TableCell class="text-muted-foreground">{{
+                                cssVar.description
+                              }}</TableCell>
                             </TableRow>
                           }
                         </TableBody>
@@ -280,9 +274,7 @@ import {
 
         <!-- Examples Section -->
         <section class="scroll-mt-20 mb-16" id="examples">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-8">
-            Examples
-          </h2>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-8">Examples</h2>
           <div class="space-y-12">
             @for (example of doc.examples; track example.title; let i = $index) {
               <div class="space-y-4">
@@ -305,9 +297,7 @@ import {
 
         <!-- Accessibility Section -->
         <section class="scroll-mt-20 mb-16" id="accessibility">
-          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">
-            Accessibility
-          </h2>
+          <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">Accessibility</h2>
 
           @if (doc.accessibility.ariaPattern) {
             <p class="text-muted-foreground mb-6">
@@ -318,8 +308,8 @@ import {
                 rel="noopener noreferrer"
                 class="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
               >
-                {{ doc.accessibility.ariaPattern }}
-              </a>.
+                {{ doc.accessibility.ariaPattern }} </a
+              >.
             </p>
           }
 
@@ -338,10 +328,15 @@ import {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  @for (interaction of doc.accessibility.keyboardInteractions; track interaction.key) {
+                  @for (
+                    interaction of doc.accessibility.keyboardInteractions;
+                    track interaction.key
+                  ) {
                     <TableRow>
                       <TableCell>
-                        <kbd class="inline-flex items-center gap-1 rounded border bg-muted px-2 py-1 font-mono text-sm">
+                        <kbd
+                          class="inline-flex items-center gap-1 rounded border bg-muted px-2 py-1 font-mono text-sm"
+                        >
                           {{ interaction.key }}
                         </kbd>
                       </TableCell>
@@ -359,9 +354,7 @@ import {
         <!-- Additional Links -->
         @if (doc.links.length > 0) {
           <section class="scroll-mt-20 mb-16" id="links">
-            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">
-              Additional Links
-            </h2>
+            <h2 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-6">Additional Links</h2>
             <ul class="space-y-3">
               @for (link of doc.links; track link.url) {
                 <li>
@@ -416,9 +409,7 @@ import {
         <p class="text-muted-foreground mb-4">
           The documentation for "{{ slug() }}" is not available yet.
         </p>
-        <Button routerLink="/docs/components" variant="outline">
-          View All Components
-        </Button>
+        <Button routerLink="/docs/components" variant="outline"> View All Components </Button>
       </div>
     }
   `,

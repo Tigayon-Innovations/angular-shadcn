@@ -63,10 +63,10 @@ export class NativeSelect {
       "bg-[image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")]",
       // Chevron arrow — dark mode (neutral-400 stroke, visible on dark backgrounds)
       "dark:bg-[image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")]",
-      "bg-[size:16px_16px]",
-      "bg-[position:right_0.5rem_center]",
-      "bg-no-repeat",
-      "pr-8",
+      'bg-[size:16px_16px]',
+      'bg-[position:right_0.5rem_center]',
+      'bg-no-repeat',
+      'pr-8',
       this.class(),
     ),
   );

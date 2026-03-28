@@ -10,209 +10,1427 @@
     }
   },
   "components": [
-    { "name": "Accordion", "package": "@shadcn-angular/accordion", "selector": "Accordion", "selectorType": "element", "standalone": true },
-    { "name": "AccordionItem", "package": "@shadcn-angular/accordion", "selector": "AccordionItem", "selectorType": "element", "standalone": true },
-    { "name": "AccordionTrigger", "package": "@shadcn-angular/accordion", "selector": "AccordionTrigger", "selectorType": "element", "standalone": true },
-    { "name": "AccordionContent", "package": "@shadcn-angular/accordion", "selector": "AccordionContent", "selectorType": "element", "standalone": true },
-    { "name": "Alert", "package": "@shadcn-angular/alert", "selector": "Alert", "selectorType": "element", "standalone": true },
-    { "name": "AlertTitle", "package": "@shadcn-angular/alert", "selector": "AlertTitle", "selectorType": "element", "standalone": true },
-    { "name": "AlertDescription", "package": "@shadcn-angular/alert", "selector": "AlertDescription", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialog", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialog", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogTrigger", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogTrigger", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogContent", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogContent", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogHeader", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogHeader", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogFooter", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogFooter", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogTitle", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogTitle", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogDescription", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogDescription", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogAction", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogAction", "selectorType": "element", "standalone": true },
-    { "name": "AlertDialogCancel", "package": "@shadcn-angular/alert-dialog", "selector": "AlertDialogCancel", "selectorType": "element", "standalone": true },
-    { "name": "AspectRatio", "package": "@shadcn-angular/aspect-ratio", "selector": "AspectRatio", "selectorType": "element", "standalone": true },
-    { "name": "Avatar", "package": "@shadcn-angular/avatar", "selector": "Avatar", "selectorType": "element", "standalone": true },
-    { "name": "AvatarImage", "package": "@shadcn-angular/avatar", "selector": "AvatarImage", "selectorType": "element", "standalone": true },
-    { "name": "AvatarFallback", "package": "@shadcn-angular/avatar", "selector": "AvatarFallback", "selectorType": "element", "standalone": true },
-    { "name": "Badge", "package": "@shadcn-angular/badge", "selector": "Badge", "selectorType": "element", "standalone": true },
-    { "name": "Breadcrumb", "package": "@shadcn-angular/breadcrumb", "selector": "Breadcrumb", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbList", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbList", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbItem", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbItem", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbLink", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbLink", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbPage", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbPage", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbSeparator", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbSeparator", "selectorType": "element", "standalone": true },
-    { "name": "BreadcrumbEllipsis", "package": "@shadcn-angular/breadcrumb", "selector": "BreadcrumbEllipsis", "selectorType": "element", "standalone": true },
-    { "name": "Button", "package": "@shadcn-angular/button", "selector": "Button", "selectorType": "element", "standalone": true },
-    { "name": "Calendar", "package": "@shadcn-angular/calendar", "selector": "Calendar", "selectorType": "element", "standalone": true },
-    { "name": "Card", "package": "@shadcn-angular/card", "selector": "Card", "selectorType": "element", "standalone": true },
-    { "name": "CardHeader", "package": "@shadcn-angular/card", "selector": "CardHeader", "selectorType": "element", "standalone": true },
-    { "name": "CardTitle", "package": "@shadcn-angular/card", "selector": "CardTitle", "selectorType": "element", "standalone": true },
-    { "name": "CardDescription", "package": "@shadcn-angular/card", "selector": "CardDescription", "selectorType": "element", "standalone": true },
-    { "name": "CardContent", "package": "@shadcn-angular/card", "selector": "CardContent", "selectorType": "element", "standalone": true },
-    { "name": "CardFooter", "package": "@shadcn-angular/card", "selector": "CardFooter", "selectorType": "element", "standalone": true },
-    { "name": "Carousel", "package": "@shadcn-angular/carousel", "selector": "Carousel", "selectorType": "element", "standalone": true },
-    { "name": "CarouselContent", "package": "@shadcn-angular/carousel", "selector": "CarouselContent", "selectorType": "element", "standalone": true },
-    { "name": "CarouselItem", "package": "@shadcn-angular/carousel", "selector": "CarouselItem", "selectorType": "element", "standalone": true },
-    { "name": "CarouselPrevious", "package": "@shadcn-angular/carousel", "selector": "CarouselPrevious", "selectorType": "element", "standalone": true },
-    { "name": "CarouselNext", "package": "@shadcn-angular/carousel", "selector": "CarouselNext", "selectorType": "element", "standalone": true },
-    { "name": "Checkbox", "package": "@shadcn-angular/checkbox", "selector": "Checkbox", "selectorType": "element", "standalone": true },
-    { "name": "Collapsible", "package": "@shadcn-angular/collapsible", "selector": "Collapsible", "selectorType": "element", "standalone": true },
-    { "name": "CollapsibleTrigger", "package": "@shadcn-angular/collapsible", "selector": "CollapsibleTrigger", "selectorType": "element", "standalone": true },
-    { "name": "CollapsibleContent", "package": "@shadcn-angular/collapsible", "selector": "CollapsibleContent", "selectorType": "element", "standalone": true },
-    { "name": "Command", "package": "@shadcn-angular/command", "selector": "Command", "selectorType": "element", "standalone": true },
-    { "name": "CommandInput", "package": "@shadcn-angular/command", "selector": "CommandInput", "selectorType": "element", "standalone": true },
-    { "name": "CommandList", "package": "@shadcn-angular/command", "selector": "CommandList", "selectorType": "element", "standalone": true },
-    { "name": "CommandEmpty", "package": "@shadcn-angular/command", "selector": "CommandEmpty", "selectorType": "element", "standalone": true },
-    { "name": "CommandGroup", "package": "@shadcn-angular/command", "selector": "CommandGroup", "selectorType": "element", "standalone": true },
-    { "name": "CommandItem", "package": "@shadcn-angular/command", "selector": "CommandItem", "selectorType": "element", "standalone": true },
-    { "name": "CommandShortcut", "package": "@shadcn-angular/command", "selector": "CommandShortcut", "selectorType": "element", "standalone": true },
-    { "name": "CommandSeparator", "package": "@shadcn-angular/command", "selector": "CommandSeparator", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenu", "package": "@shadcn-angular/context-menu", "selector": "ContextMenu", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuTrigger", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuTrigger", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuContent", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuContent", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuItem", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuItem", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuCheckboxItem", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuCheckboxItem", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuRadioGroup", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuRadioGroup", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuRadioItem", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuRadioItem", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuLabel", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuLabel", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuSeparator", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuSeparator", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuShortcut", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuShortcut", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuSub", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuSub", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuSubTrigger", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuSubTrigger", "selectorType": "element", "standalone": true },
-    { "name": "ContextMenuSubContent", "package": "@shadcn-angular/context-menu", "selector": "ContextMenuSubContent", "selectorType": "element", "standalone": true },
-    { "name": "DatePicker", "package": "@shadcn-angular/date-picker", "selector": "DatePicker", "selectorType": "element", "standalone": true },
-    { "name": "Dialog", "package": "@shadcn-angular/dialog", "selector": "Dialog", "selectorType": "element", "standalone": true },
-    { "name": "DialogTrigger", "package": "@shadcn-angular/dialog", "selector": "DialogTrigger", "selectorType": "element", "standalone": true },
-    { "name": "DialogContent", "package": "@shadcn-angular/dialog", "selector": "DialogContent", "selectorType": "element", "standalone": true },
-    { "name": "DialogHeader", "package": "@shadcn-angular/dialog", "selector": "DialogHeader", "selectorType": "element", "standalone": true },
-    { "name": "DialogFooter", "package": "@shadcn-angular/dialog", "selector": "DialogFooter", "selectorType": "element", "standalone": true },
-    { "name": "DialogTitle", "package": "@shadcn-angular/dialog", "selector": "DialogTitle", "selectorType": "element", "standalone": true },
-    { "name": "DialogDescription", "package": "@shadcn-angular/dialog", "selector": "DialogDescription", "selectorType": "element", "standalone": true },
-    { "name": "DialogClose", "package": "@shadcn-angular/dialog", "selector": "DialogClose", "selectorType": "element", "standalone": true },
-    { "name": "Drawer", "package": "@shadcn-angular/drawer", "selector": "Drawer", "selectorType": "element", "standalone": true },
-    { "name": "DrawerTrigger", "package": "@shadcn-angular/drawer", "selector": "DrawerTrigger", "selectorType": "element", "standalone": true },
-    { "name": "DrawerContent", "package": "@shadcn-angular/drawer", "selector": "DrawerContent", "selectorType": "element", "standalone": true },
-    { "name": "DrawerHeader", "package": "@shadcn-angular/drawer", "selector": "DrawerHeader", "selectorType": "element", "standalone": true },
-    { "name": "DrawerFooter", "package": "@shadcn-angular/drawer", "selector": "DrawerFooter", "selectorType": "element", "standalone": true },
-    { "name": "DrawerTitle", "package": "@shadcn-angular/drawer", "selector": "DrawerTitle", "selectorType": "element", "standalone": true },
-    { "name": "DrawerDescription", "package": "@shadcn-angular/drawer", "selector": "DrawerDescription", "selectorType": "element", "standalone": true },
-    { "name": "DrawerClose", "package": "@shadcn-angular/drawer", "selector": "DrawerClose", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenu", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenu", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuTrigger", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuTrigger", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuContent", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuContent", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuItem", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuItem", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuCheckboxItem", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuCheckboxItem", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuRadioGroup", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuRadioGroup", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuRadioItem", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuRadioItem", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuLabel", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuLabel", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuSeparator", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuSeparator", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuShortcut", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuShortcut", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuGroup", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuGroup", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuSub", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuSub", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuSubTrigger", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuSubTrigger", "selectorType": "element", "standalone": true },
-    { "name": "DropdownMenuSubContent", "package": "@shadcn-angular/dropdown-menu", "selector": "DropdownMenuSubContent", "selectorType": "element", "standalone": true },
-    { "name": "Form", "package": "@shadcn-angular/form", "selector": "Form", "selectorType": "element", "standalone": true },
-    { "name": "FormField", "package": "@shadcn-angular/form", "selector": "FormField", "selectorType": "element", "standalone": true },
-    { "name": "FormItem", "package": "@shadcn-angular/form", "selector": "FormItem", "selectorType": "element", "standalone": true },
-    { "name": "FormLabel", "package": "@shadcn-angular/form", "selector": "FormLabel", "selectorType": "element", "standalone": true },
-    { "name": "FormControl", "package": "@shadcn-angular/form", "selector": "FormControl", "selectorType": "element", "standalone": true },
-    { "name": "FormDescription", "package": "@shadcn-angular/form", "selector": "FormDescription", "selectorType": "element", "standalone": true },
-    { "name": "FormMessage", "package": "@shadcn-angular/form", "selector": "FormMessage", "selectorType": "element", "standalone": true },
-    { "name": "HoverCard", "package": "@shadcn-angular/hover-card", "selector": "HoverCard", "selectorType": "element", "standalone": true },
-    { "name": "HoverCardTrigger", "package": "@shadcn-angular/hover-card", "selector": "HoverCardTrigger", "selectorType": "element", "standalone": true },
-    { "name": "HoverCardContent", "package": "@shadcn-angular/hover-card", "selector": "HoverCardContent", "selectorType": "element", "standalone": true },
-    { "name": "Input", "package": "@shadcn-angular/input", "selector": "Input", "selectorType": "element", "standalone": true },
-    { "name": "InputOTP", "package": "@shadcn-angular/input-otp", "selector": "InputOTP", "selectorType": "element", "standalone": true },
-    { "name": "InputOTPGroup", "package": "@shadcn-angular/input-otp", "selector": "InputOTPGroup", "selectorType": "element", "standalone": true },
-    { "name": "InputOTPSlot", "package": "@shadcn-angular/input-otp", "selector": "InputOTPSlot", "selectorType": "element", "standalone": true },
-    { "name": "InputOTPSeparator", "package": "@shadcn-angular/input-otp", "selector": "InputOTPSeparator", "selectorType": "element", "standalone": true },
-    { "name": "Label", "package": "@shadcn-angular/label", "selector": "Label", "selectorType": "element", "standalone": true },
-    { "name": "Menubar", "package": "@shadcn-angular/menubar", "selector": "Menubar", "selectorType": "element", "standalone": true },
-    { "name": "MenubarMenu", "package": "@shadcn-angular/menubar", "selector": "MenubarMenu", "selectorType": "element", "standalone": true },
-    { "name": "MenubarTrigger", "package": "@shadcn-angular/menubar", "selector": "MenubarTrigger", "selectorType": "element", "standalone": true },
-    { "name": "MenubarContent", "package": "@shadcn-angular/menubar", "selector": "MenubarContent", "selectorType": "element", "standalone": true },
-    { "name": "MenubarItem", "package": "@shadcn-angular/menubar", "selector": "MenubarItem", "selectorType": "element", "standalone": true },
-    { "name": "MenubarSeparator", "package": "@shadcn-angular/menubar", "selector": "MenubarSeparator", "selectorType": "element", "standalone": true },
-    { "name": "MenubarLabel", "package": "@shadcn-angular/menubar", "selector": "MenubarLabel", "selectorType": "element", "standalone": true },
-    { "name": "MenubarCheckboxItem", "package": "@shadcn-angular/menubar", "selector": "MenubarCheckboxItem", "selectorType": "element", "standalone": true },
-    { "name": "MenubarRadioGroup", "package": "@shadcn-angular/menubar", "selector": "MenubarRadioGroup", "selectorType": "element", "standalone": true },
-    { "name": "MenubarRadioItem", "package": "@shadcn-angular/menubar", "selector": "MenubarRadioItem", "selectorType": "element", "standalone": true },
-    { "name": "MenubarSub", "package": "@shadcn-angular/menubar", "selector": "MenubarSub", "selectorType": "element", "standalone": true },
-    { "name": "MenubarSubTrigger", "package": "@shadcn-angular/menubar", "selector": "MenubarSubTrigger", "selectorType": "element", "standalone": true },
-    { "name": "MenubarSubContent", "package": "@shadcn-angular/menubar", "selector": "MenubarSubContent", "selectorType": "element", "standalone": true },
-    { "name": "MenubarShortcut", "package": "@shadcn-angular/menubar", "selector": "MenubarShortcut", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenu", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenu", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuList", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuList", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuItem", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuItem", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuTrigger", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuTrigger", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuContent", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuContent", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuLink", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuLink", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuIndicator", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuIndicator", "selectorType": "element", "standalone": true },
-    { "name": "NavigationMenuViewport", "package": "@shadcn-angular/navigation-menu", "selector": "NavigationMenuViewport", "selectorType": "element", "standalone": true },
-    { "name": "Pagination", "package": "@shadcn-angular/pagination", "selector": "Pagination", "selectorType": "element", "standalone": true },
-    { "name": "PaginationContent", "package": "@shadcn-angular/pagination", "selector": "PaginationContent", "selectorType": "element", "standalone": true },
-    { "name": "PaginationItem", "package": "@shadcn-angular/pagination", "selector": "PaginationItem", "selectorType": "element", "standalone": true },
-    { "name": "PaginationLink", "package": "@shadcn-angular/pagination", "selector": "PaginationLink", "selectorType": "element", "standalone": true },
-    { "name": "PaginationPrevious", "package": "@shadcn-angular/pagination", "selector": "PaginationPrevious", "selectorType": "element", "standalone": true },
-    { "name": "PaginationNext", "package": "@shadcn-angular/pagination", "selector": "PaginationNext", "selectorType": "element", "standalone": true },
-    { "name": "PaginationEllipsis", "package": "@shadcn-angular/pagination", "selector": "PaginationEllipsis", "selectorType": "element", "standalone": true },
-    { "name": "Popover", "package": "@shadcn-angular/popover", "selector": "Popover", "selectorType": "element", "standalone": true },
-    { "name": "PopoverTrigger", "package": "@shadcn-angular/popover", "selector": "PopoverTrigger", "selectorType": "element", "standalone": true },
-    { "name": "PopoverContent", "package": "@shadcn-angular/popover", "selector": "PopoverContent", "selectorType": "element", "standalone": true },
-    { "name": "PopoverAnchor", "package": "@shadcn-angular/popover", "selector": "PopoverAnchor", "selectorType": "element", "standalone": true },
-    { "name": "Progress", "package": "@shadcn-angular/progress", "selector": "Progress", "selectorType": "element", "standalone": true },
-    { "name": "RadioGroup", "package": "@shadcn-angular/radio-group", "selector": "RadioGroup", "selectorType": "element", "standalone": true },
-    { "name": "RadioGroupItem", "package": "@shadcn-angular/radio-group", "selector": "RadioGroupItem", "selectorType": "element", "standalone": true },
-    { "name": "ResizablePanelGroup", "package": "@shadcn-angular/resizable", "selector": "ResizablePanelGroup", "selectorType": "element", "standalone": true },
-    { "name": "ResizablePanel", "package": "@shadcn-angular/resizable", "selector": "ResizablePanel", "selectorType": "element", "standalone": true },
-    { "name": "ResizableHandle", "package": "@shadcn-angular/resizable", "selector": "ResizableHandle", "selectorType": "element", "standalone": true },
-    { "name": "ScrollArea", "package": "@shadcn-angular/scroll-area", "selector": "ScrollArea", "selectorType": "element", "standalone": true },
-    { "name": "ScrollBar", "package": "@shadcn-angular/scroll-area", "selector": "ScrollBar", "selectorType": "element", "standalone": true },
-    { "name": "Select", "package": "@shadcn-angular/select", "selector": "Select", "selectorType": "element", "standalone": true },
-    { "name": "SelectTrigger", "package": "@shadcn-angular/select", "selector": "SelectTrigger", "selectorType": "element", "standalone": true },
-    { "name": "SelectValue", "package": "@shadcn-angular/select", "selector": "SelectValue", "selectorType": "element", "standalone": true },
-    { "name": "SelectContent", "package": "@shadcn-angular/select", "selector": "SelectContent", "selectorType": "element", "standalone": true },
-    { "name": "SelectGroup", "package": "@shadcn-angular/select", "selector": "SelectGroup", "selectorType": "element", "standalone": true },
-    { "name": "SelectItem", "package": "@shadcn-angular/select", "selector": "SelectItem", "selectorType": "element", "standalone": true },
-    { "name": "SelectLabel", "package": "@shadcn-angular/select", "selector": "SelectLabel", "selectorType": "element", "standalone": true },
-    { "name": "SelectSeparator", "package": "@shadcn-angular/select", "selector": "SelectSeparator", "selectorType": "element", "standalone": true },
-    { "name": "Separator", "package": "@shadcn-angular/separator", "selector": "Separator", "selectorType": "element", "standalone": true },
-    { "name": "Sheet", "package": "@shadcn-angular/sheet", "selector": "Sheet", "selectorType": "element", "standalone": true },
-    { "name": "SheetTrigger", "package": "@shadcn-angular/sheet", "selector": "SheetTrigger", "selectorType": "element", "standalone": true },
-    { "name": "SheetContent", "package": "@shadcn-angular/sheet", "selector": "SheetContent", "selectorType": "element", "standalone": true },
-    { "name": "SheetHeader", "package": "@shadcn-angular/sheet", "selector": "SheetHeader", "selectorType": "element", "standalone": true },
-    { "name": "SheetFooter", "package": "@shadcn-angular/sheet", "selector": "SheetFooter", "selectorType": "element", "standalone": true },
-    { "name": "SheetTitle", "package": "@shadcn-angular/sheet", "selector": "SheetTitle", "selectorType": "element", "standalone": true },
-    { "name": "SheetDescription", "package": "@shadcn-angular/sheet", "selector": "SheetDescription", "selectorType": "element", "standalone": true },
-    { "name": "SheetClose", "package": "@shadcn-angular/sheet", "selector": "SheetClose", "selectorType": "element", "standalone": true },
-    { "name": "Skeleton", "package": "@shadcn-angular/skeleton", "selector": "Skeleton", "selectorType": "element", "standalone": true },
-    { "name": "Slider", "package": "@shadcn-angular/slider", "selector": "Slider", "selectorType": "element", "standalone": true },
-    { "name": "Sonner", "package": "@shadcn-angular/sonner", "selector": "Sonner", "selectorType": "element", "standalone": true },
-    { "name": "Switch", "package": "@shadcn-angular/switch", "selector": "Switch", "selectorType": "element", "standalone": true },
-    { "name": "Table", "package": "@shadcn-angular/table", "selector": "Table", "selectorType": "element", "standalone": true },
-    { "name": "TableHeader", "package": "@shadcn-angular/table", "selector": "TableHeader", "selectorType": "element", "standalone": true },
-    { "name": "TableBody", "package": "@shadcn-angular/table", "selector": "TableBody", "selectorType": "element", "standalone": true },
-    { "name": "TableFooter", "package": "@shadcn-angular/table", "selector": "TableFooter", "selectorType": "element", "standalone": true },
-    { "name": "TableRow", "package": "@shadcn-angular/table", "selector": "TableRow", "selectorType": "element", "standalone": true },
-    { "name": "TableHead", "package": "@shadcn-angular/table", "selector": "TableHead", "selectorType": "element", "standalone": true },
-    { "name": "TableCell", "package": "@shadcn-angular/table", "selector": "TableCell", "selectorType": "element", "standalone": true },
-    { "name": "TableCaption", "package": "@shadcn-angular/table", "selector": "TableCaption", "selectorType": "element", "standalone": true },
-    { "name": "Tabs", "package": "@shadcn-angular/tabs", "selector": "Tabs", "selectorType": "element", "standalone": true },
-    { "name": "TabsList", "package": "@shadcn-angular/tabs", "selector": "TabsList", "selectorType": "element", "standalone": true },
-    { "name": "TabsTrigger", "package": "@shadcn-angular/tabs", "selector": "TabsTrigger", "selectorType": "element", "standalone": true },
-    { "name": "TabsContent", "package": "@shadcn-angular/tabs", "selector": "TabsContent", "selectorType": "element", "standalone": true },
-    { "name": "Textarea", "package": "@shadcn-angular/textarea", "selector": "Textarea", "selectorType": "element", "standalone": true },
-    { "name": "Toast", "package": "@shadcn-angular/toast", "selector": "Toast", "selectorType": "element", "standalone": true },
-    { "name": "ToastAction", "package": "@shadcn-angular/toast", "selector": "ToastAction", "selectorType": "element", "standalone": true },
-    { "name": "ToastClose", "package": "@shadcn-angular/toast", "selector": "ToastClose", "selectorType": "element", "standalone": true },
-    { "name": "ToastDescription", "package": "@shadcn-angular/toast", "selector": "ToastDescription", "selectorType": "element", "standalone": true },
-    { "name": "ToastProvider", "package": "@shadcn-angular/toast", "selector": "ToastProvider", "selectorType": "element", "standalone": true },
-    { "name": "ToastTitle", "package": "@shadcn-angular/toast", "selector": "ToastTitle", "selectorType": "element", "standalone": true },
-    { "name": "ToastViewport", "package": "@shadcn-angular/toast", "selector": "ToastViewport", "selectorType": "element", "standalone": true },
-    { "name": "Toaster", "package": "@shadcn-angular/toast", "selector": "Toaster", "selectorType": "element", "standalone": true },
-    { "name": "Toggle", "package": "@shadcn-angular/toggle", "selector": "Toggle", "selectorType": "element", "standalone": true },
-    { "name": "ToggleGroup", "package": "@shadcn-angular/toggle-group", "selector": "ToggleGroup", "selectorType": "element", "standalone": true },
-    { "name": "ToggleGroupItem", "package": "@shadcn-angular/toggle-group", "selector": "ToggleGroupItem", "selectorType": "element", "standalone": true },
-    { "name": "Tooltip", "package": "@shadcn-angular/tooltip", "selector": "Tooltip", "selectorType": "element", "standalone": true },
-    { "name": "TooltipTrigger", "package": "@shadcn-angular/tooltip", "selector": "TooltipTrigger", "selectorType": "element", "standalone": true },
-    { "name": "TooltipContent", "package": "@shadcn-angular/tooltip", "selector": "TooltipContent", "selectorType": "element", "standalone": true },
-    { "name": "TooltipProvider", "package": "@shadcn-angular/tooltip", "selector": "TooltipProvider", "selectorType": "element", "standalone": true }
+    {
+      "name": "Accordion",
+      "package": "@shadcn-angular/accordion",
+      "selector": "Accordion",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AccordionItem",
+      "package": "@shadcn-angular/accordion",
+      "selector": "AccordionItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AccordionTrigger",
+      "package": "@shadcn-angular/accordion",
+      "selector": "AccordionTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AccordionContent",
+      "package": "@shadcn-angular/accordion",
+      "selector": "AccordionContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Alert",
+      "package": "@shadcn-angular/alert",
+      "selector": "Alert",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertTitle",
+      "package": "@shadcn-angular/alert",
+      "selector": "AlertTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDescription",
+      "package": "@shadcn-angular/alert",
+      "selector": "AlertDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialog",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialog",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogTrigger",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogContent",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogHeader",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogFooter",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogTitle",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogDescription",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogAction",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogAction",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AlertDialogCancel",
+      "package": "@shadcn-angular/alert-dialog",
+      "selector": "AlertDialogCancel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AspectRatio",
+      "package": "@shadcn-angular/aspect-ratio",
+      "selector": "AspectRatio",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Avatar",
+      "package": "@shadcn-angular/avatar",
+      "selector": "Avatar",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AvatarImage",
+      "package": "@shadcn-angular/avatar",
+      "selector": "AvatarImage",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "AvatarFallback",
+      "package": "@shadcn-angular/avatar",
+      "selector": "AvatarFallback",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Badge",
+      "package": "@shadcn-angular/badge",
+      "selector": "Badge",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Breadcrumb",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "Breadcrumb",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbList",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbList",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbItem",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbLink",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbLink",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbPage",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbPage",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbSeparator",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "BreadcrumbEllipsis",
+      "package": "@shadcn-angular/breadcrumb",
+      "selector": "BreadcrumbEllipsis",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Button",
+      "package": "@shadcn-angular/button",
+      "selector": "Button",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Calendar",
+      "package": "@shadcn-angular/calendar",
+      "selector": "Calendar",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Card",
+      "package": "@shadcn-angular/card",
+      "selector": "Card",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CardHeader",
+      "package": "@shadcn-angular/card",
+      "selector": "CardHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CardTitle",
+      "package": "@shadcn-angular/card",
+      "selector": "CardTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CardDescription",
+      "package": "@shadcn-angular/card",
+      "selector": "CardDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CardContent",
+      "package": "@shadcn-angular/card",
+      "selector": "CardContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CardFooter",
+      "package": "@shadcn-angular/card",
+      "selector": "CardFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Carousel",
+      "package": "@shadcn-angular/carousel",
+      "selector": "Carousel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CarouselContent",
+      "package": "@shadcn-angular/carousel",
+      "selector": "CarouselContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CarouselItem",
+      "package": "@shadcn-angular/carousel",
+      "selector": "CarouselItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CarouselPrevious",
+      "package": "@shadcn-angular/carousel",
+      "selector": "CarouselPrevious",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CarouselNext",
+      "package": "@shadcn-angular/carousel",
+      "selector": "CarouselNext",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Checkbox",
+      "package": "@shadcn-angular/checkbox",
+      "selector": "Checkbox",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Collapsible",
+      "package": "@shadcn-angular/collapsible",
+      "selector": "Collapsible",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CollapsibleTrigger",
+      "package": "@shadcn-angular/collapsible",
+      "selector": "CollapsibleTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CollapsibleContent",
+      "package": "@shadcn-angular/collapsible",
+      "selector": "CollapsibleContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Command",
+      "package": "@shadcn-angular/command",
+      "selector": "Command",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandInput",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandInput",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandList",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandList",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandEmpty",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandEmpty",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandGroup",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandItem",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandShortcut",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandShortcut",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "CommandSeparator",
+      "package": "@shadcn-angular/command",
+      "selector": "CommandSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenu",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenu",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuTrigger",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuContent",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuItem",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuCheckboxItem",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuCheckboxItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuRadioGroup",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuRadioGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuRadioItem",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuRadioItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuLabel",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuLabel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuSeparator",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuShortcut",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuShortcut",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuSub",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuSub",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuSubTrigger",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuSubTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ContextMenuSubContent",
+      "package": "@shadcn-angular/context-menu",
+      "selector": "ContextMenuSubContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DatePicker",
+      "package": "@shadcn-angular/date-picker",
+      "selector": "DatePicker",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Dialog",
+      "package": "@shadcn-angular/dialog",
+      "selector": "Dialog",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogTrigger",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogContent",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogHeader",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogFooter",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogTitle",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogDescription",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DialogClose",
+      "package": "@shadcn-angular/dialog",
+      "selector": "DialogClose",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Drawer",
+      "package": "@shadcn-angular/drawer",
+      "selector": "Drawer",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerTrigger",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerContent",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerHeader",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerFooter",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerTitle",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerDescription",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DrawerClose",
+      "package": "@shadcn-angular/drawer",
+      "selector": "DrawerClose",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenu",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenu",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuTrigger",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuContent",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuItem",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuCheckboxItem",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuCheckboxItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuRadioGroup",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuRadioGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuRadioItem",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuRadioItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuLabel",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuLabel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuSeparator",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuShortcut",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuShortcut",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuGroup",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuSub",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuSub",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuSubTrigger",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuSubTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "DropdownMenuSubContent",
+      "package": "@shadcn-angular/dropdown-menu",
+      "selector": "DropdownMenuSubContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Form",
+      "package": "@shadcn-angular/form",
+      "selector": "Form",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormField",
+      "package": "@shadcn-angular/form",
+      "selector": "FormField",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormItem",
+      "package": "@shadcn-angular/form",
+      "selector": "FormItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormLabel",
+      "package": "@shadcn-angular/form",
+      "selector": "FormLabel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormControl",
+      "package": "@shadcn-angular/form",
+      "selector": "FormControl",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormDescription",
+      "package": "@shadcn-angular/form",
+      "selector": "FormDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "FormMessage",
+      "package": "@shadcn-angular/form",
+      "selector": "FormMessage",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "HoverCard",
+      "package": "@shadcn-angular/hover-card",
+      "selector": "HoverCard",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "HoverCardTrigger",
+      "package": "@shadcn-angular/hover-card",
+      "selector": "HoverCardTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "HoverCardContent",
+      "package": "@shadcn-angular/hover-card",
+      "selector": "HoverCardContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Input",
+      "package": "@shadcn-angular/input",
+      "selector": "Input",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "InputOTP",
+      "package": "@shadcn-angular/input-otp",
+      "selector": "InputOTP",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "InputOTPGroup",
+      "package": "@shadcn-angular/input-otp",
+      "selector": "InputOTPGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "InputOTPSlot",
+      "package": "@shadcn-angular/input-otp",
+      "selector": "InputOTPSlot",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "InputOTPSeparator",
+      "package": "@shadcn-angular/input-otp",
+      "selector": "InputOTPSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Label",
+      "package": "@shadcn-angular/label",
+      "selector": "Label",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Menubar",
+      "package": "@shadcn-angular/menubar",
+      "selector": "Menubar",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarMenu",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarMenu",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarTrigger",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarContent",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarItem",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarSeparator",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarLabel",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarLabel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarCheckboxItem",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarCheckboxItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarRadioGroup",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarRadioGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarRadioItem",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarRadioItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarSub",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarSub",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarSubTrigger",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarSubTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarSubContent",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarSubContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "MenubarShortcut",
+      "package": "@shadcn-angular/menubar",
+      "selector": "MenubarShortcut",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenu",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenu",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuList",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuList",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuItem",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuTrigger",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuContent",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuLink",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuLink",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuIndicator",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuIndicator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "NavigationMenuViewport",
+      "package": "@shadcn-angular/navigation-menu",
+      "selector": "NavigationMenuViewport",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Pagination",
+      "package": "@shadcn-angular/pagination",
+      "selector": "Pagination",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationContent",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationItem",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationLink",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationLink",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationPrevious",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationPrevious",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationNext",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationNext",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PaginationEllipsis",
+      "package": "@shadcn-angular/pagination",
+      "selector": "PaginationEllipsis",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Popover",
+      "package": "@shadcn-angular/popover",
+      "selector": "Popover",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PopoverTrigger",
+      "package": "@shadcn-angular/popover",
+      "selector": "PopoverTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PopoverContent",
+      "package": "@shadcn-angular/popover",
+      "selector": "PopoverContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "PopoverAnchor",
+      "package": "@shadcn-angular/popover",
+      "selector": "PopoverAnchor",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Progress",
+      "package": "@shadcn-angular/progress",
+      "selector": "Progress",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "RadioGroup",
+      "package": "@shadcn-angular/radio-group",
+      "selector": "RadioGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "RadioGroupItem",
+      "package": "@shadcn-angular/radio-group",
+      "selector": "RadioGroupItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ResizablePanelGroup",
+      "package": "@shadcn-angular/resizable",
+      "selector": "ResizablePanelGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ResizablePanel",
+      "package": "@shadcn-angular/resizable",
+      "selector": "ResizablePanel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ResizableHandle",
+      "package": "@shadcn-angular/resizable",
+      "selector": "ResizableHandle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ScrollArea",
+      "package": "@shadcn-angular/scroll-area",
+      "selector": "ScrollArea",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ScrollBar",
+      "package": "@shadcn-angular/scroll-area",
+      "selector": "ScrollBar",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Select",
+      "package": "@shadcn-angular/select",
+      "selector": "Select",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectTrigger",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectValue",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectValue",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectContent",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectGroup",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectItem",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectLabel",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectLabel",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SelectSeparator",
+      "package": "@shadcn-angular/select",
+      "selector": "SelectSeparator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Separator",
+      "package": "@shadcn-angular/separator",
+      "selector": "Separator",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Sheet",
+      "package": "@shadcn-angular/sheet",
+      "selector": "Sheet",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetTrigger",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetContent",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetHeader",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetFooter",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetTitle",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetDescription",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "SheetClose",
+      "package": "@shadcn-angular/sheet",
+      "selector": "SheetClose",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Skeleton",
+      "package": "@shadcn-angular/skeleton",
+      "selector": "Skeleton",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Slider",
+      "package": "@shadcn-angular/slider",
+      "selector": "Slider",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Sonner",
+      "package": "@shadcn-angular/sonner",
+      "selector": "Sonner",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Switch",
+      "package": "@shadcn-angular/switch",
+      "selector": "Switch",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Table",
+      "package": "@shadcn-angular/table",
+      "selector": "Table",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableHeader",
+      "package": "@shadcn-angular/table",
+      "selector": "TableHeader",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableBody",
+      "package": "@shadcn-angular/table",
+      "selector": "TableBody",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableFooter",
+      "package": "@shadcn-angular/table",
+      "selector": "TableFooter",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableRow",
+      "package": "@shadcn-angular/table",
+      "selector": "TableRow",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableHead",
+      "package": "@shadcn-angular/table",
+      "selector": "TableHead",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableCell",
+      "package": "@shadcn-angular/table",
+      "selector": "TableCell",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TableCaption",
+      "package": "@shadcn-angular/table",
+      "selector": "TableCaption",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Tabs",
+      "package": "@shadcn-angular/tabs",
+      "selector": "Tabs",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TabsList",
+      "package": "@shadcn-angular/tabs",
+      "selector": "TabsList",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TabsTrigger",
+      "package": "@shadcn-angular/tabs",
+      "selector": "TabsTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TabsContent",
+      "package": "@shadcn-angular/tabs",
+      "selector": "TabsContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Textarea",
+      "package": "@shadcn-angular/textarea",
+      "selector": "Textarea",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Toast",
+      "package": "@shadcn-angular/toast",
+      "selector": "Toast",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastAction",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastAction",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastClose",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastClose",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastDescription",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastDescription",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastProvider",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastProvider",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastTitle",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastTitle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToastViewport",
+      "package": "@shadcn-angular/toast",
+      "selector": "ToastViewport",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Toaster",
+      "package": "@shadcn-angular/toast",
+      "selector": "Toaster",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Toggle",
+      "package": "@shadcn-angular/toggle",
+      "selector": "Toggle",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToggleGroup",
+      "package": "@shadcn-angular/toggle-group",
+      "selector": "ToggleGroup",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "ToggleGroupItem",
+      "package": "@shadcn-angular/toggle-group",
+      "selector": "ToggleGroupItem",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "Tooltip",
+      "package": "@shadcn-angular/tooltip",
+      "selector": "Tooltip",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TooltipTrigger",
+      "package": "@shadcn-angular/tooltip",
+      "selector": "TooltipTrigger",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TooltipContent",
+      "package": "@shadcn-angular/tooltip",
+      "selector": "TooltipContent",
+      "selectorType": "element",
+      "standalone": true
+    },
+    {
+      "name": "TooltipProvider",
+      "package": "@shadcn-angular/tooltip",
+      "selector": "TooltipProvider",
+      "selectorType": "element",
+      "standalone": true
+    }
   ],
   "compat": {
     "tweakCn": true,
@@ -252,7 +1470,15 @@
       "name": "DataTable",
       "package": "@shadcn-angular/blocks",
       "description": "Advanced data table with sorting, filtering, and pagination",
-      "components": ["Table", "Button", "DropdownMenu", "Checkbox", "Input", "Select", "Pagination"],
+      "components": [
+        "Table",
+        "Button",
+        "DropdownMenu",
+        "Checkbox",
+        "Input",
+        "Select",
+        "Pagination"
+      ],
       "variants": ["default", "compact", "expandable"]
     },
     {
@@ -331,6 +1557,19 @@
     "darkMode": true,
     "cssVariables": true,
     "colorFormat": "oklch",
-    "availableThemes": ["neutral", "zinc", "slate", "stone", "gray", "red", "rose", "orange", "green", "blue", "yellow", "violet"]
+    "availableThemes": [
+      "neutral",
+      "zinc",
+      "slate",
+      "stone",
+      "gray",
+      "red",
+      "rose",
+      "orange",
+      "green",
+      "blue",
+      "yellow",
+      "violet"
+    ]
   }
 }

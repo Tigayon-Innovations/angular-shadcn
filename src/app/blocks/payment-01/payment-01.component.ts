@@ -9,9 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <!-- Header -->
         <div class="mb-8">
           <h2 class="mb-2 text-2xl font-bold">Payment Details</h2>
-          <p class="text-sm text-muted-foreground">
-            Complete your purchase securely
-          </p>
+          <p class="text-sm text-muted-foreground">Complete your purchase securely</p>
         </div>
 
         <!-- Order Summary -->
@@ -40,9 +38,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             <h3 class="mb-4 font-semibold">Card Information</h3>
             <div class="space-y-4">
               <div>
-                <label class="mb-2 block text-sm font-medium">
-                  Card Number
-                </label>
+                <label class="mb-2 block text-sm font-medium"> Card Number </label>
                 <input
                   type="text"
                   placeholder="1234 5678 9012 3456"
@@ -51,9 +47,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
               </div>
               <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label class="mb-2 block text-sm font-medium">
-                    Expiry Date
-                  </label>
+                  <label class="mb-2 block text-sm font-medium"> Expiry Date </label>
                   <input
                     type="text"
                     placeholder="MM/YY"
@@ -77,9 +71,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             <h3 class="mb-4 font-semibold">Billing Information</h3>
             <div class="space-y-4">
               <div>
-                <label class="mb-2 block text-sm font-medium">
-                  Cardholder Name
-                </label>
+                <label class="mb-2 block text-sm font-medium"> Cardholder Name </label>
                 <input
                   type="text"
                   placeholder="John Doe"
@@ -115,9 +107,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                   />
                 </div>
                 <div>
-                  <label class="mb-2 block text-sm font-medium">
-                    Postal Code
-                  </label>
+                  <label class="mb-2 block text-sm font-medium"> Postal Code </label>
                   <input
                     type="text"
                     placeholder="94102"
@@ -133,12 +123,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             <input type="checkbox" class="mt-1 h-4 w-4" id="terms" />
             <label for="terms" class="text-sm text-muted-foreground">
               I agree to the
-              <a href="#" class="text-primary hover:underline"
-                >Terms of Service</a
-              >
+              <a href="#" class="text-primary hover:underline">Terms of Service</a>
               and
-              <a href="#" class="text-primary hover:underline">Privacy Policy</a
-              >
+              <a href="#" class="text-primary hover:underline">Privacy Policy</a>
             </label>
           </div>
 

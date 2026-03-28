@@ -8,7 +8,8 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
   {
     name: 'Button',
     slug: 'button',
-    description: 'Displays a button or a component that looks like a button. Supports multiple variants, sizes, and states.',
+    description:
+      'Displays a button or a component that looks like a button. Supports multiple variants, sizes, and states.',
     category: 'form',
     package: '@ng-cn/button',
     imports: ['Button', 'buttonVariants'],
@@ -128,12 +129,37 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'variant', type: "'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'", default: "'default'", description: 'The visual style of the button.' },
-      { name: 'size', type: "'default' | 'sm' | 'lg' | 'icon'", default: "'default'", description: 'The size of the button.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the button is disabled.' },
-      { name: 'asChild', type: 'boolean', default: 'false', description: 'Render as child element, passing props to the child.' },
+      {
+        name: 'variant',
+        type: "'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'",
+        default: "'default'",
+        description: 'The visual style of the button.',
+      },
+      {
+        name: 'size',
+        type: "'default' | 'sm' | 'lg' | 'icon'",
+        default: "'default'",
+        description: 'The size of the button.',
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the button is disabled.',
+      },
+      {
+        name: 'asChild',
+        type: 'boolean',
+        default: 'false',
+        description: 'Render as child element, passing props to the child.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-      { name: 'type', type: "'button' | 'submit' | 'reset'", default: "'button'", description: 'The button type attribute.' },
+      {
+        name: 'type',
+        type: "'button' | 'submit' | 'reset'",
+        default: "'button'",
+        description: 'The button type attribute.',
+      },
     ],
   },
   {
@@ -160,8 +186,18 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'checked', type: 'boolean', default: 'false', description: 'Whether the checkbox is checked.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the checkbox is disabled.' },
+      {
+        name: 'checked',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the checkbox is checked.',
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the checkbox is disabled.',
+      },
       { name: 'id', type: 'string', description: 'The id of the checkbox.' },
     ],
   },
@@ -189,7 +225,11 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     ],
     props: [
       { name: 'value', type: 'string', description: 'The selected value.' },
-      { name: 'placeholder', type: 'string', description: 'Placeholder text when no option is selected.' },
+      {
+        name: 'placeholder',
+        type: 'string',
+        description: 'Placeholder text when no option is selected.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -208,14 +248,20 @@ export const FORM_COMPONENTS: ComponentInfo[] = [
     ],
     props: [
       { name: 'date', type: 'Date', description: 'The selected date.' },
-      { name: 'placeholder', type: 'string', default: "'Pick a date'", description: 'Placeholder text.' },
+      {
+        name: 'placeholder',
+        type: 'string',
+        default: "'Pick a date'",
+        description: 'Placeholder text.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
   {
     name: 'Form',
     slug: 'form',
-    description: 'Building forms with Angular Reactive Forms. Provides form field components with built-in validation, error messages, and accessibility.',
+    description:
+      'Building forms with Angular Reactive Forms. Provides form field components with built-in validation, error messages, and accessibility.',
     category: 'form',
     package: '@ng-cn/form',
     imports: ['FormField', 'FormLabel', 'FormControl', 'FormDescription', 'FormMessage'],
@@ -449,15 +495,31 @@ async onSubmit() {
       },
     ],
     props: [
-      { name: 'formGroup', type: 'FormGroup', description: 'The reactive form group.', component: 'Form' },
-      { name: 'htmlFor', type: 'string', description: 'Associates label with form control.', component: 'FormLabel' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes.', component: 'FormField' },
+      {
+        name: 'formGroup',
+        type: 'FormGroup',
+        description: 'The reactive form group.',
+        component: 'Form',
+      },
+      {
+        name: 'htmlFor',
+        type: 'string',
+        description: 'Associates label with form control.',
+        component: 'FormLabel',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes.',
+        component: 'FormField',
+      },
     ],
   },
   {
     name: 'Input',
     slug: 'input',
-    description: 'Displays a form input field. Supports various types, states, and integrates with Angular forms.',
+    description:
+      'Displays a form input field. Supports various types, states, and integrates with Angular forms.',
     category: 'form',
     package: '@ng-cn/input',
     imports: ['Input'],
@@ -622,13 +684,28 @@ form = new FormGroup({
     props: [
       { name: 'type', type: 'string', default: "'text'", description: 'The HTML input type.' },
       { name: 'placeholder', type: 'string', description: 'Placeholder text.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the input is disabled.' },
-      { name: 'readonly', type: 'boolean', default: 'false', description: 'Whether the input is read-only.' },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the input is disabled.',
+      },
+      {
+        name: 'readonly',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the input is read-only.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes.' },
       { name: 'id', type: 'string', description: 'The input id for label association.' },
       { name: 'name', type: 'string', description: 'The input name attribute.' },
       { name: 'value', type: 'string', description: 'The input value.' },
-      { name: 'required', type: 'boolean', default: 'false', description: 'Whether the input is required.' },
+      {
+        name: 'required',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the input is required.',
+      },
     ],
   },
   {
@@ -664,7 +741,8 @@ form = new FormGroup({
   {
     name: 'Label',
     slug: 'label',
-    description: 'Renders an accessible label associated with form controls. Essential for form accessibility and usability.',
+    description:
+      'Renders an accessible label associated with form controls. Essential for form accessibility and usability.',
     category: 'form',
     package: '@ng-cn/label',
     imports: ['Label'],
@@ -794,7 +872,11 @@ form = new FormGroup({
     ],
     props: [
       { name: 'value', type: 'string', description: 'The controlled value of the radio group.' },
-      { name: 'defaultValue', type: 'string', description: 'The value of the radio item that should be checked by default.' },
+      {
+        name: 'defaultValue',
+        type: 'string',
+        description: 'The value of the radio item that should be checked by default.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -804,7 +886,15 @@ form = new FormGroup({
     description: 'Displays a list of options for the user to pick from.',
     category: 'form',
     package: '@ng-cn/select',
-    imports: ['Select', 'SelectTrigger', 'SelectValue', 'SelectContent', 'SelectItem', 'SelectGroup', 'SelectLabel'],
+    imports: [
+      'Select',
+      'SelectTrigger',
+      'SelectValue',
+      'SelectContent',
+      'SelectItem',
+      'SelectGroup',
+      'SelectLabel',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -885,8 +975,18 @@ form = new FormGroup({
       },
     ],
     props: [
-      { name: 'checked', type: 'boolean', default: 'false', description: 'Whether the switch is checked.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the switch is disabled.' },
+      {
+        name: 'checked',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the switch is checked.',
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the switch is disabled.',
+      },
       { name: 'id', type: 'string', description: 'The id of the switch.' },
     ],
   },
@@ -912,7 +1012,12 @@ form = new FormGroup({
     ],
     props: [
       { name: 'placeholder', type: 'string', description: 'Placeholder text.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the textarea is disabled.' },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the textarea is disabled.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -945,9 +1050,24 @@ form = new FormGroup({
       },
     ],
     props: [
-      { name: 'variant', type: "'default' | 'outline'", default: "'default'", description: 'The visual style of the toggle.' },
-      { name: 'size', type: "'default' | 'sm' | 'lg'", default: "'default'", description: 'The size of the toggle.' },
-      { name: 'pressed', type: 'boolean', default: 'false', description: 'Whether the toggle is pressed.' },
+      {
+        name: 'variant',
+        type: "'default' | 'outline'",
+        default: "'default'",
+        description: 'The visual style of the toggle.',
+      },
+      {
+        name: 'size',
+        type: "'default' | 'sm' | 'lg'",
+        default: "'default'",
+        description: 'The size of the toggle.',
+      },
+      {
+        name: 'pressed',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the toggle is pressed.',
+      },
     ],
   },
   {
@@ -974,8 +1094,17 @@ form = new FormGroup({
       },
     ],
     props: [
-      { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Whether one or multiple items can be pressed.' },
-      { name: 'value', type: 'string | string[]', description: 'The controlled value of the toggle group.' },
+      {
+        name: 'type',
+        type: "'single' | 'multiple'",
+        default: "'single'",
+        description: 'Whether one or multiple items can be pressed.',
+      },
+      {
+        name: 'value',
+        type: 'string | string[]',
+        description: 'The controlled value of the toggle group.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },

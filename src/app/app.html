@@ -29,7 +29,9 @@
       <Card class="lg:col-span-2">
         <CardHeader>
           <CardTitle>Tabs</CardTitle>
-          <CardDescription>A set of layered sections of content—known as tab panels.</CardDescription>
+          <CardDescription
+            >A set of layered sections of content—known as tab panels.</CardDescription
+          >
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="account" class="w-full">
@@ -81,7 +83,9 @@
           </Tabs>
         </CardContent>
         <CardFooter class="text-sm text-muted-foreground">
-          <code class="bg-muted px-1 rounded">&lt;Tabs defaultValue="account"&gt;...&lt;/Tabs&gt;</code>
+          <code class="bg-muted px-1 rounded"
+            >&lt;Tabs defaultValue="account"&gt;...&lt;/Tabs&gt;</code
+          >
         </CardFooter>
       </Card>
 
@@ -89,15 +93,17 @@
       <Card>
         <CardHeader>
           <CardTitle>Collapsible</CardTitle>
-          <CardDescription>An interactive component which expands/collapses a panel.</CardDescription>
+          <CardDescription
+            >An interactive component which expands/collapses a panel.</CardDescription
+          >
         </CardHeader>
         <CardContent>
           <Collapsible [(open)]="collapsibleOpen" class="w-full space-y-2">
             <div class="flex items-center justify-between space-x-4 px-4">
-              <h4 class="text-sm font-semibold">
-                &#64;peduarte starred 3 repositories
-              </h4>
-              <CollapsibleTrigger class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9">
+              <h4 class="text-sm font-semibold">&#64;peduarte starred 3 repositories</h4>
+              <CollapsibleTrigger
+                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9"
+              >
                 <lucide-icon [img]="icons.ChevronsUpDown" class="size-4" />
                 <span class="sr-only">Toggle</span>
               </CollapsibleTrigger>
@@ -132,9 +138,8 @@
               <AccordionTrigger>Product Information</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance">
                 <p>
-                  Our flagship product combines cutting-edge technology with sleek
-                  design. Built with premium materials, it offers unparalleled
-                  performance and reliability.
+                  Our flagship product combines cutting-edge technology with sleek design. Built
+                  with premium materials, it offers unparalleled performance and reliability.
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -142,24 +147,23 @@
               <AccordionTrigger>Shipping Details</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance">
                 <p>
-                  We offer worldwide shipping through trusted courier partners.
-                  Standard delivery takes 3-5 business days.
+                  We offer worldwide shipping through trusted courier partners. Standard delivery
+                  takes 3-5 business days.
                 </p>
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>Return Policy</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance">
-                <p>
-                  We stand behind our products with a comprehensive 30-day return
-                  policy.
-                </p>
+                <p>We stand behind our products with a comprehensive 30-day return policy.</p>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </CardContent>
         <CardFooter class="text-sm text-muted-foreground">
-          <code class="bg-muted px-1 rounded">&lt;Accordion type="single" collapsible&gt;...&lt;/Accordion&gt;</code>
+          <code class="bg-muted px-1 rounded"
+            >&lt;Accordion type="single" collapsible&gt;...&lt;/Accordion&gt;</code
+          >
         </CardFooter>
       </Card>
 
@@ -167,7 +171,9 @@
       <Card>
         <CardHeader>
           <CardTitle>Button</CardTitle>
-          <CardDescription>Displays a button or a component that looks like a button.</CardDescription>
+          <CardDescription
+            >Displays a button or a component that looks like a button.</CardDescription
+          >
         </CardHeader>
         <CardContent class="flex flex-wrap gap-3">
           <Button>Default</Button>
@@ -178,7 +184,9 @@
           <Button variant="link">Link</Button>
         </CardContent>
         <CardFooter class="text-sm text-muted-foreground">
-          <code class="bg-muted px-1 rounded">&lt;Button variant="default"&gt;Click&lt;/Button&gt;</code>
+          <code class="bg-muted px-1 rounded"
+            >&lt;Button variant="default"&gt;Click&lt;/Button&gt;</code
+          >
         </CardFooter>
       </Card>
 
@@ -202,7 +210,9 @@
       <Card>
         <CardHeader>
           <CardTitle>Badge</CardTitle>
-          <CardDescription>Displays a badge or a component that looks like a badge.</CardDescription>
+          <CardDescription
+            >Displays a badge or a component that looks like a badge.</CardDescription
+          >
         </CardHeader>
         <CardContent class="flex flex-wrap gap-3">
           <Badge>Default</Badge>
@@ -266,7 +276,9 @@
       <Card>
         <CardHeader>
           <CardTitle>Avatar</CardTitle>
-          <CardDescription>An image element with a fallback for representing the user.</CardDescription>
+          <CardDescription
+            >An image element with a fallback for representing the user.</CardDescription
+          >
         </CardHeader>
         <CardContent class="flex gap-4">
           <Avatar>

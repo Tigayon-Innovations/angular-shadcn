@@ -47,8 +47,7 @@ export const TOOLTIP_DOCUMENTATION: ComponentDocumentation = {
   apiReference: [
     {
       name: 'Provider',
-      description:
-        'Wraps your app to provide global functionality to your tooltips.',
+      description: 'Wraps your app to provide global functionality to your tooltips.',
       props: [
         {
           name: 'delayDuration',
@@ -93,8 +92,7 @@ export const TOOLTIP_DOCUMENTATION: ComponentDocumentation = {
           name: 'delayDuration',
           type: 'number',
           default: '700',
-          description:
-            'Override the provider delay duration for this tooltip.',
+          description: 'Override the provider delay duration for this tooltip.',
         },
         {
           name: 'disableHoverableContent',
@@ -127,9 +125,7 @@ export const TOOLTIP_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-state]', values: '"open" | "closed"' },
-      ],
+      dataAttributes: [{ name: '[data-state]', values: '"open" | "closed"' }],
     },
     {
       name: 'Content',
@@ -139,8 +135,7 @@ export const TOOLTIP_DOCUMENTATION: ComponentDocumentation = {
           name: 'side',
           type: "'top' | 'right' | 'bottom' | 'left'",
           default: "'top'",
-          description:
-            'The preferred side of the trigger to render against when open.',
+          description: 'The preferred side of the trigger to render against when open.',
         },
         {
           name: 'sideOffset',

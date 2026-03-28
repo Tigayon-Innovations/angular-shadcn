@@ -17,7 +17,9 @@ import { RouterOutlet } from '@angular/router';
 
       <!-- Main content with its own scroll -->
       <main class="flex-1 overflow-y-auto">
-        <div class="container mx-auto py-6 px-4 lg:py-8 lg:px-6 xl:grid xl:grid-cols-[1fr_200px] xl:gap-10">
+        <div
+          class="container mx-auto py-6 px-4 lg:py-8 lg:px-6 xl:grid xl:grid-cols-[1fr_200px] xl:gap-10"
+        >
           <div class="mx-auto w-full min-w-0 max-w-4xl">
             <router-outlet />
           </div>

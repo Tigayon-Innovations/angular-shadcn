@@ -13,28 +13,33 @@ This file defines strict legal-safe defaults for recruitment and immigration mes
 ## Risky to Safe Rewrites
 
 Risky:
+
 - "Guaranteed visa approval."
-Safe:
+  Safe:
 - "We provide end-to-end guidance to strengthen your application."
 
 Risky:
+
 - "You will get a job in weeks."
-Safe:
+  Safe:
 - "We help connect you with suitable opportunities based on your profile."
 
 Risky:
+
 - "Fast-track immigration with no delays."
-Safe:
+  Safe:
 - "Timelines vary by case and government processing stages."
 
 Risky:
+
 - "100% success rate."
-Safe:
+  Safe:
 - "Our team follows a structured process and supports clients through each step."
 
 ## Acceptable Proof Language
 
 Use only if true and verifiable:
+
 - Named credentials or certifications.
 - Verifiable case volume ranges.
 - Publicly defensible process descriptions.
@@ -53,11 +58,13 @@ Only use these with auditable evidence and a named basis.
 ## Immigration-Sensitive Phrasing
 
 Prefer:
+
 - "Eligibility depends on your profile and applicable regulations."
 - "Final decisions are made by government authorities."
 - "We help you prepare complete documentation and avoid common mistakes."
 
 Avoid:
+
 - "Approval is easy."
 - "No risk."
 - "Guaranteed outcome."
@@ -65,6 +72,7 @@ Avoid:
 ## Reviewer Checklist
 
 Before approving copy, confirm:
+
 - No explicit or implied guarantees.
 - No unverifiable performance claims.
 - Process and timeline statements include qualifiers when required.

@@ -5,17 +5,17 @@ import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-    ArrowLeft,
-    ArrowRight,
-    Box,
-    Check,
-    FolderTree,
-    LucideAngularModule,
-    Package,
-    Palette,
-    Sparkles,
-    Terminal,
-    Zap
+  ArrowLeft,
+  ArrowRight,
+  Box,
+  Check,
+  FolderTree,
+  LucideAngularModule,
+  Package,
+  Palette,
+  Sparkles,
+  Terminal,
+  Zap,
 } from 'lucide-angular';
 
 /**
@@ -30,9 +30,7 @@ import {
       <!-- Header -->
       <div class="space-y-4 pb-8 pt-6 md:pb-10">
         <div class="space-y-2">
-          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-            Installation
-          </h1>
+          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">Installation</h1>
           <p class="text-xl text-muted-foreground leading-7">
             One command. Zero config. Start building in seconds.
           </p>
@@ -43,10 +41,11 @@ import {
 
       <!-- Content -->
       <div class="space-y-12">
-
         <!-- ✨ MAGIC INSTALLATION -->
         <section class="scroll-mt-20" id="magic-installation">
-          <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 relative overflow-hidden">
+          <div
+            class="rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 relative overflow-hidden"
+          >
             <!-- Sparkle decoration -->
             <div class="absolute top-4 right-4 opacity-20">
               <lucide-icon [img]="icons.Sparkles" class="h-24 w-24 text-primary" />
@@ -54,22 +53,24 @@ import {
 
             <div class="space-y-6 relative">
               <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg"
+                >
                   <lucide-icon [img]="icons.Sparkles" class="h-6 w-6" />
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
                     <h2 class="text-2xl font-bold">Magic Installation</h2>
-                    <span class="rounded-full bg-primary/20 px-2 py-0.5 text-xs font-medium text-primary">Recommended</span>
+                    <span
+                      class="rounded-full bg-primary/20 px-2 py-0.5 text-xs font-medium text-primary"
+                      >Recommended</span
+                    >
                   </div>
                   <p class="text-sm text-muted-foreground">Everything you need in one command</p>
                 </div>
               </div>
 
-              <CodeBlock
-                [code]="magicInstallCode"
-                language="bash"
-              />
+              <CodeBlock [code]="magicInstallCode" language="bash" />
 
               <div class="rounded-lg border bg-card p-4 space-y-3">
                 <p class="text-sm font-semibold flex items-center gap-2">
@@ -99,15 +100,17 @@ import {
                 </div>
                 <div>
                   <h2 class="text-2xl font-bold">Quick Start</h2>
-                  <p class="text-sm text-muted-foreground">Set up core utilities, add components as needed</p>
+                  <p class="text-sm text-muted-foreground">
+                    Set up core utilities, add components as needed
+                  </p>
                 </div>
               </div>
-              <CodeBlock
-                [code]="quickStartCode"
-                language="bash"
-              />
+              <CodeBlock [code]="quickStartCode" language="bash" />
               <p class="text-sm text-muted-foreground">
-                Then add components individually with <code class="bg-muted px-1.5 py-0.5 rounded">ng g &#64;ng-cn/core:c &lt;name&gt;</code>
+                Then add components individually with
+                <code class="bg-muted px-1.5 py-0.5 rounded"
+                  >ng g &#64;ng-cn/core:c &lt;name&gt;</code
+                >
               </p>
             </div>
           </div>
@@ -128,21 +131,22 @@ import {
 
             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               @for (theme of availableThemes; track theme.name) {
-                <div class="rounded-lg border bg-card p-4 hover:border-primary/50 transition-colors">
+                <div
+                  class="rounded-lg border bg-card p-4 hover:border-primary/50 transition-colors"
+                >
                   <div class="flex items-center gap-2 mb-2">
                     <div class="h-4 w-4 rounded-full" [style.background]="theme.color"></div>
                     <span class="font-medium">{{ theme.name }}</span>
                   </div>
                   <p class="text-xs text-muted-foreground">{{ theme.description }}</p>
-                  <code class="text-xs text-muted-foreground mt-2 block">--theme={{ theme.value }}</code>
+                  <code class="text-xs text-muted-foreground mt-2 block"
+                    >--theme={{ theme.value }}</code
+                  >
                 </div>
               }
             </div>
 
-            <CodeBlock
-              [code]="themeExamplesCode"
-              language="bash"
-            />
+            <CodeBlock [code]="themeExamplesCode" language="bash" />
           </div>
         </section>
 
@@ -155,7 +159,9 @@ import {
               </div>
               <div>
                 <h2 class="text-2xl font-bold">What's in the Box</h2>
-                <p class="text-sm text-muted-foreground">Everything included with the magic install</p>
+                <p class="text-sm text-muted-foreground">
+                  Everything included with the magic install
+                </p>
               </div>
             </div>
 
@@ -197,19 +203,27 @@ import {
               <div class="grid gap-3 md:grid-cols-2">
                 <div class="space-y-1">
                   <code class="text-sm font-medium">cn()</code>
-                  <p class="text-xs text-muted-foreground">Tailwind CSS class merging utility with conflict resolution</p>
+                  <p class="text-xs text-muted-foreground">
+                    Tailwind CSS class merging utility with conflict resolution
+                  </p>
                 </div>
                 <div class="space-y-1">
                   <code class="text-sm font-medium">Animation utilities</code>
-                  <p class="text-xs text-muted-foreground">Smooth transitions with AnimatedDirective, PresenceComponent</p>
+                  <p class="text-xs text-muted-foreground">
+                    Smooth transitions with AnimatedDirective, PresenceComponent
+                  </p>
                 </div>
                 <div class="space-y-1">
                   <code class="text-sm font-medium">Accessibility utilities</code>
-                  <p class="text-xs text-muted-foreground">FocusTrap, KeyboardNavigation, LiveRegion directives</p>
+                  <p class="text-xs text-muted-foreground">
+                    FocusTrap, KeyboardNavigation, LiveRegion directives
+                  </p>
                 </div>
                 <div class="space-y-1">
                   <code class="text-sm font-medium">Positioning utilities</code>
-                  <p class="text-xs text-muted-foreground">Smart overlay positioning for popovers & dropdowns</p>
+                  <p class="text-xs text-muted-foreground">
+                    Smart overlay positioning for popovers & dropdowns
+                  </p>
                 </div>
               </div>
             </div>
@@ -228,10 +242,7 @@ import {
                 <p class="text-sm text-muted-foreground">Files added to your project</p>
               </div>
             </div>
-            <CodeBlock
-              [code]="projectStructureCode"
-              language="plaintext"
-            />
+            <CodeBlock [code]="projectStructureCode" language="plaintext" />
 
             <!-- File descriptions -->
             <div class="space-y-3">
@@ -259,10 +270,7 @@ import {
                 <p class="text-sm text-muted-foreground">Install components one at a time</p>
               </div>
             </div>
-            <CodeBlock
-              [code]="addComponentsCode"
-              language="bash"
-            />
+            <CodeBlock [code]="addComponentsCode" language="bash" />
             <div class="rounded-lg border bg-muted/30 p-4">
               <p class="text-sm font-medium mb-3">Popular components:</p>
               <div class="flex flex-wrap gap-2">
@@ -280,7 +288,10 @@ import {
           <div class="space-y-6">
             <div>
               <h2 class="text-2xl font-bold">All Available Components</h2>
-              <p class="text-sm text-muted-foreground">56+ components included with <code class="bg-muted px-1.5 py-0.5 rounded">--components=all</code></p>
+              <p class="text-sm text-muted-foreground">
+                56+ components included with
+                <code class="bg-muted px-1.5 py-0.5 rounded">--components=all</code>
+              </p>
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -315,7 +326,10 @@ import {
               <!-- Step 1 -->
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">1</span>
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
+                    >1</span
+                  >
                   <h3 class="font-semibold">Install dependencies</h3>
                 </div>
                 <CodeBlock [code]="manualDepsCode" language="bash" />
@@ -324,40 +338,62 @@ import {
               <!-- Step 2 -->
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">2</span>
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
+                    >2</span
+                  >
                   <h3 class="font-semibold">Create PostCSS config for Tailwind v4</h3>
                 </div>
-                <p class="text-sm text-muted-foreground">Create <code class="bg-muted px-1.5 py-0.5 rounded">postcss.config.mjs</code>:</p>
+                <p class="text-sm text-muted-foreground">
+                  Create <code class="bg-muted px-1.5 py-0.5 rounded">postcss.config.mjs</code>:
+                </p>
                 <CodeBlock [code]="postcssConfigCode" language="javascript" />
               </div>
 
               <!-- Step 3 -->
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">3</span>
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
+                    >3</span
+                  >
                   <h3 class="font-semibold">Create the cn utility</h3>
                 </div>
-                <p class="text-sm text-muted-foreground">Create <code class="bg-muted px-1.5 py-0.5 rounded">src/app/lib/utils/cn.ts</code>:</p>
+                <p class="text-sm text-muted-foreground">
+                  Create
+                  <code class="bg-muted px-1.5 py-0.5 rounded">src/app/lib/utils/cn.ts</code>:
+                </p>
                 <CodeBlock [code]="cnUtilityCode" language="typescript" />
               </div>
 
               <!-- Step 4 -->
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">4</span>
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
+                    >4</span
+                  >
                   <h3 class="font-semibold">Add CSS variables</h3>
                 </div>
-                <p class="text-sm text-muted-foreground">Create <code class="bg-muted px-1.5 py-0.5 rounded">src/ng-cn.scss</code> and import in your styles:</p>
+                <p class="text-sm text-muted-foreground">
+                  Create <code class="bg-muted px-1.5 py-0.5 rounded">src/ng-cn.scss</code> and
+                  import in your styles:
+                </p>
                 <CodeBlock [code]="cssVariablesCode" language="scss" />
               </div>
 
               <!-- Step 5 -->
               <div class="space-y-3">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">5</span>
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
+                    >5</span
+                  >
                   <h3 class="font-semibold">Configure path aliases</h3>
                 </div>
-                <p class="text-sm text-muted-foreground">Add to <code class="bg-muted px-1.5 py-0.5 rounded">tsconfig.json</code>:</p>
+                <p class="text-sm text-muted-foreground">
+                  Add to <code class="bg-muted px-1.5 py-0.5 rounded">tsconfig.json</code>:
+                </p>
                 <CodeBlock [code]="pathAliasesCode" language="json" />
               </div>
             </div>
@@ -366,10 +402,14 @@ import {
 
         <!-- Success -->
         <section class="scroll-mt-20">
-          <div class="rounded-xl border bg-gradient-to-br from-green-500/10 to-transparent p-8 text-center">
+          <div
+            class="rounded-xl border bg-gradient-to-br from-green-500/10 to-transparent p-8 text-center"
+          >
             <div class="space-y-4">
               <div class="flex justify-center">
-                <div class="h-12 w-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                <div
+                  class="h-12 w-12 rounded-full bg-green-500/20 flex items-center justify-center"
+                >
                   <lucide-icon [img]="icons.Check" class="h-6 w-6 text-green-600" />
                 </div>
               </div>
@@ -378,15 +418,9 @@ import {
                 Start building beautiful, accessible UIs with shadcn-angular.
               </p>
               <div class="flex flex-wrap justify-center gap-3 pt-2">
-                <Button routerLink="/docs/components" variant="default">
-                  Browse Components
-                </Button>
-                <Button routerLink="/docs/theming" variant="outline">
-                  Customize Theme
-                </Button>
-                <Button routerLink="/blocks" variant="outline">
-                  View Blocks
-                </Button>
+                <Button routerLink="/docs/components" variant="default"> Browse Components </Button>
+                <Button routerLink="/docs/theming" variant="outline"> Customize Theme </Button>
+                <Button routerLink="/blocks" variant="outline"> View Blocks </Button>
               </div>
             </div>
           </div>
@@ -411,8 +445,16 @@ export class InstallationPage {
   private readonly seo = inject(SeoService);
 
   protected readonly icons = {
-    ArrowRight, ArrowLeft, Terminal, Zap, FolderTree,
-    Package, Sparkles, Palette, Check, Box
+    ArrowRight,
+    ArrowLeft,
+    Terminal,
+    Zap,
+    FolderTree,
+    Package,
+    Sparkles,
+    Palette,
+    Check,
+    Box,
   };
 
   protected readonly magicFeatures = [
@@ -423,17 +465,47 @@ export class InstallationPage {
     'Configures TypeScript path aliases',
     'Adds accessibility utilities',
     'Sets up dark mode support',
-    'Zero manual configuration needed'
+    'Zero manual configuration needed',
   ];
 
   protected readonly availableThemes = [
-    { name: 'shadcn', value: 'shadcn', color: 'oklch(0.205 0 0)', description: 'Default clean, minimal design' },
-    { name: 'GitHub', value: 'github', color: 'oklch(0.546 0.192 262.881)', description: 'Developer-focused aesthetic' },
+    {
+      name: 'shadcn',
+      value: 'shadcn',
+      color: 'oklch(0.205 0 0)',
+      description: 'Default clean, minimal design',
+    },
+    {
+      name: 'GitHub',
+      value: 'github',
+      color: 'oklch(0.546 0.192 262.881)',
+      description: 'Developer-focused aesthetic',
+    },
     { name: 'Vercel', value: 'vercel', color: 'oklch(0 0 0)', description: 'Bold black and white' },
-    { name: 'Apple', value: 'apple', color: 'oklch(0.586 0.228 259.815)', description: 'Elegant, sophisticated' },
-    { name: 'OpenAI', value: 'openai', color: 'oklch(0.538 0.163 163.319)', description: 'Modern tech-forward' },
-    { name: 'ClickUp', value: 'clickup', color: 'oklch(0.638 0.238 288.545)', description: 'Vibrant, colorful' },
-    { name: 'Linear', value: 'linear', color: 'oklch(0.538 0.207 262.881)', description: 'Sleek, minimal' }
+    {
+      name: 'Apple',
+      value: 'apple',
+      color: 'oklch(0.586 0.228 259.815)',
+      description: 'Elegant, sophisticated',
+    },
+    {
+      name: 'OpenAI',
+      value: 'openai',
+      color: 'oklch(0.538 0.163 163.319)',
+      description: 'Modern tech-forward',
+    },
+    {
+      name: 'ClickUp',
+      value: 'clickup',
+      color: 'oklch(0.638 0.238 288.545)',
+      description: 'Vibrant, colorful',
+    },
+    {
+      name: 'Linear',
+      value: 'linear',
+      color: 'oklch(0.538 0.207 262.881)',
+      description: 'Sleek, minimal',
+    },
   ];
 
   protected readonly dependencies = [
@@ -443,50 +515,128 @@ export class InstallationPage {
     { name: 'lucide-angular', version: '^0.562.0' },
     { name: 'class-variance-authority', version: '^0.7.1' },
     { name: 'clsx', version: '^2.1.1' },
-    { name: 'tailwind-merge', version: '^3.4.0' }
+    { name: 'tailwind-merge', version: '^3.4.0' },
   ];
 
   protected readonly filesDescription = [
-    { path: 'ng-cn.scss', description: 'Theme CSS variables with light/dark mode support, base styles, and animation keyframes' },
+    {
+      path: 'ng-cn.scss',
+      description:
+        'Theme CSS variables with light/dark mode support, base styles, and animation keyframes',
+    },
     { path: 'postcss.config.mjs', description: 'PostCSS configuration for Tailwind CSS v4' },
-    { path: 'lib/utils/cn.ts', description: 'Class merging utility combining clsx and tailwind-merge' },
-    { path: 'lib/utils/animation/', description: 'Animation utilities including AnimatedDirective and PresenceComponent' },
-    { path: 'lib/utils/accessibility/', description: 'A11y utilities: FocusTrap, KeyboardNavigation, LiveRegion, VisuallyHidden' },
-    { path: 'lib/utils/positioning/', description: 'Smart overlay positioning for popovers, tooltips, and dropdowns' },
-    { path: 'lib/components/ui/', description: 'All UI components when using --components=all' }
+    {
+      path: 'lib/utils/cn.ts',
+      description: 'Class merging utility combining clsx and tailwind-merge',
+    },
+    {
+      path: 'lib/utils/animation/',
+      description: 'Animation utilities including AnimatedDirective and PresenceComponent',
+    },
+    {
+      path: 'lib/utils/accessibility/',
+      description: 'A11y utilities: FocusTrap, KeyboardNavigation, LiveRegion, VisuallyHidden',
+    },
+    {
+      path: 'lib/utils/positioning/',
+      description: 'Smart overlay positioning for popovers, tooltips, and dropdowns',
+    },
+    { path: 'lib/components/ui/', description: 'All UI components when using --components=all' },
   ];
 
   protected readonly componentCategories = [
     {
       name: 'Form Controls',
-      components: ['button', 'checkbox', 'input', 'input-otp', 'label', 'radio-group', 'select', 'slider', 'switch', 'textarea', 'toggle', 'toggle-group', 'form']
+      components: [
+        'button',
+        'checkbox',
+        'input',
+        'input-otp',
+        'label',
+        'radio-group',
+        'select',
+        'slider',
+        'switch',
+        'textarea',
+        'toggle',
+        'toggle-group',
+        'form',
+      ],
     },
     {
       name: 'Data Display',
-      components: ['avatar', 'badge', 'calendar', 'card', 'carousel', 'chart', 'progress', 'skeleton', 'table', 'data-table']
+      components: [
+        'avatar',
+        'badge',
+        'calendar',
+        'card',
+        'carousel',
+        'chart',
+        'progress',
+        'skeleton',
+        'table',
+        'data-table',
+      ],
     },
     {
       name: 'Feedback',
-      components: ['alert', 'alert-dialog', 'dialog', 'drawer', 'sheet', 'toast', 'tooltip', 'spinner']
+      components: [
+        'alert',
+        'alert-dialog',
+        'dialog',
+        'drawer',
+        'sheet',
+        'toast',
+        'tooltip',
+        'spinner',
+      ],
     },
     {
       name: 'Navigation',
-      components: ['breadcrumb', 'command', 'dropdown-menu', 'context-menu', 'menubar', 'navigation-menu', 'pagination', 'sidebar', 'tabs']
+      components: [
+        'breadcrumb',
+        'command',
+        'dropdown-menu',
+        'context-menu',
+        'menubar',
+        'navigation-menu',
+        'pagination',
+        'sidebar',
+        'tabs',
+      ],
     },
     {
       name: 'Layout',
-      components: ['accordion', 'aspect-ratio', 'collapsible', 'resizable', 'scroll-area', 'separator']
+      components: [
+        'accordion',
+        'aspect-ratio',
+        'collapsible',
+        'resizable',
+        'scroll-area',
+        'separator',
+      ],
     },
     {
       name: 'Overlay',
-      components: ['popover', 'hover-card', 'combobox', 'date-picker']
-    }
+      components: ['popover', 'hover-card', 'combobox', 'date-picker'],
+    },
   ];
 
   protected readonly popularComponents = [
-    'button', 'card', 'dialog', 'input', 'select',
-    'checkbox', 'tabs', 'table', 'toast', 'dropdown-menu',
-    'form', 'sidebar', 'command', 'calendar'
+    'button',
+    'card',
+    'dialog',
+    'input',
+    'select',
+    'checkbox',
+    'tabs',
+    'table',
+    'toast',
+    'dropdown-menu',
+    'form',
+    'sidebar',
+    'command',
+    'calendar',
   ];
 
   constructor() {

@@ -10,12 +10,10 @@ import { RouterLink } from '@angular/router';
       <div class="mx-auto max-w-5xl">
         <!-- Hero Section -->
         <div class="mb-12 space-y-4 text-center">
-          <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-            Building Blocks for the Web
-          </h1>
+          <h1 class="text-4xl font-bold tracking-tight md:text-5xl">Building Blocks for the Web</h1>
           <p class="text-lg text-muted-foreground md:text-xl">
-            Clean, modern building blocks. Copy and paste into your apps. Works
-            with Angular. Open Source. Free forever.
+            Clean, modern building blocks. Copy and paste into your apps. Works with Angular. Open
+            Source. Free forever.
           </p>
         </div>
 

@@ -23,12 +23,14 @@ Update your `mcp.json` to use the HTTP endpoint:
 ### Starting the Server
 
 #### Option 1: Using npm script
+
 ```bash
 cd mcp-server
 npm run dev:http
 ```
 
 #### Option 2: Using the shell script
+
 ```bash
 cd mcp-server
 chmod +x start-http.sh
@@ -36,6 +38,7 @@ chmod +x start-http.sh
 ```
 
 #### Option 3: Direct execution
+
 ```bash
 cd mcp-server
 npx tsx streamable-http-server.ts
@@ -46,6 +49,7 @@ npx tsx streamable-http-server.ts
 - `MCP_PORT` - Server port (default: 3100)
 
 Example:
+
 ```bash
 MCP_PORT=3200 npx tsx streamable-http-server.ts
 ```
@@ -84,17 +88,21 @@ If you were previously using stdio transport:
 ## Troubleshooting
 
 ### Port Already in Use
+
 If port 3100 is already in use, set a different port:
+
 ```bash
 MCP_PORT=3200 npm run dev:http
 ```
 
 ### Connection Issues
+
 - Ensure the server is running before connecting
 - Check firewall settings if connecting remotely
 - Verify the URL in your MCP configuration
 
 ### Checking Server Status
+
 Visit `http://localhost:3100/health` to verify the server is running.
 
 ## Benefits of Streamable HTTP

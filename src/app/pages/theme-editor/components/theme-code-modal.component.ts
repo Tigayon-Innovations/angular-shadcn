@@ -22,10 +22,7 @@ interface ColorValue {
   template: `
     @if (open()) {
       <!-- Backdrop -->
-      <div
-        class="fixed inset-0 z-50 bg-black/80 animate-in fade-in-0"
-        (click)="close()"
-      ></div>
+      <div class="fixed inset-0 z-50 bg-black/80 animate-in fade-in-0" (click)="close()"></div>
 
       <!-- Modal Content -->
       <div
@@ -51,7 +48,10 @@ interface ColorValue {
 
         <div class="flex-1 overflow-hidden flex flex-col gap-4">
           <!-- Package manager tabs -->
-          <Tabs [value]="selectedPackageManager()" (valueChange)="selectedPackageManager.set($event)">
+          <Tabs
+            [value]="selectedPackageManager()"
+            (valueChange)="selectedPackageManager.set($event)"
+          >
             <div class="flex items-center justify-between">
               <TabsList class="bg-muted">
                 <TabsTrigger value="pnpm">pnpm</TabsTrigger>
@@ -66,9 +66,7 @@ interface ColorValue {
             </div>
           </Tabs>
 
-          <p class="text-sm text-muted-foreground">
-            Save your theme to get the registry command
-          </p>
+          <p class="text-sm text-muted-foreground">Save your theme to get the registry command</p>
 
           <!-- Format selectors -->
           <div class="flex items-center gap-2">
@@ -206,10 +204,7 @@ ${entries.map(([key, value]) => `    --${key}: ${formatColor(value.dark)};`).joi
     const g = Math.round(toSrgb(lg) * 255);
     const bVal = Math.round(toSrgb(lb) * 255);
 
-    const toHex = (n: number) =>
-      Math.max(0, Math.min(255, n))
-        .toString(16)
-        .padStart(2, '0');
+    const toHex = (n: number) => Math.max(0, Math.min(255, n)).toString(16).padStart(2, '0');
     return `#${toHex(r)}${toHex(g)}${toHex(bVal)}`;
   }
 

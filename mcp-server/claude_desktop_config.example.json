@@ -3,9 +3,7 @@
   "mcpServers": {
     "ng-cn": {
       "command": "node",
-      "args": [
-        "/REPLACE/WITH/ABSOLUTE/PATH/TO/ng-cn/dist/mcp-server/index.js"
-      ],
+      "args": ["/REPLACE/WITH/ABSOLUTE/PATH/TO/ng-cn/dist/mcp-server/index.js"],
       "env": {}
     }
   }

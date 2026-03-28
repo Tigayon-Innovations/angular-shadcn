@@ -70,7 +70,8 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
           name: 'defaultOpen',
           type: 'boolean',
           default: 'false',
-          description: 'The open state of the dialog when it is initially rendered. Use when you do not need to control the state.',
+          description:
+            'The open state of the dialog when it is initially rendered. Use when you do not need to control the state.',
         },
         {
           name: 'open',
@@ -88,8 +89,7 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
         {
           name: 'openChange',
           type: 'EventEmitter<boolean>',
-          description:
-            'Event emitted when the dialog open state changes.',
+          description: 'Event emitted when the dialog open state changes.',
         },
       ],
       dataAttributes: [
@@ -101,8 +101,7 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
     },
     {
       name: 'Trigger',
-      description:
-        'The button that opens the dialog. This element must be rendered.',
+      description: 'The button that opens the dialog. This element must be rendered.',
       props: [
         {
           name: 'asChild',
@@ -132,8 +131,7 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
           name: 'showClose',
           type: 'boolean',
           default: 'true',
-          description:
-            'Whether to display the close button in the top right corner.',
+          description: 'Whether to display the close button in the top right corner.',
         },
         {
           name: 'initialFocus',
@@ -177,9 +175,7 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply to the title.',
         },
       ],
-      dataAttributes: [
-        { name: '[id]', values: 'auto-generated unique id' },
-      ],
+      dataAttributes: [{ name: '[id]', values: 'auto-generated unique id' }],
     },
     {
       name: 'Description',
@@ -191,9 +187,7 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply to the description.',
         },
       ],
-      dataAttributes: [
-        { name: '[id]', values: 'auto-generated unique id' },
-      ],
+      dataAttributes: [{ name: '[id]', values: 'auto-generated unique id' }],
     },
     {
       name: 'Footer',
@@ -208,15 +202,13 @@ export const DIALOG_DOCUMENTATION: ComponentDocumentation = {
     },
     {
       name: 'Close',
-      description:
-        'A button that closes the dialog. Must be rendered within the dialog.',
+      description: 'A button that closes the dialog. Must be rendered within the dialog.',
       props: [
         {
           name: 'asChild',
           type: 'boolean',
           default: 'false',
-          description:
-            'Change the default rendered element for the one passed as a child.',
+          description: 'Change the default rendered element for the one passed as a child.',
         },
       ],
     },
@@ -548,23 +540,19 @@ async submitForm() {
       },
       {
         key: 'Shift + Tab',
-        description:
-          'Moves focus to the previous focusable element within the dialog.',
+        description: 'Moves focus to the previous focusable element within the dialog.',
       },
       {
         key: 'Escape',
-        description:
-          'Closes the dialog if it is configured to close on Escape.',
+        description: 'Closes the dialog if it is configured to close on Escape.',
       },
       {
         key: 'Enter',
-        description:
-          'Activates the focused button or submits the form if a form field is focused.',
+        description: 'Activates the focused button or submits the form if a form field is focused.',
       },
       {
         key: 'Space',
-        description:
-          'Activates the focused button or toggles the focused checkbox.',
+        description: 'Activates the focused button or toggles the focused checkbox.',
       },
     ],
     ariaAttributes: [

@@ -79,14 +79,12 @@ export const AVATAR_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply to the image.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-slot]', values: '"avatar-image"' },
-      ],
+      dataAttributes: [{ name: '[data-slot]', values: '"avatar-image"' }],
     },
     {
       name: 'Fallback',
       description:
-        'An element that renders when the image hasn\'t loaded. This means whilst it\'s loading, or if there was an error. If you notice a flash during loading, you can provide a delayMs prop to delay its rendering so it only renders for those with slower connections.',
+        "An element that renders when the image hasn't loaded. This means whilst it's loading, or if there was an error. If you notice a flash during loading, you can provide a delayMs prop to delay its rendering so it only renders for those with slower connections.",
       props: [
         {
           name: 'delayMs',
@@ -100,9 +98,7 @@ export const AVATAR_DOCUMENTATION: ComponentDocumentation = {
           description: 'Additional CSS classes to apply to the fallback.',
         },
       ],
-      dataAttributes: [
-        { name: '[data-slot]', values: '"avatar-fallback"' },
-      ],
+      dataAttributes: [{ name: '[data-slot]', values: '"avatar-fallback"' }],
     },
   ],
 
@@ -121,7 +117,8 @@ export const AVATAR_DOCUMENTATION: ComponentDocumentation = {
     },
     {
       title: 'With delay on fallback',
-      description: 'Use the delayMs prop to delay the fallback rendering and avoid content flashing.',
+      description:
+        'Use the delayMs prop to delay the fallback rendering and avoid content flashing.',
       code: `<Avatar>
   <AvatarImage
     src="https://github.com/shadcn.png"
@@ -213,7 +210,8 @@ export const AVATAR_DOCUMENTATION: ComponentDocumentation = {
     keyboardInteractions: [
       {
         key: 'Tab',
-        description: 'Avatar can receive focus if it\'s interactive (e.g., wrapped in a button or link).',
+        description:
+          "Avatar can receive focus if it's interactive (e.g., wrapped in a button or link).",
       },
     ],
   },

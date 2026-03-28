@@ -1,7 +1,6 @@
 import { InjectionToken, Signal, WritableSignal } from '@angular/core';
 import { LucideIconData } from 'lucide-angular';
 
-
 export interface ComboboxOption {
   value: string;
   label: string;

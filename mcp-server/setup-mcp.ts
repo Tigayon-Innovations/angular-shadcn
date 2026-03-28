@@ -25,7 +25,13 @@ function getConfigPath(): string {
   const platform = process.platform;
 
   if (platform === 'darwin') {
-    return join(homedir(), 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
+    return join(
+      homedir(),
+      'Library',
+      'Application Support',
+      'Claude',
+      'claude_desktop_config.json',
+    );
   } else if (platform === 'win32') {
     return join(process.env.APPDATA || '', 'Claude', 'claude_desktop_config.json');
   } else {
@@ -45,7 +51,9 @@ async function main() {
     mcpUrl = 'http://localhost:4000/api/mcp/sse';
     console.log('\n✓ Using local development server');
   } else {
-    const customUrl = await question('Enter your deployed MCP URL (e.g., https://your-app.com/api/mcp/sse): ');
+    const customUrl = await question(
+      'Enter your deployed MCP URL (e.g., https://your-app.com/api/mcp/sse): ',
+    );
     mcpUrl = customUrl.trim();
   }
 
@@ -72,8 +80,8 @@ async function main() {
   config.mcpServers['ng-cn'] = {
     url: mcpUrl,
     transport: {
-      type: 'sse'
-    }
+      type: 'sse',
+    },
   };
 
   // Write config

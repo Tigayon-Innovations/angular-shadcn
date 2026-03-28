@@ -51,10 +51,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
         <!-- User Section -->
         <div class="absolute bottom-0 w-full border-t p-4">
-          <div
-            [class.justify-center]="collapsed()"
-            class="flex items-center gap-3"
-          >
+          <div [class.justify-center]="collapsed()" class="flex items-center gap-3">
             <div
               class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
             >
@@ -75,8 +72,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
         <div class="p-6">
           <h1 class="mb-4 text-2xl font-bold">Dashboard</h1>
           <p class="text-muted-foreground">
-            Welcome to your dashboard. This sidebar collapses to icons for a
-            compact view.
+            Welcome to your dashboard. This sidebar collapses to icons for a compact view.
           </p>
         </div>
       </main>

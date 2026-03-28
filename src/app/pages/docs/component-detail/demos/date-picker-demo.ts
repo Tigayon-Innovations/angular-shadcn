@@ -9,20 +9,27 @@ import { CalendarIcon, LucideAngularModule } from 'lucide-angular';
 @Component({
   selector: 'DatePickerDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, Calendar, Popover, PopoverContent, PopoverTrigger, LucideAngularModule, DatePipe],
+  imports: [
+    Button,
+    Calendar,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    LucideAngularModule,
+    DatePipe,
+  ],
   template: `
     <Popover>
       <PopoverTrigger>
         <Button
           variant="outline"
-          [class]="cn(
-            'w-[280px] justify-start text-left font-normal',
-            !date() && 'text-muted-foreground'
-          )"
+          [class]="
+            cn('w-[280px] justify-start text-left font-normal', !date() && 'text-muted-foreground')
+          "
         >
           <lucide-icon [img]="CalendarIcon" class="mr-2 h-4 w-4" />
           @if (date()) {
-            {{ date() | date:'PPP' }}
+            {{ date() | date: 'PPP' }}
           } @else {
             <span>Pick a date</span>
           }

@@ -1,9 +1,5 @@
 import { BlocksService } from '@/services/blocks.service';
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from '@/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/ui/collapsible';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ChevronRight, LucideAngularModule } from 'lucide-angular';
@@ -42,9 +38,14 @@ interface NavItem {
                   @if (item.items) {
                     <!-- Collapsible section -->
                     <Collapsible [open]="true">
-                      <CollapsibleTrigger class="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground">
+                      <CollapsibleTrigger
+                        class="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground"
+                      >
                         {{ item.title }}
-                        <lucide-icon [img]="icons.ChevronRight" class="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-90" />
+                        <lucide-icon
+                          [img]="icons.ChevronRight"
+                          class="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-90"
+                        />
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <div class="ml-4 flex flex-col gap-1 border-l pl-2">
@@ -101,10 +102,7 @@ export class BlocksSidebar {
     return [
       {
         title: 'Building Blocks',
-        items: [
-          { title: 'All Blocks', href: '/blocks' },
-          ...categoryItems,
-        ],
+        items: [{ title: 'All Blocks', href: '/blocks' }, ...categoryItems],
       },
     ];
   });

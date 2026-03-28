@@ -13,7 +13,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AlertCircle, Code, Copy, Edit3, Eye, LucideAngularModule, Palette, Play, RotateCcw, Sparkles } from 'lucide-angular';
+import {
+  AlertCircle,
+  Code,
+  Copy,
+  Edit3,
+  Eye,
+  LucideAngularModule,
+  Palette,
+  Play,
+  RotateCcw,
+  Sparkles,
+} from 'lucide-angular';
 
 interface ComponentExample {
   id: string;
@@ -66,12 +77,10 @@ interface ComponentExample {
             <lucide-icon [img]="icons.Sparkles" class="size-3" />
             Interactive
           </Badge>
-          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
-            Component Playground
-          </h1>
+          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Component Playground</h1>
           <p class="max-w-[600px] text-lg text-muted-foreground">
-            Explore shadcn-angular components with live previews.
-            Select an example or paste your own template to see it rendered dynamically.
+            Explore shadcn-angular components with live previews. Select an example or paste your
+            own template to see it rendered dynamically.
           </p>
           <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Button routerLink="/theme-editor" variant="outline" class="gap-2">
@@ -141,7 +150,12 @@ interface ComponentExample {
               </div>
               <div class="flex items-center gap-2">
                 @if (mode() === 'custom') {
-                  <Button variant="ghost" size="sm" class="h-8 gap-2" (click)="resetCustomTemplate()">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    class="h-8 gap-2"
+                    (click)="resetCustomTemplate()"
+                  >
                     <lucide-icon [img]="icons.RotateCcw" class="size-3.5" />
                     Reset
                   </Button>
@@ -178,27 +192,25 @@ interface ComponentExample {
                 <div class="p-4">
                   <textarea
                     class="min-h-[450px] w-full resize-none rounded-md border border-input bg-background px-3 py-2 font-mono text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="Paste your Angular template here...
+                    placeholder='Paste your Angular template here...
 
 Example:
-<div class=&quot;flex flex-wrap items-center gap-4&quot;>
+<div class="flex flex-wrap items-center gap-4">
   <Button>Default</Button>
-  <Button variant=&quot;secondary&quot;>Secondary</Button>
-  <Button variant=&quot;destructive&quot;>Destructive</Button>
-</div>"
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="destructive">Destructive</Button>
+</div>'
                     [ngModel]="customTemplate()"
                     (ngModelChange)="updateCustomTemplate($event)"
                   ></textarea>
                   <p class="mt-2 text-xs text-muted-foreground">
-                    Supported components: Button, Card, Badge, Alert, Accordion, Tabs, Input, Label, Checkbox, and more.
+                    Supported components: Button, Card, Badge, Alert, Accordion, Tabs, Input, Label,
+                    Checkbox, and more.
                   </p>
                 </div>
               } @else {
                 <div class="max-h-[500px] overflow-auto">
-                  <CodeBlock
-                    [code]="getSelectedComponent()?.code ?? ''"
-                    language="angular-ts"
-                  />
+                  <CodeBlock [code]="getSelectedComponent()?.code ?? ''" language="angular-ts" />
                 </div>
               }
             </div>
@@ -397,11 +409,15 @@ Example:
               <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Button Variants</p>
-                  <code class="text-xs text-muted-foreground">variant="secondary|destructive|outline|ghost|link"</code>
+                  <code class="text-xs text-muted-foreground"
+                    >variant="secondary|destructive|outline|ghost|link"</code
+                  >
                 </div>
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Badge Variants</p>
-                  <code class="text-xs text-muted-foreground">variant="secondary|destructive|outline"</code>
+                  <code class="text-xs text-muted-foreground"
+                    >variant="secondary|destructive|outline"</code
+                  >
                 </div>
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Alert Variants</p>
@@ -409,11 +425,15 @@ Example:
                 </div>
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Card Structure</p>
-                  <code class="text-xs text-muted-foreground">Card > CardHeader, CardContent, CardFooter</code>
+                  <code class="text-xs text-muted-foreground"
+                    >Card > CardHeader, CardContent, CardFooter</code
+                  >
                 </div>
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Accordion</p>
-                  <code class="text-xs text-muted-foreground">type="single|multiple" collapsible</code>
+                  <code class="text-xs text-muted-foreground"
+                    >type="single|multiple" collapsible</code
+                  >
                 </div>
                 <div class="space-y-1">
                   <p class="text-sm font-medium">Tailwind Classes</p>
@@ -428,7 +448,17 @@ Example:
   `,
 })
 export class PlaygroundPage {
-  protected readonly icons = { AlertCircle, Code, Copy, Edit3, Eye, Palette, Play, RotateCcw, Sparkles };
+  protected readonly icons = {
+    AlertCircle,
+    Code,
+    Copy,
+    Edit3,
+    Eye,
+    Palette,
+    Play,
+    RotateCcw,
+    Sparkles,
+  };
   protected readonly copied = signal(false);
   protected readonly selectedComponent = signal('accordion');
   protected readonly mode = signal<'examples' | 'custom'>('examples');
@@ -604,7 +634,7 @@ export class PlaygroundPage {
   }
 
   protected getSelectedComponent(): ComponentExample | undefined {
-    return this.components.find(c => c.id === this.selectedComponent());
+    return this.components.find((c) => c.id === this.selectedComponent());
   }
 
   protected setMode(mode: 'examples' | 'custom'): void {
@@ -620,9 +650,8 @@ export class PlaygroundPage {
   }
 
   protected copyCode(): void {
-    const code = this.mode() === 'custom'
-      ? this.customTemplate()
-      : this.getSelectedComponent()?.code ?? '';
+    const code =
+      this.mode() === 'custom' ? this.customTemplate() : (this.getSelectedComponent()?.code ?? '');
 
     if (code) {
       navigator.clipboard.writeText(code);

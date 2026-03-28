@@ -1,4 +1,4 @@
 interface:
-  display_name: "JobsGlobal Code Review"
-  short_description: "Post-coding quality review against clean code standards."
-  default_prompt: "Use $jobsglobal-code-review to audit the changed files for naming, return types, function design, comments, TypeScript quality, and Angular conventions."
+  display_name: 'JobsGlobal Code Review'
+  short_description: 'Post-coding quality review against clean code standards.'
+  default_prompt: 'Use $jobsglobal-code-review to audit the changed files for naming, return types, function design, comments, TypeScript quality, and Angular conventions.'

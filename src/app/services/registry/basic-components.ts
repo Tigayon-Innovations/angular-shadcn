@@ -37,14 +37,58 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Determines whether one or multiple items can be opened at the same time.', component: 'Accordion' },
-      { name: 'collapsible', type: 'boolean', default: 'false', description: 'When type is single, allows closing content when clicking trigger of an open item.', component: 'Accordion' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.', component: 'Accordion' },
-      { name: 'value', type: 'string', description: 'A unique value for the accordion item.', component: 'AccordionItem' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the accordion item is disabled.', component: 'AccordionItem' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.', component: 'AccordionItem' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.', component: 'AccordionTrigger' },
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.', component: 'AccordionContent' },
+      {
+        name: 'type',
+        type: "'single' | 'multiple'",
+        default: "'single'",
+        description: 'Determines whether one or multiple items can be opened at the same time.',
+        component: 'Accordion',
+      },
+      {
+        name: 'collapsible',
+        type: 'boolean',
+        default: 'false',
+        description:
+          'When type is single, allows closing content when clicking trigger of an open item.',
+        component: 'Accordion',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes to apply.',
+        component: 'Accordion',
+      },
+      {
+        name: 'value',
+        type: 'string',
+        description: 'A unique value for the accordion item.',
+        component: 'AccordionItem',
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the accordion item is disabled.',
+        component: 'AccordionItem',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes to apply.',
+        component: 'AccordionItem',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes to apply.',
+        component: 'AccordionTrigger',
+      },
+      {
+        name: 'class',
+        type: 'string',
+        description: 'Additional CSS classes to apply.',
+        component: 'AccordionContent',
+      },
     ],
   },
   {
@@ -53,7 +97,15 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'Displays the path to the current resource.',
     category: 'basic',
     package: '@ng-cn/breadcrumb',
-    imports: ['Breadcrumb', 'BreadcrumbList', 'BreadcrumbItem', 'BreadcrumbLink', 'BreadcrumbPage', 'BreadcrumbSeparator', 'BreadcrumbEllipsis'],
+    imports: [
+      'Breadcrumb',
+      'BreadcrumbList',
+      'BreadcrumbItem',
+      'BreadcrumbLink',
+      'BreadcrumbPage',
+      'BreadcrumbSeparator',
+      'BreadcrumbEllipsis',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -92,9 +144,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
 </Breadcrumb>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
   {
     name: 'Context Menu',
@@ -102,7 +152,14 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'Displays a menu to the user on right click.',
     category: 'basic',
     package: '@ng-cn/context-menu',
-    imports: ['ContextMenu', 'ContextMenuTrigger', 'ContextMenuContent', 'ContextMenuItem', 'ContextMenuSeparator', 'ContextMenuShortcut'],
+    imports: [
+      'ContextMenu',
+      'ContextMenuTrigger',
+      'ContextMenuContent',
+      'ContextMenuItem',
+      'ContextMenuSeparator',
+      'ContextMenuShortcut',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -130,7 +187,12 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the menu item is disabled.' },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the menu item is disabled.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -140,7 +202,16 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'Displays a menu when triggered.',
     category: 'basic',
     package: '@ng-cn/dropdown-menu',
-    imports: ['DropdownMenu', 'DropdownMenuTrigger', 'DropdownMenuContent', 'DropdownMenuItem', 'DropdownMenuLabel', 'DropdownMenuSeparator', 'DropdownMenuShortcut', 'DropdownMenuGroup'],
+    imports: [
+      'DropdownMenu',
+      'DropdownMenuTrigger',
+      'DropdownMenuContent',
+      'DropdownMenuItem',
+      'DropdownMenuLabel',
+      'DropdownMenuSeparator',
+      'DropdownMenuShortcut',
+      'DropdownMenuGroup',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -175,7 +246,12 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the menu item is disabled.' },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the menu item is disabled.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -185,7 +261,15 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'A visually persistent menu common in desktop applications.',
     category: 'basic',
     package: '@ng-cn/menubar',
-    imports: ['Menubar', 'MenubarMenu', 'MenubarTrigger', 'MenubarContent', 'MenubarItem', 'MenubarSeparator', 'MenubarShortcut'],
+    imports: [
+      'Menubar',
+      'MenubarMenu',
+      'MenubarTrigger',
+      'MenubarContent',
+      'MenubarItem',
+      'MenubarSeparator',
+      'MenubarShortcut',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -230,9 +314,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
 </Menubar>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
   {
     name: 'Navigation Menu',
@@ -240,7 +322,14 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'A collection of links for navigating websites.',
     category: 'basic',
     package: '@ng-cn/navigation-menu',
-    imports: ['NavigationMenu', 'NavigationMenuList', 'NavigationMenuItem', 'NavigationMenuTrigger', 'NavigationMenuContent', 'NavigationMenuLink'],
+    imports: [
+      'NavigationMenu',
+      'NavigationMenuList',
+      'NavigationMenuItem',
+      'NavigationMenuTrigger',
+      'NavigationMenuContent',
+      'NavigationMenuLink',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -256,9 +345,7 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
 </NavigationMenu>`,
       },
     ],
-    props: [
-      { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
-    ],
+    props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
   {
     name: 'Pagination',
@@ -266,7 +353,15 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
     description: 'Pagination with page navigation, next and previous links.',
     category: 'basic',
     package: '@ng-cn/pagination',
-    imports: ['Pagination', 'PaginationContent', 'PaginationItem', 'PaginationLink', 'PaginationPrevious', 'PaginationNext', 'PaginationEllipsis'],
+    imports: [
+      'Pagination',
+      'PaginationContent',
+      'PaginationItem',
+      'PaginationLink',
+      'PaginationPrevious',
+      'PaginationNext',
+      'PaginationEllipsis',
+    ],
     examples: [
       {
         title: 'Basic',
@@ -295,7 +390,12 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'isActive', type: 'boolean', default: 'false', description: 'Whether the pagination link is active.' },
+      {
+        name: 'isActive',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether the pagination link is active.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
@@ -330,7 +430,11 @@ export const BASIC_COMPONENTS: ComponentInfo[] = [
       },
     ],
     props: [
-      { name: 'defaultValue', type: 'string', description: 'The value of the tab that should be active by default.' },
+      {
+        name: 'defaultValue',
+        type: 'string',
+        description: 'The value of the tab that should be active by default.',
+      },
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
