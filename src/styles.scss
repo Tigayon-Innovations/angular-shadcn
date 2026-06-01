@@ -905,7 +905,7 @@
    ======================================== */
 
 :root {
-  /* Accordion content height (set by JS) */
+  /* Accordion content dimensions (placeholder — CSS grid animation is used instead; kept for third-party Radix compat) */
   --radix-accordion-content-height: auto;
   --radix-accordion-content-width: auto;
 

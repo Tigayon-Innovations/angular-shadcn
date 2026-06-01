@@ -16,6 +16,7 @@ export interface AccordionItemContext {
   value: () => string;
   isOpen: () => boolean;
   toggle: () => void;
+  disabled: () => boolean;
   /** Unique IDs for ARIA relationships */
   triggerId: string;
   contentId: string;

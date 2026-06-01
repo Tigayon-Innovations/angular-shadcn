@@ -15,7 +15,6 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
     <span class="me-2"><ng-content /></span>
     <svg
       class="size-4 shrink-0 ms-auto text-muted-foreground transition-transform duration-200"
-      [class.rotate-180]="item.isOpen()"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -30,11 +29,13 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
     </svg>
   `,
   host: {
+    'attr.data-slot': '"accordion-trigger"',
     '[class]': 'computedClass()',
     '[attr.id]': 'item.triggerId',
     '[attr.data-state]': 'item.isOpen() ? "open" : "closed"',
     '[attr.aria-expanded]': 'item.isOpen()',
     '[attr.aria-controls]': 'item.contentId',
+    '[attr.aria-disabled]': 'item.disabled() || null',
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',
@@ -52,15 +53,18 @@ export class AccordionTrigger {
   protected readonly computedClass = computed(() =>
     cn(
       'flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 cursor-pointer w-full',
+      this.item.disabled() && 'cursor-not-allowed opacity-50 hover:no-underline',
       this.class(),
     ),
   );
 
   protected onClick(): void {
+    if (this.item.disabled()) return;
     this.item.toggle();
   }
   protected onSpace(event: Event): void {
     event.preventDefault();
+    if (this.item.disabled()) return;
     this.item.toggle();
   }
 }

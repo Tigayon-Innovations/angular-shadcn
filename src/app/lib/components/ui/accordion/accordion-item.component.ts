@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { AriaIdService } from '@/lib/utils/accessibility';
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -30,9 +31,12 @@ import {
   selector: 'AccordionItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"accordion-item"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'isOpen() ? "open" : "closed"',
     '[attr.data-value]': 'value()',
+    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.aria-disabled]': 'disabled() || null',
   },
   providers: [
     {
@@ -45,6 +49,9 @@ import {
 export class AccordionItem implements AccordionItemContext, OnInit, OnDestroy {
   /** Unique value for this accordion item */
   readonly value = input.required<string>();
+
+  /** Whether this item is disabled */
+  readonly disabled = input<boolean, unknown>(false, { transform: booleanAttribute });
 
   /** Additional CSS classes */
   readonly class = input<string>('');
@@ -77,6 +84,7 @@ export class AccordionItem implements AccordionItemContext, OnInit, OnDestroy {
 
   /** Toggle this item's open state */
   toggle(): void {
+    if (this.disabled()) return;
     this._accordion.onValueChange(this.value());
   }
 }

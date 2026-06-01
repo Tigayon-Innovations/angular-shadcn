@@ -4,7 +4,8 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 
 /**
  * AccordionContent component - expandable content area.
- * Uses role="region" and aria-labelledby to associate with trigger.
+ * Uses CSS grid animation (grid-template-rows: 0fr → 1fr) for smooth open/close.
+ * Content is always in the DOM; visibility is controlled by the grid row height.
  *
  * @example
  * <AccordionContent>
@@ -14,19 +15,17 @@ import { ACCORDION_ITEM_CONTEXT } from './accordion-context';
 @Component({
   selector: 'AccordionContent',
   template: `
-    @if (item.isOpen()) {
-      <div [class]="innerClass()">
-        <ng-content />
-      </div>
-    }
+    <div [class]="innerClass()">
+      <ng-content />
+    </div>
   `,
   host: {
+    'attr.data-slot': '"accordion-content"',
     role: 'region',
     '[class]': 'computedClass()',
     '[attr.id]': 'item.contentId',
     '[attr.data-state]': 'item.isOpen() ? "open" : "closed"',
     '[attr.aria-labelledby]': 'item.triggerId',
-    '[attr.aria-hidden]': '!item.isOpen()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,13 +35,11 @@ export class AccordionContent {
 
   protected readonly item = inject(ACCORDION_ITEM_CONTEXT);
 
-  protected readonly computedClass = computed(() =>
-    cn(
-      'overflow-hidden text-sm',
-      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-    ),
-  );
+  // No overflow-hidden on the host — grid-template-rows handles expansion.
+  // Global CSS ([data-slot='accordion-content'] > div { overflow: hidden }) clips the inner div.
+  protected readonly computedClass = computed(() => cn('text-sm', this.class()));
+
   protected readonly innerClass = computed(() =>
-    cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed', this.class()),
+    cn('pb-4 pt-2 px-1 text-muted-foreground leading-relaxed'),
   );
 }

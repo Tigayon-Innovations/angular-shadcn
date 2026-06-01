@@ -7,6 +7,7 @@ import {
   effect,
   forwardRef,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { ACCORDION_CONTEXT, AccordionContext, AccordionType } from './accordion-context';
@@ -28,6 +29,7 @@ import { ACCORDION_CONTEXT, AccordionContext, AccordionType } from './accordion-
   selector: 'Accordion',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"accordion"',
     '[class]': 'computedClass()',
     '[attr.data-orientation]': '"vertical"',
     '(keydown)': 'onKeydown($event)',
@@ -68,6 +70,9 @@ export class Accordion implements AccordionContext {
   readonly controlledValue = input<string | string[] | undefined>(undefined, { alias: 'value' });
   /** Additional CSS classes */
   readonly class = input<string>('');
+
+  /** Emits the new value whenever the open state changes */
+  readonly valueChange = output<string | string[] | undefined>();
 
   protected readonly computedClass = computed(() => cn('w-full', this.class()));
   /** Get current value(s) */
@@ -119,6 +124,7 @@ export class Accordion implements AccordionContext {
 
       return newSet;
     });
+    this.valueChange.emit(this.value());
   }
   /** Check if an item is open */
   isItemOpen(itemValue: string): boolean {
@@ -179,12 +185,24 @@ export class Accordion implements AccordionContext {
 
     if (handled) {
       event.preventDefault();
-      // Focus the trigger of the new item
-      const newValue = values[newIndex];
-      const newTrigger = document.querySelector(
-        `AccordionItem[data-value="${newValue}"] AccordionTrigger, [data-accordion-trigger="${newValue}"]`,
-      ) as HTMLElement;
-      newTrigger?.focus();
+      const direction =
+        event.key === 'ArrowDown' || event.key === 'End' ? 1 : -1;
+      let attempts = 0;
+      while (attempts < values.length) {
+        const candidateValue = values[newIndex];
+        const candidateItem = document.querySelector(
+          `AccordionItem[data-value="${candidateValue}"]`,
+        );
+        if (!candidateItem?.hasAttribute('data-disabled')) {
+          const trigger = document.querySelector(
+            `AccordionItem[data-value="${candidateValue}"] AccordionTrigger`,
+          ) as HTMLElement;
+          trigger?.focus();
+          break;
+        }
+        newIndex = (newIndex + direction + values.length) % values.length;
+        attempts++;
+      }
     }
   }
 }
