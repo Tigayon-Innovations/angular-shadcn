@@ -22,6 +22,7 @@ import { badgeVariants, type BadgeVariants } from './badge-variants';
   selector: 'Badge',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"badge"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

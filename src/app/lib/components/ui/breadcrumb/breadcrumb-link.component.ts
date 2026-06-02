@@ -1,24 +1,17 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-/**
- * BreadcrumbLink component - anchor link.
- * Matches shadcn/ui React BreadcrumbLink exactly.
- */
 @Component({
   selector: 'BreadcrumbLink',
-  template: `<ng-content />`,
+  template: `<a [attr.href]="href()" [class]="computedClass()"><ng-content /></a>`,
   host: {
-    '[class]': 'computedClass()',
-    '[attr.href]': 'href()',
+    'attr.data-slot': '"breadcrumb-link"',
+    style: 'display:contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbLink {
-  /** Link href */
-  readonly href = input<string>('#');
-
-  /** Additional CSS classes */
+  readonly href = input<string | undefined>(undefined);
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>

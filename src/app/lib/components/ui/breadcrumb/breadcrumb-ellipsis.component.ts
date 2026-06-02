@@ -27,6 +27,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <span class="sr-only">More</span>
   `,
   host: {
+    'attr.data-slot': '"breadcrumb-ellipsis"',
     role: 'presentation',
     '[attr.aria-hidden]': '"true"',
     '[class]': 'computedClass()',

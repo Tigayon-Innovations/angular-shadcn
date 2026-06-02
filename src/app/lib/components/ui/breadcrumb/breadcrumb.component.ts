@@ -22,6 +22,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'Breadcrumb',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"breadcrumb"',
     role: 'navigation',
     '[attr.aria-label]': '"breadcrumb"',
     '[class]': 'computedClass()',

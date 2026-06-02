@@ -1,27 +1,32 @@
 import { cn } from '@/lib/utils';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  input,
+  signal,
+} from '@angular/core';
+import { AVATAR_CONTEXT, AvatarContext, AvatarImageStatus } from './avatar-context';
 
-/**
- * Avatar container component.
- * Wraps the avatar image and fallback.
- *
- * @example
- * <Avatar>
- *   <img AvatarImage src="/avatar.png" alt="User" />
- *   <AvatarFallback>JD</AvatarFallback>
- * </Avatar>
- */
 @Component({
   selector: 'Avatar',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"avatar"',
     '[class]': 'computedClass()',
-    'data-slot': 'avatar',
   },
+  providers: [
+    {
+      provide: AVATAR_CONTEXT,
+      useExisting: forwardRef(() => Avatar),
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Avatar {
+export class Avatar implements AvatarContext {
   readonly class = input<string>('');
+  readonly imageStatus = signal<AvatarImageStatus>('idle');
 
   protected readonly computedClass = computed(() =>
     cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.class()),

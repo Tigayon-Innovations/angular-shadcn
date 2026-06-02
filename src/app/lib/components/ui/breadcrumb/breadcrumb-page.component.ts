@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'BreadcrumbPage',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"breadcrumb-page"',
     role: 'link',
     '[attr.aria-disabled]': '"true"',
     '[attr.aria-current]': '"page"',

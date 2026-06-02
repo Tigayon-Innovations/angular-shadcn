@@ -30,6 +30,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     </div>
   `,
   host: {
+    'attr.data-slot': '"aspect-ratio"',
     '[class]': 'computedClass()',
     '[style.padding-bottom]': 'paddingBottom()',
     '[style.position]': '"relative"',

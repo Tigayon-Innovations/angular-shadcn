@@ -1,20 +1,16 @@
 import { cn } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-/**
- * BreadcrumbItem component - li container.
- * Matches shadcn/ui React BreadcrumbItem exactly.
- */
 @Component({
   selector: 'BreadcrumbItem',
-  template: `<ng-content />`,
+  template: `<li [class]="computedClass()"><ng-content /></li>`,
   host: {
-    '[class]': 'computedClass()',
+    'attr.data-slot': '"breadcrumb-item"',
+    style: 'display:contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbItem {
-  /** Additional CSS classes */
   readonly class = input<string>('');
 
   protected readonly computedClass = computed(() =>
