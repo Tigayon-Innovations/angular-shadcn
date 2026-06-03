@@ -17,7 +17,6 @@ import { SELECT_CONTEXT } from './select-context';
       [attr.data-side]="side()"
       [attr.data-align]="align()"
       role="listbox"
-      aria-label="Options"
       (keydown.escape)="onEscape()"
     >
       <div [class]="viewportClass()">
@@ -27,7 +26,7 @@ import { SELECT_CONTEXT } from './select-context';
   `,
   host: {
     class: 'contents',
-    'data-slot': 'select-content',
+    'attr.data-slot': '"select-content"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

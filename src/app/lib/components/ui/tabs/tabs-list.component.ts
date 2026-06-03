@@ -187,6 +187,12 @@ export class TabsList {
 
     if (handled) {
       event.preventDefault();
+
+      // Skip disabled tabs — scan in the movement direction
+      const direction =
+        event.key === 'ArrowLeft' || event.key === 'ArrowUp' || event.key === 'End' ? -1 : 1;
+      newIndex = this.findEnabledIndex(tabValues, newIndex, direction);
+
       const newValue = tabValues[newIndex];
 
       // In automatic mode, activate on focus; in manual mode, just focus
@@ -199,6 +205,18 @@ export class TabsList {
       const tabElement = document.getElementById(tabId);
       tabElement?.focus();
     }
+  }
+
+  private findEnabledIndex(tabValues: string[], startIndex: number, direction: 1 | -1): number {
+    const length = tabValues.length;
+    let index = startIndex;
+    for (let i = 0; i < length; i++) {
+      const tabId = this.tabs.getTabId(tabValues[index]);
+      const el = document.getElementById(tabId);
+      if (!el?.hasAttribute('data-disabled')) return index;
+      index = ((index + direction) + length) % length;
+    }
+    return startIndex;
   }
 
   private updateIndicator(): void {

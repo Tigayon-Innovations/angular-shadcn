@@ -198,7 +198,7 @@ export class DropdownMenuContent implements OnDestroy {
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
-          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled=""])',
         ),
       );
     }

@@ -50,6 +50,7 @@ export * from './switch-demo';
 export * from './table-demo';
 export * from './tabs-demo';
 export * from './textarea-demo';
+export * from './sonner-demo';
 export * from './toast-demo';
 export * from './toggle-demo';
 export * from './toggle-group-demo';

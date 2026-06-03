@@ -57,7 +57,7 @@ import { SELECT_CONTEXT } from './select-context';
   `,
   host: {
     class: 'contents',
-    'data-slot': 'select-trigger',
+    'attr.data-slot': '"select-trigger"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -114,35 +114,28 @@ export class SelectTrigger {
       case 'ArrowDown':
         event.preventDefault();
         if (!this.context.open()) {
-          // Save trigger element
           const button = this.triggerButton()?.nativeElement;
-          if (button) {
-            this.context.triggerElement.set(button);
-          }
+          if (button) this.context.triggerElement.set(button);
           this.context.setOpen(true);
           setTimeout(() => this.context?.focusItem(0));
         } else {
-          // Move to next item
           const currentIndex = this.context.focusedIndex();
           const itemCount = this.context.itemValues().length;
-          this.context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+          this.context.focusItem((currentIndex + 1) % itemCount);
         }
         break;
       case 'ArrowUp':
         event.preventDefault();
         if (!this.context.open()) {
-          // Save trigger element
           const button = this.triggerButton()?.nativeElement;
-          if (button) {
-            this.context.triggerElement.set(button);
-          }
+          if (button) this.context.triggerElement.set(button);
           this.context.setOpen(true);
           const lastIndex = this.context.itemValues().length - 1;
           setTimeout(() => this.context?.focusItem(lastIndex));
         } else {
-          // Move to previous item
           const currentIndex = this.context.focusedIndex();
-          this.context.focusItem(Math.max(currentIndex - 1, 0));
+          const itemCount = this.context.itemValues().length;
+          this.context.focusItem(currentIndex > 0 ? currentIndex - 1 : itemCount - 1);
         }
         break;
       case 'Escape':

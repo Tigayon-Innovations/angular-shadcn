@@ -55,7 +55,7 @@ import { SELECT_CONTEXT } from './select-context';
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(click)': 'select()',
     '(keydown)': 'onKeyDown($event)',
-    'data-slot': 'select-item',
+    'attr.data-slot': '"select-item"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -117,17 +117,20 @@ export class SelectItem implements OnInit, OnDestroy {
         event.preventDefault();
         this.select();
         break;
-      case 'ArrowDown':
+      case 'ArrowDown': {
         event.preventDefault();
         const currentIndex = this._context.focusedIndex();
         const itemCount = this._context.itemValues().length;
-        this._context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+        this._context.focusItem((currentIndex + 1) % itemCount);
         break;
-      case 'ArrowUp':
+      }
+      case 'ArrowUp': {
         event.preventDefault();
         const idx = this._context.focusedIndex();
-        this._context.focusItem(Math.max(idx - 1, 0));
+        const count = this._context.itemValues().length;
+        this._context.focusItem(idx > 0 ? idx - 1 : count - 1);
         break;
+      }
       case 'Home':
         event.preventDefault();
         this._context.focusItem(0);
