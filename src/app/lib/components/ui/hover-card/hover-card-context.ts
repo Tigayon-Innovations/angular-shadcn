@@ -12,6 +12,8 @@ export interface HoverCardContextValue {
   openDelay: () => number;
   /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
   closeDelay: () => number;
+  /** Reference to the trigger element for fixed positioning */
+  triggerRef: WritableSignal<HTMLElement | null>;
 }
 
 export const HOVER_CARD_CONTEXT = new InjectionToken<HoverCardContextValue>('HOVER_CARD_CONTEXT');

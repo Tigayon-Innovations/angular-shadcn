@@ -96,6 +96,7 @@ export class HoverCardTrigger implements OnDestroy {
   }
 
   onMouseEnter(): void {
+    this.context.triggerRef.set(this._elementRef.nativeElement);
     this.clearTimeouts();
     this.openTimeout = setTimeout(() => {
       this.context.setOpen(true);
@@ -108,6 +109,7 @@ export class HoverCardTrigger implements OnDestroy {
     }, this.context.closeDelay());
   }
   onFocus(): void {
+    this.context.triggerRef.set(this._elementRef.nativeElement);
     this.clearTimeouts();
     // Open immediately on focus for keyboard users
     this.context.setOpen(true);

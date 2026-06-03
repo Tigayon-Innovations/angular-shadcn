@@ -6,6 +6,7 @@ import {
   output,
   signal,
   Signal,
+  WritableSignal,
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, type HoverCardContextValue } from './hover-card-context';
 
@@ -94,7 +95,7 @@ export interface HoverCardProps {
   template: `<ng-content />`,
   host: {
     'attr.data-slot': '"hover-card"',
-    class: 'relative inline-block',
+    class: 'inline-block',
   },
   providers: [
     {
@@ -120,6 +121,9 @@ export class HoverCard implements HoverCardContextValue {
   readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
 
   readonly open = signal(false);
+
+  /** Reference to the trigger element for fixed positioning */
+  readonly triggerRef: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(null);
 
   /** The duration from when the pointer enters the trigger until the hover card opens (ms) */
   readonly openDelay = input<number>(700);

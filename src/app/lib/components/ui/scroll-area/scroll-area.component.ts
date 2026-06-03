@@ -98,15 +98,16 @@ export class ScrollArea {
 
   protected readonly computedClass = computed(() => cn('relative overflow-hidden', this.class()));
 
-  protected readonly viewportClass = computed(() =>
-    cn(
+  protected readonly viewportClass = computed(() => {
+    const type = this.type();
+    return cn(
       'h-full w-full rounded-[inherit]',
       '[&>div]:!block',
-      // Hide native scrollbar
+      // Hide native scrollbar (custom ScrollBar component provides visual feedback)
       '[&::-webkit-scrollbar]:hidden',
       '[-ms-overflow-style:none]',
       '[scrollbar-width:none]',
-      'overflow-auto',
-    ),
-  );
+      type === 'always' ? 'overflow-scroll' : 'overflow-auto',
+    );
+  });
 }

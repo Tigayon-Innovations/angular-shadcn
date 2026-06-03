@@ -111,7 +111,7 @@ export class DropdownMenuContent implements OnDestroy {
   /** Additional CSS classes */
   readonly class = input<string>('');
   /** Positioning strategy: 'absolute' stays within parent, 'fixed' escapes overflow containers */
-  readonly strategy = input<'absolute' | 'fixed'>('absolute');
+  readonly strategy = input<'absolute' | 'fixed'>('fixed');
 
   private readonly _elementRef = inject(ElementRef);
 
