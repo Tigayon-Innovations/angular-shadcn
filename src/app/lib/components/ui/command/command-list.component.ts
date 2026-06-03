@@ -11,6 +11,7 @@ import { COMMAND_CONTEXT } from './command-context';
   selector: 'CommandList',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"command-list"',
     '[class]': 'computedClass()',
     '[attr.id]': 'context.listId',
     role: 'listbox',

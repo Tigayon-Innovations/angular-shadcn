@@ -37,6 +37,7 @@ export const DROPDOWN_MENU_RADIO_GROUP_CONTEXT = new InjectionToken<DropdownMenu
     },
   ],
   host: {
+    'attr.data-slot': '"dropdown-menu-radio-group"',
     '[attr.role]': '"group"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

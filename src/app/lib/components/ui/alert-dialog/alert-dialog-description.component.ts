@@ -14,6 +14,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   selector: 'AlertDialogDescription',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"alert-dialog-description"',
     '[class]': 'computedClass()',
     '[attr.id]': 'context.descriptionId',
   },

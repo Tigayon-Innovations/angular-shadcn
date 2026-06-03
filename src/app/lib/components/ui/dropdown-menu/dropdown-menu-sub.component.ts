@@ -30,6 +30,7 @@ export const DROPDOWN_MENU_SUB_CONTEXT = new InjectionToken<DropdownMenuSubConte
     },
   ],
   host: {
+    'attr.data-slot': '"dropdown-menu-sub"',
     class: 'relative',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

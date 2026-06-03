@@ -16,6 +16,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'AlertDialogFooter',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"alert-dialog-footer"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

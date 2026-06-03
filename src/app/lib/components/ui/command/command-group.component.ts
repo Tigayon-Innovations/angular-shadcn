@@ -23,6 +23,7 @@ import {
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"command-group"',
     '[class]': 'computedClass()',
     '[hidden]': '!hasVisibleItems()',
   },

@@ -25,6 +25,7 @@ import { DROPDOWN_MENU_CONTEXT, type DropdownMenuContextValue } from './dropdown
     },
   ],
   host: {
+    'attr.data-slot': '"dropdown-menu"',
     class: 'relative inline-block',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

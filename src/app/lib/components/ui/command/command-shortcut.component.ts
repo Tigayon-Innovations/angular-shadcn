@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'CommandShortcut',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"command-shortcut"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DropdownMenuSeparator',
   template: ``,
   host: {
+    'attr.data-slot': '"dropdown-menu-separator"',
     '[class]': 'computedClass()',
     '[attr.role]': '"separator"',
   },

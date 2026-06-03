@@ -26,6 +26,7 @@ import { Command } from './command.component';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"command-dialog"',
     class: 'contents',
     '(document:keydown.escape)': 'onEscapeKey()',
   },

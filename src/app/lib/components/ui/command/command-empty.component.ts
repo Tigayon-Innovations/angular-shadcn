@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'CommandEmpty',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"command-empty"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

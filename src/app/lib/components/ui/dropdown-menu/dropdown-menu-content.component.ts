@@ -42,6 +42,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"dropdown-menu-content"',
     class: 'contents',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',

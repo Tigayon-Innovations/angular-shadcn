@@ -25,6 +25,7 @@ let itemIndexCounter = 0;
   selector: 'CommandItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"command-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"option"',
     '[attr.id]': 'itemId',
@@ -92,7 +93,7 @@ export class CommandItem implements OnInit, OnDestroy {
   });
   protected readonly computedClass = computed(() =>
     cn(
-      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
+      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-accent data-[selected]:text-accent-foreground data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 [&>lucide-icon]:size-4 [&>lucide-icon]:shrink-0',
       !this.disabled() && 'cursor-pointer hover:bg-accent hover:text-accent-foreground',
       this.class(),
     ),

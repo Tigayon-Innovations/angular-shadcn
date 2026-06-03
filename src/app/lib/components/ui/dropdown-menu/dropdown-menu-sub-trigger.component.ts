@@ -15,6 +15,7 @@ import { DROPDOWN_MENU_SUB_CONTEXT } from './dropdown-menu-sub.component';
     <lucide-icon [img]="ChevronRightIcon" class="ml-auto h-4 w-4" />
   `,
   host: {
+    'attr.data-slot': '"dropdown-menu-sub-trigger"',
     '[class]': 'computedClass()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
@@ -33,7 +34,7 @@ export class DropdownMenuSubTrigger {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&>svg]:size-4 [&>svg]:shrink-0',
+      'flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&>svg]:size-4 [&>svg]:shrink-0 [&>lucide-icon]:size-4 [&>lucide-icon]:shrink-0',
       this.inset() && 'pl-8',
       this.class(),
     ),

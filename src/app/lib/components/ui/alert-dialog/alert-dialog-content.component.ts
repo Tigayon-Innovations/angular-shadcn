@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   computed,
   DestroyRef,
@@ -9,8 +10,12 @@ import {
   HostListener,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
+
+/** Animation duration in ms — must match Tailwind's duration-200 */
+const EXIT_ANIMATION_MS = 200;
 
 /**
  * AlertDialogContent component - the modal content of the alert dialog.
@@ -26,9 +31,13 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   selector: 'AlertDialogContent',
   imports: [FocusTrapDirective],
   template: `
-    @if (context.isOpen()) {
+    @if (shouldRender()) {
       <!-- Overlay - does NOT close on click -->
-      <div class="fixed inset-0 z-50 bg-black/80" aria-hidden="true"></div>
+      <div
+        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-200"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
+        aria-hidden="true"
+      ></div>
       <!-- Content Dialog -->
       <div
         hlmFocusTrap
@@ -37,6 +46,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
         [restoreFocus]="false"
         [initialFocus]="'[data-slot=alert-dialog-cancel]'"
         [class]="computedClass()"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="context.titleId"
         [attr.aria-describedby]="context.descriptionId"
@@ -48,35 +58,44 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
     }
   `,
   host: {
+    'attr.data-slot': '"alert-dialog-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialogContent {
   constructor() {
-    // Handle body scroll lock based on open state
     effect(() => {
       const isOpen = this.context.isOpen();
+      this._cdr.markForCheck();
+
       if (isOpen) {
+        this.shouldRender.set(true);
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
+        if (this.shouldRender()) {
+          setTimeout(() => {
+            this.shouldRender.set(false);
+            this._cdr.markForCheck();
+          }, EXIT_ANIMATION_MS);
+        }
       }
     });
 
-    // Cleanup on destroy
     this._destroyRef.onDestroy(() => {
       this.unlockBodyScroll();
       this.restoreFocus();
     });
   }
 
-  /** Additional CSS classes */
   readonly class = input<string>('');
 
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
+  protected readonly shouldRender = signal(false);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -91,7 +110,6 @@ export class AlertDialogContent {
     ),
   );
 
-  /** Previous body overflow for restoration */
   private previousBodyOverflow = '';
 
   @HostListener('document:keydown.escape')
@@ -119,9 +137,7 @@ export class AlertDialogContent {
   private restoreFocus(): void {
     const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {
-      setTimeout(() => {
-        triggerEl.focus();
-      }, 0);
+      setTimeout(() => triggerEl.focus(), 0);
     }
   }
 }

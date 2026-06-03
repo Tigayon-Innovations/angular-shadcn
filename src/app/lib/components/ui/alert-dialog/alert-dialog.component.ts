@@ -43,6 +43,10 @@ import { ALERT_DIALOG_CONTEXT, type AlertDialogContextValue } from './alert-dial
       useExisting: forwardRef(() => AlertDialog),
     },
   ],
+  host: {
+    'attr.data-slot': '"alert-dialog"',
+    style: 'display: contents',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertDialog implements AlertDialogContextValue {

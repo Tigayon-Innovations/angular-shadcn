@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DropdownMenuShortcut',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dropdown-menu-shortcut"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

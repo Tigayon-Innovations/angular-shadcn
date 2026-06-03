@@ -15,6 +15,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   selector: 'AlertDialogAction',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"alert-dialog-action"',
     '[class]': 'computedClass()',
     '(click)': 'onClick($event)',
   },

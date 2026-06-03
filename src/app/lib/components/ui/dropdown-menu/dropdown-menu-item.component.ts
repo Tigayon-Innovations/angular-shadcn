@@ -10,6 +10,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   selector: 'DropdownMenuItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dropdown-menu-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitem"',
     '[attr.tabindex]': 'disabled() ? -1 : 0',

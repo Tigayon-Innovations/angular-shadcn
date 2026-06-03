@@ -9,6 +9,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
   selector: 'DropdownMenuTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dropdown-menu-trigger"',
     class: 'cursor-pointer',
     '(click)': 'toggle()',
     '(keydown)': 'onKeyDown($event)',

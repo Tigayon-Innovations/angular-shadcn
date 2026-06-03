@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'DropdownMenuGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dropdown-menu-group"',
     '[attr.role]': '"group"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

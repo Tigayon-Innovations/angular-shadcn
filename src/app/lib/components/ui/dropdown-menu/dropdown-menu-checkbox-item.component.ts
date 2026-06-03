@@ -27,6 +27,7 @@ import { DROPDOWN_MENU_CONTEXT } from './dropdown-menu-context';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"dropdown-menu-checkbox-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemcheckbox"',
     '[attr.aria-checked]': 'checked()',

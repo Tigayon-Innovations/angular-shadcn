@@ -21,6 +21,7 @@ import { DROPDOWN_MENU_SUB_CONTEXT } from './dropdown-menu-sub.component';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"dropdown-menu-sub-content"',
     class: 'contents',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

@@ -15,6 +15,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   selector: 'AlertDialogTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"alert-dialog-trigger"',
     '(click)': 'onClick($event)',
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'context.isOpen()',

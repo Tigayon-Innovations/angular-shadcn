@@ -20,6 +20,7 @@ import { DROPDOWN_MENU_RADIO_GROUP_CONTEXT } from './dropdown-menu-radio-group.c
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"dropdown-menu-radio-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemradio"',
     '[attr.aria-checked]': 'isSelected()',

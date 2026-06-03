@@ -63,6 +63,7 @@ const defaultFilterFn: CommandFilterFunction = (
     },
   ],
   host: {
+    'attr.data-slot': '"command"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -44,6 +44,7 @@ import { COMMAND_CONTEXT } from './command-context';
     </div>
   `,
   host: {
+    'attr.data-slot': '"command-input-wrapper"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
