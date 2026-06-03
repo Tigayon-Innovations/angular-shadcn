@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
   ChangeDetectionStrategy,
@@ -10,22 +10,25 @@ import {
   HostListener,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
-
-/** Animation duration in ms — must match Tailwind's duration-200 */
-const EXIT_ANIMATION_MS = 200;
 
 /**
  * DialogContent component - the content of the dialog.
  * Matches shadcn/ui React DialogContent exactly.
+ *
+ * Features:
+ * - Escape key closes the dialog
+ * - Overlay click closes the dialog
+ * - Focus is trapped within the dialog
+ * - Exit animations handled by Presence component (no setTimeout needed)
+ * - Focus restored on any close path (overlay click, close button, Escape, programmatic)
  */
 @Component({
   selector: 'DialogContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (shouldRender()) {
+    <Presence [present]="context.isOpen()">
       <!-- Overlay -->
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-200"
@@ -38,7 +41,7 @@ const EXIT_ANIMATION_MS = 200;
         hlmFocusTrap
         [trapFocus]="context.isOpen()"
         [autoFocus]="true"
-        [restoreFocus]="true"
+        [restoreFocus]="false"
         [initialFocus]="initialFocus()"
         [class]="computedClass()"
         [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
@@ -76,7 +79,7 @@ const EXIT_ANIMATION_MS = 200;
           </button>
         }
       </div>
-    }
+    </Presence>
   `,
   host: {
     'attr.data-slot': '"dialog-content"',
@@ -94,7 +97,6 @@ export class DialogContent {
 
       if (isOpen) {
         wasOpen = true;
-        this.shouldRender.set(true);
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
@@ -103,13 +105,6 @@ export class DialogContent {
           this.restoreFocus();
         }
         wasOpen = false;
-        if (this.shouldRender()) {
-          // Keep DOM alive for the exit animation, then unmount
-          setTimeout(() => {
-            this.shouldRender.set(false);
-            this._cdr.markForCheck();
-          }, EXIT_ANIMATION_MS);
-        }
       }
     });
 
@@ -128,8 +123,6 @@ export class DialogContent {
   private readonly _cdr = inject(ChangeDetectorRef);
 
   readonly context = inject(DIALOG_CONTEXT);
-
-  protected readonly shouldRender = signal(false);
 
   protected readonly computedClass = computed(() =>
     cn(

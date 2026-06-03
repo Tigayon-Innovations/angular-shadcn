@@ -10,6 +10,8 @@ import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
 
 export type PopoverState = 'open' | 'closed';
 
+let idCounter = 0;
+
 /**
  * Props for the Popover component
  */

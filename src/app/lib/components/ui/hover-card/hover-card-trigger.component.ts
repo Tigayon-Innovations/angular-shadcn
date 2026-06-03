@@ -99,13 +99,13 @@ export class HoverCardTrigger implements OnDestroy {
     this.clearTimeouts();
     this.openTimeout = setTimeout(() => {
       this.context.setOpen(true);
-    }, this.context.openDelay);
+    }, this.context.openDelay());
   }
   onMouseLeave(): void {
     this.clearTimeouts();
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
-    }, this.context.closeDelay);
+    }, this.context.closeDelay());
   }
   onFocus(): void {
     this.clearTimeouts();
@@ -127,7 +127,7 @@ export class HoverCardTrigger implements OnDestroy {
     this.clearTimeouts();
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
-    }, this.context.closeDelay);
+    }, this.context.closeDelay());
   }
   onKeyDown(event: Event): void {
     event.preventDefault();

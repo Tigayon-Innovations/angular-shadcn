@@ -16,6 +16,8 @@ export interface PopoverContextValue {
   triggerRef?: Signal<HTMLElement | null>;
   /** Set the trigger element reference */
   setTriggerRef?: (element: HTMLElement | null) => void;
+  /** Unique ID for aria-controls relationship */
+  contentId: string;
 }
 
 export const POPOVER_CONTEXT = new InjectionToken<PopoverContextValue>('POPOVER_CONTEXT');

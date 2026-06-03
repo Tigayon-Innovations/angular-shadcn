@@ -114,7 +114,7 @@ export class MenubarContent implements OnDestroy {
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
-          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+          '[role="menuitem"]:not([data-disabled=""]), [role="menuitemcheckbox"]:not([data-disabled=""]), [role="menuitemradio"]:not([data-disabled=""])',
         ),
       );
     }

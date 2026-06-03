@@ -4,6 +4,7 @@ export interface CollapsibleContext {
   isOpen: () => boolean;
   toggle: () => void;
   disabled: () => boolean;
+  contentId: string;
 }
 
 export const COLLAPSIBLE_CONTEXT = new InjectionToken<CollapsibleContext>('CollapsibleContext');

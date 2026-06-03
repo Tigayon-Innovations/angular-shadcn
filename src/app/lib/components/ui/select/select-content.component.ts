@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { SELECT_CONTEXT } from './select-context';
 
@@ -9,20 +9,25 @@ import { SELECT_CONTEXT } from './select-context';
  */
 @Component({
   selector: 'SelectContent',
+  imports: [Presence],
   template: `
-    <div
-      [class]="dropdownClass()"
-      [attr.id]="context?.contentId"
-      [attr.data-state]="context?.open() ? 'open' : 'closed'"
-      [attr.data-side]="side()"
-      [attr.data-align]="align()"
-      role="listbox"
-      (keydown.escape)="onEscape()"
-    >
-      <div [class]="viewportClass()">
-        <ng-content />
+    <Presence [present]="context?.open() ?? false">
+      <div
+        [class]="dropdownClass()"
+        [attr.id]="context?.contentId"
+        [attr.data-state]="context?.open() ? 'open' : 'closed'"
+        [attr.data-side]="side()"
+        [attr.data-align]="align()"
+        [attr.aria-activedescendant]="focusedItemId()"
+        role="listbox"
+        (keydown.escape)="onEscape()"
+        (keydown)="onKeydown($event)"
+      >
+        <div [class]="viewportClass()">
+          <ng-content />
+        </div>
       </div>
-    </div>
+    </Presence>
   `,
   host: {
     class: 'contents',
@@ -58,11 +63,27 @@ export class SelectContent {
   /** Viewport class */
   protected readonly viewportClass = computed(() => cn('max-h-60 overflow-y-auto p-1'));
 
+  /** ID of the currently focused item for aria-activedescendant */
+  protected readonly focusedItemId = computed(() => {
+    if (!this.context) return null;
+    const values = this.context.itemValues();
+    const focusedIndex = this.context.focusedIndex();
+    const focusedValue = values[focusedIndex];
+    return focusedValue ? `select-item-${focusedValue}` : null;
+  });
+
   protected onEscape(): void {
     this.context?.setOpen(false);
     const trigger = this.context?.triggerElement();
     if (trigger) {
       setTimeout(() => trigger.focus());
+    }
+  }
+
+  /** Handle printable character keys for typeahead search */
+  onKeydown(event: KeyboardEvent): void {
+    if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      this.context?.handleTypeahead(event.key);
     }
   }
 }

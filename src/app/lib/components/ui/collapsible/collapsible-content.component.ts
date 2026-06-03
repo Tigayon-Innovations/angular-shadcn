@@ -22,7 +22,8 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
     '[class]': 'computedClass()',
     '[attr.data-state]': 'collapsible.isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',
-    '[attr.aria-hidden]': '!collapsible.isOpen()',
+    '[attr.id]': 'collapsible.contentId',
+    '[attr.inert]': '!collapsible.isOpen() || null',
   },
   styles: [
     `

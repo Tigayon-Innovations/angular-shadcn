@@ -22,6 +22,16 @@ export interface NavigationMenuContextValue {
   activeItem: WritableSignal<string | null>;
   /** Layout orientation of the menu */
   orientation: WritableSignal<NavigationMenuOrientation>;
+  /** Ordered list of registered trigger element IDs */
+  triggerIds: WritableSignal<string[]>;
+  /** Register a trigger ID (called by NavigationMenuTrigger on init) */
+  registerTrigger: (triggerId: string) => void;
+  /** Unregister a trigger ID (called by NavigationMenuTrigger on destroy) */
+  unregisterTrigger: (triggerId: string) => void;
+  /** Move DOM focus to the next trigger in document order */
+  focusNextTrigger: (currentTriggerId: string) => void;
+  /** Move DOM focus to the previous trigger in document order */
+  focusPreviousTrigger: (currentTriggerId: string) => void;
 }
 
 export const NAVIGATION_MENU_CONTEXT = new InjectionToken<NavigationMenuContextValue>(
@@ -38,6 +48,10 @@ export const NAVIGATION_MENU_CONTEXT = new InjectionToken<NavigationMenuContextV
 export interface NavigationMenuItemContextValue {
   /** Unique identifier for this item */
   itemId: string;
+  /** DOM id for the trigger element (used for aria-controls / aria-labelledby) */
+  triggerId: string;
+  /** DOM id for the content element (used for aria-controls) */
+  contentId: string;
   /** Whether this item's content is open */
   open: WritableSignal<boolean>;
 }

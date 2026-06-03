@@ -126,6 +126,8 @@ export class Tooltip implements TooltipContextValue {
   readonly disableHoverableContent = input<boolean>(false);
 
   readonly open = signal(false);
+  /** Reference to the trigger element for fixed positioning */
+  readonly triggerRef = signal<HTMLElement | null>(null);
 
   /** The duration from when the pointer enters the trigger until the tooltip opens */
   readonly delayDuration = 700;

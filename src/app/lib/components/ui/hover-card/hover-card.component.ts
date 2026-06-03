@@ -5,6 +5,7 @@ import {
   input,
   output,
   signal,
+  Signal,
 } from '@angular/core';
 import { HOVER_CARD_CONTEXT, type HoverCardContextValue } from './hover-card-context';
 
@@ -121,9 +122,9 @@ export class HoverCard implements HoverCardContextValue {
   readonly open = signal(false);
 
   /** The duration from when the pointer enters the trigger until the hover card opens (ms) */
-  readonly openDelay = 700;
+  readonly openDelay = input<number>(700);
   /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
-  readonly closeDelay = 300;
+  readonly closeDelay = input<number>(300);
 
   setOpen(open: boolean): void {
     if (this.controlledOpen() === undefined) {

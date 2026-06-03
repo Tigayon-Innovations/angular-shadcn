@@ -16,6 +16,8 @@ export interface TooltipContextValue {
   tooltipId: string;
   /** Whether hoverable content is disabled */
   disableHoverableContent: () => boolean;
+  /** Reference to the trigger element for fixed positioning */
+  triggerRef?: WritableSignal<HTMLElement | null>;
 }
 
 export const TOOLTIP_CONTEXT = new InjectionToken<TooltipContextValue>('TOOLTIP_CONTEXT');

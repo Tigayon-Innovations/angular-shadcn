@@ -155,7 +155,7 @@ export class HoverCardContent implements OnDestroy {
   onMouseLeave(): void {
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
-    }, this.context.closeDelay);
+    }, this.context.closeDelay());
   }
   onFocusIn(): void {
     this.clearTimeout();
@@ -171,7 +171,7 @@ export class HoverCardContent implements OnDestroy {
 
     this.closeTimeout = setTimeout(() => {
       this.context.setOpen(false);
-    }, this.context.closeDelay);
+    }, this.context.closeDelay());
   }
   onEscape(): void {
     this.context.setOpen(false);

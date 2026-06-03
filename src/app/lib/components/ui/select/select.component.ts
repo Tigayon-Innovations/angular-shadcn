@@ -199,6 +199,11 @@ export class Select {
   private readonly _isDisabled = signal<boolean>(false);
 
   private readonly ariaIds = this._ariaIdService.generateMenuIds('select');
+  /** Internal typeahead signals */
+  private readonly _itemLabels = signal<Map<string, string>>(new Map());
+  private readonly _typeaheadBuffer = signal<string>('');
+  private readonly _typeaheadTimeout = signal<ReturnType<typeof setTimeout> | null>(null);
+
   /** Context for child components */
   readonly context: SelectContext = {
     value: this._value,
@@ -232,6 +237,11 @@ export class Select {
       }
     },
     focusItem: (index: number) => this.focusItemByIndex(index),
+    itemLabels: this._itemLabels,
+    typeaheadBuffer: this._typeaheadBuffer,
+    typeaheadTimeout: this._typeaheadTimeout,
+    handleTypeahead: (char: string) => this.handleTypeahead(char),
+    focusMatchingItem: (query: string) => this.focusMatchingItem(query),
   };
 
   /** Focus an item by index */
@@ -246,6 +256,42 @@ export class Select {
     ) as HTMLElement;
     if (selectItem) {
       selectItem.focus();
+    }
+  }
+
+  /** Handle typeahead: accumulate char, clear after 500 ms, then focus matching item */
+  private handleTypeahead(char: string): void {
+    // Clear existing timeout
+    const existingTimeout = this._typeaheadTimeout();
+    if (existingTimeout !== null) {
+      clearTimeout(existingTimeout);
+    }
+
+    const newBuffer = this._typeaheadBuffer() + char;
+    this._typeaheadBuffer.set(newBuffer);
+
+    const timeout = setTimeout(() => {
+      this._typeaheadBuffer.set('');
+      this._typeaheadTimeout.set(null);
+    }, 500);
+    this._typeaheadTimeout.set(timeout);
+
+    this.focusMatchingItem(newBuffer);
+  }
+
+  /** Focus the first item whose label starts with query (case-insensitive) */
+  private focusMatchingItem(query: string): void {
+    const values = this.context.itemValues();
+    const labels = this._itemLabels();
+    const lowerQuery = query.toLowerCase();
+
+    const matchIndex = values.findIndex((v) => {
+      const label = labels.get(v) ?? v;
+      return label.toLowerCase().startsWith(lowerQuery);
+    });
+
+    if (matchIndex !== -1) {
+      this.focusItemByIndex(matchIndex);
     }
   }
 }
