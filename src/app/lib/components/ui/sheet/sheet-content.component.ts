@@ -120,7 +120,10 @@ export class SheetContent implements OnDestroy {
     this.close();
   }
   onEscapeKey(): void {
-    this.close();
+    // Guard: only close when the sheet is actually open (not during exit animation)
+    if (this.context.open()) {
+      this.close();
+    }
   }
   onClose(): void {
     this.close();

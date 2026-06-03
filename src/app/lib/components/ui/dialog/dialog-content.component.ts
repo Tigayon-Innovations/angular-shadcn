@@ -86,15 +86,23 @@ const EXIT_ANIMATION_MS = 200;
 })
 export class DialogContent {
   constructor() {
+    let wasOpen = false;
+
     effect(() => {
       const isOpen = this.context.isOpen();
       this._cdr.markForCheck();
 
       if (isOpen) {
+        wasOpen = true;
         this.shouldRender.set(true);
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
+        // Restore focus on any close path (overlay click, close button, Escape, programmatic)
+        if (wasOpen) {
+          this.restoreFocus();
+        }
+        wasOpen = false;
         if (this.shouldRender()) {
           // Keep DOM alive for the exit animation, then unmount
           setTimeout(() => {
@@ -137,6 +145,7 @@ export class DialogContent {
   );
 
   private previousBodyOverflow = '';
+  private previousBodyPaddingRight = '';
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
@@ -154,17 +163,22 @@ export class DialogContent {
 
   private lockBodyScroll(): void {
     if (typeof document !== 'undefined') {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       this.previousBodyOverflow = document.body.style.overflow;
+      this.previousBodyPaddingRight = document.body.style.paddingRight;
       document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+      }
     }
   }
   private unlockBodyScroll(): void {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = this.previousBodyOverflow;
+      document.body.style.paddingRight = this.previousBodyPaddingRight;
     }
   }
   private close(): void {
-    this.restoreFocus();
     this.context.setOpen(false);
   }
   private restoreFocus(): void {
