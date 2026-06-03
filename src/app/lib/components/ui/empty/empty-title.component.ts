@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'EmptyTitle',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"empty-title"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

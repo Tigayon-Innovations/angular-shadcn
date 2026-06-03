@@ -24,6 +24,7 @@ import { CHART_CONTEXT, type ChartConfig, type ChartContext } from './chart-cont
   selector: 'ChartContainer',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"chart-container"',
     '[class]': 'computedClass()',
     '[style]': 'chartStyles()',
     'data-chart': '',

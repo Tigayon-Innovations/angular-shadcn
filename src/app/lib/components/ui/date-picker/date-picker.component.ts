@@ -44,6 +44,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
     </Popover>
   `,
   host: {
+    'attr.data-slot': '"date-picker"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

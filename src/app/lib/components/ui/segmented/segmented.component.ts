@@ -33,6 +33,7 @@ import { segmentedVariants, type SegmentedVariants } from './segmented-variants'
   selector: 'Segmented',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"segmented"',
     '[class]': 'computedClass()',
     role: 'tablist',
     '[attr.aria-orientation]': '"horizontal"',

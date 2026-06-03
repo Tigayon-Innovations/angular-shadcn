@@ -10,6 +10,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'InputGroupInput',
   template: ``,
   host: {
+    'attr.data-slot': '"input-group-input"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

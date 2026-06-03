@@ -13,6 +13,7 @@ import { segmentedItemVariants } from './segmented-variants';
   selector: 'SegmentedItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"segmented-item"',
     '[class]': 'computedClass()',
     '[attr.role]': 'itemRole()',
     '[attr.aria-selected]': 'itemRole() === "tab" ? isSelected() : null',

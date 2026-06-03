@@ -10,6 +10,7 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
   selector: 'CarouselItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"carousel-item"',
     '[class]': 'computedClass()',
     role: 'group',
     'aria-roledescription': 'slide',

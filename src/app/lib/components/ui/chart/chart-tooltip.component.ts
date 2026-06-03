@@ -6,11 +6,11 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
  */
 @Component({
   selector: 'ChartTooltip',
-  template: `
-    <div [class]="computedClass()">
-      <ng-content />
-    </div>
-  `,
+  template: `<ng-content />`,
+  host: {
+    'attr.data-slot': '"chart-tooltip"',
+    '[class]': 'computedClass()',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartTooltip {

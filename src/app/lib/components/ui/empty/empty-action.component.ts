@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'EmptyAction',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"empty-action"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -24,6 +24,7 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
     </button>
   `,
   host: {
+    'attr.data-slot': '"carousel-next"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

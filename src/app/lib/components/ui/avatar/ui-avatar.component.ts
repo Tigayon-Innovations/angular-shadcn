@@ -14,6 +14,10 @@ import { Avatar } from './avatar.component';
   selector: 'ui-avatar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Avatar, AvatarImage, AvatarFallback],
+  host: {
+    'attr.data-slot': '"ui-avatar"',
+    style: 'display: contents',
+  },
   template: `
     <Avatar [class]="class()">
       @if (src()) {
