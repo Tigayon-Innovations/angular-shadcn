@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'InputOTPGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"input-otp-group"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

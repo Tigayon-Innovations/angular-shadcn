@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TableCell',
   template: `<td [class]="computedClass()"><ng-content /></td>`,
   host: {
+    'attr.data-slot': '"table-cell"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

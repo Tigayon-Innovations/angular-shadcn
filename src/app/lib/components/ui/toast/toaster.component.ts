@@ -84,6 +84,7 @@ export interface ToasterProps {
     </div>
   `,
   host: {
+    'attr.data-slot': '"toaster"',
     class: 'contents',
     ngSkipHydration: 'true',
   },

@@ -44,6 +44,7 @@ export interface ToastActionProps {
     </button>
   `,
   host: {
+    'attr.data-slot': '"toast-action"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TableHead',
   template: `<th [scope]="scope()" [class]="computedClass()"><ng-content /></th>`,
   host: {
+    'attr.data-slot': '"table-head"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

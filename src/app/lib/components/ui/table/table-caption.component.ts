@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <ng-content />
   </caption>`,
   host: {
+    'attr.data-slot': '"table-caption"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

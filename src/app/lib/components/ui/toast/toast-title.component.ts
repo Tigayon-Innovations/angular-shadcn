@@ -30,6 +30,7 @@ export interface ToastTitleProps {
   selector: 'ToastTitle',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"toast-title"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

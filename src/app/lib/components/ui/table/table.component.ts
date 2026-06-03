@@ -29,6 +29,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     </table>
   `,
   host: {
+    'attr.data-slot': '"table"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

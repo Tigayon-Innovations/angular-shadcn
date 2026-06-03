@@ -15,6 +15,7 @@ import { LucideAngularModule, Minus } from 'lucide-angular';
     </div>
   `,
   host: {
+    'attr.data-slot': '"input-otp-separator"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

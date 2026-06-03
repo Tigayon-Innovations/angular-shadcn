@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <ng-content />
   </tfoot>`,
   host: {
+    'attr.data-slot': '"table-footer"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

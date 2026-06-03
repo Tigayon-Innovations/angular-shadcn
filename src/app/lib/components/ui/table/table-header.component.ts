@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <ng-content />
   </thead>`,
   host: {
+    'attr.data-slot': '"table-header"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

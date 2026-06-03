@@ -19,6 +19,7 @@ import { INPUT_OTP_CONTEXT } from './input-otp-context';
     }
   `,
   host: {
+    'attr.data-slot': '"input-otp-slot"',
     '[class]': 'computedClass()',
     '[attr.data-active]': 'isActive() ? "" : null',
     '[attr.aria-label]': 'ariaLabel()',

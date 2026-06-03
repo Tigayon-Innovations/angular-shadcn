@@ -130,6 +130,7 @@ export interface InputOTPProps {
     },
   ],
   host: {
+    'attr.data-slot': '"input-otp"',
     class: 'contents',
     '[attr.data-disabled]': 'disabled() ? "" : null',
   },

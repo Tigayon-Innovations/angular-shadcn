@@ -30,6 +30,7 @@ export interface ToastDescriptionProps {
   selector: 'ToastDescription',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"toast-description"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

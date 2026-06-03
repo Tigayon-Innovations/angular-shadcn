@@ -133,6 +133,7 @@ export interface ToastProps {
     </div>
   `,
   host: {
+    'attr.data-slot': '"toast"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
