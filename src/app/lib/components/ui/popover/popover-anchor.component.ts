@@ -42,6 +42,7 @@ export interface PopoverAnchorProps {
   selector: 'PopoverAnchor',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"popover-anchor"',
     class: 'inline-block',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

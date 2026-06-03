@@ -21,6 +21,7 @@ import { CONTEXT_MENU_SUB_CONTEXT } from './context-menu-sub.component';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"context-menu-sub-content"',
     class: 'contents',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

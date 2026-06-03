@@ -107,6 +107,7 @@ export interface PopoverContentProps {
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"popover-content"',
     class: 'contents',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',

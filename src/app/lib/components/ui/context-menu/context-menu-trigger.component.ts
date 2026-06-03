@@ -10,6 +10,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   selector: 'ContextMenuTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"context-menu-trigger"',
     '[attr.tabindex]': '0',
     '(contextmenu)': 'onContextMenu($event)',
     '(keydown)': 'onKeydown($event)',

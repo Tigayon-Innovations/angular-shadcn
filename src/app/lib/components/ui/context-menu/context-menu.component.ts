@@ -20,6 +20,7 @@ import { CONTEXT_MENU_CONTEXT, type ContextMenuContextValue } from './context-me
     },
   ],
   host: {
+    'attr.data-slot': '"context-menu"',
     class: 'relative inline-block',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

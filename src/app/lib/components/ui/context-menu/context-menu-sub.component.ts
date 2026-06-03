@@ -30,6 +30,7 @@ export const CONTEXT_MENU_SUB_CONTEXT = new InjectionToken<ContextMenuSubContext
     },
   ],
   host: {
+    'attr.data-slot': '"context-menu-sub"',
     class: 'relative',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

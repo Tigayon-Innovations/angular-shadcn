@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'ContextMenuShortcut',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"context-menu-shortcut"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

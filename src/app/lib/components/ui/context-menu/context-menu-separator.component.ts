@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'ContextMenuSeparator',
   template: ``,
   host: {
+    'attr.data-slot': '"context-menu-separator"',
     '[class]': 'computedClass()',
     '[attr.role]': '"separator"',
   },

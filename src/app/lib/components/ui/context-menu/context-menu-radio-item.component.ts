@@ -20,6 +20,7 @@ import { CONTEXT_MENU_RADIO_GROUP_CONTEXT } from './context-menu-radio-group.com
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"context-menu-radio-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemradio"',
     '[attr.aria-checked]': 'isSelected()',

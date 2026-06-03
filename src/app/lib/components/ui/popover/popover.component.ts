@@ -98,6 +98,7 @@ export interface PopoverProps {
   selector: 'Popover',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"popover"',
     class: 'relative',
   },
   providers: [

@@ -35,6 +35,7 @@ export const CONTEXT_MENU_RADIO_GROUP_CONTEXT = new InjectionToken<ContextMenuRa
     },
   ],
   host: {
+    'attr.data-slot': '"context-menu-radio-group"',
     '[attr.role]': '"group"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

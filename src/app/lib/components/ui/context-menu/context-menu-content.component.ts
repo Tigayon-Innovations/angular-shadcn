@@ -38,6 +38,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"context-menu-content"',
     class: 'contents',
     '(document:click)': 'onDocumentClick()',
     '(document:keydown.escape)': 'onEscapeKey()',

@@ -27,6 +27,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"context-menu-checkbox-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemcheckbox"',
     '[attr.aria-checked]': 'checked()',

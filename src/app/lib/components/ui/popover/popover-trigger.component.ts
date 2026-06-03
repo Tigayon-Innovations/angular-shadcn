@@ -59,6 +59,7 @@ export interface PopoverTriggerProps {
   selector: 'PopoverTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"popover-trigger"',
     '(click)': 'onClick($event)',
     '[attr.aria-expanded]': 'context.open()',
     '[attr.aria-haspopup]': '"dialog"',

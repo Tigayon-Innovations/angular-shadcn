@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'ContextMenuLabel',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"context-menu-label"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
