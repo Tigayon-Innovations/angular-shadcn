@@ -40,7 +40,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   host: {
     'attr.data-slot': '"context-menu-content"',
     class: 'contents',
-    '(document:click)': 'onDocumentClick()',
+    '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',
     '(document:contextmenu)': 'onAnotherContextMenu()',
   },
@@ -194,8 +194,12 @@ export class ContextMenuContent implements OnDestroy {
       triggerEl.focus();
     }
   }
-  protected onDocumentClick(): void {
-    this.close();
+  protected onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const host = this._elementRef.nativeElement;
+    if (!host.contains(target)) {
+      this.close();
+    }
   }
   protected onEscapeKey(): void {
     this.close();

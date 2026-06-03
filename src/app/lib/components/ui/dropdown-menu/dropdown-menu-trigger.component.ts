@@ -36,6 +36,31 @@ export class DropdownMenuTrigger {
         this.context.open.set(true);
         this.context.focusedIndex.set(0);
         break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.context.triggerElement.set(this._elementRef.nativeElement);
+        this.context.open.set(true);
+        // Set focusedIndex to -1 so the content effect opens normally,
+        // then after it renders and focuses the first item we move to last.
+        this.context.focusedIndex.set(-1);
+        setTimeout(() => {
+          // After the content's own setTimeout(0) has run and focused item[0],
+          // query the menu items and focus the last one.
+          const menu = document.querySelector('[data-slot="dropdown-menu-content"] [role="menu"]');
+          if (menu) {
+            const items = Array.from(
+              menu.querySelectorAll<HTMLElement>(
+                '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled=""])',
+              ),
+            );
+            if (items.length > 0) {
+              const lastIndex = items.length - 1;
+              items[lastIndex].focus();
+              this.context.focusedIndex.set(lastIndex);
+            }
+          }
+        }, 10);
+        break;
       case 'Enter':
       case ' ':
         event.preventDefault();

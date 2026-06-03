@@ -8,6 +8,8 @@ import {
 
 export interface ContextMenuSubContext {
   open: WritableSignal<boolean>;
+  /** True while the mouse is hovering over the sub-content panel */
+  isMouseInSubContent: WritableSignal<boolean>;
 }
 
 export const CONTEXT_MENU_SUB_CONTEXT = new InjectionToken<ContextMenuSubContext>(
@@ -26,6 +28,7 @@ export const CONTEXT_MENU_SUB_CONTEXT = new InjectionToken<ContextMenuSubContext
       provide: CONTEXT_MENU_SUB_CONTEXT,
       useFactory: (): ContextMenuSubContext => ({
         open: signal(false),
+        isMouseInSubContent: signal(false),
       }),
     },
   ],

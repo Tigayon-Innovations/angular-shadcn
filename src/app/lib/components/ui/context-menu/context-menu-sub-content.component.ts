@@ -43,9 +43,11 @@ export class ContextMenuSubContent {
   );
 
   protected onMouseEnter(): void {
+    this.subContext.isMouseInSubContent.set(true);
     this.subContext.open.set(true);
   }
   protected onMouseLeave(): void {
+    this.subContext.isMouseInSubContent.set(false);
     this.subContext.open.set(false);
   }
 }

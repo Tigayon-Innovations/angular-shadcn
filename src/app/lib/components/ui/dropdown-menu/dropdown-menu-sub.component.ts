@@ -8,6 +8,8 @@ import {
 
 export interface DropdownMenuSubContext {
   open: WritableSignal<boolean>;
+  /** True while the mouse is hovering over the sub-content panel */
+  isMouseInSubContent: WritableSignal<boolean>;
 }
 
 export const DROPDOWN_MENU_SUB_CONTEXT = new InjectionToken<DropdownMenuSubContext>(
@@ -26,6 +28,7 @@ export const DROPDOWN_MENU_SUB_CONTEXT = new InjectionToken<DropdownMenuSubConte
       provide: DROPDOWN_MENU_SUB_CONTEXT,
       useFactory: (): DropdownMenuSubContext => ({
         open: signal(false),
+        isMouseInSubContent: signal(false),
       }),
     },
   ],

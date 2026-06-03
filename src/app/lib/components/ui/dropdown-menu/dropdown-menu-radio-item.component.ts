@@ -67,5 +67,6 @@ export class DropdownMenuRadioItem {
     }
     this._radioGroupContext.setValue(this.value());
     this.onSelect.emit();
+    this._context.open.set(false);
   }
 }
