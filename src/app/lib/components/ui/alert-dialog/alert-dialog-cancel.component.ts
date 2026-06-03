@@ -18,7 +18,7 @@ import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
   host: {
     '[class]': 'computedClass()',
     '(click)': 'onClick($event)',
-    'data-slot': 'alert-dialog-cancel',
+    'attr.data-slot': '"alert-dialog-cancel"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

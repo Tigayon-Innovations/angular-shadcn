@@ -40,7 +40,7 @@ let comboboxIdCounter = 0;
   exportAs: 'combobox',
   host: {
     '[class]': 'computedClass()',
-    'data-slot': 'combobox',
+    'attr.data-slot': '"combobox"',
   },
   providers: [
     {

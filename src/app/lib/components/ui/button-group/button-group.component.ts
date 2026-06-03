@@ -24,6 +24,7 @@ import { buttonGroupVariants, type ButtonGroupVariants } from './button-group-va
   selector: 'ButtonGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"button-group"',
     '[class]': 'computedClass()',
     role: 'group',
   },

@@ -36,7 +36,7 @@ import {
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    'data-slot': 'data-table',
+    'attr.data-slot': '"data-table"',
     ngSkipHydration: 'true',
   },
   providers: [

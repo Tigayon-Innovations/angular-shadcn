@@ -42,7 +42,7 @@ import { nativeSelectVariants, type NativeSelectVariants } from './native-select
   template: `<ng-content />`,
   host: {
     '[class]': 'computedClass()',
-    'data-slot': 'native-select',
+    'attr.data-slot': '"native-select"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

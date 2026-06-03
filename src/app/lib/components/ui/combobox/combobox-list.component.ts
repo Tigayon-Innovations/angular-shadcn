@@ -33,7 +33,7 @@ import { ComboboxItem } from './combobox-item.component';
   `,
   host: {
     class: 'contents',
-    'data-slot': 'combobox-list',
+    'attr.data-slot': '"combobox-list"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
