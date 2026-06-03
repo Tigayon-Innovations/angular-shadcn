@@ -74,6 +74,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
     </div>
   `,
   host: {
+    'attr.data-slot': '"data-table-pagination"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

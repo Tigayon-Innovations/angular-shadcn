@@ -49,8 +49,9 @@ export class SelectContent {
   protected readonly dropdownClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground absolute left-0 top-full z-50 mt-1 w-full overflow-hidden rounded-md border shadow-md',
-      'animate-in fade-in-0 zoom-in-95',
-      !this.context?.open() && 'pointer-events-none invisible opacity-0',
+      'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
+      'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
+      'data-[state=closed]:pointer-events-none',
       this.class(),
     ),
   );

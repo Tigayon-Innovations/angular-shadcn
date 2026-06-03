@@ -40,6 +40,7 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
     />
   `,
   host: {
+    'attr.data-slot': '"combobox-input"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

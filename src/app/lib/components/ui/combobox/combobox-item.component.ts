@@ -50,6 +50,7 @@ import { LucideAngularModule } from 'lucide-angular';
     </div>
   `,
   host: {
+    'attr.data-slot': '"combobox-item"',
     '[class]': 'computedClass()',
     '[id]': 'optionId()',
     role: 'option',
@@ -65,7 +66,6 @@ import { LucideAngularModule } from 'lucide-angular';
 })
 export class ComboboxItem {
   constructor() {
-    // Scroll into view when highlighted
     effect(() => {
       if (this.isHighlighted()) {
         this.itemElement()?.nativeElement?.scrollIntoView({
@@ -73,8 +73,6 @@ export class ComboboxItem {
           behavior: 'smooth',
         });
       }
-
-      // console.log('icon position on combobox item', this.iconPosition());
     });
   }
 
@@ -93,7 +91,6 @@ export class ComboboxItem {
 
   protected readonly context = inject(COMBOBOX_CONTEXT);
 
-  // readonly iconPosition = this.context.iconPosition();
   readonly iconPosition = computed(() => this.context.iconPosition());
   protected readonly option = computed(() =>
     this.context.options().find((o) => o.value === this.value()),

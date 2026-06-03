@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DataTableToolbar',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"data-table-toolbar"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

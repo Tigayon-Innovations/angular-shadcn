@@ -21,6 +21,7 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
   `,
   imports: [LucideAngularModule],
   host: {
+    'attr.data-slot': '"combobox-trigger"',
     '[class]': 'computedClass()',
     role: 'combobox',
     '[attr.id]': 'context.id + "-trigger"',

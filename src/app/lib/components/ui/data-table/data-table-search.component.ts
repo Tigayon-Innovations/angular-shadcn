@@ -16,6 +16,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
     />
   `,
   host: {
+    'attr.data-slot': '"data-table-search"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

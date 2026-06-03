@@ -96,6 +96,7 @@ import {
     </div>
   `,
   host: {
+    'attr.data-slot': '"data-table-content"',
     '[class]': 'computedClass()',
     ngSkipHydration: 'true',
   },

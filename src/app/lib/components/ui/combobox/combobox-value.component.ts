@@ -26,6 +26,7 @@ import { LucideAngularModule } from 'lucide-angular';
       <span class="text-neutral-500">{{ placeholder() }}</span>
     }`,
   host: {
+    'attr.data-slot': '"combobox-value"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

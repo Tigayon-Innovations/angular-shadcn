@@ -42,6 +42,7 @@ import { DATA_TABLE_CONTEXT } from './data-table-context';
     </div>
   `,
   host: {
+    'attr.data-slot': '"data-table-view-options"',
     '[class]': 'computedClass()',
     '(document:click)': 'onDocumentClick($event)',
   },

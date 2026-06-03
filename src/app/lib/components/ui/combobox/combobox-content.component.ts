@@ -25,6 +25,7 @@ import { COMBOBOX_CONTEXT } from './combobox-context';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"combobox-content"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'context.open() ? "open" : "closed"',
   },

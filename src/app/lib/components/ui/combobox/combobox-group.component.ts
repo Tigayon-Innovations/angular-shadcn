@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'ComboboxGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"combobox-group"',
     '[class]': 'computedClass()',
     role: 'group',
     '[attr.aria-label]': 'label()',
