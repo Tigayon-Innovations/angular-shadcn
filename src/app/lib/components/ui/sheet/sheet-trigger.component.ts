@@ -9,6 +9,7 @@ import { SHEET_CONTEXT } from './sheet-context';
   selector: 'SheetTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sheet-trigger"',
     '(click)': 'onClick($event)',
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'context.open()',

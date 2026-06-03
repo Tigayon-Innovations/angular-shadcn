@@ -9,6 +9,7 @@ import { SHEET_CONTEXT } from './sheet-context';
   selector: 'SheetClose',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sheet-close"',
     class: 'contents',
     '(click)': 'onClick($event)',
   },

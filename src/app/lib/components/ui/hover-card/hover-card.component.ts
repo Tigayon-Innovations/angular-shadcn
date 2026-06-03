@@ -92,6 +92,7 @@ export interface HoverCardProps {
   selector: 'HoverCard',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"hover-card"',
     class: 'relative inline-block',
   },
   providers: [

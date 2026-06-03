@@ -64,6 +64,7 @@ export interface HoverCardTriggerProps {
   selector: 'HoverCardTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"hover-card-trigger"',
     tabindex: '0',
     role: 'button',
     '(mouseenter)': 'onMouseEnter()',

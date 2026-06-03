@@ -76,6 +76,7 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"sheet-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

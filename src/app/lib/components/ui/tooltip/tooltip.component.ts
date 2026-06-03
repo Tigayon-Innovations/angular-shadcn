@@ -96,6 +96,7 @@ export interface TooltipProps {
   selector: 'Tooltip',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"tooltip"',
     class: 'relative inline-block',
   },
   providers: [

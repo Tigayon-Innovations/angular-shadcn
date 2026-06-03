@@ -93,6 +93,7 @@ export interface HoverCardContentProps {
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"hover-card-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

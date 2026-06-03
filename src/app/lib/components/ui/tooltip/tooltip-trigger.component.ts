@@ -54,6 +54,7 @@ export interface TooltipTriggerProps {
   selector: 'TooltipTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"tooltip-trigger"',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
     '(focus)': 'onFocus()',

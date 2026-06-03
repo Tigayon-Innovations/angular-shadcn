@@ -33,6 +33,10 @@ import { SHEET_CONTEXT, type SheetContextValue } from './sheet-context';
 @Component({
   selector: 'Sheet',
   template: `<ng-content />`,
+  host: {
+    'attr.data-slot': '"sheet"',
+    style: 'display: contents',
+  },
   providers: [
     {
       provide: SHEET_CONTEXT,

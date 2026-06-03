@@ -91,6 +91,7 @@ export interface TooltipContentProps {
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"tooltip-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

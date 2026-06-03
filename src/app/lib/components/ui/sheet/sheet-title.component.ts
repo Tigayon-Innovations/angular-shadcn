@@ -11,6 +11,7 @@ import { SHEET_CONTEXT } from './sheet-context';
   selector: 'SheetTitle',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sheet-title"',
     '[class]': 'computedClass()',
     '[attr.id]': 'context.titleId',
   },

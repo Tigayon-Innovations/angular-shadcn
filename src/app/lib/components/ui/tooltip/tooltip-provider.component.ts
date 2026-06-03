@@ -52,6 +52,10 @@ export interface TooltipProviderProps {
 @Component({
   selector: 'TooltipProvider',
   template: `<ng-content />`,
+  host: {
+    'attr.data-slot': '"tooltip-provider"',
+    style: 'display: contents',
+  },
   providers: [
     {
       provide: TOOLTIP_CONTEXT,
