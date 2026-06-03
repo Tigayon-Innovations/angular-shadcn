@@ -20,6 +20,7 @@ import { navigationMenuTriggerStyle } from './navigation-menu-trigger-style';
     />
   `,
   host: {
+    'attr.data-slot': '"navigation-menu-trigger"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'itemContext.open() ? "open" : "closed"',
     '(click)': 'toggle()',

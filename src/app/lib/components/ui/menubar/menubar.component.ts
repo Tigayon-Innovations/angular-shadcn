@@ -131,6 +131,7 @@ export interface MenubarProps {
     },
   ],
   host: {
+    'attr.data-slot': '"menubar"',
     '[class]': 'computedClass()',
     role: 'menubar',
     'aria-orientation': 'horizontal',

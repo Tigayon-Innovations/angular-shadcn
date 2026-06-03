@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'MenubarShortcut',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"menubar-shortcut"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

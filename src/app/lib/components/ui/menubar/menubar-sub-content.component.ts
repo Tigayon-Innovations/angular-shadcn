@@ -21,6 +21,7 @@ import { MENUBAR_SUB_CONTEXT } from './menubar-sub.component';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"menubar-sub-content"',
     class: 'contents',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

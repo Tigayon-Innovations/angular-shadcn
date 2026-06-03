@@ -34,6 +34,7 @@ import { COLLAPSIBLE_CONTEXT, CollapsibleContext } from './collapsible-context';
   selector: 'Collapsible',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"collapsible"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'disabled() ? "" : null',

@@ -33,6 +33,7 @@ let menuIdCounter = 0;
     },
   ],
   host: {
+    'attr.data-slot': '"menubar-menu"',
     class: 'relative',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

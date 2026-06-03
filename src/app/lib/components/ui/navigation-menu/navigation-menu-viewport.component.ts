@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'NavigationMenuViewport',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"navigation-menu-viewport"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -27,6 +27,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"menubar-checkbox-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemcheckbox"',
     '[attr.aria-checked]': 'checked()',

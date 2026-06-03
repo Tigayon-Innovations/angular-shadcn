@@ -18,6 +18,7 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
     </div>
   `,
   host: {
+    'attr.data-slot': '"collapsible-content"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'collapsible.isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',

@@ -19,6 +19,7 @@ import { MENUBAR_RADIO_GROUP_CONTEXT } from './menubar-radio-group.component';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"menubar-radio-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitemradio"',
     '[attr.aria-checked]': 'isSelected()',

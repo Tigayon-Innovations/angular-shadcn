@@ -24,6 +24,7 @@ import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigat
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"navigation-menu-content"',
     class: 'contents',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',

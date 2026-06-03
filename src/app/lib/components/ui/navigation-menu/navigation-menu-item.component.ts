@@ -24,6 +24,7 @@ let itemIdCounter = 0;
     },
   ],
   host: {
+    'attr.data-slot': '"navigation-menu-item"',
     class: 'relative',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

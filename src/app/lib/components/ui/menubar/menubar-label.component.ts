@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'MenubarLabel',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"menubar-label"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

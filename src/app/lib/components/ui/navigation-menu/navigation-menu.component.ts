@@ -114,6 +114,10 @@ export interface NavigationMenuProps {
       <NavigationMenuViewport />
     </div>
   `,
+  host: {
+    'attr.data-slot': '"navigation-menu"',
+    style: 'display: contents',
+  },
   providers: [
     {
       provide: NAVIGATION_MENU_CONTEXT,

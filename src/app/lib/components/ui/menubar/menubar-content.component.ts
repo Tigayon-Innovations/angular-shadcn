@@ -35,6 +35,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"menubar-content"',
     class: 'contents',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',

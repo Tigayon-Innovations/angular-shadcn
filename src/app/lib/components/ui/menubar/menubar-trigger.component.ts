@@ -19,6 +19,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   selector: 'MenubarTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"menubar-trigger"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitem"',
     '[attr.tabindex]': 'isFocused() ? 0 : -1',

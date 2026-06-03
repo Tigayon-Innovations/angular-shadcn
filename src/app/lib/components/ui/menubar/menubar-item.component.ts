@@ -11,6 +11,7 @@ import { MENUBAR_CONTEXT, MENUBAR_MENU_CONTEXT } from './menubar-context';
   selector: 'MenubarItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"menubar-item"',
     '[class]': 'computedClass()',
     '[attr.role]': '"menuitem"',
     '[attr.tabindex]': 'disabled() ? -1 : -1',

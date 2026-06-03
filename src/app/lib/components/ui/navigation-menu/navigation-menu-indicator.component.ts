@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <div class="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md"></div>
   `,
   host: {
+    'attr.data-slot': '"navigation-menu-indicator"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

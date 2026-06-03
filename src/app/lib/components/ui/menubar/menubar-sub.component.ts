@@ -28,6 +28,7 @@ export const MENUBAR_SUB_CONTEXT = new InjectionToken<MenubarSubContext>('MENUBA
     },
   ],
   host: {
+    'attr.data-slot': '"menubar-sub"',
     class: 'relative',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

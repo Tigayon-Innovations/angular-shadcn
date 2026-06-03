@@ -12,6 +12,7 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
   selector: 'CollapsibleTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"collapsible-trigger"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'collapsible.isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',

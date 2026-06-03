@@ -12,6 +12,7 @@ import { navigationMenuTriggerStyle } from './navigation-menu-trigger-style';
   selector: 'NavigationMenuLink',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"navigation-menu-link"',
     '[class]': 'computedClass()',
     '[attr.aria-current]': 'ariaCurrent()',
     '[attr.data-active]': 'active() || null',

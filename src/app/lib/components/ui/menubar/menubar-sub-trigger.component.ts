@@ -15,6 +15,7 @@ import { MENUBAR_SUB_CONTEXT } from './menubar-sub.component';
     <lucide-icon [img]="ChevronRightIcon" class="ml-auto h-4 w-4" />
   `,
   host: {
+    'attr.data-slot': '"menubar-sub-trigger"',
     '[class]': 'computedClass()',
     '[attr.data-state]': 'subContext.open() ? "open" : "closed"',
     '(mouseenter)': 'onMouseEnter()',

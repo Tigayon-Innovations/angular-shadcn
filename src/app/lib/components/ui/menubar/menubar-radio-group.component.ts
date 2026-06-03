@@ -35,6 +35,7 @@ export const MENUBAR_RADIO_GROUP_CONTEXT = new InjectionToken<MenubarRadioGroupC
     },
   ],
   host: {
+    'attr.data-slot': '"menubar-radio-group"',
     '[attr.role]': '"group"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
