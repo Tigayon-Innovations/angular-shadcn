@@ -10,8 +10,12 @@ import {
   HostListener,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { DIALOG_CONTEXT } from './dialog-context';
+
+/** Animation duration in ms — must match Tailwind's duration-200 */
+const EXIT_ANIMATION_MS = 200;
 
 /**
  * DialogContent component - the content of the dialog.
@@ -21,10 +25,11 @@ import { DIALOG_CONTEXT } from './dialog-context';
   selector: 'DialogContent',
   imports: [FocusTrapDirective],
   template: `
-    @if (context.isOpen()) {
+    @if (shouldRender()) {
       <!-- Overlay -->
       <div
-        class="fixed inset-0 z-50 bg-black/80"
+        class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-200"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         (click)="onOverlayClick($event)"
         aria-hidden="true"
       ></div>
@@ -36,6 +41,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
         [restoreFocus]="true"
         [initialFocus]="initialFocus()"
         [class]="computedClass()"
+        [attr.data-state]="context.isOpen() ? 'open' : 'closed'"
         [attr.id]="context.contentId"
         [attr.aria-labelledby]="context.titleId"
         [attr.aria-describedby]="context.descriptionId"
@@ -43,7 +49,6 @@ import { DIALOG_CONTEXT } from './dialog-context';
         aria-modal="true"
       >
         <ng-content />
-        <!-- Close button -->
         @if (showClose()) {
           <button
             type="button"
@@ -74,47 +79,49 @@ import { DIALOG_CONTEXT } from './dialog-context';
     }
   `,
   host: {
+    'attr.data-slot': '"dialog-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContent {
   constructor() {
-    // Handle body scroll lock based on open state
     effect(() => {
       const isOpen = this.context.isOpen();
-
-      // Force change detection since context.isOpen() might update outside of this component's hierarchy
-      // and we are using OnPush
       this._cdr.markForCheck();
 
       if (isOpen) {
+        this.shouldRender.set(true);
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
+        if (this.shouldRender()) {
+          // Keep DOM alive for the exit animation, then unmount
+          setTimeout(() => {
+            this.shouldRender.set(false);
+            this._cdr.markForCheck();
+          }, EXIT_ANIMATION_MS);
+        }
       }
     });
 
-    // Cleanup on destroy
     this._destroyRef.onDestroy(() => {
       this.unlockBodyScroll();
       this.restoreFocus();
     });
   }
 
-  /** Additional CSS classes */
   readonly class = input<string>('');
-  /** Whether to show close button */
   readonly showClose = input<boolean>(true);
-  /** Aria label for close button */
   readonly ariaCloselabel = input<string>('Close dialog');
-  /** Selector for initial focus element */
   readonly initialFocus = input<string | undefined>(undefined);
 
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _cdr = inject(ChangeDetectorRef);
 
   readonly context = inject(DIALOG_CONTEXT);
+
+  protected readonly shouldRender = signal(false);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -129,7 +136,6 @@ export class DialogContent {
     ),
   );
 
-  /** Previous body overflow for restoration */
   private previousBodyOverflow = '';
 
   @HostListener('document:keydown.escape')
@@ -164,9 +170,7 @@ export class DialogContent {
   private restoreFocus(): void {
     const triggerEl = this.context.getTriggerElement();
     if (triggerEl) {
-      setTimeout(() => {
-        triggerEl.focus();
-      }, 0);
+      setTimeout(() => triggerEl.focus(), 0);
     }
   }
 }

@@ -116,6 +116,7 @@ export interface TabsProps {
   selector: 'Tabs',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"tabs"',
     '[class]': 'computedClass()',
     '[attr.data-orientation]': 'orientation()',
   },

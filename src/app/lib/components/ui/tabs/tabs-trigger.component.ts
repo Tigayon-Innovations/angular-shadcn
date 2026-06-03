@@ -74,6 +74,7 @@ export interface TabsTriggerProps {
   selector: 'TabsTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"tabs-trigger"',
     '[class]': 'computedClass()',
     '[attr.id]': 'tabId()',
     '[attr.data-state]': 'state()',

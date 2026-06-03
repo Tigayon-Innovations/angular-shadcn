@@ -57,6 +57,7 @@ import { buttonVariants, type ButtonVariants } from './button-variants';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"button"',
     '[class]': 'computedClass()',
     '[attr.disabled]': 'isDisabled() || null',
     '[attr.aria-disabled]': 'isDisabled() || null',

@@ -39,6 +39,7 @@ import { DIALOG_CONTEXT, type DialogContextValue } from './dialog-context';
     },
   ],
   host: {
+    'attr.data-slot': '"dialog"',
     style: 'display: contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

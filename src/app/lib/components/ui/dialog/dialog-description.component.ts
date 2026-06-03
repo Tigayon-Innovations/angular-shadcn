@@ -11,6 +11,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
   selector: 'DialogDescription',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dialog-description"',
     '[class]': 'computedClass()',
     '[attr.id]': 'context.descriptionId',
   },

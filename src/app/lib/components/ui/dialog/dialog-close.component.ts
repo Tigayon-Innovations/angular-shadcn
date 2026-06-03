@@ -9,6 +9,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
   selector: 'DialogClose',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dialog-close"',
     '(click)': 'onClick($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

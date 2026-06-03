@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DialogFooter',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dialog-footer"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

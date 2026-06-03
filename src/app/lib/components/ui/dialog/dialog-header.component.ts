@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DialogHeader',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dialog-header"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

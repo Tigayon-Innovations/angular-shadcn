@@ -59,18 +59,15 @@ export interface TabsContentProps {
  */
 @Component({
   selector: 'TabsContent',
-  template: `
-    @if (shouldRender()) {
-      <ng-content />
-    }
-  `,
+  template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"tabs-content"',
     '[class]': 'computedClass()',
     '[attr.id]': 'panelId()',
     '[attr.data-state]': 'state()',
     '[attr.data-orientation]': 'tabs.orientation()',
     '[attr.aria-labelledby]': 'tabId()',
-    '[attr.hidden]': '!isActive() ? true : null',
+    '[attr.hidden]': '!isActive() && !forceMount() ? true : null',
     '[attr.tabindex]': 'isActive() ? 0 : -1',
     role: 'tabpanel',
   },

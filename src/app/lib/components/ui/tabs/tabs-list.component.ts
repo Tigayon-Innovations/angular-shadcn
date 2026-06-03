@@ -86,6 +86,7 @@ export interface TabsListProps {
     }
   `,
   host: {
+    'attr.data-slot': '"tabs-list"',
     '[class]': 'computedClass()',
     role: 'tablist',
     '[attr.id]': 'tabs.tablistId',

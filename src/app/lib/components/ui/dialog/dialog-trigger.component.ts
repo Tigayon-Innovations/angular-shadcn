@@ -9,6 +9,7 @@ import { DIALOG_CONTEXT } from './dialog-context';
   selector: 'DialogTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"dialog-trigger"',
     '(click)': 'onClick($event)',
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'context.isOpen()',
