@@ -84,6 +84,7 @@ export interface ScrollAreaProps {
     <ng-content select="ScrollBar" />
   `,
   host: {
+    'attr.data-slot': '"scroll-area"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

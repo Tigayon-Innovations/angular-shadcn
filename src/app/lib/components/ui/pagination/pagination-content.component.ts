@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'PaginationContent',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"pagination-content"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

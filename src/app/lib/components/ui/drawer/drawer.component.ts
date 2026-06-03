@@ -37,6 +37,10 @@ import { DRAWER_CONTEXT, type DrawerContextValue } from './drawer-context';
 @Component({
   selector: 'Drawer',
   template: `<ng-content />`,
+  host: {
+    'attr.data-slot': '"drawer"',
+    style: 'display: contents',
+  },
   providers: [
     {
       provide: DRAWER_CONTEXT,

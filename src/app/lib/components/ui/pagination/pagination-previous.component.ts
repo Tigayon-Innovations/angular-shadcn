@@ -26,6 +26,7 @@ import { buttonVariants } from '../button/button-variants';
     <span>Previous</span>
   `,
   host: {
+    'attr.data-slot': '"pagination-previous"',
     '[class]': 'computedClass()',
     '[attr.href]': 'href()',
     '[attr.aria-label]': '"Go to previous page"',

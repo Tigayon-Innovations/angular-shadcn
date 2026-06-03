@@ -27,6 +27,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     <span class="sr-only">More pages</span>
   `,
   host: {
+    'attr.data-slot': '"pagination-ellipsis"',
     '[class]': 'computedClass()',
     '[attr.aria-hidden]': '"true"',
   },

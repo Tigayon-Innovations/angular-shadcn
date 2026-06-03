@@ -10,6 +10,7 @@ import { buttonVariants } from '../button/button-variants';
   selector: 'PaginationLink',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"pagination-link"',
     '[class]': 'computedClass()',
     '[attr.href]': 'href()',
     '[attr.aria-current]': 'isActive() ? "page" : null',

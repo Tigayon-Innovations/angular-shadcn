@@ -27,6 +27,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'Pagination',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"pagination"',
     role: 'navigation',
     '[attr.aria-label]': '"pagination"',
     '[class]': 'computedClass()',

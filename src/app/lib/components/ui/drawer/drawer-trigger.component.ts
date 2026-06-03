@@ -9,6 +9,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
   selector: 'DrawerTrigger',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"drawer-trigger"',
     '(click)': 'onClick($event)',
     '[attr.aria-controls]': 'context.contentId',
     '[attr.aria-expanded]': 'context.open()',

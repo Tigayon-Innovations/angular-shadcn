@@ -10,6 +10,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
   selector: 'DrawerDescription',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"drawer-description"',
     '[class]': 'computedClass()',
     '[attr.id]': 'context.descriptionId',
   },

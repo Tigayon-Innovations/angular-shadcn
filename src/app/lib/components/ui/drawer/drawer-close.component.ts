@@ -9,6 +9,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
   selector: 'DrawerClose',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"drawer-close"',
     '(click)': 'onClick($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -26,6 +26,7 @@ import { buttonVariants } from '../button/button-variants';
     </svg>
   `,
   host: {
+    'attr.data-slot': '"pagination-next"',
     '[class]': 'computedClass()',
     '[attr.href]': 'href()',
     '[attr.aria-label]': '"Go to next page"',

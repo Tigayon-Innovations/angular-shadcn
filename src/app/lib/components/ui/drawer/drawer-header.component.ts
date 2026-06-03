@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'DrawerHeader',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"drawer-header"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

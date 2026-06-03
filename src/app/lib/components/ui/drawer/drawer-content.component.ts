@@ -52,6 +52,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
     </Presence>
   `,
   host: {
+    'attr.data-slot': '"drawer-content"',
     class: 'contents',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

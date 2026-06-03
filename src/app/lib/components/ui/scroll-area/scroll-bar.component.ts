@@ -46,6 +46,7 @@ export interface ScrollBarProps {
   selector: 'ScrollBar',
   template: ` <div [class]="thumbClass()"></div> `,
   host: {
+    'attr.data-slot': '"scroll-bar"',
     '[class]': 'computedClass()',
     '[attr.data-orientation]': 'orientation()',
   },
