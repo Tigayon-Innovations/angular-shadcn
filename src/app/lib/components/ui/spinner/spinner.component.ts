@@ -43,6 +43,7 @@ import { spinnerVariants, type SpinnerVariants } from './spinner-variants';
     </svg>
   `,
   host: {
+    'attr.data-slot': '"spinner"',
     role: 'status',
     'aria-label': 'Loading',
     '[attr.aria-busy]': 'true',

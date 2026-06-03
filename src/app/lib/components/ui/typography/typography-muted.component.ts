@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyMuted',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-muted"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

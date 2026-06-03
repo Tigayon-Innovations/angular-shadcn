@@ -13,6 +13,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyBlockquote',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-blockquote"',
     '[class]': 'computedClass()',
     style: 'display: block',
   },

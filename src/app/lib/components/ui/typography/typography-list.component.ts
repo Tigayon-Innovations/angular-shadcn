@@ -14,6 +14,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyList',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-list"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyP',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-p"',
     '[class]': 'computedClass()',
     style: 'display: block',
   },

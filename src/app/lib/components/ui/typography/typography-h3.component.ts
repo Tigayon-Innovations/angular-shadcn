@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyH3',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-h3"',
     '[class]': 'computedClass()',
     style: 'display: block',
   },

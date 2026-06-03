@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyInlineCode',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-inline-code"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

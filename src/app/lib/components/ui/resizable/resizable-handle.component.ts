@@ -43,6 +43,7 @@ let handleIdCounter = 0;
     }
   `,
   host: {
+    'attr.data-slot': '"resizable-handle"',
     '[class]': 'computedClass()',
     '[attr.data-panel-resize-handle]': 'true',
     '[attr.data-panel-resize-handle-id]': 'handleId',

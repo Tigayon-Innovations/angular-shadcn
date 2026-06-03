@@ -22,6 +22,7 @@ import { kbdVariants, type KbdVariants } from './kbd-variants';
   selector: 'Kbd',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"kbd"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

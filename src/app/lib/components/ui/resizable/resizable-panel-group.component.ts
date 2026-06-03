@@ -28,6 +28,7 @@ import { RESIZABLE_CONTEXT, type ResizableContextValue } from './resizable-conte
   selector: 'ResizablePanelGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"resizable-panel-group"',
     '[class]': 'computedClass()',
     '[attr.data-panel-group]': 'true',
     '[attr.data-panel-group-direction]': 'direction()',

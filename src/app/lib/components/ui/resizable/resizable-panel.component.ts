@@ -17,6 +17,7 @@ let panelIdCounter = 0;
   selector: 'ResizablePanel',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"resizable-panel"',
     '[class]': 'computedClass()',
     '[style.flex-basis.%]': 'currentSize()',
     '[attr.data-panel]': 'true',

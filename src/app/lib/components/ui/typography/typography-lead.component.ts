@@ -13,6 +13,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'TypographyLead',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"typography-lead"',
     '[class]': 'computedClass()',
     style: 'display: block',
   },
