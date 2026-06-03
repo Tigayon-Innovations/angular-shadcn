@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarSeparator',
   template: ``,
   host: {
+    'attr.data-slot': '"sidebar-separator"',
     '[class]': 'computedClass()',
     'data-sidebar': 'separator',
   },

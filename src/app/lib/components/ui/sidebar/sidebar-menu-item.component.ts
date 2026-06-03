@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarMenuItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-menu-item"',
     '[class]': 'computedClass()',
     'data-sidebar': 'menu-item',
     '[attr.role]': '"presentation"',

@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarFooter',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-footer"',
     '[class]': 'computedClass()',
     'data-sidebar': 'footer',
   },

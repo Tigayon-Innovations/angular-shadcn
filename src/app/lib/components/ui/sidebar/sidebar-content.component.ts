@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarContent',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-content"',
     '[class]': 'computedClass()',
     'data-sidebar': 'content',
   },

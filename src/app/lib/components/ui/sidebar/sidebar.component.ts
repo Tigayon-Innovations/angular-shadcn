@@ -52,6 +52,7 @@ import {
     }
   `,
   host: {
+    'attr.data-slot': '"sidebar"',
     '[attr.data-state]': 'context.state()',
     '[attr.data-collapsible]': 'context.state() === "collapsed" ? collapsible() : ""',
     '[attr.data-variant]': 'variant()',

@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarGroupContent',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-group-content"',
     '[class]': 'computedClass()',
     'data-sidebar': 'group-content',
   },

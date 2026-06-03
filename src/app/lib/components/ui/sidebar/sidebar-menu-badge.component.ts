@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarMenuBadge',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-menu-badge"',
     '[class]': 'computedClass()',
     'data-sidebar': 'menu-badge',
   },

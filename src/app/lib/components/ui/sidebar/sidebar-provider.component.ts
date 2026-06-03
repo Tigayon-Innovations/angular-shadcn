@@ -41,6 +41,7 @@ import {
   selector: 'SidebarProvider',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-provider"',
     '[class]': 'computedClass()',
     '[style.--sidebar-width]': 'sidebarWidth',
     '[style.--sidebar-width-icon]': 'SIDEBAR_WIDTH_ICON',

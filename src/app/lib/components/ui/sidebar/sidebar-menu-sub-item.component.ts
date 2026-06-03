@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarMenuSubItem',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-menu-sub-item"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

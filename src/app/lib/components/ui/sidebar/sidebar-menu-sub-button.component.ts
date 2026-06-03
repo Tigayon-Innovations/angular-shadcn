@@ -12,6 +12,7 @@ import type { AriaCurrentValue } from './sidebar-context';
   selector: 'SidebarMenuSubButton',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"sidebar-menu-sub-button"',
     '[class]': 'computedClass()',
     'data-sidebar': 'menu-sub-button',
     '[attr.data-size]': 'size()',

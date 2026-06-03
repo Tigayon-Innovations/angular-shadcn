@@ -13,6 +13,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     ></div>
   `,
   host: {
+    'attr.data-slot': '"sidebar-menu-skeleton"',
     '[class]': 'computedClass()',
     'data-sidebar': 'menu-skeleton',
   },

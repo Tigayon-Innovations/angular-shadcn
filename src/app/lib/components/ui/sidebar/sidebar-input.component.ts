@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'SidebarInput',
   template: ``,
   host: {
+    'attr.data-slot': '"sidebar-input"',
     '[class]': 'computedClass()',
     'data-sidebar': 'input',
   },

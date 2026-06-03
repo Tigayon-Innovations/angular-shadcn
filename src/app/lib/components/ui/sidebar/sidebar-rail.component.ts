@@ -9,6 +9,7 @@ import { SIDEBAR_CONTEXT } from './sidebar-context';
   selector: 'SidebarRail',
   template: ``,
   host: {
+    'attr.data-slot': '"sidebar-rail"',
     '[class]': 'computedClass()',
     '[attr.aria-label]': '"Toggle Sidebar"',
     '[attr.tabindex]': '-1',

@@ -27,6 +27,7 @@ import { SIDEBAR_CONTEXT } from './sidebar-context';
     <ng-content />
   `,
   host: {
+    'attr.data-slot': '"sidebar-trigger"',
     '[class]': 'computedClass()',
     '(click)': 'onClick()',
   },
