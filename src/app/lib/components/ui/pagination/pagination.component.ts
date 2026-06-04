@@ -29,12 +29,14 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   host: {
     'attr.data-slot': '"pagination"',
     role: 'navigation',
-    '[attr.aria-label]': '"pagination"',
+    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Pagination {
+  /** Accessible label for the navigation landmark */
+  readonly ariaLabel = input<string>('Pagination');
   /** Additional CSS classes */
   readonly class = input<string>('');
 

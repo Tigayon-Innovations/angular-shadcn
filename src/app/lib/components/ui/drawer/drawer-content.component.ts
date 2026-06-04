@@ -11,6 +11,7 @@ import {
   Injector,
   input,
   OnDestroy,
+  signal,
   viewChild,
 } from '@angular/core';
 import { DRAWER_CONTEXT } from './drawer-context';
@@ -35,6 +36,7 @@ import { DRAWER_CONTEXT } from './drawer-context';
       <div
         #contentEl
         [class]="computedClass()"
+        [style]="swipeStyle()"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
         role="dialog"
         aria-modal="true"
@@ -44,6 +46,9 @@ import { DRAWER_CONTEXT } from './drawer-context';
         hlmFocusTrap
         [trapFocus]="context.open()"
         (keydown.escape)="onEscapeKey()"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
       >
         <!-- Handle -->
         <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
@@ -105,6 +110,17 @@ export class DrawerContent implements OnDestroy {
     );
   });
 
+  protected readonly swipeDelta = signal(0);
+  private touchStartCoord = 0;
+
+  protected readonly swipeStyle = computed(() => {
+    const delta = this.swipeDelta();
+    if (delta === 0) return '';
+    const dir = this.context.direction;
+    if (dir === 'bottom' || dir === 'top') return { transform: `translateY(${delta}px)` };
+    return { transform: `translateX(${delta}px)` };
+  });
+
   /** Previous body overflow style for restoration */
   private previousBodyOverflow = '';
 
@@ -118,6 +134,34 @@ export class DrawerContent implements OnDestroy {
   }
   onEscapeKey(): void {
     this.context.setOpen(false);
+  }
+  onTouchStart(event: TouchEvent): void {
+    const touch = event.touches[0];
+    const dir = this.context.direction;
+    this.touchStartCoord = dir === 'bottom' || dir === 'top' ? touch.clientY : touch.clientX;
+  }
+  onTouchMove(event: TouchEvent): void {
+    const touch = event.touches[0];
+    const dir = this.context.direction;
+    const coord = dir === 'bottom' || dir === 'top' ? touch.clientY : touch.clientX;
+    const rawDelta = coord - this.touchStartCoord;
+    // Only allow dragging in the "away" direction
+    const isAway =
+      (dir === 'bottom' && rawDelta > 0) ||
+      (dir === 'top' && rawDelta < 0) ||
+      (dir === 'right' && rawDelta > 0) ||
+      (dir === 'left' && rawDelta < 0);
+    this.swipeDelta.set(isAway ? rawDelta : 0);
+  }
+  onTouchEnd(): void {
+    const threshold = 80;
+    if (Math.abs(this.swipeDelta()) >= threshold) {
+      this.swipeDelta.set(0);
+      this.context.setOpen(false);
+    } else {
+      this.swipeDelta.set(0);
+    }
+    this.touchStartCoord = 0;
   }
 
   private focusFirstElement(): void {

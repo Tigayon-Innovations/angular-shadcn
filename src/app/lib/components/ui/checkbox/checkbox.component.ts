@@ -96,7 +96,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `,
   host: {
     '[class]': 'computedClass()',
-    'data-slot': 'checkbox',
+    'attr.data-slot': '"checkbox"',
   },
   providers: [
     {

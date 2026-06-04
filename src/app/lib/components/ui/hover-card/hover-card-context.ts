@@ -9,9 +9,11 @@ export interface HoverCardContextValue {
   /** Set open state */
   setOpen: (open: boolean) => void;
   /** The duration from when the pointer enters the trigger until the hover card opens (ms) */
-  openDelay: number;
+  openDelay: () => number;
   /** The duration from when the pointer leaves the trigger/content until the hover card closes (ms) */
-  closeDelay: number;
+  closeDelay: () => number;
+  /** Reference to the trigger element for fixed positioning */
+  triggerRef: WritableSignal<HTMLElement | null>;
 }
 
 export const HOVER_CARD_CONTEXT = new InjectionToken<HoverCardContextValue>('HOVER_CARD_CONTEXT');

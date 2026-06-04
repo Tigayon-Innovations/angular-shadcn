@@ -7,6 +7,7 @@ import {
   input,
   model,
   output,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { toggleVariants, type ToggleVariants } from './toggle-variants';
@@ -97,8 +98,8 @@ export type ToggleProps = {
     type: 'button',
     '[attr.aria-pressed]': 'pressed()',
     '[attr.data-state]': 'state()',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
-    '[attr.disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'isDisabled() ? "" : null',
+    '[attr.disabled]': 'isDisabled() ? "" : null',
     '(click)': 'toggle()',
     'data-slot': 'toggle',
   },
@@ -136,6 +137,9 @@ export class Toggle implements ControlValueAccessor {
   /** Additional CSS classes to apply */
   readonly class = input<string>('');
 
+  /** Whether the toggle is effectively disabled (input or Angular Forms) */
+  protected readonly isDisabled = computed(() => this.disabled() || this.isFormsDisabled());
+
   /** Current state for data attribute */
   protected readonly state = computed((): ToggleState => (this.pressed() ? 'on' : 'off'));
   /** Computed class combining variants and custom classes */
@@ -149,17 +153,19 @@ export class Toggle implements ControlValueAccessor {
     ),
   );
 
+  /** Tracks disabled state set by Angular Forms (.disable() / .enable()) */
+  private readonly isFormsDisabled = signal<boolean>(false);
+
   /** ControlValueAccessor callbacks */
   private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
-  setDisabledState?(isDisabled: boolean): void {
-    // Disabled state is managed by the disabled input
-    // Angular forms will call this but we use the input binding
+  setDisabledState(isDisabled: boolean): void {
+    this.isFormsDisabled.set(isDisabled);
   }
 
   /** Toggle the pressed state */
   toggle(): void {
-    if (!this.disabled()) {
+    if (!this.isDisabled()) {
       const newValue = !this.pressed();
       this.pressed.set(newValue);
       this.onChange(newValue);

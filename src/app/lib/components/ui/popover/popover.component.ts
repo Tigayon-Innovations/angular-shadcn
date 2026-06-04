@@ -10,6 +10,8 @@ import { POPOVER_CONTEXT, type PopoverContextValue } from './popover-context';
 
 export type PopoverState = 'open' | 'closed';
 
+let idCounter = 0;
+
 /**
  * Props for the Popover component
  */
@@ -128,6 +130,8 @@ export class Popover implements PopoverContextValue {
   readonly controlledOpen = input<boolean | undefined>(undefined, { alias: 'open' });
 
   readonly open = signal(false);
+  /** Unique ID for aria-controls relationship */
+  readonly contentId = `popover-content-${++idCounter}`;
   /** Reference to the trigger element for positioning */
   readonly triggerRef = signal<HTMLElement | null>(null);
 

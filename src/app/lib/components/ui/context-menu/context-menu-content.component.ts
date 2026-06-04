@@ -7,8 +7,10 @@ import {
   effect,
   ElementRef,
   inject,
+  Injector,
   input,
   OnDestroy,
+  signal,
 } from '@angular/core';
 import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
 
@@ -26,8 +28,8 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
         [class]="computedClass()"
         [attr.data-state]="context.open() ? 'open' : 'closed'"
         [style.position]="'fixed'"
-        [style.left.px]="context.position().x"
-        [style.top.px]="context.position().y"
+        [style.left.px]="displayPosition().x"
+        [style.top.px]="displayPosition().y"
         role="menu"
         aria-orientation="vertical"
         tabindex="-1"
@@ -40,7 +42,7 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
   host: {
     'attr.data-slot': '"context-menu-content"',
     class: 'contents',
-    '(document:click)': 'onDocumentClick()',
+    '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'onEscapeKey()',
     '(document:contextmenu)': 'onAnotherContextMenu()',
   },
@@ -48,19 +50,28 @@ import { CONTEXT_MENU_CONTEXT } from './context-menu-context';
 })
 export class ContextMenuContent implements OnDestroy {
   constructor() {
-    // Focus first item when menu opens
+    // Clamp position and focus first item when menu opens
     effect(() => {
       if (this.context.open()) {
-        setTimeout(() => {
-          this.updateMenuItems();
-          const focusedIdx = this.context.focusedIndex();
-          if (focusedIdx >= 0 && this.menuItems[focusedIdx]) {
-            this.menuItems[focusedIdx].focus();
-          } else if (this.menuItems.length > 0) {
-            this.menuItems[0].focus();
-            this.context.focusedIndex.set(0);
-          }
-        }, 0);
+        this.isPositioned.set(false);
+        afterNextRender(
+          () => {
+            this.clampPosition();
+            this.isPositioned.set(true);
+            this.updateMenuItems();
+            const focusedIdx = this.context.focusedIndex();
+            if (focusedIdx >= 0 && this.menuItems[focusedIdx]) {
+              this.menuItems[focusedIdx].focus();
+            } else if (this.menuItems.length > 0) {
+              this.menuItems[0].focus();
+              this.context.focusedIndex.set(0);
+            }
+          },
+          { injector: this._injector },
+        );
+      } else {
+        this.isPositioned.set(false);
+        this.clampedPos.set(null);
       }
     });
 
@@ -74,8 +85,13 @@ export class ContextMenuContent implements OnDestroy {
   readonly class = input<string>('');
 
   private readonly _elementRef = inject(ElementRef);
+  private readonly _injector = inject(Injector);
 
   protected readonly context = inject(CONTEXT_MENU_CONTEXT);
+
+  protected readonly isPositioned = signal(false);
+  protected readonly clampedPos = signal<{ x: number; y: number } | null>(null);
+  protected readonly displayPosition = computed(() => this.clampedPos() ?? this.context.position());
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -83,6 +99,7 @@ export class ContextMenuContent implements OnDestroy {
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+      !this.isPositioned() && 'pointer-events-none opacity-0',
       this.class(),
     ),
   );
@@ -97,12 +114,22 @@ export class ContextMenuContent implements OnDestroy {
     }
   }
 
+  private clampPosition(): void {
+    const menu = this._elementRef.nativeElement.querySelector('[role="menu"]') as HTMLElement;
+    if (!menu) return;
+    const pos = this.context.position();
+    const rect = menu.getBoundingClientRect();
+    const padding = 8;
+    const x = Math.max(padding, Math.min(pos.x, window.innerWidth - rect.width - padding));
+    const y = Math.max(padding, Math.min(pos.y, window.innerHeight - rect.height - padding));
+    this.clampedPos.set({ x, y });
+  }
   private updateMenuItems(): void {
     const content = this._elementRef.nativeElement.querySelector('[role="menu"]');
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
-          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+          ':is([role="menuitem"],[role="menuitemcheckbox"],[role="menuitemradio"]):not([aria-disabled="true"]):not([data-disabled=""])',
         ),
       );
     }
@@ -194,8 +221,12 @@ export class ContextMenuContent implements OnDestroy {
       triggerEl.focus();
     }
   }
-  protected onDocumentClick(): void {
-    this.close();
+  protected onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const host = this._elementRef.nativeElement;
+    if (!host.contains(target)) {
+      this.close();
+    }
   }
   protected onEscapeKey(): void {
     this.close();

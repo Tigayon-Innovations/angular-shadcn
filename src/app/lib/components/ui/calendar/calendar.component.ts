@@ -26,8 +26,12 @@ import { buttonVariants } from '../button';
 @Component({
   selector: 'Calendar',
   imports: [LucideAngularModule],
+  host: {
+    'attr.data-slot': '"calendar"',
+    '[class]': 'computedClass()',
+  },
   template: `
-    <div [class]="computedClass()" role="application" [attr.aria-label]="ariaLabel()">
+    <div role="application" [attr.aria-label]="ariaLabel()">
       <!-- Header with navigation -->
       <div class="w-full">
         <div class="w-full space-y-4">

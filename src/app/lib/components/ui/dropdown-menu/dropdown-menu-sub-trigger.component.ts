@@ -19,7 +19,12 @@ import { DROPDOWN_MENU_SUB_CONTEXT } from './dropdown-menu-sub.component';
     '[class]': 'computedClass()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
+    '(keydown)': 'onKeyDown($event)',
     '[attr.data-state]': 'subContext.open() ? "open" : "closed"',
+    'role': 'menuitem',
+    '[attr.aria-haspopup]': '"menu"',
+    '[attr.aria-expanded]': 'subContext.open()',
+    '[attr.tabindex]': '"-1"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -46,9 +51,30 @@ export class DropdownMenuSubTrigger {
     this.subContext.open.set(true);
   }
   protected onMouseLeave(): void {
-    // Delay closing to allow mouse to move to sub-content
     setTimeout(() => {
-      // Check if mouse is still outside both trigger and content
+      if (!this.subContext.isMouseInSubContent()) {
+        this.subContext.open.set(false);
+      }
     }, 100);
+  }
+  protected onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowRight' || event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.subContext.open.set(true);
+      // Focus first focusable item in sub-content after it renders
+      setTimeout(() => {
+        const subContent = (event.target as HTMLElement)
+          .closest('DropdownMenuSub')
+          ?.querySelector<HTMLElement>('[role="menu"] [role="menuitem"]:not([aria-disabled="true"]):not([data-disabled=""])');
+        if (subContent) {
+          subContent.focus();
+        }
+      }, 10);
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.subContext.open.set(false);
+    }
   }
 }

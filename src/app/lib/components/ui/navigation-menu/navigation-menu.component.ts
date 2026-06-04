@@ -7,6 +7,37 @@ import {
 } from './navigation-menu-context';
 import { NavigationMenuViewport } from './navigation-menu-viewport.component';
 
+function createNavigationMenuContext(): NavigationMenuContextValue {
+  const triggerIds = signal<string[]>([]);
+  return {
+    activeItem: signal(null),
+    orientation: signal('horizontal'),
+    triggerIds,
+    registerTrigger: (triggerId: string) => {
+      triggerIds.update((ids) => [...ids, triggerId]);
+    },
+    unregisterTrigger: (triggerId: string) => {
+      triggerIds.update((ids) => ids.filter((id) => id !== triggerId));
+    },
+    focusNextTrigger: (currentTriggerId: string) => {
+      const ids = triggerIds();
+      const idx = ids.indexOf(currentTriggerId);
+      const nextId = idx < ids.length - 1 ? ids[idx + 1] : ids[0];
+      if (nextId) {
+        document.getElementById(nextId)?.focus();
+      }
+    },
+    focusPreviousTrigger: (currentTriggerId: string) => {
+      const ids = triggerIds();
+      const idx = ids.indexOf(currentTriggerId);
+      const prevId = idx > 0 ? ids[idx - 1] : ids[ids.length - 1];
+      if (prevId) {
+        document.getElementById(prevId)?.focus();
+      }
+    },
+  };
+}
+
 /**
  * Props for the NavigationMenu component
  */
@@ -121,10 +152,7 @@ export interface NavigationMenuProps {
   providers: [
     {
       provide: NAVIGATION_MENU_CONTEXT,
-      useFactory: (): NavigationMenuContextValue => ({
-        activeItem: signal(null),
-        orientation: signal('horizontal'),
-      }),
+      useFactory: createNavigationMenuContext,
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

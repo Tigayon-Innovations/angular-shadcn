@@ -83,7 +83,6 @@ export interface TabsTriggerProps {
     '[attr.aria-controls]': 'panelId()',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'isActive() ? 0 : -1',
-    '[attr.disabled]': 'disabled() ? "" : null',
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',
     '(keydown.space)': 'onSpace($event)',

@@ -16,6 +16,7 @@ import { CHART_COLORS, CHART_CONTEXT } from './chart-context';
     }
   `,
   host: {
+    'attr.data-slot': '"chart-legend-content"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

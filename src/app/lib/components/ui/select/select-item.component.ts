@@ -47,6 +47,7 @@ import { SELECT_CONTEXT } from './select-context';
   host: {
     '[class]': 'computedClass()',
     role: 'option',
+    '[attr.id]': 'itemId()',
     '[attr.aria-selected]': 'isSelected()',
     '[attr.data-state]': 'isSelected() ? "checked" : "unchecked"',
     '[attr.data-disabled]': 'disabled() ? "" : null',
@@ -55,7 +56,7 @@ import { SELECT_CONTEXT } from './select-context';
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(click)': 'select()',
     '(keydown)': 'onKeyDown($event)',
-    'data-slot': 'select-item',
+    'attr.data-slot': '"select-item"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -71,6 +72,9 @@ export class SelectItem implements OnInit, OnDestroy {
   readonly class = input<string>('');
 
   private readonly _context = inject(SELECT_CONTEXT, { optional: true });
+
+  /** Stable DOM id for aria-activedescendant */
+  readonly itemId = computed(() => `select-item-${this.value()}`);
 
   /** Whether this item is selected */
   protected readonly isSelected = computed(() => {
@@ -94,17 +98,28 @@ export class SelectItem implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    // Register this item
+    // Register this item's value
     this._context?.itemValues.update((values) => {
       if (!values.includes(this.value())) {
         return [...values, this.value()];
       }
       return values;
     });
+    // Register this item's label for typeahead
+    this._context?.itemLabels.update((m) => {
+      const label = this.textContent()?.nativeElement?.textContent?.trim() || this.value();
+      m.set(this.value(), label);
+      return m;
+    });
   }
   ngOnDestroy(): void {
-    // Unregister this item
+    // Unregister this item's value
     this._context?.itemValues.update((values) => values.filter((v) => v !== this.value()));
+    // Unregister this item's label
+    this._context?.itemLabels.update((m) => {
+      m.delete(this.value());
+      return m;
+    });
   }
 
   /** Handle keyboard navigation */
@@ -117,17 +132,20 @@ export class SelectItem implements OnInit, OnDestroy {
         event.preventDefault();
         this.select();
         break;
-      case 'ArrowDown':
+      case 'ArrowDown': {
         event.preventDefault();
         const currentIndex = this._context.focusedIndex();
         const itemCount = this._context.itemValues().length;
-        this._context.focusItem(Math.min(currentIndex + 1, itemCount - 1));
+        this._context.focusItem((currentIndex + 1) % itemCount);
         break;
-      case 'ArrowUp':
+      }
+      case 'ArrowUp': {
         event.preventDefault();
         const idx = this._context.focusedIndex();
-        this._context.focusItem(Math.max(idx - 1, 0));
+        const count = this._context.itemValues().length;
+        this._context.focusItem(idx > 0 ? idx - 1 : count - 1);
         break;
+      }
       case 'Home':
         event.preventDefault();
         this._context.focusItem(0);

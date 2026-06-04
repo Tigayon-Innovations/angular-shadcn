@@ -17,10 +17,15 @@ let itemIdCounter = 0;
   providers: [
     {
       provide: NAVIGATION_MENU_ITEM_CONTEXT,
-      useFactory: (): NavigationMenuItemContextValue => ({
-        itemId: `nav-item-${itemIdCounter++}`,
-        open: signal(false),
-      }),
+      useFactory: (): NavigationMenuItemContextValue => {
+        const id = itemIdCounter++;
+        return {
+          itemId: `nav-item-${id}`,
+          triggerId: `nav-trigger-${id}`,
+          contentId: `nav-content-${id}`,
+          open: signal(false),
+        };
+      },
     },
   ],
   host: {

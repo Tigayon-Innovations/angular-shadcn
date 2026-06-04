@@ -18,7 +18,13 @@ import { NAVIGATION_MENU_CONTEXT, NAVIGATION_MENU_ITEM_CONTEXT } from './navigat
   imports: [Presence],
   template: `
     <Presence [present]="itemContext.open()">
-      <div [class]="computedClass()" [attr.data-state]="itemContext.open() ? 'open' : 'closed'">
+      <div
+        [class]="computedClass()"
+        [attr.id]="itemContext.contentId"
+        [attr.data-state]="itemContext.open() ? 'open' : 'closed'"
+        [attr.aria-labelledby]="itemContext.triggerId"
+        role="region"
+      >
         <ng-content />
       </div>
     </Presence>

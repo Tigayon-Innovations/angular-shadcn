@@ -31,6 +31,16 @@ export interface SelectContext {
   required?: () => boolean;
   /** Name for form submission */
   name?: () => string;
+  /** Map of item value → display label for typeahead */
+  itemLabels: WritableSignal<Map<string, string>>;
+  /** Accumulated typeahead characters */
+  typeaheadBuffer: WritableSignal<string>;
+  /** Timeout handle for clearing the typeahead buffer */
+  typeaheadTimeout: WritableSignal<ReturnType<typeof setTimeout> | null>;
+  /** Handle a typed character for typeahead search */
+  handleTypeahead: (char: string) => void;
+  /** Focus the first item whose label starts with query (case-insensitive) */
+  focusMatchingItem: (query: string) => void;
 }
 
 export interface SelectGroupContext {

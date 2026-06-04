@@ -100,6 +100,7 @@ export interface PopoverContentProps {
         [attr.data-align]="computedAlign()"
         [style]="mergedStyles()"
         role="dialog"
+        tabindex="-1"
         [attr.aria-modal]="context.modal() || null"
       >
         <ng-content />
@@ -277,5 +278,15 @@ export class PopoverContent {
       '--radix-popover-content-transform-origin': transformOrigin,
     });
     this.isPositioned.set(true);
+
+    // Move focus into the popover for keyboard accessibility
+    setTimeout(() => {
+      const dialog = this._elementRef.nativeElement.querySelector('[role="dialog"]') as HTMLElement;
+      if (!dialog) return;
+      const firstFocusable = dialog.querySelector<HTMLElement>(
+        'button:not([disabled]):not([data-disabled=""]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      (firstFocusable ?? dialog).focus({ preventScroll: true });
+    }, 0);
   }
 }

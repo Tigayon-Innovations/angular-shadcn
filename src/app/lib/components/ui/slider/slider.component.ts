@@ -346,10 +346,10 @@ export class Slider implements ControlValueAccessor {
         newValue -= stepValue * increment;
         break;
       case 'ArrowUp':
-        newValue += stepValue;
+        newValue += stepValue * (this.inverted() ? -1 : 1);
         break;
       case 'ArrowDown':
-        newValue -= stepValue;
+        newValue -= stepValue * (this.inverted() ? -1 : 1);
         break;
       case 'PageUp':
         newValue += largeStep;

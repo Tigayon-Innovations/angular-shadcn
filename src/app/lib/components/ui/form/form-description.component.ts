@@ -14,7 +14,7 @@ import { FORM_FIELD_CONTEXT } from './form-context';
   host: {
     '[class]': 'computedClass()',
     '[attr.id]': 'fieldContext?.formDescriptionId()',
-    'data-slot': 'form-description',
+    'attr.data-slot': '"form-description"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,6 +26,6 @@ export class FormDescription {
 
   /** Computed class combining base styles and custom classes */
   protected readonly computedClass = computed(() =>
-    cn('text-muted-foreground text-[0.8rem]', this.class()),
+    cn('text-muted-foreground text-[length:var(--font-size-description)]', this.class()),
   );
 }

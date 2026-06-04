@@ -14,6 +14,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'InputGroupAddon',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"input-group-addon"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

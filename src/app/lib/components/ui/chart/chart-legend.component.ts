@@ -6,11 +6,11 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
  */
 @Component({
   selector: 'ChartLegend',
-  template: `
-    <div [class]="computedClass()">
-      <ng-content />
-    </div>
-  `,
+  template: `<ng-content />`,
+  host: {
+    'attr.data-slot': '"chart-legend"',
+    '[class]': 'computedClass()',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartLegend {

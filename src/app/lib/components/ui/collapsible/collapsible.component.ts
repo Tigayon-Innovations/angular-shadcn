@@ -77,6 +77,9 @@ export class Collapsible implements CollapsibleContext {
 
   protected readonly computedClass = computed(() => cn('', this.class()));
 
+  /** Stable ID linking the trigger (aria-controls) to the content (id) */
+  readonly contentId = `collapsible-content-${Math.random().toString(36).slice(2)}`;
+
   /** Internal state for open/closed */
   private readonly _isOpen = signal<boolean>(false);
 

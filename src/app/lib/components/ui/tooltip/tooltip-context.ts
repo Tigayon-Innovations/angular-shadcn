@@ -9,13 +9,15 @@ export interface TooltipContextValue {
   /** Set open state */
   setOpen: (open: boolean) => void;
   /** Delay before showing tooltip (ms) */
-  delayDuration: number;
+  delayDuration: () => number;
   /** Skip delay duration when quickly hovering between tooltips (ms) */
   skipDelayDuration: number;
   /** Unique ID for aria-describedby relationship */
   tooltipId: string;
   /** Whether hoverable content is disabled */
   disableHoverableContent: () => boolean;
+  /** Reference to the trigger element for fixed positioning */
+  triggerRef?: WritableSignal<HTMLElement | null>;
 }
 
 export const TOOLTIP_CONTEXT = new InjectionToken<TooltipContextValue>('TOOLTIP_CONTEXT');

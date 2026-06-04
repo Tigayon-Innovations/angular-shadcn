@@ -111,7 +111,7 @@ export class DropdownMenuContent implements OnDestroy {
   /** Additional CSS classes */
   readonly class = input<string>('');
   /** Positioning strategy: 'absolute' stays within parent, 'fixed' escapes overflow containers */
-  readonly strategy = input<'absolute' | 'fixed'>('absolute');
+  readonly strategy = input<'absolute' | 'fixed'>('fixed');
 
   private readonly _elementRef = inject(ElementRef);
 
@@ -198,7 +198,7 @@ export class DropdownMenuContent implements OnDestroy {
     if (content) {
       this.menuItems = Array.from(
         content.querySelectorAll(
-          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled])',
+          '[role="menuitem"]:not([aria-disabled="true"]):not([data-disabled=""])',
         ),
       );
     }

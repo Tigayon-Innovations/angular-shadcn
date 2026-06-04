@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input, OnDestroy } from '@angular/core';
 import { TOOLTIP_CONTEXT } from './tooltip-context';
 
 /**
@@ -70,6 +70,7 @@ export class TooltipTrigger implements OnDestroy {
   readonly asChild = input<boolean>(false);
 
   protected readonly context = inject(TOOLTIP_CONTEXT);
+  private readonly _elementRef = inject(ElementRef);
 
   private showTimeout: ReturnType<typeof setTimeout> | null = null;
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -80,9 +81,10 @@ export class TooltipTrigger implements OnDestroy {
 
   onMouseEnter(): void {
     this.clearTimeouts();
+    this.context.triggerRef?.set(this._elementRef.nativeElement);
     this.showTimeout = setTimeout(() => {
       this.context.setOpen(true);
-    }, this.context.delayDuration);
+    }, this.context.delayDuration());
   }
   onMouseLeave(): void {
     this.clearTimeouts();
@@ -93,6 +95,7 @@ export class TooltipTrigger implements OnDestroy {
   }
   onFocus(): void {
     // Show immediately on focus for keyboard users
+    this.context.triggerRef?.set(this._elementRef.nativeElement);
     this.context.setOpen(true);
   }
   onBlur(): void {

@@ -103,9 +103,7 @@ export type SwitchProps = {
       [attr.data-disabled]="isDisabled() ? '' : null"
       [disabled]="isDisabled()"
       [class]="trackClass()"
-      [style.backgroundColor]="checked() ? checkedBgColor() : 'var(--color-input)'"
       (click)="toggle()"
-      (keydown)="onKeyDown($event)"
     >
       <span data-slot="switch-thumb" [class]="thumbClass()" [attr.data-state]="state()"></span>
     </button>
@@ -125,7 +123,7 @@ export type SwitchProps = {
   `,
   host: {
     '[class]': 'computedClass()',
-    'data-slot': 'switch',
+    'attr.data-slot': '"switch"',
   },
   providers: [
     {
@@ -168,9 +166,6 @@ export class Switch implements ControlValueAccessor {
   readonly class = input<string>('');
   /** Additional CSS classes to apply to the inner track button */
   readonly buttonClass = input<string>('');
-  /** Background color for checked state (hex, rgb, or CSS color name) */
-  readonly checkedBgColor = input<string>('rgb(59, 130, 246)');
-
   /** Current state for data attribute */
   protected readonly state = computed(
     (): SwitchState => (this.checked() ? 'checked' : 'unchecked'),
@@ -246,12 +241,4 @@ export class Switch implements ControlValueAccessor {
     }
   }
 
-  /** Handle keyboard events */
-  protected onKeyDown(event: KeyboardEvent): void {
-    // Switch should only respond to Space (Enter is handled by button default)
-    if (event.key === ' ') {
-      // Let the click handler deal with it
-      return;
-    }
-  }
 }

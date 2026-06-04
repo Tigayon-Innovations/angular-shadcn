@@ -14,6 +14,7 @@ import { CAROUSEL_CONTEXT } from './carousel-context';
     </div>
   `,
   host: {
+    'attr.data-slot': '"carousel-content"',
     '[class]': 'computedClass()',
     'aria-atomic': 'false',
   },

@@ -58,6 +58,8 @@
     ]
   },
   "dependencies": {
+    "@angular-devkit/core": "^21.2.5",
+    "@angular-devkit/schematics": "^21.2.5",
     "@angular/cdk": "^21.2.4",
     "@angular/common": "^21.2.6",
     "@angular/compiler": "^21.2.6",
@@ -74,18 +76,17 @@
     "express": "^5.1.0",
     "lucide-angular": "^1.0.0",
     "ng-apexcharts": "^2.3.0",
+    "ngx-sonner": "^3.1.0",
     "postcss": "^8.5.8",
     "rxjs": "~7.8.0",
     "shiki": "^4.0.2",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
-    "tslib": "^2.3.0",
-    "@angular-devkit/core": "^21.2.5",
-    "@angular-devkit/schematics": "^21.2.5"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@analogjs/vitest-angular": "^2.3.1",
     "@analogjs/vite-plugin-angular": "^2.2.0",
+    "@analogjs/vitest-angular": "^2.3.1",
     "@angular/build": "^21.2.5",
     "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "^21.2.6",

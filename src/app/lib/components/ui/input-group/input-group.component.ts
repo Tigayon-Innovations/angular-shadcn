@@ -30,6 +30,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'InputGroup',
   template: `<ng-content />`,
   host: {
+    'attr.data-slot': '"input-group"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

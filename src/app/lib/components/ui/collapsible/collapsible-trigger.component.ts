@@ -17,6 +17,7 @@ import { COLLAPSIBLE_CONTEXT } from './collapsible-context';
     '[attr.data-state]': 'collapsible.isOpen() ? "open" : "closed"',
     '[attr.data-disabled]': 'collapsible.disabled() ? "" : null',
     '[attr.aria-expanded]': 'collapsible.isOpen()',
+    '[attr.aria-controls]': 'collapsible.contentId',
     '[attr.disabled]': 'collapsible.disabled() ? true : null',
     '(click)': 'onClick()',
     '(keydown.enter)': 'onClick()',

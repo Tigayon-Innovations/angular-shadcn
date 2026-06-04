@@ -83,13 +83,21 @@ import { sheetVariants, type SheetVariants } from './sheet-variants';
 })
 export class SheetContent implements OnDestroy {
   constructor() {
-    // Handle body scroll lock based on open state (browser-only via effect + afterNextRender)
+    let wasOpen = false;
+
+    // Handle body scroll lock and focus restoration based on open state
     effect(() => {
       const isOpen = this.context.open();
       if (isOpen) {
+        wasOpen = true;
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
+        // Restore focus whenever sheet closes (covers close button, overlay, Escape, programmatic)
+        if (wasOpen) {
+          this.restoreFocus();
+        }
+        wasOpen = false;
       }
     });
   }
@@ -105,13 +113,14 @@ export class SheetContent implements OnDestroy {
     cn(sheetVariants({ side: this.side() }), this.class()),
   );
 
-  /** Previous body overflow for restoration */
+  /** Previous body overflow/padding for restoration */
   private previousBodyOverflow = '';
+  private previousBodyPaddingRight = '';
 
   ngOnDestroy(): void {
     // Restore body scroll
     this.unlockBodyScroll();
-    // Restore focus to trigger element
+    // Restore focus to trigger element (fallback if not already called via effect)
     this.restoreFocus();
   }
 
@@ -120,7 +129,10 @@ export class SheetContent implements OnDestroy {
     this.close();
   }
   onEscapeKey(): void {
-    this.close();
+    // Guard: only close when the sheet is actually open (not during exit animation)
+    if (this.context.open()) {
+      this.close();
+    }
   }
   onClose(): void {
     this.close();
@@ -128,17 +140,22 @@ export class SheetContent implements OnDestroy {
 
   private lockBodyScroll(): void {
     if (typeof document !== 'undefined') {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       this.previousBodyOverflow = document.body.style.overflow;
+      this.previousBodyPaddingRight = document.body.style.paddingRight;
       document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+      }
     }
   }
   private unlockBodyScroll(): void {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = this.previousBodyOverflow;
+      document.body.style.paddingRight = this.previousBodyPaddingRight;
     }
   }
   private close(): void {
-    this.restoreFocus();
     this.context.setOpen(false);
   }
   private restoreFocus(): void {

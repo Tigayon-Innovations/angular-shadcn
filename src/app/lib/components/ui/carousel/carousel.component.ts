@@ -77,6 +77,7 @@ import {
     },
   ],
   host: {
+    'attr.data-slot': '"carousel"',
     '[class]': 'computedClass()',
     role: 'region',
     '[attr.aria-label]': 'ariaLabel()',

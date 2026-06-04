@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn, Presence } from '@/lib/utils';
 import { FocusTrapDirective } from '@/lib/utils/accessibility';
 import {
   ChangeDetectionStrategy,
@@ -10,12 +10,8 @@ import {
   HostListener,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { ALERT_DIALOG_CONTEXT } from './alert-dialog-context';
-
-/** Animation duration in ms — must match Tailwind's duration-200 */
-const EXIT_ANIMATION_MS = 200;
 
 /**
  * AlertDialogContent component - the modal content of the alert dialog.
@@ -26,12 +22,14 @@ const EXIT_ANIMATION_MS = 200;
  * - Overlay/backdrop click does NOT close the dialog
  * - Focus is trapped within the dialog
  * - User must explicitly click Cancel or Action to close
+ * - Exit animations handled by Presence component (no setTimeout needed)
+ * - Focus restored on any programmatic close (Action/Cancel/Escape)
  */
 @Component({
   selector: 'AlertDialogContent',
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Presence],
   template: `
-    @if (shouldRender()) {
+    <Presence [present]="context.isOpen()">
       <!-- Overlay - does NOT close on click -->
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-200"
@@ -55,7 +53,7 @@ const EXIT_ANIMATION_MS = 200;
       >
         <ng-content />
       </div>
-    }
+    </Presence>
   `,
   host: {
     'attr.data-slot': '"alert-dialog-content"',
@@ -65,21 +63,22 @@ const EXIT_ANIMATION_MS = 200;
 })
 export class AlertDialogContent {
   constructor() {
+    let wasOpen = false;
+
     effect(() => {
       const isOpen = this.context.isOpen();
       this._cdr.markForCheck();
 
       if (isOpen) {
-        this.shouldRender.set(true);
+        wasOpen = true;
         this.lockBodyScroll();
       } else {
         this.unlockBodyScroll();
-        if (this.shouldRender()) {
-          setTimeout(() => {
-            this.shouldRender.set(false);
-            this._cdr.markForCheck();
-          }, EXIT_ANIMATION_MS);
+        // Restore focus whenever dialog closes (covers Action/Cancel/Escape paths)
+        if (wasOpen) {
+          this.restoreFocus();
         }
+        wasOpen = false;
       }
     });
 
@@ -95,7 +94,6 @@ export class AlertDialogContent {
   private readonly _cdr = inject(ChangeDetectorRef);
 
   protected readonly context = inject(ALERT_DIALOG_CONTEXT);
-  protected readonly shouldRender = signal(false);
 
   protected readonly computedClass = computed(() =>
     cn(
@@ -111,28 +109,31 @@ export class AlertDialogContent {
   );
 
   private previousBodyOverflow = '';
+  private previousBodyPaddingRight = '';
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
     if (this.context.isOpen()) {
-      this.close();
+      this.context.setOpen(false);
     }
   }
 
   private lockBodyScroll(): void {
     if (typeof document !== 'undefined') {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       this.previousBodyOverflow = document.body.style.overflow;
+      this.previousBodyPaddingRight = document.body.style.paddingRight;
       document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+      }
     }
   }
   private unlockBodyScroll(): void {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = this.previousBodyOverflow;
+      document.body.style.paddingRight = this.previousBodyPaddingRight;
     }
-  }
-  private close(): void {
-    this.restoreFocus();
-    this.context.setOpen(false);
   }
   private restoreFocus(): void {
     const triggerEl = this.context.getTriggerElement();

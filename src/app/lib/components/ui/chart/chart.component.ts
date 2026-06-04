@@ -114,6 +114,7 @@ import {
     </svg>
   `,
   host: {
+    'attr.data-slot': '"chart"',
     '[class]': 'computedClass()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
