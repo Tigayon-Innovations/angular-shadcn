@@ -363,6 +363,16 @@ export class ComponentDemos {
         component: m.TypographyDemo,
       })),
     );
+    this.registerDemo('country-selector', () =>
+      import('@/pages/docs/component-detail/demos/country-selector-demo').then((m) => ({
+        component: m.CountrySelectorDemo,
+      })),
+    );
+    this.registerDemo('phone-input', () =>
+      import('@/pages/docs/component-detail/demos/phone-input-demo').then((m) => ({
+        component: m.PhoneInputDemo,
+      })),
+    );
   }
 
   private registerDemo(slug: string, loader: () => Promise<ComponentDemo>): void {

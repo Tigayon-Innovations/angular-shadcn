@@ -154,6 +154,8 @@ export class DocsSidebar {
             { title: 'Select', href: '/docs/components/select' },
             { title: 'Slider', href: '/docs/components/slider' },
             { title: 'Switch', href: '/docs/components/switch' },
+            { title: 'Country Selector', href: '/docs/components/country-selector' },
+            { title: 'Phone Input', href: '/docs/components/phone-input' },
             { title: 'Textarea', href: '/docs/components/textarea' },
             { title: 'Toggle', href: '/docs/components/toggle' },
             { title: 'Toggle Group', href: '/docs/components/toggle-group' },
