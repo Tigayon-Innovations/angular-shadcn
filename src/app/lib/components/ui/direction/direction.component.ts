@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, effect, forwardRef, input, signal } from '@angular/core';
-import { DIRECTION_CONTEXT, type Direction, type DirectionContext } from './direction-context';
+import {
+  DIRECTION_CONTEXT,
+  type Direction as DirectionType,
+  type DirectionContext,
+} from './direction-context';
 
 /**
  * Direction component - provides RTL/LTR direction context to descendants.
@@ -30,10 +34,10 @@ import { DIRECTION_CONTEXT, type Direction, type DirectionContext } from './dire
 })
 export class Direction {
   /** Text direction */
-  readonly dir = input<Direction>('ltr');
+  readonly dir = input<DirectionType>('ltr');
 
   readonly context: DirectionContext = {
-    dir: signal<Direction>(this.dir()),
+    dir: signal<DirectionType>(this.dir()),
   };
 
   constructor() {

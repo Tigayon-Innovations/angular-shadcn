@@ -73,7 +73,7 @@ export class TooltipProvider implements TooltipContextValue {
   /** Unique ID for aria-describedby relationship */
   readonly tooltipId = `tooltip-provider-${++tooltipIdCounter}`;
   /** The duration from when the pointer enters the trigger until the tooltip opens */
-  readonly delayDuration = 700;
+  readonly delayDuration = input<number>(700);
   /** How much time a user has to enter another trigger without incurring a delay again */
   readonly skipDelayDuration = 300;
 

@@ -103,7 +103,6 @@ export type SwitchProps = {
       [attr.data-disabled]="isDisabled() ? '' : null"
       [disabled]="isDisabled()"
       [class]="trackClass()"
-      [style.backgroundColor]="checked() ? checkedBgColor() : 'var(--color-input)'"
       (click)="toggle()"
     >
       <span data-slot="switch-thumb" [class]="thumbClass()" [attr.data-state]="state()"></span>
@@ -167,9 +166,6 @@ export class Switch implements ControlValueAccessor {
   readonly class = input<string>('');
   /** Additional CSS classes to apply to the inner track button */
   readonly buttonClass = input<string>('');
-  /** Background color for checked state (hex, rgb, or CSS color name) */
-  readonly checkedBgColor = input<string>('rgb(59, 130, 246)');
-
   /** Current state for data attribute */
   protected readonly state = computed(
     (): SwitchState => (this.checked() ? 'checked' : 'unchecked'),
