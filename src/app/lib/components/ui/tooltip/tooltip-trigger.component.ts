@@ -84,7 +84,7 @@ export class TooltipTrigger implements OnDestroy {
     this.context.triggerRef?.set(this._elementRef.nativeElement);
     this.showTimeout = setTimeout(() => {
       this.context.setOpen(true);
-    }, this.context.delayDuration);
+    }, this.context.delayDuration());
   }
   onMouseLeave(): void {
     this.clearTimeouts();

@@ -9,7 +9,7 @@ export interface TooltipContextValue {
   /** Set open state */
   setOpen: (open: boolean) => void;
   /** Delay before showing tooltip (ms) */
-  delayDuration: number;
+  delayDuration: () => number;
   /** Skip delay duration when quickly hovering between tooltips (ms) */
   skipDelayDuration: number;
   /** Unique ID for aria-describedby relationship */
