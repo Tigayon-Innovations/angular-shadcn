@@ -139,7 +139,7 @@ export class SheetContent implements OnDestroy {
   }
 
   private lockBodyScroll(): void {
-    if (typeof document !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       this.previousBodyOverflow = document.body.style.overflow;
       this.previousBodyPaddingRight = document.body.style.paddingRight;

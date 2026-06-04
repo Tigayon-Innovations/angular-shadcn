@@ -51,6 +51,7 @@ import { buttonVariants } from '../button';
                 type="button"
                 [class]="navButtonClass()"
                 (click)="previousMonth()"
+                [disabled]="isPrevMonthDisabled()"
                 [attr.aria-label]="'Go to previous month, ' + getPreviousMonthLabel()"
               >
                 <lucide-icon [img]="ChevronLeftIcon" class="h-4 w-4" aria-hidden="true" />
@@ -59,6 +60,7 @@ import { buttonVariants } from '../button';
                 type="button"
                 [class]="navButtonClass()"
                 (click)="nextMonth()"
+                [disabled]="isNextMonthDisabled()"
                 [attr.aria-label]="'Go to next month, ' + getNextMonthLabel()"
               >
                 <lucide-icon [img]="ChevronRightIcon" class="h-4 w-4" aria-hidden="true" />
@@ -138,6 +140,10 @@ export class Calendar {
   readonly showOutsideDays = input<boolean>(true);
   /** Disabled dates function */
   readonly disabled = input<((date: Date) => boolean) | undefined>(undefined);
+  /** Minimum selectable date — dates before this are disabled, navigation before this month is blocked */
+  readonly minDate = input<Date | undefined>(undefined);
+  /** Maximum selectable date — dates after this are disabled, navigation after this month is blocked */
+  readonly maxDate = input<Date | undefined>(undefined);
   /** Accessible label for the calendar */
   readonly ariaLabel = input<string>('Calendar');
   /** Additional CSS classes */
@@ -152,6 +158,22 @@ export class Calendar {
       'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-neutral-800',
     ),
   );
+  /** True when navigating to the previous month would go before minDate */
+  protected readonly isPrevMonthDisabled = computed(() => {
+    const min = this.minDate();
+    if (!min) return false;
+    const current = this.currentMonth();
+    const prevMonthEnd = new Date(current.getFullYear(), current.getMonth(), 0);
+    return prevMonthEnd < new Date(min.getFullYear(), min.getMonth(), 1);
+  });
+  /** True when navigating to the next month would go after maxDate */
+  protected readonly isNextMonthDisabled = computed(() => {
+    const max = this.maxDate();
+    if (!max) return false;
+    const current = this.currentMonth();
+    const nextMonthStart = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+    return nextMonthStart > new Date(max.getFullYear(), max.getMonth() + 1, 0);
+  });
   protected readonly monthYear = computed(() => {
     const date = this.currentMonth();
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -188,7 +210,12 @@ export class Calendar {
         const dayDate = new Date(current);
         const isOutside = dayDate.getMonth() !== month;
         const disabledFn = this.disabled();
-        const isDisabled = disabledFn ? disabledFn(dayDate) : false;
+        const min = this.minDate();
+        const max = this.maxDate();
+        const isDisabled =
+          (disabledFn ? disabledFn(dayDate) : false) ||
+          (min != null && this.isBeforeDay(dayDate, min)) ||
+          (max != null && this.isAfterDay(dayDate, max));
 
         week.push({
           date: dayDate,
@@ -357,4 +384,17 @@ export class Calendar {
       date1.getDate() === date2.getDate()
     );
   }
+  private isBeforeDay(date: Date, ref: Date): boolean {
+    if (date.getFullYear() !== ref.getFullYear()) return date.getFullYear() < ref.getFullYear();
+    if (date.getMonth() !== ref.getMonth()) return date.getMonth() < ref.getMonth();
+    return date.getDate() < ref.getDate();
+  }
+  private isAfterDay(date: Date, ref: Date): boolean {
+    if (date.getFullYear() !== ref.getFullYear()) return date.getFullYear() > ref.getFullYear();
+    if (date.getMonth() !== ref.getMonth()) return date.getMonth() > ref.getMonth();
+    return date.getDate() > ref.getDate();
+  }
+
+  // TODO: range and multiple modes - requires multi-select state
 }
+

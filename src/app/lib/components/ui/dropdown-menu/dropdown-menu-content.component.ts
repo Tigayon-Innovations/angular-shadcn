@@ -55,29 +55,31 @@ export class DropdownMenuContent implements OnDestroy {
     effect(() => {
       if (this.context.open()) {
         if (this.strategy() === 'fixed') {
-          const trigger = this.context.triggerElement();
-          if (trigger) {
-            const rect = trigger.getBoundingClientRect();
-            const side = this.side();
-            const offset = this.sideOffset();
-            let top = rect.top;
-            let left = rect.left;
+          if (typeof window !== 'undefined') {
+            const trigger = this.context.triggerElement();
+            if (trigger) {
+              const rect = trigger.getBoundingClientRect();
+              const side = this.side();
+              const offset = this.sideOffset();
+              let top = rect.top;
+              let left = rect.left;
 
-            if (side === 'bottom') {
-              top = rect.bottom + offset;
-              left = rect.left;
-            } else if (side === 'top') {
-              top = rect.top - offset;
-              left = rect.left;
-            } else if (side === 'right') {
-              top = rect.top;
-              left = rect.right + offset;
-            } else if (side === 'left') {
-              top = rect.top;
-              left = rect.left - offset;
+              if (side === 'bottom') {
+                top = rect.bottom + offset;
+                left = rect.left;
+              } else if (side === 'top') {
+                top = rect.top - offset;
+                left = rect.left;
+              } else if (side === 'right') {
+                top = rect.top;
+                left = rect.right + offset;
+              } else if (side === 'left') {
+                top = rect.top;
+                left = rect.left - offset;
+              }
+
+              this.fixedPos.set({ top, left });
             }
-
-            this.fixedPos.set({ top, left });
           }
         } else {
           this.fixedPos.set(null);

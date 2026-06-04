@@ -187,6 +187,7 @@ export class TabsList {
 
     if (handled) {
       event.preventDefault();
+      if (typeof document === 'undefined') return;
 
       // Skip disabled tabs — scan in the movement direction
       const direction =
@@ -212,7 +213,7 @@ export class TabsList {
     let index = startIndex;
     for (let i = 0; i < length; i++) {
       const tabId = this.tabs.getTabId(tabValues[index]);
-      const el = document.getElementById(tabId);
+      const el = typeof document !== 'undefined' ? document.getElementById(tabId) : null;
       if (!el?.hasAttribute('data-disabled')) return index;
       index = ((index + direction) + length) % length;
     }
@@ -220,6 +221,7 @@ export class TabsList {
   }
 
   private updateIndicator(): void {
+    if (typeof document === 'undefined') return;
     const activeValue = this.tabs.value();
     if (!activeValue) return;
 

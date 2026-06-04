@@ -178,7 +178,7 @@ export class ToastService {
     this._toasts.update((toasts) => [...toasts, newToast]);
 
     const duration = toast.duration ?? 4000;
-    if (duration > 0) {
+    if (duration > 0 && typeof window !== 'undefined') {
       setTimeout(() => this.dismiss(id), duration);
     }
 
