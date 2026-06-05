@@ -373,6 +373,12 @@ export class ComponentDemos {
         component: m.PhoneInputDemo,
       })),
     );
+
+    this.registerDemo('sonner', () =>
+      import('@/pages/docs/component-detail/demos/sonner-demo').then((m) => ({
+        component: m.SonnerDemo,
+      })),
+    );
   }
 
   private registerDemo(slug: string, loader: () => Promise<ComponentDemo>): void {
