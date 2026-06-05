@@ -44,6 +44,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
           [disabled]="disabledDates()"
           [minDate]="minDate()"
           [maxDate]="maxDate()"
+          [locale]="locale()"
           class="w-full"
         />
       </PopoverContent>
@@ -75,8 +76,6 @@ export class DatePicker implements ControlValueAccessor {
   readonly class = input<string>('');
   /** Placeholder text */
   readonly placeholder = input<string>('Pick a date');
-  /** Date format */
-  readonly dateFormat = input<string>('PPP');
   /** Disabled dates function */
   readonly disabledDates = input<((date: Date) => boolean) | undefined>(undefined);
   /** Minimum selectable date — passed to Calendar */

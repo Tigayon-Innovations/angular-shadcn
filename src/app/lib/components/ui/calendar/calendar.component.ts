@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   inject,
   input,
   model,
@@ -100,6 +101,7 @@ import { buttonVariants } from '../button';
                       <button
                         type="button"
                         [class]="getDayClass(day)"
+                        [attr.data-date]="day.date.getFullYear() + '-' + day.date.getMonth() + '-' + day.date.getDate()"
                         [attr.aria-label]="getDateLabel(day.date)"
                         [attr.aria-selected]="isSelected(day.date) ? 'true' : null"
                         [attr.aria-current]="isToday(day.date) ? 'date' : null"
@@ -144,12 +146,15 @@ export class Calendar {
   readonly minDate = input<Date | undefined>(undefined);
   /** Maximum selectable date — dates after this are disabled, navigation after this month is blocked */
   readonly maxDate = input<Date | undefined>(undefined);
+  /** Locale for date formatting (e.g. 'en-US', 'fr-FR') */
+  readonly locale = input<string>('en-US');
   /** Accessible label for the calendar */
   readonly ariaLabel = input<string>('Calendar');
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   private readonly _liveAnnouncer = inject(LiveAnnouncerService);
+  private readonly _elementRef = inject(ElementRef);
 
   protected readonly computedClass = computed(() => cn('w-full p-3', this.class()));
   protected readonly navButtonClass = computed(() =>
@@ -176,7 +181,7 @@ export class Calendar {
   });
   protected readonly monthYear = computed(() => {
     const date = this.currentMonth();
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return date.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   });
   protected readonly calendarWeeks = computed(() => {
     const date = this.currentMonth();
@@ -255,7 +260,7 @@ export class Calendar {
       day: 'numeric',
       year: 'numeric',
     };
-    const label = date.toLocaleDateString('en-US', options);
+    const label = date.toLocaleDateString(this.locale(), options);
 
     if (this.isToday(date)) {
       return `${label}, today`;
@@ -273,13 +278,13 @@ export class Calendar {
   protected getPreviousMonthLabel(): string {
     const current = this.currentMonth();
     const prev = new Date(current.getFullYear(), current.getMonth() - 1, 1);
-    return prev.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return prev.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   }
   /** Get label for next month button */
   protected getNextMonthLabel(): string {
     const current = this.currentMonth();
     const next = new Date(current.getFullYear(), current.getMonth() + 1, 1);
-    return next.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return next.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   }
   /** Get tabindex for day button (roving tabindex) */
   protected getDayTabIndex(day: { date: Date; isOutside: boolean; disabled: boolean }): number {
@@ -329,13 +334,21 @@ export class Calendar {
       if (newDate.getMonth() !== this.currentMonth().getMonth()) {
         this.currentMonth.set(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
       }
-      // Focus the new date after DOM update
-      setTimeout(() => {
-        const button = document.querySelector(
-          `[aria-label*="${newDate!.getDate()},"]`,
-        ) as HTMLElement;
-        button?.focus();
-      }, 0);
+      // Focus the new date after DOM update (browser only)
+      if (typeof document !== 'undefined') {
+        const targetDate = newDate;
+        setTimeout(() => {
+          const root: HTMLElement = this._elementRef.nativeElement;
+          const buttons = root.querySelectorAll<HTMLElement>('button[data-date]');
+          const targetStr = `${targetDate.getFullYear()}-${targetDate.getMonth()}-${targetDate.getDate()}`;
+          for (const btn of Array.from(buttons)) {
+            if (btn.dataset['date'] === targetStr) {
+              btn.focus();
+              break;
+            }
+          }
+        }, 0);
+      }
     }
   }
   protected getDayClass(day: { date: Date; isOutside: boolean; disabled: boolean }): string {
