@@ -154,7 +154,7 @@ interface Task {
       <div class="flex items-center justify-between gap-2">
         <p class="text-sm text-muted-foreground">0 of {{ tasks.length }} row(s) selected.</p>
         <div class="flex items-center gap-2">
-          <Button variant="outline" size="sm" disabled>Previous</Button>
+          <Button variant="outline" size="sm" [disabled]="true">Previous</Button>
           <Button variant="outline" size="sm">Next</Button>
         </div>
       </div>
