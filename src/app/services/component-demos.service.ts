@@ -363,6 +363,34 @@ export class ComponentDemos {
         component: m.TypographyDemo,
       })),
     );
+    this.registerDemo('country-selector', () =>
+      import('@/pages/docs/component-detail/demos/country-selector-demo').then((m) => ({
+        component: m.CountrySelectorDemo,
+      })),
+    );
+    this.registerDemo('phone-input', () =>
+      import('@/pages/docs/component-detail/demos/phone-input-demo').then((m) => ({
+        component: m.PhoneInputDemo,
+      })),
+    );
+
+    this.registerDemo('sonner', () =>
+      import('@/pages/docs/component-detail/demos/sonner-demo').then((m) => ({
+        component: m.SonnerDemo,
+      })),
+    );
+
+    this.registerDemo('field', () =>
+      import('@/pages/docs/component-detail/demos/field-demo').then((m) => ({
+        component: m.FieldDemo,
+      })),
+    );
+
+    this.registerDemo('item', () =>
+      import('@/pages/docs/component-detail/demos/item-demo').then((m) => ({
+        component: m.ItemDemo,
+      })),
+    );
   }
 
   private registerDemo(slug: string, loader: () => Promise<ComponentDemo>): void {

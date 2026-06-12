@@ -5,11 +5,12 @@ import { HomeHeroSection } from './home-hero-section/home-hero-section';
 import { HomeFeaturesSection } from './home-features-section/home-features-section';
 import { HomePerformanceSection } from './home-performance-section/home-performance-section';
 import { HomeCommunitySection } from './home-community-section/home-community-section';
+import { HomeExamplesSection } from './home-examples-section/home-examples-section';
 
 @Component({
   selector: 'HomePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HomeHeroSection, HomeFeaturesSection, HomePerformanceSection, HomeCommunitySection],
+  imports: [HomeHeroSection, HomeFeaturesSection, HomePerformanceSection, HomeCommunitySection, HomeExamplesSection],
   styleUrl: './home.style.css',
   templateUrl: './home.component.html',
 })

@@ -165,7 +165,7 @@ export class ResizableHandle {
       if (!this.isDragging()) return;
 
       const currentPosition = this.context.direction() === 'horizontal' ? e.clientX : e.clientY;
-      const delta = ((currentPosition - this.startPosition) / window.innerWidth) * 100;
+      const delta = ((currentPosition - this.startPosition) / (typeof window !== 'undefined' ? window.innerWidth : 1000)) * 100;
       this.context.onResize(delta);
       this.startPosition = currentPosition;
     };
@@ -194,7 +194,7 @@ export class ResizableHandle {
       const currentTouch = e.touches[0];
       const currentPosition =
         this.context.direction() === 'horizontal' ? currentTouch.clientX : currentTouch.clientY;
-      const delta = ((currentPosition - this.startPosition) / window.innerWidth) * 100;
+      const delta = ((currentPosition - this.startPosition) / (typeof window !== 'undefined' ? window.innerWidth : 1000)) * 100;
       this.context.onResize(delta);
       this.startPosition = currentPosition;
     };

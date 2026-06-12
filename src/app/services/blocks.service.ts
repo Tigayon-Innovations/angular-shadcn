@@ -46,18 +46,21 @@ export class BlocksService {
       slug: 'sidebar-02',
       description: 'A collapsible sidebar with icons.',
       category: 'sidebar',
+      componentPath: '@/blocks/sidebar-02',
     },
     {
       name: 'Sidebar 03',
       slug: 'sidebar-03',
       description: 'A sidebar with submenus.',
       category: 'sidebar',
+      componentPath: '@/blocks/sidebar-03',
     },
     {
       name: 'Sidebar 07',
       slug: 'sidebar-07',
       description: 'A sidebar that collapses to icons.',
       category: 'sidebar',
+      componentPath: '@/blocks/sidebar-07',
     },
     // Login Blocks
     {
@@ -73,18 +76,28 @@ export class BlocksService {
       slug: 'login-02',
       description: 'A login form with social login options.',
       category: 'login',
+      componentPath: '@/blocks/login-02',
     },
     {
       name: 'Login 03',
       slug: 'login-03',
       description: 'A login page with a muted background color.',
       category: 'login',
+      componentPath: '@/blocks/login-03',
     },
     {
       name: 'Login 04',
       slug: 'login-04',
       description: 'A login page with form and image.',
       category: 'login',
+      componentPath: '@/blocks/login-04',
+    },
+    {
+      name: 'Login 05',
+      slug: 'login-05',
+      description: 'A minimal email-only login page.',
+      category: 'login',
+      componentPath: '@/blocks/login-05',
     },
     // Signup Blocks
     {
@@ -100,6 +113,7 @@ export class BlocksService {
       slug: 'signup-02',
       description: 'A signup form with terms and conditions.',
       category: 'signup',
+      componentPath: '@/blocks/signup-02',
     },
     // OTP Blocks
     {
@@ -115,6 +129,7 @@ export class BlocksService {
       slug: 'otp-02',
       description: 'An OTP form with resend functionality.',
       category: 'otp',
+      componentPath: '@/blocks/otp-02',
     },
     // Pricing Blocks
     {
@@ -150,6 +165,33 @@ export class BlocksService {
       description: 'A calendar with event management.',
       category: 'calendar',
       featured: true,
+      componentPath: '@/blocks/calendar-01',
+    },
+    // Dashboard 02
+    {
+      name: 'Dashboard 02',
+      slug: 'dashboard-02',
+      description: 'An analytics dashboard with charts and stats.',
+      category: 'dashboard',
+      componentPath: '@/blocks/dashboard-02',
+    },
+    // Products
+    {
+      name: 'Products 01',
+      slug: 'products-01',
+      description: 'A product management table with filters.',
+      category: 'products',
+      featured: true,
+      componentPath: '@/blocks/products-01',
+    },
+    // Chat
+    {
+      name: 'Chat 01',
+      slug: 'chat-01',
+      description: 'A chat interface with message history.',
+      category: 'chat',
+      featured: true,
+      componentPath: '@/blocks/chat-01',
     },
   ]);
 
@@ -158,7 +200,7 @@ export class BlocksService {
       name: 'Dashboard',
       slug: 'dashboard',
       description: 'Dashboard layouts with charts and data tables',
-      count: 1,
+      count: 2,
     },
     {
       name: 'Sidebar',
@@ -170,7 +212,7 @@ export class BlocksService {
       name: 'Login',
       slug: 'login',
       description: 'Login and authentication forms',
-      count: 4,
+      count: 5,
     },
     {
       name: 'Signup',
@@ -206,6 +248,18 @@ export class BlocksService {
       name: 'Calendar',
       slug: 'calendar',
       description: 'Calendar and scheduling components',
+      count: 1,
+    },
+    {
+      name: 'Products',
+      slug: 'products',
+      description: 'Product listing and management tables',
+      count: 1,
+    },
+    {
+      name: 'Chat',
+      slug: 'chat',
+      description: 'Chat and messaging interfaces',
       count: 1,
     },
   ]);

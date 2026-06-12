@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   inject,
   input,
   model,
@@ -51,6 +52,7 @@ import { buttonVariants } from '../button';
                 type="button"
                 [class]="navButtonClass()"
                 (click)="previousMonth()"
+                [disabled]="isPrevMonthDisabled()"
                 [attr.aria-label]="'Go to previous month, ' + getPreviousMonthLabel()"
               >
                 <lucide-icon [img]="ChevronLeftIcon" class="h-4 w-4" aria-hidden="true" />
@@ -59,6 +61,7 @@ import { buttonVariants } from '../button';
                 type="button"
                 [class]="navButtonClass()"
                 (click)="nextMonth()"
+                [disabled]="isNextMonthDisabled()"
                 [attr.aria-label]="'Go to next month, ' + getNextMonthLabel()"
               >
                 <lucide-icon [img]="ChevronRightIcon" class="h-4 w-4" aria-hidden="true" />
@@ -98,6 +101,7 @@ import { buttonVariants } from '../button';
                       <button
                         type="button"
                         [class]="getDayClass(day)"
+                        [attr.data-date]="day.date.getFullYear() + '-' + day.date.getMonth() + '-' + day.date.getDate()"
                         [attr.aria-label]="getDateLabel(day.date)"
                         [attr.aria-selected]="isSelected(day.date) ? 'true' : null"
                         [attr.aria-current]="isToday(day.date) ? 'date' : null"
@@ -138,12 +142,19 @@ export class Calendar {
   readonly showOutsideDays = input<boolean>(true);
   /** Disabled dates function */
   readonly disabled = input<((date: Date) => boolean) | undefined>(undefined);
+  /** Minimum selectable date — dates before this are disabled, navigation before this month is blocked */
+  readonly minDate = input<Date | undefined>(undefined);
+  /** Maximum selectable date — dates after this are disabled, navigation after this month is blocked */
+  readonly maxDate = input<Date | undefined>(undefined);
+  /** Locale for date formatting (e.g. 'en-US', 'fr-FR') */
+  readonly locale = input<string>('en-US');
   /** Accessible label for the calendar */
   readonly ariaLabel = input<string>('Calendar');
   /** Additional CSS classes */
   readonly class = input<string>('');
 
   private readonly _liveAnnouncer = inject(LiveAnnouncerService);
+  private readonly _elementRef = inject(ElementRef);
 
   protected readonly computedClass = computed(() => cn('w-full p-3', this.class()));
   protected readonly navButtonClass = computed(() =>
@@ -152,9 +163,25 @@ export class Calendar {
       'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-neutral-800',
     ),
   );
+  /** True when navigating to the previous month would go before minDate */
+  protected readonly isPrevMonthDisabled = computed(() => {
+    const min = this.minDate();
+    if (!min) return false;
+    const current = this.currentMonth();
+    const prevMonthEnd = new Date(current.getFullYear(), current.getMonth(), 0);
+    return prevMonthEnd < new Date(min.getFullYear(), min.getMonth(), 1);
+  });
+  /** True when navigating to the next month would go after maxDate */
+  protected readonly isNextMonthDisabled = computed(() => {
+    const max = this.maxDate();
+    if (!max) return false;
+    const current = this.currentMonth();
+    const nextMonthStart = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+    return nextMonthStart > new Date(max.getFullYear(), max.getMonth() + 1, 0);
+  });
   protected readonly monthYear = computed(() => {
     const date = this.currentMonth();
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return date.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   });
   protected readonly calendarWeeks = computed(() => {
     const date = this.currentMonth();
@@ -188,7 +215,12 @@ export class Calendar {
         const dayDate = new Date(current);
         const isOutside = dayDate.getMonth() !== month;
         const disabledFn = this.disabled();
-        const isDisabled = disabledFn ? disabledFn(dayDate) : false;
+        const min = this.minDate();
+        const max = this.maxDate();
+        const isDisabled =
+          (disabledFn ? disabledFn(dayDate) : false) ||
+          (min != null && this.isBeforeDay(dayDate, min)) ||
+          (max != null && this.isAfterDay(dayDate, max));
 
         week.push({
           date: dayDate,
@@ -228,7 +260,7 @@ export class Calendar {
       day: 'numeric',
       year: 'numeric',
     };
-    const label = date.toLocaleDateString('en-US', options);
+    const label = date.toLocaleDateString(this.locale(), options);
 
     if (this.isToday(date)) {
       return `${label}, today`;
@@ -246,13 +278,13 @@ export class Calendar {
   protected getPreviousMonthLabel(): string {
     const current = this.currentMonth();
     const prev = new Date(current.getFullYear(), current.getMonth() - 1, 1);
-    return prev.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return prev.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   }
   /** Get label for next month button */
   protected getNextMonthLabel(): string {
     const current = this.currentMonth();
     const next = new Date(current.getFullYear(), current.getMonth() + 1, 1);
-    return next.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return next.toLocaleDateString(this.locale(), { month: 'long', year: 'numeric' });
   }
   /** Get tabindex for day button (roving tabindex) */
   protected getDayTabIndex(day: { date: Date; isOutside: boolean; disabled: boolean }): number {
@@ -302,13 +334,21 @@ export class Calendar {
       if (newDate.getMonth() !== this.currentMonth().getMonth()) {
         this.currentMonth.set(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
       }
-      // Focus the new date after DOM update
-      setTimeout(() => {
-        const button = document.querySelector(
-          `[aria-label*="${newDate!.getDate()},"]`,
-        ) as HTMLElement;
-        button?.focus();
-      }, 0);
+      // Focus the new date after DOM update (browser only)
+      if (typeof document !== 'undefined') {
+        const targetDate = newDate;
+        setTimeout(() => {
+          const root: HTMLElement = this._elementRef.nativeElement;
+          const buttons = root.querySelectorAll<HTMLElement>('button[data-date]');
+          const targetStr = `${targetDate.getFullYear()}-${targetDate.getMonth()}-${targetDate.getDate()}`;
+          for (const btn of Array.from(buttons)) {
+            if (btn.dataset['date'] === targetStr) {
+              btn.focus();
+              break;
+            }
+          }
+        }, 0);
+      }
     }
   }
   protected getDayClass(day: { date: Date; isOutside: boolean; disabled: boolean }): string {
@@ -357,4 +397,17 @@ export class Calendar {
       date1.getDate() === date2.getDate()
     );
   }
+  private isBeforeDay(date: Date, ref: Date): boolean {
+    if (date.getFullYear() !== ref.getFullYear()) return date.getFullYear() < ref.getFullYear();
+    if (date.getMonth() !== ref.getMonth()) return date.getMonth() < ref.getMonth();
+    return date.getDate() < ref.getDate();
+  }
+  private isAfterDay(date: Date, ref: Date): boolean {
+    if (date.getFullYear() !== ref.getFullYear()) return date.getFullYear() > ref.getFullYear();
+    if (date.getMonth() !== ref.getMonth()) return date.getMonth() > ref.getMonth();
+    return date.getDate() > ref.getDate();
+  }
+
+  // TODO: range and multiple modes - requires multi-select state
 }
+

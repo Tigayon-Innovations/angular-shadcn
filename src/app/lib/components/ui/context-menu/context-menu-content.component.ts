@@ -115,6 +115,7 @@ export class ContextMenuContent implements OnDestroy {
   }
 
   private clampPosition(): void {
+    if (typeof window === 'undefined') return;
     const menu = this._elementRef.nativeElement.querySelector('[role="menu"]') as HTMLElement;
     if (!menu) return;
     const pos = this.context.position();

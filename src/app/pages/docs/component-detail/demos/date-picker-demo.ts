@@ -1,48 +1,56 @@
-import { cn } from '@/lib/utils';
-import { Button } from '@/ui/button';
-import { Calendar } from '@/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover';
-import { DatePipe } from '@angular/common';
+import { DatePicker } from '@/ui/date-picker';
+import { Label } from '@/ui/label';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CalendarIcon, LucideAngularModule } from 'lucide-angular';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'DatePickerDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    Button,
-    Calendar,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-    LucideAngularModule,
-    DatePipe,
-  ],
+  imports: [DatePicker, Label, ReactiveFormsModule],
   template: `
-    <Popover>
-      <PopoverTrigger>
-        <Button
-          variant="outline"
-          [class]="
-            cn('w-[280px] justify-start text-left font-normal', !date() && 'text-muted-foreground')
-          "
-        >
-          <lucide-icon [img]="CalendarIcon" class="mr-2 h-4 w-4" />
-          @if (date()) {
-            {{ date() | date: 'PPP' }}
-          } @else {
-            <span>Pick a date</span>
-          }
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent class="w-auto p-0">
-        <Calendar [selected]="date()" (selectedChange)="date.set($event)" mode="single" />
-      </PopoverContent>
-    </Popover>
+    <div class="flex flex-col gap-6 w-full max-w-sm">
+      <!-- Basic -->
+      <div class="grid gap-1.5">
+        <Label>Pick a date</Label>
+        <DatePicker [(date)]="date" placeholder="Select a date" />
+        @if (date()) {
+          <p class="text-sm text-muted-foreground">Selected: {{ date()?.toDateString() }}</p>
+        }
+      </div>
+
+      <!-- With minDate / maxDate -->
+      <div class="grid gap-1.5">
+        <Label>This month only</Label>
+        <DatePicker
+          placeholder="Select within this month"
+          [minDate]="monthStart"
+          [maxDate]="monthEnd"
+        />
+      </div>
+
+      <!-- Locale -->
+      <div class="grid gap-1.5">
+        <Label>French locale</Label>
+        <DatePicker placeholder="Choisir une date" locale="fr-FR" />
+      </div>
+
+      <!-- formControl -->
+      <div class="grid gap-1.5">
+        <Label>Reactive form</Label>
+        <DatePicker [formControl]="dateControl" placeholder="formControl date" />
+        @if (dateControl.value) {
+          <p class="text-sm text-muted-foreground">
+            Control value: {{ dateControl.value?.toDateString() }}
+          </p>
+        }
+      </div>
+    </div>
   `,
 })
 export class DatePickerDemo {
-  protected readonly CalendarIcon = CalendarIcon;
-  protected readonly cn = cn;
   protected readonly date = signal<Date | undefined>(undefined);
+  protected readonly dateControl = new FormControl<Date | undefined>(undefined);
+
+  protected readonly monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  protected readonly monthEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
 }
