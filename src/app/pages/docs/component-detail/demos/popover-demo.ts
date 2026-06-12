@@ -1,3 +1,4 @@
+import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
 
 import { Label } from '@/ui/label';
@@ -7,7 +8,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'PopoverDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, Label, Popover, PopoverContent, PopoverTrigger],
+  imports: [
+    Input,Button, Label, Popover, PopoverContent, PopoverTrigger],
   template: `
     <Popover>
       <PopoverTrigger>

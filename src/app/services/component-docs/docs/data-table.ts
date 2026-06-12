@@ -330,12 +330,12 @@ onSelectionChange(selection: RowSelectionState): void {
   links: [
     {
       text: 'View source',
-      url: 'https://github.com/example/shadcn-angular/tree/main/src/app/lib/components/ui/data-table',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/tree/main/src/app/lib/components/ui/data-table',
       icon: 'source',
     },
     {
       text: 'Report an issue',
-      url: 'https://github.com/example/shadcn-angular/issues/new',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/issues/new',
       icon: 'issue',
     },
     {

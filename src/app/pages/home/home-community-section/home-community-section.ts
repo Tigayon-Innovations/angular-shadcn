@@ -18,6 +18,6 @@ export class HomeCommunitySection {
   protected readonly sparklesIcon = Sparkles;
 
   protected openGitHub(): void {
-    window.open('https://github.com/example/shadcn-angular', '_blank');
+    window.open('https://github.com/Tigayon-Innovations/angular-shadcn', '_blank');
   }
 }

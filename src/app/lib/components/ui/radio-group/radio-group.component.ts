@@ -8,7 +8,6 @@ import {
   inject,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -121,9 +120,6 @@ export type RadioGroupProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroup implements ControlValueAccessor {
-  /** Emitted when value changes */
-  readonly valueChange = output<string>();
-
   /** The current selected value */
   readonly value = model<string>('');
 
@@ -169,7 +165,6 @@ export class RadioGroup implements ControlValueAccessor {
         this.context.value.set(value);
         this.onChange(value);
         this.onTouched();
-        this.valueChange.emit(value);
       }
     },
     focusNext: (currentValue: string) => this.focusItem(currentValue, 1),

@@ -1,3 +1,4 @@
+import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
 import {
   Dialog,
@@ -16,6 +17,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   selector: 'DialogDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    Input,
     Dialog,
     DialogContent,
     DialogDescription,

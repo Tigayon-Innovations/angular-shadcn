@@ -29,7 +29,7 @@ import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
         </p>
         <div class="flex items-center gap-4">
           <a
-            href="https://github.com/example/shadcn-angular"
+            href="https://github.com/Tigayon-Innovations/angular-shadcn"
             target="_blank"
             rel="noopener noreferrer"
             class="text-muted-foreground hover:text-foreground"

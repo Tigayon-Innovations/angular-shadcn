@@ -10,7 +10,6 @@ import {
   inject,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import { SELECT_CONTEXT, type SelectContext } from './select-context';
@@ -168,11 +167,6 @@ export class Select {
     });
   }
 
-  /** Event handler called when the value changes */
-  readonly valueChange = output<string>();
-  /** Event handler called when the open state changes */
-  readonly openChange = output<boolean>();
-
   /** The controlled value of the select */
   readonly value = model<string>('');
   /** The controlled open state of the select */
@@ -211,7 +205,6 @@ export class Select {
     setOpen: (open: boolean) => {
       this._isOpen.set(open);
       this.open.set(open);
-      this.openChange.emit(open);
     },
     disabled: this._isDisabled,
     placeholder: signal(''),
@@ -225,7 +218,6 @@ export class Select {
     setValue: (value: string, label?: string) => {
       this._value.set(value);
       this.value.set(value);
-      this.valueChange.emit(value);
       if (label) {
         this.context.selectedLabel.set(label);
       }

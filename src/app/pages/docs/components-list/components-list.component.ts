@@ -1,3 +1,4 @@
+import { Input } from '@/ui/input';
 import { ComponentRegistry, type ComponentCategory } from '@/services/component-registry.service';
 import { SeoService } from '@/services/seo.service';
 import { Badge } from '@/ui/badge';
@@ -16,6 +17,7 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
   selector: 'ComponentsListPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    Input,
     RouterLink,
     Badge,
     Card,

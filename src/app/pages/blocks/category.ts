@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
           >
             ← Back to all blocks
           </a>
-          @if (category(); as cat) {
+          @if (categoryInfo(); as cat) {
             <h1 class="mb-2 text-4xl font-bold tracking-tight">
               {{ cat.name }}
             </h1>
@@ -71,13 +71,13 @@ import { RouterLink } from '@angular/router';
 export class BlocksCategoryPage {
   private blocksService = inject(BlocksService);
 
-  slug = input.required<string>();
+  category = input.required<string>();
 
-  category = computed(() => {
-    return this.blocksService.getCategoryBySlug(this.slug());
+  categoryInfo = computed(() => {
+    return this.blocksService.getCategoryBySlug(this.category());
   });
 
   blocks = computed(() => {
-    return this.blocksService.getBlocksByCategory(this.slug());
+    return this.blocksService.getBlocksByCategory(this.category());
   });
 }

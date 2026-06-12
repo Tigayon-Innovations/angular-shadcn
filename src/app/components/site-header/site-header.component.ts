@@ -35,17 +35,13 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
         <!-- Logo (hidden on mobile) -->
         <div class="mr-4 hidden md:flex">
-          <a routerLink="/" class="mr-6 flex items-center gap-2 space-x-2">
+          <a routerLink="/" class="mr-6 flex items-center gap-2">
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAAb1BMVEUAAAD///8XFxfGxsbJycm5ubkgICAYGBjMzMwqKiqkpKShoaHZ2dkcHBzW1tYtLS0PDw/19fU8PDwICAgkJCS/v7/n5+cxMTE3NzcSEhKEhISYmJjh4eE9PT3r6+uLi4tVVVVoaGiwsLBRUVFdXV34CXnyAAACxUlEQVR4nO2bbXObQAyEfeAXcDDFPYcE26VNmv//Gxu7IYgZt3PIw4nN7POdyUaj22MlvFgQQgghhBBCCCGEEEIIIYQQQr4ojbWA0VQ/W1f88tYyRpGn7sIRSbVfXjW79mCtJJw8cx+8WUsJZpd2mt2LtZZQ1stPzftnazGB5H2d3WtlrSaMKus1nxNrNWHkfW+4FYjmSmjOdtZqwjgIzY8gdV6LM/i4tlYTxk72BkidpdetQPrZI3qd0IzidYnojQzkDA68bmOtJowDoNclos4lSD+je10B0s+IXieylUtBzqDIVi4FqbP0uhVIneU7fwFS50G2AvENWecSxJ+l1zFbTccgW4H0cw7odZDZCnCO1HCOFAXEbLXhHCkOiF4HmK02ojeWIGdQel0K8r6B6HWNbo7UJI3dhlyXrZpjua+3T1MK+w9e1jm8n7fXB2obo9Flq+Th45HTlNr+hXKO1Gl2mcG+Wc6RluH9vHWGonXZqnron4rfHrodve/rbHAQddkqEXUuv0+p7xbKHb2oc/xPVXTZKhGai+hXi3KOJHqjjt4buh19Jep8/jalvlvospX0uiJ6nZVzJHkG49dZla0GXhfdN5Q7eqHZ2Os07xuuiN4bumzlTb1Ot6MfvG+AeF0zG68bsaOXXhf97kb0unuzlYXX6Xb08/G68Gwlve78Y0p9t9Dt6KXXtfG9TjdHmk22GrGjn43XKeZIl/8UMFu1ttkquJ9nlK1Uc6QiutdBZqv750jR7+5KZiuQOdLiqPI60znSwu8VXmebrd7v4b43VHOk+NnqQtGdQZBsdeU3ltf9xR/b9z/+CuJ1Hf7w9vIcvs4xzVY6bLOVEuHqZ5szOJ6mNPY6DcnnVWTkdRqaujuDVp8XKOiyt53XaXiqrd437iE5ZdkJ5GsxQQXy43tCCCGEEEIIIYQQQgghhBBCCCFfnT9MgR8dTROf8AAAAABJRU5ErkJggg=="
               alt="shadcn-angular"
-              class="h-6 scale-110 me-2"
+              class="h-6"
             />
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Angular_gradient_logo.png/1200px-Angular_gradient_logo.png"
-              alt="shadcn-angular"
-              class="h-6 scale-150 ms-2"
-            />
+            <span class="font-bold whitespace-nowrap">shadcn/angular</span>
           </a>
         </div>
 
@@ -53,65 +49,57 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
         <nav class="hidden md:flex flex-1 items-center gap-6 text-sm">
           <a
             routerLink="/docs"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Docs
           </a>
           <a
             routerLink="/docs/components"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Components
           </a>
           <a
             routerLink="/blocks"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Blocks
           </a>
           <a
             routerLink="/charts"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Charts
           </a>
           <a
             routerLink="/themes"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Themes
           </a>
           <a
             routerLink="/colors"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Colors
           </a>
           <a
             routerLink="/playground"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Playground
           </a>
           <a
             routerLink="/theme-editor"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Theme Editor
           </a>
           <a
             routerLink="/create"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
+            class="whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground/80"
           >
             Create
-          </a>
-          <a
-            href="https://github.com/example/shadcn-angular"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            GitHub
           </a>
         </nav>
 
@@ -126,7 +114,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
           <!-- Search Button - Full on desktop -->
           <Button
             variant="outline"
-            class="relative h-9 hidden md:flex w-64 lg:w-80 justify-start rounded-md bg-muted/50 text-sm text-muted-foreground"
+            class="relative h-9 hidden md:flex w-48 lg:w-64 justify-start rounded-md bg-muted/50 text-sm text-muted-foreground"
             (click)="openSearch()"
           >
             <lucide-icon [img]="icons.Search" class="mr-2 h-4 w-4" />
@@ -144,7 +132,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
           <!-- GitHub Stars -->
           <a
-            href="https://github.com/example/shadcn-angular"
+            href="https://github.com/Tigayon-Innovations/angular-shadcn"
             target="_blank"
             rel="noopener noreferrer"
             class="hidden sm:flex"
@@ -277,7 +265,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
         <div class="border-t border-border my-3"></div>
 
         <a
-          href="https://github.com/example/shadcn-angular"
+          href="https://github.com/Tigayon-Innovations/angular-shadcn"
           target="_blank"
           rel="noopener noreferrer"
           class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"

@@ -1,3 +1,4 @@
+import { Input } from '@/ui/input';
 import { CodeBlock } from '@/components/code-block';
 import { DynamicPreview } from '@/components/playground';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/ui/accordion';
@@ -41,6 +42,7 @@ interface ComponentExample {
   selector: 'PlaygroundPage',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    Input,
     CodeBlock,
     DynamicPreview,
     Accordion,

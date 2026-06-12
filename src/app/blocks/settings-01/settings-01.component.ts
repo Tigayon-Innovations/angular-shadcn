@@ -1,3 +1,4 @@
+import { Input } from '@/lib/components/ui/input';
 import { Button } from '@/lib/components/ui/button';
 import {
   Card,
@@ -16,6 +17,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 @Component({
   selector: 'app-settings-01',
   imports: [
+    Input,
     Button,
     Card,
     CardContent,
