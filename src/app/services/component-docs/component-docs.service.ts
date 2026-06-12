@@ -66,6 +66,10 @@ import { TABLE_DOCUMENTATION } from './docs/table';
 import { TOGGLE_DOCUMENTATION } from './docs/toggle';
 import { TOGGLE_GROUP_DOCUMENTATION } from './docs/toggle-group';
 import { TYPOGRAPHY_DOCUMENTATION } from './docs/typography';
+import { FIELD_DOCUMENTATION } from './docs/field';
+import { ITEM_DOCUMENTATION } from './docs/item';
+import { SONNER_DOCUMENTATION } from './docs/sonner';
+import { DIRECTION_DOCUMENTATION } from './docs/direction';
 
 /**
  * Registry service for comprehensive component documentation.
@@ -134,6 +138,10 @@ export class ComponentDocsRegistry {
     ['toggle', TOGGLE_DOCUMENTATION],
     ['toggle-group', TOGGLE_GROUP_DOCUMENTATION],
     ['typography', TYPOGRAPHY_DOCUMENTATION],
+    ['field', FIELD_DOCUMENTATION],
+    ['item', ITEM_DOCUMENTATION],
+    ['sonner', SONNER_DOCUMENTATION],
+    ['direction', DIRECTION_DOCUMENTATION],
   ]);
 
   /**
