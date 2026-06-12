@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
+import { Github, Heart, LucideAngularModule } from 'lucide-angular';
 
 /**
  * Site footer component with links and credits.
@@ -29,7 +29,7 @@ import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
         </p>
         <div class="flex items-center gap-4">
           <a
-            href="https://github.com/example/shadcn-angular"
+            href="https://github.com/Tigayon-Innovations/angular-shadcn"
             target="_blank"
             rel="noopener noreferrer"
             class="text-muted-foreground hover:text-foreground"
@@ -37,20 +37,11 @@ import { Github, Heart, LucideAngularModule, Twitter } from 'lucide-angular';
             <lucide-icon [img]="icons.Github" class="h-5 w-5" />
             <span class="sr-only">GitHub</span>
           </a>
-          <a
-            href="https://twitter.com/shadcn"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-muted-foreground hover:text-foreground"
-          >
-            <lucide-icon [img]="icons.Twitter" class="h-5 w-5" />
-            <span class="sr-only">Twitter</span>
-          </a>
         </div>
       </div>
     </footer>
   `,
 })
 export class SiteFooter {
-  protected readonly icons = { Github, Twitter, Heart };
+  protected readonly icons = { Github, Heart };
 }

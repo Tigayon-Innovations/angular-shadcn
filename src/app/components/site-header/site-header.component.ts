@@ -4,7 +4,7 @@ import { Button } from '@/ui/button';
 import { Kbd } from '@/ui/kbd';
 import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide-angular';
 
 /**
@@ -13,7 +13,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 @Component({
   selector: 'SiteHeader',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd, Separator],
+  imports: [RouterLink, RouterLinkActive, Button, ThemeToggle, LucideAngularModule, SearchDialog, Kbd, Separator],
   host: {
     '(document:keydown)': 'onKeydown($event)',
   },
@@ -51,68 +51,19 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
         <!-- Main Nav -->
         <nav class="hidden md:flex flex-1 items-center gap-6 text-sm">
+          @for (link of navLinks; track link.label) {
+            <a
+              [routerLink]="link.href"
+              routerLinkActive="!text-foreground font-medium"
+              class="text-foreground/60 transition-colors hover:text-foreground/80"
+            >{{ link.label }}</a>
+          }
           <a
-            routerLink="/docs"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Docs
-          </a>
-          <a
-            routerLink="/docs/components"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Components
-          </a>
-          <a
-            routerLink="/blocks"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Blocks
-          </a>
-          <a
-            routerLink="/charts"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Charts
-          </a>
-          <a
-            routerLink="/themes"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Themes
-          </a>
-          <a
-            routerLink="/colors"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Colors
-          </a>
-          <a
-            routerLink="/playground"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Playground
-          </a>
-          <a
-            routerLink="/theme-editor"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Theme Editor
-          </a>
-          <a
-            routerLink="/create"
-            class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            Create
-          </a>
-          <a
-            href="https://github.com/example/shadcn-angular"
+            href="https://github.com/Tigayon-Innovations/angular-shadcn"
             target="_blank"
             rel="noopener noreferrer"
             class="text-foreground/60 transition-colors hover:text-foreground/80"
-          >
-            GitHub
-          </a>
+          >GitHub</a>
         </nav>
 
         <!-- Right side actions -->
@@ -144,7 +95,7 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
 
           <!-- GitHub Stars -->
           <a
-            href="https://github.com/example/shadcn-angular"
+            href="https://github.com/Tigayon-Innovations/angular-shadcn"
             target="_blank"
             rel="noopener noreferrer"
             class="hidden sm:flex"
@@ -205,79 +156,25 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
       <nav class="flex flex-col gap-1">
         <a
           routerLink="/"
+          routerLinkActive="bg-accent !text-foreground"
+          [routerLinkActiveOptions]="{exact: true}"
           class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
           (click)="closeMobileMenu()"
-        >
-          Home
-        </a>
-        <a
-          routerLink="/docs"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Docs
-        </a>
-        <a
-          routerLink="/docs/components"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Components
-        </a>
-        <a
-          routerLink="/blocks"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Blocks
-        </a>
-        <a
-          routerLink="/charts"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Charts
-        </a>
-        <a
-          routerLink="/themes"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Themes
-        </a>
-        <a
-          routerLink="/colors"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Colors
-        </a>
-        <a
-          routerLink="/playground"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Playground
-        </a>
-        <a
-          routerLink="/theme-editor"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Theme Editor
-        </a>
-        <a
-          routerLink="/create"
-          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          (click)="closeMobileMenu()"
-        >
-          Create
-        </a>
+        >Home</a>
+
+        @for (link of navLinks; track link.label) {
+          <a
+            [routerLink]="link.href"
+            routerLinkActive="bg-accent !text-foreground"
+            class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+            (click)="closeMobileMenu()"
+          >{{ link.label }}</a>
+        }
 
         <div class="border-t border-border my-3"></div>
 
         <a
-          href="https://github.com/example/shadcn-angular"
+          href="https://github.com/Tigayon-Innovations/angular-shadcn"
           target="_blank"
           rel="noopener noreferrer"
           class="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
@@ -297,6 +194,15 @@ export class SiteHeader implements OnInit {
   protected readonly searchOpen = signal(false);
   protected readonly mobileMenuOpen = signal(false);
   protected readonly starCount = signal('1.2k');
+  protected readonly navLinks = [
+    { href: '/docs', label: 'Docs' },
+    { href: '/docs/components', label: 'Components' },
+    { href: '/blocks', label: 'Blocks' },
+    { href: '/charts', label: 'Charts' },
+    { href: '/themes', label: 'Themes' },
+    { href: '/colors', label: 'Colors' },
+    { href: '/create', label: 'Create' },
+  ];
 
   ngOnInit(): void {
     // In a real app, you would fetch the actual star count from GitHub API
