@@ -379,6 +379,18 @@ export class ComponentDemos {
         component: m.SonnerDemo,
       })),
     );
+
+    this.registerDemo('field', () =>
+      import('@/pages/docs/component-detail/demos/field-demo').then((m) => ({
+        component: m.FieldDemo,
+      })),
+    );
+
+    this.registerDemo('item', () =>
+      import('@/pages/docs/component-detail/demos/item-demo').then((m) => ({
+        component: m.ItemDemo,
+      })),
+    );
   }
 
   private registerDemo(slug: string, loader: () => Promise<ComponentDemo>): void {

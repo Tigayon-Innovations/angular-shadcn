@@ -1,3 +1,4 @@
+import { BLOCK_LOADERS } from '@/blocks/block-loaders';
 import { CodeBlock } from '@/components/code-block';
 import { BlocksService } from '@/services/blocks.service';
 import {
@@ -10,7 +11,6 @@ import {
   signal,
   viewChild,
   ViewContainerRef,
-  type Type,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -144,12 +144,9 @@ export class BlockDetailPage {
         container.clear();
 
         try {
-          const componentModule = await import(/* @vite-ignore */ block.componentPath);
-          const componentClass = Object.values(componentModule).find(
-            (exp: any) => exp?.prototype?.constructor,
-          ) as Type<any>;
-
-          if (componentClass) {
+          const loader = BLOCK_LOADERS[block.slug];
+          if (loader) {
+            const componentClass = await loader();
             container.createComponent(componentClass);
           }
         } catch (error) {

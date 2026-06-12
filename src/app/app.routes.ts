@@ -98,6 +98,16 @@ export const routes: Routes = [
     title: 'Charts - shadcn-angular',
   },
   {
+    path: 'colors',
+    loadComponent: () => import('@/pages/colors').then((m) => m.ColorsPage),
+    title: 'Colors - shadcn-angular',
+  },
+  {
+    path: 'themes',
+    loadComponent: () => import('@/pages/themes').then((m) => m.ThemesPage),
+    title: 'Themes - shadcn-angular',
+  },
+  {
     path: 'blocks',
     loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksLayout),
     title: 'Blocks - shadcn-angular',

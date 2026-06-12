@@ -76,6 +76,18 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
             Charts
           </a>
           <a
+            routerLink="/themes"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Themes
+          </a>
+          <a
+            routerLink="/colors"
+            class="text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Colors
+          </a>
+          <a
             routerLink="/playground"
             class="text-foreground/60 transition-colors hover:text-foreground/80"
           >
@@ -219,6 +231,20 @@ import { Github, LucideAngularModule, Menu, Plus, Search, Star, X } from 'lucide
           (click)="closeMobileMenu()"
         >
           Charts
+        </a>
+        <a
+          routerLink="/themes"
+          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+          (click)="closeMobileMenu()"
+        >
+          Themes
+        </a>
+        <a
+          routerLink="/colors"
+          class="block w-full rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+          (click)="closeMobileMenu()"
+        >
+          Colors
         </a>
         <a
           routerLink="/playground"

@@ -22,6 +22,8 @@
       "@/ui/*": ["src/app/lib/components/ui/*"],
       "@/utils/*": ["src/app/lib/utils/*"],
       "@/services/*": ["src/app/services/*"],
+      "@/blocks": ["src/app/blocks"],
+      "@/blocks/*": ["src/app/blocks/*"],
       "@/data/*": ["src/app/data/*"],
       "@/pages/*": ["src/app/pages/*"]
     }
