@@ -328,4 +328,124 @@ export const ADVANCED_COMPONENTS: ComponentInfo[] = [
     ],
     props: [{ name: 'class', type: 'string', description: 'Additional CSS classes.' }],
   },
+  {
+    name: 'Direction',
+    slug: 'direction',
+    description: 'Context provider that sets text direction (LTR/RTL) for all descendant components.',
+    category: 'advanced',
+    package: '@ng-cn/direction',
+    imports: ['Direction'],
+    examples: [
+      {
+        title: 'RTL Layout',
+        code: `<Direction dir="rtl">
+  <div class="space-y-4 p-4">
+    <Input placeholder="أدخل نصًا هنا..." />
+    <Button>إرسال</Button>
+  </div>
+</Direction>`,
+      },
+      {
+        title: 'LTR (default)',
+        code: `<Direction dir="ltr">
+  <div class="space-y-4 p-4">
+    <Input placeholder="Enter text here..." />
+    <Button>Submit</Button>
+  </div>
+</Direction>`,
+      },
+    ],
+    props: [
+      { name: 'dir', type: "'ltr' | 'rtl'", default: "'ltr'", description: 'Text direction applied to all descendants.' },
+    ],
+  },
+  {
+    name: 'Field',
+    slug: 'field',
+    description: 'Composable form field layout with label, description, error and content slots.',
+    category: 'advanced',
+    package: '@ng-cn/field',
+    imports: ['Field', 'FieldLabel', 'FieldContent', 'FieldDescription', 'FieldError', 'FieldGroup'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<Field>
+  <FieldLabel>Username</FieldLabel>
+  <FieldContent>
+    <Input placeholder="Enter username" />
+  </FieldContent>
+  <FieldDescription>This is your public display name.</FieldDescription>
+</Field>`,
+      },
+      {
+        title: 'With Error',
+        code: `<Field>
+  <FieldLabel>Email</FieldLabel>
+  <FieldContent>
+    <Input type="email" placeholder="m@example.com" />
+  </FieldContent>
+  <FieldError>Please enter a valid email address.</FieldError>
+</Field>`,
+      },
+      {
+        title: 'Group',
+        code: `<FieldGroup>
+  <Field>
+    <FieldLabel>First Name</FieldLabel>
+    <FieldContent><Input placeholder="John" /></FieldContent>
+  </Field>
+  <Field>
+    <FieldLabel>Last Name</FieldLabel>
+    <FieldContent><Input placeholder="Doe" /></FieldContent>
+  </Field>
+</FieldGroup>`,
+      },
+    ],
+    props: [
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
+    ],
+  },
+  {
+    name: 'Item',
+    slug: 'item',
+    description: 'Composable list-item layout with media, header, content and action slots.',
+    category: 'advanced',
+    package: '@ng-cn/item',
+    imports: ['Item', 'ItemHeader', 'ItemTitle', 'ItemDescription', 'ItemContent', 'ItemActions', 'ItemMedia'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<Item>
+  <ItemHeader>
+    <ItemTitle>Notification Title</ItemTitle>
+    <ItemDescription>A brief description of the item content.</ItemDescription>
+  </ItemHeader>
+  <ItemActions>
+    <Button variant="ghost" size="sm">Dismiss</Button>
+  </ItemActions>
+</Item>`,
+      },
+      {
+        title: 'With Media',
+        code: `<Item>
+  <ItemMedia>
+    <Avatar>
+      <AvatarImage src="/avatar.png" alt="User" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  </ItemMedia>
+  <ItemHeader>
+    <ItemTitle>John Doe</ItemTitle>
+    <ItemDescription>Sent you a message</ItemDescription>
+  </ItemHeader>
+  <ItemActions>
+    <Button variant="outline" size="sm">Reply</Button>
+  </ItemActions>
+</Item>`,
+      },
+    ],
+    props: [
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
+    ],
+  },
 ];

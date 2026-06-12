@@ -341,4 +341,31 @@ export const COMPLEX_COMPONENTS: ComponentInfo[] = [
     ],
     props: [{ name: 'class', type: 'string', description: 'Additional CSS classes to apply.' }],
   },
+  {
+    name: 'Data Table',
+    slug: 'data-table',
+    description: 'A powerful data table with sorting, filtering, pagination and column visibility controls.',
+    category: 'complex',
+    package: '@ng-cn/data-table',
+    imports: ['DataTable', 'DataTableContent', 'DataTableToolbar', 'DataTableSearch', 'DataTablePagination', 'DataTableViewOptions'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<DataTable [data]="rows" [columns]="columns">
+  <DataTableToolbar>
+    <DataTableSearch />
+    <DataTableViewOptions />
+  </DataTableToolbar>
+  <DataTableContent />
+  <DataTablePagination />
+</DataTable>`,
+      },
+    ],
+    props: [
+      { name: 'data', type: 'T[]', description: 'The array of row data objects.' },
+      { name: 'columns', type: 'ColumnDef<T>[]', description: 'Column definitions array.' },
+      { name: 'pageSize', type: 'number', default: '10', description: 'Number of rows per page.' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
+    ],
+  },
 ];

@@ -1108,4 +1108,61 @@ form = new FormGroup({
       { name: 'class', type: 'string', description: 'Additional CSS classes to apply.' },
     ],
   },
+  {
+    name: 'Country Selector',
+    slug: 'country-selector',
+    description: 'A searchable country dropdown with flag, name and dial code. Integrates with Angular Forms.',
+    category: 'form',
+    package: '@ng-cn/country-selector',
+    imports: ['CountrySelector'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<div class="w-full max-w-sm">
+  <CountrySelector [(ngModel)]="countryCode" />
+</div>`,
+      },
+      {
+        title: 'Pre-selected',
+        code: `<div class="w-full max-w-sm">
+  <CountrySelector [value]="'US'" (countryChange)="onCountryChange($event)" />
+</div>`,
+      },
+    ],
+    props: [
+      { name: 'value', type: 'string', description: 'ISO 2-letter country code (e.g. "US").' },
+      { name: 'placeholder', type: 'string', default: "'Select country'", description: 'Placeholder text when nothing is selected.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the selector is disabled.' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
+      { name: 'countryChange', type: 'EventEmitter<Country>', description: 'Emits the selected Country object on change.' },
+    ],
+  },
+  {
+    name: 'Phone Input',
+    slug: 'phone-input',
+    description: 'Phone number input combining a CountrySelector dial code picker with a number field.',
+    category: 'form',
+    package: '@ng-cn/phone-input',
+    imports: ['PhoneInput'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<div class="w-full max-w-sm">
+  <PhoneInput [(ngModel)]="phone" placeholder="Enter phone number" />
+</div>`,
+      },
+      {
+        title: 'With Label',
+        code: `<div class="grid w-full max-w-sm gap-1.5">
+  <Label htmlFor="phone">Phone</Label>
+  <PhoneInput id="phone" placeholder="Enter phone number" />
+</div>`,
+      },
+    ],
+    props: [
+      { name: 'placeholder', type: 'string', default: "'Phone number'", description: 'Placeholder for the number input.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the input is disabled.' },
+      { name: 'class', type: 'string', description: 'Additional CSS classes.' },
+    ],
+  },
 ];

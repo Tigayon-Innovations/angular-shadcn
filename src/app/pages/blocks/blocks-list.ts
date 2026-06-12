@@ -1,10 +1,11 @@
 import { BlocksService } from '@/services/blocks.service';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BlockPreview } from './block-preview.component';
 
 @Component({
   selector: 'app-blocks-list',
-  imports: [RouterLink],
+  imports: [RouterLink, BlockPreview],
   template: `
     <div class="container py-12 md:py-16">
       <div class="mx-auto max-w-5xl">
@@ -29,21 +30,7 @@ import { RouterLink } from '@angular/router';
                   [routerLink]="['/blocks', block.category, block.slug]"
                   class="group relative overflow-hidden rounded-lg border bg-card transition-colors hover:border-primary"
                 >
-                  <div class="aspect-video bg-muted">
-                    @if (block.image) {
-                      <img
-                        [src]="block.image"
-                        [alt]="block.name"
-                        class="h-full w-full object-cover"
-                      />
-                    } @else {
-                      <div
-                        class="flex h-full w-full items-center justify-center text-muted-foreground"
-                      >
-                        <span class="text-sm">Preview</span>
-                      </div>
-                    }
-                  </div>
+                  <block-preview [slug]="block.slug" class="block" />
                   <div class="p-4">
                     <h3 class="font-medium group-hover:text-primary">
                       {{ block.name }}

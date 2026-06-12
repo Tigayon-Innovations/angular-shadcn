@@ -1373,4 +1373,50 @@ this.toast.show({
       },
     ],
   },
+  {
+    name: 'Sonner',
+    slug: 'sonner',
+    description: 'Toast notifications powered by ngx-sonner. Stacked, themed and non-intrusive.',
+    category: 'overlay',
+    package: '@ng-cn/sonner',
+    imports: ['Sonner', 'toast'],
+    examples: [
+      {
+        title: 'Basic',
+        code: `<!-- Mount once in your root layout -->
+<Sonner />
+
+<!-- Trigger toasts programmatically -->
+<Button (click)="toast('Event has been created!')">Show Toast</Button>`,
+      },
+      {
+        title: 'Variants',
+        code: `<div class="flex flex-wrap gap-2">
+  <Button (click)="toast.success('Event created!')">Success</Button>
+  <Button (click)="toast.error('Something went wrong.')">Error</Button>
+  <Button (click)="toast.warning('Low disk space.')">Warning</Button>
+  <Button (click)="toast.info('App updated to v2.')">Info</Button>
+</div>`,
+      },
+      {
+        title: 'With Description',
+        code: `<Button
+  (click)="toast('Scheduled: Catch up', {
+    description: 'Friday, February 10, 2025 at 5:57 PM',
+  })"
+>
+  Show with description
+</Button>`,
+      },
+    ],
+    props: [
+      { name: 'position', type: "'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center'", default: "'bottom-right'", description: 'Where toasts appear on screen.' },
+      { name: 'theme', type: "'light' | 'dark' | 'system'", default: "'system'", description: 'Color theme for the toasts.' },
+      { name: 'richColors', type: 'boolean', default: 'false', description: 'Use rich semantic colors for success/error/warning/info.' },
+      { name: 'closeButton', type: 'boolean', default: 'false', description: 'Show a close button on each toast.' },
+      { name: 'duration', type: 'number', default: '4000', description: 'Auto-dismiss duration in milliseconds.' },
+      { name: 'visibleToasts', type: 'number', default: '3', description: 'Maximum number of toasts visible at once.' },
+      { name: 'expand', type: 'boolean', default: 'false', description: 'Whether to expand toasts by default.' },
+    ],
+  },
 ];
