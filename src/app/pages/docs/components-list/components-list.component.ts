@@ -2,6 +2,7 @@ import { ComponentRegistry, type ComponentCategory } from '@/services/component-
 import { SeoService } from '@/services/seo.service';
 import { Badge } from '@/ui/badge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/ui/card';
+import { Input } from '@/ui/input';
 
 import { Separator } from '@/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
@@ -22,6 +23,7 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
     CardDescription,
     CardHeader,
     CardTitle,
+    Input,
     Separator,
     Tabs,
     TabsContent,
@@ -49,7 +51,8 @@ import { ArrowRight, LucideAngularModule, Search } from 'lucide-angular';
           [img]="icons.Search"
           class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
         />
-        <Input
+        <input
+          Input
           type="search"
           placeholder="Search components..."
           class="pl-12 h-12 text-base"
