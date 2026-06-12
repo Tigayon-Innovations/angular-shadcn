@@ -178,18 +178,19 @@ import {
                     <Table>
                       <TableHeader>
                         <TableRow class="bg-muted/50">
-                          <TableHead class="w-[180px]">Prop</TableHead>
-                          <TableHead class="w-[200px]">Type</TableHead>
-                          <TableHead class="w-[120px]">Default</TableHead>
+                          <TableHead class="w-[160px]">Prop</TableHead>
+                          <TableHead class="w-[160px]">Type</TableHead>
+                          <TableHead class="w-[100px]">Default</TableHead>
+                          <TableHead>Description</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         @for (prop of api.props; track prop.name) {
                           <TableRow>
-                            <TableCell class="font-mono text-sm">
+                            <TableCell class="font-mono text-sm font-medium">
                               {{ prop.name }}
                               @if (prop.required) {
-                                <span class="text-red-500">*</span>
+                                <span class="text-destructive ml-0.5">*</span>
                               }
                             </TableCell>
                             <TableCell>
@@ -197,12 +198,10 @@ import {
                                 prop.type
                               }}</code>
                             </TableCell>
-                            <TableCell class="text-muted-foreground">
+                            <TableCell class="text-muted-foreground text-sm">
                               {{ prop.default || '—' }}
                             </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell colspan="3" class="text-sm text-muted-foreground pt-0 pb-4">
+                            <TableCell class="text-sm text-muted-foreground">
                               {{ prop.description }}
                             </TableCell>
                           </TableRow>
@@ -285,7 +284,19 @@ import {
                   }
                 </div>
 
-                <CodeBlock [code]="example.code" language="html" />
+                @if (i === 0 && hasDemo()) {
+                  <ComponentPreview [code]="example.code" language="html" [interactive]="false">
+                    <div class="flex items-center justify-center p-8 min-h-[200px]">
+                      <ng-container #firstExampleContainer />
+                    </div>
+                  </ComponentPreview>
+                } @else {
+                  <ComponentPreview [code]="example.code" language="html" [interactive]="false">
+                    <div class="flex items-center justify-center p-8 min-h-[160px]">
+                      <p class="text-xs text-muted-foreground">See live preview above ↑</p>
+                    </div>
+                  </ComponentPreview>
+                }
 
                 @if (example.css) {
                   <CodeBlock [code]="example.css" language="css" />
@@ -423,6 +434,7 @@ export class ComponentDocPage {
   readonly slug = input.required<string>();
 
   protected readonly demoContainer = viewChild('demoContainer', { read: ViewContainerRef });
+  protected readonly firstExampleContainer = viewChild('firstExampleContainer', { read: ViewContainerRef });
 
   protected readonly icons = {
     ArrowRight,
@@ -439,7 +451,7 @@ export class ComponentDocPage {
   };
 
   // Signal for installation tab state
-  protected readonly installTab = signal<string>('ng-add');
+  protected readonly installTab = signal<string>('npm');
 
   protected readonly docs = computed(() => {
     return this.docsRegistry.getBySlug(this.slug());
@@ -468,10 +480,21 @@ export class ComponentDocPage {
   });
 
   constructor() {
+    // Set installTab default based on whether ngAdd is available
+    effect(() => {
+      const doc = this.docs();
+      if (doc?.installation.ngAdd) {
+        this.installTab.set('ng-add');
+      } else {
+        this.installTab.set('npm');
+      }
+    }, { allowSignalWrites: true });
+
     // Load demo component when slug changes
     effect(() => {
       const slug = this.slug();
       const container = this.demoContainer();
+      const firstContainer = this.firstExampleContainer();
 
       if (container) {
         container.clear();
@@ -480,6 +503,10 @@ export class ComponentDocPage {
           this.demos.getDemo(slug).then((demo) => {
             if (demo) {
               container.createComponent(demo.component as Type<unknown>);
+              if (firstContainer) {
+                firstContainer.clear();
+                firstContainer.createComponent(demo.component as Type<unknown>);
+              }
             }
           });
         }

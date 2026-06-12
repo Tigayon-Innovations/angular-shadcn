@@ -108,6 +108,11 @@ export const routes: Routes = [
     title: 'Themes - shadcn-angular',
   },
   {
+    path: 'create',
+    loadComponent: () => import('@/pages/create').then((m) => m.CreatePage),
+    title: 'New Project - shadcn-angular',
+  },
+  {
     path: 'blocks',
     loadComponent: () => import('@/pages/blocks').then((m) => m.BlocksLayout),
     title: 'Blocks - shadcn-angular',
