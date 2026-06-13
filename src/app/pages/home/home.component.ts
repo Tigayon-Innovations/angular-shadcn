@@ -1,21 +1,22 @@
 import { SeoService } from '@/services/seo.service';
+import { Badge } from '@/lib/components/ui/badge';
+import { Button } from '@/lib/components/ui/button';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ArrowRight, LucideAngularModule } from 'lucide-angular';
 
-import { HomeHeroSection } from './home-hero-section/home-hero-section';
-import { HomeFeaturesSection } from './home-features-section/home-features-section';
-import { HomePerformanceSection } from './home-performance-section/home-performance-section';
-import { HomeCommunitySection } from './home-community-section/home-community-section';
-import { HomeExamplesSection } from './home-examples-section/home-examples-section';
+import { CardsDemo } from '@/components/cards/cards-demo.component';
 
 @Component({
   selector: 'HomePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HomeHeroSection, HomeFeaturesSection, HomePerformanceSection, HomeCommunitySection, HomeExamplesSection],
+  imports: [Badge, Button, RouterLink, LucideAngularModule, CardsDemo],
   styleUrl: './home.style.css',
   templateUrl: './home.component.html',
 })
 export class HomePage {
   private readonly seo = inject(SeoService);
+  protected readonly icons = { ArrowRight };
 
   constructor() {
     this.seo.updateMetaTags({

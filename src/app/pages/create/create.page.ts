@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import { RouterLink } from '@angular/router';
 import { Check, Copy, LucideAngularModule, Wand2 } from 'lucide-angular';
 
-import { CreateShowcase } from './create-showcase.component';
+import { CardsDemo } from '@/components/cards/cards-demo.component';
 
 const COLORS = [
   { name: 'zinc',    hex: '#71717a', label: 'Zinc'    },
@@ -57,17 +57,17 @@ const RADIUS = [
 @Component({
   selector: 'CreatePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, Badge, Separator, LucideAngularModule, RouterLink, CreateShowcase],
+  imports: [Button, Badge, Separator, LucideAngularModule, RouterLink, CardsDemo],
   template: `
     <div
       class="section-soft relative flex flex-col overflow-hidden"
       style="min-height: calc(100vh - var(--site-header-height, 56px))"
     >
       <div
-        class="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row-reverse md:gap-6 md:p-6"
+        class="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row md:gap-6 md:p-6"
       >
-        <!-- ─── CUSTOMIZER (floating dark glass card, right) ─────── -->
-        <aside class="dark self-start md:sticky md:top-6 md:w-64 lg:w-72">
+        <!-- ─── CUSTOMIZER (panel, left — matches shadcn /create) ─── -->
+        <aside class="self-start md:sticky md:top-6 md:w-64 lg:w-72">
           <div
             class="flex max-h-[calc(100vh-var(--site-header-height,56px)-3rem)] flex-col overflow-hidden rounded-2xl border bg-card/90 text-card-foreground shadow-xl backdrop-blur-xl"
           >
@@ -206,11 +206,13 @@ const RADIUS = [
           </div>
         </aside>
 
-        <!-- ─── PREVIEW (main, left) ──────────────────────────────── -->
+        <!-- ─── PREVIEW (main, right) — the shadcn card masonry ───── -->
         <main
           class="min-h-0 flex-1 overflow-hidden rounded-2xl border bg-background/70 shadow-sm backdrop-blur"
         >
-          <create-showcase class="block h-full overflow-y-auto" />
+          <div class="h-full overflow-y-auto">
+            <cards-demo />
+          </div>
         </main>
       </div>
     </div>

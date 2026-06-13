@@ -1,8 +1,37 @@
-<div class="flex flex-col min-h-screen overflow-hidden">
-  <home-hero-section />
-  <home-examples-section />
-  <home-features-section />
-  <home-performance-section />
-  <home-community-section />
-  <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+<div class="flex flex-1 flex-col">
+  <!-- Hero (shadcn PageHeader) -->
+  <section class="border-grid border-b">
+    <div
+      class="container flex flex-col items-center gap-2 px-6 py-8 text-center md:py-16 lg:py-20 xl:gap-4"
+    >
+      <a routerLink="/docs">
+        <Badge variant="secondary" class="gap-1 bg-muted">
+          Introducing GitHub Registries
+          <lucide-icon [img]="icons.ArrowRight" class="size-3" />
+        </Badge>
+      </a>
+      <h1
+        class="max-w-4xl text-3xl font-semibold tracking-tight text-balance text-primary lg:leading-[1.1] xl:text-5xl xl:tracking-tighter"
+      >
+        The Foundation for your Design System
+      </h1>
+      <p class="max-w-4xl text-base text-balance text-foreground sm:text-lg">
+        A set of beautifully designed components that you can customize, extend, and build on. Start
+        here then make it your own. Open Source. Open Code.
+      </p>
+      <div class="flex w-full items-center justify-center gap-2 pt-2">
+        <a routerLink="/create">
+          <Button class="h-9 gap-1.5 rounded-lg">
+            Build Your Own
+            <lucide-icon [img]="icons.ArrowRight" class="size-4" />
+          </Button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Component card masonry -->
+  <div class="flex-1">
+    <cards-demo />
+  </div>
 </div>
