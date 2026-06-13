@@ -18,8 +18,10 @@ import { CardNotificationSettings } from './notification-settings.card';
 import { CardPowerUsage } from './power-usage.card';
 
 /**
- * The shadcn/ui home/create card masonry — a responsive grid of component
- * demos. Mirrors apps/v4/app/(app)/(root)/cards/index.tsx column layout.
+ * The shadcn/ui home card masonry — a contained, responsive multi-column grid
+ * on a muted backdrop with soft top/bottom fades. Mirrors
+ * apps/v4/app/(app)/(root)/cards/index.tsx (the `/create` page uses the wider
+ * CardsCanvas instead).
  */
 @Component({
   selector: 'cards-demo',
@@ -45,32 +47,32 @@ import { CardPowerUsage } from './power-usage.card';
   ],
   template: `
     <div
-      class="cards-neutral relative flex w-full max-w-none flex-col gap-6 overflow-hidden bg-muted p-6 dark:bg-background lg:p-6 xl:p-12 xl:gap-8"
+      class="cards-neutral relative flex w-full max-w-none flex-col gap-6 overflow-hidden bg-muted p-6 pb-0! dark:bg-background lg:p-6 xl:gap-8 xl:p-12 min-[1900px]:gap-10"
     >
       <div
-        class="relative z-10 mx-auto grid w-full gap-6 xl:gap-8 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4 xl:max-w-[1600px] min-[1700px]:grid-cols-5 min-[1700px]:max-w-[1900px] [&_[data-slot=card]]:w-full"
+        class="relative z-10 mx-auto grid gap-6 xl:gap-8 min-[1900px]:gap-10 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] min-[1400px]:grid-cols-4! 2xl:max-w-[1900px] min-[1900px]:grid-cols-5! [&_[data-slot=card]]:w-full"
       >
-        <div class="flex flex-col items-start gap-6 xl:gap-8">
+        <div class="flex flex-col items-start gap-6 xl:gap-8 min-[1900px]:gap-10">
           <card-ui-elements class="w-full" />
           <card-sidebar-nav class="w-full" />
           <card-savings-targets class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 lg:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 min-[1900px]:gap-10 lg:flex">
           <card-contribution-history class="w-full" />
           <card-claimable-balance class="w-full" />
           <card-dividend-income class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 min-[1700px]:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 min-[1900px]:gap-10 min-[1900px]:flex!">
           <card-new-milestone class="w-full" />
           <card-payout-threshold class="w-full" />
           <card-account-access class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 md:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 min-[1900px]:gap-10 md:flex">
           <card-qr-connect class="w-full" />
           <card-transfer-funds class="w-full" />
           <card-payments class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 xl:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 min-[1900px]:gap-10 min-[1400px]:flex!">
           <card-empty-distribute-track class="w-full" />
           <card-analytics class="w-full" />
           <card-notification-settings class="w-full" />
@@ -82,7 +84,7 @@ import { CardPowerUsage } from './power-usage.card';
         class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-120 bg-gradient-to-b from-background via-muted to-transparent dark:hidden"
       ></div>
       <div
-        class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-gradient-to-t from-background via-muted/80 to-transparent dark:via-background/80 lg:h-72"
+        class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-gradient-to-t from-background via-muted/80 to-transparent dark:via-background/80 lg:h-80 xl:h-64"
       ></div>
     </div>
   `,

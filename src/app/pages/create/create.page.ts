@@ -1,19 +1,32 @@
 import { Button } from '@/ui/button';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '@/ui/dropdown-menu';
+import { ThemeService } from '@/services/theme.service';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   Check,
   Code,
+  Compass,
   Copy,
   FolderOpen,
   LayoutTemplate,
   LucideAngularModule,
   Menu,
+  Moon,
+  RotateCcw,
   Shuffle,
   Sparkles,
+  Sun,
 } from 'lucide-angular';
 
-import { CardsDemo } from '@/components/cards/cards-demo.component';
+import { CardsCanvas } from '@/components/cards/cards-canvas.component';
 
 const COLORS = [
   { name: 'zinc',    hex: '#71717a', label: 'Zinc'    },
@@ -65,7 +78,21 @@ const RADIUS = [
 @Component({
   selector: 'CreatePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, LucideAngularModule, RouterLink, CardsDemo],
+  imports: [
+    Button,
+    LucideAngularModule,
+    RouterLink,
+    CardsCanvas,
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+  ],
+  host: {
+    '(document:keydown)': 'onKeydown($event)',
+  },
   template: `
     <div
       class="section-soft relative flex flex-col overflow-hidden"
@@ -75,14 +102,45 @@ const RADIUS = [
         class="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row md:gap-6 md:p-6"
       >
         <!-- ─── CUSTOMIZER (panel, left — matches shadcn /create) ─── -->
-        <aside class="self-start md:sticky md:top-6 md:w-52 lg:w-56">
+        <aside class="self-start md:sticky md:top-6 md:w-48 2xl:w-56">
           <div
             class="flex max-h-[calc(100vh-var(--site-header-height,56px)-3rem)] flex-col overflow-hidden rounded-2xl border bg-card/90 text-card-foreground shadow-xl backdrop-blur-xl"
           >
-            <!-- Header: Menu -->
-            <div class="flex items-center justify-between border-b px-3 py-2.5">
-              <span class="text-sm font-medium">Menu</span>
-              <lucide-icon [img]="icons.Menu" class="size-5 text-foreground" />
+            <!-- Header: Menu (dropdown — Light/Dark, Shuffle, Reset…) -->
+            <div class="border-b p-1.5">
+              <DropdownMenu class="block! w-full">
+                <DropdownMenuTrigger class="block! w-full">
+                  <span
+                    class="flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-sm font-medium ring-1 ring-foreground/10 transition-colors hover:bg-muted"
+                  >
+                    <span>Menu</span>
+                    <lucide-icon [img]="icons.Menu" class="size-5 text-foreground" />
+                  </span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" class="w-52">
+                  <DropdownMenuItem (click)="openSearch()">
+                    <lucide-icon [img]="icons.Compass" class="size-4" />
+                    <span>Navigate…</span>
+                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem (click)="cycleStyle()">
+                    <lucide-icon [img]="icons.Shuffle" class="size-4" />
+                    <span>Shuffle</span>
+                    <DropdownMenuShortcut>R</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem (click)="toggleTheme()">
+                    <lucide-icon [img]="isDark() ? icons.Sun : icons.Moon" class="size-4" />
+                    <span>Light/Dark</span>
+                    <DropdownMenuShortcut>D</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem (click)="resetCustomizer()">
+                    <lucide-icon [img]="icons.RotateCcw" class="size-4" />
+                    <span>Reset</span>
+                    <DropdownMenuShortcut>⇧R</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <!-- Body: picker rows -->
@@ -196,10 +254,29 @@ const RADIUS = [
 
         <!-- ─── PREVIEW (main, right) — the shadcn card masonry ───── -->
         <main
-          class="min-h-0 flex-1 overflow-hidden rounded-2xl border bg-background/70 shadow-sm backdrop-blur"
+          class="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-muted ring ring-foreground/10 md:ring-muted dark:bg-background dark:ring-foreground/10"
         >
-          <div class="h-full overflow-y-auto">
-            <cards-demo />
+          <cards-canvas />
+          <!-- 01 / 02 preview switcher (shadcn) -->
+          <div
+            class="dark absolute right-3 bottom-3 z-20 flex items-center gap-1 rounded-xl bg-card/90 p-1 shadow-xl backdrop-blur-xl"
+          >
+            <button
+              type="button"
+              (click)="previewItem.set('01')"
+              [attr.data-active]="previewItem() === '01'"
+              class="h-7 min-w-8 cursor-pointer rounded-lg px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground"
+            >
+              01
+            </button>
+            <button
+              type="button"
+              (click)="previewItem.set('02')"
+              [attr.data-active]="previewItem() === '02'"
+              class="h-7 min-w-8 cursor-pointer rounded-lg px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground"
+            >
+              02
+            </button>
           </div>
         </main>
       </div>
@@ -207,7 +284,22 @@ const RADIUS = [
   `,
 })
 export class CreatePage {
-  protected readonly icons = { Check, Code, Copy, FolderOpen, LayoutTemplate, Menu, Shuffle, Sparkles };
+  protected readonly icons = {
+    Check,
+    Code,
+    Compass,
+    Copy,
+    FolderOpen,
+    LayoutTemplate,
+    Menu,
+    Moon,
+    RotateCcw,
+    Shuffle,
+    Sparkles,
+    Sun,
+  };
+  private readonly themeService = inject(ThemeService);
+  protected readonly isDark = this.themeService.isDark;
   protected readonly presets = PRESETS;
   protected readonly colors = COLORS;
   protected readonly fonts = FONTS;
@@ -218,6 +310,7 @@ export class CreatePage {
   readonly selectedFont = signal<string>('inter');
   readonly selectedRadius = signal<string>('0.5');
   protected readonly copied = signal(false);
+  protected readonly previewItem = signal<'01' | '02'>('01');
 
   // Display values for the picker rows
   protected readonly styleLabel = computed(
@@ -259,5 +352,46 @@ export class CreatePage {
       this.copied.set(true);
       setTimeout(() => this.copied.set(false), 2000);
     });
+  }
+
+  // ─── Menu actions (mirrors shadcn /create MainMenu) ───
+  protected toggleTheme(): void {
+    this.themeService.toggle();
+  }
+  protected openSearch(): void {
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }),
+    );
+  }
+  protected resetCustomizer(): void {
+    this.selectedPreset.set('nova');
+    this.selectedColor.set('neutral');
+    this.selectedFont.set('inter');
+    this.selectedRadius.set('0.5');
+  }
+
+  /** Keyboard shortcuts: D toggles theme, R shuffles, ⇧R resets. */
+  protected onKeydown(event: KeyboardEvent): void {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const el = event.target as HTMLElement | null;
+    if (
+      el &&
+      (el.isContentEditable ||
+        el instanceof HTMLInputElement ||
+        el instanceof HTMLTextAreaElement ||
+        el instanceof HTMLSelectElement)
+    ) {
+      return;
+    }
+    if (event.key === 'd' || event.key === 'D') {
+      event.preventDefault();
+      this.toggleTheme();
+    } else if (event.key === 'R') {
+      event.preventDefault();
+      this.resetCustomizer();
+    } else if (event.key === 'r') {
+      event.preventDefault();
+      this.cycleStyle();
+    }
   }
 }
