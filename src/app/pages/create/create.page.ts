@@ -1,9 +1,17 @@
-import { Badge } from '@/ui/badge';
 import { Button } from '@/ui/button';
-import { Separator } from '@/ui/separator';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Check, Copy, LucideAngularModule, Wand2 } from 'lucide-angular';
+import {
+  Check,
+  Code,
+  Copy,
+  FolderOpen,
+  LayoutTemplate,
+  LucideAngularModule,
+  Menu,
+  Shuffle,
+  Sparkles,
+} from 'lucide-angular';
 
 import { CardsDemo } from '@/components/cards/cards-demo.component';
 
@@ -57,7 +65,7 @@ const RADIUS = [
 @Component({
   selector: 'CreatePage',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, Badge, Separator, LucideAngularModule, RouterLink, CardsDemo],
+  imports: [Button, LucideAngularModule, RouterLink, CardsDemo],
   template: `
     <div
       class="section-soft relative flex flex-col overflow-hidden"
@@ -67,139 +75,119 @@ const RADIUS = [
         class="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row md:gap-6 md:p-6"
       >
         <!-- ─── CUSTOMIZER (panel, left — matches shadcn /create) ─── -->
-        <aside class="self-start md:sticky md:top-6 md:w-64 lg:w-72">
+        <aside class="self-start md:sticky md:top-6 md:w-52 lg:w-56">
           <div
             class="flex max-h-[calc(100vh-var(--site-header-height,56px)-3rem)] flex-col overflow-hidden rounded-2xl border bg-card/90 text-card-foreground shadow-xl backdrop-blur-xl"
           >
-            <!-- Header -->
-            <div class="flex items-center justify-between gap-2 border-b px-4 py-3">
-              <div class="flex items-center gap-2">
-                <div class="flex size-6 items-center justify-center rounded-md bg-primary">
-                  <lucide-icon [img]="icons.Wand2" class="h-3.5 w-3.5 text-primary-foreground" />
-                </div>
-                <span class="text-sm font-semibold">New Project</span>
-              </div>
-              <button
-                type="button"
-                class="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                (click)="copyCommand()"
-              >
-                <lucide-icon [img]="copied() ? icons.Check : icons.Copy" class="h-3.5 w-3.5" />
-                {{ copied() ? 'Copied' : 'Copy' }}
-              </button>
+            <!-- Header: Menu -->
+            <div class="flex items-center justify-between border-b px-3 py-2.5">
+              <span class="text-sm font-medium">Menu</span>
+              <lucide-icon [img]="icons.Menu" class="size-5 text-foreground" />
             </div>
 
-            <!-- Body -->
-            <div class="no-scrollbar flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4">
+            <!-- Body: picker rows -->
+            <div class="no-scrollbar flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto p-3">
               <!-- Style -->
-              <div class="flex flex-col gap-2">
-                <span class="text-xs font-medium text-muted-foreground">Style</span>
-                <div class="grid grid-cols-2 gap-1.5">
-                  @for (preset of presets; track preset.value) {
-                    <button
-                      type="button"
-                      class="flex flex-col items-start rounded-lg border px-2.5 py-1.5 text-left transition-colors hover:bg-accent"
-                      [class.border-primary]="selectedPreset() === preset.value"
-                      [class.bg-accent]="selectedPreset() === preset.value"
-                      (click)="selectedPreset.set(preset.value)"
-                    >
-                      <span class="text-xs font-semibold leading-none">{{ preset.name }}</span>
-                      <span class="mt-1 text-[10px] leading-tight text-muted-foreground">{{ preset.description }}</span>
-                    </button>
-                  }
-                </div>
+              <button type="button" (click)="cycleStyle()" class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10 transition-colors hover:bg-muted">
+                <span class="block text-xs text-muted-foreground">Style</span>
+                <span class="block text-sm font-medium text-foreground">{{ styleLabel() }}</span>
+                <lucide-icon [img]="icons.LayoutTemplate" class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-foreground" />
+              </button>
+
+              <div class="my-1 h-px bg-border"></div>
+
+              <!-- Base Color -->
+              <button type="button" (click)="cycleColor()" class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10 transition-colors hover:bg-muted">
+                <span class="block text-xs text-muted-foreground">Base Color</span>
+                <span class="block text-sm font-medium text-foreground">{{ colorLabel() }}</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 rounded-full" [style.background-color]="colorHex()"></span>
+              </button>
+
+              <!-- Theme -->
+              <div class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10">
+                <span class="block text-xs text-muted-foreground">Theme</span>
+                <span class="block text-sm font-medium text-foreground">Neutral</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 rounded-full bg-muted-foreground"></span>
               </div>
 
-              <Separator />
-
-              <!-- Color -->
-              <div class="flex flex-col gap-2">
-                <span class="text-xs font-medium text-muted-foreground">Base Color</span>
-                <div class="grid grid-cols-8 gap-1.5">
-                  @for (color of colors; track color.name) {
-                    <button
-                      type="button"
-                      class="flex size-6 items-center justify-center rounded-full border transition-transform hover:scale-110"
-                      [attr.title]="color.label"
-                      [style.background-color]="color.hex"
-                      [class.ring-2]="selectedColor() === color.name"
-                      [class.ring-ring]="selectedColor() === color.name"
-                      [class.ring-offset-2]="selectedColor() === color.name"
-                      [class.ring-offset-card]="selectedColor() === color.name"
-                      [class.border-transparent]="true"
-                      (click)="selectedColor.set(color.name)"
-                    >
-                      @if (selectedColor() === color.name) {
-                        <lucide-icon [img]="icons.Check" class="h-3 w-3 text-white drop-shadow" />
-                      }
-                    </button>
-                  }
-                </div>
+              <!-- Chart Color -->
+              <div class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10">
+                <span class="block text-xs text-muted-foreground">Chart Color</span>
+                <span class="block text-sm font-medium text-foreground">Neutral</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 rounded-full bg-muted-foreground"></span>
               </div>
 
-              <Separator />
+              <div class="my-1 h-px bg-border"></div>
 
-              <!-- Radius -->
-              <div class="flex flex-col gap-2">
-                <span class="text-xs font-medium text-muted-foreground">Radius</span>
-                <div class="grid grid-cols-5 gap-1.5">
-                  @for (r of radiusOptions; track r.value) {
-                    <button
-                      type="button"
-                      class="rounded-md border py-1.5 text-xs font-medium transition-colors hover:bg-accent"
-                      [class.border-primary]="selectedRadius() === r.value"
-                      [class.bg-accent]="selectedRadius() === r.value"
-                      (click)="selectedRadius.set(r.value)"
-                    >
-                      {{ r.label }}
-                    </button>
-                  }
-                </div>
-              </div>
-
-              <Separator />
+              <!-- Heading -->
+              <button type="button" (click)="cycleFont()" class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10 transition-colors hover:bg-muted">
+                <span class="block text-xs text-muted-foreground">Heading</span>
+                <span class="block text-sm font-medium text-foreground">{{ fontLabel() }}</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-base font-medium text-foreground">Aa</span>
+              </button>
 
               <!-- Font -->
-              <div class="flex flex-col gap-2">
-                <span class="text-xs font-medium text-muted-foreground">Font</span>
-                <div class="flex flex-col gap-0.5">
-                  @for (font of fonts; track font.value) {
-                    <button
-                      type="button"
-                      class="flex items-center justify-between rounded-md px-2 py-1.5 text-left transition-colors hover:bg-accent"
-                      [class.bg-accent]="selectedFont() === font.value"
-                      (click)="selectedFont.set(font.value)"
-                    >
-                      <span class="text-sm font-medium leading-none">{{ font.name }}</span>
-                      @if (selectedFont() === font.value) {
-                        <lucide-icon [img]="icons.Check" class="ml-2 h-3.5 w-3.5 shrink-0" />
-                      }
-                    </button>
-                  }
-                </div>
+              <button type="button" (click)="cycleFont()" class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10 transition-colors hover:bg-muted">
+                <span class="block text-xs text-muted-foreground">Font</span>
+                <span class="block text-sm font-medium text-foreground">{{ fontLabel() }}</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-base font-medium text-foreground">Aa</span>
+              </button>
+
+              <div class="my-1 h-px bg-border"></div>
+
+              <!-- Icon Library -->
+              <div class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10">
+                <span class="block text-xs text-muted-foreground">Icon Library</span>
+                <span class="block text-sm font-medium text-foreground">Lucide</span>
+                <lucide-icon [img]="icons.Sparkles" class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-foreground" />
               </div>
 
-              <Separator />
+              <!-- Radius -->
+              <button type="button" (click)="cycleRadius()" class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10 transition-colors hover:bg-muted">
+                <span class="block text-xs text-muted-foreground">Radius</span>
+                <span class="block text-sm font-medium text-foreground">{{ radiusLabel() }}</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 rounded-tl-[6px] border-t-2 border-l-2 border-foreground"></span>
+              </button>
 
-              <!-- Icons -->
-              <div class="flex flex-col gap-2">
-                <span class="text-xs font-medium text-muted-foreground">Icon Library</span>
-                <div class="flex items-center justify-between rounded-md border px-3 py-2">
-                  <span class="text-sm font-medium">Lucide</span>
-                  <Badge variant="secondary" class="text-[10px]">Included</Badge>
-                </div>
+              <div class="my-1 h-px bg-border"></div>
+
+              <!-- Menu -->
+              <div class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10">
+                <span class="block text-xs text-muted-foreground">Menu</span>
+                <span class="block text-sm font-medium text-foreground">Default / Solid</span>
+                <lucide-icon [img]="icons.Menu" class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-foreground" />
+              </div>
+
+              <!-- Menu Accent -->
+              <div class="relative w-full rounded-lg px-2.5 py-2 text-left ring-1 ring-foreground/10">
+                <span class="block text-xs text-muted-foreground">Menu Accent</span>
+                <span class="block text-sm font-medium text-foreground">Subtle</span>
+                <span class="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 rounded-full border-2 border-foreground"></span>
               </div>
             </div>
 
-            <!-- Footer -->
-            <div class="flex flex-col gap-2 border-t p-4">
-              <pre
-                class="no-scrollbar overflow-x-auto rounded-md border bg-muted px-3 py-2 font-mono text-[10px] leading-relaxed text-muted-foreground"
-              >{{ generatedCommand() }}</pre>
+            <!-- Footer: actions -->
+            <div class="flex flex-col gap-2 border-t p-3">
+              <button
+                type="button"
+                (click)="copyCommand()"
+                class="flex items-center justify-between rounded-lg bg-muted px-2.5 py-2 text-xs font-medium text-muted-foreground ring-1 ring-foreground/10 transition-colors hover:bg-muted/70"
+              >
+                <span>{{ copied() ? 'Copied!' : '--preset b0' }}</span>
+                <lucide-icon [img]="copied() ? icons.Check : icons.Copy" class="size-3.5" />
+              </button>
+              <Button variant="outline" size="sm" class="w-full justify-center gap-1.5">
+                <lucide-icon [img]="icons.FolderOpen" class="size-3.5" />
+                Open Preset
+              </Button>
+              <Button variant="outline" size="sm" class="w-full justify-center gap-1.5" (click)="cycleStyle()">
+                <lucide-icon [img]="icons.Shuffle" class="size-3.5" />
+                Shuffle
+              </Button>
               <a routerLink="/docs/installation" class="block w-full">
-                <Button size="sm" class="w-full gap-1.5">
-                  <lucide-icon [img]="icons.Wand2" class="h-3.5 w-3.5" />
-                  Get Started
+                <Button size="sm" class="w-full justify-center gap-1.5">
+                  <lucide-icon [img]="icons.Code" class="size-3.5" />
+                  Get Code
                 </Button>
               </a>
             </div>
@@ -219,17 +207,45 @@ const RADIUS = [
   `,
 })
 export class CreatePage {
-  protected readonly icons = { Check, Copy, Wand2 };
+  protected readonly icons = { Check, Code, Copy, FolderOpen, LayoutTemplate, Menu, Shuffle, Sparkles };
   protected readonly presets = PRESETS;
   protected readonly colors = COLORS;
   protected readonly fonts = FONTS;
   protected readonly radiusOptions = RADIUS;
 
-  readonly selectedPreset = signal<string>('vega');
-  readonly selectedColor  = signal<string>('zinc');
-  readonly selectedFont   = signal<string>('inter');
+  readonly selectedPreset = signal<string>('nova');
+  readonly selectedColor = signal<string>('neutral');
+  readonly selectedFont = signal<string>('inter');
   readonly selectedRadius = signal<string>('0.5');
   protected readonly copied = signal(false);
+
+  // Display values for the picker rows
+  protected readonly styleLabel = computed(
+    () => PRESETS.find((p) => p.value === this.selectedPreset())?.name ?? 'Nova',
+  );
+  protected readonly colorLabel = computed(
+    () => COLORS.find((c) => c.name === this.selectedColor())?.label ?? 'Neutral',
+  );
+  protected readonly colorHex = computed(
+    () => COLORS.find((c) => c.name === this.selectedColor())?.hex ?? '#737373',
+  );
+  protected readonly fontLabel = computed(
+    () => FONTS.find((f) => f.value === this.selectedFont())?.name ?? 'Inter',
+  );
+  protected readonly radiusLabel = computed(() => {
+    const v = this.selectedRadius();
+    return v === '0' ? 'None' : v === '0.5' ? 'Default' : v;
+  });
+
+  // Cycle helpers (each picker advances to the next option)
+  private cycle<T>(list: readonly T[], pick: (x: T) => string, sig: { (): string; set: (v: string) => void }): void {
+    const i = list.findIndex((x) => pick(x) === sig());
+    sig.set(pick(list[(i + 1) % list.length]));
+  }
+  protected cycleStyle(): void { this.cycle(PRESETS, (p) => p.value, this.selectedPreset); }
+  protected cycleColor(): void { this.cycle(COLORS, (c) => c.name, this.selectedColor); }
+  protected cycleFont(): void { this.cycle(FONTS, (f) => f.value, this.selectedFont); }
+  protected cycleRadius(): void { this.cycle(RADIUS, (r) => r.value, this.selectedRadius); }
 
   readonly generatedCommand = computed(
     () =>

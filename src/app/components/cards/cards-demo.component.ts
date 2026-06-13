@@ -48,7 +48,7 @@ import { CardPowerUsage } from './power-usage.card';
       class="cards-neutral relative flex w-full max-w-none flex-col gap-6 overflow-hidden bg-muted p-6 dark:bg-background lg:p-6 xl:p-12 xl:gap-8"
     >
       <div
-        class="relative z-10 mx-auto grid w-full gap-6 xl:gap-8 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 min-[1400px]:grid-cols-4 xl:max-w-[1600px] min-[1900px]:grid-cols-5 min-[1900px]:max-w-[1900px] [&_[data-slot=card]]:w-full"
+        class="relative z-10 mx-auto grid w-full gap-6 xl:gap-8 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4 xl:max-w-[1600px] min-[1700px]:grid-cols-5 min-[1700px]:max-w-[1900px] [&_[data-slot=card]]:w-full"
       >
         <div class="flex flex-col items-start gap-6 xl:gap-8">
           <card-ui-elements class="w-full" />
@@ -60,7 +60,7 @@ import { CardPowerUsage } from './power-usage.card';
           <card-claimable-balance class="w-full" />
           <card-dividend-income class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 min-[1600px]:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 min-[1700px]:flex">
           <card-new-milestone class="w-full" />
           <card-payout-threshold class="w-full" />
           <card-account-access class="w-full" />
@@ -70,7 +70,7 @@ import { CardPowerUsage } from './power-usage.card';
           <card-transfer-funds class="w-full" />
           <card-payments class="w-full" />
         </div>
-        <div class="hidden flex-col gap-6 xl:gap-8 min-[1400px]:flex">
+        <div class="hidden flex-col gap-6 xl:gap-8 xl:flex">
           <card-empty-distribute-track class="w-full" />
           <card-analytics class="w-full" />
           <card-notification-settings class="w-full" />
