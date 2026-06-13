@@ -1,14 +1,20 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
+  // Interactive preview routes embed Dialog/Select overlays and a dynamic
+  // template renderer that rely on browser APIs (DOMParser) and cannot be
+  // serialized by Angular SSR (NG0502). Render them on the client.
   {
-    // Uses Dialog overlays that fail SSR serialization (NG0502)
     path: 'themes',
     renderMode: RenderMode.Client,
   },
   {
+    path: 'playground',
+    renderMode: RenderMode.Client,
+  },
+  {
     path: 'docs/components/:slug',
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Client,
   },
   {
     path: 'blocks/:category',
@@ -16,7 +22,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'blocks/:category/:slug',
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Client,
   },
   {
     path: '**',
