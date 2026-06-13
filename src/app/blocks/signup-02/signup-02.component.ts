@@ -1,94 +1,97 @@
 import { Button } from '@/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/ui/card';
-import { Checkbox } from '@/ui/checkbox';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Separator } from '@/ui/separator';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GalleryVerticalEnd, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-signup-02',
-  imports: [
-    Button,
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    Checkbox,
-    Input,
-    Label,
-  ],
+  imports: [Button, Input, Label, Separator, LucideAngularModule],
   template: `
-    <div class="flex min-h-svh w-full items-center justify-center bg-muted p-6 md:p-10">
-      <div class="w-full max-w-sm">
-        <Card>
-          <CardHeader class="text-center">
-            <CardTitle class="text-2xl">Create an account</CardTitle>
-            <CardDescription>Enter your details below to create your account</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form class="space-y-4">
-              <!-- Name Field -->
-              <div class="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <input Input id="name" type="text" placeholder="John Doe" />
+    <div class="grid min-h-svh lg:grid-cols-2">
+      <div class="flex flex-col gap-4 p-6 md:p-10">
+        <div class="flex justify-center gap-2 md:justify-start">
+          <a href="#" class="flex items-center gap-2 font-medium">
+            <div class="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <lucide-icon [img]="icons.GalleryVerticalEnd" class="size-4" />
+            </div>
+            Acme Inc.
+          </a>
+        </div>
+        <div class="flex flex-1 items-center justify-center">
+          <div class="w-full max-w-xs">
+            <form class="flex flex-col gap-6">
+              <div class="flex flex-col gap-6">
+                <div class="flex flex-col items-center gap-1 text-center">
+                  <h1 class="text-2xl font-bold">Create your account</h1>
+                  <p class="text-sm text-balance text-muted-foreground">
+                    Fill in the form below to create your account
+                  </p>
+                </div>
+                <div class="grid gap-2">
+                  <Label for="name">Full Name</Label>
+                  <input Input id="name" type="text" placeholder="John Doe" required />
+                </div>
+                <div class="grid gap-2">
+                  <Label for="email">Email</Label>
+                  <input Input id="email" type="email" placeholder="m&#64;example.com" required />
+                  <p class="text-sm text-muted-foreground">
+                    We'll use this to contact you. We will not share your email
+                    with anyone else.
+                  </p>
+                </div>
+                <div class="grid gap-2">
+                  <Label for="password">Password</Label>
+                  <input Input id="password" type="password" required />
+                  <p class="text-sm text-muted-foreground">
+                    Must be at least 8 characters long.
+                  </p>
+                </div>
+                <div class="grid gap-2">
+                  <Label for="confirm-password">Confirm Password</Label>
+                  <input Input id="confirm-password" type="password" required />
+                  <p class="text-sm text-muted-foreground">Please confirm your password.</p>
+                </div>
+                <div class="grid gap-2">
+                  <Button type="submit">Create Account</Button>
+                </div>
+                <div class="relative -my-2 h-5 text-sm">
+                  <Separator class="absolute inset-0 top-1/2" />
+                  <span class="relative mx-auto block w-fit bg-background px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+                <div class="grid gap-2">
+                  <Button variant="outline" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    Sign up with GitHub
+                  </Button>
+                  <p class="text-sm text-muted-foreground px-6 text-center">
+                    Already have an account? <a href="#">Sign in</a>
+                  </p>
+                </div>
               </div>
-
-              <!-- Email Field -->
-              <div class="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <input Input id="email" type="email" placeholder="m@example.com" />
-              </div>
-
-              <!-- Password Field -->
-              <div class="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <input Input id="password" type="password" />
-              </div>
-
-              <!-- Confirm Password Field -->
-              <div class="space-y-2">
-                <Label htmlFor="confirm-password">Confirm Password</Label>
-                <input Input id="confirm-password" type="password" />
-              </div>
-
-              <!-- Terms and Conditions -->
-              <div class="flex items-center space-x-2">
-                <Checkbox id="terms" [(checked)]="agreedToTerms" />
-                <Label htmlFor="terms" class="font-normal">
-                  I agree to the
-                  <a href="#" class="text-primary underline underline-offset-4 hover:no-underline">
-                    terms and conditions
-                  </a>
-                </Label>
-              </div>
-
-              <!-- Create Account Button -->
-              <Button type="submit" class="w-full" [disabled]="!agreedToTerms()">
-                Create Account
-              </Button>
             </form>
-          </CardContent>
-          <CardFooter class="justify-center">
-            <p class="text-center text-sm text-muted-foreground">
-              Already have an account?
-              <a href="#" class="ml-1 text-primary underline-offset-4 hover:underline">Login</a>
-            </p>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
+      </div>
+      <div class="relative hidden bg-muted lg:block">
+        <img
+          src="/placeholder.svg"
+          alt="Image"
+          class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        />
       </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signup02Component {
-  protected readonly agreedToTerms = signal(false);
+  protected readonly icons = { GalleryVerticalEnd };
 }

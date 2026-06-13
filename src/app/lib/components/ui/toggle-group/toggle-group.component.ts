@@ -8,7 +8,6 @@ import {
   inject,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import type { ToggleVariants } from '../toggle/toggle-variants';
@@ -138,9 +137,6 @@ export type ToggleGroupProps = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleGroup {
-  /** Emitted when value changes */
-  readonly valueChange = output<string | string[]>();
-
   /** The current selected value(s) */
   readonly value = model<string | string[]>('');
 
@@ -205,7 +201,6 @@ export class ToggleGroup {
 
       this.value.set(newValue);
       this.context.value.set(newValue);
-      this.valueChange.emit(newValue);
     },
     isPressed: (itemValue: string) => {
       const currentValue = this.context.value();

@@ -6,7 +6,6 @@ import {
   forwardRef,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -120,9 +119,6 @@ export class Toggle implements ControlValueAccessor {
     }
   }
 
-  /** Emitted when pressed state changes */
-  readonly pressedChange = output<boolean>();
-
   /** Whether the toggle is pressed/on */
   readonly pressed = model<boolean>(false);
 
@@ -170,7 +166,6 @@ export class Toggle implements ControlValueAccessor {
       this.pressed.set(newValue);
       this.onChange(newValue);
       this.onTouched();
-      this.pressedChange.emit(newValue);
     }
   }
   // ControlValueAccessor implementation

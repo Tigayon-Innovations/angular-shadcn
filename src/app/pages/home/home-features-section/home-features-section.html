@@ -14,10 +14,9 @@
         <div class="feature-card group p-6 rounded-xl border border-transparent">
           <div class="flex items-center gap-4 mb-4">
             <div
-              class="h-10 w-10 rounded-lg bg-gradient-to-br flex items-center justify-center"
-              [class]="feat.iconClass"
+              class="flex size-10 items-center justify-center rounded-lg border bg-muted"
             >
-              <lucide-icon [img]="feat.icon" class="h-5 w-5 text-white" />
+              <lucide-icon [img]="feat.icon" class="h-5 w-5 text-foreground" />
             </div>
             <h3 class="text-lg font-semibold">{{ feat.title }}</h3>
           </div>

@@ -510,8 +510,11 @@ export class ChartsPage implements AfterViewInit {
   }
 
   private getColor(i: number): string {
+    // --chart-* tokens are already complete oklch() colors; use them as-is.
+    // (Previously re-wrapped as oklch(oklch(...)) which was invalid and made
+    // every series fall back to a near-black default.)
     const c = this.chartColors[i] || this.chartColors[0];
-    return c ? `oklch(${c})` : `var(--chart-${i + 1})`;
+    return c || `var(--chart-${i + 1})`;
   }
 
   protected setActiveTab(tab: ChartType | 'tooltips'): void {

@@ -39,7 +39,7 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
             <div class="space-y-4 text-base leading-7">
               <p>
                 shadcn-angular is a collection of reusable components built with
-                <strong>Angular 21+</strong> and <strong>Tailwind CSS v4</strong>. Unlike
+                <strong>Angular 22+</strong> and <strong>Tailwind CSS v4</strong>. Unlike
                 traditional component libraries, you don't install a package — you copy what you
                 need into your app.
               </p>
@@ -192,7 +192,7 @@ import { ArrowRight, ExternalLink, Github, LucideAngularModule } from 'lucide-an
                     >
                       <span class="text-lg font-bold text-primary">A</span>
                     </div>
-                    <h3 class="text-xl font-semibold">Angular 21+</h3>
+                    <h3 class="text-xl font-semibold">Angular 22+</h3>
                   </div>
                   <p class="text-sm text-muted-foreground leading-relaxed">
                     Built for modern Angular with signals, standalone components, and zoneless

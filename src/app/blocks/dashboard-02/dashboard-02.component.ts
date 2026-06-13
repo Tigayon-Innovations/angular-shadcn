@@ -140,7 +140,7 @@ export class Dashboard02Component {
   protected readonly dateRange = signal('30d');
 
   protected readonly chartConfig: ChartConfig = {
-    revenue: { label: 'Revenue', color: 'hsl(var(--chart-1))' },
+    revenue: { label: 'Revenue', color: 'var(--chart-1)' },
   };
 
   protected readonly chartData: ChartDataPoint[] = [

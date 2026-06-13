@@ -10,7 +10,6 @@ import {
   HostListener,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import {
@@ -71,9 +70,6 @@ export class SidebarProvider {
     });
   }
 
-  /** Open state change event */
-  readonly openChange = output<boolean>();
-
   /** Controlled open state */
   readonly open = model<boolean>(true);
 
@@ -101,7 +97,6 @@ export class SidebarProvider {
       this.context.open.set(value);
       this.context.state.set(value ? 'expanded' : 'collapsed');
       this.open.set(value);
-      this.openChange.emit(value);
     },
     openMobile: signal(false),
     setOpenMobile: (value: boolean) => {

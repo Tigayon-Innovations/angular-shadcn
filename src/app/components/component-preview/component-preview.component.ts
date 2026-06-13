@@ -1,131 +1,44 @@
 import { CodeBlock } from '@/components/code-block';
 import { cn } from '@/lib/utils';
-import { Button } from '@/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import {
-  Code2,
-  Copy,
-  Eye,
-  Fullscreen,
-  LucideAngularModule,
-  Maximize2,
-  Monitor,
-  Smartphone,
-  Tablet,
-} from 'lucide-angular';
-
-type ViewportSize = 'mobile' | 'tablet' | 'desktop' | 'full';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 /**
- * Component preview with tabs for Preview and Code views.
- * Features interactive viewport controls and improved visual hierarchy.
+ * Component preview with Preview / Code tabs — matched to shadcn/ui v4's
+ * ComponentPreview (rounded-xl border, top-left tabs, a clean centered
+ * preview area; no device toolbar, dot-pattern, or interactive badge).
  */
 @Component({
   selector: 'ComponentPreview',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Tabs, TabsContent, TabsList, TabsTrigger, Button, CodeBlock, LucideAngularModule],
+  imports: [Tabs, TabsContent, TabsList, TabsTrigger, CodeBlock],
   template: `
     <div [class]="computedClass()">
-      <Tabs defaultValue="preview" class="relative w-full">
-        <!-- Header with centered tabs -->
-        <div
-          class="relative flex items-center justify-center border-b border-border bg-muted/30 px-4 py-2"
-        >
-          <!-- Center: Tabs (absolutely positioned to stay centered) -->
-          <TabsList class="h-9 rounded-lg bg-muted p-1">
-            <TabsTrigger value="preview" class="gap-2 text-xs px-3">
-              <lucide-icon [img]="icons.Eye" class="h-3.5 w-3.5" />
+      <Tabs defaultValue="preview" class="relative w-full gap-0">
+        <!-- Header: tabs top-left (shadcn) -->
+        <div class="flex items-center border-b px-4">
+          <TabsList class="h-11 justify-start rounded-none bg-transparent p-0">
+            <TabsTrigger
+              value="preview"
+              class="h-11 rounded-none border-b-2 border-transparent bg-transparent px-3 text-sm font-medium text-muted-foreground data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            >
               Preview
             </TabsTrigger>
-            <TabsTrigger value="code" class="gap-2 text-xs px-3">
-              <lucide-icon [img]="icons.Code2" class="h-3.5 w-3.5" />
+            <TabsTrigger
+              value="code"
+              class="h-11 rounded-none border-b-2 border-transparent bg-transparent px-3 text-sm font-medium text-muted-foreground data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            >
               Code
             </TabsTrigger>
           </TabsList>
-
-          <!-- Right: Viewport Controls (absolutely positioned) -->
-          <div class="absolute right-4 flex items-center gap-1">
-            @if (showViewportControls()) {
-              <div class="hidden sm:flex items-center gap-1 mr-2 border-r border-border pr-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  class="h-7 w-7"
-                  [class.bg-accent]="viewport() === 'mobile'"
-                  (click)="setViewport('mobile')"
-                >
-                  <lucide-icon [img]="icons.Smartphone" class="h-3.5 w-3.5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  class="h-7 w-7"
-                  [class.bg-accent]="viewport() === 'tablet'"
-                  (click)="setViewport('tablet')"
-                >
-                  <lucide-icon [img]="icons.Tablet" class="h-3.5 w-3.5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  class="h-7 w-7"
-                  [class.bg-accent]="viewport() === 'desktop'"
-                  (click)="setViewport('desktop')"
-                >
-                  <lucide-icon [img]="icons.Monitor" class="h-3.5 w-3.5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  class="h-7 w-7"
-                  [class.bg-accent]="viewport() === 'full'"
-                  (click)="setViewport('full')"
-                >
-                  <lucide-icon [img]="icons.Maximize2" class="h-3.5 w-3.5" />
-                </Button>
-              </div>
-            }
-            @if (showExpandButton()) {
-              <Button variant="ghost" size="icon" class="h-7 w-7" (click)="toggleExpand()">
-                <lucide-icon [img]="icons.Fullscreen" class="h-3.5 w-3.5" />
-              </Button>
-            }
-          </div>
         </div>
 
         <!-- Preview Panel -->
         <TabsContent value="preview" class="mt-0">
-          <div [class]="previewContainerClass()">
-            <!-- Viewport wrapper for responsive preview -->
-            <div [class]="viewportWrapperClass()">
-              <!-- Subtle dot pattern background -->
-              <div
-                class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:16px_16px] opacity-30"
-              ></div>
-
-              <!-- Component content -->
-              <div [class]="previewContentClass()">
-                <ng-content />
-              </div>
-            </div>
-
-            <!-- Interactive badge -->
-            @if (interactive()) {
-              <div class="absolute bottom-3 right-3">
-                <span
-                  class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary ring-1 ring-primary/20"
-                >
-                  <span class="relative flex h-1.5 w-1.5">
-                    <span
-                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"
-                    ></span>
-                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"></span>
-                  </span>
-                  Interactive
-                </span>
-              </div>
-            }
+          <div
+            class="preview relative flex min-h-[350px] w-full items-center justify-center p-10"
+          >
+            <ng-content />
           </div>
         </TabsContent>
 
@@ -149,62 +62,16 @@ export class ComponentPreview {
   readonly title = input<string>('');
   readonly description = input<string>('');
   readonly class = input<string>('');
+  // Retained for API compatibility with existing callers (now no-ops to match
+  // shadcn's chrome-free preview).
   readonly interactive = input<boolean>(false);
   readonly showViewportControls = input<boolean>(false);
   readonly showExpandButton = input<boolean>(true);
 
-  protected readonly viewport = signal<ViewportSize>('full');
-  protected readonly expanded = signal(false);
-
-  protected readonly icons = {
-    Eye,
-    Code2,
-    Copy,
-    Smartphone,
-    Tablet,
-    Monitor,
-    Maximize2,
-    Fullscreen,
-  };
-
   protected readonly computedClass = computed(() =>
     cn(
-      'relative overflow-hidden rounded-xl border border-border bg-background shadow-sm',
-      this.expanded() && 'fixed inset-4 z-50',
+      'group relative overflow-hidden rounded-xl border bg-background',
       this.class(),
     ),
   );
-
-  protected readonly previewContainerClass = computed(() =>
-    cn(
-      'relative overflow-hidden bg-background',
-      this.expanded() ? 'h-[calc(100vh-12rem)]' : 'min-h-[350px]',
-    ),
-  );
-
-  protected readonly viewportWrapperClass = computed(() => {
-    const vp = this.viewport();
-    return cn(
-      'relative mx-auto h-full transition-all duration-300 ease-in-out',
-      vp === 'mobile' && 'max-w-[375px]',
-      vp === 'tablet' && 'max-w-[768px]',
-      vp === 'desktop' && 'max-w-[1024px]',
-      vp === 'full' && 'max-w-full',
-    );
-  });
-
-  protected readonly previewContentClass = computed(() =>
-    cn(
-      'relative flex min-h-[350px] w-full items-center justify-center p-10',
-      this.expanded() && 'min-h-full',
-    ),
-  );
-
-  protected setViewport(size: ViewportSize): void {
-    this.viewport.set(size);
-  }
-
-  protected toggleExpand(): void {
-    this.expanded.update((v) => !v);
-  }
 }

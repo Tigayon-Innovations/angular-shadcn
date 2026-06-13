@@ -52,7 +52,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -79,6 +81,15 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "csr": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "ssr": false,
+              "server": false,
+              "prerender": false,
+              "outputMode": "static"
             }
           },
           "defaultConfiguration": "production"
@@ -91,6 +102,9 @@
             },
             "development": {
               "buildTarget": "shadcn-angular:build:development"
+            },
+            "csr": {
+              "buildTarget": "shadcn-angular:build:csr"
             }
           },
           "defaultConfiguration": "development"
@@ -109,7 +123,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "src/styles.scss"
+            ]
           }
         }
       }

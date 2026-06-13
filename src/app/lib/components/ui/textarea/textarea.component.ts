@@ -31,7 +31,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * <textarea Textarea formControlName="message" placeholder="Enter message"></textarea>
  */
 @Component({
-  selector: 'textarea[Textarea]',
+  selector: 'textarea[Textarea], Textarea',
   template: '',
   host: {
     '[class]': 'computedClass()',

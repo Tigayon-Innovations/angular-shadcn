@@ -8,10 +8,12 @@ import {
   effect,
   inject,
   input,
+  PLATFORM_ID,
   signal,
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -122,6 +124,7 @@ import { RouterLink } from '@angular/router';
 })
 export class BlockDetailPage {
   private blocksService = inject(BlocksService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   category = input.required<string>();
   slug = input.required<string>();
@@ -137,6 +140,12 @@ export class BlockDetailPage {
 
   constructor() {
     effect(async () => {
+      // Dynamic block components render on the client only; running the async
+      // loader during SSR races injector teardown (NG0205).
+      if (!this.isBrowser) {
+        return;
+      }
+
       const block = this.block();
       const container = this.componentContainer();
 

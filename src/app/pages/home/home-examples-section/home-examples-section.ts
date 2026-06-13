@@ -57,7 +57,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
             <!-- MAIN GRID -->
             <div class="flex-1 overflow-hidden"
-                 style="display: grid; grid-template-columns: 20% 18% 19% 21% 22%; grid-template-rows: 29% 21% 26% 24%; gap: 1px; background: hsl(var(--border) / 0.6);">
+                 style="display: grid; grid-template-columns: 20% 18% 19% 21% 22%; grid-template-rows: 29% 21% 26% 24%; gap: 1px; background: color-mix(in oklch, var(--border) 60%, transparent);">
 
               <!-- 1. Contribution Metrics (col1, rows 1–2) -->
               <div class="bg-background p-2.5 overflow-hidden" style="grid-column:1; grid-row:1/span 2;">
@@ -67,7 +67,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                   @for (v of contribBars; track $index) {
                     <div class="flex-1 rounded-t-[1px]"
                          [style.height.%]="v"
-                         [style.background]="v > 70 ? 'hsl(var(--foreground))' : 'hsl(var(--foreground)/0.35)'">
+                         [style.background]="v > 70 ? 'var(--foreground)' : 'color-mix(in oklch, var(--foreground) 35%, transparent)'">
                     </div>
                   }
                 </div>
@@ -131,7 +131,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                   @for (b of savingsBars; track $index) {
                     <div class="flex-1 rounded-t-[1px]"
                          [style.height.%]="b.h"
-                         [style.background]="b.dark ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground)/0.25)'">
+                         [style.background]="b.dark ? 'var(--foreground)' : 'color-mix(in oklch, var(--muted-foreground) 25%, transparent)'">
                     </div>
                   }
                 </div>

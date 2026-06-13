@@ -355,12 +355,12 @@ export const FIELD_DOCUMENTATION: ComponentDocumentation = {
   links: [
     {
       text: 'View source',
-      url: 'https://github.com/example/shadcn-angular/tree/main/src/app/lib/components/ui/field',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/tree/main/src/app/lib/components/ui/field',
       icon: 'source',
     },
     {
       text: 'Report an issue',
-      url: 'https://github.com/example/shadcn-angular/issues/new',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/issues/new',
       icon: 'issue',
     },
     {

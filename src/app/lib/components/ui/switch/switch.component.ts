@@ -7,7 +7,6 @@ import {
   forwardRef,
   input,
   model,
-  output,
   signal,
   viewChild,
 } from '@angular/core';
@@ -144,9 +143,6 @@ export class Switch implements ControlValueAccessor {
 
   private readonly buttonElement = viewChild<ElementRef<HTMLButtonElement>>('buttonElement');
 
-  /** Emitted when checked state changes */
-  readonly checkedChange = output<boolean>();
-
   /** Whether the switch is checked/on */
   readonly checked = model<boolean>(false);
 
@@ -237,7 +233,6 @@ export class Switch implements ControlValueAccessor {
       this.checked.set(newValue);
       this.onChange(newValue);
       this.onTouched();
-      this.checkedChange.emit(newValue);
     }
   }
 

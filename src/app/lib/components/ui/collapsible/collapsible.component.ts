@@ -8,7 +8,6 @@ import {
   forwardRef,
   input,
   model,
-  output,
   signal,
 } from '@angular/core';
 import { COLLAPSIBLE_CONTEXT, CollapsibleContext } from './collapsible-context';
@@ -62,9 +61,6 @@ export class Collapsible implements CollapsibleContext {
     });
   }
 
-  /** Event emitted when open state changes */
-  readonly openChange = output<boolean>();
-
   /** Controlled open state - two-way binding supported */
   readonly open = model<boolean | undefined>(undefined);
 
@@ -96,6 +92,5 @@ export class Collapsible implements CollapsibleContext {
     }
 
     this.open.set(newState);
-    this.openChange.emit(newState);
   };
 }

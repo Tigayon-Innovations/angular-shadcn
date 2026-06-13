@@ -168,8 +168,6 @@ export class Slider implements ControlValueAccessor {
   private readonly thumb = viewChild<ElementRef<HTMLElement>>('thumb');
   private readonly elementRef = viewChild<ElementRef<HTMLElement>>('slider');
 
-  /** Emitted when value changes */
-  readonly valueChange = output<number>();
   /** Emitted when value change is committed (on release) */
   readonly valueCommit = output<number>();
 
@@ -373,7 +371,6 @@ export class Slider implements ControlValueAccessor {
     if (newValue !== this.value()) {
       this.value.set(newValue);
       this.onChange(newValue);
-      this.valueChange.emit(newValue);
     }
   }
 
@@ -406,7 +403,6 @@ export class Slider implements ControlValueAccessor {
     if (newValue !== this.value()) {
       this.value.set(newValue);
       this.onChange(newValue);
-      this.valueChange.emit(newValue);
     }
   }
 }

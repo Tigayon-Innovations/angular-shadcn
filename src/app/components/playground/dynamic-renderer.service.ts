@@ -156,6 +156,11 @@ export class DynamicRendererService {
       return [];
     }
 
+    // DOMParser is a browser-only API; skip during server-side rendering.
+    if (typeof DOMParser === 'undefined') {
+      return [];
+    }
+
     try {
       const parser = new DOMParser();
       // Wrap in a root element to handle multiple top-level elements

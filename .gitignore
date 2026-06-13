@@ -43,3 +43,7 @@ src/environments/environment.ts
 .DS_Store
 Thumbs.db
 .claude/
+
+# session audit helpers
+.spa-server.mjs
+.shoot*.mjs

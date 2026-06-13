@@ -28,11 +28,13 @@ export interface ChartContext {
 
 export const CHART_CONTEXT = new InjectionToken<ChartContext>('ChartContext');
 
-// CSS variable name mapping for chart colors
+// CSS variable name mapping for chart colors.
+// The --chart-* tokens are full oklch() colors, so reference them directly
+// (wrapping in hsl() produced invalid hsl(oklch(...)) and rendered monochrome).
 export const CHART_COLORS = {
-  chart1: 'hsl(var(--chart-1))',
-  chart2: 'hsl(var(--chart-2))',
-  chart3: 'hsl(var(--chart-3))',
-  chart4: 'hsl(var(--chart-4))',
-  chart5: 'hsl(var(--chart-5))',
+  chart1: 'var(--chart-1)',
+  chart2: 'var(--chart-2)',
+  chart3: 'var(--chart-3)',
+  chart4: 'var(--chart-4)',
+  chart5: 'var(--chart-5)',
 } as const;

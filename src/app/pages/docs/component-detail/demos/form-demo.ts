@@ -1,3 +1,4 @@
+import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
 import {
   Form,
@@ -16,6 +17,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   selector: 'FormDemo',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    Input,
     ReactiveFormsModule,
     Button,
     Form,

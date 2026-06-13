@@ -230,8 +230,8 @@ import type { ChartConfig, ChartDataPoint } from '@/ui/chart';`,
       hasDemo: true,
       code: `// In your component:
 chartConfig: ChartConfig = {
-  desktop: { label: 'Desktop', color: 'hsl(var(--chart-1))' },
-  mobile:  { label: 'Mobile',  color: 'hsl(var(--chart-2))' },
+  desktop: { label: 'Desktop', color: 'var(--chart-1)' },
+  mobile:  { label: 'Mobile',  color: 'var(--chart-2)' },
 };
 
 data: ChartDataPoint[] = [
@@ -255,7 +255,7 @@ data: ChartDataPoint[] = [
       title: 'Line chart',
       description: 'Render a connected line chart for trend data.',
       code: `chartConfig: ChartConfig = {
-  revenue: { label: 'Revenue', color: 'hsl(var(--chart-1))' },
+  revenue: { label: 'Revenue', color: 'var(--chart-1)' },
 };
 
 data: ChartDataPoint[] = [
@@ -285,11 +285,11 @@ data: ChartDataPoint[] = [
       title: 'Pie chart',
       description: 'Display proportional data as a pie chart.',
       code: `chartConfig: ChartConfig = {
-  Chrome:  { label: 'Chrome',  color: 'hsl(var(--chart-1))' },
-  Safari:  { label: 'Safari',  color: 'hsl(var(--chart-2))' },
-  Firefox: { label: 'Firefox', color: 'hsl(var(--chart-3))' },
-  Edge:    { label: 'Edge',    color: 'hsl(var(--chart-4))' },
-  Other:   { label: 'Other',   color: 'hsl(var(--chart-5))' },
+  Chrome:  { label: 'Chrome',  color: 'var(--chart-1)' },
+  Safari:  { label: 'Safari',  color: 'var(--chart-2)' },
+  Firefox: { label: 'Firefox', color: 'var(--chart-3)' },
+  Edge:    { label: 'Edge',    color: 'var(--chart-4)' },
+  Other:   { label: 'Other',   color: 'var(--chart-5)' },
 };
 
 data: ChartDataPoint[] = [
@@ -349,12 +349,12 @@ data: ChartDataPoint[] = [
   links: [
     {
       text: 'View source',
-      url: 'https://github.com/example/shadcn-angular/tree/main/src/app/lib/components/ui/chart',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/tree/main/src/app/lib/components/ui/chart',
       icon: 'source',
     },
     {
       text: 'Report an issue',
-      url: 'https://github.com/example/shadcn-angular/issues/new',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/issues/new',
       icon: 'issue',
     },
     {

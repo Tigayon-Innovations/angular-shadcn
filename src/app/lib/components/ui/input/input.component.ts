@@ -30,7 +30,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * <Input type="email" formControlName="email" placeholder="Enter email" />
  */
 @Component({
-  selector: 'input[Input]',
+  selector: 'input[Input], Input',
   template: '',
   host: {
     '[type]': 'type()',

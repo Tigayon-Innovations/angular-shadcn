@@ -243,12 +243,12 @@ isWeekend = (date: Date): boolean => {
   links: [
     {
       text: 'View source',
-      url: 'https://github.com/example/shadcn-angular/tree/main/src/app/lib/components/ui/calendar',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/tree/main/src/app/lib/components/ui/calendar',
       icon: 'source',
     },
     {
       text: 'Report an issue',
-      url: 'https://github.com/example/shadcn-angular/issues/new',
+      url: 'https://github.com/Tigayon-Innovations/angular-shadcn/issues/new',
       icon: 'issue',
     },
     {
