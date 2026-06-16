@@ -13,8 +13,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       <div class="grid gap-1.5">
         <Label>Pick a date</Label>
         <DatePicker [(date)]="date" placeholder="Select a date" />
-        @if (date()) {
-          <p class="text-sm text-muted-foreground">Selected: {{ date()?.toDateString() }}</p>
+        @if (date(); as selectedDate) {
+          <p class="text-sm text-muted-foreground">Selected: {{ selectedDate.toDateString() }}</p>
         }
       </div>
 
@@ -38,9 +38,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       <div class="grid gap-1.5">
         <Label>Reactive form</Label>
         <DatePicker [formControl]="dateControl" placeholder="formControl date" />
-        @if (dateControl.value) {
+        @if (dateControl.value; as controlDate) {
           <p class="text-sm text-muted-foreground">
-            Control value: {{ dateControl.value?.toDateString() }}
+            Control value: {{ controlDate.toDateString() }}
           </p>
         }
       </div>

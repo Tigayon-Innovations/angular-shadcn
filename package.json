@@ -1,6 +1,6 @@
 {
   "name": "@ng-cn/core",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Beautifully designed Angular components built with Tailwind CSS v4 - The official Angular port of shadcn/ui",
   "keywords": [
     "angular",

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -16,7 +15,6 @@ import { Item, ItemContent, ItemDescription } from '@/lib/components/ui/item';
   standalone: true,
   imports: [
     Card,
-    CardAction,
     CardContent,
     CardDescription,
     CardFooter,
